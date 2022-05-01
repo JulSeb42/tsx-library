@@ -1,6 +1,6 @@
 {
     "name": "tsx-library-julseb",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "description": "Small components library for React TypeScript",
     "main": "index.js",
     "author": "julseb42",
