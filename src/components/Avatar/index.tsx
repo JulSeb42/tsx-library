@@ -12,21 +12,24 @@ import { props } from "./types"
 // Styles
 import { Container } from "./styles"
 
-const Avatar: React.FC<props> = props => {
+const Avatar: React.FC<props> = ({
+    size = 48,
+    background = Variables.Colors.Primary500,
+    color = Variables.Colors.White,
+    children,
+    src,
+    icon,
+    ...props
+}) => {
     let alt: string = props.alt!
 
     return (
-        <Container
-            size={props.size || 48}
-            background={props.background || Variables.Colors.Primary500}
-            color={props.color || Variables.Colors.White}
-            {...props}
-        >
-            {props.children && props.children}
+        <Container size={size} background={background} color={color} {...props}>
+            {children && children}
 
-            {props.src && (
+            {src && (
                 <Image
-                    src={props.src}
+                    src={src}
                     alt={alt}
                     width="100%"
                     height="100%"
@@ -34,12 +37,7 @@ const Avatar: React.FC<props> = props => {
                 />
             )}
 
-            {props.icon && (
-                <Icon
-                    name={props.icon}
-                    size={props.size ? props.size * 0.7 : 48 * 0.7}
-                />
-            )}
+            {icon && <Icon src={icon} size={size ? size * 0.7 : 48 * 0.7} />}
         </Container>
     )
 }

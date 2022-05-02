@@ -1,81 +1,78 @@
 // Packages
 import React from "react"
-import styled from "@emotion/styled"
 
 // Components
-import Variables from "../Variables"
-import ButtonsContainer from "./ButtonsContainer"
-import Button from "./Button"
+import ButtonsContainer from "../ButtonsContainer"
+import Button from "../Button"
 
 // Types
-interface props extends React.HTMLAttributes<HTMLFormElement> {
-    btnPrimary?: string
-    btnCancel?: string
-    btnReset?: string
-    colorPrimary?: string
-    iconLeftPrimary?: string
-    iconRightPrimary?: string
-    loading?: boolean
-    colorCancel?: string
-    iconLeftCancel?: string
-    iconRightCancel?: string
-    textBtnCancel?: string
-    textBtnReset?: string
-    colorReset?: string
-    iconLeftReset?: string
-    iconRightReset?: string
-    onClickReset?: (event: React.MouseEvent<HTMLElement>) => void
-}
+import { props } from "./types"
 
 // Styles
-const Container = styled.form`
-    display: grid;
-    gap: ${Variables.Spacers.S};
-`
+import { Container } from "./styles"
 
-const Form: React.FC<props> = props => {
+const Form: React.FC<props> = ({
+    children,
+    btnPrimary,
+    colorPrimary = "primary",
+    iconLeftPrimary,
+    iconRightPrimary,
+    loading,
+    btnCancel,
+    textBtnCancel = "Cancel",
+    colorCancel = "primary",
+    iconLeftCancel,
+    iconRightCancel,
+    btnReset,
+    textBtnReset,
+    colorReset = "primary",
+    iconLeftReset,
+    iconRightReset,
+    onClickReset,
+    ...props
+}) => {
     return (
         <Container {...props}>
-            {props.children}
+            {children}
 
-            {(props.btnPrimary || props.btnCancel || props.btnReset) && (
+            {(btnPrimary || btnCancel || btnReset) && (
                 <ButtonsContainer>
-                    {props.btnPrimary && (
+                    {btnPrimary && (
                         <Button
                             btnStyle="plain"
-                            color={props.colorPrimary || "primary"}
-                            iconLeft={props.iconLeftPrimary}
-                            iconRight={props.iconRightPrimary}
+                            color={colorPrimary}
+                            iconLeft={iconLeftPrimary}
+                            iconRight={iconRightPrimary}
                             type="submit"
-                            loading={props.loading}
-                            disabled={props.loading}
+                            loading={loading}
+                            disabled={loading}
                         >
-                            {props.btnPrimary}
+                            {btnPrimary}
                         </Button>
                     )}
 
-                    {props.btnCancel && (
+                    {btnCancel && (
                         <Button
                             btnStyle="text"
-                            color={props.colorCancel || "primary"}
-                            iconLeft={props.iconLeftCancel}
-                            iconRight={props.iconRightCancel}
-                            to={props.btnCancel}
+                            color={colorCancel}
+                            iconLeft={iconLeftCancel}
+                            iconRight={iconRightCancel}
+                            to={btnCancel}
                         >
-                            {props.textBtnCancel || "Cancel"}
+                            {textBtnCancel}
                         </Button>
                     )}
 
-                    {(props.btnReset || props.textBtnReset) && (
+                    {(btnReset || textBtnReset) && (
                         <Button
                             btnStyle="text"
-                            color={props.colorReset || "primary"}
-                            iconLeft={props.iconLeftReset}
-                            iconRight={props.iconRightReset}
+                            color={colorReset}
+                            iconLeft={iconLeftReset}
+                            iconRight={iconRightReset}
                             type="reset"
-                            onClick={props.onClickReset}
+                            onClick={onClickReset}
                         >
-                            {props.textBtnReset || "Reset"}
+                            {textBtnReset ? textBtnReset : "Reset"}
                         </Button>
                     )}
                 </ButtonsContainer>

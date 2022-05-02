@@ -3,39 +3,40 @@ import React from "react"
 import { Helmet as HelmetMeta } from "react-helmet"
 
 // Types
-interface props {
-    title: string
-    favicon?: string
-    description?: string
-    keywords?: any
-    author?: string
-    type?: string
-    cover?: string
-    siteName?: string
-    language?: string
-    children?: any
-}
+import { props } from "./types"
 
-const Helmet: React.FC<props> = props => {
+const Helmet: React.FC<props> = ({
+    title,
+    favicon,
+    description,
+    keywords,
+    author,
+    type,
+    cover,
+    siteName,
+    language,
+    children,
+    ...props
+}) => {
     return (
-        <HelmetMeta>
-            <title>{props.title}</title>
-            <link rel="icon" href={props.favicon} />
+        <HelmetMeta {...props}>
+            <title>{title}</title>
+            <link rel="icon" href={favicon} />
             <meta content="IE=edge" http-equiv="X-UA-Compatible" />
             <meta
                 content="width=device-width, initial-scale=1"
                 name="viewport"
             />
-            <meta name="description" content={props.description} />
-            <meta name="keywords" content={props.keywords} />
-            <meta name="author" content={props.author} />
-            <meta property="og:title" content={props.title} />
-            <meta property="og:type" content={props.type} />
-            <meta property="og:image" content={props.cover} />
-            <meta property="og:site_name" content={props.siteName} />
-            <meta property="og:locale" content={props.language} />
+            <meta name="description" content={description} />
+            <meta name="keywords" content={keywords} />
+            <meta name="author" content={author} />
+            <meta property="og:title" content={title} />
+            <meta property="og:type" content={type} />
+            <meta property="og:image" content={cover} />
+            <meta property="og:site_name" content={siteName} />
+            <meta property="og:locale" content={language} />
 
-            {props.children}
+            {children}
         </HelmetMeta>
     )
 }

@@ -1,91 +1,21 @@
 // Packages
 import React from "react"
-import styled from "@emotion/styled"
 
 // Components
-import Variables from "../Variables"
-import InputContainer from "./InputContainer"
-import Image from "./Image"
-import Icon from "./Icon"
+import InputContainer from "../InputContainer"
+import Icon from "../Icon"
 
 // Types
-interface styleProps extends React.HTMLAttributes<HTMLLabelElement> {
-    width?: string
-    height?: string
-}
-
-interface props extends React.HTMLAttributes<HTMLInputElement> {
-    label?: string
-    helper?: string
-    validation?: string
-    src: string
-    alt: string
-    iconEmpty?: string
-    iconHover?: string
-    width?: string
-    height?: string
-    id: string
-}
+import { props } from "./types"
 
 // Styles
-const Container = styled.label<styleProps>`
-    position: relative;
-    width: ${props => props.width};
-    height: ${props => props.height};
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: ${Variables.Radiuses.M};
-    overflow: hidden;
-    cursor: pointer;
+import { Container, Input, Img, EmptyContainer, HoverContainer } from "./styles"
 
-    &:hover .hover {
-        opacity: 1;
-    }
-`
-
-const Input = styled.input`
-    display: none;
-`
-
-const Img = styled(Image)`
-    width: 100%;
-    height: 100%;
-    position: relative;
-    z-index: 1;
-    object-fit: cover;
-`
-
-const EmptyContainer = styled.div`
-    width: 100%;
-    height: 100%;
-    position: relative;
-    z-index: 1;
-    background-color: ${Variables.Colors.Gray200};
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-`
-
-const HoverContainer = styled.span`
-    position: absolute;
-    z-index: 2;
-    background-color: ${Variables.Overlays.Plain.White50};
-    color: ${Variables.Colors.Primary500};
-    opacity: 0;
-    width: 100%;
-    height: 100%;
-    transition: ${Variables.Transitions.Short};
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-`
-
-const Empty: React.FC<{ icon?: string }> = props => {
+const Empty: React.FC<{ icon?: string }> = ({ icon }) => {
     return (
         <EmptyContainer>
-            {props.icon ? (
-                <Icon name={props.icon} size={64} />
+            {icon ? (
+                <Icon src={icon} size={64} />
             ) : (
                 <svg
                     width="64"
@@ -104,11 +34,11 @@ const Empty: React.FC<{ icon?: string }> = props => {
     )
 }
 
-const Hover: React.FC<{ icon?: string }> = props => {
+const Hover: React.FC<{ icon?: string }> = ({ icon }) => {
     return (
         <HoverContainer className="hover">
-            {props.icon ? (
-                <Icon name={props.icon} size={32} />
+            {icon ? (
+                <Icon src={icon} size={32} />
             ) : (
                 <svg
                     width="32"
@@ -133,37 +63,49 @@ const Hover: React.FC<{ icon?: string }> = props => {
     )
 }
 
-const InputImage: React.FC<props> = props => {
-    return props.label || props.helper || props.validation ? (
+const InputImage: React.FC<props> = ({
+    label,
+    helper,
+    validation,
+    src,
+    alt,
+    iconEmpty,
+    iconHover,
+    width = "80px",
+    height = "80px",
+    id,
+    ...props
+}) => {
+    return label || helper || validation ? (
         <InputContainer
-            label={props.label}
-            helper={props.helper}
-            validation={props.validation}
-            id={props.id}
+            label={label}
+            helper={helper}
+            validation={validation}
+            id={id}
         >
-            <Container width={props.width || "80px"} height={props.height || "80px"}>
+            <Container width={width} height={height}>
                 <Input type="file" {...props} />
 
-                {props.src === "" ? (
-                    <Empty icon={props.iconEmpty} />
+                {src === "" ? (
+                    <Empty icon={iconEmpty} />
                 ) : (
-                    <Img src={props.src} alt={props.alt} fit="cover" />
+                    <Img src={src} alt={alt} fit="cover" />
                 )}
 
-                <Hover icon={props.iconHover} />
+                <Hover icon={iconHover} />
             </Container>
         </InputContainer>
     ) : (
         <Container>
             <Input type="file" {...props} />
 
-            {props.src === "" ? (
-                <Empty icon={props.iconEmpty} />
+            {src === "" ? (
+                <Empty icon={iconEmpty} />
             ) : (
-                <Img src={props.src} alt={props.alt} />
+                <Img src={src} alt={alt} />
             )}
 
-            <Hover icon={props.iconHover} />
+            <Hover icon={iconHover} />
         </Container>
     )
 }

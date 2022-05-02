@@ -1,5 +1,4 @@
 // Packages
-import React from "react"
 import styled from "@emotion/styled"
 import { css } from "@emotion/react"
 
@@ -7,10 +6,7 @@ import { css } from "@emotion/react"
 import Variables from "../Variables"
 
 // Types
-interface styleProps extends React.HTMLAttributes<HTMLSpanElement> {
-    justify?: string
-    pill?: boolean
-}
+import { styleProps } from "./types"
 
 // Styles
 const Tag = styled.span<styleProps>`

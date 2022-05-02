@@ -1,28 +1,20 @@
 // Packages
 import React from "react"
-import styled from "@emotion/styled"
-import Markdown from "markdown-to-jsx"
-
-// Components
-import Variables from "../Variables"
 
 // Types
-interface props {
-    options?: any
-    children?: any
-}
+import { props } from "./types"
 
 // Styles
-const Container = styled(Markdown)`
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: ${Variables.Spacers.XS};
-`
+import { Container } from "./styles"
 
-const MarkdownContainer: React.FC<props> = props => {
+const MarkdownContainer: React.FC<props> = ({
+    options,
+    children,
+    ...props
+}) => {
     return (
-        <Container options={props.options} {...props}>
-            {props.children}
+        <Container options={options} {...props}>
+            {children}
         </Container>
     )
 }

@@ -1,3 +1,6 @@
+// Packages
+import { HTMLAttributes } from "react"
+
 // Import types
 import gridProps from "../Grid/types"
 
@@ -6,11 +9,15 @@ export interface containerProps extends gridProps {
     accordionStyle?: string
 }
 
-export interface buttonProps extends React.HTMLAttributes<HTMLButtonElement> {
+export interface buttonProps extends HTMLAttributes<HTMLButtonElement> {
     icon?: string
 }
 
-export interface itemProps extends React.HTMLAttributes<HTMLParagraphElement> {
+export interface itemProps extends HTMLAttributes<HTMLParagraphElement> {
     isOpen?: boolean
     icon?: string
+}
+
+export interface contentProps extends HTMLAttributes<HTMLParagraphElement> {
+    isOpen: boolean
 }

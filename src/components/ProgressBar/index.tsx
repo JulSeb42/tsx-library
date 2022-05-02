@@ -1,21 +1,16 @@
 // Packages
-import React from "react"
 import styled from "@emotion/styled"
 
 // Components
 import Variables from "../Variables"
 
 // Types
-interface props extends React.HTMLAttributes<HTMLSpanElement> {
-    value: number
-    height?: number
-    color?: string
-}
+import { props } from "./types"
 
 // Styles
 const ProgressBar = styled.span<props>`
     width: 100%;
-    height: ${props => `${props.height || 16}px`};
+    height: ${props => props.height}px;
     background-color: ${Variables.Colors.Gray100};
     display: block;
     border-radius: ${Variables.Radiuses.Round};
@@ -27,7 +22,7 @@ const ProgressBar = styled.span<props>`
         position: absolute;
         top: 0;
         left: 0;
-        width: ${props => `${props.value}%`};
+        width: ${props => props.value}%;
         height: 100%;
         background-color: ${props =>
             props.color === "primary"
@@ -42,10 +37,15 @@ const ProgressBar = styled.span<props>`
                 ? Variables.Colors.Warning500
                 : props.color === "white"
                 ? Variables.Colors.White
-                : props.color || Variables.Colors.Primary500};
+                : props.color};
         border-radius: ${Variables.Radiuses.Round};
         transition: ${Variables.Transitions.Short};
     }
 `
+
+ProgressBar.defaultProps = {
+    height: 16,
+    color: Variables.Colors.Primary500,
+}
 
 export default ProgressBar

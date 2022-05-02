@@ -2,6 +2,7 @@
 import React from "react"
 
 // Components
+import Variables from "../Variables"
 import Icon from "../Icon"
 
 // Types
@@ -10,21 +11,19 @@ import { props } from "./types"
 // Styles
 import { Container } from "./styles"
 
-const Badge: React.FC<props> = props => {
+const Badge: React.FC<props> = ({
+    size = 16,
+    color = "primary",
+    icon,
+    children,
+    textColor = Variables.Colors.White,
+    ...props
+}) => {
     return (
-        <Container
-            size={props.size || 16}
-            color={props.color || "primary"}
-            {...props}
-        >
-            {props.icon && (
-                <Icon
-                    name={props.icon}
-                    size={props.size ? props.size * 0.7 : 48 * 0.7}
-                />
-            )}
+        <Container size={size} color={color} textColor={textColor} {...props}>
+            {icon && <Icon src={icon} size={size ? size * 0.7 : 16 * 0.7} />}
 
-            {props.children && props.children}
+            {children && children}
         </Container>
     )
 }

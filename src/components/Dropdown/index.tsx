@@ -1,5 +1,4 @@
 // Packages
-import React from "react"
 import styled from "@emotion/styled"
 import { css } from "@emotion/react"
 
@@ -7,9 +6,7 @@ import { css } from "@emotion/react"
 import Variables from "../Variables"
 
 // Types
-interface props extends React.HTMLAttributes<HTMLDivElement> {
-    isOpen: boolean
-}
+import { props } from "./types"
 
 // Styles
 const DropdownContainer = styled.div`

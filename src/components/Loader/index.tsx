@@ -1,5 +1,4 @@
 // Packages
-import { HTMLAttributes } from "react"
 import styled from "@emotion/styled"
 import { keyframes, css } from "@emotion/react"
 
@@ -7,14 +6,7 @@ import { keyframes, css } from "@emotion/react"
 import Variables from "../Variables"
 
 // Types
-interface props extends HTMLAttributes<HTMLSpanElement> {
-    size?: number
-    border?: number
-    backgroundColor?: string
-    color?: string
-    marginLeft?: string
-    marginRight?: string
-}
+import { props } from "./types"
 
 // Styles
 const Rotation = keyframes`
@@ -28,9 +20,9 @@ const Rotation = keyframes`
 `
 
 const Loader = styled.span<props>`
-    width: ${props => `${props.size || 48}px`};
-    height: ${props => `${props.size || 48}px`};
-    border: ${props => `${props.border || 2}px`} solid
+    width: ${props => props.size}px;
+    height: ${props => props.size}px;
+    border: ${props => props.border}px solid
         ${props =>
             props.backgroundColor === "primary"
                 ? Variables.Colors.Primary500
@@ -44,7 +36,7 @@ const Loader = styled.span<props>`
                 ? Variables.Colors.Warning500
                 : props.backgroundColor === "white"
                 ? Variables.Colors.White
-                : props.backgroundColor || Variables.Colors.White};
+                : props.backgroundColor};
     border-bottom-color: ${props =>
         props.color === "primary"
             ? Variables.Colors.Primary500
@@ -58,7 +50,7 @@ const Loader = styled.span<props>`
             ? Variables.Colors.Warning500
             : props.color === "white"
             ? Variables.Colors.White
-            : props.color || Variables.Colors.Primary500};
+            : props.color};
     border-radius: 50%;
     display: inline-block;
     box-sizing: border-box;
@@ -71,5 +63,12 @@ const Loader = styled.span<props>`
             margin-right: ${props.marginRight};
         `}
 `
+
+Loader.defaultProps = {
+    size: 48,
+    border: 2,
+    backgroundColor: Variables.Colors.White,
+    color: Variables.Colors.Primary500,
+}
 
 export default Loader

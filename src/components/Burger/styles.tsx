@@ -10,8 +10,8 @@ import { styleProps } from "./types"
 
 // Styles
 const Container = styled.button<styleProps>`
-    width: ${props => `${props.width || 32}px`};
-    height: ${props => `${props.height || 24}px`};
+    width: ${props => props.width}px;
+    height: ${props => props.height}px;
     position: relative;
     background: none;
     border: none;
@@ -20,7 +20,7 @@ const Container = styled.button<styleProps>`
     span {
         transition: ${Variables.Transitions.Short};
         width: 100%;
-        height: ${props => `${props.border || 2}px`};
+        height: ${props => props.border}px;
         background-color: ${props =>
             props.color === "primary"
                 ? Variables.Colors.Primary500
@@ -34,7 +34,7 @@ const Container = styled.button<styleProps>`
                 ? Variables.Colors.Warning500
                 : props.color === "white"
                 ? Variables.Colors.White
-                : props.color || Variables.Colors.Primary500};
+                : props.color};
         position: absolute;
         left: 0;
 
@@ -43,7 +43,7 @@ const Container = styled.button<styleProps>`
         }
 
         &:nth-child(2) {
-            top: calc(50% - ${props => `${props.border || 2}px`} / 2);
+            top: calc(50% - ${props => props.border}px / 2);
         }
 
         &:last-child {

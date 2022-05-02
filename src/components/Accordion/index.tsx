@@ -7,18 +7,25 @@ import { containerProps, itemProps } from "./types"
 // Styles
 import { AccordionContainer, Item, Button, Content } from "./style"
 
-const Accordion: React.FC<containerProps> = props => {
+const Accordion: React.FC<containerProps> = ({
+    accordionStyle = "basic",
+    children,
+    ...props
+}) => {
     return (
-        <AccordionContainer
-            accordionStyle={props.accordionStyle || "basic"}
-            {...props}
-        >
-            {props.children}
+        <AccordionContainer accordionStyle={accordionStyle} {...props}>
+            {children}
         </AccordionContainer>
     )
 }
 
-const AccordionItem: React.FC<itemProps> = props => {
+const AccordionItem: React.FC<itemProps> = ({
+    icon,
+    title,
+    className,
+    children,
+    ...props
+}) => {
     const [isOpen, setIsOpen] = useState(props.isOpen || false)
 
     return (
@@ -26,11 +33,11 @@ const AccordionItem: React.FC<itemProps> = props => {
             <Button
                 className="open-accordion"
                 onClick={() => setIsOpen(!isOpen)}
-                icon={props.icon}
+                icon={icon}
             >
-                <span>{props.title}</span>
+                <span>{title}</span>
 
-                {props.icon === "plus" ? (
+                {icon === "plus" ? (
                     <svg
                         width="16"
                         height="16"
@@ -62,11 +69,12 @@ const AccordionItem: React.FC<itemProps> = props => {
             </Button>
 
             <Content
-                className={`content-accordion ${isOpen ? "open" : ""} ${
-                    props.className
-                }`}
+                className={`content-accordion ${
+                    isOpen ? "open" : ""
+                } ${className}`}
+                isOpen={isOpen}
             >
-                {props.children}
+                {children}
             </Content>
         </Item>
     )

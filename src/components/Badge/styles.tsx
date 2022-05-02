@@ -9,14 +9,14 @@ import { styleProps } from "./types"
 
 // Styles
 const Container = styled.span<styleProps>`
-    width: ${props => `${props.size}px`};
-    height: ${props => `${props.size}px`};
+    width: ${props => props.size}px;
+    height: ${props => props.size}px;
     border-radius: 50%;
     overflow: hidden;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: calc(${props => `${props.size}px`} * 0.7);
+    font-size: calc(${props => props.size}px * 0.7);
     line-height: 100%;
     background-color: ${props =>
         props.color === "primary"
@@ -30,7 +30,7 @@ const Container = styled.span<styleProps>`
             : props.color === "warning"
             ? Variables.Colors.Warning500
             : props.color};
-    color: ${props => props.textColor || Variables.Colors.White};
+    color: ${props => props.textColor};
     font-weight: ${Variables.FontWeights.Black};
 `
 

@@ -3,7 +3,7 @@ import styled from "@emotion/styled"
 
 // Components
 import Variables from "../Variables"
-import Flexbox from "./Flexbox"
+import Flexbox from "../Flexbox"
 
 // Styles
 const TitleFlex = styled(Flexbox)`

@@ -12,6 +12,7 @@ export interface styleProps
     colorHover?: string
     colorActive?: string
     justify?: string
+    to?: string
 }
 
 export interface props extends styleProps {

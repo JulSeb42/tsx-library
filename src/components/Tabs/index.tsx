@@ -1,23 +1,12 @@
 // Packages
-import React from "react"
 import styled from "@emotion/styled"
 
 // Components
-import Grid from "./Grid"
+import Grid from "../Grid"
 import Variables from "../Variables"
 
 // Types
-interface buttonsContainerProps extends React.HTMLAttributes<HTMLDivElement> {
-    col: number
-}
-
-interface buttonProps extends React.HTMLAttributes<HTMLButtonElement> {
-    active?: boolean
-}
-
-interface contentProps extends React.HTMLAttributes<HTMLDivElement> {
-    active?: boolean
-}
+import { buttonsContainerProps, buttonProps, contentProps } from "./types"
 
 // Styles
 const TabsContainer = styled(Grid)`

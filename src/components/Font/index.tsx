@@ -1,5 +1,4 @@
 // Packages
-import { HTMLAttributes } from "react"
 import styled from "@emotion/styled"
 import { css } from "@emotion/react"
 
@@ -7,75 +6,26 @@ import { css } from "@emotion/react"
 import Variables from "../Variables"
 
 // Types
-interface h1Props extends HTMLAttributes<HTMLHeadingElement> {
-    align?: string
-    display?: boolean
-    color?: string
-    hidden?: boolean
-}
-
-interface h2Props extends HTMLAttributes<HTMLHeadingElement> {
-    align?: string
-    display?: boolean
-    color?: string
-}
-
-interface h3Props extends HTMLAttributes<HTMLHeadingElement> {
-    align?: string
-    display?: boolean
-    color?: string
-}
-
-interface h4Props extends HTMLAttributes<HTMLHeadingElement> {
-    align?: string
-    display?: boolean
-    color?: string
-}
-
-interface h5Props extends HTMLAttributes<HTMLHeadingElement> {
-    align?: string
-    display?: boolean
-    color?: string
-}
-
-interface h6Props extends HTMLAttributes<HTMLHeadingElement> {
-    align?: string
-    color?: string
-}
-
-interface pProps extends HTMLAttributes<HTMLParagraphElement> {
-    align?: string
-    pre?: boolean
-    color?: string
-}
-
-interface smallProps extends HTMLAttributes<HTMLElement> {
-    align?: string
-    color?: string
-}
-
-interface strongProps extends HTMLAttributes<HTMLElement> {
-    align?: string
-    color?: string
-}
-
-interface emProps extends HTMLAttributes<HTMLElement> {
-    align?: string
-    color?: string
-}
-
-interface listProps extends HTMLAttributes<HTMLUListElement> {
-    gap?: string | number
-    color?: string
-    align?: string
-}
+import {
+    h1Props,
+    h2Props,
+    h3Props,
+    h4Props,
+    h5Props,
+    h6Props,
+    pProps,
+    smallProps,
+    strongProps,
+    emProps,
+    listProps,
+} from "./types"
 
 // Styles
 const H1 = styled.h1<h1Props>`
     font-size: ${Variables.FontSizes.Titles.ExtraLarge};
     font-weight: ${Variables.FontWeights.Black};
-    color: ${props => props.color || "currentColor"};
-    text-align: ${props => props.align || "left"};
+    color: ${props => props.color};
+    text-align: ${props => props.align};
 
     a {
         color: ${Variables.Colors.Primary500};
@@ -109,8 +59,8 @@ const H1 = styled.h1<h1Props>`
 const H2 = styled.h2<h2Props>`
     font-size: ${Variables.FontSizes.Titles.Large};
     font-weight: ${Variables.FontWeights.Black};
-    color: ${props => props.color || "currentColor"};
-    text-align: ${props => props.align || "left"};
+    color: ${props => props.color};
+    text-align: ${props => props.align};
 
     a {
         color: ${Variables.Colors.Primary500};
@@ -136,8 +86,8 @@ const H2 = styled.h2<h2Props>`
 const H3 = styled.h3<h3Props>`
     font-size: ${Variables.FontSizes.Titles.Large};
     font-weight: ${Variables.FontWeights.Bold};
-    color: ${props => props.color || "currentColor"};
-    text-align: ${props => props.align || "left"};
+    color: ${props => props.color};
+    text-align: ${props => props.align};
 
     a {
         color: ${Variables.Colors.Primary500};
@@ -164,8 +114,8 @@ const H3 = styled.h3<h3Props>`
 const H4 = styled.h4<h4Props>`
     font-size: ${Variables.FontSizes.Titles.Medium};
     font-weight: ${Variables.FontWeights.Black};
-    color: ${props => props.color || "currentColor"};
-    text-align: ${props => props.align || "left"};
+    color: ${props => props.color};
+    text-align: ${props => props.align};
 
     a {
         color: ${Variables.Colors.Primary500};
@@ -191,8 +141,8 @@ const H4 = styled.h4<h4Props>`
 const H5 = styled.h5<h5Props>`
     font-size: ${Variables.FontSizes.Titles.Medium};
     font-weight: ${Variables.FontWeights.Bold};
-    color: ${props => props.color || "currentColor"};
-    text-align: ${props => props.align || "left"};
+    color: ${props => props.color};
+    text-align: ${props => props.align};
 
     a {
         color: ${Variables.Colors.Primary500};
@@ -219,8 +169,8 @@ const H5 = styled.h5<h5Props>`
 const H6 = styled.h6<h6Props>`
     font-size: ${Variables.FontSizes.Titles.Small};
     font-weight: ${Variables.FontWeights.Black};
-    color: ${props => props.color || "currentColor"};
-    text-align: ${props => props.align || "left"};
+    color: ${props => props.color};
+    text-align: ${props => props.align};
 
     a {
         color: ${Variables.Colors.Primary500};
@@ -239,8 +189,8 @@ const H6 = styled.h6<h6Props>`
 
 const P = styled.p<pProps>`
     font-size: ${Variables.FontSizes.Body};
-    color: ${props => props.color || "currentColor"};
-    text-align: ${props => props.align || "left"};
+    color: ${props => props.color};
+    text-align: ${props => props.align};
 
     a {
         color: ${Variables.Colors.Primary500};
@@ -275,8 +225,8 @@ const P = styled.p<pProps>`
 
 const Small = styled.small<smallProps>`
     font-size: ${Variables.FontSizes.Small};
-    color: ${props => props.color || "currentColor"};
-    text-align: ${props => props.align || "left"};
+    color: ${props => props.color};
+    text-align: ${props => props.align};
 
     a {
         color: ${Variables.Colors.Primary500};
@@ -296,8 +246,8 @@ const Small = styled.small<smallProps>`
 
 const Strong = styled.strong<strongProps>`
     font-weight: ${Variables.FontWeights.Bold};
-    color: ${props => props.color || "currentColor"};
-    text-align: ${props => props.align || "left"};
+    color: ${props => props.color};
+    text-align: ${props => props.align};
 
     a {
         color: ${Variables.Colors.Primary500};
@@ -316,8 +266,8 @@ const Strong = styled.strong<strongProps>`
 
 const Em = styled.em<emProps>`
     font-style: italic;
-    color: ${props => props.color || "currentColor"};
-    text-align: ${props => props.align || "left"};
+    color: ${props => props.color};
+    text-align: ${props => props.align};
 
     a {
         color: ${Variables.Colors.Primary500};
@@ -341,14 +291,14 @@ const List = styled.ul<listProps>`
     padding-left: ${Variables.Spacers.S};
     display: grid;
     grid-template-columns: 1fr;
-    gap: ${props => props.gap || Variables.Spacers.XXS};
+    gap: ${props => props.gap};
     list-style: none;
-    color: ${props => props.color || "currentColor"};
-    text-align: ${props => props.align || "left"};
+    color: ${props => props.color};
+    text-align: ${props => props.align};
 
     li {
         padding-inline-start: ${Variables.Spacers.XS};
-        line-height: calc(${Variables.LineHeight} * ${Variables.FontSizes.Body});
+        line-height: ${Variables.LineHeight};
 
         a {
             color: ${Variables.Colors.Primary500};
@@ -370,5 +320,27 @@ const List = styled.ul<listProps>`
         }
     }
 `
+
+const defaultProps = {
+    color: "currentColor",
+    align: "left",
+}
+
+const listDefault = {
+    ...defaultProps,
+    gap: Variables.Spacers.XXS,
+}
+
+H1.defaultProps = defaultProps
+H2.defaultProps = defaultProps
+H3.defaultProps = defaultProps
+H4.defaultProps = defaultProps
+H5.defaultProps = defaultProps
+H6.defaultProps = defaultProps
+P.defaultProps = defaultProps
+Small.defaultProps = defaultProps
+Strong.defaultProps = defaultProps
+Em.defaultProps = defaultProps
+List.defaultProps = listDefault
 
 export { H1, H2, H3, H4, H5, H6, P, Small, Strong, Em, List }

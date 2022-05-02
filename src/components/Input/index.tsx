@@ -1,228 +1,73 @@
 // Packages
 import React, { useState } from "react"
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
 import MDEditor from "@uiw/react-md-editor"
 
 // Components
 import Variables from "../Variables"
-import InputContainer from "./InputContainer"
-import Icon from "./Icon"
+import InputContainer from "../InputContainer"
+import Icon from "../Icon"
 
 // Types
-interface inputStyledProps extends React.HTMLAttributes<HTMLInputElement> {
-    icon?: string
-    validation?: any
-    value?: any
-    colorMode?: string
-    onChange?: any
-    preview?: any
-}
-
-interface inputFunctionProps extends inputStyledProps {
-    icon?: string
-    password?: boolean
-    validation?: string
-    disabled?: boolean
-    maxLength?: number
-    type?: string
-    customIconPassed?: string
-    customIconNotPassed?: string
-    iconPassword?: boolean
-}
-
-interface iconContainerProps extends React.HTMLAttributes<HTMLSpanElement> {
-    disabled?: boolean
-}
-
-interface inputProps extends inputFunctionProps {
-    label?: string
-    helper?: string
-    helperBottom?: string
-    counter?: boolean
-    validationText?: string
-    id: string
-}
+import { inputFunctionProps, inputProps } from "./types"
 
 // Styles
-const Container = styled.div`
-    position: relative;
-    width: 100%;
-`
+import {
+    Container,
+    InputStyled,
+    IconContainer,
+    RightContainer,
+    ButtonPassword,
+    SelectContainer,
+} from "./styles"
 
-const InputStyled = styled.input<inputStyledProps>`
-    position: relative;
-    z-index: 1;
-    border: 1px solid ${Variables.Colors.Gray200};
-    border-radius: ${Variables.Radiuses.S};
-    outline: none;
-    padding: ${Variables.Spacers.XS} ${Variables.Spacers.XS};
-    font-family: ${Variables.FontFamilies.Body};
-    font-size: ${Variables.FontSizes.Body};
-    height: 35px;
-    width: 100%;
-
-    &:focus {
-        border-color: ${Variables.Colors.Primary500};
-    }
-
-    &:disabled {
-        cursor: not-allowed;
-        color: ${Variables.Colors.Gray800};
-        border-color: ${Variables.Colors.Gray200};
-        background-color: ${Variables.Colors.Gray50};
-    }
-
-    ${props =>
-        props.type === "textarea" &&
-        css`
-            min-height: calc(
-                ${Variables.FontSizes.Body} * ${Variables.LineHeight} * 3 +
-                    ${Variables.Spacers.XXS} * 2
-            );
-            resize: vertical;
-        `}
-
-    ${props =>
-        props.type === "select" &&
-        css`
-            appearance: none;
-            cursor: pointer;
-
-            &::-ms-expand {
-                display: none;
-            }
-        `}
-
-    ${props =>
-        props.icon &&
-        css`
-            padding-left: calc(${Variables.Spacers.XS} + 32px);
-        `}
-    
-    ${props =>
-        props.validation &&
-        props.validation !== "passed" &&
-        props.value.length > 0 &&
-        css`
-            background-color: ${Variables.Colors.Danger50};
-
-            &:focus {
-                border-color: ${Variables.Colors.Danger500};
-            }
-        `}
-`
-
-const IconContainer = styled.span<iconContainerProps>`
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 32px;
-    color: ${props =>
-        props.disabled
-            ? Variables.Colors.Gray800
-            : Variables.Colors.Primary500};
-
-    &:after {
-        content: "";
-        position: absolute;
-        top: 1px;
-        right: 0;
-        height: calc(100% - 2px);
-        width: 1px;
-        background-color: ${Variables.Colors.Gray200};
-    }
-`
-
-const RightContainer = styled.span`
-    position: absolute;
-    top: 0;
-    right: ${Variables.Spacers.XS};
-    height: 100%;
-    z-index: 1;
-    display: inline-flex;
-    align-items: center;
-
-    & > *:not(:last-child) {
-        margin-right: ${Variables.Spacers.XXS};
-    }
-`
-
-const ButtonPassword = styled.button`
-    border: none;
-    padding: 0;
-    background: none;
-    color: ${Variables.Colors.Primary500};
-    font-size: ${Variables.FontSizes.Body};
-    font-weight: ${Variables.FontWeights.Bold};
-    transition: ${Variables.Transitions.Short};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &:hover {
-        color: ${Variables.Colors.Primary300};
-    }
-
-    &:active {
-        color: ${Variables.Colors.Primary600};
-    }
-`
-
-const SelectContainer = styled.div<{ disabled: boolean | undefined }>`
-    position: relative;
-
-    &:after {
-        content: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10.862 6.19533L8.00001 9.05733L5.13801 6.19533L4.19534 7.13799L8.00001 10.9427L11.8047 7.13799L10.862 6.19533Z' fill='%231B4568'/%3E%3C/svg%3E");
-        color: ${Variables.Colors.Primary500};
-        position: absolute;
-        z-index: 2;
-        top: calc(50% - 18px / 2);
-        right: ${Variables.Spacers.XS};
-
-        ${props =>
-            props.disabled &&
-            css`
-                content: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10.862 6.19533L8.00001 9.05733L5.13801 6.19533L4.19534 7.13799L8.00001 10.9427L11.8047 7.13799L10.862 6.19533Z' fill='%232F2F2F'/%3E%3C/svg%3E");
-            `}
-    }
-`
-
-const InputFunction: React.FC<inputFunctionProps> = props => {
+const InputFunction: React.FC<inputFunctionProps> = ({
+    icon,
+    validation,
+    value,
+    colorMode = "light",
+    onChange,
+    preview = "edit",
+    password,
+    disabled,
+    maxLength,
+    type = "text",
+    customIconPassed,
+    customIconNotPassed,
+    iconPassword,
+    id,
+    ...props
+}) => {
     const [isVisible, setIsVisible] = useState(false)
     const visible = isVisible ? "text" : "password"
 
-    return props.icon || props.password || props.validation ? (
+    return icon || password || validation ? (
         <Container>
-            {props.icon && (
-                <IconContainer disabled={props.disabled}>
-                    <Icon name={props.icon} size={16} />
+            {icon && (
+                <IconContainer disabled={disabled}>
+                    <Icon src={icon} size={16} />
                 </IconContainer>
             )}
 
             <InputStyled
-                id={props.id}
-                value={props.value}
-                type={props.password ? visible : props.type || "text"}
-                onChange={props.onChange}
-                icon={props.icon}
-                maxLength={props.maxLength}
+                id={id}
+                value={value}
+                type={password ? visible : type}
+                onChange={onChange}
+                icon={icon}
+                maxLength={maxLength}
+                validation={validation}
+                disabled={disabled}
                 {...props}
             />
 
-            {(props.validation || props.password) && (
+            {(validation || password) && (
                 <RightContainer>
-                    {props.validation &&
-                        props.value.length > 0 &&
-                        (props.validation === "passed" ? (
-                            props.customIconPassed ? (
+                    {validation &&
+                        value.length > 0 &&
+                        (validation === "passed" ? (
+                            customIconPassed ? (
                                 <Icon
-                                    name={props.customIconPassed}
+                                    src={customIconPassed}
                                     color={Variables.Colors.Success500}
                                     size={16}
                                 />
@@ -246,9 +91,9 @@ const InputFunction: React.FC<inputFunctionProps> = props => {
                                     />
                                 </svg>
                             )
-                        ) : props.customIconNotPassed ? (
+                        ) : customIconNotPassed ? (
                             <Icon
-                                name={props.customIconNotPassed}
+                                src={customIconNotPassed}
                                 color={Variables.Colors.Danger500}
                                 size={16}
                             />
@@ -273,12 +118,12 @@ const InputFunction: React.FC<inputFunctionProps> = props => {
                             </svg>
                         ))}
 
-                    {props.password && (
+                    {password && (
                         <ButtonPassword
                             onClick={() => setIsVisible(!isVisible)}
                             type="button"
                         >
-                            {props.iconPassword ? (
+                            {iconPassword ? (
                                 isVisible ? (
                                     <svg
                                         width="24"
@@ -322,45 +167,136 @@ const InputFunction: React.FC<inputFunctionProps> = props => {
                 </RightContainer>
             )}
         </Container>
-    ) : props.type === "textarea" ? (
-        <InputStyled as="textarea" {...props} />
-    ) : props.type === "select" ? (
-        <SelectContainer disabled={props.disabled}>
-            <InputStyled as="select" id={props.id} {...props}>
+    ) : type === "textarea" ? (
+        <InputStyled
+            as="textarea"
+            id={id}
+            value={value}
+            type="textarea"
+            onChange={onChange}
+            icon={icon}
+            maxLength={maxLength}
+            validation={validation}
+            disabled={disabled}
+            {...props}
+        />
+    ) : type === "select" ? (
+        <SelectContainer disabled={disabled}>
+            <InputStyled
+                as="select"
+                id={id}
+                value={value}
+                type="select"
+                onChange={onChange}
+                icon={icon}
+                maxLength={maxLength}
+                validation={validation}
+                disabled={disabled}
+                {...props}
+            >
                 {props.children}
             </InputStyled>
         </SelectContainer>
-    ) : props.type === "markdown" ? (
-        <div data-color-mode={props.colorMode || "light"}>
+    ) : type === "markdown" ? (
+        <div data-color-mode={colorMode}>
             <MDEditor
-                value={props.value}
-                onChange={props.onChange}
-                preview={props.preview || "edit"}
+                value={value}
+                onChange={onChange}
+                preview={preview}
+                id={id}
                 {...props}
             />
         </div>
     ) : (
-        <InputStyled id={props.id} {...props} />
+        <InputStyled
+            id={id}
+            value={value}
+            type={password ? visible : type}
+            onChange={onChange}
+            icon={icon}
+            maxLength={maxLength}
+            validation={validation}
+            disabled={disabled}
+            {...props}
+        />
     )
 }
 
-const Input: React.FC<inputProps> = props => {
-    return props.label ? (
+const Input: React.FC<inputProps> = ({
+    label,
+    id,
+    helper,
+    helperBottom,
+    validation,
+    validationText,
+    counter,
+    maxLength,
+    value,
+    onChange,
+    password,
+    icon,
+    colorMode,
+    preview,
+    disabled,
+    customIconPassed,
+    customIconNotPassed,
+    iconPassword,
+    type,
+    ...props
+}) => {
+    return label ||
+        helper ||
+        helperBottom ||
+        validation ||
+        validationText ||
+        counter ? (
         <InputContainer
-            id={props.id}
-            label={props.label}
-            helper={props.helper}
-            helperBottom={props.helperBottom}
-            validation={props.validation}
-            validationText={props.validationText}
-            counter={props.counter}
-            maxLength={props.maxLength}
-            value={props.value}
+            id={id}
+            maxLength={maxLength}
+            value={value}
+            label={label}
+            helper={helper}
+            helperBottom={helperBottom}
+            validation={validation}
+            validationText={validationText}
+            counter={counter}
         >
-            <InputFunction {...props} />
+            <InputFunction
+                onChange={onChange}
+                value={value}
+                validation={validation}
+                password={password}
+                icon={icon}
+                colorMode={colorMode}
+                preview={preview}
+                disabled={disabled}
+                maxLength={maxLength}
+                type={type}
+                customIconPassed={customIconPassed}
+                customIconNotPassed={customIconNotPassed}
+                iconPassword={iconPassword}
+                id={id}
+                {...props}
+            />
         </InputContainer>
     ) : (
-        <InputFunction {...props} />
+        <InputFunction
+            onChange={onChange}
+            value={value}
+            validation={validation}
+            password={password}
+            icon={icon}
+            colorMode={colorMode}
+            preview={preview}
+            disabled={disabled}
+            maxLength={maxLength}
+            type={type}
+            customIconPassed={customIconPassed}
+            customIconNotPassed={customIconNotPassed}
+            iconPassword={iconPassword}
+            id={id}
+            {...props}
+        />
     )
 }
 

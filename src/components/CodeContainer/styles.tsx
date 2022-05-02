@@ -1,8 +1,26 @@
 // Packages
 import styled from "@emotion/styled"
-import { css } from "@emotion/react"
+import SyntaxHighlighter from "react-syntax-highlighter"
 
-// Types
-
+// Components
+import Variables from "../Variables"
 
 // Styles
+const Container = styled(SyntaxHighlighter)`
+    padding: ${Variables.Spacers.M} !important;
+    overflow-x: scroll !important;
+    max-width: 100% !important;
+    white-space: pre;
+    background-color: ${Variables.Colors.Gray800};
+
+    code {
+        padding: 0 !important;
+        white-space: pre !important;
+    }
+
+    & > * {
+        white-space: pre !important;
+    }
+`
+
+export { Container }

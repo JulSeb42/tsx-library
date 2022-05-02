@@ -6,13 +6,13 @@ import { css } from "@emotion/react"
 import Variables from "../Variables"
 
 // Types
-import props from "./types"
+import { props } from "./types"
 
 // Styles
 const Aside = styled.aside<props>`
     display: grid;
     grid-template-columns: 1fr;
-    gap: ${props => props.gap || Variables.Spacers.L};
+    gap: ${props => props.gap};
     align-content: start;
     grid-column: ${props =>
         props.template === "aside-left"
@@ -46,5 +46,9 @@ const Aside = styled.aside<props>`
             align-items: ${props.align};
         `}
 `
+
+Aside.defaultProps = {
+    gap: Variables.Spacers.L,
+}
 
 export default Aside

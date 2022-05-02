@@ -11,8 +11,8 @@ import { styleProps } from "./types"
 // Styles
 const Container = styled.button<styleProps>`
     justify-self: start;
-    width: ${props => `${props.size}px`};
-    height: ${props => `${props.size}px`};
+    width: ${props => props.size}px;
+    height: ${props => props.size}px;
     display: inline-flex;
     align-items: center;
     justify-content: center;

@@ -1,5 +1,4 @@
 // Packages
-
 import styled from "@emotion/styled"
 import { css } from "@emotion/react"
 
@@ -7,15 +6,15 @@ import { css } from "@emotion/react"
 import Variables from "../Variables"
 
 // Types
-import props from "./types"
+import { props } from "./types"
 
 // Styles
 const Grid = styled.div<props>`
     display: ${props => (props.inline ? "inline-grid" : "grid")};
     grid-template-columns: repeat(${props => (props.col ? props.col : 1)}, 1fr);
-    gap: ${props => props.gap || Variables.Spacers.L};
-    justify-items: ${props => props.justify || "stretch"};
-    align-items: ${props => props.align || "stretch"};
+    gap: ${props => props.gap};
+    justify-items: ${props => props.justify};
+    align-items: ${props => props.align};
 
     ${props =>
         props.row &&
@@ -52,5 +51,11 @@ const Grid = styled.div<props>`
         );
     }
 `
+
+Grid.defaultProps = {
+    gap: Variables.Spacers.L,
+    justify: "stretch",
+    align: "stretch",
+}
 
 export default Grid

@@ -1,181 +1,46 @@
 // Packages
 import React, { useState, useEffect, useCallback } from "react"
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
 
 // Components
 import Variables from "../Variables"
-import Icon from "./Icon"
-import Flexbox, { props as flexboxProps} from "./Flexbox"
-import Grid from "./Grid"
-import ButtonIcon from "./ButtonIcon"
+import Icon from "../Icon"
+import ButtonIcon from "../ButtonIcon"
 
 // Types
-interface styleWrapperProps extends flexboxProps {
-    height?: string | number
-}
-
-interface styleContentProps extends flexboxProps {
-    speed?: number
-    show?: number
-    active: number
-}
-
-interface styleButtonsContainerProps extends flexboxProps {
-    btnLarge?: boolean
-    position?: string
-    hideMobile?: boolean
-}
-
-interface styleButtonLargeProps extends React.HTMLAttributes<HTMLButtonElement> {
-    position?: string
-}
-
-interface styleDotProps extends React.HTMLAttributes<HTMLButtonElement> {
-    dotSize?: number
-    active?: boolean
-}
-
-interface buttonProps extends React.HTMLAttributes<HTMLButtonElement> {
-    position?: string
-    btnLarge?: boolean
-    hideMobile?: boolean
-    btnSize?: number
-    btnColor?: string
-}
-
-interface props extends React.HTMLAttributes<HTMLElement> {
-    children: any
-    show?: number
-    auto?: number
-    controls?: boolean
-    controlsLarge?: boolean
-    height?: string | number
-    hideButtonsMobile?: boolean
-    speed?: number
-    pagination?: boolean
-    gapDots?: number | string
-    dotSize?: number
-}
+import { buttonProps, props } from "./types"
 
 // Styles
-const Container = styled(Grid)`
-    width: 100%;
-    gap: ${Variables.Spacers.XS};
-    align-items: start;
-`
+import {
+    Container,
+    Wrapper,
+    ContentWrapper,
+    Content,
+    ButtonsContainer,
+    ButtonLarge,
+    PaginationContainer,
+    Dot,
+} from "./styles"
 
-const Wrapper = styled(Flexbox)<styleWrapperProps>`
-    width: 100%;
-    height: ${props => props.height};
-    position: relative;
-`
-
-const ContentWrapper = styled.div`
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-`
-
-const Content = styled(Flexbox)<styleContentProps>`
-    transition: all ${props => `${props.speed}ms`} ease;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    width: ${props => (props.show ? `calc(100% / ${props.show})` : "100%")};
-    transform: ${props =>
-        props.show
-            ? `translateX(-${props.active * (100 / props.show)}%)`
-            : `translateX(-${props.active * 100}%)`};
-    height: 100%;
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
-
-    & > * {
-        width: 100%;
-        height: 100%;
-        flex-shrink: 0;
-        flex-grow: 1;
-    }
-`
-
-const ButtonsContainer = styled(Flexbox)<styleButtonsContainerProps>`
-    position: absolute;
-    z-index: 2;
-    padding: 0 ${props => (props.btnLarge ? 0 : Variables.Spacers.XS)};
-    height: 100%;
-    left: ${props => (props.position === "left" ? 0 : "auto")};
-    right: ${props => (props.position === "right" ? 0 : "auto")};
-
-    ${props =>
-        props.hideMobile &&
-        css`
-            @media (hover: none) and (pointer: coarse) {
-                display: none;
-            }
-        `}
-`
-
-const ButtonLarge = styled.button<styleButtonLargeProps>`
-    --size: 48px;
-    width: var(--size);
-    height: var(--size);
-    background-color: ${Variables.Overlays.Plain.White50};
-    transition: ${Variables.Transitions.Short};
-    border: none;
-    color: ${Variables.Colors.Primary500};
-    border-radius: ${props =>
-        props.position === "left"
-            ? `0 ${Variables.Radiuses.M} ${Variables.Radiuses.M} 0`
-            : `${Variables.Radiuses.M} 0 0 ${Variables.Radiuses.M}`};
-
-    &:hover {
-        background-color: ${Variables.Overlays.Plain.White80};
-    }
-`
-
-const PaginationContainer = styled(Flexbox)`
-    width: 100%;
-`
-
-const Dot = styled.button<styleDotProps>`
-    width: ${props => `${props.dotSize}px`};
-    height: ${props => `${props.dotSize}px`};
-    padding: 0;
-    border-radius: 50%;
-    border: none;
-    background-color: ${props =>
-        props.active
-            ? Variables.Colors.Primary500
-            : Variables.Colors.Primary300};
-    transition: ${Variables.Transitions.Short};
-
-    &:hover {
-        background-color: ${props =>
-            props.active
-                ? Variables.Colors.Primary300
-                : Variables.Colors.Primary500};
-    }
-
-    &:active {
-        background-color: ${Variables.Colors.Primary600};
-    }
-`
-
-const SlideshowButton: React.FC<buttonProps> = props => {
+const SlideshowButton: React.FC<buttonProps> = ({
+    position,
+    btnLarge,
+    hideMobile,
+    btnSize = 32,
+    btnColor = "primary",
+    onClick,
+}) => {
     return (
         <ButtonsContainer
             align="center"
-            position={props.position}
-            btnLarge={props.btnLarge}
-            hideMobile={props.hideMobile}
+            position={position}
+            btnLarge={btnLarge}
+            hideMobile={hideMobile}
         >
-            {props.btnLarge ? (
-                <ButtonLarge position={props.position} onClick={props.onClick}>
+            {btnLarge ? (
+                <ButtonLarge position={position} onClick={onClick}>
                     <Icon
-                        name={
-                            props.position === "left"
+                        src={
+                            position === "left"
                                 ? "chevron-left"
                                 : "chevron-right"
                         }
@@ -184,42 +49,48 @@ const SlideshowButton: React.FC<buttonProps> = props => {
                 </ButtonLarge>
             ) : (
                 <ButtonIcon
-                    size={props.btnSize || 32}
-                    color={props.btnColor || "primary"}
+                    size={btnSize}
+                    color={btnColor}
                     icon={
-                        props.position === "left"
-                            ? "chevron-left"
-                            : "chevron-right"
+                        position === "left" ? "chevron-left" : "chevron-right"
                     }
-                    onClick={props.onClick}
+                    onClick={onClick}
                 />
             )}
         </ButtonsContainer>
     )
 }
 
-const Slideshow: React.FC<props> = props => {
+const Slideshow: React.FC<props> = ({
+    children,
+    show,
+    auto,
+    controls,
+    controlsLarge,
+    height = "60vh",
+    hideButtonsMobile,
+    speed = 250,
+    pagination,
+    gapDots = Variables.Spacers.XS,
+    dotSize = 8,
+}) => {
     // Slideshow with buttons
     const [active, setActive] = useState(0)
-    const length = props.children.length
+    const length = children.length
 
     const handleNext = () => {
-        if (!props.show) {
+        if (!show) {
             setActive(active < length - 1 ? active + 1 : 0)
         } else {
-            setActive(active < length + props.show ? active + props.show : 0)
+            setActive(active < length + show ? active + show : 0)
         }
     }
 
     const handlePrev = () => {
-        if (!props.show) {
+        if (!show) {
             setActive(active > 0 ? active - 1 : length - 1)
         } else {
-            setActive(
-                active > 0
-                    ? active - props.show
-                    : length + props.show + (props.show - 1)
-            )
+            setActive(active > 0 ? active - show : length + show + (show - 1))
         }
     }
 
@@ -229,10 +100,10 @@ const Slideshow: React.FC<props> = props => {
     }, [active, length])
 
     useEffect(() => {
-        if (props.auto) {
-            setInterval(() => autoSlideshow(), props.auto)
+        if (auto) {
+            setInterval(() => autoSlideshow(), auto)
         }
-    }, [props.auto, autoSlideshow])
+    }, [auto, autoSlideshow])
 
     // Swipe
     const [touchPosition, setTouchPosition] = useState(null)
@@ -259,13 +130,13 @@ const Slideshow: React.FC<props> = props => {
 
     return (
         <Container>
-            <Wrapper direction="column" height={props.height || "60vh"}>
-                {(props.controls || props.controlsLarge) && (
+            <Wrapper direction="column" height={height}>
+                {(controls || controlsLarge) && (
                     <SlideshowButton
                         position="left"
                         onClick={handlePrev}
-                        btnLarge={props.controlsLarge}
-                        hideMobile={props.hideButtonsMobile}
+                        btnLarge={controlsLarge}
+                        hideMobile={hideButtonsMobile}
                     />
                 )}
 
@@ -273,35 +144,31 @@ const Slideshow: React.FC<props> = props => {
                     onTouchStart={handleTouchStart}
                     onTouchMove={handleTouchMove}
                 >
-                    <Content
-                        show={props.show}
-                        active={active}
-                        speed={props.speed || 250}
-                    >
-                        {props.children}
+                    <Content show={show} active={active} speed={speed}>
+                        {children}
                     </Content>
                 </ContentWrapper>
 
-                {(props.controls || props.controlsLarge) && (
+                {(controls || controlsLarge) && (
                     <SlideshowButton
                         position="right"
                         onClick={handleNext}
-                        btnLarge={props.controlsLarge}
-                        hideMobile={props.hideButtonsMobile}
+                        btnLarge={controlsLarge}
+                        hideMobile={hideButtonsMobile}
                     />
                 )}
             </Wrapper>
 
-            {props.pagination && (
+            {pagination && (
                 <PaginationContainer
                     justify="center"
                     align="center"
-                    gap={props.gapDots || Variables.Spacers.XS}
+                    gap={gapDots}
                 >
-                    {props.children.map((_: any, i: any) => (
+                    {children.map((_: any, i: any) => (
                         <Dot
                             onClick={() => setActive(i)}
-                            dotSize={props.dotSize || 8}
+                            dotSize={dotSize}
                             active={active === i && true}
                             key={i}
                         />

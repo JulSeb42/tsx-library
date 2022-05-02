@@ -13,24 +13,33 @@ import { props } from "./types"
 // Styles
 import { Container } from "./styles"
 
-const Button: React.FC<props> = props => {
+const Button: React.FC<props> = ({
+    to,
+    btnStyle = "plain",
+    color = "primary",
+    loading,
+    iconLeft,
+    iconRight,
+    children,
+    ...props
+}) => {
     return (
         <Container
-            as={props.to ? Link : "button"}
-            to={props.to}
-            btnStyle={props.btnStyle || "plain"}
-            color={props.color || "primary"}
+            as={to ? Link : "button"}
+            to={to}
+            btnStyle={btnStyle}
+            color={color}
             {...props}
         >
-            {!props.loading && props.iconLeft && (
-                <Icon name={props.iconLeft} size={16} className="icon-left" />
+            {!loading && iconLeft && (
+                <Icon src={iconLeft} size={16} className="icon-left" />
             )}
 
-            {props.loading && (
+            {loading && (
                 <Loader
                     size={16}
                     backgroundColor={
-                        props.btnStyle === "plain"
+                        btnStyle === "plain"
                             ? Variables.Colors.Gray100
                             : Variables.Colors.White
                     }
@@ -39,10 +48,10 @@ const Button: React.FC<props> = props => {
                 />
             )}
 
-            {props.children}
+            {children}
 
-            {props.iconRight && (
-                <Icon name={props.iconRight} size={16} className="icon-right" />
+            {iconRight && (
+                <Icon src={iconRight} size={16} className="icon-right" />
             )}
         </Container>
     )

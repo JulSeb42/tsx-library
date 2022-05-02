@@ -2,11 +2,7 @@
 import { css } from "@emotion/react"
 
 // Types
-interface props {
-    icon: string
-    size: number
-    color?: string
-}
+import { props } from "./types"
 
 // Styles
 const IconMixin = (props: props) => css`

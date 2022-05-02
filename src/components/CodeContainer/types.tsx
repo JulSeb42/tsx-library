@@ -1,4 +1,8 @@
 // Packages
-import { HTMLAttributes } from "react"
+import { ReactNode } from "react"
 
 // Types
+export interface props {
+    language?: string
+    children: ReactNode | any
+}

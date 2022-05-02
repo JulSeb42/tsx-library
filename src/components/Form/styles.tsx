@@ -1,8 +1,13 @@
 // Packages
 import styled from "@emotion/styled"
-import { css } from "@emotion/react"
 
-// Types
-
+// Components
+import Variables from "../Variables"
 
 // Styles
+const Container = styled.form`
+    display: grid;
+    gap: ${Variables.Spacers.S};
+`
+
+export { Container }

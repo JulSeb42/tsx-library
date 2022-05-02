@@ -1,97 +1,50 @@
 // Packages
 import React from "react"
-import styled from "@emotion/styled"
 
 // Components
-import * as Font from "./Font"
+import * as Font from "../Font"
 import Variables from "../Variables"
-import Flexbox from "./Flexbox"
-import Icon from "./Icon"
+import Flexbox from "../Flexbox"
+import Icon from "../Icon"
 
 // Types
-interface props {
-    handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-    handlePrev: (event: React.MouseEvent<HTMLElement>) => void
-    handleNext: (event: React.MouseEvent<HTMLElement>) => void
-    active: number
-    totalPages: number
-    justify?: string
-    customIconPrev?: string
-    customIconNext?: string
-}
+import { props } from "./types"
 
 // Styles
-const Input = styled.input`
-    border: 1px solid ${Variables.Colors.Gray200};
-    font-size: ${Variables.FontSizes.Body};
-    width: 32px;
-    border-radius: ${Variables.Radiuses.XS};
-    padding: ${Variables.Spacers.XXS};
-    -moz-appearance: textfield;
+import { Input, Button } from "./styles"
 
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-`
-
-const Button = styled.button`
-    padding: 0;
-    --size: 24px;
-    width: var(--size);
-    height: var(--size);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    border-radius: 50%;
-    background-color: transparent;
-    color: ${Variables.Colors.Primary500};
-    transition: ${Variables.Transitions.Short};
-
-    &:hover {
-        color: ${Variables.Colors.Primary300};
-        background-color: ${Variables.Colors.Gray50};
-    }
-
-    &:active {
-        color: ${Variables.Colors.Primary600};
-    }
-
-    &:disabled {
-        color: ${Variables.Colors.Gray500};
-
-        &:hover {
-            color: ${Variables.Colors.Gray500};
-            background-color: transparent;
-        }
-    }
-`
-
-const Paginator: React.FC<props> = props => {
+const Paginator: React.FC<props> = ({
+    handleChange,
+    handlePrev,
+    handleNext,
+    active,
+    totalPages,
+    justify,
+    customIconPrev,
+    customIconNext,
+}) => {
+    const activePage =
+        active > totalPages ? totalPages : active < 0 ? 0 : active
+    
     return (
         <Flexbox
             as={Font.P}
             align="center"
-            justify={props.justify}
+            justify={justify}
             gap={Variables.Spacers.XS}
         >
             Page
             <Input
                 type="number"
-                onChange={props.handleChange}
-                value={props.active}
+                onChange={handleChange}
+                value={activePage}
                 min={1}
-                max={props.totalPages}
+                max={totalPages}
             />
-            of {props.totalPages}
-            <Button
-                onClick={props.handlePrev}
-                disabled={props.active === 1 && true}
-            >
-                {props.customIconPrev ? (
-                    <Icon name={props.customIconPrev} size={24} />
+            of {totalPages}
+            <Button onClick={handlePrev} disabled={activePage === 1 && true}>
+                {customIconPrev ? (
+                    <Icon src={customIconPrev} size={24} />
                 ) : (
                     <svg
                         width="24"
@@ -108,11 +61,11 @@ const Paginator: React.FC<props> = props => {
                 )}
             </Button>
             <Button
-                onClick={props.handleNext}
-                disabled={props.active === props.totalPages && true}
+                onClick={handleNext}
+                disabled={activePage === totalPages && true}
             >
-                {props.customIconNext ? (
-                    <Icon name={props.customIconNext} size={24} />
+                {customIconNext ? (
+                    <Icon src={customIconNext} size={24} />
                 ) : (
                     <svg
                         width="24"

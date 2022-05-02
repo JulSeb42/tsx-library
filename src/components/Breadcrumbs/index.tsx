@@ -8,10 +8,10 @@ import { Breadcrumbs, Item } from "./styles"
 // Types
 import { itemProps } from "./types"
 
-const BreadcrumbsItem: React.FC<itemProps> = props => {
+const BreadcrumbsItem: React.FC<itemProps> = ({ to, children, ...props }) => {
     return (
-        <Item as={props.to ? Link : "span"} to={props.to} {...props}>
-            {props.children}
+        <Item as={to ? Link : "span"} to={to} {...props}>
+            {children}
         </Item>
     )
 }

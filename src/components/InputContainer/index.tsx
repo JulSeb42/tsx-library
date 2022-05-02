@@ -1,59 +1,47 @@
 // Packages
 import React from "react"
-import styled from "@emotion/styled"
 
 // Components
-import * as Font from "./Font"
+import * as Font from "../Font"
 import Variables from "../Variables"
-import Grid, { props as gridProps } from "./Grid"
+import Grid from "../Grid"
 
 // Types
-interface props extends gridProps {
-    id: string
-    label?: string
-    helper?: string
-    helperBottom?: string
-    validationText?: string
-    validation?: string
-    value?: any
-    counter?: boolean
-    maxLength?: number
-}
+import { props } from "./types"
 
 // Styles
-const Label = styled.label`
-    color: ${Variables.Colors.Primary500};
-    font-weight: ${Variables.FontWeights.Bold};
-`
+import { Label, Helper } from "./styles"
 
-const Helper = styled(Font.P)<{ bottom?: boolean }>`
-    position: relative;
-    z-index: 0;
-    font-size: ${props =>
-        props.bottom ? Variables.FontSizes.Small : Variables.FontSizes.Body};
-`
-
-const InputContainer: React.FC<props> = props => {
+const InputContainer: React.FC<props> = ({
+    id,
+    label,
+    helper,
+    helperBottom,
+    validationText,
+    validation,
+    value,
+    counter,
+    maxLength,
+    children,
+}) => {
     return (
         <Grid gap={Variables.Spacers.XXS}>
-            {props.label && <Label htmlFor={props.id}>{props.label}</Label>}
+            {label && <Label htmlFor={id}>{label}</Label>}
 
-            {props.helper && <Helper>{props.helper}</Helper>}
+            {helper && <Helper>{helper}</Helper>}
 
-            {props.children}
+            {children}
 
-            {props.helperBottom && <Helper bottom>{props.helperBottom}</Helper>}
+            {helperBottom && <Helper bottom>{helperBottom}</Helper>}
 
-            {props.validationText &&
-                props.validation &&
-                props.value.length > 0 && (
-                    <Font.Small>{props.validationText}</Font.Small>
-                )}
+            {validationText && validation && value.length > 0 && (
+                <Font.Small>{validationText}</Font.Small>
+            )}
 
-            {(props.counter || props.maxLength) && (
+            {(counter || maxLength) && (
                 <Font.Small>
-                    {props.value.length}
-                    {props.maxLength && ` / ${props.maxLength}`}
+                    {value.length}
+                    {maxLength && ` / ${maxLength}`}
                 </Font.Small>
             )}
         </Grid>

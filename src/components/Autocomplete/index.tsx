@@ -20,59 +20,68 @@ import {
     List,
 } from "./styles"
 
-const Autocomplete: React.FC<props> = props => {
+const Autocomplete: React.FC<props> = ({
+    helper,
+    helperBottom,
+    label,
+    id,
+    icon,
+    disabled,
+    value,
+    items,
+    onMouseDown,
+    ...props
+}) => {
     const [isOpen, setIsOpen] = useState(false)
 
     const handleOpen = () => setIsOpen(true)
     const handleClose = () => setTimeout(() => setIsOpen(false), 500)
 
-    return props.helper || props.helperBottom || props.label ? (
+    return helper || helperBottom || label ? (
         <Grid gap={Variables.Spacers.XXS}>
-            {props.label && <Label htmlFor={props.id}>{props.label}</Label>}
+            {label && <Label htmlFor={id}>{label}</Label>}
 
-            {props.helper && <Helper>{props.helper}</Helper>}
+            {helper && <Helper>{helper}</Helper>}
 
             <InputContainer>
-                {props.icon && (
-                    <IconContainer disabled={props.disabled}>
-                        <Icon name={props.icon} size={16} />
+                {icon && (
+                    <IconContainer disabled={disabled}>
+                        <Icon src={icon} size={16} />
                     </IconContainer>
                 )}
 
                 <Input
-                    id={props.id}
+                    id={id}
                     onFocus={handleOpen}
                     onBlur={handleClose}
-                    value={props.value}
+                    value={value}
                     {...props}
                 />
 
                 <List open={isOpen}>
-                    {props.items.slice(0, 20).map((item, i) => (
-                        <li onMouseDown={props.onMouseDown} key={i}>
+                    {items.slice(0, 20).map((item, i) => (
+                        <li onMouseDown={onMouseDown} key={i}>
                             {item}
                         </li>
                     ))}
                 </List>
             </InputContainer>
 
-            {props.helperBottom && (
-                <Helper as={Font.Small}>{props.helperBottom}</Helper>
-            )}
+            {helperBottom && <Helper as={Font.Small}>{helperBottom}</Helper>}
         </Grid>
     ) : (
         <InputContainer>
             <Input
-                id={props.id}
+                id={id}
                 onFocus={handleOpen}
                 onBlur={handleClose}
-                value={props.value}
+                value={value}
                 {...props}
             />
 
             <List open={isOpen}>
-                {props.items.slice(0, 20).map((item, i) => (
-                    <li onMouseDown={props.onMouseDown} key={i}>
+                {items.slice(0, 20).map((item, i) => (
+                    <li onMouseDown={onMouseDown} key={i}>
                         {item}
                     </li>
                 ))}

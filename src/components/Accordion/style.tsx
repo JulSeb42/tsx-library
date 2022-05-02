@@ -8,7 +8,7 @@ import Variables from "../Variables"
 import Grid from "../Grid"
 
 // Types
-import { containerProps, buttonProps } from "./types"
+import { containerProps, buttonProps, contentProps } from "./types"
 
 // Styles
 const AccordionContainer = styled(Grid)<containerProps>`
@@ -96,16 +96,12 @@ const Button = styled.button<buttonProps>`
         `}
 `
 
-const Content = styled(Font.P)`
-    max-height: 0;
+const Content = styled(Font.P)<contentProps>`
+    max-height: ${props => (props.isOpen ? "600px" : 0)};
     padding: 0;
     overflow: hidden;
     transition: ${Variables.Transitions.Short};
     padding: 0 ${Variables.Spacers.S};
-
-    &.open {
-        max-height: 600px;
-    }
 `
 
 export { AccordionContainer, Item, Button, Content }

@@ -8,7 +8,7 @@ import Variables from "../Variables"
 import IconMixin from "../IconMixin"
 
 // Types
-import { styleProps } from "./types"
+import { styleProps, styleItemProps } from "./types"
 
 // Styles
 const Breadcrumbs = styled(Font.P)<styleProps>`
@@ -37,6 +37,6 @@ const Breadcrumbs = styled(Font.P)<styleProps>`
         `}
 `
 
-const Item = styled.span``
+const Item = styled.span<styleItemProps>``
 
 export { Breadcrumbs, Item }

@@ -1,82 +1,31 @@
 // Packages
 import React from "react"
-import styled from "@emotion/styled"
 
 // Components
-import Variables from "../Variables"
-import Icon from "./Icon"
+import Icon from "../Icon"
 
 // Types
-interface styleProps extends React.HTMLAttributes<HTMLButtonElement> {
-    active?: boolean
-    more?: boolean
-}
-
-interface props extends styleProps {
-    prev?: boolean
-    customIconPrev?: string
-    customIconMore?: string
-    number?: number
-    next?: boolean
-    customIconNext?: string
-    disabled?: boolean
-}
+import { props } from "./types"
 
 // Styles
-const Pagination = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
+import { Pagination, Button } from "./styles"
 
-    button:not(:last-child) {
-        margin-right: ${Variables.Spacers.XS};
-    }
-`
-
-const Button = styled.button<styleProps>`
-    --size: 32px;
-    width: var(--size);
-    height: var(--size);
-    border-radius: 50%;
-    border: none;
-    font-size: ${Variables.FontSizes.Body};
-    line-height: ${Variables.FontSizes.Body};
-    font-family: ${Variables.FontFamilies.Body};
-    font-weight: ${Variables.FontWeights.Bold};
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: ${props =>
-        props.active ? Variables.Colors.Primary500 : "none"};
-    color: ${props =>
-        props.active ? Variables.Colors.White : Variables.Colors.Primary500};
-    transition: ${Variables.Transitions.Short};
-    cursor: ${props => props.more ? "default" : "pointer"};
-
-    &:hover {
-        background-color: ${props =>
-            props.more ? "transparent" : Variables.Colors.Primary300};
-        color: ${props =>
-            props.more ? Variables.Colors.Primary500 : Variables.Colors.White};
-    }
-
-    &:active {
-        background-color: ${Variables.Colors.Primary600};
-        color: ${Variables.Colors.White};
-    }
-
-    &:disabled {
-        color: ${Variables.Colors.Gray500};
-        background-color: transparent;
-    }
-`
-
-const PaginationButton: React.FC<props> = props => {
+const PaginationButton: React.FC<props> = ({
+    prev,
+    customIconPrev,
+    customIconMore,
+    number,
+    next,
+    customIconNext,
+    disabled,
+    more,
+    ...props
+}) => {
     return (
-        <Button {...props}>
-            {props.prev &&
-                (props.customIconPrev ? (
-                    <Icon name={props.customIconPrev} size={16} />
+        <Button disabled={disabled} more={more} {...props}>
+            {prev &&
+                (customIconPrev ? (
+                    <Icon src={customIconPrev} size={16} />
                 ) : (
                     <svg
                         width="16"
@@ -92,9 +41,9 @@ const PaginationButton: React.FC<props> = props => {
                     </svg>
                 ))}
 
-            {props.more &&
-                (props.customIconMore ? (
-                    <Icon name={props.customIconMore} size={16} />
+            {more &&
+                (customIconMore ? (
+                    <Icon src={customIconMore} size={16} />
                 ) : (
                     <svg
                         width="16"
@@ -110,11 +59,11 @@ const PaginationButton: React.FC<props> = props => {
                     </svg>
                 ))}
 
-            {props.number && props.number}
+            {number && number}
 
-            {props.next &&
-                (props.customIconNext ? (
-                    <Icon name={props.customIconNext} size={16} />
+            {next &&
+                (customIconNext ? (
+                    <Icon src={customIconNext} size={16} />
                 ) : (
                     <svg
                         width="16"

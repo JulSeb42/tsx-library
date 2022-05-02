@@ -6,7 +6,7 @@ import Grid from "../Grid"
 import Variables from "../Variables"
 
 // Types
-import props from "./types"
+import { props } from "./types"
 
 // Styles
 const Alert = styled(Grid)<props>`
@@ -25,7 +25,7 @@ const Alert = styled(Grid)<props>`
             ? Variables.Colors.Warning50
             : props.color === "white"
             ? Variables.Colors.White
-            : props.color || Variables.Colors.Success50};
+            : props.color};
     border: 1px solid
         ${props =>
             props.color === "primary"
@@ -40,8 +40,13 @@ const Alert = styled(Grid)<props>`
                 ? Variables.Colors.Warning500
                 : props.color === "white"
                 ? Variables.Colors.White
-                : props.borderColor || Variables.Colors.Success500};
+                : props.borderColor};
     border-radius: ${Variables.Radiuses.M};
 `
+
+Alert.defaultProps = {
+    color: "success",
+    borderColor: "success",
+}
 
 export default Alert

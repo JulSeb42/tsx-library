@@ -2,7 +2,7 @@
 import { HTMLAttributes } from "react"
 
 // Types
-export default interface props extends HTMLAttributes<HTMLElement> {
+export interface props extends HTMLAttributes<HTMLElement> {
     gap?: string
     template?: string
     last?: boolean

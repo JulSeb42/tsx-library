@@ -1,19 +1,15 @@
 // Packages
-import { HTMLAttributes } from "react"
 import styled from "@emotion/styled"
 
 // Components
 import Variables from "../Variables"
 
 // Types
-interface props extends HTMLAttributes<HTMLDivElement> {
-    gap?: string
-    template?: string
-}
+import { props } from "./types"
 
 const Wrapper = styled.div<props>`
     display: grid;
-    gap: ${props => props.gap || Variables.Spacers.L};
+    gap: ${props => props.gap};
     padding: ${Variables.Container.Padding};
     grid-template-columns: ${props =>
         props.template === "aside-left"
@@ -30,5 +26,9 @@ const Wrapper = styled.div<props>`
         grid-template-columns: ${Variables.Container.TemplateTablet};
     }
 `
+
+Wrapper.defaultProps = {
+    gap: Variables.Spacers.L,
+}
 
 export default Wrapper

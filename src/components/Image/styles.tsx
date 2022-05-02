@@ -2,25 +2,11 @@
 import styled from "@emotion/styled"
 
 // Components
-import Variables from ".../Variables"
+import Variables from "../Variables"
 import * as Font from "../Font"
 
 // Types
-interface propsFallback extends React.HTMLAttributes<HTMLDivElement> {
-    width: number | string
-    height: number | string
-}
-
-interface propsContainer extends React.HTMLAttributes<HTMLDivElement> {
-    width?: string | number
-    height?: string | number
-}
-
-export interface propsImg extends React.HTMLAttributes<HTMLImageElement> {
-    width?: string | number
-    height?: string | number
-    fit?: string
-}
+import { propsFallback, propsContainer } from "./types"
 
 // Styles
 const Fallback = styled.div<propsFallback>`

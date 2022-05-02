@@ -11,19 +11,23 @@ import { props } from "./types"
 // Styles
 import { Container } from "./styles"
 
-const ButtonIcon: React.FC<props> = props => {
+const ButtonIcon: React.FC<props> = ({
+    to,
+    size = 48,
+    btnStyle = "plain",
+    color = "primary",
+    icon,
+    ...props
+}) => {
     return (
         <Container
-            as={props.to ? Link : "button"}
-            size={props.size || 48}
-            btnStyle={props.btnStyle || "plain"}
-            color={props.color || "primary"}
+            as={to ? Link : "button"}
+            size={size}
+            btnStyle={btnStyle}
+            color={color}
             {...props}
         >
-            <Icon
-                name={props.icon}
-                size={props.size ? props.size * 0.6 : 48 * 0.6}
-            />
+            <Icon src={icon} size={size * 0.6} />
         </Container>
     )
 }

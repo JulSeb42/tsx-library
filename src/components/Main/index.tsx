@@ -1,5 +1,4 @@
 // Packages
-import { HTMLAttributes } from "react"
 import styled from "@emotion/styled"
 import { css } from "@emotion/react"
 
@@ -7,18 +6,13 @@ import { css } from "@emotion/react"
 import Variables from "../Variables"
 
 // Types
-interface props extends HTMLAttributes<HTMLElement> {
-    gap?: string
-    template?: string
-    justify?: string
-    align?: string
-}
+import { props } from "./types"
 
 // Styles
 const Main = styled.main<props>`
     display: grid;
     grid-template-columns: 1fr;
-    gap: ${props => props.gap || Variables.Spacers.L};
+    gap: ${props => props.gap};
     align-content: start;
     grid-column: ${props =>
         props.template === "aside-left" || props.template === "both-sides"
@@ -41,5 +35,9 @@ const Main = styled.main<props>`
             align-items: ${props.align};
         `}
 `
+
+Main.defaultProps = {
+    gap: Variables.Spacers.L,
+}
 
 export default Main
