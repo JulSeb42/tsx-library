@@ -18,7 +18,11 @@ const Image: React.FC<propsComponent> = ({
 }) => {
     return (
         <Suspense fallback={<Fallback width={width} height={height} />}>
-            <Container width={width} height={height} className={className}>
+            <Container
+                width={width}
+                height={height}
+                className={`img-container${className ? ` ${className}` : ""}`}
+            >
                 <Img width={width} height={height} fit={fit} {...props} />
 
                 {caption && <Caption>{caption}</Caption>}

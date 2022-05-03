@@ -20,7 +20,7 @@ const Container = styled.div<styleProps>`
     align-items: center;
     justify-content: center;
 
-    & > div {
+    & > .img-container {
         width: 90%;
         height: 90%;
 
