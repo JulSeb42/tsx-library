@@ -1,5 +1,6 @@
 // Packages
 import styled from "@emotion/styled"
+import { css } from "@emotion/react"
 
 // Components
 import Grid from "../Grid"
@@ -12,7 +13,6 @@ import { props } from "./types"
 const Alert = styled(Grid)<props>`
     padding: ${Variables.Spacers.S};
     gap: ${Variables.Spacers.S};
-    min-width: 400px;
     background-color: ${props =>
         props.color === "primary"
             ? Variables.Colors.Primary50
@@ -44,10 +44,16 @@ const Alert = styled(Grid)<props>`
                 : props.borderColor};
     border-radius: ${Variables.Radiuses.M};
 
-    @media ${Variables.Breakpoints.Mobile} {
-        min-width: inherit;
-        width: 90vw;
-    }
+    ${props =>
+        props.modal &&
+        css`
+            min-width: 400px;
+
+            @media ${Variables.Breakpoints.Mobile} {
+                min-width: inherit;
+                width: 90vw;
+            }
+        `}
 `
 
 Alert.defaultProps = {

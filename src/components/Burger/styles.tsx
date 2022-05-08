@@ -38,15 +38,15 @@ const Container = styled.button<styleProps>`
         position: absolute;
         left: 0;
 
-        &:first-child {
+        &:first-of-type {
             top: 0;
         }
 
-        &:nth-child(2) {
+        &:nth-of-type(2) {
             top: calc(50% - ${props => props.border}px / 2);
         }
 
-        &:last-child {
+        &:last-of-type {
             bottom: 0;
         }
     }
@@ -55,16 +55,16 @@ const Container = styled.button<styleProps>`
         props.open &&
         css`
             span {
-                &:first-child {
+                &:first-of-type {
                     transform: rotate(45deg);
                     top: 45%;
                 }
 
-                &:nth-child(2) {
+                &:nth-of-type(2) {
                     width: 0;
                 }
 
-                &:last-child {
+                &:last-of-type {
                     transform: rotate(-45deg);
                     bottom: 45%;
                 }

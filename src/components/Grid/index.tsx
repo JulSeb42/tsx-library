@@ -11,7 +11,7 @@ import { props } from "./types"
 // Styles
 const Grid = styled.div<props>`
     display: ${props => (props.inline ? "inline-grid" : "grid")};
-    grid-template-columns: repeat(${props => (props.col ? props.col : 1)}, 1fr);
+    grid-template-columns: repeat(${props => props.col}, 1fr);
     gap: ${props => props.gap};
     justify-items: ${props => props.justify};
     align-items: ${props => props.align};
@@ -56,6 +56,7 @@ Grid.defaultProps = {
     gap: Variables.Spacers.L,
     justify: "stretch",
     align: "stretch",
+    col: 1,
 }
 
 export default Grid

@@ -5,4 +5,5 @@ import gridProps from "../Grid/types"
 export interface props extends gridProps {
     color?: string
     borderColor?: string
+    modal?: boolean
 }

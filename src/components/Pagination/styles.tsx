@@ -13,7 +13,7 @@ const Pagination = styled.div`
     align-items: center;
     justify-content: center;
 
-    button:not(:last-child) {
+    button:not(:last-of-type) {
         margin-right: ${Variables.Spacers.XS};
     }
 `

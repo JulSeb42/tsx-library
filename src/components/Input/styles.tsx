@@ -112,7 +112,7 @@ const RightContainer = styled.span`
     display: inline-flex;
     align-items: center;
 
-    & > *:not(:last-child) {
+    & > *:not(:last-of-type) {
         margin-right: ${Variables.Spacers.XXS};
     }
 `

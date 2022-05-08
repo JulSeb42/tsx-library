@@ -32,7 +32,7 @@ const AccordionContainer = styled(Grid)<containerProps>`
                 padding-bottom: ${Variables.Spacers.XS};
             }
 
-            & > div:not(:last-child) {
+            & > div:not(:last-of-type) {
                 border-bottom: 1px solid ${Variables.Colors.Primary500};
             }
         `}
@@ -45,7 +45,7 @@ const AccordionContainer = styled(Grid)<containerProps>`
             border: 1px solid ${Variables.Colors.Gray200};
             overflow: hidden;
 
-            & > div:not(:last-child) {
+            & > div:not(:last-of-type) {
                 border-bottom: 1px solid ${Variables.Colors.White};
             }
 
