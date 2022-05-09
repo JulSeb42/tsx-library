@@ -29,8 +29,23 @@ const Container = styled.span<styleProps>`
             ? Variables.Colors.Danger500
             : props.color === "warning"
             ? Variables.Colors.Warning500
+            : props.textColor === "white"
+            ? Variables.Colors.White
             : props.color};
-    color: ${props => props.textColor};
+    color: ${props =>
+        props.textColor === "primary"
+            ? Variables.Colors.Primary500
+            : props.textColor === "secondary"
+            ? Variables.Colors.Secondary500
+            : props.textColor === "success"
+            ? Variables.Colors.Success500
+            : props.textColor === "danger"
+            ? Variables.Colors.Danger500
+            : props.textColor === "warning"
+            ? Variables.Colors.Warning500
+            : props.textColor === "white"
+            ? Variables.Colors.White
+            : props.textColor};
     font-weight: ${Variables.FontWeights.Black};
 `
 

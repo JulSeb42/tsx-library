@@ -7,12 +7,7 @@ import { props } from "./types"
 // Styles
 import { Container } from "./styles"
 
-const Icon: React.FC<props> = ({
-    src,
-    color = "currentColor",
-    size,
-    ...props
-}) => {
+const Icon: React.FC<props> = ({ src, color, size, ...props }) => {
     return (
         <Container
             src={`/icons/${src}.svg`}

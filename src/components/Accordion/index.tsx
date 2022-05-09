@@ -21,9 +21,9 @@ const Accordion: React.FC<containerProps> = ({
 
 const AccordionItem: React.FC<itemProps> = ({
     icon,
-    title,
+    title = "Title",
     className,
-    children,
+    children = "Content",
     ...props
 }) => {
     const [isOpen, setIsOpen] = useState(props.isOpen || false)

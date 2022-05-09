@@ -32,8 +32,8 @@ const EmptyContainer: React.FC<emptyProps> = ({ children, ...props }) => {
 }
 
 const Message: React.FC<messageProps> = ({
-    type,
-    children,
+    type = "sent",
+    children = "Message",
     date,
     time,
     ...props

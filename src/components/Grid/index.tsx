@@ -1,6 +1,7 @@
 // Packages
 import styled from "@emotion/styled"
 import { css } from "@emotion/react"
+import { stringifyPx } from "ts-utils-julseb"
 
 // Components
 import Variables from "../Variables"
@@ -12,7 +13,7 @@ import { props } from "./types"
 const Grid = styled.div<props>`
     display: ${props => (props.inline ? "inline-grid" : "grid")};
     grid-template-columns: repeat(${props => props.col}, 1fr);
-    gap: ${props => props.gap};
+    gap: ${props => (props.gap ? stringifyPx(props.gap) : Variables.Spacers.L)};
     justify-items: ${props => props.justify};
     align-items: ${props => props.align};
 
@@ -53,7 +54,6 @@ const Grid = styled.div<props>`
 `
 
 Grid.defaultProps = {
-    gap: Variables.Spacers.L,
     justify: "stretch",
     align: "stretch",
     col: 1,

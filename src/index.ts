@@ -9,7 +9,6 @@ import { Breadcrumbs, BreadcrumbsItem } from "./components/Breadcrumbs"
 import Burger from "./components/Burger"
 import Button from "./components/Button"
 import ButtonIcon from "./components/ButtonIcon"
-import ButtonsContainer from "./components/ButtonsContainer"
 import CodeContainer from "./components/CodeContainer"
 import { DropdownContainer, Dropdown } from "./components/Dropdown"
 import Flexbox from "./components/Flexbox"
@@ -50,7 +49,6 @@ import {
     TabsContent,
 } from "./components/Tabs"
 import Tag from "./components/Tag"
-import TitleFlex from "./components/TitleFlex"
 import Toast from "./components/Toast"
 import Tooltip from "./components/Tooltip"
 import Variables from "./components/Variables"
@@ -71,7 +69,6 @@ export {
     Burger,
     Button,
     ButtonIcon,
-    ButtonsContainer,
     CodeContainer,
     DropdownContainer,
     Dropdown,
@@ -111,7 +108,6 @@ export {
     TabsButton,
     TabsContent,
     Tag,
-    TitleFlex,
     Toast,
     Tooltip,
     Variables,

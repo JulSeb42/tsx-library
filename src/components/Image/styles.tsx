@@ -1,5 +1,6 @@
 // Packages
 import styled from "@emotion/styled"
+import { stringifyPx } from "ts-utils-julseb"
 
 // Components
 import Variables from "../Variables"
@@ -11,15 +12,15 @@ import { propsFallback, propsContainer } from "./types"
 // Styles
 const Fallback = styled.div<propsFallback>`
     position: relative;
-    width: ${props => props.width};
-    height: ${props => props.height};
+    width: ${props => stringifyPx(props.width)};
+    height: ${props => stringifyPx(props.height)};
     background-color: ${Variables.Colors.Gray500};
 `
 
 const Container = styled.div<propsContainer>`
     position: relative;
-    width: ${props => props.width};
-    height: ${props => props.height};
+    width: ${props => props.width ? stringifyPx(props.width) : "100%"};
+    height: ${props => props.height ? stringifyPx(props.height) : "auto"};
 
     & > div {
         position: relative;

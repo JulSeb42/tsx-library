@@ -1,14 +1,16 @@
 // Packages
 import styled from "@emotion/styled"
 import { css } from "@emotion/react"
+import { stringifyPx } from "ts-utils-julseb"
 
 // Types
 import { styleProps } from "./types"
 
 // Styles
 const Container = styled.video<styleProps>`
-    width: ${props => props.width};
-    height: ${props => props.height};
+    width: ${props => (props.width ? stringifyPx(props.width) : "100%")};
+    height: ${props =>
+        props.height ? stringifyPx(props.height) : props.height};
 
     ${props =>
         props.fit &&

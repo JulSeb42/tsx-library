@@ -1,6 +1,7 @@
 // Packages
 import styled from "@emotion/styled"
 import { css } from "@emotion/react"
+import { stringifyPx } from "ts-utils-julseb"
 
 // Components
 import Variables from "../Variables"
@@ -12,7 +13,7 @@ import { props } from "./types"
 const Aside = styled.aside<props>`
     display: grid;
     grid-template-columns: 1fr;
-    gap: ${props => props.gap};
+    gap: ${props => (props.gap ? stringifyPx(props.gap) : Variables.Spacers.L)};
     align-content: start;
     grid-column: ${props =>
         props.template === "aside-left"
@@ -46,9 +47,5 @@ const Aside = styled.aside<props>`
             align-items: ${props.align};
         `}
 `
-
-Aside.defaultProps = {
-    gap: Variables.Spacers.L,
-}
 
 export default Aside

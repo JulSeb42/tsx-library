@@ -24,6 +24,10 @@ const Container = styled.span<styleContainerProps>`
             ? Variables.Colors.Warning500
             : props.color === "white"
             ? Variables.Colors.White
+            : props.color === "black"
+            ? Variables.Colors.Black
+            : props.color === "gray"
+            ? Variables.Colors.Gray500
             : props.color};
 
     ${props =>

@@ -24,8 +24,6 @@ const Alert = styled(Grid)<props>`
             ? Variables.Colors.Danger50
             : props.color === "warning"
             ? Variables.Colors.Warning50
-            : props.color === "white"
-            ? Variables.Colors.White
             : props.color};
     border: 1px solid
         ${props =>
@@ -39,8 +37,6 @@ const Alert = styled(Grid)<props>`
                 ? Variables.Colors.Danger500
                 : props.color === "warning"
                 ? Variables.Colors.Warning500
-                : props.color === "white"
-                ? Variables.Colors.White
                 : props.borderColor};
     border-radius: ${Variables.Radiuses.M};
 

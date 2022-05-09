@@ -22,7 +22,11 @@ const PaginationButton: React.FC<props> = ({
     ...props
 }) => {
     return (
-        <Button disabled={disabled} more={more} {...props}>
+        <Button
+            disabled={disabled}
+            more={more}
+            {...props}
+        >
             {prev &&
                 (customIconPrev ? (
                     <Icon src={customIconPrev} size={16} />

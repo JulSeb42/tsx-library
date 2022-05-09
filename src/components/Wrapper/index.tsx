@@ -1,5 +1,6 @@
 // Packages
 import styled from "@emotion/styled"
+import { stringifyPx } from "ts-utils-julseb"
 
 // Components
 import Variables from "../Variables"
@@ -9,7 +10,7 @@ import { props } from "./types"
 
 const Wrapper = styled.div<props>`
     display: grid;
-    gap: ${props => props.gap};
+    gap: ${props => props.gap ? stringifyPx(props.gap) : Variables.Spacers.L};
     padding: ${Variables.Container.Padding};
     grid-template-columns: ${props =>
         props.template === "aside-left"
@@ -26,9 +27,5 @@ const Wrapper = styled.div<props>`
         grid-template-columns: ${Variables.Container.TemplateTablet};
     }
 `
-
-Wrapper.defaultProps = {
-    gap: Variables.Spacers.L,
-}
 
 export default Wrapper

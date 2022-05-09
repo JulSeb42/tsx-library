@@ -1,5 +1,6 @@
 // Packages
 import styled from "@emotion/styled"
+import { stringifyPx } from "ts-utils-julseb"
 
 // Types
 import { props } from "./types"
@@ -11,7 +12,7 @@ const Flexbox = styled.div<props>`
     justify-content: ${props => props.justify};
     flex-direction: ${props => props.direction};
     flex-wrap: ${props => props.wrap};
-    gap: ${props => props.gap};
+    gap: ${props => props.gap ? stringifyPx(props.gap) : 0};
 `
 
 Flexbox.defaultProps = {
@@ -19,7 +20,6 @@ Flexbox.defaultProps = {
     justify: "flex-start",
     direction: "row",
     wrap: "nowrap",
-    gap: 0,
 }
 
 export default Flexbox

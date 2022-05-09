@@ -2,8 +2,9 @@
 import React from "react"
 
 // Components
-import ButtonsContainer from "../ButtonsContainer"
+import Flexbox from "../Flexbox"
 import Button from "../Button"
+import Variables from "../Variables"
 
 // Types
 import { props } from "./types"
@@ -36,7 +37,7 @@ const Form: React.FC<props> = ({
             {children}
 
             {(btnPrimary || btnCancel || btnReset) && (
-                <ButtonsContainer>
+                <Flexbox gap={Variables.Spacers.XS}>
                     {btnPrimary && (
                         <Button
                             btnStyle="plain"
@@ -75,7 +76,7 @@ const Form: React.FC<props> = ({
                             {textBtnReset ? textBtnReset : "Reset"}
                         </Button>
                     )}
-                </ButtonsContainer>
+                </Flexbox>
             )}
         </Container>
     )

@@ -15,7 +15,23 @@ import { Container, Close, TitleContainer, Title } from "./styles"
 const TitleFunction: React.FC<titleProps> = ({ icon, iconColor, title }) => {
     return icon ? (
         <Title>
-            <Icon src={icon} size={16} color={iconColor} />
+            <Icon
+                src={icon}
+                size={16}
+                color={
+                    iconColor === "primary"
+                        ? Variables.Colors.Primary500
+                        : iconColor === "secondary"
+                        ? Variables.Colors.Secondary500
+                        : iconColor === "success"
+                        ? Variables.Colors.Success500
+                        : iconColor === "danger"
+                        ? Variables.Colors.Danger500
+                        : iconColor === "warning"
+                        ? Variables.Colors.Warning500
+                        : iconColor
+                }
+            />
 
             <Font.H5>{title}</Font.H5>
         </Title>
@@ -29,8 +45,8 @@ const Toast: React.FC<props> = ({
     icon,
     iconColor,
     customIconClose,
-    title,
-    children,
+    title = "Title",
+    children = "Content",
     ...props
 }) => {
     return (

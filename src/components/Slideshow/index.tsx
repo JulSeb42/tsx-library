@@ -1,10 +1,12 @@
 // Packages
 import React, { useState, useEffect, useCallback } from "react"
+import { stringifyPx } from "ts-utils-julseb"
 
 // Components
 import Variables from "../Variables"
 import Icon from "../Icon"
 import ButtonIcon from "../ButtonIcon"
+import Flexbox from "../Flexbox"
 
 // Types
 import { buttonProps, props } from "./types"
@@ -17,7 +19,6 @@ import {
     Content,
     ButtonsContainer,
     ButtonLarge,
-    PaginationContainer,
     Dot,
 } from "./styles"
 
@@ -67,11 +68,11 @@ const Slideshow: React.FC<props> = ({
     auto,
     controls,
     controlsLarge,
-    height = "60vh",
+    height,
     hideButtonsMobile,
     speed = 250,
     pagination,
-    gapDots = Variables.Spacers.XS,
+    gapDots,
     dotSize = 8,
 }) => {
     // Slideshow with buttons
@@ -160,11 +161,7 @@ const Slideshow: React.FC<props> = ({
             </Wrapper>
 
             {pagination && (
-                <PaginationContainer
-                    justify="center"
-                    align="center"
-                    gap={gapDots}
-                >
+                <Flexbox justify="center" align="center" gap={gapDots ? stringifyPx(gapDots) : Variables.Spacers.XS}>
                     {children.map((_: any, i: any) => (
                         <Dot
                             onClick={() => setActive(i)}
@@ -173,7 +170,7 @@ const Slideshow: React.FC<props> = ({
                             key={i}
                         />
                     ))}
-                </PaginationContainer>
+                </Flexbox>
             )}
         </Container>
     )

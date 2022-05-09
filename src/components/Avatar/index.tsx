@@ -2,7 +2,6 @@
 import React from "react"
 
 // Components
-import Variables from "../Variables"
 import Image from "../Image"
 import Icon from "../Icon"
 
@@ -14,8 +13,8 @@ import { Container } from "./styles"
 
 const Avatar: React.FC<props> = ({
     size = 48,
-    background = Variables.Colors.Primary500,
-    color = Variables.Colors.White,
+    background = "primary",
+    color = "white",
     children,
     src,
     icon,

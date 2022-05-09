@@ -13,6 +13,7 @@ import { Container } from "./styles"
 
 const PageLoading: React.FC<props> = ({
     backgroundColor = "primary",
+    loaderColor,
     ...props
 }) => {
     return (
@@ -21,6 +22,18 @@ const PageLoading: React.FC<props> = ({
                 color={
                     backgroundColor === "white"
                         ? Variables.Colors.Primary500
+                        : loaderColor === "primary"
+                        ? Variables.Colors.Primary500
+                        : loaderColor === "secondary"
+                        ? Variables.Colors.Secondary500
+                        : loaderColor === "success"
+                        ? Variables.Colors.Success500
+                        : loaderColor === "danger"
+                        ? Variables.Colors.Danger500
+                        : loaderColor === "warning"
+                        ? Variables.Colors.Warning500
+                        : loaderColor
+                        ? loaderColor
                         : Variables.Colors.White
                 }
                 backgroundColor={backgroundColor}

@@ -1,6 +1,7 @@
 // Packages
 import styled from "@emotion/styled"
 import { keyframes, css } from "@emotion/react"
+import { stringifyPx } from "ts-utils-julseb"
 
 // Components
 import Variables from "../Variables"
@@ -54,13 +55,17 @@ const Loader = styled.span<props>`
     border-radius: 50%;
     display: inline-block;
     box-sizing: border-box;
-    animation: ${Rotation} 1s linear infinite;
+    animation: ${Rotation} ${props => props.speed}ms linear infinite;
 
     ${props =>
         (props.marginLeft || props.marginRight) &&
         css`
-            margin-left: ${props.marginLeft};
-            margin-right: ${props.marginRight};
+            margin-left: ${props.marginLeft
+                ? stringifyPx(props.marginLeft)
+                : 0};
+            margin-right: ${props.marginRight
+                ? stringifyPx(props.marginRight)
+                : 0};
         `}
 `
 
@@ -69,6 +74,7 @@ Loader.defaultProps = {
     border: 2,
     backgroundColor: Variables.Colors.White,
     color: Variables.Colors.Primary500,
+    speed: 1000,
 }
 
 export default Loader

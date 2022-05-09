@@ -1,6 +1,7 @@
 // Packages
 import styled from "@emotion/styled"
 import { css } from "@emotion/react"
+import { stringifyPx } from "ts-utils-julseb"
 
 // Components
 import Variables from "../Variables"
@@ -25,7 +26,7 @@ const Container = styled(Grid)`
 
 const Wrapper = styled(Flexbox)<styleWrapperProps>`
     width: 100%;
-    height: ${props => props.height};
+    height: ${props => (props.height ? stringifyPx(props.height) : "60vh")};
     position: relative;
 `
 
@@ -93,10 +94,6 @@ const ButtonLarge = styled.button<styleButtonLargeProps>`
     }
 `
 
-const PaginationContainer = styled(Flexbox)`
-    width: 100%;
-`
-
 const Dot = styled.button<styleDotProps>`
     width: ${props => props.dotSize}px;
     height: ${props => props.dotSize}px;
@@ -128,6 +125,5 @@ export {
     Content,
     ButtonsContainer,
     ButtonLarge,
-    PaginationContainer,
     Dot,
 }
