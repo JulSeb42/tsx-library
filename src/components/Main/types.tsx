@@ -4,7 +4,7 @@ import { HTMLAttributes } from "react"
 // Types
 export interface props extends HTMLAttributes<HTMLElement> {
     gap?: string | number
-    template?: "1-col" | "aside-left" | "aside-right" | "both-sides" | "form"
+    template?: "1col" | "aside-left" | "aside-right" | "both-sides" | "form"
     justify?:
         | "start"
         | "end"

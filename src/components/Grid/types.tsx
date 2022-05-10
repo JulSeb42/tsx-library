@@ -17,11 +17,6 @@ export interface props extends HTMLAttributes<HTMLDivElement> {
         | 10
         | 11
         | 12
-        | "inherit"
-        | "initial"
-        | "revert"
-        | "revert-layer"
-        | "unset"
     gap?: string | number
     justify?:
         | "start"
