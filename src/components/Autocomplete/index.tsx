@@ -1,16 +1,12 @@
-// Packages
+// Imports
 import React, { useState } from "react"
 
-// Components
 import * as Font from "../Font"
-import Variables from "../Variables"
 import Grid from "../Grid"
 import Icon from "../Icon"
 
-// Types
 import { props } from "./types"
 
-// Styles
 import {
     Label,
     Helper,
@@ -38,7 +34,7 @@ const Autocomplete: React.FC<props> = ({
     const handleClose = () => setTimeout(() => setIsOpen(false), 500)
 
     return helper || helperBottom || label ? (
-        <Grid gap={Variables.Spacers.XXS}>
+        <Grid gap="xxs">
             {label && <Label htmlFor={id}>{label}</Label>}
 
             {helper && <Helper>{helper}</Helper>}
@@ -58,7 +54,7 @@ const Autocomplete: React.FC<props> = ({
                     {...props}
                 />
 
-                <List open={isOpen}>
+                <List isOpen={isOpen}>
                     {items.slice(0, 20).map((item, i) => (
                         <li onMouseDown={onMouseDown} key={i}>
                             {item}
@@ -79,7 +75,7 @@ const Autocomplete: React.FC<props> = ({
                 {...props}
             />
 
-            <List open={isOpen}>
+            <List isOpen={isOpen}>
                 {items.slice(0, 20).map((item, i) => (
                     <li onMouseDown={onMouseDown} key={i}>
                         {item}

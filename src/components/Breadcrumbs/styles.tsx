@@ -1,42 +1,39 @@
-// Packages
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
+// Imports
+import styled, { css } from "styled-components"
 
-// Components
-import * as Font from "../Font"
 import Variables from "../Variables"
-import IconMixin from "../IconMixin"
+import * as Mixins from "../Mixins"
+import * as Font from "../Font"
 
-// Types
-import { styleProps, styleItemProps } from "./types"
+import { styleProps } from "./types"
 
-// Styles
 const Breadcrumbs = styled(Font.P)<styleProps>`
-    a:after {
-        content: "/";
-        margin: 0 ${Variables.Spacers.XXS};
-        color: ${Variables.Colors.Gray500};
+    a {
+        ${Mixins.Flexbox({
+            inline: true,
+            alignItems: "center",
+        })};
+
+        &:after {
+            ${({ icon }) =>
+                icon
+                    ? css`
+                          ${Mixins.Icon({
+                              icon: icon,
+                              size: 14,
+                              color: "current",
+                          })}
+                      `
+                    : css`
+                          content: "/";
+                      `};
+            color: ${Variables.Colors.Gray500};
+            margin: 0 ${Variables.Spacers.XXS};
+            margin-top: ${({ icon }) => icon && "2px"};
+        }
     }
-
-    ${props =>
-        props.icon &&
-        css`
-            a {
-                display: inline-flex;
-                align-items: center;
-
-                &:after {
-                    ${IconMixin({
-                        icon: props.icon,
-                        size: 14,
-                        color: Variables.Colors.Gray500,
-                    })};
-                    margin-top: 2px;
-                }
-            }
-        `}
 `
 
-const Item = styled.span<styleItemProps>``
+const Item = styled.span``
 
 export { Breadcrumbs, Item }

@@ -1,38 +1,27 @@
-// Packages
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
+// Imports
+import styled, { css } from "styled-components"
 
-// Components
 import Variables from "../Variables"
+import * as Mixins from "../Mixins"
 
-// Types
 import { styleContainerProps, styleLabelProps, styleCheckProps } from "./types"
 
-// Styles
 const Container = styled.label<styleContainerProps>`
-    display: inline-flex;
-    align-items: center;
-    cursor: ${props => (props.disabled ? "not-allowed" : "pointer")};
-
-    ${props =>
-        props.justify &&
-        css`
-            justify-self: ${props.justify};
-        `}
+    ${Mixins.Flexbox({
+        inline: true,
+        alignItems: "center",
+    })};
+    cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+    justify-self: ${({ justify }) => justify};
 `
 
 const Label = styled.label<styleLabelProps>`
     font-size: ${Variables.FontSizes.Body};
-    cursor: ${props => (props.disabled ? "not-allowed" : "pointer")};
+    cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+    color: ${({ disabled }) => disabled && Variables.Colors.Gray500};
 
-    ${props =>
-        props.disabled &&
-        css`
-            color: ${Variables.Colors.Gray500};
-        `}
-
-    ${props =>
-        props.selector &&
+    ${({ selector }) =>
+        selector &&
         css`
             background-color: ${Variables.Colors.Gray100};
             transition: ${Variables.Transitions.Short};
@@ -132,17 +121,19 @@ const Checkbox = styled.label<styleCheckProps>`
     margin-right: ${Variables.Spacers.XXS};
     position: relative;
     color: ${Variables.Colors.White};
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    ${Mixins.Flexbox({
+        inline: true,
+        alignItems: "center",
+        justifyContent: "center",
+    })};
     cursor: pointer;
 
     .icon {
         display: none;
     }
 
-    ${props =>
-        props.disabled &&
+    ${({ disabled }) =>
+        disabled &&
         css`
             border-color: ${Variables.Colors.Gray200};
             background-color: ${Variables.Colors.Gray50};
@@ -172,8 +163,8 @@ const Radio = styled.label<styleCheckProps>`
         border-radius: 50%;
     }
 
-    ${props =>
-        props.disabled &&
+    ${({ disabled }) =>
+        disabled &&
         css`
             border-color: ${Variables.Colors.Gray500};
             cursor: not-allowed;

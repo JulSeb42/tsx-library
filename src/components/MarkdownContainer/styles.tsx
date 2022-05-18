@@ -1,15 +1,14 @@
-// Packages
-import styled from "@emotion/styled"
+// Imports
+import styled from "styled-components"
 import Markdown from "markdown-to-jsx"
+import { stringifyPx } from "ts-utils-julseb"
 
-// Components
-import Variables from "../Variables"
+import * as Mixins from "../Mixins"
 
-// Styles
 const Container = styled(Markdown)`
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: ${Variables.Spacers.XS};
+    ${({ gap }) => Mixins.Grid({
+        gap: gap ? stringifyPx(gap) : "s",
+    })};
 `
 
 export { Container }

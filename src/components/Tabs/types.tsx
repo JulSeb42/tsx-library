@@ -1,15 +1,14 @@
-// Packages
-import { HTMLAttributes } from "react"
+// Imports
+import React from "react"
 
-// Types
-export interface buttonsContainerProps extends HTMLAttributes<HTMLDivElement> {
+export interface buttonsContainerProps extends React.HTMLAttributes<HTMLDivElement> {
     col: number
 }
 
-export interface buttonProps extends HTMLAttributes<HTMLButtonElement> {
+export interface buttonProps extends React.HTMLAttributes<HTMLButtonElement> {
     active?: boolean
 }
 
-export interface contentProps extends HTMLAttributes<HTMLDivElement> {
+export interface contentProps extends React.HTMLAttributes<HTMLDivElement> {
     active?: boolean
 }

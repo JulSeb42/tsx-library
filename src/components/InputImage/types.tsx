@@ -1,13 +1,12 @@
-// Packages
-import { HTMLAttributes } from "react"
+// Imports
+import React from "react"
 
-// Types
-export interface styleProps extends HTMLAttributes<HTMLLabelElement> {
-    width?: string
-    height?: string
+export interface styleProps extends React.HTMLAttributes<HTMLLabelElement> {
+    width?: string | number
+    height?: string | number
 }
 
-export interface props extends HTMLAttributes<HTMLInputElement> {
+export interface props extends React.HTMLAttributes<HTMLInputElement> {
     label?: string
     helper?: string
     validation?: string

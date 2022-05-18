@@ -1,14 +1,14 @@
-// Packages
-import { HTMLAttributes } from "react"
+// Imports
+import React from "react"
 
-// Types
-export interface inputStyledProps extends HTMLAttributes<HTMLInputElement> {
+export interface inputStyledProps extends React.HTMLAttributes<HTMLInputElement> {
     icon?: string
     validation?: any
     value?: any
     colorMode?: "dark" | "light"
     onChange?: any
     preview?: "live" | "edit" | "preview"
+    as?: string | any
 }
 
 export interface inputFunctionProps extends inputStyledProps {
@@ -39,10 +39,7 @@ export interface inputFunctionProps extends inputStyledProps {
     customIconPassed?: string
     customIconNotPassed?: string
     iconPassword?: boolean
-}
-
-export interface iconContainerProps extends HTMLAttributes<HTMLSpanElement> {
-    disabled?: boolean
+    as?: string | any
 }
 
 export interface inputProps extends inputFunctionProps {
@@ -53,4 +50,10 @@ export interface inputProps extends inputFunctionProps {
     validationText?: string
     id: string
     children?: any
+    as?: string | any
+}
+
+export interface iconContainerProps extends React.HTMLAttributes<HTMLSpanElement> {
+    disabled?: boolean
+    as?: string | any
 }

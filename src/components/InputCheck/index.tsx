@@ -1,13 +1,10 @@
-// Packages
+// Imports
 import React from "react"
 
-// Components
 import Icon from "../Icon"
 
-// Types
 import { props } from "./types"
 
-// Styles
 import { Container, Label, Input, Checkbox, Radio, Toggle } from "./styles"
 
 const InputCheck: React.FC<props> = ({

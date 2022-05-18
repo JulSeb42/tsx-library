@@ -1,8 +1,11 @@
-// Packages
-import { HTMLAttributes } from "react"
+// Imports
+import React from "react"
 
-// Types
-export interface props extends HTMLAttributes<HTMLElement> {
+export interface styleProps extends React.HTMLAttributes<HTMLElement> {
+    gap?: string | number
+}
+
+export interface props extends styleProps {
     options?: any
     children?: any
 }

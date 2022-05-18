@@ -1,51 +1,33 @@
-// Packages
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
+// Imports
+import styled from "styled-components"
 import { stringifyPx } from "ts-utils-julseb"
 
-// Components
 import Variables from "../Variables"
+import * as Mixins from "../Mixins"
 
-// Types
 import { props } from "./types"
 
-// Styles
 const Aside = styled.aside<props>`
     display: grid;
-    grid-template-columns: 1fr;
-    gap: ${props => (props.gap ? stringifyPx(props.gap) : Variables.Spacers.L)};
-    align-content: start;
-    grid-column: ${props =>
-        props.template === "aside-left"
-            ? 2
-            : props.template === "aside-right"
-            ? 3
-            : props.template === "both-sides"
-            ? 2
-            : ""};
-
-    ${props =>
-        props.template === "both-sides" &&
-        props.last &&
-        css`
-            grid-column: 4;
-        `}
+    ${({ gap }) =>
+        Mixins.Grid({
+            gap: gap ? stringifyPx(gap) : "l",
+            alignContent: "start",
+        })};
+    grid-column: ${({ col }) => (col ? col + 1 : 2)};
+    justify-items: ${({ justify }) => justify};
+    align-items: ${({ align }) => align};
+    width: ${({ width }) =>
+        width ? stringifyPx(width) : Variables.Container.AsideWidth};
 
     @media ${Variables.Breakpoints.Tablet} {
         grid-column: 2;
+        width: 100%;
     }
-
-    ${props =>
-        props.justify &&
-        css`
-            justify-items: ${props.justify};
-        `}
-
-    ${props =>
-        props.align &&
-        css`
-            align-items: ${props.align};
-        `}
 `
+
+Aside.defaultProps = {
+    align: "start",
+}
 
 export default Aside

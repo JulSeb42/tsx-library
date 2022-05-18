@@ -1,10 +1,8 @@
-// Packages
+// Imports
 import React from "react"
 
-// Import types
 import { props as flexboxProps } from "../Flexbox/types"
 
-// Types
 export interface styleWrapperProps extends flexboxProps {
     height?: string | number
 }
@@ -45,7 +43,7 @@ export interface buttonProps extends React.HTMLAttributes<HTMLButtonElement> {
         | string
 }
 
-export interface props extends React.HTMLAttributes<HTMLElement> {
+export interface props extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactNode[]
     show?: number
     auto?: number

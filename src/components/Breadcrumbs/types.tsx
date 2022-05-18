@@ -1,15 +1,11 @@
-// Packages
-import { HTMLAttributes } from "react"
+// Imports
+import React from "react"
+import { commonProps as textProps } from "../Font/types"
 
-// Types
-export interface styleProps extends HTMLAttributes<HTMLParagraphElement> {
+export interface styleProps extends React.HTMLAttributes<HTMLParagraphElement>, textProps {
     icon?: string
 }
 
-export interface styleItemProps extends styleProps {
-    to?: string
-}
-
-export interface itemProps extends styleProps {
+export interface props extends React.HTMLAttributes<HTMLParagraphElement> {
     to?: string
 }

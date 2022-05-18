@@ -1,16 +1,13 @@
-// Packages
+// Imports
 import React from "react"
 import Linkify from "react-linkify"
 
-// Components
 import * as Font from "../Font"
 import Icon from "../Icon"
 import Hr from "../Hr"
 
-// Types
-import { emptyProps, messageProps, inputProps } from "./types"
+import { messageProps, inputProps } from "./types"
 
-// Styles
 import {
     MessagesContainer,
     Empty,
@@ -23,7 +20,10 @@ import {
     Send,
 } from "./styles"
 
-const EmptyContainer: React.FC<emptyProps> = ({ children, ...props }) => {
+const EmptyContainer: React.FC<{ children: React.ReactNode }> = ({
+    children,
+    ...props
+}) => {
     return (
         <Empty {...props}>
             <Font.P>{children}</Font.P>

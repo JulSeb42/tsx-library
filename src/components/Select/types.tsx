@@ -1,24 +1,24 @@
-// Packages
-import { HTMLAttributes } from "react"
+// Imports
+import React from "react"
 
-// Types
-export interface styleSelectedProps extends HTMLAttributes<HTMLSpanElement> {
+export interface styleSelectedProps
+    extends React.HTMLAttributes<HTMLSpanElement> {
     isOpen: boolean
-    arrow?: any
+    arrow?: boolean
     noSelect: boolean
     disabled?: boolean
 }
 
-export interface styleListProps extends HTMLAttributes<HTMLUListElement> {
+export interface styleListProps extends React.HTMLAttributes<HTMLUListElement> {
     isOpen: boolean
     index?: number
 }
 
-export interface styleLiProps extends HTMLAttributes<HTMLLIElement> {
+export interface styleLiProps extends React.HTMLAttributes<HTMLLIElement> {
     selected: string | boolean
 }
 
-export interface props extends HTMLAttributes<HTMLDivElement> {
+export interface props extends React.HTMLAttributes<HTMLDivElement> {
     label?: string
     helper?: string
     validation?: string

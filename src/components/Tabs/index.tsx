@@ -1,23 +1,19 @@
-// Packages
-import styled from "@emotion/styled"
+// Imports
+import styled from "styled-components"
 
-// Components
 import Grid from "../Grid"
 import Variables from "../Variables"
 
-// Types
 import { buttonsContainerProps, buttonProps, contentProps } from "./types"
 
-// Styles
 const TabsContainer = styled(Grid)`
     width: 100%;
     position: relative;
     gap: ${Variables.Spacers.S};
 `
 
-const TabsButtonsContainer = styled.div<buttonsContainerProps>`
-    display: grid;
-    grid-template-columns: repeat(${props => props.col}, 1fr);
+const TabsButtonsContainer = styled(Grid)<buttonsContainerProps>`
+    grid-template-columns: repeat(${({ col }) => col}, 1fr);
     gap: ${Variables.Spacers.M};
     position: relative;
     padding-bottom: ${Variables.Spacers.XXS};
@@ -49,14 +45,14 @@ const TabsButton = styled.button<buttonProps>`
         bottom: -4px;
         width: 100%;
         height: 2px;
-        background-color: ${props =>
-            props.active ? Variables.Colors.Primary500 : "transparent"};
+        background-color: ${({ active }) =>
+            active ? Variables.Colors.Primary500 : "transparent"};
         z-index: 2;
     }
 `
 
 const TabsContent = styled.div<contentProps>`
-    display: ${props => (props.active ? "block" : "none")};
+    display: ${({ active }) => (active ? "block" : "none")};
 `
 
 export { TabsContainer, TabsButtonsContainer, TabsButton, TabsContent }

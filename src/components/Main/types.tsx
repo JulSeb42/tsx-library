@@ -1,10 +1,9 @@
-// Packages
+// Imports
 import { HTMLAttributes } from "react"
 
-// Types
-export interface props extends HTMLAttributes<HTMLElement> {
+export interface props extends HTMLAttributes<HTMLDivElement> {
     gap?: string | number
-    template?: "1col" | "aside-left" | "aside-right" | "both-sides" | "form"
+    col?: 1 | 2
     justify?:
         | "start"
         | "end"
@@ -28,4 +27,5 @@ export interface props extends HTMLAttributes<HTMLElement> {
         | "revert"
         | "revert-layer"
         | "unset"
+    width?: string | number
 }

@@ -1,21 +1,17 @@
-// Packages
-import styled from "@emotion/styled"
+// Imports
+import styled from "styled-components"
 
-// Components
 import Variables from "../Variables"
+import * as Mixins from "../Mixins"
 
-// Types
 import { styleProps } from "./types"
 
-// Styles
 const Pagination = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    button:not(:last-of-type) {
-        margin-right: ${Variables.Spacers.XS};
-    }
+    ${Mixins.Flexbox({
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "xs",
+    })};
 `
 
 const Button = styled.button<styleProps>`
@@ -28,21 +24,23 @@ const Button = styled.button<styleProps>`
     line-height: ${Variables.FontSizes.Body};
     font-family: ${Variables.FontFamilies.Body};
     font-weight: ${Variables.FontWeights.Bold};
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: ${props =>
-        props.active ? Variables.Colors.Primary500 : "none"};
-    color: ${props =>
-        props.active ? Variables.Colors.White : Variables.Colors.Primary500};
+    ${Mixins.Flexbox({
+        inline: true,
+        alignItems: "center",
+        justifyContent: "center",
+    })};
+    background: ${({ active }) =>
+        active ? Variables.Colors.Primary500 : "none"};
+    color: ${({ active }) =>
+        active ? Variables.Colors.White : Variables.Colors.Primary500};
     transition: ${Variables.Transitions.Short};
-    cursor: ${props => (props.more ? "default" : "pointer")};
+    cursor: ${({ more }) => (more ? "default" : "pointer")};
 
     &:hover {
-        background-color: ${props =>
-            props.more ? "transparent" : Variables.Colors.Primary300};
-        color: ${props =>
-            props.more ? Variables.Colors.Primary500 : Variables.Colors.White};
+        background-color: ${({ more }) =>
+            more ? "transparent" : Variables.Colors.Primary300};
+        color: ${({ more }) =>
+            more ? Variables.Colors.Primary500 : Variables.Colors.White};
     }
 
     &:active {

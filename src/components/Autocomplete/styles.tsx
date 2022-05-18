@@ -1,15 +1,12 @@
-// Packages
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
+// Imports
+import styled, { css } from "styled-components"
 
-// Types
+import Variables from "../Variables"
+import * as Mixins from "../Mixins"
+import * as Font from "../Font"
+
 import { styleProps } from "./types"
 
-// Components
-import * as Font from "../Font"
-import Variables from "../Variables"
-
-// Styles
 const Label = styled.label`
     color: ${Variables.Colors.Primary500};
     font-weight: ${Variables.FontWeights.Bold};
@@ -30,15 +27,15 @@ const IconContainer = styled.span<{ disabled?: boolean }>`
     top: 0;
     left: 0;
     z-index: 2;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    ${Mixins.Flexbox({
+        inline: true,
+        alignItems: "center",
+        justifyContent: "center",
+    })};
     height: 100%;
     width: 32px;
-    color: ${props =>
-        props.disabled
-            ? Variables.Colors.Gray800
-            : Variables.Colors.Primary500};
+    color: ${({ disabled }) =>
+        disabled ? Variables.Colors.Gray800 : Variables.Colors.Primary500};
 
     &:after {
         content: "";
@@ -74,14 +71,14 @@ const Input = styled.input<styleProps>`
         background-color: ${Variables.Colors.Gray50};
     }
 
-    ${props =>
-        props.icon &&
+    ${({ icon }) =>
+        icon &&
         css`
             padding-left: calc(${Variables.Spacers.XS} + 32px);
         `}
 `
 
-const List = styled.ul<{ open: boolean }>`
+const List = styled.ul<{ isOpen: boolean }>`
     padding: 0;
     margin: 0;
     list-style: none;
@@ -92,24 +89,17 @@ const List = styled.ul<{ open: boolean }>`
     top: 0;
     border-radius: ${Variables.Radiuses.S};
     border: 1px solid ${Variables.Colors.Primary500};
-    max-height: 0;
+    max-height: ${({ isOpen }) => (isOpen ? "200px" : 0)};
     transition: ${Variables.Transitions.Long};
     overflow: hidden;
-    padding-top: 0;
-    opacity: 0;
+    padding-top: ${({ isOpen }) => (isOpen ? "28px" : 0)};
+    opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
     overflow-y: scroll;
-
-    ${props =>
-        props.open &&
-        css`
-            padding-top: 28px;
-            max-height: 200px;
-            opacity: 1;
-        `}
 
     li {
         padding: ${Variables.Spacers.XS};
         transition: ${Variables.Transitions.Short};
+
         &:hover {
             background-color: ${Variables.Colors.Primary500};
             color: ${Variables.Colors.White};

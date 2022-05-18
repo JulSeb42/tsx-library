@@ -1,9 +1,14 @@
-// Packages
+// Imports
 import React from "react"
+import { props as gridProps } from "../Grid/types"
 
-// Types
-export interface props extends React.HTMLAttributes<HTMLDivElement> {
-    close?: (event: React.MouseEvent<HTMLElement>) => void
+export interface styleProps extends gridProps {
+    radius?: string
+    shadow?: string
+}
+
+export interface containerProps extends styleProps {
+    close?: (e: React.MouseEvent<HTMLElement>) => void
     icon?: string
     iconColor?:
         | "primary"
@@ -11,17 +16,14 @@ export interface props extends React.HTMLAttributes<HTMLDivElement> {
         | "success"
         | "danger"
         | "warning"
+        | "black"
+        | "white"
+        | "gray"
+        | "current"
         | string
     customIconClose?: string
 }
 
-export interface titleProps extends React.HTMLAttributes<HTMLSpanElement> {
-    icon?: string
-    iconColor?:
-        | "primary"
-        | "secondary"
-        | "success"
-        | "danger"
-        | "warning"
-        | string
+export interface titleProps extends containerProps {
+    
 }

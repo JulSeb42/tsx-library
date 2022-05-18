@@ -1,47 +1,55 @@
-// Packages
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
+// Imports
+import styled, { css } from "styled-components"
+import { stringifyPx } from "ts-utils-julseb"
 
-// Components
 import Grid from "../Grid"
 import Variables from "../Variables"
+import * as Mixins from "../Mixins"
 
-// Types
 import { props } from "./types"
 
-// Styles
 const Alert = styled(Grid)<props>`
-    padding: ${Variables.Spacers.S};
-    gap: ${Variables.Spacers.S};
-    background-color: ${props =>
-        props.color === "primary"
+    padding: ${({ padding }) =>
+        padding ? stringifyPx(padding) : Variables.Spacers.S};
+    ${Mixins.Gap};
+    color: ${Variables.Colors.Black};
+    background-color: ${({ color }) =>
+        color === "primary"
             ? Variables.Colors.Primary50
-            : props.color === "secondary"
+            : color === "secondary"
             ? Variables.Colors.Secondary50
-            : props.color === "success"
+            : color === "success"
             ? Variables.Colors.Success50
-            : props.color === "danger"
+            : color === "danger"
             ? Variables.Colors.Danger50
-            : props.color === "warning"
+            : color === "warning"
             ? Variables.Colors.Warning50
-            : props.color};
+            : color === "white"
+            ? Variables.Colors.White
+            : color === "gray"
+            ? Variables.Colors.Gray50
+            : color};
     border: 1px solid
-        ${props =>
-            props.color === "primary"
+        ${({ color, borderColor }) =>
+            color === "primary"
                 ? Variables.Colors.Primary500
-                : props.color === "secondary"
+                : color === "secondary"
                 ? Variables.Colors.Secondary500
-                : props.color === "success"
+                : color === "success"
                 ? Variables.Colors.Success500
-                : props.color === "danger"
+                : color === "danger"
                 ? Variables.Colors.Danger500
-                : props.color === "warning"
+                : color === "warning"
                 ? Variables.Colors.Warning500
-                : props.borderColor};
-    border-radius: ${Variables.Radiuses.M};
+                : color === "white"
+                ? Variables.Colors.White
+                : color === "gray"
+                ? Variables.Colors.Gray500
+                : borderColor};
+    ${Mixins.Radius};
 
-    ${props =>
-        props.modal &&
+    ${({ modal }) =>
+        modal &&
         css`
             min-width: 400px;
 
@@ -53,8 +61,9 @@ const Alert = styled(Grid)<props>`
 `
 
 Alert.defaultProps = {
-    color: "success",
-    borderColor: "success",
+    color: "danger",
+    gap: "s",
+    radius: "m",
 }
 
 export default Alert

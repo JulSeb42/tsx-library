@@ -1,18 +1,15 @@
-// Packages
+// Imports
 import React from "react"
 
-// Components
 import Icon from "../Icon"
 
-// Types
 import { props } from "./types"
 
-// Styles
 import { Container, Close } from "./styles"
 
-const Modal: React.FC<props> = ({ close, icon, children, ...props }) => {
+const Modal: React.FC<props> = ({ close, icon, children, isOpen, ...props }) => {
     return (
-        <Container {...props}>
+        <Container isOpen={isOpen} {...props}>
             {close && (
                 <Close onClick={close}>
                     {icon ? (

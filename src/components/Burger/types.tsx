@@ -1,24 +1,15 @@
-// Packages
-import { HTMLAttributes } from "react"
+// Imports
+import React from "react"
 
-// Types
-export interface styleProps extends HTMLAttributes<HTMLButtonElement> {
+export interface styleProps extends React.HTMLAttributes<HTMLButtonElement> {
     width?: number
     height?: number
     border?: number
-    color?:
-        | "primary"
-        | "secondary"
-        | "success"
-        | "danger"
-        | "warning"
-        | "white"
-        | string
-    open: boolean
+    color?: string
+    isOpen: boolean
 }
 
 export interface props extends styleProps {
     ariaLabel?: string
-    onClick: (event: React.MouseEvent<HTMLElement>) => void
-    open: boolean
+    onClick: (e: React.MouseEvent<HTMLElement>) => void
 }

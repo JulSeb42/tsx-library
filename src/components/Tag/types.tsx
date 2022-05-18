@@ -1,17 +1,9 @@
-// Packages
-import { HTMLAttributes } from "react"
+// Imports
+import React from "react"
 
-// Types
-export interface styleProps extends HTMLAttributes<HTMLSpanElement> {
-    justify?: string
+export interface props extends React.HTMLAttributes<HTMLSpanElement> {
+    justify?: "start" | "center" | "end" | "stretch"
     pill?: boolean
-    color?:
-        | "primary"
-        | "secondary"
-        | "success"
-        | "danger"
-        | "warning"
-        | "white"
-        | "disabled"
-        | string
+    color?: string
+    textColor?: string
 }

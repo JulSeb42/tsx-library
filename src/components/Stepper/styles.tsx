@@ -1,17 +1,13 @@
-// Packages
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
+// Imports
+import styled, { css } from "styled-components"
 
-// Components
-import * as Font from "../Font"
 import Variables from "../Variables"
+import * as Font from "../Font"
 import Flexbox from "../Flexbox"
 import Badge from "../Badge"
 
-// Types
 import { textStyleProps } from "./types"
 
-// Styles
 const Container = styled(Flexbox)`
     position: relative;
 

@@ -1,29 +1,31 @@
-// Packages
+// Imports
 import React, { Suspense } from "react"
 
-// Types
-import { propsComponent } from "./types"
+import { props } from "./types"
 
-// Styles
-import { Fallback, Container, Caption } from "./styles"
+import { Container, Fallback, Caption } from "./styles"
 const Img = React.lazy(() => import("./Img"))
 
-const Image: React.FC<propsComponent> = ({
-    width = "100%",
-    height = "auto",
-    className,
+const Image: React.FC<props> = ({
+    src,
+    alt,
+    width,
+    height,
     fit,
     caption,
     ...props
 }) => {
     return (
         <Suspense fallback={<Fallback width={width} height={height} />}>
-            <Container
-                width={width}
-                height={height}
-                className={`img-container${className ? ` ${className}` : ""}`}
-            >
-                <Img width={width} height={height} fit={fit} {...props} />
+            <Container width={width} height={height}>
+                <Img
+                    src={src}
+                    alt={alt}
+                    width={width}
+                    height={height}
+                    fit={fit}
+                    {...props}
+                />
 
                 {caption && <Caption>{caption}</Caption>}
             </Container>

@@ -1,8 +1,7 @@
-// Components
+// Imports
 import { ReactNode } from "react"
 import { props as gridProps } from "../Grid/types"
 
-// Types
 export interface props extends gridProps {
     id: string
     label?: string

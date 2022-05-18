@@ -1,14 +1,11 @@
-// Packages
+// Imports
 import React from "react"
 import { Link } from "react-router-dom"
 
-// Components
 import Icon from "../Icon"
 
-// Types
 import { props } from "./types"
 
-// Styles
 import { Container } from "./styles"
 
 const ButtonIcon: React.FC<props> = ({
@@ -17,14 +14,18 @@ const ButtonIcon: React.FC<props> = ({
     btnStyle = "plain",
     color = "primary",
     icon,
+    disabled,
+    hoverBackground,
     ...props
 }) => {
     return (
         <Container
             as={to ? Link : "button"}
             size={size}
-            btnStyle={btnStyle}
             color={color}
+            btnStyle={btnStyle}
+            disabled={disabled}
+            hoverBackground={hoverBackground}
             {...props}
         >
             <Icon src={icon} size={size * 0.6} />

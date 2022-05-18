@@ -1,10 +1,8 @@
-// Packages
+// Imports
 import React from "react"
 
-// Types
 import { props } from "./types"
 
-// Styles
 import { Container } from "./styles"
 
 const Icon: React.FC<props> = ({ src, color, size, ...props }) => {

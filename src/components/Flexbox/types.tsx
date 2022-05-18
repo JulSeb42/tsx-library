@@ -1,9 +1,22 @@
-// Packages
-import { HTMLAttributes } from "react"
+// Imports
+import React from "react"
 
-// Types
-export interface props extends HTMLAttributes<HTMLDivElement> {
-    align?:
+export interface props extends React.HTMLAttributes<HTMLDivElement> {
+    inline?: boolean
+    direction?: "row" | "row-reverse" | "column" | "column-reverse"
+    wrap?: "nowrap" | "wrap" | "wrap-reverse"
+    justifyContent?:
+        | "flex-start"
+        | "flex-end"
+        | "center"
+        | "space-between"
+        | "space-around"
+        | "space-evenly"
+        | "start"
+        | "end"
+        | "left"
+        | "right"
+    alignItems?:
         | "stretch"
         | "flex-start"
         | "flex-end"
@@ -15,20 +28,19 @@ export interface props extends HTMLAttributes<HTMLDivElement> {
         | "end"
         | "self-start"
         | "self end"
-        | string
-    justify?:
+    alignContent?:
         | "flex-start"
         | "flex-end"
         | "center"
         | "space-between"
         | "space-around"
         | "space-evenly"
+        | "stretch"
         | "start"
         | "end"
-        | "left"
-        | "right"
-        | string
-    direction?: "row" | "row-reverse" | "column" | "column-reverse"
-    wrap?: "nowrap" | "wrap" | "wrap-reverse"
-    gap?: string | number
+        | "baseline"
+        | "first baseline"
+        | "unsafe"
+    gap?: number | string
+    padding?: number | string
 }

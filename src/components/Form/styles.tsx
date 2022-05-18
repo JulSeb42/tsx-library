@@ -1,13 +1,13 @@
-// Packages
-import styled from "@emotion/styled"
+// Imports
+import styled from "styled-components"
 
-// Components
 import Variables from "../Variables"
+import * as Mixins from "../Mixins"
 
-// Styles
 const Container = styled.form`
-    display: grid;
-    gap: ${Variables.Spacers.S};
+    ${Mixins.Grid({
+        gap: Variables.Spacers.S,
+    })}
 `
 
 export { Container }

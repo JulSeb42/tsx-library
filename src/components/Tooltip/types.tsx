@@ -1,25 +1,15 @@
-// Packages
-import { HTMLAttributes } from "react"
+// Imports
+import React from "react"
 
-// Types
-export interface styleContainerProps extends HTMLAttributes<HTMLSpanElement> {
-    color?:
-        | "primary"
-        | "secondary"
-        | "success"
-        | "danger"
-        | "warning"
-        | "white"
-        | "black"
-        | "gray"
-        | string
+export interface styleProps extends React.HTMLAttributes<HTMLSpanElement> {
+    color?: string
     textStyle?: "dotted" | "underline" | "bold"
 }
 
-export interface styleTipProps extends HTMLAttributes<HTMLSpanElement> {
+export interface styleTipProps extends React.HTMLAttributes<HTMLSpanElement> {
     isVisible: boolean
 }
 
-export interface props extends styleContainerProps {
+export interface props extends styleProps {
     text: string
 }

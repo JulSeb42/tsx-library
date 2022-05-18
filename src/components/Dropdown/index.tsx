@@ -1,39 +1,37 @@
-// Packages
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
+// Imports
+import styled from "styled-components"
 
-// Components
 import Variables from "../Variables"
+import * as Mixins from "../Mixins"
 
-// Types
 import { props } from "./types"
 
-// Styles
 const DropdownContainer = styled.div`
     position: relative;
 `
 
 const Dropdown = styled.div<props>`
     position: absolute;
-    left: 0;
+    left: ${({ position }) => position === "left" && 0};
+    right: ${({ position }) => position === "right" && 0};
     top: 42px;
-    list-style: none;
-    background-color: ${Variables.Colors.White};
-    box-shadow: ${Variables.Shadows.S};
+    background-color: ${Mixins.Background};
+    ${Mixins.Shadow};
     min-width: 150px;
-    padding: 0;
-    display: grid;
-    grid-template-columns: 1fr;
+    ${Mixins.Grid({
+        col: 1,
+    })};
     border-radius: ${Variables.Radiuses.M};
-    max-height: 0;
+    max-height: ${({ isOpen }) => (isOpen ? "800px" : 0)};
     overflow: hidden;
+    overflow-y: ${({ isOpen }) => isOpen && "scroll"};
     transition: ${Variables.Transitions.Long};
     z-index: 10;
 
     & > a,
     & > button {
         padding: ${Variables.Spacers.XS};
-        color: ${Variables.Colors.Primary500};
+        color: ${Mixins.Color};
         text-decoration: none;
         font-weight: ${Variables.FontWeights.Bold};
         transition: ${Variables.Transitions.Short};
@@ -42,17 +40,28 @@ const Dropdown = styled.div<props>`
         font-size: ${Variables.FontSizes.Body};
 
         &:hover {
-            background-color: ${Variables.Colors.Primary500};
-            color: ${Variables.Colors.White};
+            background-color: ${Mixins.ColorHover};
+            color: ${({ color }) =>
+                color === "white"
+                    ? Variables.Colors.Primary500
+                    : Variables.Colors.White};
+        }
+
+        &:active {
+            background-color: ${Mixins.ColorActive};
+            color: ${({ color }) =>
+                color === "white"
+                    ? Variables.Colors.Primary500
+                    : Variables.Colors.White};
         }
     }
-
-    ${props =>
-        props.isOpen &&
-        css`
-            max-height: 800px;
-            overflow-y: scroll;
-        `}
 `
+
+Dropdown.defaultProps = {
+    position: "left",
+    background: "white",
+    shadow: "s",
+    color: "primary",
+}
 
 export { DropdownContainer, Dropdown }

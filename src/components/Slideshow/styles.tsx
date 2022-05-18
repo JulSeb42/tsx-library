@@ -1,14 +1,11 @@
-// Packages
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
+// Imports
+import styled, { css } from "styled-components"
 import { stringifyPx } from "ts-utils-julseb"
 
-// Components
 import Variables from "../Variables"
 import Flexbox from "../Flexbox"
 import Grid from "../Grid"
 
-// Types
 import {
     styleWrapperProps,
     styleContentProps,
@@ -17,7 +14,6 @@ import {
     styleDotProps,
 } from "./types"
 
-// Styles
 const Container = styled(Grid)`
     width: 100%;
     gap: ${Variables.Spacers.XS};
@@ -26,7 +22,7 @@ const Container = styled(Grid)`
 
 const Wrapper = styled(Flexbox)<styleWrapperProps>`
     width: 100%;
-    height: ${props => (props.height ? stringifyPx(props.height) : "60vh")};
+    height: ${({ height }) => (height ? stringifyPx(height) : "60vh")};
     position: relative;
 `
 
@@ -37,14 +33,14 @@ const ContentWrapper = styled.div`
 `
 
 const Content = styled(Flexbox)<styleContentProps>`
-    transition: all ${props => props.speed}ms ease;
+    transition: all ${({ speed }) => speed}ms ease;
     -ms-overflow-style: none;
     scrollbar-width: none;
-    width: ${props => (props.show ? `calc(100% / ${props.show})` : "100%")};
-    transform: ${props =>
-        props.show
-            ? `translateX(-${props.active * (100 / props.show)}%)`
-            : `translateX(-${props.active * 100}%)`};
+    width: ${({ show }) => (show ? `calc(100% / ${show})` : "100%")};
+    transform: ${({ show, active }) =>
+        show
+            ? `translateX(-${active * (100 / show)}%)`
+            : `translateX(-${active * 100}%)`};
     height: 100%;
 
     &::-webkit-scrollbar {
@@ -62,10 +58,10 @@ const Content = styled(Flexbox)<styleContentProps>`
 const ButtonsContainer = styled(Flexbox)<styleButtonsContainerProps>`
     position: absolute;
     z-index: 2;
-    padding: 0 ${props => (props.btnLarge ? 0 : Variables.Spacers.XS)};
+    padding: 0 ${({ btnLarge }) => (btnLarge ? 0 : Variables.Spacers.XS)};
     height: 100%;
-    left: ${props => (props.position === "left" ? 0 : "auto")};
-    right: ${props => (props.position === "right" ? 0 : "auto")};
+    left: ${({ position }) => (position === "left" ? 0 : "auto")};
+    right: ${({ position }) => (position === "right" ? 0 : "auto")};
 
     ${props =>
         props.hideMobile &&
@@ -84,8 +80,8 @@ const ButtonLarge = styled.button<styleButtonLargeProps>`
     transition: ${Variables.Transitions.Short};
     border: none;
     color: ${Variables.Colors.Primary500};
-    border-radius: ${props =>
-        props.position === "left"
+    border-radius: ${({ position }) =>
+        position === "left"
             ? `0 ${Variables.Radiuses.M} ${Variables.Radiuses.M} 0`
             : `${Variables.Radiuses.M} 0 0 ${Variables.Radiuses.M}`};
 
@@ -95,20 +91,18 @@ const ButtonLarge = styled.button<styleButtonLargeProps>`
 `
 
 const Dot = styled.button<styleDotProps>`
-    width: ${props => props.dotSize}px;
-    height: ${props => props.dotSize}px;
+    width: ${({ dotSize }) => dotSize}px;
+    height: ${({ dotSize }) => dotSize}px;
     padding: 0;
     border-radius: 50%;
     border: none;
-    background-color: ${props =>
-        props.active
-            ? Variables.Colors.Primary500
-            : Variables.Colors.Primary300};
+    background-color: ${({ active }) =>
+        active ? Variables.Colors.Primary500 : Variables.Colors.Primary300};
     transition: ${Variables.Transitions.Short};
 
     &:hover {
-        background-color: ${props =>
-            props.active
+        background-color: ${({ active }) =>
+            active
                 ? Variables.Colors.Primary300
                 : Variables.Colors.Primary500};
     }

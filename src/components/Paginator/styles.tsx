@@ -1,10 +1,9 @@
-// Packages
-import styled from "@emotion/styled"
+// Imports
+import styled from "styled-components"
 
-// Components
 import Variables from "../Variables"
+import * as Mixins from "../Mixins"
 
-// Styles
 const Input = styled.input`
     border: 1px solid ${Variables.Colors.Gray200};
     font-size: ${Variables.FontSizes.Body};
@@ -25,9 +24,11 @@ const Button = styled.button`
     --size: 24px;
     width: var(--size);
     height: var(--size);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    ${Mixins.Flexbox({
+        inline: true,
+        alignItems: "center",
+        justifyContent: "center",
+    })};
     border: none;
     border-radius: 50%;
     background-color: transparent;

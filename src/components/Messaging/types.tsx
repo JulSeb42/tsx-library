@@ -1,28 +1,23 @@
-// Packages
-import { HTMLAttributes } from "react"
+// Imports
+import React from "react"
 
-// Types
-export interface styleContainerMessagesProps
-    extends HTMLAttributes<HTMLDivElement> {
-    type: "sent" | "received" | string
+export interface styleMessageProps
+    extends React.HTMLAttributes<HTMLDivElement>,
+        React.HTMLAttributes<HTMLParagraphElement> {
+    type: "sent" | "received"
 }
 
-export interface styleBubbleProps extends HTMLAttributes<HTMLParagraphElement> {
-    type?: "sent" | "received" | string
-}
-
-export interface styleSendProps extends HTMLAttributes<HTMLButtonElement> {
+export interface styleSendProps
+    extends React.HTMLAttributes<HTMLButtonElement> {
     textButton?: string | boolean
 }
 
-export interface emptyProps extends HTMLAttributes<HTMLDivElement> {}
-
-export interface messageProps extends styleBubbleProps {
+export interface messageProps extends styleMessageProps {
     time?: string
     date?: string
 }
 
-export interface inputProps extends HTMLAttributes<HTMLElement> {
+export interface inputProps extends React.HTMLAttributes<HTMLElement> {
     textButton?: string
     icon?: string
 }

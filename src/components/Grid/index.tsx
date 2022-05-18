@@ -1,62 +1,59 @@
-// Packages
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
+// Imports
+import styled, { css } from "styled-components"
 import { stringifyPx } from "ts-utils-julseb"
 
-// Components
 import Variables from "../Variables"
+import * as Mixins from "../Mixins"
 
-// Types
 import { props } from "./types"
 
-// Styles
 const Grid = styled.div<props>`
-    display: ${props => (props.inline ? "inline-grid" : "grid")};
-    grid-template-columns: repeat(${props => props.col}, 1fr);
-    gap: ${props => (props.gap ? stringifyPx(props.gap) : Variables.Spacers.L)};
-    justify-items: ${props => props.justify};
-    align-items: ${props => props.align};
+    display: ${({ inline }) => (inline ? "inline-grid" : "grid")};
+    grid-template-columns: ${({ col }) =>
+        typeof col === "number" ? `repeat(${col}, 1fr)` : col};
+    grid-template-rows: ${({ rows }) => rows};
+    grid-template-areas: ${({ areas }) => areas};
+    ${({ gap }) => Mixins.Gap({ gap: gap })};
+    justify-items: ${({ justifyItems }) => justifyItems};
+    align-items: ${({ alignItems }) => alignItems};
+    justify-content: ${({ justifyContent }) => justifyContent};
+    align-content: ${({ alignContent }) => alignContent};
+    padding: ${({ padding }) => (padding ? stringifyPx(padding) : 0)};
 
-    ${props =>
-        props.row &&
-        css`
-            grid-template-rows: ${props.row};
-        `}
+    ${({ col, colTablet, colMobile }) =>
+        typeof col === "number"
+            ? css`
+                  @media ${Variables.Breakpoints.Tablet} {
+                      grid-template-columns: repeat(
+                          ${!col
+                              ? 1
+                              : col >= 6
+                              ? 4
+                              : col === 4 || col === 5
+                              ? 3
+                              : col === 3 || col === 2
+                              ? 2
+                              : 1},
+                          1fr
+                      );
+                  }
 
-    ${props =>
-        props.area &&
-        css`
-            grid-template-areas: ${props.area};
-        `}
+                  @media ${Variables.Breakpoints.Mobile} {
+                      grid-template-columns: repeat(
+                          ${!col ? 1 : col >= 6 ? 2 : 1},
+                          1fr
+                      );
+                  }
+              `
+            : css`
+                  @media ${Variables.Breakpoints.Tablet} {
+                      grid-template-columns: ${colTablet};
+                  }
 
-    @media ${Variables.Breakpoints.Tablet} {
-        grid-template-columns: repeat(
-            ${props =>
-                !props.col
-                    ? 1
-                    : props.col >= 6
-                    ? 4
-                    : props.col === 5 || props.col === 4
-                    ? 3
-                    : props.col === 3 || props.col === 2
-                    ? 2
-                    : 1},
-            1fr
-        );
-    }
-
-    @media ${Variables.Breakpoints.Mobile} {
-        grid-template-columns: repeat(
-            ${props => (!props.col ? 1 : props.col >= 6 ? 2 : 1)},
-            1fr
-        );
-    }
+                  @media ${Variables.Breakpoints.Mobile} {
+                      grid-template-columns: ${colMobile};
+                  }
+              `}
 `
-
-Grid.defaultProps = {
-    justify: "stretch",
-    align: "stretch",
-    col: 1,
-}
 
 export default Grid

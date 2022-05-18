@@ -1,8 +1,7 @@
-// Packages
-import { HTMLAttributes } from "react"
+// Imports
+import React from "react"
 
-// Types
-export interface styleProps extends HTMLAttributes<HTMLButtonElement> {
+export interface styleProps extends React.HTMLAttributes<HTMLButtonElement> {
     active?: boolean
     more?: boolean
 }

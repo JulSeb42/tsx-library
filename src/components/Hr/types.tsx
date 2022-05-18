@@ -1,17 +1,6 @@
-// Packages
-import { HTMLAttributes } from "react"
+// Imports
+import React from "react"
 
-// Types
-export interface props extends HTMLAttributes<HTMLHRElement> {
-    color?:
-        | "primary"
-        | "secondary"
-        | "success"
-        | "danger"
-        | "warning"
-        | "white"
-        | "black"
-        | "gray"
-        | string
+export interface props extends React.HTMLAttributes<HTMLHRElement> {
     height?: number
 }

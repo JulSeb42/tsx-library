@@ -1,16 +1,14 @@
-// Packages
+// Imports
 import React from "react"
 import { Link } from "react-router-dom"
 
-// Styles
+import { props } from "./types"
+
 import { Breadcrumbs, Item } from "./styles"
 
-// Types
-import { itemProps } from "./types"
-
-const BreadcrumbsItem: React.FC<itemProps> = ({ to, children, ...props }) => {
+const BreadcrumbsItem: React.FC<props> = ({ to, children, ...props }) => {
     return (
-        <Item as={to ? Link : "span"} to={to} {...props}>
+        <Item to={to} as={to ? Link : "span"} {...props}>
             {children}
         </Item>
     )

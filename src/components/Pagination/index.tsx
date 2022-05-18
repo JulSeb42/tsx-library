@@ -1,13 +1,10 @@
-// Packages
+// Imports
 import React from "react"
 
-// Components
 import Icon from "../Icon"
 
-// Types
 import { props } from "./types"
 
-// Styles
 import { Pagination, Button } from "./styles"
 
 const PaginationButton: React.FC<props> = ({
@@ -22,11 +19,7 @@ const PaginationButton: React.FC<props> = ({
     ...props
 }) => {
     return (
-        <Button
-            disabled={disabled}
-            more={more}
-            {...props}
-        >
+        <Button disabled={disabled} more={more} {...props}>
             {prev &&
                 (customIconPrev ? (
                     <Icon src={customIconPrev} size={16} />

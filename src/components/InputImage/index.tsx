@@ -1,14 +1,11 @@
-// Packages
+// Imports
 import React from "react"
 
-// Components
 import InputContainer from "../InputContainer"
 import Icon from "../Icon"
 
-// Types
 import { props } from "./types"
 
-// Styles
 import { Container, Input, Img, EmptyContainer, HoverContainer } from "./styles"
 
 const Empty: React.FC<{ icon?: string }> = ({ icon }) => {
@@ -71,8 +68,8 @@ const InputImage: React.FC<props> = ({
     alt,
     iconEmpty,
     iconHover,
-    width = "80px",
-    height = "80px",
+    width,
+    height,
     id,
     ...props
 }) => {

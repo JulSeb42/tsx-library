@@ -1,5 +1,7 @@
-// Types
-export interface props {
+// Imports
+import React from "react"
+
+export interface props extends React.HTMLAttributes<HTMLElement> {
     language?:
         | "oneC (1c)"
         | "abnf"
@@ -193,4 +195,5 @@ export interface props {
         | "yaml"
         | "zephir"
     children: string | string[]
+    style?: any
 }

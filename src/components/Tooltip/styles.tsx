@@ -1,69 +1,23 @@
-// Packages
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
+// Imports
+import styled, { css } from "styled-components"
 
-// Components
 import Variables from "../Variables"
+import * as Mixins from "../Mixins"
 
-// Types
-import { styleContainerProps, styleTipProps } from "./types"
+import { styleProps, styleTipProps } from "./types"
 
-// Styles
-const Container = styled.span<styleContainerProps>`
+const Container = styled.span<styleProps>`
     position: relative;
-    color: ${props =>
-        props.color === "primary"
-            ? Variables.Colors.Primary500
-            : props.color === "secondary"
-            ? Variables.Colors.Secondary500
-            : props.color === "success"
-            ? Variables.Colors.Success500
-            : props.color === "danger"
-            ? Variables.Colors.Danger500
-            : props.color === "warning"
-            ? Variables.Colors.Warning500
-            : props.color === "white"
-            ? Variables.Colors.White
-            : props.color === "black"
-            ? Variables.Colors.Black
-            : props.color === "gray"
-            ? Variables.Colors.Gray500
-            : props.color};
+    color: ${Mixins.Color};
+    font-weight: ${({ textStyle }) =>
+        textStyle === "bold" && Variables.FontWeights.Bold};
 
-    ${props =>
-        (props.textStyle === "underline" || props.textStyle === "dotted") &&
+    ${({ textStyle }) =>
+        (textStyle === "dotted" || textStyle === "underline") &&
         css`
-            border-bottom: 1px
-                ${props.textStyle === "underline" ? "solid" : "dotted"}
+            border-bottom: 1px ${textStyle === "dotted" ? "dotted" : "solid"}
                 currentColor;
         `}
-
-    ${props =>
-        props.textStyle === "bold" &&
-        css`
-            font-weight: ${Variables.FontWeights.Bold};
-        `}
-
-    &:after {
-        content: "";
-        position: absolute;
-        bottom: 75%;
-        left: 50%;
-        margin-left: -5px;
-        border-width: 5px;
-        border-style: solid;
-        opacity: 0;
-        transition: ${Variables.Transitions.Short};
-        border-color: ${Variables.Overlays.Plain.Black80} transparent
-            transparent transparent;
-        visibility: hidden;
-    }
-
-    &:hover:before,
-    &:hover:after {
-        opacity: 1;
-        visibility: visible;
-    }
 `
 
 const Tip = styled.span<styleTipProps>`
@@ -75,12 +29,27 @@ const Tip = styled.span<styleTipProps>`
     padding: ${Variables.Spacers.XS};
     border-radius: ${Variables.Radiuses.M};
     z-index: 1;
-    opacity: ${props => (props.isVisible ? 1 : 0)};
+    opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
     transition: ${Variables.Transitions.Short};
     bottom: 125%;
     left: calc(50% - 150px / 2);
     font-size: ${Variables.FontSizes.Small};
-    visibility: ${props => (props.isVisible ? "visible" : "hidden")};
+    visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
+
+    &:after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
+        transition: ${Variables.Transitions.Short};
+        border-color: ${Variables.Overlays.Plain.Black80} transparent
+            transparent transparent;
+        visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
+    }
 `
 
 export { Container, Tip }

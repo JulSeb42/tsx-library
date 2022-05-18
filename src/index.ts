@@ -18,7 +18,6 @@ import Grid from "./components/Grid"
 import Helmet from "./components/Helmet"
 import Hr from "./components/Hr"
 import Icon from "./components/Icon"
-import IconMixin from "./components/IconMixin"
 import Image from "./components/Image"
 import Input from "./components/Input"
 import InputCheck from "./components/InputCheck"
@@ -34,6 +33,7 @@ import {
     Message,
     MessageInput,
 } from "./components/Messaging"
+import * as Mixins from "./components/Mixins"
 import Modal from "./components/Modal"
 import PageLoading from "./components/PageLoading"
 import { Pagination, PaginationButton } from "./components/Pagination"
@@ -79,7 +79,6 @@ export {
     Helmet,
     Hr,
     Icon,
-    IconMixin,
     Image,
     Input,
     InputCheck,
@@ -87,6 +86,7 @@ export {
     InputImage,
     Loader,
     Main,
+    Mixins,
     MarkdownContainer,
     MessagesContainer,
     EmptyContainer,

@@ -1,17 +1,14 @@
-// Packages
+// Imports
 import React, { useState, useEffect, useCallback } from "react"
 import { stringifyPx } from "ts-utils-julseb"
 
-// Components
 import Variables from "../Variables"
 import Icon from "../Icon"
 import ButtonIcon from "../ButtonIcon"
 import Flexbox from "../Flexbox"
 
-// Types
 import { buttonProps, props } from "./types"
 
-// Styles
 import {
     Container,
     Wrapper,
@@ -32,7 +29,7 @@ const SlideshowButton: React.FC<buttonProps> = ({
 }) => {
     return (
         <ButtonsContainer
-            align="center"
+            alignItems="center"
             position={position}
             btnLarge={btnLarge}
             hideMobile={hideMobile}
@@ -161,7 +158,11 @@ const Slideshow: React.FC<props> = ({
             </Wrapper>
 
             {pagination && (
-                <Flexbox justify="center" align="center" gap={gapDots ? stringifyPx(gapDots) : Variables.Spacers.XS}>
+                <Flexbox
+                    justifyContent="center"
+                    alignItems="center"
+                    gap={gapDots ? stringifyPx(gapDots) : Variables.Spacers.XS}
+                >
                     {children.map((_: any, i: any) => (
                         <Dot
                             onClick={() => setActive(i)}

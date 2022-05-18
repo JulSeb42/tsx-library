@@ -1,14 +1,11 @@
-// Packages
+// Imports
 import React from "react"
 
-// Components
-import Image from "../Image"
 import Icon from "../Icon"
+import Image from "../Image"
 
-// Types
 import { props } from "./types"
 
-// Styles
 import { Container } from "./styles"
 
 const Avatar: React.FC<props> = ({
@@ -36,7 +33,7 @@ const Avatar: React.FC<props> = ({
                 />
             )}
 
-            {icon && <Icon src={icon} size={size ? size * 0.7 : 48 * 0.7} />}
+            {icon && <Icon src={icon} size={size * 0.7} color={color} />}
         </Container>
     )
 }

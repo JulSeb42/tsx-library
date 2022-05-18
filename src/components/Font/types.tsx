@@ -1,8 +1,7 @@
-// Packages
-import { HTMLAttributes } from "react"
+// Imports
+import React from "react"
 
-// Types
-export interface h1Props extends HTMLAttributes<HTMLHeadingElement> {
+export interface commonProps {
     align?:
         | "left"
         | "center"
@@ -13,8 +12,7 @@ export interface h1Props extends HTMLAttributes<HTMLHeadingElement> {
         | "revert"
         | "revert-layer"
         | "unset"
-    display?: boolean
-    color?:
+    colorLink?:
         | "primary"
         | "secondary"
         | "success"
@@ -25,251 +23,30 @@ export interface h1Props extends HTMLAttributes<HTMLHeadingElement> {
         | "gray"
         | "currentColor"
         | string
+    colorLinkHover?: string
+    colorLinkActive?: string
+}
+
+export interface titleProps
+    extends React.HTMLAttributes<HTMLHeadingElement>,
+        commonProps {
+    display?: boolean
+}
+
+export interface h1Props extends titleProps {
     hidden?: boolean
 }
 
-export interface h2Props extends HTMLAttributes<HTMLHeadingElement> {
-    align?:
-        | "left"
-        | "center"
-        | "right"
-        | "justify"
-        | "inherit"
-        | "initial"
-        | "revert"
-        | "revert-layer"
-        | "unset"
-    display?: boolean
-    color?:
-        | "primary"
-        | "secondary"
-        | "success"
-        | "danger"
-        | "warning"
-        | "black"
-        | "white"
-        | "gray"
-        | "currentColor"
-        | string
-}
+export interface paragraphsProps
+    extends React.HTMLAttributes<HTMLParagraphElement>,
+        commonProps {}
 
-export interface h3Props extends HTMLAttributes<HTMLHeadingElement> {
-    align?:
-        | "left"
-        | "center"
-        | "right"
-        | "justify"
-        | "inherit"
-        | "initial"
-        | "revert"
-        | "revert-layer"
-        | "unset"
-    display?: boolean
-    color?:
-        | "primary"
-        | "secondary"
-        | "success"
-        | "danger"
-        | "warning"
-        | "black"
-        | "white"
-        | "gray"
-        | "currentColor"
-        | string
-}
-
-export interface h4Props extends HTMLAttributes<HTMLHeadingElement> {
-    align?:
-        | "left"
-        | "center"
-        | "right"
-        | "justify"
-        | "inherit"
-        | "initial"
-        | "revert"
-        | "revert-layer"
-        | "unset"
-    display?: boolean
-    color?:
-        | "primary"
-        | "secondary"
-        | "success"
-        | "danger"
-        | "warning"
-        | "black"
-        | "white"
-        | "gray"
-        | "currentColor"
-        | string
-}
-
-export interface h5Props extends HTMLAttributes<HTMLHeadingElement> {
-    align?:
-        | "left"
-        | "center"
-        | "right"
-        | "justify"
-        | "inherit"
-        | "initial"
-        | "revert"
-        | "revert-layer"
-        | "unset"
-    display?: boolean
-    color?:
-        | "primary"
-        | "secondary"
-        | "success"
-        | "danger"
-        | "warning"
-        | "black"
-        | "white"
-        | "gray"
-        | "currentColor"
-        | string
-}
-
-export interface h6Props extends HTMLAttributes<HTMLHeadingElement> {
-    align?:
-        | "left"
-        | "center"
-        | "right"
-        | "justify"
-        | "inherit"
-        | "initial"
-        | "revert"
-        | "revert-layer"
-        | "unset"
-    color?:
-        | "primary"
-        | "secondary"
-        | "success"
-        | "danger"
-        | "warning"
-        | "black"
-        | "white"
-        | "gray"
-        | "currentColor"
-        | string
-}
-
-export interface pProps extends HTMLAttributes<HTMLParagraphElement> {
-    align?:
-        | "left"
-        | "center"
-        | "right"
-        | "justify"
-        | "inherit"
-        | "initial"
-        | "revert"
-        | "revert-layer"
-        | "unset"
+export interface pProps extends paragraphsProps {
     pre?: boolean
-    color?:
-        | "primary"
-        | "secondary"
-        | "success"
-        | "danger"
-        | "warning"
-        | "black"
-        | "white"
-        | "gray"
-        | "currentColor"
-        | string
 }
 
-export interface smallProps extends HTMLAttributes<HTMLElement> {
-    align?:
-        | "left"
-        | "center"
-        | "right"
-        | "justify"
-        | "inherit"
-        | "initial"
-        | "revert"
-        | "revert-layer"
-        | "unset"
-    color?:
-        | "primary"
-        | "secondary"
-        | "success"
-        | "danger"
-        | "warning"
-        | "black"
-        | "white"
-        | "gray"
-        | "currentColor"
-        | string
-}
-
-export interface strongProps extends HTMLAttributes<HTMLElement> {
-    align?:
-        | "left"
-        | "center"
-        | "right"
-        | "justify"
-        | "inherit"
-        | "initial"
-        | "revert"
-        | "revert-layer"
-        | "unset"
-    color?:
-        | "primary"
-        | "secondary"
-        | "success"
-        | "danger"
-        | "warning"
-        | "black"
-        | "white"
-        | "gray"
-        | "currentColor"
-        | string
-}
-
-export interface emProps extends HTMLAttributes<HTMLElement> {
-    align?:
-        | "left"
-        | "center"
-        | "right"
-        | "justify"
-        | "inherit"
-        | "initial"
-        | "revert"
-        | "revert-layer"
-        | "unset"
-    color?:
-        | "primary"
-        | "secondary"
-        | "success"
-        | "danger"
-        | "warning"
-        | "black"
-        | "white"
-        | "gray"
-        | "currentColor"
-        | string
-}
-
-export interface listProps extends HTMLAttributes<HTMLUListElement> {
+export interface listProps
+    extends React.HTMLAttributes<HTMLUListElement>,
+        commonProps {
     gap?: string | number
-    color?:
-        | "primary"
-        | "secondary"
-        | "success"
-        | "danger"
-        | "warning"
-        | "black"
-        | "white"
-        | "gray"
-        | "currentColor"
-        | string
-    align?:
-        | "left"
-        | "center"
-        | "right"
-        | "justify"
-        | "inherit"
-        | "initial"
-        | "revert"
-        | "revert-layer"
-        | "unset"
 }

@@ -1,20 +1,13 @@
-// Packages
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
+// Imports
+import styled, { css } from "styled-components"
 import ScrollToBottom from "react-scroll-to-bottom"
 
-// Components
-import * as Font from "../Font"
 import Variables from "../Variables"
+import * as Mixins from "../Mixins"
+import * as Font from "../Font"
 
-// Types
-import {
-    styleContainerMessagesProps,
-    styleBubbleProps,
-    styleSendProps,
-} from "./types"
+import { styleMessageProps, styleSendProps } from "./types"
 
-// Styles
 const MessagesContainer = styled.div`
     width: 100%;
     height: 65vh;
@@ -31,30 +24,32 @@ const MessagesContainer = styled.div`
 
 const Empty = styled.div`
     flex-grow: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    ${Mixins.Flexbox({
+        alignItems: "center",
+        justifyContent: "center",
+    })};
 `
 
 const ListMessages = styled(ScrollToBottom)`
     flex-grow: 1;
-    display: grid;
+    ${Mixins.Grid};
     margin-bottom: ${Variables.Spacers.S};
     overflow-y: scroll;
 
     & > div {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: ${Variables.Spacers.S};
-        align-content: start;
+        ${Mixins.Grid({
+            gap: "s",
+            alignContent: "start",
+        })};
     }
 `
 
-const ContainerMessage = styled.div<styleContainerMessagesProps>`
-    display: flex;
-    flex-direction: column;
-    align-items: ${props =>
-        props.type === "sent" ? "flex-end" : "flex-start"};
+const ContainerMessage = styled.div<styleMessageProps>`
+    ${({ type }) =>
+        Mixins.Flexbox({
+            direction: "column",
+            alignItems: type === "sent" ? "flex-end" : "flex-start",
+        })}
 `
 
 const DateTime = styled(Font.Small)`
@@ -62,45 +57,47 @@ const DateTime = styled(Font.Small)`
     margin-top: ${Variables.Spacers.XXS};
 `
 
-const Bubble = styled(Font.P)<styleBubbleProps>`
+const Bubble = styled(Font.P)<styleMessageProps>`
     width: auto;
     display: inline;
     max-width: 70%;
     padding: ${Variables.Spacers.XS} ${Variables.Spacers.S};
     border-radius: ${Variables.Radiuses.S};
+    color: ${({ type }) => type === "sent" && Variables.Colors.White};
+    background-color: ${({ type }) =>
+        type === "sent"
+            ? Variables.Colors.Primary500
+            : Variables.Colors.Gray100};
 
     a {
         text-decoration: underline;
         font-weight: ${Variables.FontWeights.Regular};
+        color: ${({ type }) =>
+            type === "sent"
+                ? Variables.Colors.White
+                : Variables.Colors.Primary500};
+
+        &:hover {
+            color: ${({ type }) =>
+                type === "sent"
+                    ? Variables.Colors.Gray300
+                    : Variables.Colors.Primary300};
+        }
+
+        &:active {
+            color: ${({ type }) =>
+                type === "sent"
+                    ? Variables.Colors.Gray100
+                    : Variables.Colors.Primary600};
+        }
     }
-
-    ${props =>
-        props.type === "sent" &&
-        css`
-            background-color: ${Variables.Colors.Primary500};
-            color: ${Variables.Colors.White};
-
-            a {
-                color: ${Variables.Colors.White};
-
-                &:hover {
-                    color: ${Variables.Colors.Gray100};
-                }
-            }
-        `}
-
-    ${props =>
-        props.type === "received" &&
-        css`
-            background-color: ${Variables.Colors.Gray100};
-            color: ${Variables.Colors.Black};
-        `}
 `
 
 const ContainerSend = styled.form`
     height: 10%;
-    display: flex;
-    align-items: center;
+    ${Mixins.Flexbox({
+        alignItems: "center",
+    })};
     min-height: 50px;
 `
 
@@ -143,9 +140,10 @@ const Send = styled.button<styleSendProps>`
             --size: 32px;
             width: var(--size);
             height: var(--size);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            ${Mixins.Flexbox({
+                alignItems: "center",
+                justifyContent: "center",
+            })};
             border-radius: 50%;
 
             &:hover {

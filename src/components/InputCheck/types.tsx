@@ -1,22 +1,21 @@
-// Packages
-import { HTMLAttributes } from "react"
+// Imports
+import React from "react"
 
-// Types
-export interface styleContainerProps extends HTMLAttributes<HTMLLabelElement> {
+export interface styleContainerProps extends React.HTMLAttributes<HTMLLabelElement> {
     disabled?: boolean
     justify?: "start" | "center" | "end" | "stretch"
 }
 
-export interface styleLabelProps extends HTMLAttributes<HTMLLabelElement> {
+export interface styleLabelProps extends React.HTMLAttributes<HTMLLabelElement> {
     disabled?: boolean
     selector?: boolean
 }
 
-export interface styleCheckProps extends HTMLAttributes<HTMLLabelElement> {
+export interface styleCheckProps extends React.HTMLAttributes<HTMLLabelElement> {
     disabled?: boolean
 }
 
-export interface props extends HTMLAttributes<HTMLInputElement> {
+export interface props extends React.HTMLAttributes<HTMLInputElement> {
     disabled?: boolean
     selector?: boolean
     toggle?: boolean

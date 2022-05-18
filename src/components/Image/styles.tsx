@@ -1,42 +1,33 @@
-// Packages
-import styled from "@emotion/styled"
+// Imports
+import styled from "styled-components"
 import { stringifyPx } from "ts-utils-julseb"
 
-// Components
 import Variables from "../Variables"
-import * as Font from "../Font"
+import { P } from "../Font"
 
-// Types
-import { propsFallback, propsContainer } from "./types"
+import { containerProps, fallbackProps } from "./types"
 
-// Styles
-const Fallback = styled.div<propsFallback>`
+const Fallback = styled.div<fallbackProps>`
     position: relative;
-    width: ${props => stringifyPx(props.width)};
-    height: ${props => stringifyPx(props.height)};
+    width: ${({ width }) => (width ? stringifyPx(width) : "100%")};
+    height: ${({ height }) => (height ? stringifyPx(height) : "auto")};
     background-color: ${Variables.Colors.Gray500};
 `
 
-const Container = styled.div<propsContainer>`
+const Container = styled.div<containerProps>`
     position: relative;
-    width: ${props => props.width ? stringifyPx(props.width) : "100%"};
-    height: ${props => props.height ? stringifyPx(props.height) : "auto"};
-
-    & > div {
-        position: relative;
-        width: ${props => props.width};
-        height: ${props => props.height};
-    }
+    width: ${({ width }) => (width ? stringifyPx(width) : "100%")};
+    height: ${({ height }) => (height ? stringifyPx(height) : "auto")};
 `
 
-const Caption = styled(Font.P)`
+const Caption = styled(P)`
     position: absolute;
+    z-index: 2;
     bottom: 0;
     left: 0;
     width: 100%;
-    z-index: 2;
-    padding: ${Variables.Spacers.XS} ${Variables.Spacers.S};
     background-color: ${Variables.Overlays.Plain.Black50};
+    padding: ${Variables.Spacers.XS} ${Variables.Spacers.S};
     color: ${Variables.Colors.White};
 `
 

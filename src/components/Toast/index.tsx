@@ -1,20 +1,18 @@
-// Packages
+// Imports
 import React from "react"
 
-// Components
 import * as Font from "../Font"
-import Variables from "../Variables"
+import Flexbox from "../Flexbox"
 import Icon from "../Icon"
+import Variables from "../Variables"
 
-// Types
-import { titleProps, props } from "./types"
+import { containerProps, titleProps } from "./types"
 
-// Styles
-import { Container, Close, TitleContainer, Title } from "./styles"
+import { Container, Close } from "./styles"
 
 const TitleFunction: React.FC<titleProps> = ({ icon, iconColor, title }) => {
     return icon ? (
-        <Title>
+        <Flexbox alignItems="center" gap="xxs">
             <Icon
                 src={icon}
                 size={16}
@@ -29,30 +27,41 @@ const TitleFunction: React.FC<titleProps> = ({ icon, iconColor, title }) => {
                         ? Variables.Colors.Danger500
                         : iconColor === "warning"
                         ? Variables.Colors.Warning500
+                        : iconColor === "black"
+                        ? Variables.Colors.Black
+                        : iconColor === "gray"
+                        ? Variables.Colors.Gray500
                         : iconColor
                 }
             />
 
             <Font.H5>{title}</Font.H5>
-        </Title>
+        </Flexbox>
     ) : (
         <Font.H5>{title}</Font.H5>
     )
 }
 
-const Toast: React.FC<props> = ({
+const Toast: React.FC<containerProps> = ({
+    padding = Variables.Spacers.M,
     close,
     icon,
-    iconColor,
+    iconColor = "primary",
     customIconClose,
+    radius = "m",
+    shadow = "s",
+    gap = "xs",
     title = "Title",
     children = "Content",
-    ...props
 }) => {
     return (
-        <Container gap={Variables.Spacers.XS} {...props}>
+        <Container gap={gap} padding={padding} radius={radius} shadow={shadow}>
             {close ? (
-                <TitleContainer>
+                <Flexbox
+                    alignItems="center"
+                    justifyContent="space-between"
+                    gap="xxs"
+                >
                     <TitleFunction
                         title={title}
                         icon={icon}
@@ -77,7 +86,7 @@ const Toast: React.FC<props> = ({
                             </svg>
                         )}
                     </Close>
-                </TitleContainer>
+                </Flexbox>
             ) : (
                 <TitleFunction
                     title={title}

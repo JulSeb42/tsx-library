@@ -1,15 +1,11 @@
-// Packages
+// Imports
 import React from "react"
 
-// Components
-import * as Font from "../Font"
-import Variables from "../Variables"
 import Grid from "../Grid"
+import * as Font from "../Font"
 
-// Types
 import { props } from "./types"
 
-// Styles
 import { Label, Helper } from "./styles"
 
 const InputContainer: React.FC<props> = ({
@@ -25,7 +21,7 @@ const InputContainer: React.FC<props> = ({
     children,
 }) => {
     return (
-        <Grid gap={Variables.Spacers.XXS}>
+        <Grid gap="xxs">
             {label && <Label htmlFor={id}>{label}</Label>}
 
             {helper && <Helper>{helper}</Helper>}
@@ -34,13 +30,14 @@ const InputContainer: React.FC<props> = ({
 
             {helperBottom && <Helper bottom>{helperBottom}</Helper>}
 
-            {validationText && validation && value.length > 0 && (
-                <Font.Small>{validationText}</Font.Small>
-            )}
+            {validation &&
+                validationText &&
+                typeof value === "string" &&
+                value.length > 0 && <Font.Small>{validationText}</Font.Small>}
 
-            {(counter || maxLength) && (
+            {counter && maxLength && (
                 <Font.Small>
-                    {value.length}
+                    {typeof value === "string" && value.length}
                     {maxLength && ` / ${maxLength}`}
                 </Font.Small>
             )}

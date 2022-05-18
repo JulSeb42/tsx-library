@@ -1,37 +1,22 @@
-// Packages
-import styled from "@emotion/styled"
+// Imports
+import styled from "styled-components"
 
-// Components
-import Variables from "../Variables"
+import * as Mixins from "../Mixins"
 
-// Types
-import { props } from "./types"
+import { styleProps } from "./types"
 
-// Styles
-const Container = styled.div<props>`
+const Container = styled.div<styleProps>`
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: ${props =>
-        props.backgroundColor === "primary"
-            ? Variables.Colors.Primary500
-            : props.backgroundColor === "secondary"
-            ? Variables.Colors.Secondary500
-            : props.backgroundColor === "success"
-            ? Variables.Colors.Success500
-            : props.backgroundColor === "danger"
-            ? Variables.Colors.Danger500
-            : props.backgroundColor === "warning"
-            ? Variables.Colors.Warning500
-            : props.backgroundColor === "white"
-            ? Variables.Colors.White
-            : props.backgroundColor};
     z-index: 999;
+    ${Mixins.Flexbox({
+        alignItems: "center",
+        justifyContent: "center",
+    })};
+    background-color: ${Mixins.Background};
 `
 
 export { Container }

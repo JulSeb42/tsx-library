@@ -1,16 +1,13 @@
-// Packages
+// Imports
 import React from "react"
 
-// Components
 import * as Font from "../Font"
 import Variables from "../Variables"
 import Flexbox from "../Flexbox"
 import Icon from "../Icon"
 
-// Types
 import { props } from "./types"
 
-// Styles
 import { Input, Button } from "./styles"
 
 const Paginator: React.FC<props> = ({
@@ -19,7 +16,7 @@ const Paginator: React.FC<props> = ({
     handleNext,
     active,
     totalPages,
-    justify,
+    justifyContent = "flex-start",
     customIconPrev,
     customIconNext,
 }) => {
@@ -29,11 +26,12 @@ const Paginator: React.FC<props> = ({
     return (
         <Flexbox
             as={Font.P}
-            align="center"
-            justify={justify}
+            alignItems="center"
+            justifyContent={justifyContent}
             gap={Variables.Spacers.XS}
         >
             Page
+            
             <Input
                 type="number"
                 onChange={handleChange}
@@ -41,7 +39,9 @@ const Paginator: React.FC<props> = ({
                 min={1}
                 max={totalPages}
             />
+
             of {totalPages}
+            
             <Button onClick={handlePrev} disabled={activePage === 1 && true}>
                 {customIconPrev ? (
                     <Icon src={customIconPrev} size={24} />
@@ -60,6 +60,7 @@ const Paginator: React.FC<props> = ({
                     </svg>
                 )}
             </Button>
+            
             <Button
                 onClick={handleNext}
                 disabled={activePage === totalPages && true}

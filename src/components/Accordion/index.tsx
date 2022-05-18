@@ -1,35 +1,65 @@
-// Packages
+// Imports
 import React, { useState } from "react"
 
-// Types
+import Grid from "../Grid"
+import Variables from "../Variables"
+
 import { containerProps, itemProps } from "./types"
 
-// Styles
-import { AccordionContainer, Item, Button, Content } from "./style"
+import { AccordionContainer, Button, Content } from "./styles"
 
 const Accordion: React.FC<containerProps> = ({
     accordionStyle = "basic",
+    borderColor,
+    backgroundColor = "primary",
+    titleColor,
+    iconColor,
     children,
     ...props
 }) => {
     return (
-        <AccordionContainer accordionStyle={accordionStyle} {...props}>
+        <AccordionContainer
+            accordionStyle={accordionStyle}
+            borderColor={
+                !borderColor && accordionStyle === "basic"
+                    ? Variables.Colors.Gray200
+                    : !borderColor && accordionStyle === "rounded"
+                    ? "white"
+                    : borderColor
+            }
+            backgroundColor={backgroundColor}
+            titleColor={
+                !titleColor && accordionStyle === "basic"
+                    ? "primary"
+                    : !titleColor && accordionStyle === "rounded"
+                    ? "white"
+                    : titleColor
+            }
+            iconColor={
+                !iconColor && accordionStyle === "basic"
+                    ? "primary"
+                    : !iconColor && accordionStyle === "rounded"
+                    ? "white"
+                    : iconColor
+            }
+            {...props}
+        >
             {children}
         </AccordionContainer>
     )
 }
 
 const AccordionItem: React.FC<itemProps> = ({
-    icon,
+    icon = "plus",
     title = "Title",
     className,
     children = "Content",
     ...props
 }) => {
-    const [isOpen, setIsOpen] = useState(props.isOpen || false)
+    const [isOpen, setIsOpen] = useState(false || props.isOpen)
 
     return (
-        <Item {...props}>
+        <Grid {...props}>
             <Button
                 className="open-accordion"
                 onClick={() => setIsOpen(!isOpen)}
@@ -69,14 +99,12 @@ const AccordionItem: React.FC<itemProps> = ({
             </Button>
 
             <Content
-                className={`content-accordion ${
-                    isOpen ? "open" : ""
-                } ${className}`}
+                className={`content-accordion ${className} ${isOpen && "open"}`}
                 isOpen={isOpen}
             >
                 {children}
             </Content>
-        </Item>
+        </Grid>
     )
 }
 

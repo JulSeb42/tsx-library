@@ -1,7 +1,10 @@
-// Packages
-import { HTMLAttributes } from "react"
+// Imports
+import React from "react"
 
-// Types
-export interface props extends HTMLAttributes<HTMLDivElement> {
+export interface props extends React.HTMLAttributes<HTMLDivElement> {
     isOpen: boolean
+    position?: "left" | "right"
+    background?: string
+    shadow?: string
+    color?: string
 }

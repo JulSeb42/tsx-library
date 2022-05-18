@@ -1,8 +1,7 @@
-// Packages
-import { ReactNode } from "react"
+// Imports
+import React from "react"
 
-// Types
-export interface props {
+export interface props extends React.HTMLAttributes<HTMLHeadElement> {
     title: string
     favicon?: string
     description?: string
@@ -12,5 +11,5 @@ export interface props {
     cover?: string
     siteName?: string
     language?: string
-    children?: ReactNode
+    children?: React.ReactNode
 }

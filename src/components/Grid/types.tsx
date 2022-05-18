@@ -1,24 +1,17 @@
-// Packages
-import { HTMLAttributes } from "react"
+// Imports
+import React from "react"
 
-// Types
-export interface props extends HTMLAttributes<HTMLDivElement> {
+export interface props extends React.HTMLAttributes<HTMLDivElement> {
+    col?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | number | string
+    colTablet?: string
+    colMobile?: string
+    gap?: number | string
     inline?: boolean
-    col?:
-        | 1
-        | 2
-        | 3
-        | 4
-        | 5
-        | 6
-        | 7
-        | 8
-        | 9
-        | 10
-        | 11
-        | 12
-    gap?: string | number
-    justify?:
+    rows?: string
+    areas?: string
+    justifyItems?: "start" | "end" | "center" | "stretch"
+    alignItems?: "start" | "end" | "center" | "stretch"
+    justifyContent?:
         | "start"
         | "end"
         | "center"
@@ -26,23 +19,13 @@ export interface props extends HTMLAttributes<HTMLDivElement> {
         | "space-around"
         | "space-between"
         | "space-evenly"
-        | "inherit"
-        | "initial"
-        | "revert"
-        | "revert-layer"
-        | "unset"
-    align?:
+    alignContent?:
         | "start"
         | "end"
         | "center"
         | "stretch"
-        | "inherit"
-        | "initial"
-        | "revert"
-        | "revert-layer"
-        | "unset"
-    row?: string
-    area?: string
+        | "space-around"
+        | "space-between"
+        | "space-evenly"
+    padding?: number | string
 }
-
-export default props

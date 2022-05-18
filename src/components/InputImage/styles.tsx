@@ -1,21 +1,22 @@
-// Packages
-import styled from "@emotion/styled"
+// Imports
+import styled from "styled-components"
+import { stringifyPx } from "ts-utils-julseb"
 
-// Components
 import Variables from "../Variables"
+import * as Mixins from "../Mixins"
 import Image from "../Image"
 
-// Types
 import { styleProps } from "./types"
 
-// Styles
 const Container = styled.label<styleProps>`
     position: relative;
-    width: ${props => props.width};
-    height: ${props => props.height};
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    width: ${({ width }) => (width ? stringifyPx(width) : "80px")};
+    height: ${({ height }) => (height ? stringifyPx(height) : "80px")};
+    ${Mixins.Flexbox({
+        inline: true,
+        alignItems: "center",
+        justifyContent: "center",
+    })};
     border-radius: ${Variables.Radiuses.M};
     overflow: hidden;
     cursor: pointer;
@@ -43,9 +44,11 @@ const EmptyContainer = styled.div`
     position: relative;
     z-index: 1;
     background-color: ${Variables.Colors.Gray200};
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    ${Mixins.Flexbox({
+        inline: true,
+        alignItems: "center",
+        justifyContent: "center",
+    })};
 `
 
 const HoverContainer = styled.span`
@@ -57,9 +60,11 @@ const HoverContainer = styled.span`
     width: 100%;
     height: 100%;
     transition: ${Variables.Transitions.Short};
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    ${Mixins.Flexbox({
+        inline: true,
+        alignItems: "center",
+        justifyContent: "center",
+    })};
 `
 
 export { Container, Input, Img, EmptyContainer, HoverContainer }

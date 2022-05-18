@@ -1,19 +1,18 @@
-// Packages
+// Imports
 import React from "react"
 
-// Types
 import { props } from "./types"
 
-// Styles
 import { Container } from "./styles"
 
 const MarkdownContainer: React.FC<props> = ({
     options,
     children,
+    gap,
     ...props
 }) => {
     return (
-        <Container options={options} {...props}>
+        <Container options={options} gap={gap} {...props}>
             {children}
         </Container>
     )

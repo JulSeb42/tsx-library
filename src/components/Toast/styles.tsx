@@ -1,16 +1,29 @@
-// Packages
-import styled from "@emotion/styled"
+// Imports
+import styled from "styled-components"
 
-// Components
 import Variables from "../Variables"
+import * as Mixins from "../Mixins"
 import Grid from "../Grid"
 
-// Styles
-const Container = styled(Grid)`
+import { styleProps } from "./types"
+
+const Container = styled(Grid)<styleProps>`
     background-color: ${Variables.Colors.White};
-    padding: ${Variables.Spacers.M};
-    box-shadow: ${Variables.Shadows.S};
-    border-radius: ${Variables.Radiuses.M};
+    box-shadow: ${({ shadow }) =>
+        shadow === "xs"
+            ? Variables.Shadows.XS
+            : shadow === "s"
+            ? Variables.Shadows.S
+            : shadow === "m"
+            ? Variables.Shadows.M
+            : shadow === "l"
+            ? Variables.Shadows.L
+            : shadow === "xl"
+            ? Variables.Shadows.XL
+            : shadow === "xxl"
+            ? Variables.Shadows.XXL
+            : shadow};
+    ${Mixins.Radius};
     max-width: 300px;
 `
 
@@ -18,13 +31,17 @@ const Close = styled.button`
     --size: 32px;
     width: var(--size);
     height: var(--size);
-    border-radius: 50%;
+    ${Mixins.Radius({
+        radius: "circle",
+    })};
     border: none;
     background-color: transparent;
     color: ${Variables.Colors.Primary500};
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    ${Mixins.Flexbox({
+        inline: true,
+        alignItems: "center",
+        justifyContent: "center",
+    })};
     transition: ${Variables.Transitions.Short};
 
     &:hover {
@@ -32,19 +49,4 @@ const Close = styled.button`
     }
 `
 
-const TitleContainer = styled.span`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-`
-
-const Title = styled.span`
-    display: flex;
-    align-items: center;
-
-    & > span {
-        margin-right: ${Variables.Spacers.XXS};
-    }
-`
-
-export { Container, Close, TitleContainer, Title }
+export { Container, Close }

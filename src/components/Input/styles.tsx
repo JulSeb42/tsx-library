@@ -1,14 +1,11 @@
-// Packages
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
+// Imports
+import styled, { css } from "styled-components"
 
-// Components
 import Variables from "../Variables"
+import * as Mixins from "../Mixins"
 
-// Types
 import { inputStyledProps, iconContainerProps } from "./types"
 
-// Styles
 const Container = styled.div`
     position: relative;
     width: 100%;
@@ -20,7 +17,7 @@ const InputStyled = styled.input<inputStyledProps>`
     border: 1px solid ${Variables.Colors.Gray200};
     border-radius: ${Variables.Radiuses.S};
     outline: none;
-    padding: ${Variables.Spacers.XS} ${Variables.Spacers.XS};
+    padding: ${Variables.Spacers.XS};
     font-family: ${Variables.FontFamilies.Body};
     font-size: ${Variables.FontSizes.Body};
     height: 35px;
@@ -37,37 +34,36 @@ const InputStyled = styled.input<inputStyledProps>`
         background-color: ${Variables.Colors.Gray50};
     }
 
-    ${props =>
-        props.type === "textarea" &&
-        css`
-            min-height: calc(
-                ${Variables.FontSizes.Body} * ${Variables.LineHeight} * 3 +
-                    ${Variables.Spacers.XXS} * 2
-            );
-            resize: vertical;
-        `}
+    ${({ type }) =>
+        type === "textarea"
+            ? css`
+                  min-height: calc(
+                      ${Variables.FontSizes.Body} * ${Variables.LineHeight} * 3 +
+                          ${Variables.Spacers.XXS} * 2
+                  );
+                  resize: vertical;
+              `
+            : type === "select" &&
+              css`
+                  appearance: none;
+                  cursor: pointer;
 
-    ${props =>
-        props.type === "select" &&
-        css`
-            appearance: none;
-            cursor: pointer;
+                  &::-ms-expand {
+                      display: none;
+                  }
+              `}
 
-            &::-ms-expand {
-                display: none;
-            }
-        `}
-
-    ${props =>
-        props.icon &&
+    ${({ icon }) =>
+        icon &&
         css`
             padding-left: calc(${Variables.Spacers.XS} + 32px);
         `}
     
-    ${props =>
-        props.validation &&
-        props.validation !== "passed" &&
-        props.value.length > 0 &&
+    ${({ validation, value }) =>
+        validation &&
+        validation !== "passed" &&
+        typeof value === "string" &&
+        value.length > 0 &&
         css`
             background-color: ${Variables.Colors.Danger50};
 
@@ -82,15 +78,15 @@ const IconContainer = styled.span<iconContainerProps>`
     top: 0;
     left: 0;
     z-index: 2;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    ${Mixins.Flexbox({
+        inline: true,
+        alignItems: "center",
+        justifyContent: "center",
+    })};
     height: 100%;
     width: 32px;
-    color: ${props =>
-        props.disabled
-            ? Variables.Colors.Gray800
-            : Variables.Colors.Primary500};
+    color: ${({ disabled }) =>
+        disabled ? Variables.Colors.Gray800 : Variables.Colors.Primary500};
 
     &:after {
         content: "";
@@ -109,12 +105,11 @@ const RightContainer = styled.span`
     right: ${Variables.Spacers.XS};
     height: 100%;
     z-index: 1;
-    display: inline-flex;
-    align-items: center;
-
-    & > *:not(:last-of-type) {
-        margin-right: ${Variables.Spacers.XXS};
-    }
+    ${Mixins.Flexbox({
+        inline: true,
+        alignItems: "center",
+        gap: Variables.Spacers.XXS,
+    })};
 `
 
 const ButtonPassword = styled.button`
@@ -125,9 +120,11 @@ const ButtonPassword = styled.button`
     font-size: ${Variables.FontSizes.Body};
     font-weight: ${Variables.FontWeights.Bold};
     transition: ${Variables.Transitions.Short};
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    ${Mixins.Flexbox({
+        inline: true,
+        alignItems: "center",
+        justifyContent: "center",
+    })};
 
     &:hover {
         color: ${Variables.Colors.Primary300};
@@ -149,8 +146,8 @@ const SelectContainer = styled.div<{ disabled: boolean | undefined }>`
         top: calc(50% - 18px / 2);
         right: ${Variables.Spacers.XS};
 
-        ${props =>
-            props.disabled &&
+        ${({ disabled }) =>
+            disabled &&
             css`
                 content: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10.862 6.19533L8.00001 9.05733L5.13801 6.19533L4.19534 7.13799L8.00001 10.9427L11.8047 7.13799L10.862 6.19533Z' fill='%232F2F2F'/%3E%3C/svg%3E");
             `}

@@ -1,25 +1,23 @@
-// Packages
+// Imports
 import React from "react"
 import { convertYoutube } from "ts-utils-julseb"
 
-// Types
 import { props } from "./types"
 
-// Styles
 import { Container } from "./styles"
 
 const Video: React.FC<props> = ({
-    width = "100%",
+    youtube,
+    width,
+    height = youtube ? "30vw" : "auto",
     fit,
     aspectRatio,
-    youtube,
     allow,
     frameBorder,
     allowFullScreen,
     src,
     controls,
     autoPlay,
-    height = youtube ? "30vw" : "auto",
     ...props
 }) => {
     return youtube ? (
@@ -32,7 +30,6 @@ const Video: React.FC<props> = ({
             allowFullScreen
             width={width}
             height={height}
-            {...props}
         />
     ) : autoPlay ? (
         <Container

@@ -125,10 +125,12 @@ const Variables = {
         },
 
         Titles: {
-            ExtraLarge: "var(--font-size-title-extra-large)",
-            Large: "var(--font-size-title-large)",
-            Medium: "var(--font-size-title-medium)",
-            Small: "var(--font-size-title-small)",
+            H1: "var(--font-size-h1)",
+            H2: "var(--font-size-h2)",
+            H3: "var(--font-size-h3)",
+            H4: "var(--font-size-h4)",
+            H5: "var(--font-size-h5)",
+            H6: "var(--font-size-h6)",
         },
 
         Body: "var(--font-size-body)",
@@ -152,15 +154,8 @@ const Variables = {
 
     // Container template
     Container: {
-        Template1Col: "var(--container-template-1-col)",
-        TemplateAsideLeft: "var(--container-template-aside-left)",
-        TemplateAsideRight: "var(--container-template-aside-right)",
-        TemplateBothSides: "var(--container-template-both-sides)",
-        TemplateForm: "var(--container-template-form)",
-        Column: "var(--container-template-column)",
-        Padding: "var(--container-template-padding)",
-
-        TemplateTablet: "var(--container-template-tablet)",
+        MainWidth: "var(--main-width)",
+        AsideWidth: "var(--aside-width)",
     },
 
     // Transitions

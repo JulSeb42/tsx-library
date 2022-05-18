@@ -1,52 +1,34 @@
-// Packages
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
+// Imports
+import styled from "styled-components"
 
-// Components
 import Variables from "../Variables"
+import * as Mixins from "../Mixins"
 
-// Types
-import { styleProps } from "./types"
+import { props } from "./types"
 
-// Styles
-const Tag = styled.span<styleProps>`
-    display: inline-flex;
-    align-items: center;
-    transition: ${Variables.Transitions.Short};
+const Tag = styled.span<props>`
+    ${Mixins.Flexbox({
+        inline: true,
+        alignItems: "center",
+        justifyContent: "center",
+    })};
+    justify-self: ${({ justify }) => justify};
     padding: ${Variables.Spacers.XXS} ${Variables.Spacers.S};
-    border-radius: ${props =>
-        props.pill ? Variables.Radiuses.Round : Variables.Radiuses.M};
+    border-radius: ${({ pill }) =>
+        pill ? Variables.Radiuses.Round : Variables.Radiuses.M};
     font-size: ${Variables.FontSizes.Small};
-
-    background-color: ${props =>
-        props.color === "primary"
+    background-color: ${Mixins.Color};
+    color: ${({ color, textColor }) =>
+        textColor
+            ? Mixins.TextColor
+            : color === "white"
             ? Variables.Colors.Primary500
-            : props.color === "secondary"
-            ? Variables.Colors.Secondary500
-            : props.color === "success"
-            ? Variables.Colors.Success500
-            : props.color === "danger"
-            ? Variables.Colors.Danger500
-            : props.color === "warning"
-            ? Variables.Colors.Warning500
-            : props.color === "white"
-            ? Variables.Colors.White
-            : props.color === "disabled"
-            ? Variables.Colors.Gray100
-            : props.color};
-
-    color: ${props =>
-        props.color === "white"
-            ? Variables.Colors.Primary500
-            : props.color === "disabled"
-            ? Variables.Colors.Gray500
             : Variables.Colors.White};
-
-    ${props =>
-        props.justify &&
-        css`
-            justify-self: ${props.justify};
-        `}
 `
+
+Tag.defaultProps = {
+    color: "primary",
+    justify: "start",
+}
 
 export default Tag

@@ -1,23 +1,16 @@
-// Packages
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
+// Imports
+import styled from "styled-components"
 import { stringifyPx } from "ts-utils-julseb"
 
-// Types
-import { propsImg } from "./types"
+import { styleProps } from "./types"
 
-const Img = styled.img<propsImg>`
-    width: ${props => (props.width ? stringifyPx(props.width) : "100%")};
-    height: ${props => (props.height ? stringifyPx(props.height) : "auto")};
+const Img = styled.img<styleProps>`
+    width: ${({ width }) => (width ? stringifyPx(width) : "100%")};
+    height: ${({ height }) => (height ? stringifyPx(height) : "auto")};
     position: relative;
     z-index: 1;
     display: block;
-
-    ${props =>
-        props.fit &&
-        css`
-            object-fit: ${props.fit};
-        `}
+    object-fit: ${({ fit }) => fit};
 `
 
 export default Img

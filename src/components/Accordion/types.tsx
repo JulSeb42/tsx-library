@@ -1,23 +1,63 @@
-// Packages
-import { HTMLAttributes } from "react"
+// Imports
+import React from "react"
 
-// Import types
-import gridProps from "../Grid/types"
+import { props as gridProps } from "../Grid/types"
 
-// Types
 export interface containerProps extends gridProps {
     accordionStyle?: "basic" | "rounded"
+    borderColor?:
+        | "primary"
+        | "secondary"
+        | "success"
+        | "danger"
+        | "warning"
+        | "white"
+        | "black"
+        | "gray"
+        | string
+    backgroundColor?:
+        | "primary"
+        | "secondary"
+        | "success"
+        | "danger"
+        | "warning"
+        | "white"
+        | "black"
+        | "gray"
+        | string
+    titleColor?:
+        | "primary"
+        | "secondary"
+        | "success"
+        | "danger"
+        | "warning"
+        | "white"
+        | "black"
+        | "gray"
+        | string
+    iconColor?:
+        | "primary"
+        | "secondary"
+        | "success"
+        | "danger"
+        | "warning"
+        | "white"
+        | "black"
+        | "gray"
+        | string
 }
 
-export interface buttonProps extends HTMLAttributes<HTMLButtonElement> {
-    icon?: "plus" | "chevron"
-}
-
-export interface itemProps extends HTMLAttributes<HTMLParagraphElement> {
-    isOpen?: boolean
+export interface buttonProps extends React.HTMLAttributes<HTMLButtonElement> {
     icon?: "plus" | "chevron"
 }
 
-export interface contentProps extends HTMLAttributes<HTMLParagraphElement> {
-    isOpen: boolean
+export interface itemProps extends React.HTMLAttributes<HTMLDivElement> {
+    isOpen?: boolean
+    icon?: "plus" | "chevron"
+    title?: string
+}
+
+export interface contentProps
+    extends React.HTMLAttributes<HTMLParagraphElement> {
+    isOpen?: boolean
 }

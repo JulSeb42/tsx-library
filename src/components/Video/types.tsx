@@ -1,8 +1,7 @@
-// Packages
-import { HTMLAttributes } from "react"
+// Imports
+import React from "react"
 
-// Types
-export interface styleProps extends HTMLAttributes<HTMLVideoElement> {
+export interface styleProps extends React.HTMLAttributes<HTMLVideoElement> {
     width?: string | number
     height?: string | number
     fit?:
@@ -16,8 +15,6 @@ export interface styleProps extends HTMLAttributes<HTMLVideoElement> {
         | "revert"
         | "revert-layer"
         | "unset"
-        | string
-        | undefined
     aspectRatio?: string
     youtube?: string
     allow?: string

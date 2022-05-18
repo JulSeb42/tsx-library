@@ -1,27 +1,12 @@
-// Packages
-import { HTMLAttributes } from "react"
+// Imports
+import React from "react"
 
-// Types
-export interface props extends HTMLAttributes<HTMLSpanElement> {
+export interface props extends React.HTMLAttributes<HTMLSpanElement> {
     size?: number
     border?: number
-    backgroundColor?:
-        | "primary"
-        | "secondary"
-        | "success"
-        | "danger"
-        | "warning"
-        | "white"
-        | string
-    color?:
-        | "primary"
-        | "secondary"
-        | "success"
-        | "danger"
-        | "warning"
-        | "white"
-        | string
-    marginLeft?: string | number
-    marginRight?: string | number
+    background?: string
+    color?: string
+    marginLeft?: number | string
+    marginRight?: number | string
     speed?: number
 }

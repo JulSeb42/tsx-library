@@ -1,28 +1,27 @@
-// Packages
+// Imports
 import React from "react"
 
-// Components
-import Variables from "../Variables"
-
-// Types
 import { props } from "./types"
 
-// Styles
 import { Container } from "./styles"
 
 const Burger: React.FC<props> = ({
+    isOpen,
+    color = "primary",
     width = 32,
     height = 24,
-    color = Variables.Colors.Primary500,
     border = 2,
-    ariaLabel = "Menu button",
+    ariaLabel = `${isOpen ? "Close" : "Open"} menu`,
+    onClick,
     ...props
 }) => {
     return (
         <Container
+            onClick={onClick}
+            isOpen={isOpen}
+            color={color}
             width={width}
             height={height}
-            color={color}
             border={border}
             aria-label={ariaLabel}
             {...props}

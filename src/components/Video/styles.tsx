@@ -1,35 +1,26 @@
-// Packages
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
+// Imports
+import styled, { css } from "styled-components"
 import { stringifyPx } from "ts-utils-julseb"
 
-// Types
 import { styleProps } from "./types"
 
-// Styles
 const Container = styled.video<styleProps>`
-    width: ${props => (props.width ? stringifyPx(props.width) : "100%")};
-    height: ${props =>
-        props.height ? stringifyPx(props.height) : props.height};
+    width: ${({ width }) => (width ? stringifyPx(width) : "100%")};
+    height: ${({ height }) => (height ? stringifyPx(height) : "auto")};
+    object-fit: ${({ fit }) => fit};
 
-    ${props =>
-        props.fit &&
-        css`
-            object-fit: ${props.fit};
-        `}
-
-    ${props =>
-        props.aspectRatio &&
+    ${({ aspectRatio }) =>
+        aspectRatio &&
         css`
             height: inherit;
-            aspect-ratio: ${props.aspectRatio};
+            aspect-ratio: ${aspectRatio};
         `}
 
-    ${props =>
-        props.youtube &&
+    ${({ youtube, width, height, aspectRatio }) =>
+        youtube &&
         css`
-            width: ${props.width};
-            height: ${!props.aspectRatio ? props.height : "inherit"};
+            width: ${width};
+            height: ${!aspectRatio ? height : "inherit"};
         `}
 `
 

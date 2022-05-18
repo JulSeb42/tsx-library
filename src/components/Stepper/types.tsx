@@ -1,12 +1,11 @@
-// Packages
-import { HTMLAttributes } from "react"
+// Imports
+import React from "react"
 
-// Types
-export interface textStyleProps extends HTMLAttributes<HTMLParagraphElement> {
+export interface textStyleProps extends React.HTMLAttributes<HTMLParagraphElement> {
     to?: string
 }
 
-export interface props extends HTMLAttributes<HTMLDivElement> {
+export interface props extends React.HTMLAttributes<HTMLDivElement> {
     steps: {
         text: string
         to?: string

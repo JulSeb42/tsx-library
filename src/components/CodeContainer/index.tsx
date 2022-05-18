@@ -1,16 +1,19 @@
-// Packages
+// Imports
 import React from "react"
 import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs"
 
-// Types
 import { props } from "./types"
 
-// Styles
 import { Container } from "./styles"
 
-const CodeContainer: React.FC<props> = ({ language, children, ...props }) => {
+const CodeContainer: React.FC<props> = ({
+    language,
+    children,
+    style = atomOneDark,
+    ...props
+}) => {
     return (
-        <Container language={language} style={atomOneDark} {...props}>
+        <Container language={language} style={style} {...props}>
             {children}
         </Container>
     )

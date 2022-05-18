@@ -1,51 +1,30 @@
-// Packages
-import styled from "@emotion/styled"
+// Imports
+import styled from "styled-components"
 
-// Components
 import Variables from "../Variables"
+import * as Mixins from "../Mixins"
 
-// Types
 import { styleProps } from "./types"
 
-// Styles
 const Container = styled.span<styleProps>`
-    width: ${props => props.size}px;
-    height: ${props => props.size}px;
+    width: ${({ size }) => size}px;
+    height: ${({ size }) => size}px;
     border-radius: 50%;
     overflow: hidden;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(${props => props.size}px * 0.7);
+    ${Mixins.Flexbox({
+        inline: true,
+        alignItems: "center",
+        justifyContent: "center",
+    })};
+    font-size: calc(${({ size }) => size}px * 0.7);
     line-height: 100%;
-    background-color: ${props =>
-        props.color === "primary"
+    background-color: ${Mixins.Color};
+    color: ${({ textColor, color }) =>
+        textColor
+            ? Mixins.TextColor
+            : color === "white"
             ? Variables.Colors.Primary500
-            : props.color === "secondary"
-            ? Variables.Colors.Secondary500
-            : props.color === "success"
-            ? Variables.Colors.Success500
-            : props.color === "danger"
-            ? Variables.Colors.Danger500
-            : props.color === "warning"
-            ? Variables.Colors.Warning500
-            : props.textColor === "white"
-            ? Variables.Colors.White
-            : props.color};
-    color: ${props =>
-        props.textColor === "primary"
-            ? Variables.Colors.Primary500
-            : props.textColor === "secondary"
-            ? Variables.Colors.Secondary500
-            : props.textColor === "success"
-            ? Variables.Colors.Success500
-            : props.textColor === "danger"
-            ? Variables.Colors.Danger500
-            : props.textColor === "warning"
-            ? Variables.Colors.Warning500
-            : props.textColor === "white"
-            ? Variables.Colors.White
-            : props.textColor};
+            : Variables.Colors.White};
     font-weight: ${Variables.FontWeights.Black};
 `
 

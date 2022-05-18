@@ -1,16 +1,13 @@
-// Packages
+// Imports
 import React, { useState } from "react"
 import MDEditor from "@uiw/react-md-editor"
 
-// Components
-import Variables from "../Variables"
 import InputContainer from "../InputContainer"
+import Variables from "../Variables"
 import Icon from "../Icon"
 
-// Types
 import { inputFunctionProps, inputProps } from "./types"
 
-// Styles
 import {
     Container,
     InputStyled,
@@ -63,7 +60,7 @@ const InputFunction: React.FC<inputFunctionProps> = ({
             {(validation || password) && (
                 <RightContainer>
                     {validation &&
-                        value.length > 0 &&
+                        typeof value === "string" && value.length > 0 &&
                         (validation === "passed" ? (
                             customIconPassed ? (
                                 <Icon

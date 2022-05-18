@@ -1,13 +1,10 @@
-// Packages
+// Imports
 import React from "react"
 
-// Components
 import InputContainer from "../InputContainer"
 
-// Types
 import { props } from "./types"
 
-// Styles
 import { Container, Selected, List, SelectItem } from "./styles"
 
 const Select: React.FC<props> = ({
@@ -41,7 +38,7 @@ const Select: React.FC<props> = ({
                     onClick={!disabled && onClickSelect}
                     isOpen={isOpen}
                     disabled={disabled}
-                    arrow={children && true}
+                    arrow={children ? true : false}
                     noSelect={!children && true}
                 >
                     {selected}
@@ -60,7 +57,7 @@ const Select: React.FC<props> = ({
                 onClick={!disabled && onClickSelect}
                 isOpen={isOpen}
                 disabled={disabled}
-                arrow={children && true}
+                arrow={children ? true : false}
                 noSelect={!children && true}
             >
                 {selected}

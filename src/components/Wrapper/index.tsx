@@ -1,30 +1,28 @@
-// Packages
-import styled from "@emotion/styled"
+// Imports
+import styled from "styled-components"
 import { stringifyPx } from "ts-utils-julseb"
 
-// Components
 import Variables from "../Variables"
+import * as Mixins from "../Mixins"
 
-// Types
 import { props } from "./types"
 
 const Wrapper = styled.div<props>`
-    display: grid;
-    gap: ${props => props.gap ? stringifyPx(props.gap) : Variables.Spacers.L};
-    padding: ${Variables.Container.Padding};
-    grid-template-columns: ${props =>
-        props.template === "aside-left"
-            ? Variables.Container.TemplateAsideLeft
-            : props.template === "aside-right"
-            ? Variables.Container.TemplateAsideRight
-            : props.template === "both-sides"
-            ? Variables.Container.TemplateBothSides
-            : props.template === "form"
-            ? Variables.Container.TemplateForm
-            : Variables.Container.Template1Col};
+    ${({ template, gap }) =>
+        Mixins.Grid({
+            col:
+                template === "2cols"
+                    ? "1fr auto auto 1fr"
+                    : template === "3cols"
+                    ? "1fr auto auto auto 1fr"
+                    : "1fr auto 1fr",
+            gap: gap ? stringifyPx(gap) : "l",
+        })};
+    padding: ${({ padding }) =>
+        padding ? stringifyPx(padding) : `${Variables.Spacers.XXL} 0`};
 
     @media ${Variables.Breakpoints.Tablet} {
-        grid-template-columns: ${Variables.Container.TemplateTablet};
+        grid-template-columns: 5vw 1fr 5vw;
     }
 `
 

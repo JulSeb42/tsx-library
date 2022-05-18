@@ -1,34 +1,37 @@
-// Packages
+// Imports
 import React from "react"
 import { Link } from "react-router-dom"
 
-// Components
 import Variables from "../Variables"
 import Loader from "../Loader"
 import Icon from "../Icon"
 
-// Types
 import { props } from "./types"
 
-// Styles
 import { Container } from "./styles"
 
 const Button: React.FC<props> = ({
     to,
-    btnStyle = "plain",
+    children,
     color = "primary",
+    btnStyle = "plain",
     loading,
     iconLeft,
     iconRight,
-    children,
+    disabled,
+    justify = "start",
+    type,
     ...props
 }) => {
     return (
         <Container
             as={to ? Link : "button"}
             to={to}
-            btnStyle={btnStyle}
             color={color}
+            btnStyle={btnStyle}
+            disabled={disabled}
+            justify={justify}
+            type={type}
             {...props}
         >
             {!loading && iconLeft && (
@@ -38,12 +41,12 @@ const Button: React.FC<props> = ({
             {loading && (
                 <Loader
                     size={16}
-                    backgroundColor={
+                    background={
                         btnStyle === "plain"
                             ? Variables.Colors.Gray100
-                            : Variables.Colors.White
+                            : "white"
                     }
-                    color="currentColor"
+                    color="current"
                     marginRight={Variables.Spacers.XS}
                 />
             )}

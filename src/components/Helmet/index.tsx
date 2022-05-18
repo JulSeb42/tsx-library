@@ -1,8 +1,7 @@
-// Packages
+// Imports
 import React from "react"
 import { Helmet as HelmetMeta } from "react-helmet"
 
-// Types
 import { props } from "./types"
 
 const Helmet: React.FC<props> = ({
@@ -14,12 +13,11 @@ const Helmet: React.FC<props> = ({
     type,
     cover,
     siteName,
-    language,
+    language = "en",
     children,
-    ...props
 }) => {
     return (
-        <HelmetMeta {...props}>
+        <HelmetMeta>
             <title>{title}</title>
             <link rel="icon" href={favicon} />
             <meta content="IE=edge" http-equiv="X-UA-Compatible" />
@@ -35,6 +33,8 @@ const Helmet: React.FC<props> = ({
             <meta property="og:image" content={cover} />
             <meta property="og:site_name" content={siteName} />
             <meta property="og:locale" content={language} />
+
+            <html lang={language} />
 
             {children}
         </HelmetMeta>

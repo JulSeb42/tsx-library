@@ -1,18 +1,14 @@
-// Packages
-import { HTMLAttributes } from "react"
+// Imports
+import React from "react"
 
-// Types
-export interface propsFallback extends HTMLAttributes<HTMLDivElement> {
-    width: number | string
-    height: number | string
-}
-
-export interface propsContainer extends HTMLAttributes<HTMLDivElement> {
+export interface fallbackProps extends React.HTMLAttributes<HTMLDivElement> {
     width?: number | string
     height?: number | string
 }
 
-export interface propsImg extends HTMLAttributes<HTMLImageElement> {
+export interface containerProps extends fallbackProps {}
+
+export interface styleProps extends React.HTMLAttributes<HTMLImageElement> {
     width?: number | string
     height?: number | string
     fit?:
@@ -26,12 +22,9 @@ export interface propsImg extends HTMLAttributes<HTMLImageElement> {
         | "revert"
         | "revert-layer"
         | "unset"
-        | string
-        | undefined
 }
 
-export interface propsComponent extends propsImg {
-    className?: string
+export interface props extends styleProps {
     src: string
     alt: string
     caption?: string

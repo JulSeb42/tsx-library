@@ -1,17 +1,15 @@
-// Packages
-import styled from "@emotion/styled"
+// Imports
+import styled from "styled-components"
 
-// Components
 import Variables from "../Variables"
+import * as Mixins from "../Mixins"
 
-// Types
 import { props } from "./types"
 
-// Styles
 const ProgressBar = styled.span<props>`
     width: 100%;
     height: ${props => props.height}px;
-    background-color: ${Variables.Colors.Gray100};
+    background-color: ${Mixins.Background};
     display: block;
     border-radius: ${Variables.Radiuses.Round};
     position: relative;
@@ -24,28 +22,16 @@ const ProgressBar = styled.span<props>`
         left: 0;
         width: ${props => props.value}%;
         height: 100%;
-        background-color: ${props =>
-            props.color === "primary"
-                ? Variables.Colors.Primary500
-                : props.color === "secondary"
-                ? Variables.Colors.Secondary500
-                : props.color === "success"
-                ? Variables.Colors.Success500
-                : props.color === "danger"
-                ? Variables.Colors.Danger500
-                : props.color === "warning"
-                ? Variables.Colors.Warning500
-                : props.color === "white"
-                ? Variables.Colors.White
-                : props.color};
+        background-color: ${Mixins.Color};
         border-radius: ${Variables.Radiuses.Round};
         transition: ${Variables.Transitions.Short};
     }
 `
 
 ProgressBar.defaultProps = {
+    background: Variables.Colors.Gray100,
     height: 16,
-    color: Variables.Colors.Primary500,
+    color: "primary",
 }
 
 export default ProgressBar

@@ -1,22 +1,13 @@
-// Packages
-import { HTMLAttributes } from "react"
+// Imports
+import React from "react"
 
-// Types
-export interface props extends HTMLAttributes<HTMLDivElement> {
-    backgroundColor?:
-        | "primary"
-        | "secondary"
-        | "success"
-        | "danger"
-        | "warning"
-        | "white"
-        | string
-    loaderColor?:
-        | "primary"
-        | "secondary"
-        | "success"
-        | "danger"
-        | "warning"
-        | "white"
-        | string
+export interface styleProps extends React.HTMLAttributes<HTMLDivElement> {
+    background?: string
+}
+
+export interface props extends styleProps {
+    loaderColor?: string
+    loaderSize?: number
+    loaderBorder?: number
+    speed?: number
 }

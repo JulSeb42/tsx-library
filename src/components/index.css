@@ -1,7 +1,12 @@
 @charset "UTF-8";
 /* CSS Document */
 
+/*=============================================== Import ===============================================*/
+
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap");
+
 /*=============================================== Variables ===============================================*/
+
 :root {
     /* Colors */
     --color-black: rgb(0, 0, 0);
@@ -118,12 +123,14 @@
     --font-size-display-h3: 3.5rem;
     --font-size-display-h4: 3rem;
     --font-size-display-h5: 2.5rem;
-    --font-size-title-extra-large: 2rem;
-    --font-size-title-large: 1.5rem;
-    --font-size-title-medium: 1.125rem;
-    --font-size-title-small: 1rem;
+    --font-size-h1: 2.5rem;
+    --font-size-h2: 2rem;
+    --font-size-h3: 1.8rem;
+    --font-size-h4: 1.5rem;
+    --font-size-h5: 1.3rem;
+    --font-size-h6: 1.1rem;
     --font-size-body: 1rem;
-    --font-size-small: 14px;
+    --font-size-small: 0.875rem;
 
     /* Line height */
     --line-height: 1.5;
@@ -138,14 +145,8 @@
     --radius-round: 99em;
 
     /* Container */
-    --container-template-1-col: 1fr 600px 1fr;
-    --container-template-aside-left: 1fr 250px 600px 1fr;
-    --container-template-aside-right: 1fr 600px 250px 1fr;
-    --container-template-form: 1fr 400px 1fr;
-    --container-template-both-sides: 1fr 200px 600px 200px 1fr;
-    --container-template-column: 2;
-    --container-template-padding: 48px 0;
-    --container-template-tablet: 5vw 1fr 5vw;
+    --main-width: 600px;
+    --aside-width: 250px;
 
     /* Transitions */
     --transition-short: all 0.2s ease;
@@ -153,10 +154,8 @@
     --transition-bezier: all 0.5s cubic-bezier(0.25, 0.75, 0, 0.66);
 }
 
-/*=============================================== Import ===============================================*/
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap");
-
 /*=============================================== Reset ===============================================*/
+
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -301,6 +300,7 @@ body {
 }
 
 /*============================================================= Helpers =============================================================*/
+
 .text-left {
     text-align: left !important;
 }

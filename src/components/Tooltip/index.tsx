@@ -1,17 +1,15 @@
-// Packages
+// Imports
 import React, { useState } from "react"
 
-// Types
 import { props } from "./types"
 
-// Styles
 import { Container, Tip } from "./styles"
 
 const Tooltip: React.FC<props> = ({
+    color = "primary",
     textStyle = "dotted",
     text,
     children,
-    color = "primary",
     ...props
 }) => {
     const [isVisible, setIsVisible] = useState(false)
@@ -19,9 +17,9 @@ const Tooltip: React.FC<props> = ({
     return (
         <Container
             textStyle={textStyle}
+            color={color}
             onMouseEnter={() => setIsVisible(true)}
             onMouseLeave={() => setIsVisible(false)}
-            color={color}
             {...props}
         >
             <Tip isVisible={isVisible}>{text}</Tip>

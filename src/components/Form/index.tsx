@@ -1,16 +1,12 @@
-// Packages
+// Imports
 import React from "react"
 
-// Components
 import Flexbox from "../Flexbox"
 import Button from "../Button"
-import Variables from "../Variables"
 
-// Types
-import { props } from "./types"
-
-// Styles
 import { Container } from "./styles"
+
+import { props } from "./types"
 
 const Form: React.FC<props> = ({
     children,
@@ -37,11 +33,11 @@ const Form: React.FC<props> = ({
             {children}
 
             {(btnPrimary || btnCancel || btnReset) && (
-                <Flexbox gap={Variables.Spacers.XS}>
+                <Flexbox gap="xs">
                     {btnPrimary && (
                         <Button
-                            btnStyle="plain"
                             color={colorPrimary}
+                            btnStyle="plain"
                             iconLeft={iconLeftPrimary}
                             iconRight={iconRightPrimary}
                             type="submit"
@@ -54,6 +50,7 @@ const Form: React.FC<props> = ({
 
                     {btnCancel && (
                         <Button
+                            type="button"
                             btnStyle="text"
                             color={colorCancel}
                             iconLeft={iconLeftCancel}
@@ -66,11 +63,11 @@ const Form: React.FC<props> = ({
 
                     {(btnReset || textBtnReset) && (
                         <Button
+                            type="reset"
                             btnStyle="text"
                             color={colorReset}
                             iconLeft={iconLeftReset}
-                            iconRight={iconRightReset}
-                            type="reset"
+                            iconRight={iconRightPrimary}
                             onClick={onClickReset}
                         >
                             {textBtnReset ? textBtnReset : "Reset"}

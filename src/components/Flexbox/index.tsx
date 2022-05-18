@@ -1,25 +1,22 @@
-// Packages
-import styled from "@emotion/styled"
+// Imports
+import styled from "styled-components"
 import { stringifyPx } from "ts-utils-julseb"
 
-// Types
+import * as Mixins from "../Mixins"
+
 import { props } from "./types"
 
-// Styles
 const Flexbox = styled.div<props>`
-    display: flex;
-    align-items: ${props => props.align};
-    justify-content: ${props => props.justify};
-    flex-direction: ${props => props.direction};
-    flex-wrap: ${props => props.wrap};
-    gap: ${props => props.gap ? stringifyPx(props.gap) : 0};
+    display: ${({ inline }) => (inline ? "inline-flex" : "flex")};
+    flex-direction: ${({ direction }) => direction};
+    flex-wrap: ${({ wrap }) => wrap};
+    justify-content: ${({ justifyContent }) => justifyContent};
+    align-items: ${({ alignItems }) => alignItems};
+    align-content: ${({ alignContent }) => alignContent};
+    ${({ gap }) => Mixins.Gap({
+        gap: gap,
+    })};
+    padding: ${({ padding }) => (padding ? stringifyPx(padding) : 0)};
 `
-
-Flexbox.defaultProps = {
-    align: "flex-start",
-    justify: "flex-start",
-    direction: "row",
-    wrap: "nowrap",
-}
 
 export default Flexbox

@@ -1,11 +1,9 @@
-// Packages
-import styled from "@emotion/styled"
+// Imports
+import styled from "styled-components"
 import SyntaxHighlighter from "react-syntax-highlighter"
 
-// Components
 import Variables from "../Variables"
 
-// Styles
 const Container = styled(SyntaxHighlighter)`
     padding: ${Variables.Spacers.M} !important;
     overflow-x: scroll !important;
