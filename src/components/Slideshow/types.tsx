@@ -55,4 +55,5 @@ export interface props extends React.HTMLAttributes<HTMLDivElement> {
     pagination?: boolean
     gapDots?: number | string
     dotSize?: number
+    btnColor?: string
 }

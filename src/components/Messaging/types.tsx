@@ -20,4 +20,5 @@ export interface messageProps extends styleMessageProps {
 export interface inputProps extends React.HTMLAttributes<HTMLElement> {
     textButton?: string
     icon?: string
+    value?: any
 }

@@ -1,5 +1,5 @@
 // Imports
-import React from "react"
+import React, { useEffect } from "react"
 
 import Icon from "../Icon"
 
@@ -7,7 +7,19 @@ import { props } from "./types"
 
 import { Container, Close } from "./styles"
 
-const Modal: React.FC<props> = ({ close, icon, children, isOpen, ...props }) => {
+const Modal: React.FC<props> = ({
+    close,
+    icon,
+    children,
+    isOpen,
+    ...props
+}) => {
+    useEffect(() => {
+        isOpen
+            ? document.body.classList.add("stop-scrolling")
+            : document.body.classList.remove("stop-scrolling")
+    }, [isOpen])
+
     return (
         <Container isOpen={isOpen} {...props}>
             {close && (

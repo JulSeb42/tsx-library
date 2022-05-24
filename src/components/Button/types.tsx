@@ -9,7 +9,6 @@ export interface styleProps extends React.HTMLAttributes<HTMLButtonElement> {
     colorActive?: string
     justify?: "start" | "center" | "end" | "stretch"
     to?: string
-    textColor?: string
 }
 
 export interface props extends styleProps {

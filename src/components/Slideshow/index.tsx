@@ -1,6 +1,6 @@
 // Imports
 import React, { useState, useEffect, useCallback } from "react"
-import { stringifyPx } from "ts-utils-julseb"
+import { stringifyPx } from "js-utils-julseb"
 
 import Variables from "../Variables"
 import Icon from "../Icon"

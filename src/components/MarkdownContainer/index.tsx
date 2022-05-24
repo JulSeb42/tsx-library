@@ -1,12 +1,14 @@
 // Imports
 import React from "react"
 
+import optionsMarkdown from "../optionsMarkdown"
+
 import { props } from "./types"
 
 import { Container } from "./styles"
 
 const MarkdownContainer: React.FC<props> = ({
-    options,
+    options = optionsMarkdown,
     children,
     gap,
     ...props

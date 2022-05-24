@@ -1,7 +1,7 @@
 // Imports
 import styled from "styled-components"
 import Markdown from "markdown-to-jsx"
-import { stringifyPx } from "ts-utils-julseb"
+import { stringifyPx } from "js-utils-julseb"
 
 import * as Mixins from "../Mixins"
 

@@ -1,6 +1,6 @@
 // Imports
 import React from "react"
-import { convertYoutube } from "ts-utils-julseb"
+import { convertYoutube } from "js-utils-julseb"
 
 import { props } from "./types"
 

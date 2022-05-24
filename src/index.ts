@@ -35,6 +35,7 @@ import {
 } from "./components/Messaging"
 import * as Mixins from "./components/Mixins"
 import Modal from "./components/Modal"
+import optionsMarkdown from "./components/optionsMarkdown"
 import PageLoading from "./components/PageLoading"
 import { Pagination, PaginationButton } from "./components/Pagination"
 import Paginator from "./components/Paginator"
@@ -94,6 +95,7 @@ export {
     Message,
     MessageInput,
     Modal,
+    optionsMarkdown,
     PageLoading,
     Pagination,
     PaginationButton,

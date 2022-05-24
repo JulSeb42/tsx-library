@@ -45,6 +45,7 @@ const TitleFunction: React.FC<titleProps> = ({ icon, iconColor, title }) => {
 const Toast: React.FC<containerProps> = ({
     padding = Variables.Spacers.M,
     close,
+    isOpen = true,
     icon,
     iconColor = "primary",
     customIconClose,
@@ -53,9 +54,10 @@ const Toast: React.FC<containerProps> = ({
     gap = "xs",
     title = "Title",
     children = "Content",
+    ...props
 }) => {
     return (
-        <Container gap={gap} padding={padding} radius={radius} shadow={shadow}>
+        <Container gap={gap} padding={padding} radius={radius} shadow={shadow} isOpen={isOpen} {...props}>
             {close ? (
                 <Flexbox
                     alignItems="center"

@@ -12,7 +12,7 @@ const InputCheck: React.FC<props> = ({
     selector,
     toggle,
     label = "label",
-    justify,
+    justify = "start",
     type = "checkbox",
     icon,
     name,

@@ -4,7 +4,7 @@ import React from "react"
 export interface props extends React.HTMLAttributes<HTMLFormElement> {
     btnPrimary?: string
     btnCancel?: string
-    btnReset?: string
+    btnReset?: string | boolean
     colorPrimary?:
         | "primary"
         | "secondary"

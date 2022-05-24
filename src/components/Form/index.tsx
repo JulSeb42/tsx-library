@@ -70,7 +70,13 @@ const Form: React.FC<props> = ({
                             iconRight={iconRightPrimary}
                             onClick={onClickReset}
                         >
-                            {textBtnReset ? textBtnReset : "Reset"}
+                            {textBtnReset
+                                ? textBtnReset
+                                : typeof btnReset === "string"
+                                ? btnReset
+                                : typeof btnReset === "boolean"
+                                ? "Reset"
+                                : ""}
                         </Button>
                     )}
                 </Flexbox>

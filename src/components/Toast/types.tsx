@@ -3,8 +3,9 @@ import React from "react"
 import { props as gridProps } from "../Grid/types"
 
 export interface styleProps extends gridProps {
-    radius?: string
+    radius?: string | number
     shadow?: string
+    isOpen?: boolean
 }
 
 export interface containerProps extends styleProps {
@@ -22,6 +23,7 @@ export interface containerProps extends styleProps {
         | "current"
         | string
     customIconClose?: string
+    title?: string
 }
 
 export interface titleProps extends containerProps {

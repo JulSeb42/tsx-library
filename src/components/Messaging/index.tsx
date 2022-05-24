@@ -57,6 +57,8 @@ const Message: React.FC<messageProps> = ({
 
 const MessageInput: React.FC<inputProps> = ({
     onSubmit,
+    onChange, 
+    value,
     textButton,
     icon,
     ...props
@@ -66,7 +68,7 @@ const MessageInput: React.FC<inputProps> = ({
             <Hr />
 
             <ContainerSend onSubmit={onSubmit}>
-                <Input {...props} />
+                <Input onChange={onChange} value={value} {...props} />
 
                 <Send
                     textButton={textButton}

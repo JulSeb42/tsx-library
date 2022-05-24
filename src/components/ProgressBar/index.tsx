@@ -14,6 +14,7 @@ const ProgressBar = styled.span<props>`
     border-radius: ${Variables.Radiuses.Round};
     position: relative;
     overflow: hidden;
+    transition: ${Variables.Transitions.Short};
 
     &:after {
         content: "";

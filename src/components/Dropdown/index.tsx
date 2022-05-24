@@ -5,9 +5,11 @@ import Variables from "../Variables"
 import * as Mixins from "../Mixins"
 
 import { props } from "./types"
+import { props as flexboxProps } from "../Flexbox/types"
 
-const DropdownContainer = styled.div`
+const DropdownContainer = styled.div<flexboxProps>`
     position: relative;
+    ${Mixins.Flexbox};
 `
 
 const Dropdown = styled.div<props>`
@@ -56,6 +58,11 @@ const Dropdown = styled.div<props>`
         }
     }
 `
+
+DropdownContainer.defaultProps = {
+    direction: "row",
+    justifyContent: "flex-start",
+}
 
 Dropdown.defaultProps = {
     position: "left",

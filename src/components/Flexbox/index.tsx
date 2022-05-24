@@ -1,6 +1,6 @@
 // Imports
 import styled from "styled-components"
-import { stringifyPx } from "ts-utils-julseb"
+import { stringifyPx } from "js-utils-julseb"
 
 import * as Mixins from "../Mixins"
 

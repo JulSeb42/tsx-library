@@ -25,6 +25,7 @@ const Container = styled(Grid)<styleProps>`
             : shadow};
     ${Mixins.Radius};
     max-width: 300px;
+    display: ${({ isOpen }) => isOpen ? "grid" : "none"};
 `
 
 const Close = styled.button`

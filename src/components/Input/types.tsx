@@ -39,6 +39,8 @@ export interface inputFunctionProps extends inputStyledProps {
     customIconPassed?: string
     customIconNotPassed?: string
     iconPassword?: boolean
+    textShowPassword?: string
+    textHidePassword?: string
     as?: string | any
 }
 

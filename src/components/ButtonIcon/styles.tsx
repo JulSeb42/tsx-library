@@ -20,48 +20,47 @@ const Container = styled.button<styleProps>`
     border: none;
     transition: ${Variables.Transitions.Short};
 
-    ${({ btnStyle, color }) =>
-        btnStyle === "plain" &&
-        css`
-            background-color: ${Mixins.Color};
-            color: ${color === "white"
-                ? Variables.Colors.Primary500
-                : Variables.Colors.White};
+    ${({ btnStyle, color, hoverBackground }) =>
+        btnStyle === "plain"
+            ? css`
+                  background-color: ${Mixins.Color};
+                  color: ${color === "white"
+                      ? Variables.Colors.Primary500
+                      : Variables.Colors.White};
 
-            &:hover {
-                background-color: ${Mixins.ColorHover};
-            }
+                  &:hover {
+                      background-color: ${Mixins.ColorHover};
+                  }
 
-            &:active {
-                background-color: ${Mixins.ColorActive};
-            }
+                  &:active {
+                      background-color: ${Mixins.ColorActive};
+                  }
 
-            &:disabled {
-                background-color: ${Variables.Colors.Gray100};
-                color: ${Variables.Colors.Gray500};
-            }
-        `}
+                  &:disabled {
+                      background-color: ${Variables.Colors.Gray100};
+                      color: ${Variables.Colors.Gray500};
+                  }
+              `
+            : btnStyle === "transparent" &&
+              css`
+                  background-color: transparent;
+                  color: ${Mixins.Color};
 
-    ${({ btnStyle, hoverBackground }) =>
-        btnStyle === "transparent" &&
-        css`
-            background-color: transparent;
-            color: ${Mixins.Color};
+                  &:hover {
+                      color: ${Mixins.ColorHover};
+                      background-color: ${hoverBackground &&
+                      Variables.Colors.Gray50};
+                  }
 
-            &:hover {
-                color: ${Mixins.ColorHover};
-                background-color: ${hoverBackground && Variables.Colors.Gray50};
-            }
+                  &:active {
+                      color: ${Mixins.ColorActive};
+                  }
 
-            &:active {
-                color: ${Mixins.ColorActive};
-            }
-
-            &:disabled {
-                color: ${Variables.Colors.Gray500};
-                background-color: ${hoverBackground && "transparent"};
-            }
-        `}
+                  &:disabled {
+                      color: ${Variables.Colors.Gray500};
+                      background-color: ${hoverBackground && "transparent"};
+                  }
+              `}
 `
 
 export { Container }

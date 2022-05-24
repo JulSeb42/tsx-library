@@ -32,6 +32,8 @@ const InputFunction: React.FC<inputFunctionProps> = ({
     customIconNotPassed,
     iconPassword,
     id,
+    textShowPassword = "Show",
+    textHidePassword = "Hide",
     ...props
 }) => {
     const [isVisible, setIsVisible] = useState(false)
@@ -60,7 +62,8 @@ const InputFunction: React.FC<inputFunctionProps> = ({
             {(validation || password) && (
                 <RightContainer>
                     {validation &&
-                        typeof value === "string" && value.length > 0 &&
+                        typeof value === "string" &&
+                        value.length > 0 &&
                         (validation === "passed" ? (
                             customIconPassed ? (
                                 <Icon
@@ -155,9 +158,9 @@ const InputFunction: React.FC<inputFunctionProps> = ({
                                     </svg>
                                 )
                             ) : isVisible ? (
-                                "Hide"
+                                textHidePassword
                             ) : (
-                                "Show"
+                                textShowPassword
                             )}
                         </ButtonPassword>
                     )}

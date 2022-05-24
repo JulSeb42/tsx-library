@@ -28,3 +28,5 @@ declare module "react-scroll-to-bottom" {
 
     export default class ScrollToBottom extends React.PureComponent<ReactScrollToBottomProps> {}
 }
+
+declare module "js-utils-julseb"

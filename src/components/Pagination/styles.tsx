@@ -5,13 +5,15 @@ import Variables from "../Variables"
 import * as Mixins from "../Mixins"
 
 import { styleProps } from "./types"
+import { props as flexboxProps } from "../Flexbox/types"
 
-const Pagination = styled.div`
-    ${Mixins.Flexbox({
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "xs",
-    })};
+const Pagination = styled.div<flexboxProps>`
+    ${({ justifyContent }) =>
+        Mixins.Flexbox({
+            alignItems: "center",
+            justifyContent: justifyContent,
+            gap: "xs",
+        })};
 `
 
 const Button = styled.button<styleProps>`
@@ -53,5 +55,9 @@ const Button = styled.button<styleProps>`
         background-color: transparent;
     }
 `
+
+Pagination.defaultProps = {
+    justifyContent: "center",
+}
 
 export { Pagination, Button }

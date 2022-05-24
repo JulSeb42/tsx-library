@@ -36,7 +36,7 @@ const Container = styled.button<styleProps>`
         height: 100%;
     }
 
-    ${({ btnStyle, color, textColor }) =>
+    ${({ btnStyle, color }) =>
         btnStyle === "plain" &&
         css`
             background-color: ${Mixins.Color};

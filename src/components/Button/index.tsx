@@ -21,6 +21,9 @@ const Button: React.FC<props> = ({
     disabled,
     justify = "start",
     type,
+    noPadding,
+    colorHover,
+    colorActive,
     ...props
 }) => {
     return (
@@ -32,6 +35,9 @@ const Button: React.FC<props> = ({
             disabled={disabled}
             justify={justify}
             type={type}
+            colorHover={colorHover}
+            colorActive={colorActive}
+            noPadding={noPadding}
             {...props}
         >
             {!loading && iconLeft && (

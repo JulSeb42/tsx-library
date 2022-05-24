@@ -16,6 +16,8 @@ const ButtonIcon: React.FC<props> = ({
     icon,
     disabled,
     hoverBackground,
+    colorHover,
+    colorActive,
     ...props
 }) => {
     return (
@@ -26,6 +28,8 @@ const ButtonIcon: React.FC<props> = ({
             btnStyle={btnStyle}
             disabled={disabled}
             hoverBackground={hoverBackground}
+            colorHover={colorHover}
+            colorActive={colorActive}
             {...props}
         >
             <Icon src={icon} size={size * 0.6} />

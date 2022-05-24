@@ -1,6 +1,6 @@
 // Imports
 import styled, { css } from "styled-components"
-import { stringifyPx } from "ts-utils-julseb"
+import { stringifyPx } from "js-utils-julseb"
 
 import Variables from "../Variables"
 import Flexbox from "../Flexbox"
