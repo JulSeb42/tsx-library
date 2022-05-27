@@ -2,12 +2,12 @@
 import React, { useState } from "react"
 
 import * as Font from "../Font"
-import Grid from "../Grid"
 import Icon from "../Icon"
 
 import { props } from "./types"
 
 import {
+    Container,
     Label,
     Helper,
     InputContainer,
@@ -25,6 +25,7 @@ const Autocomplete: React.FC<props> = ({
     disabled,
     value,
     items,
+    index = 10,
     onMouseDown,
     ...props
 }) => {
@@ -34,12 +35,12 @@ const Autocomplete: React.FC<props> = ({
     const handleClose = () => setTimeout(() => setIsOpen(false), 500)
 
     return helper || helperBottom || label ? (
-        <Grid gap="xxs">
+        <Container>
             {label && <Label htmlFor={id}>{label}</Label>}
 
             {helper && <Helper>{helper}</Helper>}
 
-            <InputContainer>
+            <InputContainer index={index}>
                 {icon && (
                     <IconContainer disabled={disabled}>
                         <Icon src={icon} size={16} />
@@ -64,9 +65,9 @@ const Autocomplete: React.FC<props> = ({
             </InputContainer>
 
             {helperBottom && <Helper as={Font.Small}>{helperBottom}</Helper>}
-        </Grid>
+        </Container>
     ) : (
-        <InputContainer>
+        <InputContainer index={index}>
             <Input
                 id={id}
                 onFocus={handleOpen}

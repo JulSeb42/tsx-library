@@ -3,6 +3,7 @@ import React from "react"
 
 export interface styleProps extends React.HTMLAttributes<HTMLInputElement> {
     icon?: string
+    index?: number
 }
 
 export interface props extends styleProps {
@@ -14,4 +15,5 @@ export interface props extends styleProps {
     onMouseDown: (event: React.MouseEvent<HTMLElement>) => void
     items: string[] | number[]
     value?: string
+    index?: number
 }

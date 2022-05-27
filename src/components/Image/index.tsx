@@ -17,14 +17,13 @@ const Image: React.FC<props> = ({
 }) => {
     return (
         <Suspense fallback={<Fallback width={width} height={height} />}>
-            <Container width={width} height={height}>
+            <Container width={width} height={height} {...props}>
                 <Img
                     src={src}
                     alt={alt}
                     width={width}
                     height={height}
                     fit={fit}
-                    {...props}
                 />
 
                 {caption && <Caption>{caption}</Caption>}

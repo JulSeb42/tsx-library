@@ -2,10 +2,15 @@
 import styled, { css } from "styled-components"
 
 import Variables from "../Variables"
+import Grid from "../Grid"
 import * as Mixins from "../Mixins"
 import * as Font from "../Font"
 
 import { styleProps } from "./types"
+
+const Container = styled(Grid)`
+    gap: ${Variables.Spacers.XXS};
+`
 
 const Label = styled.label`
     color: ${Variables.Colors.Primary500};
@@ -17,9 +22,9 @@ const Helper = styled(Font.P)`
     z-index: 0;
 `
 
-const InputContainer = styled.div`
+const InputContainer = styled.div<{ index?: number }>`
     position: relative;
-    z-index: 10;
+    z-index: ${({ index }) => index};
 `
 
 const IconContainer = styled.span<{ disabled?: boolean }>`
@@ -108,4 +113,4 @@ const List = styled.ul<{ isOpen: boolean }>`
     }
 `
 
-export { Label, Helper, InputContainer, IconContainer, Input, List }
+export { Container, Label, Helper, InputContainer, IconContainer, Input, List }
