@@ -23,6 +23,7 @@ const ButtonIcon: React.FC<props> = ({
     return (
         <Container
             as={to ? Link : "button"}
+            to={to}
             size={size}
             color={color}
             btnStyle={btnStyle}

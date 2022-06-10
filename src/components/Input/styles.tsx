@@ -34,6 +34,10 @@ const InputStyled = styled.input<inputStyledProps>`
         background-color: ${Variables.Colors.Gray50};
     }
 
+    &::placeholder {
+        color: ${Variables.Colors.Gray500}
+    }
+
     ${({ type }) =>
         type === "textarea"
             ? css`
