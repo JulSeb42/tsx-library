@@ -19,7 +19,7 @@ const CodeContainer = ({
     children,
     language,
     style = atomOneDark,
-    copyButton,
+    copyButton = true,
     iconCopy,
     iconCopied,
     ...props

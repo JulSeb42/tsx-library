@@ -10,7 +10,7 @@ import { LibColorsTypes, ColorsShortTypes } from "../components/common-types"
 
 /*==================== Component ====================*/
 
-const ImageIcon = ({ size = 64, color = "primary" }: Props) => (
+const ImageIcon = ({ size = 64, color = "currentColor" }: Props) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
             d="M7.499 11C8.32743 11 8.999 10.3284 8.999 9.5C8.999 8.67157 8.32743 8 7.499 8C6.67057 8 5.999 8.67157 5.999 9.5C5.999 10.3284 6.67057 11 7.499 11Z"

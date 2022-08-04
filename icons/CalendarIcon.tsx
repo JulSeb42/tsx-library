@@ -10,7 +10,7 @@ import { LibColorsTypes, ColorsShortTypes } from "../components/common-types"
 
 /*==================== Component ====================*/
 
-const CalendarIcon = ({ size = 64, color = "primary" }: Props) => (
+const CalendarIcon = ({ size = 64, color = "currentColor" }: Props) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M9 11H7V13H9V11Z" fill={getColor(color)} />
         <path d="M9 15H7V17H9V15Z" fill={getColor(color)} />

@@ -10,7 +10,7 @@ import { LibColorsTypes, ColorsShortTypes } from "../components/common-types"
 
 /*==================== Component ====================*/
 
-const CheckCircleIcon = ({ size = 64, color = "primary" }: Props) => (
+const CheckCircleIcon = ({ size = 64, color = "currentColor" }: Props) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
             d="M7.69999 11.292L9.99899 13.587L15.293 8.293L16.707 9.707L10.001 16.413L6.28799 12.708L7.69999 11.292Z"

@@ -10,7 +10,7 @@ import { LibColorsTypes, ColorsShortTypes } from "../components/common-types"
 
 /*==================== Component ====================*/
 
-const ClockIcon = ({ size = 64, color = "primary" }: Props) => (
+const ClockIcon = ({ size = 64, color = "currentColor" }: Props) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M11 13V7H13V11H17V13H11Z" fill={getColor(color)} />
         <path
