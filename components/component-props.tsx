@@ -44,3 +44,7 @@ export type StepProps = {
     text: string
     to?: string
 }
+
+/*==================== Input validation ====================*/
+
+export type ValidationProps = "not-passed" | "passed" | undefined
