@@ -41,6 +41,7 @@ const InputFunction = ({
     iconSelect,
     password,
     children,
+    autoFocus,
     ...props
 }: Props) => {
     const [isVisible, setIsVisible] = useState(false)
@@ -56,6 +57,7 @@ const InputFunction = ({
                 name={name}
                 $validation={validation}
                 as="select"
+                autoFocus={autoFocus}
                 {...props}
             >
                 {children}
@@ -82,6 +84,7 @@ const InputFunction = ({
             disabled={disabled}
             name={name}
             $validation={validation}
+            autoFocus={autoFocus}
             {...props}
         />
     ) : icon ||
@@ -116,6 +119,7 @@ const InputFunction = ({
                 name={name}
                 $validation={validation}
                 $icon={icon}
+                autoFocus={autoFocus}
                 {...props}
             />
 
@@ -173,6 +177,7 @@ const InputFunction = ({
             disabled={disabled}
             name={name}
             $validation={validation}
+            autoFocus={autoFocus}
             {...props}
         />
     )
@@ -203,6 +208,7 @@ const Input = ({
     iconSelect,
     icon,
     clearSearch,
+    autoFocus,
     ...props
 }: Props) =>
     label || helper || helperBottom || counter ? (
@@ -236,6 +242,7 @@ const Input = ({
                 textShowPassword={textShowPassword}
                 iconClear={iconClear}
                 iconSelect={iconSelect}
+                autoFocus={autoFocus}
                 {...props}
             />
         </InputContainer>
@@ -261,6 +268,7 @@ const Input = ({
             textShowPassword={textShowPassword}
             iconClear={iconClear}
             iconSelect={iconSelect}
+            autoFocus={autoFocus}
             {...props}
         />
     )
@@ -334,6 +342,7 @@ interface Props extends React.HTMLAttributes<HTMLInputElement> {
     iconSelect?: string
     clearSearch?: (event: React.MouseEvent<HTMLButtonElement>) => void
     icon?: string
+    autoFocus?: boolean
 }
 
 /*==================== Styles ====================*/

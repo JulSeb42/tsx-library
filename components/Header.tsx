@@ -3,7 +3,7 @@
 /*==================== Imports ====================*/
 
 import React, { useState, useEffect, useRef } from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { Link } from "react-router-dom"
 
 import Variables from "./Variables"
@@ -30,6 +30,31 @@ const HeaderBurger = styled(Burger)`
 
 const Logo = styled(Link)``
 
+const LinkStyles = ({ $linkColor }: StyleProps) => css`
+    font-size: ${Variables.FontSizes.Body};
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    text-decoration: none;
+    color: ${Mixins.ColorsHoverDefault({ $color: $linkColor })};
+    font-weight: ${Variables.FontWeights.Regular};
+
+    &.active,
+    &${Logo} {
+        font-weight: ${Variables.FontWeights.Black};
+    }
+
+    @media ${Variables.Breakpoints.Hover} {
+        &:hover {
+            color: ${Mixins.ColorsHoverHover({ $color: $linkColor })};
+        }
+
+        &:active {
+            color: ${Mixins.ColorsHoverActive({ $color: $linkColor })};
+        }
+    }
+`
+
 const Container = styled.header<StyleProps>`
     position: ${({ $position }) => $position};
     z-index: 999;
@@ -45,37 +70,16 @@ const Container = styled.header<StyleProps>`
             $color: $backgroundColor,
         })};
 
-    a,
-    button {
-        font-size: ${Variables.FontSizes.Body};
-        padding: 0;
-        border: none;
-        background-color: transparent;
-        text-decoration: none;
-        color: ${({ $linkColor }) => Mixins.ColorsHoverDefault({ $color: $linkColor })};
-        font-weight: ${Variables.FontWeights.Regular};
-
-        &.active,
-        &${Logo} {
-            font-weight: ${Variables.FontWeights.Black};
-        }
-
-        @media ${Variables.Breakpoints.Hover} {
-            &:hover {
-                color: ${({ $linkColor }) => Mixins.ColorsHoverHover({ $color: $linkColor })};
-            }
-
-            &:active {
-                color: ${({ $linkColor }) => Mixins.ColorsHoverActive({ $color: $linkColor })};
-            }
-        }
-    }
-
     @media ${Variables.Breakpoints.Mobile} {
         background-color: ${({ $backgroundColor, $navColor, $isOpen }) =>
             $backgroundColor === "transparent" && $isOpen
                 ? Mixins.AllColors({ $color: $navColor })
                 : Mixins.AllColors({ $color: $backgroundColor })};
+    }
+
+    & > a,
+    & > button {
+        ${LinkStyles};
     }
 `
 
@@ -84,6 +88,11 @@ const Nav = styled.nav<NavProps>`
         $alignItems: "center",
         $gap: "s",
     })};
+
+    & > a,
+    & > button {
+        ${LinkStyles};
+    }
 
     @media ${Variables.Breakpoints.Mobile} {
         position: absolute;
@@ -108,8 +117,8 @@ const Nav = styled.nav<NavProps>`
 const Header = ({
     logoTo = "/",
     logoImg,
-    logoWidth,
-    logoHeight,
+    logoWidth = 100,
+    logoHeight = 30,
     logoAlt = "Logo",
     logoText,
     position = "relative",
@@ -150,13 +159,15 @@ const Header = ({
                 )}
             </Logo>
 
-            <HeaderBurger
-                isOpen={isOpen}
-                color={burgerColor}
-                onClick={() => setIsOpen(!isOpen)}
-            />
+            <HeaderBurger isOpen={isOpen} color={burgerColor} onClick={() => setIsOpen(!isOpen)} />
 
-            <Nav $isOpen={isOpen} $headerHeight={headerHeight} $backgroundColor={backgroundColor} $navColor={navColor}>
+            <Nav
+                $isOpen={isOpen}
+                $headerHeight={headerHeight}
+                $backgroundColor={backgroundColor}
+                $navColor={navColor}
+                $linkColor={linkColor}
+            >
                 {children}
             </Nav>
         </Container>
@@ -208,4 +219,5 @@ interface NavProps extends React.HTMLAttributes<HTMLDivElement> {
     $headerHeight: number
     $backgroundColor?: LibColorsTypes | ColorsShortTypes | string
     $navColor?: LibColorsTypes | ColorsShortTypes | string
+    $linkColor?: ColorsHoverTypes
 }

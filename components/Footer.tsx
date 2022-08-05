@@ -21,8 +21,8 @@ const Footer = ({
     logoImg,
     logoAlt = "Logo",
     logoText,
-    logoWidth,
-    logoHeight,
+    logoWidth = 100,
+    logoHeight = 30,
     separatorColor = "gray-200",
     ...props
 }: Props) => (

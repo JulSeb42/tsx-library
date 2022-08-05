@@ -6,7 +6,6 @@ import React from "react"
 import styled, { css } from "styled-components"
 import ReactLinkify from "react-linkify"
 import ScrollToBottom from "react-scroll-to-bottom"
-import { convertDateShort } from "js-utils-julseb"
 
 import Variables from "./Variables"
 import { P, Small } from "./Font"
@@ -63,7 +62,7 @@ const Message = ({ message }: MessageItemProps) => {
 
             {(date || time) && (
                 <Small color="gray">
-                    {date && convertDateShort(date)}
+                    {date && date}
                     {date && time && " at "}
                     {time && time}
                 </Small>
@@ -146,7 +145,7 @@ const InputContainer = styled.form`
     ${Mixins.Flexbox({
         $alignItems: "center",
         $gap: "xs",
-    })}
+    })};
 `
 
 const Input = styled.textarea`

@@ -24,6 +24,7 @@ const Autocomplete = ({
     disabled,
     value,
     textEmpty = "Your search did not return any result.",
+    autoFocus,
     ...props
 }: Props) => {
     const [isOpen, setIsOpen] = useState(false)
@@ -50,6 +51,7 @@ const Autocomplete = ({
                     type="text"
                     $icon={!!icon}
                     value={value}
+                    autoFocus={autoFocus}
                     {...props}
                 />
 
@@ -83,15 +85,20 @@ const Autocomplete = ({
                 type="text"
                 $icon={!!icon}
                 value={value}
+                autoFocus={autoFocus}
                 {...props}
             />
 
             <List isOpen={isOpen}>
-                {items.slice(0, 20).map(item => (
-                    <li key={uuid()} onClick={onClickItem}>
-                        {item}
-                    </li>
-                ))}
+                {items.length > 0 ? (
+                    items.slice(0, 20).map(item => (
+                        <Item key={uuid()} onClick={onClickItem}>
+                            {item}
+                        </Item>
+                    ))
+                ) : (
+                    <Item $readOnly>{textEmpty}</Item>
+                )}
             </List>
         </InputContainer>
     )
@@ -116,6 +123,7 @@ interface Props extends React.HTMLAttributes<HTMLInputElement> {
     disabled?: boolean
     value: any
     textEmpty?: string
+    autoFocus?: boolean
 }
 
 /*==================== Styles ====================*/

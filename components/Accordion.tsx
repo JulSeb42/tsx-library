@@ -55,6 +55,8 @@ const Content = styled.div<ContentStyleProps>`
               `}
 `
 
+const IconContainer = styled.span``
+
 const Button = styled.button<ButtonProps>`
     width: 100%;
     ${Mixins.Flexbox({
@@ -77,6 +79,16 @@ const Button = styled.button<ButtonProps>`
         css`
             border-bottom: none;
         `}
+
+    ${IconContainer} {
+        transition: ${Variables.Transitions.Short};
+
+        ${({ $isOpen, $icon }) =>
+            $isOpen &&
+            css`
+                transform: rotate(${$icon === "chevron" ? 180 : 45}deg);
+            `}
+    }
 
     ${StyledIconPlus}, ${StyledIconChevron} {
         transition: ${Variables.Transitions.Short};
@@ -112,11 +124,13 @@ const AccordionItem = ({
             >
                 {title}
 
-                {icon === "plus" ? (
-                    <StyledIconPlus size={20} color="currentColor" />
-                ) : (
-                    icon === "chevron" && <StyledIconChevron size={20} />
-                )}
+                <IconContainer>
+                    {icon === "plus" ? (
+                        <StyledIconPlus size={20} color="currentColor" />
+                    ) : (
+                        icon === "chevron" && <StyledIconChevron size={20} />
+                    )}
+                </IconContainer>
             </Button>
 
             <Content as={typeof content === "string" ? P : "div"} $isOpen={open} $accordionStyle={$accordionStyle}>

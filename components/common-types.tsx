@@ -259,6 +259,7 @@ const FlexAlignContent = {
     "space-around": "space-around",
     "space-evenly": "space-evenly",
     stretch: "stretch",
+    normal: "normal",
 } as const
 
 export type FlexAlignContentTypes = keyof typeof FlexAlignContent

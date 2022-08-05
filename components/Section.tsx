@@ -29,11 +29,11 @@ const sizes = {
 type SizesTypes = keyof typeof sizes
 
 interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
-    $gap?: SizesTypes | number | string
+    $gap?: SizesTypes | number
 }
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
-    gap?: SizesTypes | number | string
+    gap?: SizesTypes | number
     div?: boolean
 }
 

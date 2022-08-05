@@ -17,7 +17,7 @@ import CheckIcon from "../icons/CheckIcon"
 
 const CodeContainer = ({
     children,
-    language,
+    language = "javascript",
     style = atomOneDark,
     copyButton = true,
     iconCopy,

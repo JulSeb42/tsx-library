@@ -14,17 +14,18 @@ import { LibColorsTypes, ColorsShortTypes, SpacerTypes } from "./common-types"
 
 /*==================== Component ====================*/
 
-const Badge = ({ color = "primary", size = 16, children, icon, padding, ...props }: Props) => (
+const Badge = ({ color = "primary", size = 16, children, icon, padding, textColor, ...props }: Props) => (
     <Container
         $color={color}
         $size={size}
         $children={!!children}
         $childrenLength={children?.length}
         $padding={padding}
+        $textColor={textColor}
         {...props}
     >
         {children && children}
-        
+
         {icon && <Icon src={icon} size={size * 0.6} />}
     </Container>
 )
