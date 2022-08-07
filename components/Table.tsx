@@ -6,23 +6,17 @@ import React from "react"
 import styled, { css } from "styled-components"
 
 import Variables from "./Variables"
-import { FontCommon } from "./Font"
+import { FontCommon } from "./Text"
 
-import { TextAlignTypes, ColorsShortTypes, LibColorsTypes } from "./common-types"
+import { TextAlignTypes } from "./common-types"
 
 /*==================== Component ====================*/
 
-const Table = ({
-    tableStyle = "bordered",
-    textAlign,
-    vAlign,
-    children,
-    ...props
-}: Props) => (
+const Table = ({ options, children, ...props }: Props) => (
     <Container
-        $tableStyle={tableStyle}
-        $textAlign={textAlign}
-        $vAlign={vAlign}
+        $tableStyle={options?.variant || "bordered"}
+        $textAlign={options?.textAlign}
+        $vAlign={options?.vAlign || "top"}
         {...props}
     >
         {children}
@@ -58,12 +52,12 @@ interface StyleProps extends React.HTMLAttributes<HTMLTableElement> {
 }
 
 interface Props extends React.HTMLAttributes<HTMLTableElement> {
-    tableStyle?: TableStyleTypes
-    textAlign?: TextAlignTypes
-    vAlign?: VAlignTypes
     children: React.ReactNode | React.ReactNode[]
-    backgroundHead?: ColorsShortTypes | LibColorsTypes | string
-    textColorHead?: ColorsShortTypes | LibColorsTypes | string
+    options?: {
+        variant?: TableStyleTypes
+        textAlign?: TextAlignTypes
+        vAlign?: VAlignTypes
+    }
 }
 
 /*==================== Styles ====================*/

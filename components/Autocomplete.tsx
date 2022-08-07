@@ -7,74 +7,22 @@ import styled, { css } from "styled-components"
 import { v4 as uuid } from "uuid"
 
 import Variables from "./Variables"
-import { Small, P } from "./Font"
 import Mixins from "./Mixins"
 import Icon from "./Icon"
+import BaseInput from "./InputContainer"
 
 /*==================== Component ====================*/
 
-const Autocomplete = ({
-    id,
-    label,
-    helper,
-    helperBottom,
-    icon = undefined,
-    items,
-    onClickItem,
-    disabled,
-    value,
-    textEmpty = "Your search did not return any result.",
-    autoFocus,
-    ...props
-}: Props) => {
+const InputFunction = ({ id, items, onClickItem, disabled, value, autoFocus, options, ...props }: Props) => {
     const [isOpen, setIsOpen] = useState(false)
     const handleOpen = () => setIsOpen(true)
     const handleClose = () => setTimeout(() => setIsOpen(false), 100)
 
-    return label || helper || helperBottom ? (
-        <Container>
-            {label && <Label htmlFor={id}>{label}</Label>}
-
-            {helper && <P>{helper}</P>}
-
-            <InputContainer>
-                {icon && (
-                    <IconContainer>
-                        <Icon src={icon} size={20} color="primary" />
-                    </IconContainer>
-                )}
-
-                <StyledInput
-                    id={id}
-                    onFocus={!disabled ? handleOpen : undefined}
-                    onBlur={!disabled ? handleClose : undefined}
-                    type="text"
-                    $icon={!!icon}
-                    value={value}
-                    autoFocus={autoFocus}
-                    {...props}
-                />
-
-                <List isOpen={isOpen}>
-                    {items.length > 0 ? (
-                        items.slice(0, 20).map(item => (
-                            <Item key={uuid()} onClick={onClickItem}>
-                                {item}
-                            </Item>
-                        ))
-                    ) : (
-                        <Item $readOnly>{textEmpty}</Item>
-                    )}
-                </List>
-            </InputContainer>
-
-            {helperBottom && <Small>{helperBottom}</Small>}
-        </Container>
-    ) : (
+    return (
         <InputContainer>
-            {icon && (
+            {options?.icon && (
                 <IconContainer>
-                    <Icon src={icon} size={20} color="primary" />
+                    <Icon src={options.icon} size={20} color="primary" />
                 </IconContainer>
             )}
 
@@ -83,7 +31,7 @@ const Autocomplete = ({
                 onFocus={!disabled ? handleOpen : undefined}
                 onBlur={!disabled ? handleClose : undefined}
                 type="text"
-                $icon={!!icon}
+                $icon={!!options?.icon}
                 value={value}
                 autoFocus={autoFocus}
                 {...props}
@@ -97,12 +45,38 @@ const Autocomplete = ({
                         </Item>
                     ))
                 ) : (
-                    <Item $readOnly>{textEmpty}</Item>
+                    <Item $readOnly>{options?.textEmpty}</Item>
                 )}
             </List>
         </InputContainer>
     )
 }
+const Autocomplete = ({ id, items, onClickItem, disabled, value, autoFocus, options, ...props }: Props) =>
+    options?.label || options?.helper || options?.helperBottom ? (
+        <BaseInput id={id} label={options.label} helper={options.helper} helperBottom={options.helperBottom}>
+            <InputFunction
+                id={id}
+                items={items}
+                onClickItem={onClickItem}
+                disabled={disabled}
+                value={value}
+                autoFocus={autoFocus}
+                options={options}
+                {...props}
+            />
+        </BaseInput>
+    ) : (
+        <InputFunction
+            id={id}
+            items={items}
+            onClickItem={onClickItem}
+            disabled={disabled}
+            value={value}
+            autoFocus={autoFocus}
+            options={options}
+            {...props}
+        />
+    )
 
 export default Autocomplete
 
@@ -114,30 +88,22 @@ interface StyleProps extends React.HTMLAttributes<HTMLInputElement> {
 
 interface Props extends React.HTMLAttributes<HTMLInputElement> {
     id: string
-    label?: string
-    helper?: string
-    helperBottom?: string
-    icon?: string
     items: string[] | number[]
     onClickItem: (e: React.MouseEvent<HTMLLIElement>) => void
     disabled?: boolean
     value: any
-    textEmpty?: string
     autoFocus?: boolean
+
+    options?: {
+        label?: string
+        helper?: string
+        helperBottom?: string
+        icon?: string
+        textEmpty?: string
+    }
 }
 
 /*==================== Styles ====================*/
-
-const Container = styled.div`
-    ${Mixins.Grid({
-        $gap: "xxs",
-    })}
-`
-
-const Label = styled.label`
-    color: ${Variables.Colors.Primary500};
-    font-weight: ${Variables.FontWeights.Black};
-`
 
 const InputContainer = styled.div`
     position: relative;

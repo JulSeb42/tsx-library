@@ -20,28 +20,19 @@ import { ValidationTypes } from "./common-types"
 /*==================== Component ====================*/
 
 const InputFunction = ({
-    maxLength,
-    value,
     id,
-    validation,
-    type,
-    disabled,
+    value,
     name,
-    icon = undefined,
-    iconValidationPassed,
-    iconValidationNotPassed,
-    iconCalendar,
-    iconClock,
-    iconShowPassword,
-    iconHidePassword,
-    textHidePassword = "Hide",
-    textShowPassword = "Show",
-    iconClear,
-    clearSearch,
-    iconSelect,
-    password,
-    children,
+    disabled,
     autoFocus,
+    type,
+    password,
+    textsPassword,
+    maxLength,
+    icons,
+    clearSearch,
+    validation,
+    children,
     ...props
 }: Props) => {
     const [isVisible, setIsVisible] = useState(false)
@@ -64,8 +55,8 @@ const InputFunction = ({
             </InputStyled>
 
             <RightContainer $disabled={disabled}>
-                {iconSelect ? (
-                    <Icon src={iconSelect} size={24} color={disabled ? "gray" : "primary"} />
+                {icons?.select ? (
+                    <Icon src={icons.select} size={24} color={disabled ? "gray" : "primary"} />
                 ) : (
                     <ChevronDownIcon
                         size={24}
@@ -87,7 +78,7 @@ const InputFunction = ({
             autoFocus={autoFocus}
             {...props}
         />
-    ) : icon ||
+    ) : icons?.icon ||
       validation ||
       password ||
       type === "url" ||
@@ -98,14 +89,14 @@ const InputFunction = ({
       type === "week" ||
       type === "time" ? (
         <InputContent>
-            {icon && (
+            {icons?.icon && (
                 <IconContainer>
-                    <Icon src={icon} size={16} color={disabled ? "gray" : "primary"} />
+                    <Icon src={icons.icon} size={16} color={disabled ? "gray" : "primary"} />
                 </IconContainer>
             )}
 
             {type === "url" && (
-                <UrlContainer $icon={icon} $disabled={disabled}>
+                <UrlContainer $icon={!!icons?.icon} $disabled={disabled}>
                     http://
                 </UrlContainer>
             )}
@@ -118,48 +109,49 @@ const InputFunction = ({
                 disabled={disabled}
                 name={name}
                 $validation={validation}
-                $icon={icon}
+                $icon={!!icons?.icon}
                 autoFocus={autoFocus}
                 {...props}
             />
 
-            {(validation ||
-                password ||
-                (type === "search" && clearSearch && typeof value === "string" && value.length > 0)) && (
+            {(validation || password || (type === "search" && typeof value === "string" && value.length > 0)) && (
                 <RightContainer $disabled={disabled}>
                     {password && (
                         <ButtonInput type="button" onClick={() => setIsVisible(!isVisible)} disabled={disabled}>
                             {isVisible ? (
-                                iconHidePassword ? (
-                                    <Icon src={iconHidePassword} size={24} />
+                                icons?.hidePassword ? (
+                                    <Icon src={icons.hidePassword} size={24} />
                                 ) : (
-                                    textHidePassword
+                                    textsPassword?.hide || "Hide"
                                 )
                             ) : (
                                 !isVisible &&
-                                (iconShowPassword ? <Icon src={iconShowPassword} size={24} /> : textShowPassword)
+                                (icons?.showPassword ? (
+                                    <Icon src={icons.showPassword} size={24} />
+                                ) : (
+                                    textsPassword?.show || "Show"
+                                ))
                             )}
                         </ButtonInput>
                     )}
 
-                    {validation === "passed" &&
-                        (iconValidationPassed ? (
-                            <Icon src={iconValidationPassed} size={24} color="success" />
-                        ) : (
-                            <CheckCircleIcon size={24} color={Variables.Colors.Success500} />
-                        ))}
-
-                    {validation === "not-passed" &&
-                        (iconValidationNotPassed ? (
-                            <Icon src={iconValidationNotPassed} size={24} color="danger" />
+                    {validation &&
+                        (validation.status === "passed" ? (
+                            validation.iconPassed ? (
+                                <Icon src={validation.iconPassed} size={24} color="success" />
+                            ) : (
+                                <CheckCircleIcon size={24} color={Variables.Colors.Success500} />
+                            )
+                        ) : validation.iconNotPassed ? (
+                            <Icon src={validation.iconNotPassed} size={24} color="danger" />
                         ) : (
                             <CloseCircleIcon size={24} color={Variables.Colors.Danger500} />
                         ))}
 
                     {type === "search" && clearSearch && typeof value === "string" && value.length > 0 && (
                         <ButtonInput type="button" onClick={clearSearch} disabled={disabled}>
-                            {iconClear ? (
-                                <Icon src={iconClear} size={24} />
+                            {icons?.clear ? (
+                                <Icon src={icons.clear} size={24} />
                             ) : (
                                 <CloseIcon size={24} color={Variables.Colors.Primary500} />
                             )}
@@ -184,40 +176,29 @@ const InputFunction = ({
 }
 
 const Input = ({
-    label,
-    helper,
-    helperBottom,
-    counter,
-    maxLength,
-    value,
     id,
-    validation,
-    type,
-    disabled,
+    value,
     name,
-    iconValidationPassed,
-    iconValidationNotPassed,
-    password,
-    iconCalendar,
-    iconClock,
-    iconShowPassword,
-    iconHidePassword,
-    textHidePassword,
-    textShowPassword,
-    iconClear,
-    iconSelect,
-    icon,
-    clearSearch,
+    disabled,
     autoFocus,
+    type = undefined,
+    password,
+    textsPassword,
+    maxLength,
+    icons,
+    clearSearch,
+    options,
+    validation,
+    children,
     ...props
 }: Props) =>
-    label || helper || helperBottom || counter ? (
+    options?.label || options?.helper || options?.helperBottom || options?.counter ? (
         <InputContainer
             id={id}
-            label={label}
-            helper={helper}
-            helperBottom={helperBottom}
-            counter={counter}
+            label={options.label}
+            helper={options.helper}
+            helperBottom={options.helperBottom}
+            counter={options.counter}
             value={value}
             maxLength={maxLength}
         >
@@ -227,21 +208,12 @@ const Input = ({
                 type={type}
                 disabled={disabled}
                 name={name}
-                icon={icon}
-                iconValidationPassed={iconValidationPassed}
-                iconValidationNotPassed={iconValidationNotPassed}
+                icons={icons}
                 value={value}
                 maxLength={maxLength}
                 clearSearch={clearSearch}
                 password={password}
-                iconCalendar={iconCalendar}
-                iconClock={iconClock}
-                iconShowPassword={iconShowPassword}
-                iconHidePassword={iconHidePassword}
-                textHidePassword={textHidePassword}
-                textShowPassword={textShowPassword}
-                iconClear={iconClear}
-                iconSelect={iconSelect}
+                textsPassword={textsPassword}
                 autoFocus={autoFocus}
                 {...props}
             />
@@ -253,21 +225,12 @@ const Input = ({
             type={type}
             disabled={disabled}
             name={name}
-            icon={icon}
-            iconValidationPassed={iconValidationPassed}
-            iconValidationNotPassed={iconValidationNotPassed}
+            icons={icons}
             value={value}
             maxLength={maxLength}
             clearSearch={clearSearch}
             password={password}
-            iconCalendar={iconCalendar}
-            iconClock={iconClock}
-            iconShowPassword={iconShowPassword}
-            iconHidePassword={iconHidePassword}
-            textHidePassword={textHidePassword}
-            textShowPassword={textShowPassword}
-            iconClear={iconClear}
-            iconSelect={iconSelect}
+            textsPassword={textsPassword}
             autoFocus={autoFocus}
             {...props}
         />
@@ -296,19 +259,19 @@ const inputTypes = {
     select: "select",
 } as const
 
-type inputTypesTypes = keyof typeof inputTypes
+type InputTypesTypes = keyof typeof inputTypes
 
 interface StyleProps extends React.HTMLAttributes<HTMLInputElement> {
     $validation?: ValidationTypes | string
     $iconCalendar?: string
     $iconClock?: string
     $iconSelect?: string
-    type?: inputTypesTypes
-    $icon?: string
+    type?: InputTypesTypes
+    $icon?: boolean
 }
 
 interface UrlProps {
-    $icon?: string
+    $icon?: boolean
     $disabled?: boolean
 }
 
@@ -317,32 +280,48 @@ interface RightContainerProps {
 }
 
 interface Props extends React.HTMLAttributes<HTMLInputElement> {
-    label?: string
-    helper?: string
-    helperBottom?: string
-    counter?: boolean
-    maxLength?: number
-    value?: any
     id: string
-    validation?: ValidationTypes | string
-    type?: inputTypesTypes
-    disabled?: boolean
+    value?: any
     name?: string
+    disabled?: boolean
     as?: any
-    iconValidationPassed?: string
-    iconValidationNotPassed?: string
-    password?: boolean
-    iconCalendar?: string
-    iconClock?: string
-    iconShowPassword?: string
-    iconHidePassword?: string
-    textHidePassword?: string
-    textShowPassword?: string
-    iconClear?: string
-    iconSelect?: string
-    clearSearch?: (event: React.MouseEvent<HTMLButtonElement>) => void
-    icon?: string
     autoFocus?: boolean
+
+    type?: InputTypesTypes | undefined
+    password?: boolean
+
+    textsPassword?: {
+        hide?: string
+        show?: string
+    }
+
+    children?: any
+    maxLength?: number
+
+    icons?: {
+        icon?: string
+        calendar?: string
+        clock?: string
+        showPassword?: string
+        hidePassword?: string
+        clear?: string
+        select?: string
+    }
+
+    clearSearch?: (event: React.MouseEvent<HTMLButtonElement>) => void
+
+    validation?: {
+        status: ValidationTypes | undefined
+        iconPassed?: string
+        iconNotPassed?: string
+    }
+
+    options?: {
+        label?: string
+        helper?: string
+        helperBottom?: string
+        counter?: boolean
+    }
 }
 
 /*==================== Styles ====================*/
@@ -384,7 +363,7 @@ const InputStyled = styled.input<StyleProps>`
     }
 
     ${({ $icon }) =>
-        $icon !== undefined &&
+        $icon &&
         css`
             padding-left: calc(${size}px + ${Variables.Spacers.XS});
         `}
@@ -438,7 +417,7 @@ const InputStyled = styled.input<StyleProps>`
     ${({ type, $icon }) =>
         type === "url" &&
         css`
-            padding-left: ${$icon !== undefined ? 53 + size : 53}px;
+            padding-left: ${$icon ? 53 + size : 53}px;
         `}
 
     ${({ type, $iconCalendar }) =>
@@ -575,7 +554,7 @@ const UrlContainer = styled.span<UrlProps>`
         `}
 
     ${({ $icon }) =>
-        $icon !== undefined &&
+        $icon &&
         css`
             padding-left: calc(${size}px + ${Variables.Spacers.XS});
         `}

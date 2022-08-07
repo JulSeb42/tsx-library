@@ -10,31 +10,20 @@ const Vid = React.lazy(() => import("./Vid"))
 
 /*==================== Component ====================*/
 
-const Video = ({
-    width,
-    height,
-    fit,
-    aspectRatio,
-    emptyText = "Your browser doesn't support the video tag.",
-    autoPlay,
-    muted,
-    src,
-    controls,
-    ...props
-}: Props) => (
+const Video = ({ src, width = "100%", height = "auto", options, ...props }: Props) => (
     <Vid
         $width={width}
         $height={height}
-        $fit={fit}
-        $aspectRatio={aspectRatio}
-        autoPlay={autoPlay}
-        muted={autoPlay ? true : autoPlay}
-        controls={!autoPlay ? true : controls}
+        $fit={options?.fit}
+        $aspectRatio={options?.aspectRatio}
+        autoPlay={options?.autoPlay}
+        muted={options?.autoPlay ? true : options?.autoPlay}
+        controls={!options?.autoPlay ? true : options?.controls}
         {...props}
     >
         <source src={src} type="video/mp4" />
 
-        {emptyText}
+        {options?.emptyText || "Your browser doesn't support the video tag."}
     </Vid>
 )
 
@@ -43,13 +32,16 @@ export default Video
 /*==================== Types ====================*/
 
 interface Props extends React.HTMLAttributes<HTMLVideoElement> {
+    src: string
     width?: string | number
     height?: string | number
-    fit?: ObjectFitTypes
-    aspectRatio?: string
-    emptyText?: string
-    src: string
-    autoPlay?: boolean
-    muted?: boolean
-    controls?: boolean
+
+    options?: {
+        fit?: ObjectFitTypes
+        aspectRatio?: string
+        emptyText?: string
+        autoPlay?: boolean
+        muted?: boolean
+        controls?: boolean
+    }
 }

@@ -11,41 +11,41 @@ import Button from "./Button"
 
 /*==================== Component ====================*/
 
-const Form = ({
-    children,
-    buttonPrimary,
-    buttonSecondary = undefined,
-    buttonSecondaryText = buttonSecondary === "cancel" ? "Cancel" : buttonSecondary === "reset" ? "Reset" : "",
-    buttonSecondaryTo,
-    onClickSecondary,
-    iconLeftPrimary,
-    iconRightPrimary,
-    iconLeftSecondary,
-    iconRightSecondary,
-    ...props
-}: Props) => (
+const Form = ({ children, buttonPrimary, buttonSecondary, isLoading, ...props }: Props) => (
     <Container {...props}>
         {children}
 
         {(buttonPrimary || buttonSecondary) && (
             <Flexbox gap="xs" alignItems="center">
                 {buttonPrimary && (
-                    <Button type="submit" iconLeft={iconLeftPrimary} iconRight={iconRightPrimary}>
-                        {buttonPrimary}
+                    <Button
+                        type="submit"
+                        options={{
+                            iconLeft: buttonPrimary.iconLeft,
+                            iconRight: buttonPrimary.iconRight,
+                        }}
+                        isLoading={isLoading}
+                    >
+                        {buttonPrimary.text}
                     </Button>
                 )}
 
                 {buttonSecondary && (
                     <Button
-                        type={buttonSecondary === "reset" ? "reset" : buttonSecondaryTo ? undefined : "button"}
-                        to={buttonSecondaryTo && buttonSecondaryTo}
-                        buttonStyle="text"
-                        color="primary"
-                        onClick={onClickSecondary}
-                        iconLeft={iconLeftSecondary}
-                        iconRight={iconRightSecondary}
+                        onClick={buttonSecondary.onClick}
+                        to={buttonSecondary.to}
+                        options={{
+                            variant: "text",
+                            color: "primary",
+                            iconLeft: buttonSecondary.iconLeft,
+                            iconRight: buttonSecondary.iconRight,
+                        }}
                     >
-                        {buttonSecondaryText}
+                        {!buttonSecondary.text && buttonSecondary.to
+                            ? "Cancel"
+                            : !buttonSecondary.text && buttonSecondary.onClick
+                            ? "Reset"
+                            : buttonSecondary.text || "Cancel"}
                     </Button>
                 )}
             </Flexbox>
@@ -57,17 +57,36 @@ export default Form
 
 /*==================== Types ====================*/
 
-interface Props extends React.HTMLAttributes<HTMLFormElement> {
-    buttonPrimary?: string
-    buttonSecondary?: "cancel" | "reset" | undefined
-    buttonSecondaryText?: string
-    buttonSecondaryTo?: string
-    onClickSecondary?: (e: React.MouseEvent<HTMLButtonElement>) => void
-    iconLeftPrimary?: string
-    iconRightPrimary?: string
-    iconLeftSecondary?: string
-    iconRightSecondary?: string
+interface BaseProps extends React.HTMLAttributes<HTMLFormElement> {
+    buttonPrimary?: {
+        text: string
+        iconLeft?: string
+        iconRight?: string
+    }
+    isLoading?: boolean
 }
+
+interface Possible1 extends BaseProps {
+    buttonSecondary?: {
+        text?: string
+        iconLeft?: string
+        iconRight?: string
+        to: string
+        onClick?: never
+    }
+}
+
+interface Possible2 extends BaseProps {
+    buttonSecondary?: {
+        text?: string
+        iconLeft?: string
+        iconRight?: string
+        to?: never
+        onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+    }
+}
+
+type Props = Possible1 | Possible2
 
 /*==================== Styles ====================*/
 

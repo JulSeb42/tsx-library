@@ -6,7 +6,7 @@ import React, { useState } from "react"
 import styled from "styled-components"
 
 import Variables from "./Variables"
-import { H5, P } from "./Font"
+import Text from "./Text"
 import Mixins from "./Mixins"
 import Icon from "./Icon"
 import CloseIcon from "../icons/CloseIcon"
@@ -15,28 +15,28 @@ import { ColorsShortTypes, LibColorsTypes } from "./common-types"
 
 /*==================== Component ====================*/
 
-const Toast = ({ title, close, children, icon, iconClose, iconColor = "primary", ...props }: Props) => {
+const Toast = ({ title, close, children, icon, ...props }: Props) => {
     const [isClosed, setIsClosed] = useState(false)
 
     return (
         <Container $isClosed={isClosed} {...props}>
-            {icon || close || iconClose ? (
+            {icon || close ? (
                 <TitleContainer>
-                    {icon && <Icon src={icon} size={24} color={iconColor} />}
+                    {icon && <Icon src={icon.name} size={24} color={icon.color || "primary"} />}
 
-                    <H5>{title}</H5>
+                    <Text tag="h5">{title}</Text>
 
-                    {(close || iconClose) && (
+                    {close && (
                         <CloseButton onClick={() => setIsClosed(true)}>
-                            {iconClose ? <Icon src={iconClose} size={24} /> : <CloseIcon size={24} />}
+                            {typeof close === "object" ? <Icon src={close.icon} size={24} /> : <CloseIcon size={24} />}
                         </CloseButton>
                     )}
                 </TitleContainer>
             ) : (
-                <H5>{title}</H5>
+                <Text tag="h5">{title}</Text>
             )}
 
-            {children && <Content as={typeof children === "string" ? P : "div"}>{children}</Content>}
+            {children && <Content as={typeof children === "string" ? Text : "div"}>{children}</Content>}
         </Container>
     )
 }
@@ -51,11 +51,18 @@ interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     title: string
-    iconColor?: LibColorsTypes | ColorsShortTypes | string
-    close?: boolean
     children?: string | React.ReactNode
-    icon?: string
-    iconClose?: string
+
+    icon?: {
+        name: string
+        color?: LibColorsTypes | ColorsShortTypes | string
+    }
+
+    close?:
+        | boolean
+        | {
+              icon: string
+          }
 }
 
 /*==================== Styles ====================*/

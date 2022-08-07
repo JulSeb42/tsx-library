@@ -11,7 +11,6 @@ import Mixins from "./Mixins"
 import Image from "./Image"
 import Burger from "./Burger"
 
-import { RequireAtLeastOne } from "./RequireAtLeastOne"
 import { LibColorsTypes, ColorsShortTypes, ColorsHoverTypes } from "./common-types"
 
 /*==================== Styles ====================*/
@@ -115,12 +114,7 @@ const Nav = styled.nav<NavProps>`
 /*==================== Component ====================*/
 
 const Header = ({
-    logoTo = "/",
-    logoImg,
-    logoWidth = 100,
-    logoHeight = 30,
-    logoAlt = "Logo",
-    logoText,
+    logo,
     position = "relative",
     backgroundColor = "primary",
     linkColor = "white",
@@ -151,11 +145,17 @@ const Header = ({
             ref={ref}
             {...props}
         >
-            <Logo to={logoTo}>
-                {logoImg ? (
-                    <LogoImg src={logoImg} alt={logoAlt} fit="contain" width={logoWidth} height={logoHeight} />
+            <Logo to={logo.to || "/"}>
+                {logo.img ? (
+                    <LogoImg
+                        src={logo.img}
+                        alt={logo.alt || "Logo"}
+                        width={logo.width || 100}
+                        height={logo.height || 30}
+                        options={{ fit: "contain" }}
+                    />
                 ) : (
-                    logoText
+                    logo.text
                 )}
             </Logo>
 
@@ -195,24 +195,41 @@ interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 interface BaseProps extends React.HTMLAttributes<HTMLDivElement> {
-    logoText?: string
-    logoImg?: string
-    logoWidth?: number
-    logoHeight?: number
-    logoTo?: string
-    logoAlt?: string
     position?: PositionsTypes
     children: React.ReactNode | React.ReactNode[]
     backgroundColor?: LibColorsTypes | ColorsShortTypes | string
     linkColor?: ColorsHoverTypes
     burgerColor?: ColorsHoverTypes
-    burgerBorderColor?: LibColorsTypes | ColorsShortTypes | string
-    burgerBorderColorHover?: LibColorsTypes | ColorsShortTypes | string
-    burgerBorderColorActive?: LibColorsTypes | ColorsShortTypes | string
     navColor?: LibColorsTypes | ColorsShortTypes | string
 }
 
-type Props = RequireAtLeastOne<BaseProps, "logoText" | "logoImg">
+interface Possible1 extends BaseProps {
+    logo: {
+        text: string
+
+        img?: never
+        alt?: never
+        width?: never
+        height?: never
+
+        to?: string
+    }
+}
+
+interface Possible2 extends BaseProps {
+    logo: {
+        text?: never
+
+        img: string
+        alt?: string
+        width?: number
+        height?: number
+
+        to?: string
+    }
+}
+
+type Props = Possible1 | Possible2
 
 interface NavProps extends React.HTMLAttributes<HTMLDivElement> {
     $isOpen: boolean

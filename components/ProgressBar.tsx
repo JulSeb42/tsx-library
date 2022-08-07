@@ -12,8 +12,18 @@ import { ColorsShortTypes, LibColorsTypes } from "./common-types"
 
 /*==================== Component ====================*/
 
-const ProgressBar = ({ value, color = "primary", backgroundColor, animated = true, ...props }: Props) => (
-    <Container $value={value} $animated={animated} $color={color} $backgroundColor={backgroundColor} {...props} />
+const ProgressBar = ({
+    value,
+    options = { animated: true },
+    ...props
+}: Props) => (
+    <Container
+        $value={value}
+        $animated={options.animated}
+        $color={options.color || "primary"}
+        $backgroundColor={options.backgroundColor || "gray-100"}
+        {...props}
+    />
 )
 
 export default ProgressBar
@@ -29,9 +39,12 @@ interface StyleProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 interface Props extends React.HTMLAttributes<HTMLSpanElement> {
     value: number
-    color?: ColorsShortTypes | LibColorsTypes | string
-    backgroundColor?: ColorsShortTypes | LibColorsTypes | string
-    animated?: boolean
+
+    options?: {
+        color?: ColorsShortTypes | LibColorsTypes | string
+        backgroundColor?: ColorsShortTypes | LibColorsTypes | string
+        animated?: boolean
+    }
 }
 
 /*==================== Styles ====================*/
@@ -50,11 +63,7 @@ const Container = styled.span<StyleProps>`
     width: 100%;
     height: 16px;
     background-color: ${({ $color, $backgroundColor }) =>
-        $color === "white"
-            ? Variables.Colors.Gray900
-            : $backgroundColor
-            ? Mixins.AllColors({ $color: $backgroundColor })
-            : Variables.Colors.Gray100};
+        $color === "white" ? Variables.Colors.Gray900 : Mixins.AllColors({ $color: $backgroundColor })};
     border-radius: ${Variables.Radiuses.Round};
     position: relative;
     display: block;
@@ -70,9 +79,10 @@ const Container = styled.span<StyleProps>`
         background-color: ${Mixins.AllColors};
 
         ${({ $animated, $value }) =>
-            $animated &&
-            css`
-                animation: ${Progress({ $value: $value })} calc(${$value} * 50ms) 1;
-            `}
+            $animated === false
+                ? css``
+                : css`
+                      animation: ${Progress({ $value: $value })} calc(${$value} * 50ms) 1;
+                  `}
     }
 `

@@ -12,15 +12,22 @@ import { LibColorsTypes, ColorsShortTypes } from "./common-types"
 
 /*==================== Component ====================*/
 
-const PageLoading = ({ backgroundColor = "primary", loaderColor, ...props }: Props) => {
+const PageLoading = ({ options, ...props }: Props) => {
     useEffect(() => document.body.classList.add("stop-scrolling"))
 
     return (
-        <Container $backgroundColor={backgroundColor} {...props}>
+        <Container $backgroundColor={options?.backgroundColor || "primary"} {...props}>
             <Loader
-                size={64}
-                borderSize={8}
-                color={(backgroundColor === "white" && !loaderColor) ? "primary" : loaderColor ? loaderColor : "white"}
+                options={{
+                    size: 64,
+                    borderSize: 12,
+                    color:
+                        options?.backgroundColor === "white" && !options?.loaderColor
+                            ? "primary"
+                            : options?.loaderColor
+                            ? options?.loaderColor
+                            : "white",
+                }}
             />
         </Container>
     )
@@ -35,8 +42,10 @@ interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
-    backgroundColor?: LibColorsTypes | ColorsShortTypes | string
-    loaderColor?: LibColorsTypes | ColorsShortTypes | string
+    options?: {
+        backgroundColor?: LibColorsTypes | ColorsShortTypes | string
+        loaderColor?: LibColorsTypes | ColorsShortTypes | string
+    }
 }
 
 /*==================== Styles ====================*/

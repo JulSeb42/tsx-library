@@ -18,10 +18,9 @@ import CheckIcon from "../icons/CheckIcon"
 const CodeContainer = ({
     children,
     language = "javascript",
-    style = atomOneDark,
-    copyButton = true,
-    iconCopy,
-    iconCopied,
+    options = {
+        copyButton: true,
+    },
     ...props
 }: Props) => {
     const [hasCopied, setHasCopied] = useState(false)
@@ -36,20 +35,20 @@ const CodeContainer = ({
 
     return (
         <Container>
-            <Code language={language} style={style} {...props}>
+            <Code language={language} style={options?.style || atomOneDark} {...props}>
                 {children}
             </Code>
 
-            {(copyButton || iconCopy || iconCopied) && (
+            {(options?.copyButton || options?.iconCopy || options?.iconCopied) && (
                 <Button $hasCopied={hasCopied} onClick={copyToClipboard}>
                     {hasCopied ? (
-                        iconCopied ? (
-                            <Icon src={iconCopied} size={24} />
+                        options?.iconCopied ? (
+                            <Icon src={options.iconCopied} size={24} />
                         ) : (
                             <CheckIcon size={24} />
                         )
-                    ) : iconCopy ? (
-                        <Icon src={iconCopy} size={24} />
+                    ) : options?.iconCopy ? (
+                        <Icon src={options.iconCopy} size={24} />
                     ) : (
                         <ClipboardIcon size={24} />
                     )}
@@ -257,10 +256,12 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
         | "yaml"
         | "zephir"
     children: string
-    style?: any
-    copyButton?: boolean
-    iconCopy?: string
-    iconCopied?: string
+    options?: {
+        style?: any
+        copyButton?: boolean
+        iconCopy?: string
+        iconCopied?: string
+    }
 }
 
 interface StyleButton extends React.HTMLAttributes<HTMLButtonElement> {
@@ -274,6 +275,12 @@ const Container = styled.div`
     position: relative;
     overflow-x: scroll;
     padding: ${Variables.Spacers.M};
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `
 
 const Code = styled(SyntaxHighlighter)`
@@ -282,6 +289,12 @@ const Code = styled(SyntaxHighlighter)`
     line-height: ${Variables.LineHeights.Code};
     font-size: ${Variables.FontSizes.Small};
     padding: 0 !important;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 
     & > code {
         background-color: transparent !important;

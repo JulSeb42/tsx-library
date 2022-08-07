@@ -12,13 +12,13 @@ import { LibColorsTypes, ColorsShortTypes } from "./common-types"
 
 /*==================== Component ====================*/
 
-const Tooltip = ({ tooltip, children, textStyle = "dotted", color, ...props }: Props) => {
+const Tooltip = ({ tooltip, children, options, ...props }: Props) => {
     const [isVisible, setIsVisible] = useState(false)
 
     return (
         <Container
-            $textStyle={textStyle}
-            $color={color}
+            $textStyle={options?.textStyle || "dotted"}
+            $color={options?.color || "primary"}
             onMouseEnter={() => setIsVisible(true)}
             onMouseLeave={() => setIsVisible(false)}
             {...props}
@@ -54,8 +54,10 @@ interface StyleTipProps extends React.HTMLAttributes<HTMLSpanElement> {
 interface Props extends React.HTMLAttributes<HTMLSpanElement> {
     tooltip: string
     children: string
-    textStyle?: TextStylesTypes
-    color?: ColorsShortTypes | LibColorsTypes | string
+    options?: {
+        textStyle?: TextStylesTypes
+        color?: ColorsShortTypes | LibColorsTypes | string
+    }
 }
 
 /*==================== Styles ====================*/

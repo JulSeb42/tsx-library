@@ -15,33 +15,45 @@ import { ValidationTypes } from "./common-types"
 const InputCheck = ({
     type = "radio",
     id,
-    tile,
-    toggle,
-    selector,
     label,
     disabled,
     name,
     validation,
     iconCheck,
+    checkStyle,
     ...props
 }: Props) => (
     <Container>
-        <Input id={id} name={name} type={type} disabled={disabled} $validation={validation} $tile={tile} {...props} />
+        <Input
+            id={id}
+            name={name}
+            type={type}
+            disabled={disabled}
+            $validation={validation}
+            $tile={checkStyle === "tile"}
+            {...props}
+        />
 
-        {toggle ? (
+        {checkStyle === "toggle" ? (
             <Toggle htmlFor={id} $disabled={disabled} $validation={validation}>
                 {label}
             </Toggle>
-        ) : selector ? (
+        ) : checkStyle === "selector" ? (
             <Selector htmlFor={id} $disabled={disabled} $validation={validation}>
                 {label}
             </Selector>
         ) : type === "checkbox" ? (
-            <Checkbox htmlFor={id} $tile={tile} $disabled={disabled} $validation={validation} $iconCheck={iconCheck}>
+            <Checkbox
+                htmlFor={id}
+                $tile={checkStyle === "tile"}
+                $disabled={disabled}
+                $validation={validation}
+                $iconCheck={iconCheck}
+            >
                 {label}
             </Checkbox>
         ) : (
-            <Radio htmlFor={id} $tile={tile} $disabled={disabled} $validation={validation}>
+            <Radio htmlFor={id} $tile={checkStyle === "tile"} $disabled={disabled} $validation={validation}>
                 {label}
             </Radio>
         )}
@@ -59,18 +71,26 @@ interface StyleProps extends React.HTMLAttributes<HTMLInputElement> {
     $iconCheck?: string
 }
 
-interface Props extends React.HTMLAttributes<HTMLInputElement> {
-    type?: "checkbox" | "radio"
+interface BaseProps extends React.HTMLAttributes<HTMLInputElement> {
     id: string
-    tile?: boolean
-    toggle?: boolean
-    selector?: boolean
     label: string
     disabled?: boolean
     name?: string
     validation?: ValidationTypes
+    checkStyle?: "tile" | "toggle" | "selector" | undefined
+}
+
+interface Possible1 extends BaseProps {
+    type?: "checkbox"
     iconCheck?: string
 }
+
+interface Possible2 extends BaseProps {
+    type?: "radio"
+    iconCheck?: never
+}
+
+type Props = Possible1 | Possible2
 
 /*==================== Styles ====================*/
 

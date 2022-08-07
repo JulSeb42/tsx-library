@@ -4,21 +4,25 @@
 
 import React from "react"
 import { Link } from "react-router-dom"
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 import { v4 as uuid } from "uuid"
 
-import Variables from "./Variables"
 import Mixins from "./Mixins"
-import { P } from "./Font"
+import Text from "./Text"
 import ChevronRightIcon from "../icons/ChevronRightIcon"
 
-import { ColorsHoverTypes } from "./common-types"
+import { ColorsHoverTypes, LibColorsTypes, ColorsShortTypes } from "./common-types"
 import { BreadcrumbsItemProps } from "./component-props"
 
 /*==================== Component ====================*/
 
-const Breadcrumbs = ({ items, separator = "slash", color = "primary", ...props }: Props) => (
-    <Container $color={color} $separator={separator} {...props}>
+const Breadcrumbs = ({ items, options, ...props }: Props) => (
+    <Container
+        color={options?.color}
+        linkColor={options?.linkColor || "primary"}
+        $separator={options?.separator || "slash"}
+        {...props}
+    >
         {items.map(({ text, to }) => (
             <React.Fragment key={uuid()}>
                 <Item as={to ? Link : "span"} to={to ? to : undefined}>
@@ -26,8 +30,8 @@ const Breadcrumbs = ({ items, separator = "slash", color = "primary", ...props }
                 </Item>
 
                 {to && (
-                    <Separator $color={color} $separator={separator}>
-                        {separator === "icon" ? <ChevronRightIcon size={20} /> : "/"}
+                    <Separator $separator={options?.separator || "slash"}>
+                        {options?.separator === "icon" ? <ChevronRightIcon size={20} /> : "/"}
                     </Separator>
                 )}
             </React.Fragment>
@@ -47,19 +51,35 @@ const separators = {
 type SeparatorTypes = keyof typeof separators
 
 interface StyleProps {
-    $color?: ColorsHoverTypes
     $separator?: SeparatorTypes
+    $linkColor?:
+        | ColorsHoverTypes
+        | {
+              default?: LibColorsTypes | ColorsShortTypes | string
+              hover?: LibColorsTypes | ColorsShortTypes | string
+              active?: LibColorsTypes | ColorsShortTypes | string
+          }
 }
 
 interface Props extends React.HTMLAttributes<HTMLParagraphElement> {
-    separator?: SeparatorTypes
     items: BreadcrumbsItemProps[]
-    color?: ColorsHoverTypes
+
+    options?: {
+        separator?: SeparatorTypes
+        color?: LibColorsTypes | ColorsShortTypes | string
+        linkColor?:
+            | ColorsHoverTypes
+            | {
+                  default: string
+                  hover: string
+                  active: string
+              }
+    }
 }
 
 /*==================== Styles ====================*/
 
-const Container = styled(P)<StyleProps>`
+const Container = styled(Text)<StyleProps>`
     ${({ $separator }) =>
         Mixins.Flexbox({
             $alignItems: "center",
@@ -67,38 +87,12 @@ const Container = styled(P)<StyleProps>`
             $flexWrap: "wrap",
             $gap: $separator === "slash" ? "xs" : "xxs",
         })};
-
-    ${({ $color }) =>
-        $color &&
-        css`
-            color: ${$color === "white" ? Variables.Colors.White : Variables.Colors.Black};
-
-            a {
-                color: ${Mixins.ColorsHoverDefault};
-
-                @media ${Variables.Breakpoints.Hover} {
-                    &:hover {
-                        color: ${Mixins.ColorsHoverHover};
-                    }
-
-                    &:active {
-                        color: ${Mixins.ColorsHoverActive};
-                    }
-                }
-            }
-        `}
 `
 
 const Separator = styled.span<StyleProps>`
-    color: ${({ $color }) => ($color === "white" ? Variables.Colors.White : Variables.Colors.Black)};
+    color: currentColor;
     position: relative;
     top: ${({ $separator }) => $separator === "icon" && "4px"};
 `
 
-const Item = styled.span`
-    @media ${Variables.Breakpoints.Hover} {
-        &:hover ${Separator}, &:active ${Separator} {
-            color: ${Variables.Colors.Black};
-        }
-    }
-`
+const Item = styled.span``

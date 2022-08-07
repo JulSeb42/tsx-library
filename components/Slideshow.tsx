@@ -25,14 +25,9 @@ const SlideshowButton = ({ onClick, iconPrev, iconNext, prev, next, position }: 
 
 const Slideshow = ({
     children,
-    controls,
-    pagination,
-    iconPrev,
-    iconNext,
-    autoplay,
-    height = "60vh",
-    show,
-    speed = 1000,
+    options,
+    icons,
+    height = "30vw",
     ...props
 }: Props) => {
     const [active, setActive] = useState(0)
@@ -46,26 +41,26 @@ const Slideshow = ({
     }, [active, length])
 
     useEffect(() => {
-        if (!controls && !pagination && !autoplay) {
+        if (!options?.controls && !options?.pagination && !options?.autoplay) {
             setInterval(() => autoSlideshow(), 1000)
-        } else if (autoplay) {
-            setInterval(() => autoSlideshow(), autoplay)
+        } else if (options?.autoplay) {
+            setInterval(() => autoSlideshow(), options.autoplay)
         }
-    }, [autoplay, autoSlideshow, controls, pagination])
+    }, [options?.autoplay, autoSlideshow, options?.controls, options?.pagination])
 
     return (
         <Container {...props}>
-            {controls && <SlideshowButton onClick={handlePrev} prev iconPrev={iconPrev} position="left" />}
+            {options?.controls && <SlideshowButton onClick={handlePrev} prev iconPrev={icons?.prev} position="left" />}
 
             <Slides $height={height}>
-                <Slide $active={active} $show={show} $speed={speed}>
+                <Slide $active={active} $show={options?.show} $speed={options?.speed || 1000}>
                     {children}
                 </Slide>
             </Slides>
 
-            {controls && <SlideshowButton onClick={handleNext} next iconNext={iconNext} position="right" />}
+            {options?.controls && <SlideshowButton onClick={handleNext} next iconNext={icons?.next} position="right" />}
 
-            {pagination && (
+            {options?.pagination && (
                 <Pagination>
                     {children.map((_, i) => (
                         <PaginationItem
@@ -119,14 +114,20 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactNode[]
-    controls?: boolean
-    pagination?: boolean
-    autoplay?: number
-    iconPrev?: string
-    iconNext?: string
     height?: number | string
-    show?: number
-    speed?: number
+
+    options?: {
+        controls?: boolean
+        pagination?: boolean
+        autoplay?: number
+        show?: number
+        speed?: number
+    }
+
+    icons?: {
+        prev?: string
+        next?: string
+    }
 }
 
 /*==================== Styles ====================*/

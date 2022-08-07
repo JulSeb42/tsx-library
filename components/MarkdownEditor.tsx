@@ -10,26 +10,24 @@ import InputContainer from "./InputContainer"
 
 /*==================== Component ====================*/
 
-const MarkdownEditor = ({
-    colorMode = "light",
-    onChange,
-    value,
-    label,
-    helper,
-    helperBottom,
-    preview = "edit",
-    id,
-    ...props
-}: Props) => {
-    return label || helper || helperBottom ? (
-        <InputContainer id={id} label={label} helper={helper} helperBottom={helperBottom}>
-            <Container data-color-mode={colorMode}>
-                <MDEditor id={id} onChange={onChange} value={value} preview={preview} {...props} />
+const MarkdownEditor = ({ id, onChange, value, options, commands, extraCommands, ...props }: Props) => {
+    return options?.label || options?.helper || options?.helperBottom ? (
+        <InputContainer id={id} label={options.label} helper={options.helper} helperBottom={options.helperBottom}>
+            <Container data-color-mode={options?.colorMode || "light"}>
+                <MDEditor
+                    id={id}
+                    onChange={onChange}
+                    value={value}
+                    preview={options?.preview || "edit"}
+                    commands={commands}
+                    extraCommands={extraCommands}
+                    {...props}
+                />
             </Container>
         </InputContainer>
     ) : (
-        <Container data-color-mode={colorMode}>
-            <MDEditor id={id} onChange={onChange} value={value} preview={preview} {...props} />
+        <Container data-color-mode={options?.colorMode || "light"}>
+            <MDEditor id={id} onChange={onChange} value={value} preview={options?.preview || "edit"} {...props} />
         </Container>
     )
 }
@@ -39,14 +37,19 @@ export default MarkdownEditor
 /*==================== Types ====================*/
 
 interface Props extends React.HTMLAttributes<HTMLInputElement> {
-    colorMode?: "light" | "dark"
+    id: string
     value: any
     onChange: any
-    label?: string
-    helper?: string
-    helperBottom?: string
-    id: string
-    preview?: "live" | "edit" | "preview"
+    commands?: any
+    extraCommands?: any
+
+    options?: {
+        colorMode?: "light" | "dark"
+        label?: string
+        helper?: string
+        helperBottom?: string
+        preview?: "live" | "edit" | "preview"
+    }
 }
 
 /*==================== Styles ====================*/

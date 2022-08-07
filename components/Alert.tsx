@@ -6,7 +6,7 @@ import React from "react"
 import styled from "styled-components"
 
 import Variables from "./Variables"
-import { P } from "./Font"
+import Text from "./Text"
 import Mixins from "./Mixins"
 
 import { ColorsShortTypes } from "./common-types"
@@ -14,7 +14,7 @@ import { ColorsShortTypes } from "./common-types"
 /*==================== Component ====================*/
 
 const Alert = ({ color = "primary", children, modal, ...props }: Props) => (
-    <Container $color={color} as={typeof children === "string" ? P : "div"} $modal={modal} {...props}>
+    <Container $color={color} as={typeof children === "string" ? Text : "div"} $modal={modal} {...props}>
         {children}
     </Container>
 )

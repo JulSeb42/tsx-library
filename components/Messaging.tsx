@@ -8,7 +8,7 @@ import ReactLinkify from "react-linkify"
 import ScrollToBottom from "react-scroll-to-bottom"
 
 import Variables from "./Variables"
-import { P, Small } from "./Font"
+import Text from "./Text"
 import Mixins from "./Mixins"
 import Flexbox from "./Flexbox"
 import Icon from "./Icon"
@@ -22,27 +22,24 @@ import { MessageProps } from "./component-props"
 const Messaging = ({
     children,
     emptyMessage = "No message yet.",
-    iconSend,
-    textButton,
-    onChangeInput,
-    valueInput,
+    button,
+    input,
     onSubmit,
-    placeholderInput = "Type your message",
     ...props
 }: Props) => (
     <Container>
-        <MessagesContainer $isEmpty={!children}>{children ? children : <P>{emptyMessage}</P>}</MessagesContainer>
+        <MessagesContainer $isEmpty={!children}>{children ? children : <Text>{emptyMessage}</Text>}</MessagesContainer>
 
         <Hr />
 
         <InputContainer onSubmit={onSubmit} {...props}>
-            <Input onChange={onChangeInput} value={valueInput} placeholder={placeholderInput} />
+            <Input onChange={input.onChange} value={input.value} placeholder={input.placeholder} />
 
-            <SendButton $hasText={!!textButton} type="submit">
-                {textButton ? (
-                    textButton
-                ) : iconSend ? (
-                    <Icon src={iconSend} size={24} />
+            <SendButton $hasText={!!button?.text} type="submit">
+                {button?.text ? (
+                    button.text
+                ) : button?.icon ? (
+                    <Icon src={button.icon} size={24} />
                 ) : (
                     <SendIcon size={24} />
                 )}
@@ -61,11 +58,11 @@ const Message = ({ message }: MessageItemProps) => {
             </StyledMessage>
 
             {(date || time) && (
-                <Small color="gray">
+                <Text tag="small" color="gray">
                     {date && date}
                     {date && time && " at "}
                     {time && time}
-                </Small>
+                </Text>
             )}
         </Flexbox>
     )
@@ -86,16 +83,33 @@ interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
     $isEmpty?: boolean
 }
 
-interface Props extends React.HTMLAttributes<HTMLFormElement> {
+interface BaseProps extends React.HTMLAttributes<HTMLFormElement> {
     children?: React.ReactNode[] | React.ReactNode
     emptyMessage?: string
-    iconSend?: string
-    textButton?: string
-    onChangeInput: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
-    valueInput: string
     onSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void
-    placeholderInput?: string
+
+    input: {
+        onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+        value: string
+        placeholder?: string
+    }
 }
+
+interface Possible1 extends BaseProps {
+    button?: {
+        icon: string
+        text?: never
+    }
+}
+
+interface Possible2 extends BaseProps {
+    button?: {
+        icon?: never
+        text?: string
+    }
+}
+
+type Props = Possible1 | Possible2
 
 interface StyleButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     $hasText?: boolean
@@ -206,7 +220,7 @@ const SendButton = styled.button<StyleButtonProps>`
     }
 `
 
-const StyledMessage = styled(P)<StyleMessageProps>`
+const StyledMessage = styled(Text)<StyleMessageProps>`
     padding: ${Variables.Spacers.XS};
     border-radius: ${Variables.Radiuses.S};
     background-color: ${({ $type }) => ($type === "received" ? Variables.Colors.Gray100 : Variables.Colors.Primary500)};

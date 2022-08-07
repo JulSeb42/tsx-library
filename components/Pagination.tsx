@@ -4,14 +4,13 @@
 
 import React from "react"
 import styled, { css } from "styled-components"
+import { Link } from "react-router-dom"
 
 import Variables from "./Variables"
 import Mixins from "./Mixins"
 import Icon from "./Icon"
 import ChevronLeftIcon from "../icons/ChevronLeftIcon"
 import ChevronRightIcon from "../icons/ChevronRightIcon"
-
-import { RequireAtLeastOne } from "./RequireAtLeastOne"
 
 /*==================== Component ====================*/
 
@@ -21,28 +20,25 @@ const Pagination = ({ justify = "left", children, ...props }: Props) => (
     </Container>
 )
 
-const PaginationButton = ({
-    number,
-    more,
-    prev,
-    next,
-    iconPrev,
-    iconNext,
-    active,
-    disabled,
-    ...props
-}: ButtonProps) => (
-    <Button as={more ? "span" : "button"} $active={active} $more={more} disabled={disabled} {...props}>
-        {more ? (
+const PaginationButton = ({ isActive, to, content, icon, disabled, ...props }: ButtonProps) => (
+    <Button
+        as={content === "more" ? "span" : to ? Link : "button"}
+        $isActive={isActive}
+        $more={content === "more"}
+        to={to}
+        disabled={disabled}
+        {...props}
+    >
+        {content === "more" ? (
             "..."
-        ) : (prev && iconPrev) || (next && iconNext) ? (
-            <Icon src={iconPrev ? iconPrev : iconNext ? iconNext : ""} size={16} />
-        ) : prev ? (
+        ) : (content === "prev" && icon) || (content === "next" && icon) ? (
+            <Icon src={icon} size={16} />
+        ) : content === "prev" ? (
             <ChevronLeftIcon size={20} />
-        ) : next ? (
+        ) : content === "next" ? (
             <ChevronRightIcon size={20} />
         ) : (
-            number
+            content
         )}
     </Button>
 )
@@ -68,22 +64,43 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 interface buttonStyleProps extends React.HTMLAttributes<HTMLButtonElement> {
-    $active?: boolean
+    $isActive?: boolean
     $more?: boolean
 }
 
 interface BaseButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-    number?: number
-    more?: boolean
-    active?: boolean
-    prev?: boolean
-    next?: boolean
     disabled?: boolean
-    iconPrev?: string
-    iconNext?: string
 }
 
-type ButtonProps = RequireAtLeastOne<BaseButtonProps, "number" | "more" | "prev" | "next">
+interface Possible1 extends BaseButtonProps {
+    isActive?: boolean
+    to?: string
+    content: number
+    icon?: never
+}
+
+interface Possible2 extends BaseButtonProps {
+    isActive?: never
+    to?: never
+    content: "more"
+    icon?: never
+}
+
+interface Possible3 extends BaseButtonProps {
+    isActive?: never
+    to?: never
+    content: "prev"
+    icon?: string
+}
+
+interface Possible4 extends BaseButtonProps {
+    isActive?: never
+    to?: never
+    content: "next"
+    icon?: string
+}
+
+type ButtonProps = Possible1 | Possible2 | Possible3 | Possible4
 
 /*==================== Styles ====================*/
 
@@ -107,8 +124,9 @@ const Button = styled.button<buttonStyleProps>`
         $justifyContent: "center",
         $inline: true,
     })};
-    color: ${({ $active }) => ($active ? Variables.Colors.White : Variables.Colors.Primary500)};
-    background-color: ${({ $active }) => ($active ? Variables.Colors.Primary500 : "transparent")};
+    color: ${({ $isActive }) => ($isActive ? Variables.Colors.White : Variables.Colors.Primary500)};
+    background-color: ${({ $isActive }) => ($isActive ? Variables.Colors.Primary500 : "transparent")};
+    text-decoration: none;
 
     ${({ $more, disabled }) =>
         !$more &&

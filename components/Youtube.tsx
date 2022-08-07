@@ -8,15 +8,15 @@ import { convertYoutube, stringifyPx } from "js-utils-julseb"
 
 /*==================== Component ====================*/
 
-const Youtube = ({ src, width, height, aspectRatio, ...props }: Props) => (
+const Youtube = ({ src, options, ...props }: Props) => (
     <Container
         src={convertYoutube(src)}
         frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
-        $width={width}
-        $height={height}
-        $aspectRatio={aspectRatio}
+        $width={options?.width}
+        $height={options?.height}
+        $aspectRatio={options?.aspectRatio}
         {...props}
     />
 )
@@ -35,9 +35,12 @@ interface StyleProps extends React.HTMLAttributes<HTMLIFrameElement> {
 
 interface Props extends React.HTMLAttributes<HTMLIFrameElement> {
     src: string
-    width?: string | number
-    height?: string | number
-    aspectRatio?: string
+
+    options?: {
+        width?: string | number
+        height?: string | number
+        aspectRatio?: string
+    }
 }
 
 /*==================== Styles ====================*/

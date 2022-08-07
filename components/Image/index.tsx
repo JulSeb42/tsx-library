@@ -6,7 +6,7 @@ import React, { Suspense } from "react"
 import styled from "styled-components"
 
 import Variables from "../Variables"
-import { P } from "../Font"
+import Text from "../Text"
 import Fallback from "../Fallback"
 
 import { ObjectFitTypes } from "../common-types"
@@ -15,16 +15,16 @@ const Img = React.lazy(() => import("./Img"))
 
 /*==================== Component ====================*/
 
-const Image = ({ src, alt, width, height, fit, caption, ...props }: Props) => (
+const Image = ({ src, alt, options, width = "100%", height = "auto", ...props }: Props) => (
     <Suspense fallback={<Fallback $width={width} $height={height} />}>
-        {caption ? (
+        {options?.caption ? (
             <Container $width={width} $height={height} {...props}>
-                <Img src={src} alt={alt} $width={width} $height={height} $fit={fit} />
+                <Img src={src} alt={alt} $width={width} $height={height} $fit={options?.fit} />
 
-                <Caption>{caption}</Caption>
+                <Caption>{options.caption}</Caption>
             </Container>
         ) : (
-            <Img src={src} alt={alt} $width={width} $height={height} $fit={fit} {...props} />
+            <Img src={src} alt={alt} $width={width} $height={height} $fit={options?.fit} {...props} />
         )}
     </Suspense>
 )
@@ -39,12 +39,15 @@ interface StyleProps extends React.HTMLAttributes<HTMLImageElement> {
 }
 
 interface Props extends React.HTMLAttributes<HTMLImageElement> {
-    width?: number | string
-    height?: number | string
-    fit?: ObjectFitTypes
-    caption?: string
     src: string
     alt: string
+    width?: number | string
+    height?: number | string
+
+    options?: {
+        fit?: ObjectFitTypes
+        caption?: string
+    }
 }
 
 /*==================== Styles ====================*/
@@ -53,7 +56,7 @@ const Container = styled.div<StyleProps>`
     position: relative;
 `
 
-const Caption = styled(P)`
+const Caption = styled(Text)`
     position: absolute;
     z-index: 1;
     bottom: 0;

@@ -18,26 +18,12 @@ import { ValidationTypes } from "./common-types"
 
 /*==================== Component ====================*/
 
-const InputImage = ({
-    id,
-    src,
-    alt = "Image",
-    label,
-    helper,
-    helperBottom,
-    iconEmpty,
-    iconHover,
-    validation,
-    disabled,
-    width = 64,
-    height = 64,
-    ...props
-}: Props) => {
+const InputImage = ({ id, disabled, validation, width = 64, height = 64, img, options, icons, ...props }: Props) => {
     const EmptyContainer: React.FC = () => (
         <StyledEmptyContainer $validation={validation}>
-            {iconEmpty ? (
+            {icons?.empty ? (
                 <Icon
-                    src={iconEmpty}
+                    src={icons.empty}
                     color={validation === "not-passed" ? "danger" : disabled ? "gray" : "primary"}
                     size={48}
                 />
@@ -58,8 +44,8 @@ const InputImage = ({
 
     const HoverContainer: React.FC = () => (
         <StyledHoverContainer>
-            {iconHover ? (
-                <Icon src={iconHover} size={32} color={validation === "not-passed" ? "danger" : "primary"} />
+            {icons?.hover ? (
+                <Icon src={icons.hover} size={32} color={validation === "not-passed" ? "danger" : "primary"} />
             ) : (
                 <EditIcon
                     size={32}
@@ -69,14 +55,20 @@ const InputImage = ({
         </StyledHoverContainer>
     )
 
-    return label || helper || helperBottom ? (
-        <InputContainer id={id} label={label} helper={helper} helperBottom={helper}>
+    return options ? (
+        <InputContainer id={id} label={options.label} helper={options.helper} helperBottom={options.helperBottom}>
             <Container>
                 <Label htmlFor={id} $disabled={disabled} $width={width} $height={height}>
-                    {src === "" ? (
+                    {img.src === "" ? (
                         <EmptyContainer />
                     ) : (
-                        <Img src={src} alt={alt} width="100%" height="100%" fit="cover" />
+                        <Img
+                            src={img.src}
+                            alt={img.alt || "Image"}
+                            width="100%"
+                            height="100%"
+                            options={{ fit: "cover" }}
+                        />
                     )}
 
                     <HoverContainer />
@@ -88,7 +80,11 @@ const InputImage = ({
     ) : (
         <Container>
             <Label htmlFor={id} $disabled={disabled} $width={width} $height={height}>
-                {src === "" ? <EmptyContainer /> : <Img src={src} alt={alt} width="100%" height="100%" fit="cover" />}
+                {img.src === "" ? (
+                    <EmptyContainer />
+                ) : (
+                    <Img src={img.src} alt={img.alt || "Image"} width="100%" height="100%" options={{ fit: "cover" }} />
+                )}
 
                 <HoverContainer />
             </Label>
@@ -111,19 +107,26 @@ interface StyleProps extends React.HTMLAttributes<HTMLInputElement> {
 
 interface Props extends React.HTMLAttributes<HTMLInputElement> {
     id: string
-    src: string
-    alt?: string
-    validation?: ValidationTypes
     disabled?: boolean
+    validation?: ValidationTypes
     width?: number | string
     height?: number | string
 
-    label?: string
-    helper?: string
-    helperBottom?: string
+    img: {
+        src: string
+        alt?: string
+    }
 
-    iconEmpty?: string
-    iconHover?: string
+    options?: {
+        label?: string
+        helper?: string
+        helperBottom?: string
+    }
+
+    icons?: {
+        empty?: string
+        hover?: string
+    }
 }
 
 /*==================== Styles ====================*/

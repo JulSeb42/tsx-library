@@ -10,20 +10,40 @@ import Mixins from "./Mixins"
 import Icon from "./Icon"
 import Image from "./Image"
 
-import { RequireAtLeastOne } from "./RequireAtLeastOne"
 import { ColorsShortTypes, LibColorsTypes } from "./common-types"
 
 /*==================== Component ====================*/
 
-const Avatar = ({ color = "primary", textColor, size = 48, src, alt = "Avatar", children, icon, ...props }: Props) => (
-    <Container $color={color} $size={size} $textColor={textColor} {...props}>
-        {src && <Image src={src} alt={alt} width="100%" height="100%" fit="cover" />}
+const Avatar = ({
+    options,
+    content,
+    ...props
+}: Props) => {
+    const defaultSize = 48
 
-        {icon && <Icon src={icon} size={size * 0.6} />}
-
-        {children && children}
-    </Container>
-)
+    return (
+        <Container
+            $color={options?.color || "primary"}
+            $size={options?.size || defaultSize}
+            $contentColor={options?.contentColor || "white"}
+            {...props}
+        >
+            {content.img ? (
+                <Image
+                    src={content.img.src}
+                    alt={content.img.alt || "Avatar"}
+                    width="100%"
+                    height="100%"
+                    options={{ fit: "cover" }}
+                />
+            ) : content.icon && options?.size ? (
+                <Icon src={content.icon} size={options?.size ? options?.size * 0.6 : defaultSize * 0.6} />
+            ) : (
+                content.letter
+            )}
+        </Container>
+    )
+}
 
 export default Avatar
 
@@ -31,21 +51,48 @@ export default Avatar
 
 interface StyleProps extends React.HTMLAttributes<HTMLSpanElement> {
     $color?: LibColorsTypes | ColorsShortTypes | string
-    $textColor?: LibColorsTypes | ColorsShortTypes | string
+    $contentColor?: LibColorsTypes | ColorsShortTypes | string
     $size?: number
 }
 
-interface BaseProps extends React.HTMLAttributes<HTMLSpanElement> {
-    color?: LibColorsTypes | ColorsShortTypes | string
-    size?: number
-    src?: string
+type AvatarImg = {
+    src: string
     alt?: string
-    children?: string
-    icon?: string
-    textColor?: LibColorsTypes | ColorsShortTypes | string
 }
 
-type Props = RequireAtLeastOne<BaseProps, "src" | "icon" | "children">
+interface BaseProps extends React.HTMLAttributes<HTMLSpanElement> {
+    options?: {
+        size?: number
+        color?: LibColorsTypes | ColorsShortTypes | string
+        contentColor?: LibColorsTypes | ColorsShortTypes | string
+    }
+}
+
+interface Possible1 extends BaseProps {
+    content: {
+        img: AvatarImg
+        letter?: never
+        icon?: never
+    }
+}
+
+interface Possible2 extends BaseProps {
+    content: {
+        img?: never
+        letter: string
+        icon?: never
+    }
+}
+
+interface Possible3 extends BaseProps {
+    content: {
+        img?: never
+        letter?: never
+        icon: string
+    }
+}
+
+type Props = Possible1 | Possible2 | Possible3
 
 /*==================== Styles ====================*/
 
@@ -54,11 +101,11 @@ const Container = styled.span<StyleProps>`
     height: ${({ $size }) => $size}px;
     border-radius: ${Variables.Radiuses.Circle};
     background-color: ${Mixins.AllColors};
-    color: ${({ $color, $textColor }) =>
-        $color === "white"
+    color: ${({ $color, $contentColor }) =>
+        $color === "white" && !$contentColor
             ? Variables.Colors.Primary500
-            : $textColor
-            ? Mixins.AllColors({ $color: $textColor })
+            : $contentColor
+            ? Mixins.AllColors({ $color: $contentColor })
             : Variables.Colors.White};
     font-weight: ${Variables.FontWeights.Black};
     font-size: ${({ $size }) => ($size ? $size * 0.6 : 48 * 0.6)}px;

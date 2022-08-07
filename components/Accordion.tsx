@@ -7,7 +7,7 @@ import styled, { css } from "styled-components"
 import { v4 as uuid } from "uuid"
 
 import Variables from "./Variables"
-import { P } from "./Font"
+import Text from "./Text"
 import Mixins from "./Mixins"
 
 import PlusIcon from "../icons/PlusIcon"
@@ -133,23 +133,30 @@ const AccordionItem = ({
                 </IconContainer>
             </Button>
 
-            <Content as={typeof content === "string" ? P : "div"} $isOpen={open} $accordionStyle={$accordionStyle}>
+            <Content as={typeof content === "string" ? Text : "div"} $isOpen={open} $accordionStyle={$accordionStyle}>
                 {content}
             </Content>
         </Item>
     )
 }
 
-const Accordion = ({ accordionStyle = "basic", icon = "plus", items, ...props }: Props) => (
-    <Container $accordionStyle={accordionStyle} {...props}>
+const Accordion = ({
+    options = {
+        style: "basic",
+        icon: "plus",
+    },
+    items,
+    ...props
+}: Props) => (
+    <Container $accordionStyle={options.style} {...props}>
         {items.map((item, i) => (
             <AccordionItem
-                icon={icon}
+                icon={options.icon}
                 isOpen={item.isOpen}
                 title={item.title}
                 content={item.content}
-                $accordionStyle={accordionStyle}
-                $noBorder={accordionStyle === "rounded" && i === items.length - 1 && true}
+                $accordionStyle={options.style}
+                $noBorder={options.style === "rounded" && i === items.length - 1 && true}
                 key={uuid()}
             />
         ))}
@@ -187,9 +194,11 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 }
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
-    accordionStyle?: AccordionStyleTypes
-    icon?: IconTypes
     items: AccordionItemProps[]
+    options?: {
+        style?: AccordionStyleTypes
+        icon?: IconTypes
+    }
 }
 
 interface ContentStyleProps extends React.HTMLAttributes<HTMLDivElement> {

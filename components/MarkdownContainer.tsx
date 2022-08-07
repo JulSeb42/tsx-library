@@ -15,9 +15,9 @@ import { SpacerTypes } from "./common-types"
 
 /*==================== Component ====================*/
 
-const MarkdownContainer = ({ gap = "s", children, options = optionsMarkdown, ...props }: Props) => (
+const MarkdownContainer = ({ gap = "s", content, options = optionsMarkdown, ...props }: Props) => (
     <Container $gap={gap} options={options} {...props}>
-        {children}
+        {content}
     </Container>
 )
 
@@ -32,7 +32,7 @@ interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     gap?: SpacerTypes | string | number
     options?: any
-    children: string | React.ReactNode | React.ReactNode[]
+    content: string | React.ReactNode | React.ReactNode[]
 }
 
 /*==================== Styles ====================*/

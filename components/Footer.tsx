@@ -6,31 +6,30 @@ import React from "react"
 import styled, { css } from "styled-components"
 
 import Variables from "./Variables"
-import { Strong } from "./Font"
+import Text from "./Text"
 import Mixins from "./Mixins"
 import Image from "./Image"
 
-import { RequireAtLeastOne } from "./RequireAtLeastOne"
 import { ColorsShortTypes, LibColorsTypes } from "./common-types"
 
 /*==================== Component ====================*/
 
-const Footer = ({
-    separator,
-    children,
-    logoImg,
-    logoAlt = "Logo",
-    logoText,
-    logoWidth = 100,
-    logoHeight = 30,
-    separatorColor = "gray-200",
-    ...props
-}: Props) => (
-    <Container $separator={separator} $separatorColor={separatorColor} {...props}>
-        {logoImg ? (
-            <LogoImg src={logoImg} alt={logoAlt} width={logoWidth} height={logoHeight} fit="contain" />
+const Footer = ({ children, logo, options, ...props }: Props) => (
+    <Container $separator={options?.separator} $separatorColor={options?.separatorColor || "gray-200"} {...props}>
+        {logo.img ? (
+            <LogoImg
+                src={logo.img}
+                alt={logo.alt || "Logo"}
+                width={logo?.width || 100}
+                height={logo?.height || 30}
+                options={{
+                    fit: "contain",
+                }}
+            />
         ) : (
-            <Strong color="primary">{logoText}</Strong>
+            <Text tag="strong" color="primary">
+                {logo.text}
+            </Text>
         )}
 
         <FooterLinks>{children}</FooterLinks>
@@ -47,17 +46,35 @@ interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 interface BaseProps extends React.HTMLAttributes<HTMLDivElement> {
-    separator?: boolean
     children: React.ReactNode | React.ReactNode[] | string
-    logoImg?: string
-    logoAlt?: string
-    logoText?: string
-    logoWidth?: number
-    logoHeight?: number
-    separatorColor?: ColorsShortTypes | LibColorsTypes | string
+
+    options?: {
+        separator?: boolean
+        separatorColor?: ColorsShortTypes | LibColorsTypes | string
+    }
 }
 
-type Props = RequireAtLeastOne<BaseProps, "logoImg" | "logoText">
+interface Possible1 extends BaseProps {
+    logo: {
+        img: string
+        alt?: string
+        width?: number
+        height?: number
+        text?: never
+    }
+}
+
+interface Possible2 extends BaseProps {
+    logo: {
+        img?: never
+        alt?: never
+        width?: never
+        height?: never
+        text: string
+    }
+}
+
+type Props = Possible1 | Possible2
 
 /*==================== Styles ====================*/
 

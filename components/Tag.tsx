@@ -12,8 +12,13 @@ import { ColorsShortTypes, LibColorsTypes } from "./common-types"
 
 /*==================== Component ====================*/
 
-const Tag = ({ tagStyle = "rounded", color = "primary", textColor, children, ...props }: Props) => (
-    <Container $tagStyle={tagStyle} $color={color} $textColor={textColor} {...props}>
+const Tag = ({ options, children, ...props }: Props) => (
+    <Container
+        $tagStyle={options?.variant || "rounded"}
+        $color={options?.color || "primary"}
+        $textColor={options?.textColor}
+        {...props}
+    >
         {children}
     </Container>
 )
@@ -36,10 +41,12 @@ interface StyleProps extends React.HTMLAttributes<HTMLSpanElement> {
 }
 
 interface Props extends React.HTMLAttributes<HTMLSpanElement> {
-    tagStyle?: TagStylesTypes
-    color?: ColorsShortTypes | LibColorsTypes | string
-    textColor?: ColorsShortTypes | LibColorsTypes | string
     children: string
+    options?: {
+        variant?: TagStylesTypes
+        color?: ColorsShortTypes | LibColorsTypes | string
+        textColor?: ColorsShortTypes | LibColorsTypes | string
+    }
 }
 
 /*==================== Styles ====================*/

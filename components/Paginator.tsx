@@ -16,29 +16,24 @@ import ChevronRightIcon from "../icons/ChevronRightIcon"
 
 const Paginator = ({
     justify = "left",
-    textPage = "Page",
-    textOf = "of",
-    iconPrev,
-    iconNext,
-    handlePrev,
-    handleNext,
-    handleChange,
-    active,
-    totalPages,
     idInput = "paginator",
+    text,
+    handles,
+    pages,
+    icons,
     ...props
 }: Props) => {
-    const activePage = active > totalPages ? totalPages : active < 1 ? 1 : active
+    const activePage = pages.active > pages.total ? pages.total : pages.active < 1 ? 1 : pages.active
 
     return (
         <Container $justify={justify}>
-            {textPage} <StyledInput type="number" id={idInput} value={activePage} onChange={handleChange} {...props} />{" "}
-            {`${textOf} ${totalPages}`}
-            <Button onClick={handlePrev} disabled={activePage === 1 && true}>
-                {iconPrev ? <Icon src={iconPrev} size={16} /> : <ChevronLeftIcon size={20} />}
+            {text?.page || "Page"} <StyledInput type="number" id={idInput} value={activePage} onChange={handles.change} {...props} />{" "}
+            {`${text?.of || "of"} ${pages.total}`}
+            <Button onClick={handles.prev} disabled={activePage === 1 && true}>
+                {icons?.prev ? <Icon src={icons.prev} size={16} /> : <ChevronLeftIcon size={20} />}
             </Button>
-            <Button onClick={handleNext} disabled={activePage === totalPages && true}>
-                {iconNext ? <Icon src={iconNext} size={16} /> : <ChevronRightIcon size={20} />}
+            <Button onClick={handles.next} disabled={activePage === pages.total && true}>
+                {icons?.next ? <Icon src={icons.next} size={16} /> : <ChevronRightIcon size={20} />}
             </Button>
         </Container>
     )
@@ -61,16 +56,25 @@ interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     justify?: JustifyTypes
-    textPage?: string
-    textOf?: string
-    handlePrev: (e: React.MouseEvent<HTMLButtonElement>) => void
-    handleNext: (e: React.MouseEvent<HTMLButtonElement>) => void
-    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-    active: number
-    totalPages: number
     idInput?: string
-    iconPrev?: string
-    iconNext?: string
+
+    text?: {
+        page?: string
+        of?: string
+    }
+    handles: {
+        prev: (e: React.MouseEvent<HTMLButtonElement>) => void
+        next: (e: React.MouseEvent<HTMLButtonElement>) => void
+        change: (e: React.ChangeEvent<HTMLInputElement>) => void
+    }
+    pages: {
+        active: number
+        total: number
+    }
+    icons?: {
+        prev?: string
+        next?: string
+    }
 }
 
 /*==================== Styles ====================*/

@@ -14,21 +14,29 @@ import { LibColorsTypes, ColorsShortTypes, SpacerTypes } from "./common-types"
 
 /*==================== Component ====================*/
 
-const Badge = ({ color = "primary", size = 16, children, icon, padding, textColor, ...props }: Props) => (
-    <Container
-        $color={color}
-        $size={size}
-        $children={!!children}
-        $childrenLength={children?.length}
-        $padding={padding}
-        $textColor={textColor}
-        {...props}
-    >
-        {children && children}
+const Badge = ({ content, options, ...props }: Props) => {
+    const defaultSize = 16
 
-        {icon && <Icon src={icon} size={size * 0.6} />}
-    </Container>
-)
+    return (
+        <Container
+            $color={options?.color || "primary"}
+            $size={options?.size || defaultSize}
+            $children={!!content}
+            $childrenLength={typeof content === "number" ? content.toString().length : undefined}
+            $padding={options?.padding}
+            $textColor={options?.textColor}
+            {...props}
+        >
+            {typeof content === "number" ? (
+                content
+            ) : typeof content === "string" ? (
+                <Icon src={content} size={options?.size ? options?.size * 0.6 : defaultSize * 0.6} />
+            ) : (
+                ""
+            )}
+        </Container>
+    )
+}
 
 export default Badge
 
@@ -44,23 +52,38 @@ interface StyleProps extends React.HTMLAttributes<HTMLSpanElement> {
 }
 
 interface BaseProps extends React.HTMLAttributes<HTMLSpanElement> {
-    color?: ColorsShortTypes | LibColorsTypes
-    textColor?: ColorsShortTypes | LibColorsTypes | string
-    size?: number
-    padding?: SpacerTypes | number | string
+    options?: {
+        color?: ColorsShortTypes | LibColorsTypes | string
+        textColor?: ColorsShortTypes | LibColorsTypes | string
+        size?: number
+    }
 }
 
-interface NumberProps extends BaseProps {
-    children?: string
-    icon?: never
+interface Possible1 extends BaseProps {
+    content?: number
+
+    options?: {
+        color?: ColorsShortTypes | LibColorsTypes | string
+        textColor?: ColorsShortTypes | LibColorsTypes | string
+        size?: number
+
+        padding?: SpacerTypes | number | string
+    }
 }
 
-interface IconProps extends BaseProps {
-    children?: never
-    icon?: string
+interface Possible2 extends BaseProps {
+    content?: string
+
+    options?: {
+        color?: ColorsShortTypes | LibColorsTypes | string
+        textColor?: ColorsShortTypes | LibColorsTypes | string
+        size?: number
+
+        padding?: never
+    }
 }
 
-type Props = NumberProps | IconProps
+type Props = Possible1 | Possible2
 
 /*==================== Styles ====================*/
 

@@ -12,8 +12,14 @@ import { ColorsShortTypes, LibColorsTypes } from "./common-types"
 
 /*==================== Component ====================*/
 
-const Loader = ({ size = 48, borderSize = 4, speed = 1000, color = "primary", ...props }: Props) => (
-    <Container $size={size} $borderSize={borderSize} $speed={speed} $color={color} {...props} />
+const Loader = ({ options, ...props }: Props) => (
+    <Container
+        $size={options?.size || 48}
+        $borderSize={options?.borderSize || 8}
+        $speed={options?.speed || 1000}
+        $color={options?.color || "primary"}
+        {...props}
+    />
 )
 
 export default Loader
@@ -28,10 +34,12 @@ interface StyleProps extends React.HTMLAttributes<HTMLSpanElement> {
 }
 
 interface Props extends React.HTMLAttributes<HTMLSpanElement> {
-    size?: number
-    borderSize?: number
-    color?: ColorsShortTypes | LibColorsTypes | string
-    speed?: number
+    options?: {
+        size?: number
+        borderSize?: number
+        color?: ColorsShortTypes | LibColorsTypes | string
+        speed?: number
+    }
 }
 
 /*==================== Styles ====================*/

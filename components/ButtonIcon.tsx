@@ -16,33 +16,33 @@ import { ColorsHoverTypes } from "./common-types"
 /*==================== Component ====================*/
 
 const ButtonIcon = ({
-    buttonStyle = "plain",
-    size = 48,
-    color = "primary",
+    icon,
     disabled,
     isLoading,
-    loaderBorder,
     to,
-    icon,
-    hoverBackground,
+    options,
     ...props
 }: Props) => (
     <Container
-        $buttonStyle={buttonStyle}
-        $size={size}
-        $color={color}
+        $buttonStyle={options?.variant || "plain"}
+        $size={options?.size || 48}
+        $color={options?.color || "primary"}
         to={to ? to : undefined}
         as={to ? Link : "button"}
         disabled={isLoading ? true : disabled}
-        $hoverBackground={hoverBackground}
+        $hoverBackground={options?.hoverBackground}
         {...props}
     >
         {isLoading ? (
-            <Loader size={size * 0.6} color="gray" borderSize={loaderBorder} />
-        ) : icon ? (
-            <Icon src={icon} size={size * 0.6} />
+            <Loader
+                options={{
+                    size: options?.size ? options?.size * 0.6 : 48 * 0.6,
+                    color: "gray",
+                    borderSize: options?.loaderBorder || 4,
+                }}
+            />
         ) : (
-            ""
+            <Icon src={icon} size={options?.size ? options?.size * 0.6 : 48 * 0.6} />
         )}
     </Container>
 )
@@ -65,17 +65,36 @@ interface StyleProps extends React.HTMLAttributes<HTMLButtonElement> {
     $hoverBackground?: boolean
 }
 
-interface Props extends React.HTMLAttributes<HTMLButtonElement> {
-    buttonStyle?: ButtonStylesProps
-    color?: ColorsHoverTypes
-    disabled?: boolean
+interface BaseProps extends React.HTMLAttributes<HTMLButtonElement> {
+    icon: string
     isLoading?: boolean
     to?: string
-    size?: number
-    icon: string
-    loaderBorder?: number
-    hoverBackground?: boolean
+    disabled?: boolean
 }
+
+interface Possible1 extends BaseProps {
+    options?: {
+        variant?: "plain"
+        hoverBackground?: never
+
+        color?: ColorsHoverTypes
+        size?: number
+        loaderBorder?: number
+    }
+}
+
+interface Possible2 extends BaseProps {
+    options?: {
+        variant?: "transparent"
+        hoverBackground?: boolean
+
+        color?: ColorsHoverTypes
+        size?: number
+        loaderBorder?: number
+    }
+}
+
+type Props = Possible1 | Possible2
 
 /*==================== Styles ====================*/
 

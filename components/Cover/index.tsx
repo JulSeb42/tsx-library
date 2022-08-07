@@ -16,7 +16,7 @@ const CoverImage = React.lazy(() => import("./CoverImage"))
 const Container = styled.div<StyleProps>`
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: ${({ $height }) => $height};
 
     ${({ $overlay }) =>
         $overlay &&
@@ -60,13 +60,18 @@ const Content = styled.div<StyleProps>`
 
 /*==================== Component ====================*/
 
-const Cover = ({ src, alt, children, overlay, align = "center", ...props }: Props) => (
-    <Container $overlay={overlay} $align={align} {...props}>
-        <Suspense fallback={<Fallback $width="100%" $height="100vh" />}>
+const Cover = ({ src, alt, children, options, ...props }: Props) => (
+    <Container
+        $overlay={options?.overlay}
+        $align={options?.align || "center"}
+        $height={options?.height || "100vh"}
+        {...props}
+    >
+        <Suspense fallback={<Fallback $width="100%" $height={options?.height || "100vh"} />}>
             <CoverImage src={src} alt={alt} />
         </Suspense>
 
-        <Content $align={align}>{children}</Content>
+        <Content $align={options?.align || "center"}>{children}</Content>
     </Container>
 )
 
@@ -84,12 +89,17 @@ type AlignTypes = keyof typeof align
 interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
     $overlay?: boolean
     $align?: AlignTypes
+    $height?: number | string
 }
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     src: string
     alt: string
     children: React.ReactNode | React.ReactNode[]
-    overlay?: boolean
-    align?: AlignTypes
+
+    options?: {
+        overlay?: boolean
+        align?: AlignTypes
+        height?: number | string
+    }
 }

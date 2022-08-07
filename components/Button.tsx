@@ -17,34 +17,31 @@ import { ColorsHoverTypes } from "./common-types"
 
 const Button = ({
     color = "primary",
-    buttonStyle = "plain",
-    noPadding,
-    iconLeft,
-    iconRight,
     disabled,
-    isLoading,
     children,
     to,
     type = "button",
+    isLoading,
+    options,
     ...props
 }: Props) => (
     <Container
-        $color={color}
-        $buttonStyle={buttonStyle}
-        $noPadding={noPadding}
+        $color={options?.color || "primary"}
+        $buttonStyle={options?.variant || "plain"}
+        $noPadding={options?.noPadding}
         as={to ? Link : "button"}
         to={to ? to : undefined}
-        disabled={isLoading || disabled}
+        disabled={!!isLoading || disabled}
         type={to ? undefined : type}
         {...props}
     >
-        {isLoading && <Loader color="gray" size={16} borderSize={2} />}
+        {isLoading && <Loader options={{ size: 16, borderSize: 2, color: "gray" }} />}
 
-        {iconLeft && !isLoading && <Icon src={iconLeft} size={16} />}
+        {options?.iconLeft && !isLoading && <Icon src={options.iconLeft} size={16} />}
 
         {children}
 
-        {iconRight && <Icon src={iconRight} size={16} />}
+        {options?.iconRight && <Icon src={options.iconRight} size={16} />}
     </Container>
 )
 
@@ -66,18 +63,37 @@ interface StyleProps extends React.HTMLAttributes<HTMLButtonElement> {
     $noPadding?: boolean
 }
 
-interface Props extends React.HTMLAttributes<HTMLButtonElement> {
-    color?: ColorsHoverTypes
-    buttonStyle?: ButtonStylesType
-    noPadding?: boolean
+interface BaseProps extends React.HTMLAttributes<HTMLButtonElement> {
     disabled?: boolean
-    isLoading?: boolean
     children: string
     to?: string
     type?: "button" | "submit" | "reset" | undefined
-    iconLeft?: string
-    iconRight?: string
+    isLoading?: boolean
 }
+
+interface Possible1 extends BaseProps {
+    options?: {
+        variant?: "plain" | "outline"
+        color?: ColorsHoverTypes
+        noPadding?: never
+
+        iconLeft?: string
+        iconRight?: string
+    }
+}
+
+interface Possible2 extends BaseProps {
+    options?: {
+        variant?: "text"
+        color?: ColorsHoverTypes
+        noPadding?: boolean
+
+        iconLeft?: string
+        iconRight?: string
+    }
+}
+
+type Props = Possible1 | Possible2
 
 /*==================== Styles ====================*/
 

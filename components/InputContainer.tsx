@@ -7,7 +7,7 @@ import styled from "styled-components"
 
 import Variables from "./Variables"
 import Mixins from "./Mixins"
-import { P, Small } from "./Font"
+import Text from "./Text"
 
 /*==================== Component ====================*/
 
@@ -15,17 +15,17 @@ const InputContainer = ({ label, helper, helperBottom, counter, maxLength, value
     <Container>
         {label && <Label htmlFor={id}>{label}</Label>}
 
-        {helper && <P>{helper}</P>}
+        {helper && <Text>{helper}</Text>}
 
         {children}
 
-        {helperBottom && <Small>{helperBottom}</Small>}
+        {helperBottom && <Text tag="small">{helperBottom}</Text>}
 
         {counter && typeof value === "string" && (
-            <Small color="gray-500">
+            <Text tag="small" color="gray-500">
                 {value.length}
                 {maxLength ? ` / ${maxLength}` : ""}
-            </Small>
+            </Text>
         )}
     </Container>
 )

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom"
 import { v4 as uuid } from "uuid"
 
 import Variables from "./Variables"
-import { Small } from "./Font"
+import TextComponent from "./Text"
 import Mixins from "./Mixins"
 import Icon from "./Icon"
 import CheckIcon from "../icons/CheckIcon"
@@ -17,15 +17,23 @@ import { StepProps } from "./component-props"
 
 /*==================== Component ====================*/
 
-const Stepper = ({ steps, direction = "row", active, iconActive, ...props }: Props) => (
-    <Container $direction={direction} {...props}>
+const Stepper = ({ steps, active, options, ...props }: Props) => (
+    <Container $direction={options?.direction || "row"} {...props}>
         {steps.map((step, i) => (
-            <Item $direction={direction} key={uuid()}>
+            <Item $direction={options?.direction || "row"} key={uuid()}>
                 <Number $active={active >= i ? true : false}>
-                    {active >= i + 1 ? iconActive ? <Icon src={iconActive} size={16} /> : <CheckIcon size={16} /> : i}
+                    {active >= i + 1 ? (
+                        options?.iconActive ? (
+                            <Icon src={options?.iconActive} size={16} />
+                        ) : (
+                            <CheckIcon size={16} />
+                        )
+                    ) : (
+                        i
+                    )}
                 </Number>
 
-                <Text as={step.to ? Link : "small"} to={step.to}>
+                <Text tag="small" as={step.to ? Link : "small"} to={step.to}>
                     {step.text}
                 </Text>
             </Item>
@@ -56,6 +64,7 @@ interface ItemProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 interface TextProps extends React.HTMLAttributes<HTMLHyperlinkElementUtils> {
     to?: string
+    tag: "small"
 }
 
 interface NumberProps {
@@ -64,9 +73,12 @@ interface NumberProps {
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     steps: StepProps[]
-    direction?: DirectionTypes
     active: number
-    iconActive?: string
+
+    options?: {
+        direction?: DirectionTypes
+        iconActive?: string
+    }
 }
 
 /*==================== Styles ====================*/
@@ -123,7 +135,7 @@ const Number = styled.span<NumberProps>`
     font-weight: ${Variables.FontWeights.Black};
 `
 
-const Text = styled(Small)<TextProps>`
+const Text = styled(TextComponent)<TextProps>`
     font-size: ${Variables.FontSizes.Small};
     text-decoration: none;
     color: ${Variables.Colors.Primary500};

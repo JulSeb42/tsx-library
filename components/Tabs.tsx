@@ -7,25 +7,33 @@ import styled, { css } from "styled-components"
 import { v4 as uuid } from "uuid"
 
 import Variables from "./Variables"
-import { P } from "./Font"
+import Text from "./Text"
 import Mixins from "./Mixins"
 
 import { TabsItemProps } from "./component-props"
 
 /*==================== Component ====================*/
 
-const Tabs = ({ items, active = 0, tabsStyle = "basic", justify = "start", ...props }: Props) => {
-    const [isActive, setIsActive] = useState(active)
+const Tabs = ({
+    items,
+    options = {
+        active: 0,
+        style: "basic",
+        justify: "start",
+    },
+    ...props
+}: Props) => {
+    const [isActive, setIsActive] = useState(options.active || 0)
 
     return (
         <Container {...props}>
-            <ButtonsContainer $tabsStyle={tabsStyle} $justify={justify} $col={items.length}>
+            <ButtonsContainer $tabsStyle={options.style} $justify={options.justify} $col={items.length}>
                 {items.map((item, i) => (
                     <Button
                         $isActive={isActive === i}
                         onClick={() => setIsActive(i)}
-                        $tabsStyle={tabsStyle}
-                        $justify={justify}
+                        $tabsStyle={options.style}
+                        $justify={options.justify}
                         key={uuid()}
                     >
                         {item.title}
@@ -34,7 +42,7 @@ const Tabs = ({ items, active = 0, tabsStyle = "basic", justify = "start", ...pr
             </ButtonsContainer>
 
             {items.map((item, i) => (
-                <TabItem as={typeof item.content === "string" ? P : "div"} $isActive={isActive === i} key={uuid()}>
+                <TabItem as={typeof item.content === "string" ? Text : "div"} $isActive={isActive === i} key={uuid()}>
                     {item.content}
                 </TabItem>
             ))}
@@ -78,9 +86,11 @@ interface ContentProps extends React.HTMLAttributes<HTMLDivElement> {
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     items: TabsItemProps[]
-    active?: number
-    tabsStyle?: TableStylesTypes
-    justify?: JustifyTypes
+    options?: {
+        style?: TableStylesTypes
+        justify?: JustifyTypes
+        active?: number
+    }
 }
 
 /*==================== Styles ====================*/

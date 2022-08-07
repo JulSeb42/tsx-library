@@ -1,6 +1,6 @@
 /*=============================================== Options markdown container ===============================================*/
 
-import * as Font from "./components/Font"
+import Text from "./components/Text"
 import Table from "./components/Table"
 
 const optionsMarkdown = {
@@ -10,59 +10,101 @@ const optionsMarkdown = {
 
     overrides: {
         h1: {
-            component: Font.H1,
+            component: Text,
+            props: {
+                tag: "h1",
+            },
         },
 
         h2: {
-            component: Font.H2,
+            component: Text,
+            props: {
+                tag: "h2",
+            },
         },
 
         h3: {
-            component: Font.H3,
+            component: Text,
+            props: {
+                tag: "h3",
+            },
         },
 
         h4: {
-            component: Font.H4,
+            component: Text,
+            props: {
+                tag: "h4",
+            },
         },
 
         h5: {
-            component: Font.H5,
+            component: Text,
+            props: {
+                tag: "h5",
+            },
         },
 
         h6: {
-            component: Font.H6,
+            component: Text,
+            props: {
+                tag: "h6",
+            },
         },
 
         p: {
-            component: Font.P,
+            component: Text,
+            props: {
+                tag: "p",
+            },
         },
 
         strong: {
-            component: Font.Strong,
+            component: Text,
+            props: {
+                tag: "strong",
+            },
         },
 
         em: {
-            component: Font.Em,
+            component: Text,
+            props: {
+                tag: "em",
+            },
         },
 
         ul: {
-            component: Font.Ul,
+            component: Text,
+            props: {
+                tag: "ul",
+            },
         },
 
         ol: {
-            component: Font.Ol,
+            component: Text,
+            props: {
+                tag: "ol",
+            },
         },
 
         dl: {
-            component: Font.Dl,
+            component: Text,
+            props: {
+                tag: "dl",
+            },
         },
 
         small: {
-            component: Font.Small,
+            component: Text,
+            props: {
+                tag: "small",
+            },
         },
 
         blockquote: {
-            component: Font.Blockquote,
+            component: Text,
+            props: {
+                tag: "blockquote",
+            },
         },
 
         table: {
