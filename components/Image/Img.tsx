@@ -5,7 +5,7 @@
 /*==================== Imports ====================*/
 
 import styled from "styled-components"
-import { stringifyPx } from "js-utils-julseb"
+import { stringifyPx } from "../../utils"
 
 import { ObjectFitTypes } from "../common-types"
 

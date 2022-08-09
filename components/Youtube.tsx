@@ -4,7 +4,7 @@
 
 import React from "react"
 import styled from "styled-components"
-import { convertYoutube, stringifyPx } from "js-utils-julseb"
+import { convertYoutube, stringifyPx } from "../utils"
 
 /*==================== Component ====================*/
 

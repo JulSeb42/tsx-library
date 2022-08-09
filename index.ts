@@ -50,6 +50,7 @@ import Tag from "./components/Tag"
 import Text from "./components/Text"
 import Toast from "./components/Toast"
 import Tooltip from "./components/Tooltip"
+import * as Utils from "./utils"
 import Variables from "./components/Variables"
 import Video from "./components/Video"
 import Wrapper from "./components/Wrapper"
@@ -108,6 +109,7 @@ export {
     Text,
     Toast,
     Tooltip,
+    Utils,
     Variables,
     Video,
     Wrapper,

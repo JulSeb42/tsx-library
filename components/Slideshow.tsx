@@ -5,7 +5,7 @@
 import React, { useEffect, useState, useCallback } from "react"
 import styled from "styled-components"
 import { v4 as uuid } from "uuid"
-import { stringifyPx } from "js-utils-julseb"
+import { stringifyPx } from "../utils"
 
 import Variables from "./Variables"
 import Mixins from "./Mixins"

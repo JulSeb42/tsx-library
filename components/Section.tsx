@@ -4,7 +4,7 @@
 
 import React from "react"
 import styled from "styled-components"
-import { stringifyPx } from "js-utils-julseb"
+import { stringifyPx } from "../utils"
 
 import Mixins from "./Mixins"
 

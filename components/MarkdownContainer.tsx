@@ -5,7 +5,7 @@
 import React from "react"
 import styled from "styled-components"
 import Markdown from "markdown-to-jsx"
-import { stringifyPx } from "js-utils-julseb"
+import { stringifyPx } from "../utils"
 
 import Mixins from "./Mixins"
 

@@ -4,7 +4,7 @@
 
 import React from "react"
 import styled, { css } from "styled-components"
-import { stringifyPx } from "js-utils-julseb"
+import { stringifyPx } from "../utils"
 
 import Variables from "./Variables"
 import Mixins from "./Mixins"
