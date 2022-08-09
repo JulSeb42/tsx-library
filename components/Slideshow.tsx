@@ -9,65 +9,119 @@ import { stringifyPx } from "js-utils-julseb"
 
 import Variables from "./Variables"
 import Mixins from "./Mixins"
+import Flexbox from "./Flexbox"
 import Icon from "./Icon"
 import ChevronLeftIcon from "../icons/ChevronLeftIcon"
 import ChevronRightIcon from "../icons/ChevronRightIcon"
 
 /*==================== Component ====================*/
 
-const SlideshowButton = ({ onClick, iconPrev, iconNext, prev, next, position }: ButtonProps) => (
-    <Button onClick={onClick} $position={position}>
+const SlideshowButton = ({ onClick, iconPrev, iconNext, prev, next, position, hideTouch }: ButtonProps) => (
+    <Button onClick={onClick} $position={position} $hideTouch={hideTouch}>
         {prev && (iconPrev ? <Icon src={iconPrev} size={24} /> : <ChevronLeftIcon size={24} />)}
 
         {next && (iconNext ? <Icon src={iconNext} size={24} /> : <ChevronRightIcon size={24} />)}
     </Button>
 )
 
-const Slideshow = ({
-    children,
-    options,
-    icons,
-    height = "30vw",
-    ...props
-}: Props) => {
+const Slideshow = ({ children, height, options, icons, ...props }: Props) => {
+    // Slideshow with buttons
     const [active, setActive] = useState(0)
     const length = children.length
 
-    const handlePrev = () => setActive(active > 0 ? active - 1 : length - 1)
-    const handleNext = () => setActive(active < length - 1 ? active + 1 : 0)
+    const handleNext = () => {
+        if (!options?.show) {
+            setActive(active < length - 1 ? active + 1 : 0)
+        } else {
+            setActive(active < length + options.show ? active + options.show : 0)
+        }
+    }
 
+    const handlePrev = () => {
+        if (!options?.show) {
+            setActive(active > 0 ? active - 1 : length - 1)
+        } else {
+            setActive(active > 0 ? active - options.show : length + options.show + (options.show - 1))
+        }
+    }
+
+    // Automatic slideshow
     const autoSlideshow = useCallback(() => {
         setActive(active < length - 1 ? active + 1 : 0)
     }, [active, length])
 
     useEffect(() => {
         if (!options?.controls && !options?.pagination && !options?.autoplay) {
-            setInterval(() => autoSlideshow(), 1000)
+            setInterval(() => autoSlideshow(), 1500)
         } else if (options?.autoplay) {
             setInterval(() => autoSlideshow(), options.autoplay)
         }
     }, [options?.autoplay, autoSlideshow, options?.controls, options?.pagination])
 
+    // Swipe
+    const [touchPosition, setTouchPosition] = useState(null)
+
+    const handleTouchStart = (e: any) => setTouchPosition(e.touches[0].clientX)
+
+    const handleTouchMove = (e: any) => {
+        if (touchPosition === null) {
+            return
+        }
+
+        const diff = touchPosition - e.touches[0].clientX
+
+        if (diff > 5) {
+            handleNext()
+        }
+
+        if (diff < -5) {
+            handlePrev()
+        }
+
+        setTouchPosition(null)
+    }
+
     return (
         <Container {...props}>
-            {options?.controls && <SlideshowButton onClick={handlePrev} prev iconPrev={icons?.prev} position="left" />}
+            <Wrapper flexDirection="column" $height={height}>
+                {options?.controls && (
+                    <SlideshowButton
+                        position="left"
+                        onClick={handlePrev}
+                        prev
+                        hideTouch={options?.hideControlsTouch}
+                        iconNext={icons?.next}
+                        iconPrev={icons?.prev}
+                    />
+                )}
 
-            <Slides $height={height}>
-                <Slide $active={active} $show={options?.show} $speed={options?.speed || 1000}>
-                    {children}
-                </Slide>
-            </Slides>
+                <ContentWrapper onTouchStart={handleTouchStart} onTouchMove={handleTouchMove}>
+                    <Content $show={options?.show} $active={active} $speed={options?.speed || 1000}>
+                        {children}
+                    </Content>
+                </ContentWrapper>
 
-            {options?.controls && <SlideshowButton onClick={handleNext} next iconNext={icons?.next} position="right" />}
+                {options?.controls && (
+                    <SlideshowButton
+                        position="right"
+                        onClick={handleNext}
+                        next
+                        hideTouch={options?.hideControlsTouch}
+                        iconNext={icons?.next}
+                        iconPrev={icons?.prev}
+                    />
+                )}
+            </Wrapper>
 
             {options?.pagination && (
-                <Pagination>
-                    {children.map((_, i) => (
-                        <PaginationItem
-                            onClick={() => setActive(i)}
-                            $active={active === i ? true : false}
-                            key={uuid()}
-                        />
+                <Pagination
+                    $hideTouch={options?.hidePaginationTouch}
+                    justifyContent="center"
+                    alignItems="center"
+                    gap={Variables.Spacers.XS}
+                >
+                    {children.map((_: any, i: any) => (
+                        <Dot onClick={() => setActive(i)} $active={active === i && true} key={uuid()} />
                     ))}
                 </Pagination>
             )}
@@ -86,22 +140,23 @@ const positions = {
 
 type PositionsTypes = keyof typeof positions
 
-interface SlidesStyleProps extends React.HTMLAttributes<HTMLDivElement> {
-    $height?: number | string
+interface StyleWrapperProps {
+    $height?: string | number
 }
 
-interface SlideStyleProps extends React.HTMLAttributes<HTMLDivElement> {
-    $active: number
-    $show?: number
+interface StyleContentProps {
     $speed?: number
+    $show?: number
+    $active: number
 }
 
-interface PaginationStyleProps extends React.HTMLAttributes<HTMLSpanElement> {
-    $active: boolean
+interface StyleDotProps extends React.HTMLAttributes<HTMLButtonElement> {
+    $active?: boolean
 }
 
 interface ButtonStyleProps extends React.HTMLAttributes<HTMLButtonElement> {
     $position: PositionsTypes
+    $hideTouch?: boolean
 }
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
@@ -109,19 +164,22 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     iconNext?: string
     prev?: boolean
     next?: boolean
-    position: "left" | "right"
+    position: PositionsTypes
+    hideTouch?: boolean
 }
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactNode[]
-    height?: number | string
+    height?: string | number
 
     options?: {
-        controls?: boolean
-        pagination?: boolean
-        autoplay?: number
         show?: number
+        autoplay?: number
+        controls?: boolean
+        hideControlsTouch?: boolean
+        hidePaginationTouch?: boolean
         speed?: number
+        pagination?: boolean
     }
 
     icons?: {
@@ -133,26 +191,26 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 /*==================== Styles ====================*/
 
 const Container = styled.div`
+    width: 100%;
     ${Mixins.Grid({
         $gap: "xs",
         $alignItems: "start",
     })};
+`
+
+const Wrapper = styled(Flexbox)<StyleWrapperProps>`
     width: 100%;
+    height: ${({ $height }) => ($height ? stringifyPx($height) : "60vh")};
     position: relative;
 `
 
-const Slides = styled.div<SlidesStyleProps>`
-    ${Mixins.Flexbox({
-        $flexDirection: "column",
-    })};
-    width: 100%;
-    height: ${({ $height }) => stringifyPx($height)};
-    position: relative;
+const ContentWrapper = styled(Flexbox)`
     overflow: hidden;
-    z-index: 1;
+    width: 100%;
+    height: 100%;
 `
 
-const Slide = styled.div<SlideStyleProps>`
+const Content = styled(Flexbox)<StyleContentProps>`
     transition: all ${({ $speed }) => $speed}ms ease;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -160,7 +218,6 @@ const Slide = styled.div<SlideStyleProps>`
     transform: ${({ $show, $active }) =>
         $show ? `translateX(-${$active * (100 / $show)}%)` : `translateX(-${$active * 100}%)`};
     height: 100%;
-    display: flex;
 
     &::-webkit-scrollbar {
         display: none;
@@ -171,9 +228,12 @@ const Slide = styled.div<SlideStyleProps>`
         height: 100%;
         flex-shrink: 0;
         flex-grow: 1;
+        transition: ${Variables.Transitions.Long};
     }
 
     img {
+        width: 100%;
+        height: 100%;
         object-fit: cover;
     }
 `
@@ -202,38 +262,38 @@ const Button = styled.button<ButtonStyleProps>`
         &:hover {
             background-color: ${Variables.Colors.Primary300};
         }
-
         &:active {
             background-color: ${Variables.Colors.Primary600};
         }
     }
+
+    @media ${Variables.Breakpoints.Touch} {
+        display: ${({ $hideTouch }) => $hideTouch && "none"};
+    }
 `
 
-const Pagination = styled.div`
-    ${Mixins.Flexbox({
-        $alignItems: "center",
-        $justifyContent: "center",
-        $gap: "xs",
-    })};
+const Pagination = styled(Flexbox)<{ $hideTouch?: boolean }>`
+    @media ${Variables.Breakpoints.Touch} {
+        display: ${({ $hideTouch }) => $hideTouch && "none"};
+    }
 `
 
-const paginationItemSize = 8
+const dotSize = 8
 
-const PaginationItem = styled.span<PaginationStyleProps>`
-    width: ${paginationItemSize}px;
-    height: ${paginationItemSize}px;
+const Dot = styled.button<StyleDotProps>`
+    width: ${dotSize}px;
+    height: ${dotSize}px;
+    padding: 0;
+    border-radius: 50%;
+    border: none;
     background-color: ${({ $active }) => ($active ? Variables.Colors.Primary500 : Variables.Colors.Primary300)};
-    border-radius: ${Variables.Radiuses.Circle};
-    cursor: pointer;
     transition: ${Variables.Transitions.Short};
 
-    @media ${Variables.Breakpoints.Hover} {
-        &:hover {
-            background-color: ${({ $active }) => ($active ? Variables.Colors.Primary300 : Variables.Colors.Primary500)};
-        }
+    &:hover {
+        background-color: ${({ $active }) => ($active ? Variables.Colors.Primary300 : Variables.Colors.Primary500)};
+    }
 
-        &:active {
-            background-color: ${Variables.Colors.Primary600};
-        }
+    &:active {
+        background-color: ${Variables.Colors.Primary600};
     }
 `

@@ -65,9 +65,9 @@ interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
     $justifyContent?: FlexJustifyContentTypes
     $alignItems?: FlexAlignItemsTypes
     $justifyItems?: FlexJustifyItemsTypes
-    $gap?: SpacerTypes | number
-    $rowGap?: SpacerTypes | number
-    $columnGap?: SpacerTypes | number
+    $gap?: SpacerTypes | number | string
+    $rowGap?: SpacerTypes | number | string
+    $columnGap?: SpacerTypes | number | string
     $padding?: SpacerTypes | number | string
 }
 
@@ -79,9 +79,9 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
     justifyContent?: FlexJustifyContentTypes
     alignItems?: FlexAlignItemsTypes
     justifyItems?: FlexJustifyItemsTypes
-    gap?: SpacerTypes | number
-    rowGap?: SpacerTypes | number
-    columnGap?: SpacerTypes | number
+    gap?: SpacerTypes | number | string
+    rowGap?: SpacerTypes | number | string
+    columnGap?: SpacerTypes | number | string
     padding?: SpacerTypes | number | string
 }
 

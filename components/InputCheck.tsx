@@ -73,7 +73,7 @@ interface StyleProps extends React.HTMLAttributes<HTMLInputElement> {
 
 interface BaseProps extends React.HTMLAttributes<HTMLInputElement> {
     id: string
-    label: string
+    label: string | JSX.Element
     disabled?: boolean
     name?: string
     validation?: ValidationTypes

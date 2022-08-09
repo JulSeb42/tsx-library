@@ -97,5 +97,4 @@ interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     isOpen: boolean
-    justify?: JustifyTypes
 }

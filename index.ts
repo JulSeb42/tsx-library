@@ -32,7 +32,7 @@ import Main from "./components/Main"
 import * as MarkdownCommands from "./markdown-commands"
 import MarkdownContainer from "./components/MarkdownContainer"
 import MarkdownEditor from "./components/MarkdownEditor"
-import { Messaging, Message } from "./components/Messaging"
+import Messaging from "./components/Messaging"
 import Mixins from "./components/Mixins"
 import Modal from "./components/Modal"
 import OptionsMarkdown from "./options-markdown"
@@ -89,7 +89,6 @@ export {
     MarkdownCommands,
     MarkdownContainer,
     MarkdownEditor,
-    Message,
     Messaging,
     Mixins,
     Modal,

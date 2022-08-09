@@ -18,7 +18,7 @@ import { ValidationTypes } from "./common-types"
 
 /*==================== Component ====================*/
 
-const InputImage = ({ id, disabled, validation, width = 64, height = 64, img, options, icons, ...props }: Props) => {
+const InputImage = ({ id, disabled, validation, width = 64, height = 64, img, options, icons, value, ...props }: Props) => {
     const EmptyContainer: React.FC = () => (
         <StyledEmptyContainer $validation={validation}>
             {icons?.empty ? (
@@ -74,7 +74,7 @@ const InputImage = ({ id, disabled, validation, width = 64, height = 64, img, op
                     <HoverContainer />
                 </Label>
 
-                <Input type="file" id={id} disabled={disabled} {...props} />
+                <Input type="file" id={id} disabled={disabled} value={value} {...props} />
             </Container>
         </InputContainer>
     ) : (
@@ -89,7 +89,7 @@ const InputImage = ({ id, disabled, validation, width = 64, height = 64, img, op
                 <HoverContainer />
             </Label>
 
-            <Input type="file" id={id} disabled={disabled} {...props} />
+            <Input type="file" id={id} disabled={disabled} value={value} {...props} />
         </Container>
     )
 }
@@ -111,6 +111,7 @@ interface Props extends React.HTMLAttributes<HTMLInputElement> {
     validation?: ValidationTypes
     width?: number | string
     height?: number | string
+    value?: never
 
     img: {
         src: string

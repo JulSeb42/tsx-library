@@ -45,7 +45,7 @@ const InputFunction = ({ id, items, onClickItem, disabled, value, autoFocus, opt
                         </Item>
                     ))
                 ) : (
-                    <Item $readOnly>{options?.textEmpty}</Item>
+                    <Item $readOnly>{options?.textEmpty || "No result!"}</Item>
                 )}
             </List>
         </InputContainer>

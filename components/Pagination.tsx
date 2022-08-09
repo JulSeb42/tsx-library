@@ -60,7 +60,7 @@ interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
-    justify: JustifyTypes
+    justify?: JustifyTypes
 }
 
 interface buttonStyleProps extends React.HTMLAttributes<HTMLButtonElement> {

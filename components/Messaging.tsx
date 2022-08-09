@@ -6,6 +6,7 @@ import React from "react"
 import styled, { css } from "styled-components"
 import ReactLinkify from "react-linkify"
 import ScrollToBottom from "react-scroll-to-bottom"
+import { v4 as uuid } from "uuid"
 
 import Variables from "./Variables"
 import Text from "./Text"
@@ -21,19 +22,44 @@ import { MessageProps } from "./component-props"
 
 const Messaging = ({
     children,
-    emptyMessage = "No message yet.",
+    texts,
     button,
     input,
     onSubmit,
+    messages,
     ...props
 }: Props) => (
     <Container>
-        <MessagesContainer $isEmpty={!children}>{children ? children : <Text>{emptyMessage}</Text>}</MessagesContainer>
+        <MessagesContainer $isEmpty={!messages}>
+            {messages ? (
+                messages.map(message => (
+                    <Flexbox
+                        alignItems={message.type === "sent" ? "flex-end" : "flex-start"}
+                        flexDirection="column"
+                        key={uuid()}
+                    >
+                        <StyledMessage $type={message.type}>
+                            <ReactLinkify>{message.text}</ReactLinkify>
+                        </StyledMessage>
+
+                        {(message.date || message.time) && (
+                            <Text tag="small" color="gray">
+                                {message.date && message.date}
+                                {message.date && message.time && ` ${texts?.dateTimeAt || "at"} `}
+                                {message.time && message.time}
+                            </Text>
+                        )}
+                    </Flexbox>
+                ))
+            ) : (
+                <Text>{texts?.emptyMessages || "No message yet."}</Text>
+            )}
+        </MessagesContainer>
 
         <Hr />
 
         <InputContainer onSubmit={onSubmit} {...props}>
-            <Input onChange={input.onChange} value={input.value} placeholder={input.placeholder} />
+            <Input onChange={input.onChange} value={input.value} placeholder={input.placeholder || "Type your message"} />
 
             <SendButton $hasText={!!button?.text} type="submit">
                 {button?.text ? (
@@ -48,27 +74,7 @@ const Messaging = ({
     </Container>
 )
 
-const Message = ({ message }: MessageItemProps) => {
-    const { type, text, date, time } = message
-
-    return (
-        <Flexbox alignItems={type === "sent" ? "flex-end" : "flex-start"} flexDirection="column">
-            <StyledMessage $type={type}>
-                <ReactLinkify>{text}</ReactLinkify>
-            </StyledMessage>
-
-            {(date || time) && (
-                <Text tag="small" color="gray">
-                    {date && date}
-                    {date && time && " at "}
-                    {time && time}
-                </Text>
-            )}
-        </Flexbox>
-    )
-}
-
-export { Messaging, Message }
+export default Messaging
 
 /*==================== Types ====================*/
 
@@ -84,8 +90,13 @@ interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 interface BaseProps extends React.HTMLAttributes<HTMLFormElement> {
-    children?: React.ReactNode[] | React.ReactNode
-    emptyMessage?: string
+    messages?: MessageProps[]
+
+    texts?: {
+        emptyMessages?: string
+        dateTimeAt?: string
+    }
+
     onSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void
 
     input: {
@@ -109,7 +120,7 @@ interface Possible2 extends BaseProps {
     }
 }
 
-type Props = Possible1 | Possible2
+type Props = Possible1 | Possible2
 
 interface StyleButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     $hasText?: boolean
@@ -117,10 +128,6 @@ interface StyleButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 
 interface StyleMessageProps extends React.HTMLAttributes<HTMLParagraphElement> {
     $type?: MessageTypesTypes
-}
-
-interface MessageItemProps extends React.HTMLAttributes<HTMLParagraphElement> {
-    message: MessageProps
 }
 
 /*==================== Styles ====================*/

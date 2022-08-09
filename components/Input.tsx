@@ -46,7 +46,7 @@ const InputFunction = ({
                 type={type}
                 disabled={disabled}
                 name={name}
-                $validation={validation}
+                $validation={validation?.status}
                 as="select"
                 autoFocus={autoFocus}
                 {...props}
@@ -74,7 +74,7 @@ const InputFunction = ({
             type={type}
             disabled={disabled}
             name={name}
-            $validation={validation}
+            $validation={validation?.status}
             autoFocus={autoFocus}
             {...props}
         />
@@ -108,7 +108,7 @@ const InputFunction = ({
                 type={password ? (isVisible ? "text" : "password") : type}
                 disabled={disabled}
                 name={name}
-                $validation={validation}
+                $validation={validation?.status}
                 $icon={!!icons?.icon}
                 autoFocus={autoFocus}
                 {...props}
@@ -168,7 +168,6 @@ const InputFunction = ({
             type={type}
             disabled={disabled}
             name={name}
-            $validation={validation}
             autoFocus={autoFocus}
             {...props}
         />
@@ -216,7 +215,9 @@ const Input = ({
                 textsPassword={textsPassword}
                 autoFocus={autoFocus}
                 {...props}
-            />
+            >
+                {children}
+            </InputFunction>
         </InputContainer>
     ) : (
         <InputFunction
@@ -233,7 +234,9 @@ const Input = ({
             textsPassword={textsPassword}
             autoFocus={autoFocus}
             {...props}
-        />
+        >
+            {children}
+        </InputFunction>
     )
 
 export default Input
