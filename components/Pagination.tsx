@@ -15,9 +15,9 @@ import ChevronRightIcon from "../icons/ChevronRightIcon"
 /*==================== Component ====================*/
 
 const Pagination = ({ justify = "left", children, ...props }: Props) => (
-    <Container $justify={justify} {...props}>
+    <StyledPagination $justify={justify} {...props}>
         {children}
-    </Container>
+    </StyledPagination>
 )
 
 const PaginationButton = ({ isActive, to, content, icon, disabled, ...props }: ButtonProps) => (
@@ -104,7 +104,7 @@ type ButtonProps = Possible1 | Possible2 | Possible3 | Possible4
 
 /*==================== Styles ====================*/
 
-const Container = styled.div<StyleProps>`
+const StyledPagination = styled.div<StyleProps>`
     ${({ $justify }) =>
         Mixins.Flexbox({
             $alignItems: "center",

@@ -82,7 +82,7 @@ const Slideshow = ({ children, height, options, icons, ...props }: Props) => {
     }
 
     return (
-        <Container {...props}>
+        <StyledSlideshow {...props}>
             <Wrapper flexDirection="column" $height={height}>
                 {options?.controls && (
                     <SlideshowButton
@@ -125,7 +125,7 @@ const Slideshow = ({ children, height, options, icons, ...props }: Props) => {
                     ))}
                 </Pagination>
             )}
-        </Container>
+        </StyledSlideshow>
     )
 }
 
@@ -190,7 +190,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.div`
+const StyledSlideshow = styled.div`
     width: 100%;
     ${Mixins.Grid({
         $gap: "xs",

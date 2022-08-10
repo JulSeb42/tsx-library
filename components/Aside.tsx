@@ -12,9 +12,9 @@ import Mixins from "./Mixins"
 /*==================== Component ====================*/
 
 const Aside = ({ size, position, children, ...props }: Props) => (
-    <Container $size={size} $position={position} {...props}>
+    <StyledAside $size={size} $position={position} {...props}>
         {children}
-    </Container>
+    </StyledAside>
 )
 
 export default Aside
@@ -48,7 +48,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.aside<StyleProps>`
+const StyledAside = styled.aside<StyleProps>`
     width: ${({ $size }) =>
         $size === "small"
             ? Variables.Layouts.Aside.Small

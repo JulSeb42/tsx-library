@@ -23,7 +23,7 @@ const ButtonIcon = ({
     options,
     ...props
 }: Props) => (
-    <Container
+    <StyledButtonIcon
         $buttonStyle={options?.variant || "plain"}
         $size={options?.size || 48}
         $color={options?.color || "primary"}
@@ -44,7 +44,7 @@ const ButtonIcon = ({
         ) : (
             <Icon src={icon} size={options?.size ? options?.size * 0.6 : 48 * 0.6} />
         )}
-    </Container>
+    </StyledButtonIcon>
 )
 
 export default ButtonIcon
@@ -98,7 +98,7 @@ type Props = Possible1 | Possible2
 
 /*==================== Styles ====================*/
 
-const Container = styled.button<StyleProps>`
+const StyledButtonIcon = styled.button<StyleProps>`
     width: ${({ $size }) => $size}px;
     height: ${({ $size }) => $size}px;
     border-radius: ${Variables.Radiuses.Circle};

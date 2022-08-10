@@ -16,7 +16,7 @@ const PageLoading = ({ options, ...props }: Props) => {
     useEffect(() => document.body.classList.add("stop-scrolling"))
 
     return (
-        <Container $backgroundColor={options?.backgroundColor || "primary"} {...props}>
+        <StyledPageLoading $backgroundColor={options?.backgroundColor || "primary"} {...props}>
             <Loader
                 options={{
                     size: 64,
@@ -29,7 +29,7 @@ const PageLoading = ({ options, ...props }: Props) => {
                             : "white",
                 }}
             />
-        </Container>
+        </StyledPageLoading>
     )
 }
 
@@ -50,7 +50,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.div<StyleProps>`
+const StyledPageLoading = styled.div<StyleProps>`
     position: fixed;
     width: 100vw;
     height: 100vh;

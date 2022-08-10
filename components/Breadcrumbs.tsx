@@ -17,7 +17,7 @@ import { BreadcrumbsItemProps } from "./component-props"
 /*==================== Component ====================*/
 
 const Breadcrumbs = ({ items, options, ...props }: Props) => (
-    <Container
+    <StyledBreacrumbs
         color={options?.color}
         linkColor={options?.linkColor || "primary"}
         $separator={options?.separator || "slash"}
@@ -36,7 +36,7 @@ const Breadcrumbs = ({ items, options, ...props }: Props) => (
                 )}
             </React.Fragment>
         ))}
-    </Container>
+    </StyledBreacrumbs>
 )
 
 export default Breadcrumbs
@@ -79,7 +79,7 @@ interface Props extends React.HTMLAttributes<HTMLParagraphElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled(Text)<StyleProps>`
+const StyledBreacrumbs = styled(Text)<StyleProps>`
     ${({ $separator }) =>
         Mixins.Flexbox({
             $alignItems: "center",

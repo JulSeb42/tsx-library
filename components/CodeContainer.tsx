@@ -34,7 +34,7 @@ const CodeContainer = ({
     }
 
     return (
-        <Container>
+        <StyledCodeContainer>
             <Code language={language} style={options?.style || atomOneDark} {...props}>
                 {children}
             </Code>
@@ -54,7 +54,7 @@ const CodeContainer = ({
                     )}
                 </Button>
             )}
-        </Container>
+        </StyledCodeContainer>
     )
 }
 
@@ -270,7 +270,7 @@ interface StyleButton extends React.HTMLAttributes<HTMLButtonElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.div`
+const StyledCodeContainer = styled.div`
     background-color: ${Variables.Colors.Gray800};
     position: relative;
     overflow-x: scroll;

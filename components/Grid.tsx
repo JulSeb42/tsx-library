@@ -34,7 +34,7 @@ const Grid = ({
     children,
     ...props
 }: Props) => (
-    <Container
+    <StyledGrid
         $inline={inline}
         $col={col}
         $gap={gap}
@@ -50,7 +50,7 @@ const Grid = ({
         {...props}
     >
         {children}
-    </Container>
+    </StyledGrid>
 )
 
 export default Grid
@@ -106,7 +106,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.div<StyleProps>`
+const StyledGrid = styled.div<StyleProps>`
     display: ${({ $inline }) => ($inline ? "inline-grid" : "grid")};
     grid-template-columns: ${({ $col }) => (typeof $col === "number" ? `repeat(${$col}, 1fr)` : $col)};
     gap: ${({ $gap }) =>

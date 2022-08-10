@@ -13,7 +13,7 @@ const CoverImage = React.lazy(() => import("./CoverImage"))
 
 /*==================== Styles ====================*/
 
-const Container = styled.div<StyleProps>`
+const StyledCover = styled.div<StyleProps>`
     position: relative;
     width: 100%;
     height: ${({ $height }) => $height};
@@ -61,7 +61,7 @@ const Content = styled.div<StyleProps>`
 /*==================== Component ====================*/
 
 const Cover = ({ src, alt, children, options, ...props }: Props) => (
-    <Container
+    <StyledCover
         $overlay={options?.overlay}
         $align={options?.align || "center"}
         $height={options?.height || "100vh"}
@@ -72,7 +72,7 @@ const Cover = ({ src, alt, children, options, ...props }: Props) => (
         </Suspense>
 
         <Content $align={options?.align || "center"}>{children}</Content>
-    </Container>
+    </StyledCover>
 )
 
 export default Cover

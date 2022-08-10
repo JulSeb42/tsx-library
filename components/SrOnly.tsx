@@ -8,9 +8,9 @@ import styled from "styled-components"
 /*==================== Component ====================*/
 
 const SrOnly = ({ children, as, ...props }: Props) => (
-    <Container as={as} {...props}>
+    <StyledSrOnly as={as} {...props}>
         {children}
-    </Container>
+    </StyledSrOnly>
 )
 
 export default SrOnly
@@ -24,7 +24,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.div`
+const StyledSrOnly = styled.div`
     border: 0 !important;
     clip: rect(1px, 1px, 1px, 1px) !important;
     clip-path: inset(50%) !important;

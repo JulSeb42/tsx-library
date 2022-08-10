@@ -10,9 +10,9 @@ import Variables from "./Variables"
 /*==================== Component ====================*/
 
 const Wrapper = ({ template, children, ...props }: Props) => (
-    <Container $template={template} {...props}>
+    <StyledWrapper $template={template} {...props}>
         {children}
-    </Container>
+    </StyledWrapper>
 )
 
 export default Wrapper
@@ -37,7 +37,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.div<StyleProps>`
+const StyledWrapper = styled.div<StyleProps>`
     display: grid;
     grid-template-columns: ${({ $template }) =>
         $template === "2cols"

@@ -12,7 +12,7 @@ import Text from "./Text"
 /*==================== Component ====================*/
 
 const InputContainer = ({ label, helper, helperBottom, counter, maxLength, value, children, id }: Props) => (
-    <Container>
+    <StyledInputContainer>
         {label && <Label htmlFor={id}>{label}</Label>}
 
         {helper && <Text>{helper}</Text>}
@@ -27,7 +27,7 @@ const InputContainer = ({ label, helper, helperBottom, counter, maxLength, value
                 {maxLength ? ` / ${maxLength}` : ""}
             </Text>
         )}
-    </Container>
+    </StyledInputContainer>
 )
 
 export default InputContainer
@@ -46,7 +46,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.div`
+const StyledInputContainer = styled.div`
     ${Mixins.Grid({
         $gap: "xxs",
     })};

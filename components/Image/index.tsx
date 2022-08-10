@@ -18,11 +18,11 @@ const Img = React.lazy(() => import("./Img"))
 const Image = ({ src, alt, options, width = "100%", height = "auto", ...props }: Props) => (
     <Suspense fallback={<Fallback $width={width} $height={height} />}>
         {options?.caption ? (
-            <Container $width={width} $height={height} {...props}>
+            <StyledImageContainer $width={width} $height={height} {...props}>
                 <Img src={src} alt={alt} $width={width} $height={height} $fit={options?.fit} />
 
                 <Caption>{options.caption}</Caption>
-            </Container>
+            </StyledImageContainer>
         ) : (
             <Img src={src} alt={alt} $width={width} $height={height} $fit={options?.fit} {...props} />
         )}
@@ -52,7 +52,7 @@ interface Props extends React.HTMLAttributes<HTMLImageElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.div<StyleProps>`
+const StyledImageContainer = styled.div<StyleProps>`
     position: relative;
 `
 

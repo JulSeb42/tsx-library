@@ -22,7 +22,7 @@ const Avatar = ({
     const defaultSize = 48
 
     return (
-        <Container
+        <StyledAvatar
             $color={options?.color || "primary"}
             $size={options?.size || defaultSize}
             $contentColor={options?.contentColor || "white"}
@@ -41,7 +41,7 @@ const Avatar = ({
             ) : (
                 content.letter
             )}
-        </Container>
+        </StyledAvatar>
     )
 }
 
@@ -96,7 +96,7 @@ type Props = Possible1 | Possible2 | Possible3
 
 /*==================== Styles ====================*/
 
-const Container = styled.span<StyleProps>`
+const StyledAvatar = styled.span<StyleProps>`
     width: ${({ $size }) => $size}px;
     height: ${({ $size }) => $size}px;
     border-radius: ${Variables.Radiuses.Circle};

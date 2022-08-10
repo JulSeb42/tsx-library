@@ -26,7 +26,7 @@ const Tabs = ({
     const [isActive, setIsActive] = useState(options.active || 0)
 
     return (
-        <Container {...props}>
+        <StyledTabs {...props}>
             <ButtonsContainer $tabsStyle={options.style} $justify={options.justify} $col={items.length}>
                 {items.map((item, i) => (
                     <Button
@@ -46,7 +46,7 @@ const Tabs = ({
                     {item.content}
                 </TabItem>
             ))}
-        </Container>
+        </StyledTabs>
     )
 }
 
@@ -95,7 +95,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.div`
+const StyledTabs = styled.div`
     ${Mixins.Grid({
         $gap: "xs",
     })};

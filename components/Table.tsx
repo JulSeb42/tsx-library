@@ -13,14 +13,14 @@ import { TextAlignTypes } from "./common-types"
 /*==================== Component ====================*/
 
 const Table = ({ options, children, ...props }: Props) => (
-    <Container
+    <StyledTable
         $tableStyle={options?.variant || "bordered"}
         $textAlign={options?.textAlign}
         $vAlign={options?.vAlign || "top"}
         {...props}
     >
         {children}
-    </Container>
+    </StyledTable>
 )
 
 export default Table
@@ -62,7 +62,7 @@ interface Props extends React.HTMLAttributes<HTMLTableElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.table<StyleProps>`
+const StyledTable = styled.table<StyleProps>`
     ${FontCommon};
     display: table;
     border-collapse: collapse;

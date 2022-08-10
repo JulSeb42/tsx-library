@@ -35,7 +35,7 @@ const Flexbox = ({
     children,
     ...props
 }: Props) => (
-    <Container
+    <StyledFlexbox
         $inline={inline}
         $flexDirection={flexDirection}
         $flexWrap={flexWrap}
@@ -50,7 +50,7 @@ const Flexbox = ({
         {...props}
     >
         {children}
-    </Container>
+    </StyledFlexbox>
 )
 
 export default Flexbox
@@ -87,7 +87,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.div<StyleProps>`
+const StyledFlexbox = styled.div<StyleProps>`
     display: ${({ $inline }) => ($inline ? "inline-flex" : "flex")};
     flex-direction: ${({ $flexDirection }) => $flexDirection};
     flex-wrap: ${({ $flexWrap }) => $flexWrap};

@@ -11,9 +11,9 @@ import Mixins from "./Mixins"
 /*==================== Component ====================*/
 
 const Section = ({ gap = "large", children, div, ...props }: Props) => (
-    <Container $gap={gap} as={div ? "div" : "section"} {...props}>
+    <StyledSection $gap={gap} as={div ? "div" : "section"} {...props}>
         {children}
-    </Container>
+    </StyledSection>
 )
 
 export default Section
@@ -39,7 +39,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.section<StyleProps>`
+const StyledSection = styled.section<StyleProps>`
     ${({ $gap }) =>
         Mixins.Grid({
             $gap: $gap === "large" ? "m" : $gap === "medium" ? "s" : $gap === "small" ? "xs" : stringifyPx($gap),

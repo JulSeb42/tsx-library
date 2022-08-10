@@ -18,7 +18,7 @@ const Badge = ({ content, options, ...props }: Props) => {
     const defaultSize = 16
 
     return (
-        <Container
+        <StyledBadge
             $color={options?.color || "primary"}
             $size={options?.size || defaultSize}
             $children={!!content}
@@ -34,7 +34,7 @@ const Badge = ({ content, options, ...props }: Props) => {
             ) : (
                 ""
             )}
-        </Container>
+        </StyledBadge>
     )
 }
 
@@ -87,7 +87,7 @@ type Props = Possible1 | Possible2
 
 /*==================== Styles ====================*/
 
-const Container = styled.span<StyleProps>`
+const StyledBadge = styled.span<StyleProps>`
     min-width: ${({ $size }) => $size}px;
     height: ${({ $size }) => $size}px;
     font-size: ${({ $size }) => ($size ? $size * 0.6 : 16 * 0.6)}px;

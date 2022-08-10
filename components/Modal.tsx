@@ -18,7 +18,7 @@ const Modal = ({ children, isOpen, close, iconClose, ...props }: Props) => {
     })
 
     return (
-        <Container $isOpen={isOpen} {...props}>
+        <StyledModal $isOpen={isOpen} {...props}>
             {close && (
                 <CloseButton onClick={close}>
                     {iconClose ? (
@@ -30,7 +30,7 @@ const Modal = ({ children, isOpen, close, iconClose, ...props }: Props) => {
             )}
 
             <Content>{children}</Content>
-        </Container>
+        </StyledModal>
     )
 }
 
@@ -51,7 +51,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.div<StyleProps>`
+const StyledModal = styled.div<StyleProps>`
     position: fixed;
     top: 0;
     left: 0;

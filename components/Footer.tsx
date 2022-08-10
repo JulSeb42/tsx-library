@@ -15,7 +15,7 @@ import { ColorsShortTypes, LibColorsTypes } from "./common-types"
 /*==================== Component ====================*/
 
 const Footer = ({ children, logo, options, ...props }: Props) => (
-    <Container $separator={options?.separator} $separatorColor={options?.separatorColor || "gray-200"} {...props}>
+    <StyledFooter $separator={options?.separator} $separatorColor={options?.separatorColor || "gray-200"} {...props}>
         {logo.img ? (
             <LogoImg
                 src={logo.img}
@@ -33,7 +33,7 @@ const Footer = ({ children, logo, options, ...props }: Props) => (
         )}
 
         <FooterLinks>{children}</FooterLinks>
-    </Container>
+    </StyledFooter>
 )
 
 export default Footer
@@ -78,7 +78,7 @@ type Props = Possible1 | Possible2
 
 /*==================== Styles ====================*/
 
-const Container = styled.footer<StyleProps>`
+const StyledFooter = styled.footer<StyleProps>`
     width: 100%;
     position: relative;
     z-index: 10;

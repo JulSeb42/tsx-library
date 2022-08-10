@@ -23,7 +23,7 @@ const InputCheck = ({
     checkStyle,
     ...props
 }: Props) => (
-    <Container>
+    <StyledInputCheck>
         <Input
             id={id}
             name={name}
@@ -57,7 +57,7 @@ const InputCheck = ({
                 {label}
             </Radio>
         )}
-    </Container>
+    </StyledInputCheck>
 )
 
 export default InputCheck
@@ -94,7 +94,7 @@ type Props = Possible1 | Possible2
 
 /*==================== Styles ====================*/
 
-const Container = styled.div``
+const StyledInputCheck = styled.div``
 
 const Tile = ({ $validation, $disabled }: StyleProps) => css`
     background-color: ${Variables.Colors.White};

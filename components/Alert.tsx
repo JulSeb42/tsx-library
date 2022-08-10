@@ -14,9 +14,9 @@ import { ColorsShortTypes } from "./common-types"
 /*==================== Component ====================*/
 
 const Alert = ({ color = "primary", children, modal, ...props }: Props) => (
-    <Container $color={color} as={typeof children === "string" ? Text : "div"} $modal={modal} {...props}>
+    <StyledAlert $color={color} as={typeof children === "string" ? Text : "div"} $modal={modal} {...props}>
         {children}
-    </Container>
+    </StyledAlert>
 )
 
 export default Alert
@@ -36,7 +36,7 @@ interface Props extends React.HTMLAttributes<HTMLParagraphElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.div<StyleProps>`
+const StyledAlert = styled.div<StyleProps>`
     color: ${({ $color }) => ($color === "black" ? Variables.Colors.White : Variables.Colors.Black)};
     ${Mixins.Grid({
         $gap: "s",

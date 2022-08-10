@@ -25,7 +25,7 @@ const Button = ({
     options,
     ...props
 }: Props) => (
-    <Container
+    <StyledButton
         $color={options?.color || "primary"}
         $buttonStyle={options?.variant || "plain"}
         $noPadding={options?.noPadding}
@@ -42,7 +42,7 @@ const Button = ({
         {children}
 
         {options?.iconRight && <Icon src={options.iconRight} size={16} />}
-    </Container>
+    </StyledButton>
 )
 
 export default Button
@@ -97,7 +97,7 @@ type Props = Possible1 | Possible2
 
 /*==================== Styles ====================*/
 
-const Container = styled.button<StyleProps>`
+const StyledButton = styled.button<StyleProps>`
     border: 1px solid ${({ $buttonStyle }) => ($buttonStyle === "outline" ? Mixins.ColorsHoverDefault : "transparent")};
     text-decoration: none;
     padding: ${({ $noPadding }) => ($noPadding ? 0 : `${Variables.Spacers.XS} ${Variables.Spacers.S}`)};

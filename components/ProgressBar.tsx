@@ -17,7 +17,7 @@ const ProgressBar = ({
     options = { animated: true },
     ...props
 }: Props) => (
-    <Container
+    <StyledProgressBar
         $value={value}
         $animated={options.animated}
         $color={options.color || "primary"}
@@ -59,7 +59,7 @@ const Progress = ({ $value }: StyleProps) => keyframes`
     }
 `
 
-const Container = styled.span<StyleProps>`
+const StyledProgressBar = styled.span<StyleProps>`
     width: 100%;
     height: 16px;
     background-color: ${({ $color, $backgroundColor }) =>

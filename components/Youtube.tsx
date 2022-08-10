@@ -9,7 +9,7 @@ import { convertYoutube, stringifyPx } from "../utils"
 /*==================== Component ====================*/
 
 const Youtube = ({ src, width, height, aspectRatio, ...props }: Props) => (
-    <Container
+    <StyledYoutube
         src={convertYoutube(src)}
         frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -42,7 +42,7 @@ interface Props extends React.HTMLAttributes<HTMLIFrameElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.iframe<StyleProps>`
+const StyledYoutube = styled.iframe<StyleProps>`
     width: ${({ $width }) => ($width ? stringifyPx($width) : "100%")};
     height: ${({ $height }) => $height};
     aspect-ratio: ${({ $aspectRatio, $height }) =>

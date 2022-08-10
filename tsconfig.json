@@ -1,0 +1,39 @@
+{
+    "compilerOptions": {
+        // "target": "es5",
+        // "lib": [
+        //     "dom",
+        //     "dom.iterable",
+        //     "esnext"
+        // ],
+        // "allowJs": true,
+        "skipLibCheck": true,
+        // "esModuleInterop": true,
+        // "allowSyntheticDefaultImports": true,
+        // "strict": true,
+        // "forceConsistentCasingInFileNames": true,
+        // "noFallthroughCasesInSwitch": true,
+        // "moduleResolution": "node",
+        // "resolveJsonModule": true,
+        // "isolatedModules": true,
+        // "noEmit": true,
+        // "jsx": "react",
+        // "declaration": true,
+        // "outDir": "dist",
+        // "module": "es2020",
+        "strict": true,
+        "jsx": "react",
+        "declaration": true,
+        "esModuleInterop": true,
+        "outDir": "dist",
+        "target": "es5",
+        "module": "es2020",
+        "moduleResolution": "node"
+    },
+    "include": [
+        "lib"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

@@ -13,14 +13,14 @@ import { ColorsShortTypes, LibColorsTypes } from "./common-types"
 /*==================== Component ====================*/
 
 const Tag = ({ options, children, ...props }: Props) => (
-    <Container
+    <StyledTag
         $tagStyle={options?.variant || "rounded"}
         $color={options?.color || "primary"}
         $textColor={options?.textColor}
         {...props}
     >
         {children}
-    </Container>
+    </StyledTag>
 )
 
 export default Tag
@@ -51,7 +51,7 @@ interface Props extends React.HTMLAttributes<HTMLSpanElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.span<StyleProps>`
+const StyledTag = styled.span<StyleProps>`
     font-size: ${Variables.FontSizes.Small};
     padding: ${({ $tagStyle }) =>
         $tagStyle === "pill"

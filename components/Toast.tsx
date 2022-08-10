@@ -19,7 +19,7 @@ const Toast = ({ title, close, children, icon, ...props }: Props) => {
     const [isClosed, setIsClosed] = useState(false)
 
     return (
-        <Container $isClosed={isClosed} {...props}>
+        <StyledToast $isClosed={isClosed} {...props}>
             {icon || close ? (
                 <TitleContainer>
                     {icon && <Icon src={icon.name} size={24} color={icon.color || "primary"} />}
@@ -37,7 +37,7 @@ const Toast = ({ title, close, children, icon, ...props }: Props) => {
             )}
 
             {children && <Content as={typeof children === "string" ? Text : "div"}>{children}</Content>}
-        </Container>
+        </StyledToast>
     )
 }
 
@@ -67,7 +67,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.div<StyleProps>`
+const StyledToast = styled.div<StyleProps>`
     width: 100%;
     max-width: 400px;
     background-color: ${Variables.Colors.White};

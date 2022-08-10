@@ -26,7 +26,7 @@ const Paginator = ({
     const activePage = pages.active > pages.total ? pages.total : pages.active < 1 ? 1 : pages.active
 
     return (
-        <Container $justify={justify}>
+        <StyledPaginator $justify={justify}>
             {text?.page || "Page"} <StyledInput type="number" id={idInput} value={activePage} onChange={handles.change} {...props} />{" "}
             {`${text?.of || "of"} ${pages.total}`}
             <Button onClick={handles.prev} disabled={activePage === 1 && true}>
@@ -35,7 +35,7 @@ const Paginator = ({
             <Button onClick={handles.next} disabled={activePage === pages.total && true}>
                 {icons?.next ? <Icon src={icons.next} size={16} /> : <ChevronRightIcon size={20} />}
             </Button>
-        </Container>
+        </StyledPaginator>
     )
 }
 
@@ -79,7 +79,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.div<StyleProps>`
+const StyledPaginator = styled.div<StyleProps>`
     ${({ $justify }) =>
         Mixins.Flexbox({
             $alignItems: "center",

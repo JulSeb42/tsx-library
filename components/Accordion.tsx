@@ -21,7 +21,7 @@ const StyledIconPlus = styled(PlusIcon)``
 
 const StyledIconChevron = styled(ChevronDownIcon)``
 
-const Container = styled.div<StyleProps>`
+const StyledAccordion = styled.div<StyleProps>`
     position: relative;
     ${({ $accordionStyle }) =>
         Mixins.Grid({
@@ -148,7 +148,7 @@ const Accordion = ({
     items,
     ...props
 }: Props) => (
-    <Container $accordionStyle={options.style} {...props}>
+    <StyledAccordion $accordionStyle={options.style} {...props}>
         {items.map((item, i) => (
             <AccordionItem
                 icon={options.icon}
@@ -160,7 +160,7 @@ const Accordion = ({
                 key={uuid()}
             />
         ))}
-    </Container>
+    </StyledAccordion>
 )
 
 export default Accordion

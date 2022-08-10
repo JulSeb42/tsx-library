@@ -13,7 +13,7 @@ import InputContainer from "./InputContainer"
 const MarkdownEditor = ({ id, onChange, value, options, commands, extraCommands, ...props }: Props) => {
     return options?.label || options?.helper || options?.helperBottom ? (
         <InputContainer id={id} label={options.label} helper={options.helper} helperBottom={options.helperBottom}>
-            <Container data-color-mode={options?.colorMode || "light"}>
+            <StyledMarkdownEditor data-color-mode={options?.colorMode || "light"}>
                 <MDEditor
                     id={id}
                     onChange={onChange}
@@ -23,12 +23,12 @@ const MarkdownEditor = ({ id, onChange, value, options, commands, extraCommands,
                     extraCommands={extraCommands}
                     {...props}
                 />
-            </Container>
+            </StyledMarkdownEditor>
         </InputContainer>
     ) : (
-        <Container data-color-mode={options?.colorMode || "light"}>
+        <StyledMarkdownEditor data-color-mode={options?.colorMode || "light"}>
             <MDEditor id={id} onChange={onChange} value={value} preview={options?.preview || "edit"} {...props} />
-        </Container>
+        </StyledMarkdownEditor>
     )
 }
 
@@ -54,4 +54,4 @@ interface Props extends React.HTMLAttributes<HTMLInputElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.div``
+const StyledMarkdownEditor = styled.div``

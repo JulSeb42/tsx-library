@@ -11,7 +11,7 @@ import Flexbox from "./Flexbox"
 
 /*==================== Styles ====================*/
 
-const Container = styled.div<StyleProps>`
+const StyledDropdown = styled.div<StyleProps>`
     position: absolute;
     top: 42px;
     ${Mixins.Grid({})};
@@ -48,10 +48,10 @@ const Container = styled.div<StyleProps>`
     }
 `
 
-const StyledContainer = styled(Flexbox)<StyleContainerProps>`
+const StyledDropdownContainer = styled(Flexbox)<StyleContainerProps>`
     position: relative;
 
-    ${Container} {
+    ${StyledDropdown} {
         left: ${({ $justify }) => $justify === "left" && 0};
         right: ${({ $justify }) => $justify === "right" && 0};
     }
@@ -60,15 +60,15 @@ const StyledContainer = styled(Flexbox)<StyleContainerProps>`
 /*==================== Component ====================*/
 
 const DropdownContainer = ({ justify = "left", children, ...props }: ContainerProps) => (
-    <StyledContainer $justify={justify} justifyContent={justify === "right" ? "flex-end" : "flex-start"} {...props}>
+    <StyledDropdownContainer $justify={justify} justifyContent={justify === "right" ? "flex-end" : "flex-start"} {...props}>
         {children}
-    </StyledContainer>
+    </StyledDropdownContainer>
 )
 
 const Dropdown = ({ children, isOpen, ...props }: Props) => (
-    <Container $isOpen={isOpen} {...props}>
+    <StyledDropdown $isOpen={isOpen} {...props}>
         {children}
-    </Container>
+    </StyledDropdown>
 )
 
 export { DropdownContainer, Dropdown }

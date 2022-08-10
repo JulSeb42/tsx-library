@@ -18,7 +18,7 @@ import { StepProps } from "./component-props"
 /*==================== Component ====================*/
 
 const Stepper = ({ steps, active, options, ...props }: Props) => (
-    <Container $direction={options?.direction || "row"} {...props}>
+    <StyledStepper $direction={options?.direction || "row"} {...props}>
         {steps.map((step, i) => (
             <Item $direction={options?.direction || "row"} key={uuid()}>
                 <Number $active={active >= i ? true : false}>
@@ -38,7 +38,7 @@ const Stepper = ({ steps, active, options, ...props }: Props) => (
                 </Text>
             </Item>
         ))}
-    </Container>
+    </StyledStepper>
 )
 
 export default Stepper
@@ -83,7 +83,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.div<StyleProps>`
+const StyledStepper = styled.div<StyleProps>`
     position: relative;
     ${({ $direction }) =>
         Mixins.Flexbox({

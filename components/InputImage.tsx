@@ -57,7 +57,7 @@ const InputImage = ({ id, disabled, validation, width = 64, height = 64, img, op
 
     return options ? (
         <InputContainer id={id} label={options.label} helper={options.helper} helperBottom={options.helperBottom}>
-            <Container>
+            <StyledInputImage>
                 <Label htmlFor={id} $disabled={disabled} $width={width} $height={height}>
                     {img.src === "" ? (
                         <EmptyContainer />
@@ -75,10 +75,10 @@ const InputImage = ({ id, disabled, validation, width = 64, height = 64, img, op
                 </Label>
 
                 <Input type="file" id={id} disabled={disabled} value={value} {...props} />
-            </Container>
+            </StyledInputImage>
         </InputContainer>
     ) : (
-        <Container>
+        <StyledInputImage>
             <Label htmlFor={id} $disabled={disabled} $width={width} $height={height}>
                 {img.src === "" ? (
                     <EmptyContainer />
@@ -90,7 +90,7 @@ const InputImage = ({ id, disabled, validation, width = 64, height = 64, img, op
             </Label>
 
             <Input type="file" id={id} disabled={disabled} value={value} {...props} />
-        </Container>
+        </StyledInputImage>
     )
 }
 
@@ -132,7 +132,7 @@ interface Props extends React.HTMLAttributes<HTMLInputElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.div`
+const StyledInputImage = styled.div`
     position: relative;
 `
 

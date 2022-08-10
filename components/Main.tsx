@@ -12,9 +12,9 @@ import Mixins from "./Mixins"
 /*==================== Component ====================*/
 
 const Main = ({ size, position, children, ...props }: Props) => (
-    <Container $size={size} $position={position} {...props}>
+    <StyledMain $size={size} $position={position} {...props}>
         {children}
-    </Container>
+    </StyledMain>
 )
 
 export default Main
@@ -45,7 +45,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.main<StyleProps>`
+const StyledMain = styled.main<StyleProps>`
     width: ${({ $size }) =>
         $size === "large"
             ? Variables.Layouts.Main.Large

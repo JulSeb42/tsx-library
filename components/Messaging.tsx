@@ -29,7 +29,7 @@ const Messaging = ({
     messages,
     ...props
 }: Props) => (
-    <Container>
+    <StyledMessaging>
         <MessagesContainer $isEmpty={!messages}>
             {messages ? (
                 messages.map(message => (
@@ -71,7 +71,7 @@ const Messaging = ({
                 )}
             </SendButton>
         </InputContainer>
-    </Container>
+    </StyledMessaging>
 )
 
 export default Messaging
@@ -132,7 +132,7 @@ interface StyleMessageProps extends React.HTMLAttributes<HTMLParagraphElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.div`
+const StyledMessaging = styled.div`
     border: 1px solid ${Variables.Colors.Gray200};
     border-radius: ${Variables.Radiuses.L};
     max-height: 60vh;

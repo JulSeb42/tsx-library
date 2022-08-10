@@ -16,7 +16,7 @@ const Tooltip = ({ tooltip, children, options, ...props }: Props) => {
     const [isVisible, setIsVisible] = useState(false)
 
     return (
-        <Container
+        <StyledTooltip
             $textStyle={options?.textStyle || "dotted"}
             $color={options?.color || "primary"}
             onMouseEnter={() => setIsVisible(true)}
@@ -26,7 +26,7 @@ const Tooltip = ({ tooltip, children, options, ...props }: Props) => {
             <Tip isVisible={isVisible}>{tooltip}</Tip>
 
             {children}
-        </Container>
+        </StyledTooltip>
     )
 }
 
@@ -62,7 +62,7 @@ interface Props extends React.HTMLAttributes<HTMLSpanElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.span<StyleProps>`
+const StyledTooltip = styled.span<StyleProps>`
     display: inline;
     position: relative;
     color: ${Mixins.AllColors};

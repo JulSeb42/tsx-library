@@ -135,7 +135,7 @@ const InputFunction = ({
                         </ButtonInput>
                     )}
 
-                    {validation &&
+                    {validation && validation.status !== undefined &&
                         (validation.status === "passed" ? (
                             validation.iconPassed ? (
                                 <Icon src={validation.iconPassed} size={24} color="success" />

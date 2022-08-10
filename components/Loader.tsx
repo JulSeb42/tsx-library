@@ -13,7 +13,7 @@ import { ColorsShortTypes, LibColorsTypes } from "./common-types"
 /*==================== Component ====================*/
 
 const Loader = ({ options, ...props }: Props) => (
-    <Container
+    <StyledLoader
         $size={options?.size || 48}
         $borderSize={options?.borderSize || 8}
         $speed={options?.speed || 1000}
@@ -54,7 +54,7 @@ const Spin = keyframes`
     }
 `
 
-const Container = styled.span<StyleProps>`
+const StyledLoader = styled.span<StyleProps>`
     width: ${({ $size }) => $size}px;
     height: ${({ $size }) => $size}px;
     border-radius: ${Variables.Radiuses.Circle};

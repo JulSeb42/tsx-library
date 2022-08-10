@@ -54,7 +54,7 @@ const LinkStyles = ({ $linkColor }: StyleProps) => css`
     }
 `
 
-const Container = styled.header<StyleProps>`
+const StyledHeader = styled.header<StyleProps>`
     position: ${({ $position }) => $position};
     z-index: 999;
     width: 100vw;
@@ -136,7 +136,7 @@ const Header = ({
     }, [])
 
     return (
-        <Container
+        <StyledHeader
             $backgroundColor={backgroundColor}
             $isOpen={isOpen}
             $position={position}
@@ -170,7 +170,7 @@ const Header = ({
             >
                 {children}
             </Nav>
-        </Container>
+        </StyledHeader>
     )
 }
 

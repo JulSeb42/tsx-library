@@ -12,7 +12,7 @@ import Button from "./Button"
 /*==================== Component ====================*/
 
 const Form = ({ children, buttonPrimary, buttonSecondary, isLoading, ...props }: Props) => (
-    <Container {...props}>
+    <StyledForm {...props}>
         {children}
 
         {(buttonPrimary || buttonSecondary) && (
@@ -50,7 +50,7 @@ const Form = ({ children, buttonPrimary, buttonSecondary, isLoading, ...props }:
                 )}
             </Flexbox>
         )}
-    </Container>
+    </StyledForm>
 )
 
 export default Form
@@ -90,7 +90,7 @@ type Props = Possible1 | Possible2
 
 /*==================== Styles ====================*/
 
-const Container = styled.form`
+const StyledForm = styled.form`
     ${Mixins.Grid({
         $gap: "m",
     })};

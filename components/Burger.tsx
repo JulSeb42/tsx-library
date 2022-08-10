@@ -20,7 +20,7 @@ const Burger = ({
     height = 24,
     ...props
 }: Props) => (
-    <Container
+    <StyledBurger
         $isOpen={isOpen}
         aria-label={ariaLabel}
         $color={color}
@@ -31,7 +31,7 @@ const Burger = ({
         <span />
         <span />
         <span />
-    </Container>
+    </StyledBurger>
 )
 
 export default Burger
@@ -55,7 +55,7 @@ interface Props extends React.HTMLAttributes<HTMLButtonElement> {
 
 /*==================== Styles ====================*/
 
-const Container = styled.button<StyleProps>`
+const StyledBurger = styled.button<StyleProps>`
     position: relative;
     border: none;
     background-color: transparent;
