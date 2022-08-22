@@ -17,22 +17,32 @@ import { CountryType, ValidationTypes } from "../common-types"
 
 /*==================== Component ====================*/
 
-const InputPhone = ({ isOpen, setIsOpen, country, options, children, input, validation, disabled, ...props }: Props) => {
+const InputPhone = ({
+    isOpen,
+    setIsOpen,
+    selectedCountry,
+    options,
+    children,
+    input,
+    validation,
+    disabled,
+    ...props
+}: Props) => {
     return options?.label || options?.helper || options?.helperBottom ? (
         <InputContainer id={input.id} label={options.label} helper={options.helper} helperBottom={options.helperBottom}>
             <StyledInputPhone $isOpen={isOpen}>
                 <Button type="button" onClick={() => setIsOpen(!isOpen)}>
-                    <Flag src={country.flag} alt={`Flag ${country.name}`} />
+                    <Flag src={selectedCountry.flag} alt={`Flag ${selectedCountry.name}`} />
 
                     {options?.icon ? <Icon src={options.icon} size={12} /> : <CaretDownIcon size={12} />}
                 </Button>
 
                 <List $isOpen={isOpen}>{children}</List>
 
-                <CountryCode>{country.dial_code}</CountryCode>
+                <CountryCode>{selectedCountry.dial_code}</CountryCode>
 
                 <Input
-                    $codeLength={country.dial_code.length}
+                    $codeLength={selectedCountry.dial_code.length}
                     id={input.id}
                     value={input.value}
                     onChange={input.onChange}
@@ -63,17 +73,17 @@ const InputPhone = ({ isOpen, setIsOpen, country, options, children, input, vali
     ) : (
         <StyledInputPhone $isOpen={isOpen}>
             <Button type="button" onClick={() => setIsOpen(!isOpen)}>
-                <Flag src={country.flag} alt={`Flag ${country.name}`} />
+                <Flag src={selectedCountry.flag} alt={`Flag ${selectedCountry.name}`} />
 
                 {options?.icon ? <Icon src={options.icon} size={12} /> : <CaretDownIcon size={12} />}
             </Button>
 
             <List $isOpen={isOpen}>{children}</List>
 
-            <CountryCode>{country.dial_code}</CountryCode>
+            <CountryCode>{selectedCountry.dial_code}</CountryCode>
 
             <Input
-                $codeLength={country.dial_code.length}
+                $codeLength={selectedCountry.dial_code.length}
                 id={input.id}
                 value={input.value}
                 onChange={input.onChange}
@@ -124,8 +134,8 @@ interface StyleInputProps extends React.HTMLAttributes<HTMLInputElement> {
 interface Props extends React.HTMLAttributes<HTMLInputElement> {
     isOpen: boolean
     setIsOpen: any
-    country: CountryType
-    children: any
+    selectedCountry: CountryType
+    children: React.ReactNode | React.ReactNode[]
     disabled?: boolean
 
     input: {
@@ -150,7 +160,7 @@ interface Props extends React.HTMLAttributes<HTMLInputElement> {
 
 interface ItemProps extends React.HTMLAttributes<HTMLSpanElement> {
     country: CountryType
-    onClick: any
+    onClick: (e: React.MouseEvent<HTMLSpanElement>) => void
     isActive: boolean
 }
 
