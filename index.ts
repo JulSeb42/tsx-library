@@ -13,6 +13,7 @@ import ButtonIcon from "./components/ButtonIcon"
 import CodeContainer from "./components/CodeContainer"
 import * as CommonTypes from "./common-types"
 import * as ComponentProps from "./component-props"
+import countries from "./countries"
 import Cover from "./components/Cover"
 import { DropdownContainer, Dropdown } from "./components/Dropdown"
 import Flexbox from "./components/Flexbox"
@@ -73,6 +74,7 @@ export {
     CommonTypes,
     ComponentProps,
     Cover,
+    countries,
     Dropdown,
     DropdownContainer,
     Flexbox,
