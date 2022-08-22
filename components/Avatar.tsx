@@ -5,7 +5,7 @@
 import React from "react"
 import styled from "styled-components"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Mixins from "./Mixins"
 import Icon from "./Icon"
 import Image from "./Image"
@@ -14,11 +14,7 @@ import { ColorsShortTypes, LibColorsTypes } from "../common-types"
 
 /*==================== Component ====================*/
 
-const Avatar = ({
-    options,
-    content,
-    ...props
-}: Props) => {
+const Avatar = ({ options, content, ...props }: Props) => {
     const defaultSize = 48
 
     return (
@@ -37,7 +33,12 @@ const Avatar = ({
                     options={{ fit: "cover" }}
                 />
             ) : content.icon && options?.size ? (
-                <Icon src={content.icon} size={options?.size ? options?.size * 0.6 : defaultSize * 0.6} />
+                <Icon
+                    src={content.icon}
+                    size={
+                        options?.size ? options?.size * 0.6 : defaultSize * 0.6
+                    }
+                />
             ) : (
                 content.letter
             )}
@@ -48,12 +49,6 @@ const Avatar = ({
 export default Avatar
 
 /*==================== Types ====================*/
-
-interface StyleProps extends React.HTMLAttributes<HTMLSpanElement> {
-    $color?: LibColorsTypes | ColorsShortTypes | string
-    $contentColor?: LibColorsTypes | ColorsShortTypes | string
-    $size?: number
-}
 
 type AvatarImg = {
     src: string
@@ -96,7 +91,11 @@ type Props = Possible1 | Possible2 | Possible3
 
 /*==================== Styles ====================*/
 
-const StyledAvatar = styled.span<StyleProps>`
+const StyledAvatar = styled.span<{
+    $color?: LibColorsTypes | ColorsShortTypes | string
+    $contentColor?: LibColorsTypes | ColorsShortTypes | string
+    $size?: number
+}>`
     width: ${({ $size }) => $size}px;
     height: ${({ $size }) => $size}px;
     border-radius: ${Variables.Radiuses.Circle};

@@ -5,36 +5,58 @@
 import React, { Suspense } from "react"
 import styled, { css } from "styled-components"
 
-import Variables from "../Variables"
+import Variables from "../../Variables"
 import Mixins from "../Mixins"
 import Fallback from "../Fallback"
 
 const CoverImage = React.lazy(() => import("./CoverImage"))
 
+/*==================== Component ====================*/
+
+const Cover = ({ src, alt, children, options, ...props }: Props) => (
+    <StyledCover
+        $overlay={options?.overlay}
+        $height={options?.height || "100vh"}
+        {...props}
+    >
+        <Suspense
+            fallback={
+                <Fallback $width="100%" $height={options?.height || "100vh"} />
+            }
+        >
+            <CoverImage src={src} alt={alt} />
+        </Suspense>
+
+        <Content $align={options?.align || "center"}>{children}</Content>
+    </StyledCover>
+)
+
+export default Cover
+
+/*==================== Types ====================*/
+
+const align = {
+    center: "center",
+    bottom: "bottom",
+} as const
+
+type AlignTypes = keyof typeof align
+
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+    src: string
+    alt: string
+    children: React.ReactNode | React.ReactNode[]
+
+    options?: {
+        overlay?: "black" | "white" | "gradient-black" | "gradient-white"
+        align?: AlignTypes
+        height?: number | string
+    }
+}
+
 /*==================== Styles ====================*/
 
-const StyledCover = styled.div<StyleProps>`
-    position: relative;
-    width: 100%;
-    height: ${({ $height }) => $height};
-
-    ${({ $overlay }) =>
-        $overlay &&
-        css`
-            &:before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                z-index: 1;
-                width: 100%;
-                height: 100%;
-                background-color: ${Variables.Overlays.Plain.Black50};
-            }
-        `}
-`
-
-const Content = styled.div<StyleProps>`
+const Content = styled.div<{ $align?: AlignTypes; $height?: number | string }>`
     position: relative;
     top: 0;
     left: 0;
@@ -58,48 +80,38 @@ const Content = styled.div<StyleProps>`
     }
 `
 
-/*==================== Component ====================*/
-
-const Cover = ({ src, alt, children, options, ...props }: Props) => (
-    <StyledCover
-        $overlay={options?.overlay}
-        $align={options?.align || "center"}
-        $height={options?.height || "100vh"}
-        {...props}
-    >
-        <Suspense fallback={<Fallback $width="100%" $height={options?.height || "100vh"} />}>
-            <CoverImage src={src} alt={alt} />
-        </Suspense>
-
-        <Content $align={options?.align || "center"}>{children}</Content>
-    </StyledCover>
-)
-
-export default Cover
-
-/*==================== Types ====================*/
-
-const align = {
-    center: "center",
-    bottom: "bottom",
-} as const
-
-type AlignTypes = keyof typeof align
-
-interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
-    $overlay?: boolean
-    $align?: AlignTypes
+const StyledCover = styled.div<{
+    $overlay?: "black" | "white" | "gradient-black" | "gradient-white"
     $height?: number | string
-}
+}>`
+    position: relative;
+    width: 100%;
+    height: ${({ $height }) => $height};
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
-    src: string
-    alt: string
-    children: React.ReactNode | React.ReactNode[]
+    ${({ $overlay }) =>
+        $overlay &&
+        css`
+            ${Content} {
+                color: ${$overlay === "white" || $overlay === "gradient-white"
+                    ? Variables.Colors.Black
+                    : Variables.Colors.White};
+            }
 
-    options?: {
-        overlay?: boolean
-        align?: AlignTypes
-        height?: number | string
-    }
-}
+            &:before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 1;
+                width: 100%;
+                height: 100%;
+                background: ${$overlay === "white"
+                    ? Variables.Overlays.Plain.White50
+                    : $overlay === "gradient-black"
+                    ? Variables.Overlays.Gradient.Black
+                    : $overlay === "gradient-white"
+                    ? Variables.Overlays.Gradient.White
+                    : Variables.Overlays.Plain.Black50};
+            }
+        `}
+`

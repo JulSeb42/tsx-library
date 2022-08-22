@@ -5,7 +5,7 @@
 import { css } from "styled-components"
 import { stringifyPx } from "../utils"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 
 import {
     LibColorsTypes,
@@ -42,6 +42,12 @@ interface ColorsHoverProps {
 
 interface AllColorProps {
     $color?: LibColorsTypes | ColorsShortTypes | string
+}
+
+/*==== Spacers ====*/
+
+interface SpacersProps {
+    $spacer?: SpacerTypes | string | number
 }
 
 /*==== Grid ====*/
@@ -426,6 +432,27 @@ const Mixins = {
                 : ""}
         `,
 
+    Spacers: ({ $spacer }: SpacersProps) =>
+        css`
+            ${$spacer === "xxl"
+                ? Variables.Spacers.XXL
+                : $spacer === "xl"
+                ? Variables.Spacers.XL
+                : $spacer === "l"
+                ? Variables.Spacers.L
+                : $spacer === "m"
+                ? Variables.Spacers.M
+                : $spacer === "s"
+                ? Variables.Spacers.S
+                : $spacer === "xs"
+                ? Variables.Spacers.XS
+                : $spacer === "xxs"
+                ? Variables.Spacers.XXS
+                : $spacer
+                ? stringifyPx($spacer)
+                : ""};
+        `,
+
     Grid: ({
         $inline,
         $col,
@@ -439,79 +466,17 @@ const Mixins = {
         $padding,
     }: GridProps) => css`
         display: ${$inline ? "inline-grid" : "grid"};
-        grid-template-columns: ${typeof $col === "number" ? `repeat(${$col}, 1fr)` : $col};
-        gap: ${$gap === "xxl"
-            ? Variables.Spacers.XXL
-            : $gap === "xl"
-            ? Variables.Spacers.XL
-            : $gap === "l"
-            ? Variables.Spacers.L
-            : $gap === "m"
-            ? Variables.Spacers.M
-            : $gap === "s"
-            ? Variables.Spacers.S
-            : $gap === "xs"
-            ? Variables.Spacers.XS
-            : $gap === "xxs"
-            ? Variables.Spacers.XXS
-            : $gap
-            ? stringifyPx($gap)
-            : ""};
-        column-gap: ${$columnGap === "xxl"
-            ? Variables.Spacers.XXL
-            : $columnGap === "xl"
-            ? Variables.Spacers.XL
-            : $columnGap === "l"
-            ? Variables.Spacers.L
-            : $columnGap === "m"
-            ? Variables.Spacers.M
-            : $columnGap === "s"
-            ? Variables.Spacers.S
-            : $columnGap === "xs"
-            ? Variables.Spacers.XS
-            : $columnGap === "xxs"
-            ? Variables.Spacers.XXS
-            : $columnGap
-            ? stringifyPx($columnGap)
-            : ""};
-        row-gap: ${$rowGap === "xxl"
-            ? Variables.Spacers.XXL
-            : $rowGap === "xl"
-            ? Variables.Spacers.XL
-            : $rowGap === "l"
-            ? Variables.Spacers.L
-            : $rowGap === "m"
-            ? Variables.Spacers.M
-            : $rowGap === "s"
-            ? Variables.Spacers.S
-            : $rowGap === "xs"
-            ? Variables.Spacers.XS
-            : $rowGap === "xxs"
-            ? Variables.Spacers.XXS
-            : $rowGap
-            ? stringifyPx($rowGap)
-            : ""};
+        grid-template-columns: ${typeof $col === "number"
+            ? `repeat(${$col}, 1fr)`
+            : $col};
+        gap: ${Mixins.Spacers({ $spacer: $gap })};
+        column-gap: ${Mixins.Spacers({ $spacer: $columnGap })};
+        row-gap: ${Mixins.Spacers({ $spacer: $rowGap })};
         justify-items: ${$justifyItems};
         align-items: ${$alignItems};
         justify-content: ${$justifyContent};
         align-content: ${$alignContent};
-        padding: ${$padding === "xxl"
-            ? Variables.Spacers.XXL
-            : $padding === "xl"
-            ? Variables.Spacers.XL
-            : $padding === "l"
-            ? Variables.Spacers.L
-            : $padding === "m"
-            ? Variables.Spacers.M
-            : $padding === "s"
-            ? Variables.Spacers.S
-            : $padding === "xs"
-            ? Variables.Spacers.XS
-            : $padding === "xxs"
-            ? Variables.Spacers.XXS
-            : $padding
-            ? stringifyPx($padding)
-            : ""};
+        padding: ${Mixins.Spacers({ $spacer: $padding })};
     `,
 
     Flexbox: ({
@@ -534,74 +499,10 @@ const Mixins = {
         align-items: ${$alignItems};
         justify-items: ${$justifyItems};
         align-content: ${$alignContent};
-        gap: ${$gap === "xxl"
-            ? Variables.Spacers.XXL
-            : $gap === "xl"
-            ? Variables.Spacers.XL
-            : $gap === "l"
-            ? Variables.Spacers.L
-            : $gap === "m"
-            ? Variables.Spacers.M
-            : $gap === "s"
-            ? Variables.Spacers.S
-            : $gap === "xs"
-            ? Variables.Spacers.XS
-            : $gap === "xxs"
-            ? Variables.Spacers.XXS
-            : $gap
-            ? stringifyPx($gap)
-            : ""};
-        column-gap: ${$columnGap === "xxl"
-            ? Variables.Spacers.XXL
-            : $columnGap === "xl"
-            ? Variables.Spacers.XL
-            : $columnGap === "l"
-            ? Variables.Spacers.L
-            : $columnGap === "m"
-            ? Variables.Spacers.M
-            : $columnGap === "s"
-            ? Variables.Spacers.S
-            : $columnGap === "xs"
-            ? Variables.Spacers.XS
-            : $columnGap === "xxs"
-            ? Variables.Spacers.XXS
-            : $columnGap
-            ? stringifyPx($columnGap)
-            : ""};
-        row-gap: ${$rowGap === "xxl"
-            ? Variables.Spacers.XXL
-            : $rowGap === "xl"
-            ? Variables.Spacers.XL
-            : $rowGap === "l"
-            ? Variables.Spacers.L
-            : $rowGap === "m"
-            ? Variables.Spacers.M
-            : $rowGap === "s"
-            ? Variables.Spacers.S
-            : $rowGap === "xs"
-            ? Variables.Spacers.XS
-            : $rowGap === "xxs"
-            ? Variables.Spacers.XXS
-            : $rowGap
-            ? stringifyPx($rowGap)
-            : ""};
-        padding: ${$padding === "xxl"
-            ? Variables.Spacers.XXL
-            : $padding === "xl"
-            ? Variables.Spacers.XL
-            : $padding === "l"
-            ? Variables.Spacers.L
-            : $padding === "m"
-            ? Variables.Spacers.M
-            : $padding === "s"
-            ? Variables.Spacers.S
-            : $padding === "xs"
-            ? Variables.Spacers.XS
-            : $padding === "xxs"
-            ? Variables.Spacers.XXS
-            : $padding
-            ? stringifyPx($padding)
-            : ""};
+        gap: ${Mixins.Spacers({ $spacer: $gap })};
+        column-gap: ${Mixins.Spacers({ $spacer: $columnGap })};
+        row-gap: ${Mixins.Spacers({ $spacer: $rowGap })};
+        padding: ${Mixins.Spacers({ $spacer: $padding })};
     `,
 
     Icon: ({ $name, $color: color = "currentColor", $size }: IconProps) => css`
@@ -616,7 +517,11 @@ const Mixins = {
         height: ${$size}px;
     `,
 
-    LibIcon: ({ $name, $color: color = "currentColor", $size }: IconProps) => css`
+    LibIcon: ({
+        $name,
+        $color: color = "currentColor",
+        $size,
+    }: IconProps) => css`
         content: "";
         mask: url("../icons/${$name}.svg") no-repeat 50% 50%;
         mask-size: cover;

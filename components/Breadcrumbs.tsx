@@ -11,7 +11,11 @@ import Mixins from "./Mixins"
 import Text from "./Text"
 import ChevronRightIcon from "../icons/ChevronRightIcon"
 
-import { ColorsHoverTypes, LibColorsTypes, ColorsShortTypes } from "../common-types"
+import {
+    ColorsHoverTypes,
+    LibColorsTypes,
+    ColorsShortTypes,
+} from "../common-types"
 import { BreadcrumbsItemProps } from "../component-props"
 
 /*==================== Component ====================*/
@@ -31,7 +35,11 @@ const Breadcrumbs = ({ items, options, ...props }: Props) => (
 
                 {to && (
                     <Separator $separator={options?.separator || "slash"}>
-                        {options?.separator === "icon" ? <ChevronRightIcon size={20} /> : "/"}
+                        {options?.separator === "icon" ? (
+                            <ChevronRightIcon size={20} />
+                        ) : (
+                            "/"
+                        )}
                     </Separator>
                 )}
             </React.Fragment>
@@ -49,17 +57,6 @@ const separators = {
 } as const
 
 type SeparatorTypes = keyof typeof separators
-
-interface StyleProps {
-    $separator?: SeparatorTypes
-    $linkColor?:
-        | ColorsHoverTypes
-        | {
-              default?: LibColorsTypes | ColorsShortTypes | string
-              hover?: LibColorsTypes | ColorsShortTypes | string
-              active?: LibColorsTypes | ColorsShortTypes | string
-          }
-}
 
 interface Props extends React.HTMLAttributes<HTMLParagraphElement> {
     items: BreadcrumbsItemProps[]
@@ -79,7 +76,9 @@ interface Props extends React.HTMLAttributes<HTMLParagraphElement> {
 
 /*==================== Styles ====================*/
 
-const StyledBreacrumbs = styled(Text)<StyleProps>`
+const StyledBreacrumbs = styled(Text)<{
+    $separator?: SeparatorTypes
+}>`
     ${({ $separator }) =>
         Mixins.Flexbox({
             $alignItems: "center",
@@ -89,7 +88,9 @@ const StyledBreacrumbs = styled(Text)<StyleProps>`
         })};
 `
 
-const Separator = styled.span<StyleProps>`
+const Separator = styled.span<{
+    $separator?: SeparatorTypes
+}>`
     color: currentColor;
     position: relative;
     top: ${({ $separator }) => $separator === "icon" && "4px"};

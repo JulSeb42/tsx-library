@@ -6,14 +6,35 @@ import React from "react"
 import styled, { css } from "styled-components"
 import { stringifyPx } from "../utils"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Mixins from "./Mixins"
 
-import { LibColorsTypes, ColorsShortTypes, TextAlignTypes, ColorsHoverTypes } from "../common-types"
+import {
+    LibColorsTypes,
+    ColorsShortTypes,
+    TextAlignTypes,
+    ColorsHoverTypes,
+} from "../common-types"
 
 /*==================== Styles ====================*/
 
-export const FontCommon = ({ $color, $textAlign, $linkColor }: CommonStyleProps) => css`
+export const FontCommon = ({
+    $color,
+    $textAlign,
+    $linkColor,
+}: {
+    $textAlign?: TextAlignTypes
+    $color?: LibColorsTypes | ColorsShortTypes | string
+    $linkColor?:
+        | ColorsHoverTypes
+        | {
+              default: string
+              hover: string
+              active: string
+          }
+    $fontSize?: FontSizeTypes | string | number
+    $display?: boolean
+}) => css`
     text-align: ${$textAlign};
     color: ${Mixins.AllColors};
 
@@ -76,7 +97,19 @@ export const FontCommon = ({ $color, $textAlign, $linkColor }: CommonStyleProps)
     }
 `
 
-const StyledH1 = styled.h1<CommonStyleProps>`
+const StyledH1 = styled.h1<{
+    $textAlign?: TextAlignTypes
+    $color?: LibColorsTypes | ColorsShortTypes | string
+    $linkColor?:
+        | ColorsHoverTypes
+        | {
+              default: string
+              hover: string
+              active: string
+          }
+    $fontSize?: FontSizeTypes | string | number
+    $display?: boolean
+}>`
     ${FontCommon};
     font-weight: ${Variables.FontWeights.Black};
     font-size: ${({ $display, $fontSize }) =>
@@ -148,7 +181,19 @@ const StyledH1 = styled.h1<CommonStyleProps>`
     }
 `
 
-const StyledH2 = styled.h2<CommonStyleProps>`
+const StyledH2 = styled.h2<{
+    $textAlign?: TextAlignTypes
+    $color?: LibColorsTypes | ColorsShortTypes | string
+    $linkColor?:
+        | ColorsHoverTypes
+        | {
+              default: string
+              hover: string
+              active: string
+          }
+    $fontSize?: FontSizeTypes | string | number
+    $display?: boolean
+}>`
     ${FontCommon};
     font-weight: ${Variables.FontWeights.Black};
     font-size: ${({ $display, $fontSize }) =>
@@ -220,7 +265,19 @@ const StyledH2 = styled.h2<CommonStyleProps>`
     }
 `
 
-const StyledH3 = styled.h3<CommonStyleProps>`
+const StyledH3 = styled.h3<{
+    $textAlign?: TextAlignTypes
+    $color?: LibColorsTypes | ColorsShortTypes | string
+    $linkColor?:
+        | ColorsHoverTypes
+        | {
+              default: string
+              hover: string
+              active: string
+          }
+    $fontSize?: FontSizeTypes | string | number
+    $display?: boolean
+}>`
     ${FontCommon};
     font-weight: ${Variables.FontWeights.Black};
     font-size: ${({ $display, $fontSize }) =>
@@ -292,7 +349,19 @@ const StyledH3 = styled.h3<CommonStyleProps>`
     }
 `
 
-const StyledH4 = styled.h4<CommonStyleProps>`
+const StyledH4 = styled.h4<{
+    $textAlign?: TextAlignTypes
+    $color?: LibColorsTypes | ColorsShortTypes | string
+    $linkColor?:
+        | ColorsHoverTypes
+        | {
+              default: string
+              hover: string
+              active: string
+          }
+    $fontSize?: FontSizeTypes | string | number
+    $display?: boolean
+}>`
     ${FontCommon};
     font-weight: ${Variables.FontWeights.Black};
     font-size: ${({ $display, $fontSize }) =>
@@ -364,7 +433,19 @@ const StyledH4 = styled.h4<CommonStyleProps>`
     }
 `
 
-const StyledH5 = styled.h5<CommonStyleProps>`
+const StyledH5 = styled.h5<{
+    $textAlign?: TextAlignTypes
+    $color?: LibColorsTypes | ColorsShortTypes | string
+    $linkColor?:
+        | ColorsHoverTypes
+        | {
+              default: string
+              hover: string
+              active: string
+          }
+    $fontSize?: FontSizeTypes | string | number
+    $display?: boolean
+}>`
     ${FontCommon};
     font-weight: ${Variables.FontWeights.Black};
     font-size: ${({ $display, $fontSize }) =>
@@ -401,11 +482,26 @@ const StyledH5 = styled.h5<CommonStyleProps>`
             : Variables.FontSizes.Titles.H5};
 
     & > * {
-        font-size: ${({ $display }) => ($display ? Variables.FontSizes.Display.H5 : Variables.FontSizes.Titles.H5)};
+        font-size: ${({ $display }) =>
+            $display
+                ? Variables.FontSizes.Display.H5
+                : Variables.FontSizes.Titles.H5};
     }
 `
 
-const StyledH6 = styled.h6<CommonStyleProps>`
+const StyledH6 = styled.h6<{
+    $textAlign?: TextAlignTypes
+    $color?: LibColorsTypes | ColorsShortTypes | string
+    $linkColor?:
+        | ColorsHoverTypes
+        | {
+              default: string
+              hover: string
+              active: string
+          }
+    $fontSize?: FontSizeTypes | string | number
+    $display?: boolean
+}>`
     ${FontCommon};
     font-weight: ${Variables.FontWeights.Black};
     font-size: ${({ $fontSize }) =>
@@ -473,7 +569,19 @@ const StyledH6 = styled.h6<CommonStyleProps>`
     }
 `
 
-const StyledP = styled.p<CommonStyleProps>`
+const StyledP = styled.p<{
+    $textAlign?: TextAlignTypes
+    $color?: LibColorsTypes | ColorsShortTypes | string
+    $linkColor?:
+        | ColorsHoverTypes
+        | {
+              default: string
+              hover: string
+              active: string
+          }
+    $fontSize?: FontSizeTypes | string | number
+    $display?: boolean
+}>`
     ${FontCommon};
     font-size: ${({ $fontSize }) =>
         $fontSize === "display-h1"
@@ -540,17 +648,53 @@ const StyledP = styled.p<CommonStyleProps>`
     }
 `
 
-const StyledStrong = styled.strong<CommonStyleProps>`
+const StyledStrong = styled.strong<{
+    $textAlign?: TextAlignTypes
+    $color?: LibColorsTypes | ColorsShortTypes | string
+    $linkColor?:
+        | ColorsHoverTypes
+        | {
+              default: string
+              hover: string
+              active: string
+          }
+    $fontSize?: FontSizeTypes | string | number
+    $display?: boolean
+}>`
     ${FontCommon};
     font-weight: ${Variables.FontWeights.Black};
 `
 
-const StyledEm = styled.em<CommonStyleProps>`
+const StyledEm = styled.em<{
+    $textAlign?: TextAlignTypes
+    $color?: LibColorsTypes | ColorsShortTypes | string
+    $linkColor?:
+        | ColorsHoverTypes
+        | {
+              default: string
+              hover: string
+              active: string
+          }
+    $fontSize?: FontSizeTypes | string | number
+    $display?: boolean
+}>`
     ${FontCommon};
     font-style: italic;
 `
 
-const StyledSmall = styled.small<CommonStyleProps>`
+const StyledSmall = styled.small<{
+    $textAlign?: TextAlignTypes
+    $color?: LibColorsTypes | ColorsShortTypes | string
+    $linkColor?:
+        | ColorsHoverTypes
+        | {
+              default: string
+              hover: string
+              active: string
+          }
+    $fontSize?: FontSizeTypes | string | number
+    $display?: boolean
+}>`
     ${FontCommon};
     font-size: ${({ $fontSize }) =>
         $fontSize === "display-h1"
@@ -617,7 +761,19 @@ const StyledSmall = styled.small<CommonStyleProps>`
     }
 `
 
-const StyledBlockquote = styled.blockquote<CommonStyleProps>`
+const StyledBlockquote = styled.blockquote<{
+    $textAlign?: TextAlignTypes
+    $color?: LibColorsTypes | ColorsShortTypes | string
+    $linkColor?:
+        | ColorsHoverTypes
+        | {
+              default: string
+              hover: string
+              active: string
+          }
+    $fontSize?: FontSizeTypes | string | number
+    $display?: boolean
+}>`
     ${FontCommon};
     font-size: ${({ $fontSize }) =>
         $fontSize === "display-h1"
@@ -652,7 +808,19 @@ const StyledBlockquote = styled.blockquote<CommonStyleProps>`
     font-style: italic;
 `
 
-const StyledUl = styled.ul<CommonStyleProps>`
+const StyledUl = styled.ul<{
+    $textAlign?: TextAlignTypes
+    $color?: LibColorsTypes | ColorsShortTypes | string
+    $linkColor?:
+        | ColorsHoverTypes
+        | {
+              default: string
+              hover: string
+              active: string
+          }
+    $fontSize?: FontSizeTypes | string | number
+    $display?: boolean
+}>`
     ${FontCommon};
     padding: 0;
     margin: 0;
@@ -697,7 +865,19 @@ const StyledUl = styled.ul<CommonStyleProps>`
     }
 `
 
-const StyledOl = styled.ol<CommonStyleProps>`
+const StyledOl = styled.ol<{
+    $textAlign?: TextAlignTypes
+    $color?: LibColorsTypes | ColorsShortTypes | string
+    $linkColor?:
+        | ColorsHoverTypes
+        | {
+              default: string
+              hover: string
+              active: string
+          }
+    $fontSize?: FontSizeTypes | string | number
+    $display?: boolean
+}>`
     ${FontCommon};
     padding: 0;
     margin: 0;
@@ -742,7 +922,19 @@ const StyledOl = styled.ol<CommonStyleProps>`
     }
 `
 
-const StyledDl = styled.dl<CommonStyleProps>`
+const StyledDl = styled.dl<{
+    $textAlign?: TextAlignTypes
+    $color?: LibColorsTypes | ColorsShortTypes | string
+    $linkColor?:
+        | ColorsHoverTypes
+        | {
+              default: string
+              hover: string
+              active: string
+          }
+    $fontSize?: FontSizeTypes | string | number
+    $display?: boolean
+}>`
     ${FontCommon};
     font-size: ${({ $fontSize }) =>
         $fontSize === "display-h1"
@@ -903,7 +1095,13 @@ const H6 = ({
     fontSize,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLHeadingElement>) => (
-    <StyledH6 $color={color} $textAlign={textAlign} $linkColor={linkColor} $fontSize={fontSize} {...props}>
+    <StyledH6
+        $color={color}
+        $textAlign={textAlign}
+        $linkColor={linkColor}
+        $fontSize={fontSize}
+        {...props}
+    >
         {children}
     </StyledH6>
 )
@@ -916,7 +1114,13 @@ const P = ({
     fontSize,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLParagraphElement>) => (
-    <StyledP $color={color} $textAlign={textAlign} $linkColor={linkColor} $fontSize={fontSize} {...props}>
+    <StyledP
+        $color={color}
+        $textAlign={textAlign}
+        $linkColor={linkColor}
+        $fontSize={fontSize}
+        {...props}
+    >
         {children}
     </StyledP>
 )
@@ -929,7 +1133,13 @@ const Strong = ({
     fontSize,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLParagraphElement>) => (
-    <StyledStrong $color={color} $textAlign={textAlign} $linkColor={linkColor} $fontSize={fontSize} {...props}>
+    <StyledStrong
+        $color={color}
+        $textAlign={textAlign}
+        $linkColor={linkColor}
+        $fontSize={fontSize}
+        {...props}
+    >
         {children}
     </StyledStrong>
 )
@@ -942,7 +1152,13 @@ const Em = ({
     fontSize,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLParagraphElement>) => (
-    <StyledEm $color={color} $textAlign={textAlign} $linkColor={linkColor} $fontSize={fontSize} {...props}>
+    <StyledEm
+        $color={color}
+        $textAlign={textAlign}
+        $linkColor={linkColor}
+        $fontSize={fontSize}
+        {...props}
+    >
         {children}
     </StyledEm>
 )
@@ -955,7 +1171,13 @@ const Small = ({
     fontSize,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLParagraphElement>) => (
-    <StyledSmall $color={color} $textAlign={textAlign} $linkColor={linkColor} $fontSize={fontSize} {...props}>
+    <StyledSmall
+        $color={color}
+        $textAlign={textAlign}
+        $linkColor={linkColor}
+        $fontSize={fontSize}
+        {...props}
+    >
         {children}
     </StyledSmall>
 )
@@ -968,7 +1190,13 @@ const Blockquote = ({
     fontSize,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLQuoteElement>) => (
-    <StyledBlockquote $color={color} $textAlign={textAlign} $linkColor={linkColor} $fontSize={fontSize} {...props}>
+    <StyledBlockquote
+        $color={color}
+        $textAlign={textAlign}
+        $linkColor={linkColor}
+        $fontSize={fontSize}
+        {...props}
+    >
         {children}
     </StyledBlockquote>
 )
@@ -981,7 +1209,13 @@ const Ul = ({
     fontSize,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLUListElement>) => (
-    <StyledUl $color={color} $textAlign={textAlign} $linkColor={linkColor} $fontSize={fontSize} {...props}>
+    <StyledUl
+        $color={color}
+        $textAlign={textAlign}
+        $linkColor={linkColor}
+        $fontSize={fontSize}
+        {...props}
+    >
         {children}
     </StyledUl>
 )
@@ -994,7 +1228,13 @@ const Ol = ({
     fontSize,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLOListElement>) => (
-    <StyledOl $color={color} $textAlign={textAlign} $linkColor={linkColor} $fontSize={fontSize} {...props}>
+    <StyledOl
+        $color={color}
+        $textAlign={textAlign}
+        $linkColor={linkColor}
+        $fontSize={fontSize}
+        {...props}
+    >
         {children}
     </StyledOl>
 )
@@ -1007,7 +1247,13 @@ const Dl = ({
     fontSize,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLDListElement>) => (
-    <StyledDl $color={color} $textAlign={textAlign} $linkColor={linkColor} $fontSize={fontSize} {...props}>
+    <StyledDl
+        $color={color}
+        $textAlign={textAlign}
+        $linkColor={linkColor}
+        $fontSize={fontSize}
+        {...props}
+    >
         {children}
     </StyledDl>
 )
@@ -1092,21 +1338,7 @@ const fontSizes = {
 
 type FontSizeTypes = keyof typeof fontSizes
 
-interface CommonStyleProps {
-    $textAlign?: TextAlignTypes
-    $color?: LibColorsTypes | ColorsShortTypes | string
-    $linkColor?:
-        | ColorsHoverTypes
-        | {
-              default: string
-              hover: string
-              active: string
-          }
-    $fontSize?: FontSizeTypes | string | number
-    $display?: boolean
-}
-
-interface BaseProps extends React.HTMLAttributes<HTMLInputElement> {
+interface BaseProps extends React.HTMLAttributes<HTMLElement> {
     textAlign?: TextAlignTypes
     color?: LibColorsTypes | ColorsShortTypes | string
     linkColor?:
@@ -1125,7 +1357,16 @@ interface Possible1 extends BaseProps {
 }
 
 interface Possible2 extends BaseProps {
-    tag?: "h6" | "p" | "strong" | "em" | "small" | "blockquote" | "ul" | "ol" | "dl"
+    tag?:
+        | "h6"
+        | "p"
+        | "strong"
+        | "em"
+        | "small"
+        | "blockquote"
+        | "ul"
+        | "ol"
+        | "dl"
     display?: never
 }
 

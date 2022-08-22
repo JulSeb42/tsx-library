@@ -7,20 +7,48 @@ import styled from "styled-components"
 import { v4 as uuid } from "uuid"
 import { stringifyPx } from "../utils"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Mixins from "./Mixins"
 import Flexbox from "./Flexbox"
 import Icon from "./Icon"
 import ChevronLeftIcon from "../icons/ChevronLeftIcon"
 import ChevronRightIcon from "../icons/ChevronRightIcon"
 
+import { ColorsHoverTypes } from "../common-types"
+
 /*==================== Component ====================*/
 
-const SlideshowButton = ({ onClick, iconPrev, iconNext, prev, next, position, hideTouch }: ButtonProps) => (
-    <Button onClick={onClick} $position={position} $hideTouch={hideTouch}>
-        {prev && (iconPrev ? <Icon src={iconPrev} size={24} /> : <ChevronLeftIcon size={24} />)}
+const SlideshowButton = ({
+    onClick,
+    iconPrev,
+    iconNext,
+    prev,
+    next,
+    position,
+    hideTouch,
+    isLarge,
+    color = "primary",
+}: ButtonProps) => (
+    <Button
+        onClick={onClick}
+        $position={position}
+        $hideTouch={hideTouch}
+        $isLarge={isLarge}
+        $color={color}
+    >
+        {prev &&
+            (iconPrev ? (
+                <Icon src={iconPrev} size={24} />
+            ) : (
+                <ChevronLeftIcon size={24} />
+            ))}
 
-        {next && (iconNext ? <Icon src={iconNext} size={24} /> : <ChevronRightIcon size={24} />)}
+        {next &&
+            (iconNext ? (
+                <Icon src={iconNext} size={24} />
+            ) : (
+                <ChevronRightIcon size={24} />
+            ))}
     </Button>
 )
 
@@ -33,7 +61,9 @@ const Slideshow = ({ children, height, options, icons, ...props }: Props) => {
         if (!options?.show) {
             setActive(active < length - 1 ? active + 1 : 0)
         } else {
-            setActive(active < length + options.show ? active + options.show : 0)
+            setActive(
+                active < length + options.show ? active + options.show : 0
+            )
         }
     }
 
@@ -41,7 +71,11 @@ const Slideshow = ({ children, height, options, icons, ...props }: Props) => {
         if (!options?.show) {
             setActive(active > 0 ? active - 1 : length - 1)
         } else {
-            setActive(active > 0 ? active - options.show : length + options.show + (options.show - 1))
+            setActive(
+                active > 0
+                    ? active - options.show
+                    : length + options.show + (options.show - 1)
+            )
         }
     }
 
@@ -56,7 +90,12 @@ const Slideshow = ({ children, height, options, icons, ...props }: Props) => {
         } else if (options?.autoplay) {
             setInterval(() => autoSlideshow(), options.autoplay)
         }
-    }, [options?.autoplay, autoSlideshow, options?.controls, options?.pagination])
+    }, [
+        options?.autoplay,
+        autoSlideshow,
+        options?.controls,
+        options?.pagination,
+    ])
 
     // Swipe
     const [touchPosition, setTouchPosition] = useState(null)
@@ -84,7 +123,7 @@ const Slideshow = ({ children, height, options, icons, ...props }: Props) => {
     return (
         <StyledSlideshow {...props}>
             <Wrapper flexDirection="column" $height={height}>
-                {options?.controls && (
+                {(options?.controls || options?.controlsLarge) && (
                     <SlideshowButton
                         position="left"
                         onClick={handlePrev}
@@ -92,16 +131,25 @@ const Slideshow = ({ children, height, options, icons, ...props }: Props) => {
                         hideTouch={options?.hideControlsTouch}
                         iconNext={icons?.next}
                         iconPrev={icons?.prev}
+                        isLarge={options.controlsLarge}
+                        color={options?.controlsColor}
                     />
                 )}
 
-                <ContentWrapper onTouchStart={handleTouchStart} onTouchMove={handleTouchMove}>
-                    <Content $show={options?.show} $active={active} $speed={options?.speed || 1000}>
+                <ContentWrapper
+                    onTouchStart={handleTouchStart}
+                    onTouchMove={handleTouchMove}
+                >
+                    <Content
+                        $show={options?.show}
+                        $active={active}
+                        $speed={options?.speed || 1000}
+                    >
                         {children}
                     </Content>
                 </ContentWrapper>
 
-                {options?.controls && (
+                {(options?.controls || options?.controlsLarge) && (
                     <SlideshowButton
                         position="right"
                         onClick={handleNext}
@@ -109,6 +157,8 @@ const Slideshow = ({ children, height, options, icons, ...props }: Props) => {
                         hideTouch={options?.hideControlsTouch}
                         iconNext={icons?.next}
                         iconPrev={icons?.prev}
+                        isLarge={options.controlsLarge}
+                        color={options?.controlsColor}
                     />
                 )}
             </Wrapper>
@@ -121,7 +171,12 @@ const Slideshow = ({ children, height, options, icons, ...props }: Props) => {
                     gap={Variables.Spacers.XS}
                 >
                     {children.map((_: any, i: any) => (
-                        <Dot onClick={() => setActive(i)} $active={active === i && true} key={uuid()} />
+                        <Dot
+                            onClick={() => setActive(i)}
+                            $isActive={active === i && true}
+                            $color={options?.paginationColor}
+                            key={uuid()}
+                        />
                     ))}
                 </Pagination>
             )}
@@ -140,25 +195,6 @@ const positions = {
 
 type PositionsTypes = keyof typeof positions
 
-interface StyleWrapperProps {
-    $height?: string | number
-}
-
-interface StyleContentProps {
-    $speed?: number
-    $show?: number
-    $active: number
-}
-
-interface StyleDotProps extends React.HTMLAttributes<HTMLButtonElement> {
-    $active?: boolean
-}
-
-interface ButtonStyleProps extends React.HTMLAttributes<HTMLButtonElement> {
-    $position: PositionsTypes
-    $hideTouch?: boolean
-}
-
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     iconPrev?: string
     iconNext?: string
@@ -166,6 +202,8 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     next?: boolean
     position: PositionsTypes
     hideTouch?: boolean
+    isLarge?: boolean
+    color?: ColorsHoverTypes
 }
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
@@ -176,10 +214,13 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
         show?: number
         autoplay?: number
         controls?: boolean
+        controlsLarge?: boolean
+        controlsColor?: ColorsHoverTypes
         hideControlsTouch?: boolean
         hidePaginationTouch?: boolean
         speed?: number
         pagination?: boolean
+        paginationColor?: ColorsHoverTypes
     }
 
     icons?: {
@@ -198,7 +239,7 @@ const StyledSlideshow = styled.div`
     })};
 `
 
-const Wrapper = styled(Flexbox)<StyleWrapperProps>`
+const Wrapper = styled(Flexbox)<{ $height?: string | number }>`
     width: 100%;
     height: ${({ $height }) => ($height ? stringifyPx($height) : "60vh")};
     position: relative;
@@ -210,13 +251,19 @@ const ContentWrapper = styled(Flexbox)`
     height: 100%;
 `
 
-const Content = styled(Flexbox)<StyleContentProps>`
+const Content = styled(Flexbox)<{
+    $speed?: number
+    $show?: number
+    $active: number
+}>`
     transition: all ${({ $speed }) => $speed}ms ease;
     -ms-overflow-style: none;
     scrollbar-width: none;
     width: ${({ $show }) => ($show ? `calc(100% / ${$show})` : "100%")};
     transform: ${({ $show, $active }) =>
-        $show ? `translateX(-${$active * (100 / $show)}%)` : `translateX(-${$active * 100}%)`};
+        $show
+            ? `translateX(-${$active * (100 / $show)}%)`
+            : `translateX(-${$active * 100}%)`};
     height: 100%;
 
     &::-webkit-scrollbar {
@@ -239,31 +286,54 @@ const Content = styled(Flexbox)<StyleContentProps>`
 `
 
 const buttonSize = 32
+const buttonSizeLarge = 48
 
-const Button = styled.button<ButtonStyleProps>`
-    width: ${buttonSize}px;
-    height: ${buttonSize}px;
-    border-radius: ${Variables.Radiuses.Circle};
+const Button = styled.button<{
+    $position: PositionsTypes
+    $hideTouch?: boolean
+    $isLarge?: boolean
+    $color?: ColorsHoverTypes
+}>`
+    width: ${({ $isLarge }) => ($isLarge ? buttonSizeLarge : buttonSize)}px;
+    height: ${({ $isLarge }) => ($isLarge ? buttonSizeLarge : buttonSize)}px;
+    border-radius: ${({ $isLarge, $position }) =>
+        $isLarge && $position === "left"
+            ? `0 ${Variables.Radiuses.M} ${Variables.Radiuses.M} 0`
+            : $isLarge && $position === "right"
+            ? `${Variables.Radiuses.M} 0 0 ${Variables.Radiuses.M}`
+            : Variables.Radiuses.Circle};
     padding: 0;
     border: none;
     position: absolute;
-    top: calc(50% - ${buttonSize}px / 2);
-    left: ${({ $position }) => $position === "left" && Variables.Spacers.XS};
-    right: ${({ $position }) => $position === "right" && Variables.Spacers.XS};
+    top: calc(
+        50% - ${({ $isLarge }) => ($isLarge ? buttonSizeLarge : buttonSize)}px /
+            2
+    );
+    left: ${({ $position, $isLarge }) =>
+        $position === "left" && $isLarge
+            ? 0
+            : $position === "left" && !$isLarge && Variables.Spacers.XS};
+    right: ${({ $position, $isLarge }) =>
+        $position === "right" && $isLarge
+            ? 0
+            : $position === "right" && !$isLarge && Variables.Spacers.XS};
     ${Mixins.Flexbox({
         $alignItems: "center",
         $justifyContent: "center",
     })};
-    color: ${Variables.Colors.White};
-    background-color: ${Variables.Colors.Primary500};
+    color: ${({ $color }) =>
+        $color === "white"
+            ? Variables.Colors.Primary500
+            : Variables.Colors.White};
+    background-color: ${Mixins.ColorsHoverDefault};
     z-index: 2;
 
     @media ${Variables.Breakpoints.Hover} {
         &:hover {
-            background-color: ${Variables.Colors.Primary300};
+            background-color: ${Mixins.ColorsHoverHover};
         }
         &:active {
-            background-color: ${Variables.Colors.Primary600};
+            background-color: ${Mixins.ColorsHoverActive};
         }
     }
 
@@ -280,20 +350,81 @@ const Pagination = styled(Flexbox)<{ $hideTouch?: boolean }>`
 
 const dotSize = 8
 
-const Dot = styled.button<StyleDotProps>`
+const Dot = styled.button<{ $isActive?: boolean; $color?: ColorsHoverTypes }>`
     width: ${dotSize}px;
     height: ${dotSize}px;
     padding: 0;
     border-radius: 50%;
     border: none;
-    background-color: ${({ $active }) => ($active ? Variables.Colors.Primary500 : Variables.Colors.Primary300)};
+    background-color: ${({ $isActive, $color }) =>
+        $isActive
+            ? $color === "secondary"
+                ? Variables.Colors.Secondary500
+                : $color === "success"
+                ? Variables.Colors.Success500
+                : $color === "danger"
+                ? Variables.Colors.Danger500
+                : $color === "warning"
+                ? Variables.Colors.Warning500
+                : $color === "white"
+                ? Variables.Colors.White
+                : Variables.Colors.Primary500
+            : !$isActive &&
+              ($color === "secondary"
+                  ? Variables.Colors.Secondary300
+                  : $color === "success"
+                  ? Variables.Colors.Success300
+                  : $color === "danger"
+                  ? Variables.Colors.Danger300
+                  : $color === "warning"
+                  ? Variables.Colors.Warning300
+                  : $color === "white"
+                  ? Variables.Colors.Gray300
+                  : Variables.Colors.Primary300)};
     transition: ${Variables.Transitions.Short};
 
-    &:hover {
-        background-color: ${({ $active }) => ($active ? Variables.Colors.Primary300 : Variables.Colors.Primary500)};
-    }
+    @media ${Variables.Breakpoints.Hover} {
+        &:hover {
+            background-color: ${({ $isActive, $color }) =>
+                $isActive
+                    ? $color === "secondary"
+                        ? Variables.Colors.Secondary300
+                        : $color === "success"
+                        ? Variables.Colors.Success300
+                        : $color === "danger"
+                        ? Variables.Colors.Danger300
+                        : $color === "warning"
+                        ? Variables.Colors.Warning300
+                        : $color === "white"
+                        ? Variables.Colors.Gray300
+                        : Variables.Colors.Primary300
+                    : !$isActive &&
+                      ($color === "secondary"
+                          ? Variables.Colors.Secondary500
+                          : $color === "success"
+                          ? Variables.Colors.Success500
+                          : $color === "danger"
+                          ? Variables.Colors.Danger500
+                          : $color === "warning"
+                          ? Variables.Colors.Warning500
+                          : $color === "white"
+                          ? Variables.Colors.White
+                          : Variables.Colors.Primary500)};
+        }
 
-    &:active {
-        background-color: ${Variables.Colors.Primary600};
+        &:active {
+            background-color: ${({ $color }) =>
+                $color === "secondary"
+                    ? Variables.Colors.Secondary600
+                    : $color === "success"
+                    ? Variables.Colors.Success600
+                    : $color === "danger"
+                    ? Variables.Colors.Danger600
+                    : $color === "warning"
+                    ? Variables.Colors.Warning600
+                    : $color === "white"
+                    ? Variables.Colors.Gray100
+                    : Variables.Colors.Primary600};
+        }
     }
 `

@@ -6,14 +6,32 @@ import React, { useState } from "react"
 import styled, { css } from "styled-components"
 import { v4 as uuid } from "uuid"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Mixins from "./Mixins"
 import Icon from "./Icon"
 import BaseInput from "./InputContainer"
+import CloseCircleIcon from "../icons/CloseCircleIcon"
+import CheckCircleIcon from "../icons/CheckCircleIcon"
+
+import {
+    ValidationTypes,
+    LibColorsTypes,
+    ColorsShortTypes,
+} from "../common-types"
 
 /*==================== Component ====================*/
 
-const InputFunction = ({ id, items, onClickItem, disabled, value, autoFocus, options, ...props }: Props) => {
+const InputFunction = ({
+    id,
+    items,
+    onClickItem,
+    disabled,
+    value,
+    autoFocus,
+    options,
+    validation,
+    ...props
+}: Props) => {
     const [isOpen, setIsOpen] = useState(false)
     const handleOpen = () => setIsOpen(true)
     const handleClose = () => setTimeout(() => setIsOpen(false), 100)
@@ -34,8 +52,41 @@ const InputFunction = ({ id, items, onClickItem, disabled, value, autoFocus, opt
                 $icon={!!options?.icon}
                 value={value}
                 autoFocus={autoFocus}
+                $validation={validation?.status}
                 {...props}
             />
+
+            {validation && (
+                <RightContainer $disabled={disabled}>
+                    {validation &&
+                        validation.status !== undefined &&
+                        (validation.status === "passed" ? (
+                            validation.iconPassed ? (
+                                <Icon
+                                    src={validation.iconPassed}
+                                    size={24}
+                                    color="success"
+                                />
+                            ) : (
+                                <CheckCircleIcon
+                                    size={24}
+                                    color={Variables.Colors.Success500}
+                                />
+                            )
+                        ) : validation.iconNotPassed ? (
+                            <Icon
+                                src={validation.iconNotPassed}
+                                size={24}
+                                color="danger"
+                            />
+                        ) : (
+                            <CloseCircleIcon
+                                size={24}
+                                color={Variables.Colors.Danger500}
+                            />
+                        ))}
+                </RightContainer>
+            )}
 
             <List isOpen={isOpen}>
                 {items.length > 0 ? (
@@ -45,15 +96,30 @@ const InputFunction = ({ id, items, onClickItem, disabled, value, autoFocus, opt
                         </Item>
                     ))
                 ) : (
-                    <Item $readOnly>{options?.textEmpty || "No result!"}</Item>
+                    <Item $readOnly>{options?.textEmpty || "No result!"}</Item>
                 )}
             </List>
         </InputContainer>
     )
 }
-const Autocomplete = ({ id, items, onClickItem, disabled, value, autoFocus, options, ...props }: Props) =>
+const Autocomplete = ({
+    id,
+    items,
+    onClickItem,
+    disabled,
+    value,
+    autoFocus,
+    options,
+    validation,
+    ...props
+}: Props) =>
     options?.label || options?.helper || options?.helperBottom ? (
-        <BaseInput id={id} label={options.label} helper={options.helper} helperBottom={options.helperBottom}>
+        <BaseInput
+            id={id}
+            label={options.label}
+            helper={options.helper}
+            helperBottom={options.helperBottom}
+        >
             <InputFunction
                 id={id}
                 items={items}
@@ -62,6 +128,7 @@ const Autocomplete = ({ id, items, onClickItem, disabled, value, autoFocus, opti
                 value={value}
                 autoFocus={autoFocus}
                 options={options}
+                validation={validation}
                 {...props}
             />
         </BaseInput>
@@ -74,6 +141,7 @@ const Autocomplete = ({ id, items, onClickItem, disabled, value, autoFocus, opti
             value={value}
             autoFocus={autoFocus}
             options={options}
+            validation={validation}
             {...props}
         />
     )
@@ -81,10 +149,6 @@ const Autocomplete = ({ id, items, onClickItem, disabled, value, autoFocus, opti
 export default Autocomplete
 
 /*==================== Types ====================*/
-
-interface StyleProps extends React.HTMLAttributes<HTMLInputElement> {
-    $icon?: boolean
-}
 
 interface Props extends React.HTMLAttributes<HTMLInputElement> {
     id: string
@@ -94,10 +158,22 @@ interface Props extends React.HTMLAttributes<HTMLInputElement> {
     value: any
     autoFocus?: boolean
 
+    validation?: {
+        status: ValidationTypes | undefined
+        iconPassed?: string
+        iconNotPassed?: string
+    }
+
     options?: {
         label?: string
         helper?: string
-        helperBottom?: string
+        helperBottom?:
+            | string
+            | {
+                  text: string
+                  icon?: string
+                  iconColor?: LibColorsTypes | ColorsShortTypes | string
+              }
         icon?: string
         textEmpty?: string
     }
@@ -112,7 +188,10 @@ const InputContainer = styled.div`
 
 const size = 32
 
-const StyledInput = styled.input<StyleProps>`
+const StyledInput = styled.input<{
+    $icon?: boolean
+    $validation?: ValidationTypes | string
+}>`
     width: 100%;
     height: ${size}px;
     border: 1px solid ${Variables.Colors.Gray200};
@@ -120,7 +199,10 @@ const StyledInput = styled.input<StyleProps>`
     font-size: ${Variables.FontSizes.Body};
     font-family: ${Variables.FontFamilies.Body};
     padding: ${Variables.Spacers.XS};
-    background-color: ${Variables.Colors.White};
+    background-color: ${({ $validation }) =>
+        $validation && $validation === "not-passed"
+            ? Variables.Colors.Danger50
+            : Variables.Colors.White};
     color: ${Variables.Colors.Black};
     line-height: 100%;
     outline: none;
@@ -128,7 +210,10 @@ const StyledInput = styled.input<StyleProps>`
     position: relative;
 
     &:focus {
-        border-color: ${Variables.Colors.Primary500};
+        border-color: ${({ $validation }) =>
+            $validation && $validation === "not-passed"
+                ? Variables.Colors.Danger500
+                : Variables.Colors.Primary500};
     }
 
     &:disabled {
@@ -214,4 +299,25 @@ const Item = styled.li<{ $readOnly?: boolean }>`
             : css`
                   color: ${Variables.Colors.Gray500};
               `}
+`
+
+const RightContainer = styled.span<{ $disabled?: boolean }>`
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 32px;
+    padding: 0 ${Variables.Spacers.XS};
+    ${Mixins.Flexbox({
+        $inline: true,
+        $alignItems: "center",
+        $justifyContent: "center",
+    })};
+    gap: ${Variables.Spacers.XS};
+    z-index: 10;
+
+    ${({ $disabled }) =>
+        $disabled &&
+        css`
+            cursor: not-allowed;
+        `}
 `

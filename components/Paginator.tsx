@@ -5,7 +5,7 @@
 import React from "react"
 import styled from "styled-components"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Mixins from "./Mixins"
 import Input from "./Input"
 import Icon from "./Icon"
@@ -23,17 +23,40 @@ const Paginator = ({
     icons,
     ...props
 }: Props) => {
-    const activePage = pages.active > pages.total ? pages.total : pages.active < 1 ? 1 : pages.active
+    const activePage =
+        pages.active > pages.total
+            ? pages.total
+            : pages.active < 1
+            ? 1
+            : pages.active
 
     return (
         <StyledPaginator $justify={justify}>
-            {text?.page || "Page"} <StyledInput type="number" id={idInput} value={activePage} onChange={handles.change} {...props} />{" "}
+            {text?.page || "Page"}{" "}
+            <StyledInput
+                type="number"
+                id={idInput}
+                value={activePage}
+                onChange={handles.change}
+                {...props}
+            />{" "}
             {`${text?.of || "of"} ${pages.total}`}
             <Button onClick={handles.prev} disabled={activePage === 1 && true}>
-                {icons?.prev ? <Icon src={icons.prev} size={16} /> : <ChevronLeftIcon size={20} />}
+                {icons?.prev ? (
+                    <Icon src={icons.prev} size={16} />
+                ) : (
+                    <ChevronLeftIcon size={20} />
+                )}
             </Button>
-            <Button onClick={handles.next} disabled={activePage === pages.total && true}>
-                {icons?.next ? <Icon src={icons.next} size={16} /> : <ChevronRightIcon size={20} />}
+            <Button
+                onClick={handles.next}
+                disabled={activePage === pages.total && true}
+            >
+                {icons?.next ? (
+                    <Icon src={icons.next} size={16} />
+                ) : (
+                    <ChevronRightIcon size={20} />
+                )}
             </Button>
         </StyledPaginator>
     )
@@ -49,10 +72,6 @@ const justify = {
 } as const
 
 type JustifyTypes = keyof typeof justify
-
-interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
-    $justify?: JustifyTypes
-}
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     justify?: JustifyTypes
@@ -79,7 +98,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const StyledPaginator = styled.div<StyleProps>`
+const StyledPaginator = styled.div<{ $justify?: JustifyTypes }>`
     ${({ $justify }) =>
         Mixins.Flexbox({
             $alignItems: "center",

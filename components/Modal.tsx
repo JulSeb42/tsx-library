@@ -5,7 +5,7 @@
 import React, { useEffect } from "react"
 import styled from "styled-components"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Mixins from "./Mixins"
 import Icon from "./Icon"
 import CloseIcon from "../icons/CloseIcon"
@@ -14,7 +14,9 @@ import CloseIcon from "../icons/CloseIcon"
 
 const Modal = ({ children, isOpen, close, iconClose, ...props }: Props) => {
     useEffect(() => {
-        isOpen ? document.body.classList.add("stop-scrolling") : document.body.classList.remove("stop-scrolling")
+        isOpen
+            ? document.body.classList.add("stop-scrolling")
+            : document.body.classList.remove("stop-scrolling")
     })
 
     return (
@@ -22,7 +24,11 @@ const Modal = ({ children, isOpen, close, iconClose, ...props }: Props) => {
             {close && (
                 <CloseButton onClick={close}>
                     {iconClose ? (
-                        <Icon src={iconClose} size={32} color={Variables.Colors.White} />
+                        <Icon
+                            src={iconClose}
+                            size={32}
+                            color={Variables.Colors.White}
+                        />
                     ) : (
                         <CloseIcon size={32} color={Variables.Colors.White} />
                     )}
@@ -38,10 +44,6 @@ export default Modal
 
 /*==================== Types ====================*/
 
-interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
-    $isOpen: boolean
-}
-
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactNode
     isOpen: boolean
@@ -51,7 +53,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const StyledModal = styled.div<StyleProps>`
+const StyledModal = styled.div<{ $isOpen: boolean }>`
     position: fixed;
     top: 0;
     left: 0;

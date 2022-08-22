@@ -6,7 +6,7 @@ import React, { useState } from "react"
 import styled, { css } from "styled-components"
 import { v4 as uuid } from "uuid"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Text from "./Text"
 import Mixins from "./Mixins"
 
@@ -23,11 +23,15 @@ const Tabs = ({
     },
     ...props
 }: Props) => {
-    const [isActive, setIsActive] = useState(options.active || 0)
+    const [isActive, setIsActive] = useState(options.active || 0)
 
     return (
         <StyledTabs {...props}>
-            <ButtonsContainer $tabsStyle={options.style} $justify={options.justify} $col={items.length}>
+            <ButtonsContainer
+                $tabsStyle={options.style}
+                $justify={options.justify}
+                $col={items.length}
+            >
                 {items.map((item, i) => (
                     <Button
                         $isActive={isActive === i}
@@ -42,7 +46,11 @@ const Tabs = ({
             </ButtonsContainer>
 
             {items.map((item, i) => (
-                <TabItem as={typeof item.content === "string" ? Text : "div"} $isActive={isActive === i} key={uuid()}>
+                <TabItem
+                    as={typeof item.content === "string" ? Text : "div"}
+                    $isActive={isActive === i}
+                    key={uuid()}
+                >
                     {item.content}
                 </TabItem>
             ))}
@@ -68,22 +76,6 @@ const Justify = {
 
 type JustifyTypes = keyof typeof Justify
 
-interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
-    $isActive: boolean
-    $tabsStyle?: TableStylesTypes
-    $justify?: JustifyTypes
-}
-
-interface StyleButtonsContainerProps extends React.HTMLAttributes<HTMLDivElement> {
-    $tabsStyle?: TableStylesTypes
-    $justify?: JustifyTypes
-    $col: number
-}
-
-interface ContentProps extends React.HTMLAttributes<HTMLDivElement> {
-    $isActive: boolean
-}
-
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     items: TabsItemProps[]
     options?: {
@@ -101,7 +93,11 @@ const StyledTabs = styled.div`
     })};
 `
 
-const ButtonsContainer = styled.div<StyleButtonsContainerProps>`
+const ButtonsContainer = styled.div<{
+    $tabsStyle?: TableStylesTypes
+    $justify?: JustifyTypes
+    $col: number
+}>`
     position: relative;
 
     ${({ $tabsStyle }) =>
@@ -151,7 +147,11 @@ const ButtonsContainer = styled.div<StyleButtonsContainerProps>`
               `}
 `
 
-const Button = styled.button<StyleProps>`
+const Button = styled.button<{
+    $isActive: boolean
+    $tabsStyle?: TableStylesTypes
+    $justify?: JustifyTypes
+}>`
     border: none;
     padding: 0;
     background-color: transparent;
@@ -162,7 +162,8 @@ const Button = styled.button<StyleProps>`
                   min-width: 100px;
                   text-align: left;
                   padding-bottom: ${Variables.Spacers.XXS};
-                  border-bottom: 2px solid ${$isActive ? Variables.Colors.Primary500 : "transparent"};
+                  border-bottom: 2px solid
+                      ${$isActive ? Variables.Colors.Primary500 : "transparent"};
                   z-index: 2;
 
                   @media ${Variables.Breakpoints.Mobile} {
@@ -190,6 +191,6 @@ const Button = styled.button<StyleProps>`
               `}
 `
 
-const TabItem = styled.div<ContentProps>`
+const TabItem = styled.div<{ $isActive: boolean }>`
     display: ${({ $isActive }) => ($isActive ? "inherit" : "none")};
 `

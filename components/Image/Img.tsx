@@ -9,17 +9,13 @@ import { stringifyPx } from "../../utils"
 
 import { ObjectFitTypes } from "../../common-types"
 
-/*==================== Types ====================*/
+/*==================== Component ====================*/
 
-interface StyleProps extends React.HTMLAttributes<HTMLImageElement> {
+const Img = styled.img<{
     $width?: number | string
     $height?: number | string
     $fit?: ObjectFitTypes
-}
-
-/*==================== Component ====================*/
-
-const Img = styled.img<StyleProps>`
+}>`
     display: block;
     position: relative;
     z-index: 0;

@@ -5,7 +5,7 @@
 import React from "react"
 import styled, { css } from "styled-components"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Mixins from "./Mixins"
 
 import { ValidationTypes } from "../common-types"
@@ -39,7 +39,11 @@ const InputCheck = ({
                 {label}
             </Toggle>
         ) : checkStyle === "selector" ? (
-            <Selector htmlFor={id} $disabled={disabled} $validation={validation}>
+            <Selector
+                htmlFor={id}
+                $disabled={disabled}
+                $validation={validation}
+            >
                 {label}
             </Selector>
         ) : type === "checkbox" ? (
@@ -53,7 +57,12 @@ const InputCheck = ({
                 {label}
             </Checkbox>
         ) : (
-            <Radio htmlFor={id} $tile={checkStyle === "tile"} $disabled={disabled} $validation={validation}>
+            <Radio
+                htmlFor={id}
+                $tile={checkStyle === "tile"}
+                $disabled={disabled}
+                $validation={validation}
+            >
                 {label}
             </Radio>
         )}
@@ -64,16 +73,9 @@ export default InputCheck
 
 /*==================== Types ====================*/
 
-interface StyleProps extends React.HTMLAttributes<HTMLInputElement> {
-    $tile?: boolean
-    $validation?: ValidationTypes
-    $disabled?: boolean
-    $iconCheck?: string
-}
-
 interface BaseProps extends React.HTMLAttributes<HTMLInputElement> {
     id: string
-    label: string | JSX.Element
+    label: string | JSX.Element
     disabled?: boolean
     name?: string
     validation?: ValidationTypes
@@ -90,13 +92,21 @@ interface Possible2 extends BaseProps {
     iconCheck?: never
 }
 
-type Props = Possible1 | Possible2
+type Props = Possible1 | Possible2
 
 /*==================== Styles ====================*/
 
 const StyledInputCheck = styled.div``
 
-const Tile = ({ $validation, $disabled }: StyleProps) => css`
+const Tile = ({
+    $validation,
+    $disabled,
+}: {
+    $tile?: boolean
+    $validation?: ValidationTypes
+    $disabled?: boolean
+    $iconCheck?: string
+}) => css`
     background-color: ${Variables.Colors.White};
     border-radius: ${Variables.Radiuses.M};
     border: 1px solid ${Variables.Colors.Gray200};
@@ -131,7 +141,11 @@ const Common = css`
 const radioSize = 16
 const radioDotSize = 8
 
-const Radio = styled.label<StyleProps>`
+const Radio = styled.label<{
+    $tile?: boolean
+    $validation?: ValidationTypes
+    $disabled?: boolean
+}>`
     ${Common};
 
     &:before {
@@ -175,7 +189,12 @@ const Radio = styled.label<StyleProps>`
 
 const checkboxSize = 16
 
-const Checkbox = styled.label<StyleProps>`
+const Checkbox = styled.label<{
+    $tile?: boolean
+    $validation?: ValidationTypes
+    $disabled?: boolean
+    $iconCheck?: string
+}>`
     ${Common};
 
     &:before {
@@ -185,7 +204,9 @@ const Checkbox = styled.label<StyleProps>`
         height: ${checkboxSize}px;
         border: 2px solid
             ${({ $validation }) =>
-                $validation === "not-passed" ? Variables.Colors.Danger500 : Variables.Colors.Primary500};
+                $validation === "not-passed"
+                    ? Variables.Colors.Danger500
+                    : Variables.Colors.Primary500};
         border-radius: ${Variables.Radiuses.S};
         transition: ${Variables.Transitions.Short};
     }
@@ -227,7 +248,10 @@ const Checkbox = styled.label<StyleProps>`
 
 const toggleDotSize = 8
 
-const Toggle = styled.label<StyleProps>`
+const Toggle = styled.label<{
+    $validation?: ValidationTypes
+    $disabled?: boolean
+}>`
     ${Common};
 
     &:before {
@@ -263,29 +287,44 @@ const Toggle = styled.label<StyleProps>`
     }
 `
 
-const Selector = styled.label<StyleProps>`
+const Selector = styled.label<{
+    $validation?: ValidationTypes
+    $disabled?: boolean
+}>`
     padding: ${Variables.Spacers.XXS} ${Variables.Spacers.M};
     border-radius: ${Variables.Radiuses.Round};
     transition: ${Variables.Transitions.Short};
     background-color: ${({ $validation }) =>
-        $validation === "not-passed" ? Variables.Colors.Danger50 : Variables.Colors.Gray100};
-    color: ${({ $validation }) => ($validation === "not-passed" ? Variables.Colors.Danger500 : Variables.Colors.Black)};
+        $validation === "not-passed"
+            ? Variables.Colors.Danger50
+            : Variables.Colors.Gray100};
+    color: ${({ $validation }) =>
+        $validation === "not-passed"
+            ? Variables.Colors.Danger500
+            : Variables.Colors.Black};
 
     @media ${Variables.Breakpoints.Hover} {
         &:hover {
             background-color: ${({ $validation }) =>
-                $validation === "not-passed" ? Variables.Colors.Danger300 : Variables.Colors.Primary300};
+                $validation === "not-passed"
+                    ? Variables.Colors.Danger300
+                    : Variables.Colors.Primary300};
             color: ${Variables.Colors.White};
         }
 
         &:active {
             background-color: ${({ $validation }) =>
-                $validation === "not-passed" ? Variables.Colors.Danger600 : Variables.Colors.Primary600};
+                $validation === "not-passed"
+                    ? Variables.Colors.Danger600
+                    : Variables.Colors.Primary600};
         }
     }
 `
 
-const Input = styled.input<StyleProps>`
+const Input = styled.input<{
+    $tile?: boolean
+    $validation?: ValidationTypes
+}>`
     display: none;
 
     & ~ label {
@@ -300,12 +339,16 @@ const Input = styled.input<StyleProps>`
     &:checked {
         & ~ ${Radio}:after {
             background-color: ${({ $validation }) =>
-                $validation === "not-passed" ? Variables.Colors.Danger500 : Variables.Colors.Primary500};
+                $validation === "not-passed"
+                    ? Variables.Colors.Danger500
+                    : Variables.Colors.Primary500};
         }
 
         & ~ ${Checkbox}:before {
             background-color: ${({ $validation }) =>
-                $validation === "not-passed" ? Variables.Colors.Danger500 : Variables.Colors.Primary500};
+                $validation === "not-passed"
+                    ? Variables.Colors.Danger500
+                    : Variables.Colors.Primary500};
         }
 
         & ~ ${Toggle} {
@@ -325,26 +368,33 @@ const Input = styled.input<StyleProps>`
             }
 
             &:after {
-                background-color: ${({ disabled }) => !disabled && Variables.Colors.White};
+                background-color: ${({ disabled }) =>
+                    !disabled && Variables.Colors.White};
                 left: 12px;
             }
         }
 
         & ~ ${Selector} {
             background-color: ${({ $validation }) =>
-                $validation === "not-passed" ? Variables.Colors.Danger500 : Variables.Colors.Primary500};
+                $validation === "not-passed"
+                    ? Variables.Colors.Danger500
+                    : Variables.Colors.Primary500};
             color: ${Variables.Colors.White};
 
             @media ${Variables.Breakpoints.Hover} {
                 &:hover {
                     background-color: ${({ $validation }) =>
-                        $validation === "not-passed" ? Variables.Colors.Danger300 : Variables.Colors.Primary300};
+                        $validation === "not-passed"
+                            ? Variables.Colors.Danger300
+                            : Variables.Colors.Primary300};
                     color: ${Variables.Colors.White};
                 }
 
                 &:active {
                     background-color: ${({ $validation }) =>
-                        $validation === "not-passed" ? Variables.Colors.Danger600 : Variables.Colors.Primary600};
+                        $validation === "not-passed"
+                            ? Variables.Colors.Danger600
+                            : Variables.Colors.Primary600};
                 }
             }
         }
@@ -393,7 +443,10 @@ const Input = styled.input<StyleProps>`
             }
 
             @media ${Variables.Breakpoints.Hover} {
-                &:not(:disabled) ~ ${Radio}:hover, &:not(:disabled) ~ ${Checkbox}:hover {
+                &:not(:disabled)
+                    ~ ${Radio}:hover,
+                    &:not(:disabled)
+                    ~ ${Checkbox}:hover {
                     border-color: ${$validation === "not-passed" && !disabled
                         ? Variables.Colors.Danger300
                         : Variables.Colors.Primary300};

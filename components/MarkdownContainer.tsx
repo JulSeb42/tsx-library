@@ -15,7 +15,12 @@ import { SpacerTypes } from "../common-types"
 
 /*==================== Component ====================*/
 
-const MarkdownContainer = ({ gap = "s", content, options = optionsMarkdown, ...props }: Props) => (
+const MarkdownContainer = ({
+    gap = "s",
+    content,
+    options = optionsMarkdown,
+    ...props
+}: Props) => (
     <StyledMarkdownContainer $gap={gap} options={options} {...props}>
         {content}
     </StyledMarkdownContainer>
@@ -25,10 +30,6 @@ export default MarkdownContainer
 
 /*==================== Types ====================*/
 
-interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
-    $gap?: SpacerTypes | string | number
-}
-
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     gap?: SpacerTypes | string | number
     options?: any
@@ -37,7 +38,9 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const StyledMarkdownContainer = styled(Markdown)<StyleProps>`
+const StyledMarkdownContainer = styled(Markdown)<{
+    $gap?: SpacerTypes | string | number
+}>`
     ${({ $gap }) =>
         Mixins.Grid({
             $gap: typeof $gap === "number" ? stringifyPx($gap) : $gap,

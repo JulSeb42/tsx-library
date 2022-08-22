@@ -5,7 +5,7 @@
 import React from "react"
 import styled, { keyframes } from "styled-components"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Mixins from "./Mixins"
 
 import { ColorsShortTypes, LibColorsTypes } from "../common-types"
@@ -25,13 +25,6 @@ const Loader = ({ options, ...props }: Props) => (
 export default Loader
 
 /*==================== Types ====================*/
-
-interface StyleProps extends React.HTMLAttributes<HTMLSpanElement> {
-    $size?: number
-    $borderSize?: number
-    $color?: ColorsShortTypes | LibColorsTypes | string
-    $speed?: number
-}
 
 interface Props extends React.HTMLAttributes<HTMLSpanElement> {
     options?: {
@@ -54,7 +47,12 @@ const Spin = keyframes`
     }
 `
 
-const StyledLoader = styled.span<StyleProps>`
+const StyledLoader = styled.span<{
+    $size?: number
+    $borderSize?: number
+    $color?: ColorsShortTypes | LibColorsTypes | string
+    $speed?: number
+}>`
     width: ${({ $size }) => $size}px;
     height: ${({ $size }) => $size}px;
     border-radius: ${Variables.Radiuses.Circle};

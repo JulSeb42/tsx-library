@@ -6,7 +6,7 @@ import React from "react"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Mixins from "./Mixins"
 import Icon from "./Icon"
 import Loader from "./Loader"
@@ -37,9 +37,13 @@ const Button = ({
         form={form}
         {...props}
     >
-        {isLoading && <Loader options={{ size: 16, borderSize: 2, color: "gray" }} />}
+        {isLoading && (
+            <Loader options={{ size: 16, borderSize: 2, color: "gray" }} />
+        )}
 
-        {options?.iconLeft && !isLoading && <Icon src={options.iconLeft} size={16} />}
+        {options?.iconLeft && !isLoading && (
+            <Icon src={options.iconLeft} size={16} />
+        )}
 
         {children}
 
@@ -58,12 +62,6 @@ const buttonStyles = {
 } as const
 
 export type ButtonStylesType = keyof typeof buttonStyles
-
-interface StyleProps extends React.HTMLAttributes<HTMLButtonElement> {
-    $color?: ColorsHoverTypes
-    $buttonStyle?: ButtonStylesType
-    $noPadding?: boolean
-}
 
 interface BaseProps extends React.HTMLAttributes<HTMLButtonElement> {
     disabled?: boolean
@@ -100,10 +98,19 @@ type Props = Possible1 | Possible2
 
 /*==================== Styles ====================*/
 
-const StyledButton = styled.button<StyleProps>`
-    border: 1px solid ${({ $buttonStyle }) => ($buttonStyle === "outline" ? Mixins.ColorsHoverDefault : "transparent")};
+const StyledButton = styled.button<{
+    $color?: ColorsHoverTypes
+    $buttonStyle?: ButtonStylesType
+    $noPadding?: boolean
+}>`
+    border: 1px solid
+        ${({ $buttonStyle }) =>
+            $buttonStyle === "outline"
+                ? Mixins.ColorsHoverDefault
+                : "transparent"};
     text-decoration: none;
-    padding: ${({ $noPadding }) => ($noPadding ? 0 : `${Variables.Spacers.XS} ${Variables.Spacers.S}`)};
+    padding: ${({ $noPadding }) =>
+        $noPadding ? 0 : `${Variables.Spacers.XS} ${Variables.Spacers.S}`};
     ${Mixins.Flexbox({
         $inline: true,
         $alignItems: "center",
@@ -111,7 +118,8 @@ const StyledButton = styled.button<StyleProps>`
         $gap: "xs",
     })};
     border-radius: ${Variables.Radiuses.M};
-    background-color: ${({ $buttonStyle }) => ($buttonStyle === "plain" ? Mixins.ColorsHoverDefault : "transparent")};
+    background-color: ${({ $buttonStyle }) =>
+        $buttonStyle === "plain" ? Mixins.ColorsHoverDefault : "transparent"};
     color: ${({ $buttonStyle, $color }) =>
         $buttonStyle === "plain" && $color !== "white"
             ? Variables.Colors.White
@@ -121,23 +129,31 @@ const StyledButton = styled.button<StyleProps>`
 
     @media ${Variables.Breakpoints.Hover} {
         &:hover {
-            background-color: ${({ $buttonStyle }) => $buttonStyle === "plain" && Mixins.ColorsHoverHover};
+            background-color: ${({ $buttonStyle }) =>
+                $buttonStyle === "plain" && Mixins.ColorsHoverHover};
             color: ${({ $buttonStyle }) =>
-                ($buttonStyle === "text" || $buttonStyle === "outline") && Mixins.ColorsHoverHover};
-            border-color: ${({ $buttonStyle }) => $buttonStyle === "outline" && Mixins.ColorsHoverHover};
+                ($buttonStyle === "text" || $buttonStyle === "outline") &&
+                Mixins.ColorsHoverHover};
+            border-color: ${({ $buttonStyle }) =>
+                $buttonStyle === "outline" && Mixins.ColorsHoverHover};
         }
 
         &:active {
-            background-color: ${({ $buttonStyle }) => $buttonStyle === "plain" && Mixins.ColorsHoverActive};
+            background-color: ${({ $buttonStyle }) =>
+                $buttonStyle === "plain" && Mixins.ColorsHoverActive};
             color: ${({ $buttonStyle }) =>
-                ($buttonStyle === "text" || $buttonStyle === "outline") && Mixins.ColorsHoverActive};
-            border-color: ${({ $buttonStyle }) => $buttonStyle === "outline" && Mixins.ColorsHoverActive};
+                ($buttonStyle === "text" || $buttonStyle === "outline") &&
+                Mixins.ColorsHoverActive};
+            border-color: ${({ $buttonStyle }) =>
+                $buttonStyle === "outline" && Mixins.ColorsHoverActive};
         }
     }
 
     &:disabled {
-        background-color: ${({ $buttonStyle }) => ($buttonStyle === "plain" ? Variables.Colors.Gray100 : "")};
+        background-color: ${({ $buttonStyle }) =>
+            $buttonStyle === "plain" ? Variables.Colors.Gray100 : ""};
         color: ${Variables.Colors.Gray500};
-        border-color: ${({ $buttonStyle }) => $buttonStyle === "outline" && Variables.Colors.Gray500};
+        border-color: ${({ $buttonStyle }) =>
+            $buttonStyle === "outline" && Variables.Colors.Gray500};
     }
 `

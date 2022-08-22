@@ -4,9 +4,8 @@
 
 import React from "react"
 import styled from "styled-components"
-import { stringifyPx } from "../utils"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Mixins from "./Mixins"
 import Icon from "./Icon"
 
@@ -22,7 +21,11 @@ const Badge = ({ content, options, ...props }: Props) => {
             $color={options?.color || "primary"}
             $size={options?.size || defaultSize}
             $children={!!content}
-            $childrenLength={typeof content === "number" ? content.toString().length : undefined}
+            $childrenLength={
+                typeof content === "number"
+                    ? content.toString().length
+                    : undefined
+            }
             $padding={options?.padding}
             $textColor={options?.textColor}
             {...props}
@@ -30,7 +33,12 @@ const Badge = ({ content, options, ...props }: Props) => {
             {typeof content === "number" ? (
                 content
             ) : typeof content === "string" ? (
-                <Icon src={content} size={options?.size ? options?.size * 0.6 : defaultSize * 0.6} />
+                <Icon
+                    src={content}
+                    size={
+                        options?.size ? options?.size * 0.6 : defaultSize * 0.6
+                    }
+                />
             ) : (
                 ""
             )}
@@ -41,15 +49,6 @@ const Badge = ({ content, options, ...props }: Props) => {
 export default Badge
 
 /*==================== Types ====================*/
-
-interface StyleProps extends React.HTMLAttributes<HTMLSpanElement> {
-    $color?: ColorsShortTypes | LibColorsTypes | string
-    $textColor?: ColorsShortTypes | LibColorsTypes | string
-    $size?: number
-    $children?: boolean
-    $childrenLength?: number
-    $padding?: SpacerTypes | number | string
-}
 
 interface BaseProps extends React.HTMLAttributes<HTMLSpanElement> {
     options?: {
@@ -87,7 +86,14 @@ type Props = Possible1 | Possible2
 
 /*==================== Styles ====================*/
 
-const StyledBadge = styled.span<StyleProps>`
+const StyledBadge = styled.span<{
+    $color?: ColorsShortTypes | LibColorsTypes | string
+    $textColor?: ColorsShortTypes | LibColorsTypes | string
+    $size?: number
+    $children?: boolean
+    $childrenLength?: number
+    $padding?: SpacerTypes | number | string
+}>`
     min-width: ${({ $size }) => $size}px;
     height: ${({ $size }) => $size}px;
     font-size: ${({ $size }) => ($size ? $size * 0.6 : 16 * 0.6)}px;
@@ -107,22 +113,10 @@ const StyledBadge = styled.span<StyleProps>`
     font-weight: ${Variables.FontWeights.Black};
     padding: ${({ $children, $childrenLength, $padding }) =>
         $children && $childrenLength && $childrenLength > 2 && $padding
-            ? $padding === "xxl"
-                ? `0 ${Variables.Spacers.XXL}`
-                : $padding === "xl"
-                ? `0 ${Variables.Spacers.XL}`
-                : $padding === "l"
-                ? `0 ${Variables.Spacers.L}`
-                : $padding === "m"
-                ? `0 ${Variables.Spacers.M}`
-                : $padding === "s"
-                ? `0 ${Variables.Spacers.S}`
-                : $padding === "xs"
-                ? `0 ${Variables.Spacers.XS}`
-                : $padding === "xxs"
-                ? `0 ${Variables.Spacers.XXS}`
-                : $padding
-                ? `0 ${stringifyPx($padding)}`
-                : ""
-            : $children && $childrenLength && $childrenLength > 2 && !$padding && `0 ${Variables.Spacers.XXS}`};
+            ? Mixins.Spacers({ $spacer: $padding })
+            : $children &&
+              $childrenLength &&
+              $childrenLength > 2 &&
+              !$padding &&
+              `0 ${Variables.Spacers.XXS}`};
 `

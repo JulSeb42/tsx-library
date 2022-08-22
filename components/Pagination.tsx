@@ -6,7 +6,7 @@ import React from "react"
 import styled, { css } from "styled-components"
 import { Link } from "react-router-dom"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Mixins from "./Mixins"
 import Icon from "./Icon"
 import ChevronLeftIcon from "../icons/ChevronLeftIcon"
@@ -20,7 +20,14 @@ const Pagination = ({ justify = "left", children, ...props }: Props) => (
     </StyledPagination>
 )
 
-const PaginationButton = ({ isActive, to, content, icon, disabled, ...props }: ButtonProps) => (
+const PaginationButton = ({
+    isActive,
+    to,
+    content,
+    icon,
+    disabled,
+    ...props
+}: ButtonProps) => (
     <Button
         as={content === "more" ? "span" : to ? Link : "button"}
         $isActive={isActive}
@@ -55,17 +62,8 @@ const justify = {
 
 type JustifyTypes = keyof typeof justify
 
-interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
-    $justify?: JustifyTypes
-}
-
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     justify?: JustifyTypes
-}
-
-interface buttonStyleProps extends React.HTMLAttributes<HTMLButtonElement> {
-    $isActive?: boolean
-    $more?: boolean
 }
 
 interface BaseButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
@@ -100,20 +98,25 @@ interface Possible4 extends BaseButtonProps {
     icon?: string
 }
 
-type ButtonProps = Possible1 | Possible2 | Possible3 | Possible4
+type ButtonProps = Possible1 | Possible2 | Possible3 | Possible4
 
 /*==================== Styles ====================*/
 
-const StyledPagination = styled.div<StyleProps>`
+const StyledPagination = styled.div<{ $justify?: JustifyTypes }>`
     ${({ $justify }) =>
         Mixins.Flexbox({
             $alignItems: "center",
-            $justifyContent: $justify === "center" ? "center" : $justify === "right" ? "flex-end" : "flex-start",
+            $justifyContent:
+                $justify === "center"
+                    ? "center"
+                    : $justify === "right"
+                    ? "flex-end"
+                    : "flex-start",
             $gap: "xs",
         })};
 `
 
-const Button = styled.button<buttonStyleProps>`
+const Button = styled.button<{ $isActive?: boolean; $more?: boolean }>`
     --button-size: 32px;
     width: var(--button-size);
     height: var(--button-size);
@@ -124,8 +127,10 @@ const Button = styled.button<buttonStyleProps>`
         $justifyContent: "center",
         $inline: true,
     })};
-    color: ${({ $isActive }) => ($isActive ? Variables.Colors.White : Variables.Colors.Primary500)};
-    background-color: ${({ $isActive }) => ($isActive ? Variables.Colors.Primary500 : "transparent")};
+    color: ${({ $isActive }) =>
+        $isActive ? Variables.Colors.White : Variables.Colors.Primary500};
+    background-color: ${({ $isActive }) =>
+        $isActive ? Variables.Colors.Primary500 : "transparent"};
     text-decoration: none;
 
     ${({ $more, disabled }) =>

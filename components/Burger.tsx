@@ -5,7 +5,7 @@
 import React from "react"
 import styled from "styled-components"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Mixins from "./Mixins"
 
 import { ColorsHoverTypes } from "../common-types"
@@ -38,13 +38,6 @@ export default Burger
 
 /*==================== Types ====================*/
 
-interface StyleProps extends React.HTMLAttributes<HTMLButtonElement> {
-    $isOpen: boolean
-    $color?: ColorsHoverTypes
-    $width?: number
-    $height?: number
-}
-
 interface Props extends React.HTMLAttributes<HTMLButtonElement> {
     ariaLabel?: string
     isOpen: boolean
@@ -55,7 +48,12 @@ interface Props extends React.HTMLAttributes<HTMLButtonElement> {
 
 /*==================== Styles ====================*/
 
-const StyledBurger = styled.button<StyleProps>`
+const StyledBurger = styled.button<{
+    $isOpen: boolean
+    $color?: ColorsHoverTypes
+    $width?: number
+    $height?: number
+}>`
     position: relative;
     border: none;
     background-color: transparent;

@@ -28,10 +28,6 @@ const sizes = {
 
 type SizesTypes = keyof typeof sizes
 
-interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
-    $gap?: SizesTypes | number
-}
-
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     gap?: SizesTypes | number
     div?: boolean
@@ -39,10 +35,17 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const StyledSection = styled.section<StyleProps>`
+const StyledSection = styled.section<{ $gap?: SizesTypes | number }>`
     ${({ $gap }) =>
         Mixins.Grid({
-            $gap: $gap === "large" ? "m" : $gap === "medium" ? "s" : $gap === "small" ? "xs" : stringifyPx($gap),
+            $gap:
+                $gap === "large"
+                    ? "m"
+                    : $gap === "medium"
+                    ? "s"
+                    : $gap === "small"
+                    ? "xs"
+                    : stringifyPx($gap),
         })};
     align-content: start;
     justify-items: start;

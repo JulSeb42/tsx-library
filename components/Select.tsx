@@ -8,18 +8,36 @@ import styled, { css } from "styled-components"
 import InputContainer from "./InputContainer"
 import Icon from "./Icon"
 import ChevronDownIcon from "../icons/ChevronDownIcon"
-import Variables from "./Variables"
+import Variables from "../Variables"
 
-import { ValidationTypes } from "../common-types"
+import {
+    ValidationTypes,
+    LibColorsTypes,
+    ColorsShortTypes,
+} from "../common-types"
 import Mixins from "./Mixins"
 
 /*==================== Component ====================*/
 
-const Select = ({ isOpen, setIsOpen, disabled, options, id, children, selected }: Props) => {
+const Select = ({
+    isOpen,
+    setIsOpen,
+    disabled,
+    options,
+    id,
+    children,
+    selected,
+}: Props) => {
     return options?.label || options?.helper || options?.helperBottom ? (
-        <InputContainer id={id} label={options.label} helper={options.helper} helperBottom={options.helperBottom}>
+        <InputContainer
+            id={id}
+            label={options.label}
+            helper={options.helper}
+            helperBottom={options.helperBottom}
+        >
             <StyledSelect
                 $isOpen={isOpen}
+                $isEmpty={!children}
                 disabled={disabled}
                 onClick={!disabled ? () => setIsOpen(!isOpen) : ""}
                 id={id}
@@ -28,18 +46,32 @@ const Select = ({ isOpen, setIsOpen, disabled, options, id, children, selected }
                     {selected}
 
                     {children &&
-                        (options?.icon ? <Icon src={options.icon} size={16} /> : <ChevronDownIcon size={16} />)}
+                        (options?.icon ? (
+                            <Icon src={options.icon} size={16} />
+                        ) : (
+                            <ChevronDownIcon size={16} />
+                        ))}
                 </Selected>
 
                 <List $isOpen={isOpen}>{children}</List>
             </StyledSelect>
         </InputContainer>
     ) : (
-        <StyledSelect $isOpen={isOpen} disabled={disabled} onClick={!disabled ? () => setIsOpen(!isOpen) : ""} id={id}>
+        <StyledSelect
+            $isOpen={isOpen}
+            disabled={disabled}
+            onClick={!disabled ? () => setIsOpen(!isOpen) : ""}
+            id={id}
+        >
             <Selected>
                 {selected}
 
-                {children && (options?.icon ? <Icon src={options.icon} size={16} /> : <ChevronDownIcon size={16} />)}
+                {children &&
+                    (options?.icon ? (
+                        <Icon src={options.icon} size={16} />
+                    ) : (
+                        <ChevronDownIcon size={16} />
+                    ))}
             </Selected>
 
             <List $isOpen={isOpen}>{children}</List>
@@ -65,12 +97,18 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
     disabled?: boolean
     id: string
     children?: React.ReactNode | React.ReactNode[]
-    selected: string
+    selected: string | number
 
     options?: {
         label?: string
         helper?: string
-        helperBottom?: string
+        helperBottom?:
+            | string
+            | {
+                  text: string
+                  icon?: string
+                  iconColor?: LibColorsTypes | ColorsShortTypes | string
+              }
         icon?: string
     }
 }
@@ -85,22 +123,34 @@ interface ItemProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 const inputHeight = 32
 
-const StyledSelect = styled.div<{ disabled?: boolean; onClick?: any; $isOpen: boolean; $validation?: ValidationTypes }>`
+const StyledSelect = styled.div<{
+    disabled?: boolean
+    onClick?: any
+    $isOpen: boolean
+    $validation?: ValidationTypes
+    $isEmpty?: boolean
+}>`
     position: relative;
     width: 100%;
     height: ${inputHeight}px;
-    border: 1px solid ${({ $isOpen }) => ($isOpen ? Variables.Colors.Primary500 : Variables.Colors.Gray200)};
-    cursor: pointer;
+    border: 1px solid
+        ${({ $isOpen, $isEmpty }) =>
+            $isOpen && !$isEmpty
+                ? Variables.Colors.Primary500
+                : Variables.Colors.Gray200};
+    cursor: ${({ $isEmpty }) => ($isEmpty ? "default" : "pointer")};
     border-radius: ${Variables.Radiuses.S};
     font-size: ${Variables.FontSizes.Body};
     font-family: ${Variables.FontFamilies.Body};
     padding: 0 ${Variables.Spacers.XS};
     background-color: ${({ $validation }) =>
-        $validation && $validation === "not-passed" ? Variables.Colors.Danger50 : Variables.Colors.White};
+        $validation && $validation === "not-passed"
+            ? Variables.Colors.Danger50
+            : Variables.Colors.White};
     color: ${Variables.Colors.Black};
     line-height: 100%;
     outline: none;
-    z-index: ${({ $isOpen }) => $isOpen ? 30 : 0};
+    z-index: ${({ $isOpen }) => ($isOpen ? 30 : 0)};
 
     ${({ disabled }) =>
         disabled &&
@@ -139,8 +189,10 @@ const List = styled.div<{ $isOpen: boolean }>`
 
 const Item = styled.span<{ $isSelected: boolean }>`
     padding: ${Variables.Spacers.XS};
-    background-color: ${({ $isSelected }) => ($isSelected ? Variables.Colors.Primary500 : Variables.Colors.White)};
-    color: ${({ $isSelected }) => ($isSelected ? Variables.Colors.White : Variables.Colors.Black)};
+    background-color: ${({ $isSelected }) =>
+        $isSelected ? Variables.Colors.Primary500 : Variables.Colors.White};
+    color: ${({ $isSelected }) =>
+        $isSelected ? Variables.Colors.White : Variables.Colors.Black};
     transition: ${Variables.Transitions.Short};
 
     @media ${Variables.Breakpoints.Hover} {

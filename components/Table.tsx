@@ -5,7 +5,7 @@
 import React from "react"
 import styled, { css } from "styled-components"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import { FontCommon } from "./Text"
 
 import { TextAlignTypes } from "../common-types"
@@ -45,12 +45,6 @@ const vAlign = {
 
 type VAlignTypes = keyof typeof vAlign
 
-interface StyleProps extends React.HTMLAttributes<HTMLTableElement> {
-    $tableStyle?: TableStyleTypes
-    $textAlign?: TextAlignTypes
-    $vAlign?: VAlignTypes
-}
-
 interface Props extends React.HTMLAttributes<HTMLTableElement> {
     children: React.ReactNode | React.ReactNode[]
     options?: {
@@ -62,7 +56,11 @@ interface Props extends React.HTMLAttributes<HTMLTableElement> {
 
 /*==================== Styles ====================*/
 
-const StyledTable = styled.table<StyleProps>`
+const StyledTable = styled.table<{
+    $tableStyle?: TableStyleTypes
+    $textAlign?: TextAlignTypes
+    $vAlign?: VAlignTypes
+}>`
     ${FontCommon};
     display: table;
     border-collapse: collapse;

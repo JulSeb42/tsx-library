@@ -10,7 +10,13 @@ const Vid = React.lazy(() => import("./Vid"))
 
 /*==================== Component ====================*/
 
-const Video = ({ src, width = "100%", height = "auto", options, ...props }: Props) => (
+const Video = ({
+    src,
+    width = "100%",
+    height = "auto",
+    options,
+    ...props
+}: Props) => (
     <Vid
         $width={width}
         $height={height}

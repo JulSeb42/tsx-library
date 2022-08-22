@@ -6,7 +6,7 @@ import React from "react"
 import styled from "styled-components"
 import { stringifyPx } from "../utils"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Mixins from "./Mixins"
 
 import {
@@ -60,16 +60,6 @@ const positions = { 1: 1, 2: 2 } as const
 
 type PositionsTypes = keyof typeof positions
 
-interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
-    $size?: SizesTypes | number
-    $position?: PositionsTypes
-    $justifyContent?: GridJustifyContentTypes
-    $justifyItems?: GridJustifyItemsTypes
-    $alignContent?: GridAlignContentTypes
-    $alignItems?: GridAlignItemsTypes
-    $gap?: SpacerTypes | number
-}
-
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     size?: SizesTypes | number
     position?: PositionsTypes
@@ -82,7 +72,15 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const StyledMain = styled.main<StyleProps>`
+const StyledMain = styled.main<{
+    $size?: SizesTypes | number
+    $position?: PositionsTypes
+    $justifyContent?: GridJustifyContentTypes
+    $justifyItems?: GridJustifyItemsTypes
+    $alignContent?: GridAlignContentTypes
+    $alignItems?: GridAlignItemsTypes
+    $gap?: SpacerTypes | number
+}>`
     width: ${({ $size }) =>
         $size === "large"
             ? Variables.Layouts.Main.Large

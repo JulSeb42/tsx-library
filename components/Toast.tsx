@@ -5,7 +5,7 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Text from "./Text"
 import Mixins from "./Mixins"
 import Icon from "./Icon"
@@ -22,13 +22,23 @@ const Toast = ({ title, close, children, icon, ...props }: Props) => {
         <StyledToast $isClosed={isClosed} {...props}>
             {icon || close ? (
                 <TitleContainer>
-                    {icon && <Icon src={icon.name} size={24} color={icon.color || "primary"} />}
+                    {icon && (
+                        <Icon
+                            src={icon.name}
+                            size={24}
+                            color={icon.color || "primary"}
+                        />
+                    )}
 
                     <Text tag="h5">{title}</Text>
 
                     {close && (
                         <CloseButton onClick={() => setIsClosed(true)}>
-                            {typeof close === "object" ? <Icon src={close.icon} size={24} /> : <CloseIcon size={24} />}
+                            {typeof close === "object" ? (
+                                <Icon src={close.icon} size={24} />
+                            ) : (
+                                <CloseIcon size={24} />
+                            )}
                         </CloseButton>
                     )}
                 </TitleContainer>
@@ -36,7 +46,11 @@ const Toast = ({ title, close, children, icon, ...props }: Props) => {
                 <Text tag="h5">{title}</Text>
             )}
 
-            {children && <Content as={typeof children === "string" ? Text : "div"}>{children}</Content>}
+            {children && (
+                <Content as={typeof children === "string" ? Text : "div"}>
+                    {children}
+                </Content>
+            )}
         </StyledToast>
     )
 }
@@ -44,10 +58,6 @@ const Toast = ({ title, close, children, icon, ...props }: Props) => {
 export default Toast
 
 /*==================== Types ====================*/
-
-interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
-    $isClosed?: boolean
-}
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     title: string
@@ -67,7 +77,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const StyledToast = styled.div<StyleProps>`
+const StyledToast = styled.div<{ $isClosed?: boolean }>`
     width: 100%;
     max-width: 400px;
     background-color: ${Variables.Colors.White};

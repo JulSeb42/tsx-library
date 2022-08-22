@@ -25,14 +25,6 @@ export default Youtube
 
 /*==================== Types ====================*/
 
-interface StyleProps extends React.HTMLAttributes<HTMLIFrameElement> {
-    $width?: string | number
-    $height?: string | number
-    $aspectRatio?: string
-    frameborder?: string
-    allowfullscreen?: boolean
-}
-
 interface Props extends React.HTMLAttributes<HTMLIFrameElement> {
     src: string
     width?: string | number
@@ -42,7 +34,13 @@ interface Props extends React.HTMLAttributes<HTMLIFrameElement> {
 
 /*==================== Styles ====================*/
 
-const StyledYoutube = styled.iframe<StyleProps>`
+const StyledYoutube = styled.iframe<{
+    $width?: string | number
+    $height?: string | number
+    $aspectRatio?: string
+    frameborder?: string
+    allowfullscreen?: boolean
+}>`
     width: ${({ $width }) => ($width ? stringifyPx($width) : "100%")};
     height: ${({ $height }) => $height};
     aspect-ratio: ${({ $aspectRatio, $height }) =>

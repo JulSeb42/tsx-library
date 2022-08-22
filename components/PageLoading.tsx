@@ -16,13 +16,17 @@ const PageLoading = ({ options, ...props }: Props) => {
     useEffect(() => document.body.classList.add("stop-scrolling"))
 
     return (
-        <StyledPageLoading $backgroundColor={options?.backgroundColor || "primary"} {...props}>
+        <StyledPageLoading
+            $backgroundColor={options?.backgroundColor || "primary"}
+            {...props}
+        >
             <Loader
                 options={{
                     size: 64,
                     borderSize: 12,
                     color:
-                        options?.backgroundColor === "white" && !options?.loaderColor
+                        options?.backgroundColor === "white" &&
+                        !options?.loaderColor
                             ? "primary"
                             : options?.loaderColor
                             ? options?.loaderColor
@@ -37,10 +41,6 @@ export default PageLoading
 
 /*==================== Types ====================*/
 
-interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
-    $backgroundColor?: LibColorsTypes | ColorsShortTypes | string
-}
-
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     options?: {
         backgroundColor?: LibColorsTypes | ColorsShortTypes | string
@@ -50,13 +50,16 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const StyledPageLoading = styled.div<StyleProps>`
+const StyledPageLoading = styled.div<{
+    $backgroundColor?: LibColorsTypes | ColorsShortTypes | string
+}>`
     position: fixed;
     width: 100vw;
     height: 100vh;
     top: 0;
     left: 0;
-    background-color: ${({ $backgroundColor }) => Mixins.AllColors({ $color: $backgroundColor })};
+    background-color: ${({ $backgroundColor }) =>
+        Mixins.AllColors({ $color: $backgroundColor })};
     ${Mixins.Flexbox({
         $alignItems: "center",
         $justifyContent: "center",

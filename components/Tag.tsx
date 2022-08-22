@@ -5,7 +5,7 @@
 import React from "react"
 import styled from "styled-components"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Mixins from "./Mixins"
 
 import { ColorsShortTypes, LibColorsTypes } from "../common-types"
@@ -34,12 +34,6 @@ const tagStyles = {
 
 type TagStylesTypes = keyof typeof tagStyles
 
-interface StyleProps extends React.HTMLAttributes<HTMLSpanElement> {
-    $tagStyle?: TagStylesTypes
-    $color?: ColorsShortTypes | LibColorsTypes | string
-    $textColor?: ColorsShortTypes | LibColorsTypes | string
-}
-
 interface Props extends React.HTMLAttributes<HTMLSpanElement> {
     children: string
     options?: {
@@ -51,13 +45,18 @@ interface Props extends React.HTMLAttributes<HTMLSpanElement> {
 
 /*==================== Styles ====================*/
 
-const StyledTag = styled.span<StyleProps>`
+const StyledTag = styled.span<{
+    $tagStyle?: TagStylesTypes
+    $color?: ColorsShortTypes | LibColorsTypes | string
+    $textColor?: ColorsShortTypes | LibColorsTypes | string
+}>`
     font-size: ${Variables.FontSizes.Small};
     padding: ${({ $tagStyle }) =>
         $tagStyle === "pill"
             ? `${Variables.Spacers.XXS} ${Variables.Spacers.M}`
             : `${Variables.Spacers.XXS} ${Variables.Spacers.S}`};
-    border-radius: ${({ $tagStyle }) => ($tagStyle === "pill" ? Variables.Radiuses.Round : Variables.Radiuses.S)};
+    border-radius: ${({ $tagStyle }) =>
+        $tagStyle === "pill" ? Variables.Radiuses.Round : Variables.Radiuses.S};
     background-color: ${Mixins.AllColors};
     color: ${({ $color, $textColor }) =>
         $color === "white"

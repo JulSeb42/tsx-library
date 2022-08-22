@@ -6,7 +6,7 @@ import React from "react"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Mixins from "./Mixins"
 import Icon from "./Icon"
 import Loader from "./Loader"
@@ -42,7 +42,10 @@ const ButtonIcon = ({
                 }}
             />
         ) : (
-            <Icon src={icon} size={options?.size ? options?.size * 0.6 : 48 * 0.6} />
+            <Icon
+                src={icon}
+                size={options?.size ? options?.size * 0.6 : 48 * 0.6}
+            />
         )}
     </StyledButtonIcon>
 )
@@ -57,13 +60,6 @@ const buttonStyles = {
 } as const
 
 type ButtonStylesProps = keyof typeof buttonStyles
-
-interface StyleProps extends React.HTMLAttributes<HTMLButtonElement> {
-    $buttonStyle?: ButtonStylesProps
-    $color?: ColorsHoverTypes
-    $size?: number
-    $hoverBackground?: boolean
-}
 
 interface BaseProps extends React.HTMLAttributes<HTMLButtonElement> {
     icon: string
@@ -98,7 +94,12 @@ type Props = Possible1 | Possible2
 
 /*==================== Styles ====================*/
 
-const StyledButtonIcon = styled.button<StyleProps>`
+const StyledButtonIcon = styled.button<{
+    $buttonStyle?: ButtonStylesProps
+    $color?: ColorsHoverTypes
+    $size?: number
+    $hoverBackground?: boolean
+}>`
     width: ${({ $size }) => $size}px;
     height: ${({ $size }) => $size}px;
     border-radius: ${Variables.Radiuses.Circle};
@@ -109,7 +110,8 @@ const StyledButtonIcon = styled.button<StyleProps>`
     })};
     padding: 0;
     border: none;
-    background-color: ${({ $buttonStyle }) => ($buttonStyle === "plain" ? Mixins.ColorsHoverDefault : "transparent")};
+    background-color: ${({ $buttonStyle }) =>
+        $buttonStyle === "plain" ? Mixins.ColorsHoverDefault : "transparent"};
     color: ${({ $buttonStyle, $color }) =>
         $buttonStyle === "plain" && $color === "white"
             ? Variables.Colors.Primary500
@@ -125,17 +127,21 @@ const StyledButtonIcon = styled.button<StyleProps>`
                     : $buttonStyle === "transparent" && $hoverBackground
                     ? Variables.Colors.Gray50
                     : ""};
-            color: ${({ $buttonStyle }) => $buttonStyle === "transparent" && Mixins.ColorsHoverHover};
+            color: ${({ $buttonStyle }) =>
+                $buttonStyle === "transparent" && Mixins.ColorsHoverHover};
         }
 
         &:not(:disabled):active {
-            background-color: ${({ $buttonStyle }) => $buttonStyle === "plain" && Mixins.ColorsHoverActive};
-            color: ${({ $buttonStyle }) => $buttonStyle === "transparent" && Mixins.ColorsHoverActive};
+            background-color: ${({ $buttonStyle }) =>
+                $buttonStyle === "plain" && Mixins.ColorsHoverActive};
+            color: ${({ $buttonStyle }) =>
+                $buttonStyle === "transparent" && Mixins.ColorsHoverActive};
         }
     }
 
     &:disabled {
-        background-color: ${({ $buttonStyle }) => $buttonStyle === "plain" && Variables.Colors.Gray100};
+        background-color: ${({ $buttonStyle }) =>
+            $buttonStyle === "plain" && Variables.Colors.Gray100};
         color: ${Variables.Colors.Gray500};
     }
 `

@@ -298,5 +298,5 @@ export type CountryType = {
     name: string
     dial_code: string
     code: string
-    flag: JSX.Element | any
+    flag: JSX.Element | any
 }

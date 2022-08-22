@@ -14,17 +14,17 @@ import { LibColorsTypes, ColorsShortTypes } from "../common-types"
 /*==================== Component ====================*/
 
 const Icon = ({ src, size = 24, color = "currentColor", ...props }: Props) => (
-    <StyledIcon src={`/icons/${src}.svg`} $color={color} $size={size} {...props} />
+    <StyledIcon
+        src={`/icons/${src}.svg`}
+        $color={color}
+        $size={size}
+        {...props}
+    />
 )
 
 export default Icon
 
 /*==================== Types ====================*/
-
-interface StyleProps extends SVGProps {
-    $size?: number
-    $color?: LibColorsTypes | ColorsShortTypes | string
-}
 
 interface Props extends SVGProps {
     src: string
@@ -34,7 +34,10 @@ interface Props extends SVGProps {
 
 /*==================== Styles ====================*/
 
-const StyledIcon = styled(SVG)<StyleProps>`
+const StyledIcon = styled(SVG)<{
+    $size?: number
+    $color?: LibColorsTypes | ColorsShortTypes | string
+}>`
     width: ${({ $size }) => $size}px;
     height: ${({ $size }) => $size}px;
     fill: ${Mixins.AllColors};

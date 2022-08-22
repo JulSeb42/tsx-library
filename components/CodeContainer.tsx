@@ -7,7 +7,7 @@ import styled from "styled-components"
 import SyntaxHighlighter from "react-syntax-highlighter"
 import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Mixins from "./Mixins"
 import Icon from "./Icon"
 import ClipboardIcon from "../icons/ClipboardIcon"
@@ -35,11 +35,17 @@ const CodeContainer = ({
 
     return (
         <StyledCodeContainer>
-            <Code language={language} style={options?.style || atomOneDark} {...props}>
+            <Code
+                language={language}
+                style={options?.style || atomOneDark}
+                {...props}
+            >
                 {children}
             </Code>
 
-            {(options?.copyButton || options?.iconCopy || options?.iconCopied) && (
+            {(options?.copyButton ||
+                options?.iconCopy ||
+                options?.iconCopied) && (
                 <Button $hasCopied={hasCopied} onClick={copyToClipboard}>
                     {hasCopied ? (
                         options?.iconCopied ? (
@@ -264,10 +270,6 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
     }
 }
 
-interface StyleButton extends React.HTMLAttributes<HTMLButtonElement> {
-    $hasCopied: boolean
-}
-
 /*==================== Styles ====================*/
 
 const StyledCodeContainer = styled.div`
@@ -303,7 +305,7 @@ const Code = styled(SyntaxHighlighter)`
 
 const buttonSize = 32
 
-const Button = styled.button<StyleButton>`
+const Button = styled.button<{ $hasCopied: boolean }>`
     width: ${buttonSize}px;
     height: ${buttonSize}px;
     border-radius: ${Variables.Radiuses.Circle};
@@ -316,19 +318,25 @@ const Button = styled.button<StyleButton>`
     position: absolute;
     right: ${Variables.Spacers.M};
     top: 12px;
-    background-color: ${({ $hasCopied }) => ($hasCopied ? Variables.Colors.Success500 : Variables.Colors.White)};
-    color: ${({ $hasCopied }) => ($hasCopied ? Variables.Colors.White : Variables.Colors.Primary500)};
+    background-color: ${({ $hasCopied }) =>
+        $hasCopied ? Variables.Colors.Success500 : Variables.Colors.White};
+    color: ${({ $hasCopied }) =>
+        $hasCopied ? Variables.Colors.White : Variables.Colors.Primary500};
     transition: ${Variables.Transitions.Short};
 
     @media ${Variables.Breakpoints.Hover} {
         &:hover {
             background-color: ${({ $hasCopied }) =>
-                $hasCopied ? Variables.Colors.Success300 : Variables.Colors.Gray300};
+                $hasCopied
+                    ? Variables.Colors.Success300
+                    : Variables.Colors.Gray300};
         }
 
         &:active {
             background-color: ${({ $hasCopied }) =>
-                $hasCopied ? Variables.Colors.Success600 : Variables.Colors.Gray100};
+                $hasCopied
+                    ? Variables.Colors.Success600
+                    : Variables.Colors.Gray100};
         }
     }
 `

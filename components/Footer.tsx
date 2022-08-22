@@ -5,7 +5,7 @@
 import React from "react"
 import styled, { css } from "styled-components"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Text from "./Text"
 import Mixins from "./Mixins"
 import Image from "./Image"
@@ -15,7 +15,11 @@ import { ColorsShortTypes, LibColorsTypes } from "../common-types"
 /*==================== Component ====================*/
 
 const Footer = ({ children, logo, options, ...props }: Props) => (
-    <StyledFooter $separator={options?.separator} $separatorColor={options?.separatorColor || "gray-200"} {...props}>
+    <StyledFooter
+        $separator={options?.separator}
+        $separatorColor={options?.separatorColor || "gray-200"}
+        {...props}
+    >
         {logo.img ? (
             <LogoImg
                 src={logo.img}
@@ -39,11 +43,6 @@ const Footer = ({ children, logo, options, ...props }: Props) => (
 export default Footer
 
 /*==================== Types ====================*/
-
-interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
-    $separator?: boolean
-    $separatorColor?: ColorsShortTypes | LibColorsTypes | string
-}
 
 interface BaseProps extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactNode | React.ReactNode[] | string
@@ -78,7 +77,10 @@ type Props = Possible1 | Possible2
 
 /*==================== Styles ====================*/
 
-const StyledFooter = styled.footer<StyleProps>`
+const StyledFooter = styled.footer<{
+    $separator?: boolean
+    $separatorColor?: ColorsShortTypes | LibColorsTypes | string
+}>`
     width: 100%;
     position: relative;
     z-index: 10;
@@ -125,7 +127,9 @@ const StyledFooter = styled.footer<StyleProps>`
                 position: absolute;
                 top: ${Variables.Spacers.L};
                 left: 5%;
-                background-color: ${Mixins.AllColors({ $color: $separatorColor })};
+                background-color: ${Mixins.AllColors({
+                    $color: $separatorColor,
+                })};
             }
         `}
 `

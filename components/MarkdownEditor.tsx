@@ -8,12 +8,29 @@ import MDEditor from "@uiw/react-md-editor"
 
 import InputContainer from "./InputContainer"
 
+import { LibColorsTypes, ColorsShortTypes } from "../common-types"
+
 /*==================== Component ====================*/
 
-const MarkdownEditor = ({ id, onChange, value, options, commands, extraCommands, ...props }: Props) => {
+const MarkdownEditor = ({
+    id,
+    onChange,
+    value,
+    options,
+    commands,
+    extraCommands,
+    ...props
+}: Props) => {
     return options?.label || options?.helper || options?.helperBottom ? (
-        <InputContainer id={id} label={options.label} helper={options.helper} helperBottom={options.helperBottom}>
-            <StyledMarkdownEditor data-color-mode={options?.colorMode || "light"}>
+        <InputContainer
+            id={id}
+            label={options.label}
+            helper={options.helper}
+            helperBottom={options.helperBottom}
+        >
+            <StyledMarkdownEditor
+                data-color-mode={options?.colorMode || "light"}
+            >
                 <MDEditor
                     id={id}
                     onChange={onChange}
@@ -27,7 +44,13 @@ const MarkdownEditor = ({ id, onChange, value, options, commands, extraCommands,
         </InputContainer>
     ) : (
         <StyledMarkdownEditor data-color-mode={options?.colorMode || "light"}>
-            <MDEditor id={id} onChange={onChange} value={value} preview={options?.preview || "edit"} {...props} />
+            <MDEditor
+                id={id}
+                onChange={onChange}
+                value={value}
+                preview={options?.preview || "edit"}
+                {...props}
+            />
         </StyledMarkdownEditor>
     )
 }
@@ -47,7 +70,13 @@ interface Props extends React.HTMLAttributes<HTMLInputElement> {
         colorMode?: "light" | "dark"
         label?: string
         helper?: string
-        helperBottom?: string
+        helperBottom?:
+            | string
+            | {
+                  text: string
+                  icon?: string
+                  iconColor?: LibColorsTypes | ColorsShortTypes | string
+              }
         preview?: "live" | "edit" | "preview"
     }
 }

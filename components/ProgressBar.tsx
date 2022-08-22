@@ -5,7 +5,7 @@
 import React from "react"
 import styled, { keyframes, css } from "styled-components"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Mixins from "./Mixins"
 
 import { ColorsShortTypes, LibColorsTypes } from "../common-types"
@@ -30,13 +30,6 @@ export default ProgressBar
 
 /*==================== Types ====================*/
 
-interface StyleProps extends React.HTMLAttributes<HTMLSpanElement> {
-    $value: number
-    $color?: ColorsShortTypes | LibColorsTypes | string
-    $backgroundColor?: ColorsShortTypes | LibColorsTypes | string
-    $animated?: boolean
-}
-
 interface Props extends React.HTMLAttributes<HTMLSpanElement> {
     value: number
 
@@ -49,7 +42,7 @@ interface Props extends React.HTMLAttributes<HTMLSpanElement> {
 
 /*==================== Styles ====================*/
 
-const Progress = ({ $value }: StyleProps) => keyframes`
+const Progress = ({ $value }: { $value: number }) => keyframes`
     0% {
         width: 0;
     }
@@ -59,11 +52,18 @@ const Progress = ({ $value }: StyleProps) => keyframes`
     }
 `
 
-const StyledProgressBar = styled.span<StyleProps>`
+const StyledProgressBar = styled.span<{
+    $value: number
+    $color?: ColorsShortTypes | LibColorsTypes | string
+    $backgroundColor?: ColorsShortTypes | LibColorsTypes | string
+    $animated?: boolean
+}>`
     width: 100%;
     height: 16px;
     background-color: ${({ $color, $backgroundColor }) =>
-        $color === "white" ? Variables.Colors.Gray900 : Mixins.AllColors({ $color: $backgroundColor })};
+        $color === "white"
+            ? Variables.Colors.Gray900
+            : Mixins.AllColors({ $color: $backgroundColor })};
     border-radius: ${Variables.Radiuses.Round};
     position: relative;
     display: block;
@@ -74,7 +74,8 @@ const StyledProgressBar = styled.span<StyleProps>`
         position: absolute;
         width: ${({ $value }) => $value}%;
         height: 100%;
-        border-radius: ${({ $value }) => ($value < 3 ? Variables.Radiuses.Circle : Variables.Radiuses.Round)};
+        border-radius: ${({ $value }) =>
+            $value < 3 ? Variables.Radiuses.Circle : Variables.Radiuses.Round};
         transition: ${Variables.Transitions.Short};
         background-color: ${Mixins.AllColors};
 
@@ -82,7 +83,8 @@ const StyledProgressBar = styled.span<StyleProps>`
             $animated === false
                 ? css``
                 : css`
-                      animation: ${Progress({ $value: $value })} calc(${$value} * 50ms) 1;
+                      animation: ${Progress({ $value: $value })}
+                          calc(${$value} * 50ms) 1;
                   `}
     }
 `

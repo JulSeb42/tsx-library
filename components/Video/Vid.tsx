@@ -9,18 +9,14 @@ import { stringifyPx } from "../../utils"
 
 import { ObjectFitTypes } from "../../common-types"
 
-/*==================== Types ====================*/
+/*==================== Component ====================*/
 
-interface StyleProps extends React.HTMLAttributes<HTMLVideoElement> {
+const Vid = styled.video<{
     $width?: string | number
     $height?: string | number
     $fit?: ObjectFitTypes
     $aspectRatio?: string
-}
-
-/*==================== Component ====================*/
-
-const Vid = styled.video<StyleProps>`
+}>`
     display: block;
     object-fit: ${({ $fit }) => $fit};
     width: ${({ $width }) => ($width ? stringifyPx($width) : "100%")};

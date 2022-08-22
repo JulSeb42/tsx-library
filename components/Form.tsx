@@ -11,7 +11,13 @@ import Button from "./Button"
 
 /*==================== Component ====================*/
 
-const Form = ({ children, buttonPrimary, buttonSecondary, isLoading, ...props }: Props) => (
+const Form = ({
+    children,
+    buttonPrimary,
+    buttonSecondary,
+    isLoading,
+    ...props
+}: Props) => (
     <StyledForm {...props}>
         {children}
 

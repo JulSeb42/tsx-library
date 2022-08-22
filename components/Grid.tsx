@@ -4,16 +4,16 @@
 
 import React from "react"
 import styled, { css } from "styled-components"
-import { stringifyPx } from "../utils"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
+import Mixins from "./Mixins"
 
 import {
     SpacerTypes,
     GridJustifyItemsTypes,
     GridAlignItemsTypes,
     GridJustifyContentTypes,
-    GridAlignContentTypes
+    GridAlignContentTypes,
 } from "../common-types"
 
 /*==================== Component ====================*/
@@ -74,21 +74,6 @@ const col = {
 
 type colType = keyof typeof col
 
-interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
-    $inline?: boolean
-    $col?: colType | number | string
-    $gap?: SpacerTypes | number | string
-    $columnGap?: SpacerTypes | number | string
-    $rowGap?: SpacerTypes | number | string
-    $justifyItems?: GridJustifyItemsTypes
-    $alignItems?: GridAlignItemsTypes
-    $justifyContent?: GridJustifyContentTypes
-    $alignContent?: GridAlignContentTypes
-    $padding?: SpacerTypes | number | string
-    $colTablet?: string
-    $colMobile?: string
-}
-
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     inline?: boolean
     col?: colType | number | string
@@ -106,93 +91,34 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const StyledGrid = styled.div<StyleProps>`
-    display: ${({ $inline }) => ($inline ? "inline-grid" : "grid")};
-    grid-template-columns: ${({ $col }) => (typeof $col === "number" ? `repeat(${$col}, 1fr)` : $col)};
-    gap: ${({ $gap }) =>
-        $gap === "xxl"
-            ? Variables.Spacers.XXL
-            : $gap === "xl"
-            ? Variables.Spacers.XL
-            : $gap === "l"
-            ? Variables.Spacers.L
-            : $gap === "m"
-            ? Variables.Spacers.M
-            : $gap === "s"
-            ? Variables.Spacers.S
-            : $gap === "xs"
-            ? Variables.Spacers.XS
-            : $gap === "xxs"
-            ? Variables.Spacers.XXS
-            : $gap
-            ? stringifyPx($gap)
-            : ""};
-    column-gap: ${({ $columnGap }) =>
-        $columnGap === "xxl"
-            ? Variables.Spacers.XXL
-            : $columnGap === "xl"
-            ? Variables.Spacers.XL
-            : $columnGap === "l"
-            ? Variables.Spacers.L
-            : $columnGap === "m"
-            ? Variables.Spacers.M
-            : $columnGap === "s"
-            ? Variables.Spacers.S
-            : $columnGap === "xs"
-            ? Variables.Spacers.XS
-            : $columnGap === "xxs"
-            ? Variables.Spacers.XXS
-            : $columnGap
-            ? stringifyPx($columnGap)
-            : ""};
-    row-gap: ${({ $rowGap }) =>
-        $rowGap === "xxl"
-            ? Variables.Spacers.XXL
-            : $rowGap === "xl"
-            ? Variables.Spacers.XL
-            : $rowGap === "l"
-            ? Variables.Spacers.L
-            : $rowGap === "m"
-            ? Variables.Spacers.M
-            : $rowGap === "s"
-            ? Variables.Spacers.S
-            : $rowGap === "xs"
-            ? Variables.Spacers.XS
-            : $rowGap === "xxs"
-            ? Variables.Spacers.XXS
-            : $rowGap
-            ? stringifyPx($rowGap)
-            : ""};
-    justify-items: ${({ $justifyItems }) => $justifyItems};
-    align-items: ${({ $alignItems }) => $alignItems};
-    justify-content: ${({ $justifyContent }) => $justifyContent};
-    align-content: ${({ $alignContent }) => $alignContent};
-    padding: ${({ $padding }) =>
-        $padding === "xxl"
-            ? Variables.Spacers.XXL
-            : $padding === "xl"
-            ? Variables.Spacers.XL
-            : $padding === "l"
-            ? Variables.Spacers.L
-            : $padding === "m"
-            ? Variables.Spacers.M
-            : $padding === "s"
-            ? Variables.Spacers.S
-            : $padding === "xs"
-            ? Variables.Spacers.XS
-            : $padding === "xxs"
-            ? Variables.Spacers.XXS
-            : $padding
-            ? stringifyPx($padding)
-            : ""};
+const StyledGrid = styled.div<{
+    $inline?: boolean
+    $col?: colType | number | string
+    $gap?: SpacerTypes | number | string
+    $columnGap?: SpacerTypes | number | string
+    $rowGap?: SpacerTypes | number | string
+    $justifyItems?: GridJustifyItemsTypes
+    $alignItems?: GridAlignItemsTypes
+    $justifyContent?: GridJustifyContentTypes
+    $alignContent?: GridAlignContentTypes
+    $padding?: SpacerTypes | number | string
+    $colTablet?: string
+    $colMobile?: string
+}>`
+    ${Mixins.Grid};
 
     @media ${Variables.Breakpoints.Tablet} {
         grid-template-columns: ${({ $col }) =>
-            $col && $col >= 6 ? "repeat(4, 1fr)" : $col === 4 || $col === 5 ? "repeat(3, 1fr)" : "repeat(2, 1fr)"};
+            $col && $col >= 6
+                ? "repeat(4, 1fr)"
+                : $col === 4 || $col === 5
+                ? "repeat(3, 1fr)"
+                : "repeat(2, 1fr)"};
     }
 
     @media ${Variables.Breakpoints.Mobile} {
-        grid-template-columns: ${({ $col }) => ($col && $col >= 6 ? "repeat(2, 1fr)" : "repeat(1, 1fr)")};
+        grid-template-columns: ${({ $col }) =>
+            $col && $col >= 6 ? "repeat(2, 1fr)" : "repeat(1, 1fr)"};
     }
 
     ${({ $col, $colTablet, $colMobile }) =>
@@ -214,7 +140,10 @@ const StyledGrid = styled.div<StyleProps>`
                   }
 
                   @media ${Variables.Breakpoints.Mobile} {
-                      grid-template-columns: repeat(${!$col ? 1 : $col >= 6 ? 2 : 1}, 1fr);
+                      grid-template-columns: repeat(
+                          ${!$col ? 1 : $col >= 6 ? 2 : 1},
+                          1fr
+                      );
                   }
               `
             : css`

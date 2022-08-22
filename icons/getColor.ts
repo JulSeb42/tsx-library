@@ -2,7 +2,7 @@
 
 /*==================== Imports ====================*/
 
-import Variables from "../components/Variables"
+import Variables from "../Variables"
 
 import { LibColorsTypes, ColorsShortTypes } from "../common-types"
 

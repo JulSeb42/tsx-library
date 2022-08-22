@@ -5,7 +5,7 @@
 import React, { useState } from "react"
 import styled, { css } from "styled-components"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Mixins from "./Mixins"
 
 import { LibColorsTypes, ColorsShortTypes } from "../common-types"
@@ -23,7 +23,7 @@ const Tooltip = ({ tooltip, children, options, ...props }: Props) => {
             onMouseLeave={() => setIsVisible(false)}
             {...props}
         >
-            <Tip isVisible={isVisible}>{tooltip}</Tip>
+            <Tip $isVisible={isVisible}>{tooltip}</Tip>
 
             {children}
         </StyledTooltip>
@@ -42,15 +42,6 @@ const textStyles = {
 
 type TextStylesTypes = keyof typeof textStyles
 
-interface StyleProps extends React.HTMLAttributes<HTMLSpanElement> {
-    $textStyle?: TextStylesTypes
-    $color?: ColorsShortTypes | LibColorsTypes | string
-}
-
-interface StyleTipProps extends React.HTMLAttributes<HTMLSpanElement> {
-    isVisible: boolean
-}
-
 interface Props extends React.HTMLAttributes<HTMLSpanElement> {
     tooltip: string
     children: string
@@ -62,7 +53,10 @@ interface Props extends React.HTMLAttributes<HTMLSpanElement> {
 
 /*==================== Styles ====================*/
 
-const StyledTooltip = styled.span<StyleProps>`
+const StyledTooltip = styled.span<{
+    $textStyle?: TextStylesTypes
+    $color?: ColorsShortTypes | LibColorsTypes | string
+}>`
     display: inline;
     position: relative;
     color: ${Mixins.AllColors};
@@ -70,7 +64,10 @@ const StyledTooltip = styled.span<StyleProps>`
     ${({ $textStyle }) =>
         $textStyle === "dotted" || $textStyle === "underline"
             ? css`
-                  border-bottom: 1px ${$textStyle === "dotted" ? "dotted" : $textStyle === "underline" && "solid"}
+                  border-bottom: 1px
+                      ${$textStyle === "dotted"
+                          ? "dotted"
+                          : $textStyle === "underline" && "solid"}
                       currentColor;
               `
             : css`
@@ -78,7 +75,7 @@ const StyledTooltip = styled.span<StyleProps>`
               `}
 `
 
-const Tip = styled.span<StyleTipProps>`
+const Tip = styled.span<{ $isVisible: boolean }>`
     width: 150px;
     background-color: ${Variables.Overlays.Plain.Black80};
     color: ${Variables.Colors.White};
@@ -89,8 +86,8 @@ const Tip = styled.span<StyleTipProps>`
     left: calc(50% - 150px / 2);
     font-size: ${Variables.FontSizes.Small};
     font-weight: ${Variables.FontWeights.Regular};
-    opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
-    visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
+    opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
+    visibility: ${({ $isVisible }) => ($isVisible ? "visible" : "hidden")};
     z-index: 1;
     transition: ${Variables.Transitions.Short};
     position: absolute;
@@ -102,9 +99,10 @@ const Tip = styled.span<StyleTipProps>`
         margin-left: 2px;
         border-width: 5px;
         border-style: solid;
-        border-color: ${Variables.Overlays.Plain.Black80} transparent transparent transparent;
-        opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
-        visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
+        border-color: ${Variables.Overlays.Plain.Black80} transparent
+            transparent transparent;
+        opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
+        visibility: ${({ $isVisible }) => ($isVisible ? "visible" : "hidden")};
         z-index: 1;
         transition: ${Variables.Transitions.Short};
         position: absolute;

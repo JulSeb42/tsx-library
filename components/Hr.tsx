@@ -17,24 +17,22 @@ const Hr = ({ color = "gray-200", height = 1, ...props }: Props) => (
 
 export default Hr
 
+/*==================== Types ====================*/
+
+interface Props extends React.HTMLAttributes<HTMLHRElement> {
+    color?: LibColorsTypes | ColorsShortTypes | string
+    height?: number
+}
+
 /*==================== Styles ====================*/
 
-const StyledHr = styled.hr<StyleProps>`
+const StyledHr = styled.hr<{
+    $color?: LibColorsTypes | ColorsShortTypes | string
+    $height?: number
+}>`
     width: 100%;
     height: ${({ $height }) => $height}px;
     border: none;
     background-color: ${Mixins.AllColors};
     display: block;
 `
-
-/*==================== Types ====================*/
-
-interface StyleProps extends React.HTMLAttributes<HTMLHRElement> {
-    $color?: LibColorsTypes | ColorsShortTypes | string
-    $height?: number
-}
-
-interface Props extends React.HTMLAttributes<HTMLHRElement> {
-    color?: LibColorsTypes | ColorsShortTypes | string
-    height?: number
-}

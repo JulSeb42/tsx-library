@@ -5,13 +5,57 @@
 import React from "react"
 import styled from "styled-components"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Mixins from "./Mixins"
 import Flexbox from "./Flexbox"
 
+/*==================== Component ====================*/
+
+const DropdownContainer = ({
+    justify = "left",
+    children,
+    ...props
+}: ContainerProps) => (
+    <StyledDropdownContainer
+        $justify={justify}
+        justifyContent={justify === "right" ? "flex-end" : "flex-start"}
+        {...props}
+    >
+        {children}
+    </StyledDropdownContainer>
+)
+
+const Dropdown = ({ children, isOpen, ...props }: Props) => (
+    <StyledDropdown $isOpen={isOpen} {...props}>
+        {children}
+    </StyledDropdown>
+)
+
+export { DropdownContainer, Dropdown }
+
+/*==================== Types ====================*/
+
+const justify = {
+    left: "left",
+    right: "right",
+} as const
+
+type JustifyTypes = keyof typeof justify
+
+interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
+    justify?: JustifyTypes
+}
+
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+    isOpen: boolean
+}
+
 /*==================== Styles ====================*/
 
-const StyledDropdown = styled.div<StyleProps>`
+const StyledDropdown = styled.div<{
+    $isOpen: boolean
+    $justify?: JustifyTypes
+}>`
     position: absolute;
     top: 42px;
     ${Mixins.Grid({})};
@@ -48,7 +92,7 @@ const StyledDropdown = styled.div<StyleProps>`
     }
 `
 
-const StyledDropdownContainer = styled(Flexbox)<StyleContainerProps>`
+const StyledDropdownContainer = styled(Flexbox)<{ $justify?: JustifyTypes }>`
     position: relative;
 
     ${StyledDropdown} {
@@ -56,45 +100,3 @@ const StyledDropdownContainer = styled(Flexbox)<StyleContainerProps>`
         right: ${({ $justify }) => $justify === "right" && 0};
     }
 `
-
-/*==================== Component ====================*/
-
-const DropdownContainer = ({ justify = "left", children, ...props }: ContainerProps) => (
-    <StyledDropdownContainer $justify={justify} justifyContent={justify === "right" ? "flex-end" : "flex-start"} {...props}>
-        {children}
-    </StyledDropdownContainer>
-)
-
-const Dropdown = ({ children, isOpen, ...props }: Props) => (
-    <StyledDropdown $isOpen={isOpen} {...props}>
-        {children}
-    </StyledDropdown>
-)
-
-export { DropdownContainer, Dropdown }
-
-/*==================== Types ====================*/
-
-const justify = {
-    left: "left",
-    right: "right",
-} as const
-
-type JustifyTypes = keyof typeof justify
-
-interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
-    $isOpen: boolean
-    $justify?: JustifyTypes
-}
-
-interface StyleContainerProps extends React.HTMLAttributes<HTMLDivElement> {
-    $justify?: JustifyTypes
-}
-
-interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
-    justify?: JustifyTypes
-}
-
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
-    isOpen: boolean
-}

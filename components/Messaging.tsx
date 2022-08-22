@@ -8,7 +8,7 @@ import ReactLinkify from "react-linkify"
 import ScrollToBottom from "react-scroll-to-bottom"
 import { v4 as uuid } from "uuid"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Text from "./Text"
 import Mixins from "./Mixins"
 import Flexbox from "./Flexbox"
@@ -18,8 +18,18 @@ import Hr from "./Hr"
 
 /*==================== Component ====================*/
 
-const Message = ({ type, content, date, time, textDateTime = "at" }: MessageTypes) => (
-    <Flexbox alignItems={type === "sent" ? "flex-end" : "flex-start"} flexDirection="column" key={uuid()}>
+const Message = ({
+    type,
+    content,
+    date,
+    time,
+    textDateTime = "at",
+}: MessageTypes) => (
+    <Flexbox
+        alignItems={type === "sent" ? "flex-end" : "flex-start"}
+        flexDirection="column"
+        key={uuid()}
+    >
         <StyledMessage $type={type}>
             <ReactLinkify>{content}</ReactLinkify>
         </StyledMessage>
@@ -34,9 +44,18 @@ const Message = ({ type, content, date, time, textDateTime = "at" }: MessageType
     </Flexbox>
 )
 
-const Messaging = ({ children, textEmpty = "No message yet.", button, input, onSubmit, ...props }: Props) => (
+const Messaging = ({
+    children,
+    textEmpty = "No message yet.",
+    button,
+    input,
+    onSubmit,
+    ...props
+}: Props) => (
     <StyledMessaging>
-        <MessagesContainer $isEmpty={!children}>{children ? children : <Text>{textEmpty}</Text>}</MessagesContainer>
+        <MessagesContainer $isEmpty={!children}>
+            {children ? children : <Text>{textEmpty}</Text>}
+        </MessagesContainer>
 
         <Hr />
 
@@ -47,7 +66,11 @@ const Messaging = ({ children, textEmpty = "No message yet.", button, input, onS
                 placeholder={input.placeholder || "Type your message"}
             />
 
-            <SendButton $hasText={!!button?.text} type="submit" disabled={input.value === "" && true}>
+            <SendButton
+                $hasText={!!button?.text}
+                type="submit"
+                disabled={input.value === "" && true}
+            >
                 {button?.text ? (
                     button.text
                 ) : button?.icon ? (
@@ -70,10 +93,6 @@ const message = {
 } as const
 
 type MessageTypesTypes = keyof typeof message
-
-interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
-    $isEmpty?: boolean
-}
 
 interface MessageTypes extends React.HTMLAttributes<HTMLDivElement> {
     type: "sent" | "received"
@@ -112,14 +131,6 @@ interface Possible2 extends BaseProps {
 
 type Props = Possible1 | Possible2
 
-interface StyleButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-    $hasText?: boolean
-}
-
-interface StyleMessageProps extends React.HTMLAttributes<HTMLParagraphElement> {
-    $type?: MessageTypesTypes
-}
-
 /*==================== Styles ====================*/
 
 const StyledMessaging = styled.div`
@@ -134,7 +145,7 @@ const StyledMessaging = styled.div`
     })}
 `
 
-const MessagesContainer = styled(ScrollToBottom)<StyleProps>`
+const MessagesContainer = styled(ScrollToBottom)<{ $isEmpty?: boolean }>`
     flex-grow: 1;
     overflow-y: scroll;
     width: 100%;
@@ -178,7 +189,7 @@ const Input = styled.textarea`
 
 const buttonSize = 32
 
-const SendButton = styled.button<StyleButtonProps>`
+const SendButton = styled.button<{ $hasText?: boolean }>`
     width: ${buttonSize}px;
     height: ${buttonSize}px;
     padding: 0;
@@ -222,10 +233,13 @@ const SendButton = styled.button<StyleButtonProps>`
     }
 `
 
-const StyledMessage = styled(Text)<StyleMessageProps>`
+const StyledMessage = styled(Text)<{ $type?: MessageTypesTypes }>`
     padding: ${Variables.Spacers.XS};
     border-radius: ${Variables.Radiuses.S};
-    background-color: ${({ $type }) => ($type === "received" ? Variables.Colors.Gray100 : Variables.Colors.Primary500)};
+    background-color: ${({ $type }) =>
+        $type === "received"
+            ? Variables.Colors.Gray100
+            : Variables.Colors.Primary500};
     width: fit-content;
     max-width: 70%;
     color: ${({ $type }) => $type === "sent" && Variables.Colors.White};
@@ -235,11 +249,13 @@ const StyledMessage = styled(Text)<StyleMessageProps>`
 
         @media ${Variables.Breakpoints.Hover} {
             &:hover {
-                color: ${({ $type }) => $type === "sent" && Variables.Colors.Gray300};
+                color: ${({ $type }) =>
+                    $type === "sent" && Variables.Colors.Gray300};
             }
 
             &:active {
-                color: ${({ $type }) => $type === "sent" && Variables.Colors.Gray100};
+                color: ${({ $type }) =>
+                    $type === "sent" && Variables.Colors.Gray100};
             }
         }
     }

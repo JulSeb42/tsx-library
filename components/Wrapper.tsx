@@ -5,7 +5,7 @@
 import React from "react"
 import styled from "styled-components"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 
 /*==================== Component ====================*/
 
@@ -27,17 +27,13 @@ const common = {
 
 type CommonTypes = keyof typeof common
 
-interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
-    $template?: CommonTypes
-}
-
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     template?: CommonTypes
 }
 
 /*==================== Styles ====================*/
 
-const StyledWrapper = styled.div<StyleProps>`
+const StyledWrapper = styled.div<{ $template?: CommonTypes }>`
     display: grid;
     grid-template-columns: ${({ $template }) =>
         $template === "2cols"

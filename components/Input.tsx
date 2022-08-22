@@ -7,7 +7,7 @@ import styled, { css } from "styled-components"
 
 import InputContainer from "./InputContainer"
 import Icon from "./Icon"
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Mixins from "./Mixins"
 
 import CheckCircleIcon from "../icons/CheckCircleIcon"
@@ -15,7 +15,11 @@ import ChevronDownIcon from "../icons/ChevronDownIcon"
 import CloseCircleIcon from "../icons/CloseCircleIcon"
 import CloseIcon from "../icons/CloseIcon"
 
-import { ValidationTypes } from "../common-types"
+import {
+    ValidationTypes,
+    LibColorsTypes,
+    ColorsShortTypes,
+} from "../common-types"
 
 /*==================== Component ====================*/
 
@@ -57,11 +61,19 @@ const InputFunction = ({
 
             <RightContainer $disabled={disabled}>
                 {icons?.select ? (
-                    <Icon src={icons.select} size={24} color={disabled ? "gray" : "primary"} />
+                    <Icon
+                        src={icons.select}
+                        size={24}
+                        color={disabled ? "gray" : "primary"}
+                    />
                 ) : (
                     <ChevronDownIcon
                         size={24}
-                        color={disabled ? Variables.Colors.Gray500 : Variables.Colors.Primary500}
+                        color={
+                            disabled
+                                ? Variables.Colors.Gray500
+                                : Variables.Colors.Primary500
+                        }
                     />
                 )}
             </RightContainer>
@@ -92,7 +104,11 @@ const InputFunction = ({
         <InputContent>
             {icons?.icon && (
                 <IconContainer>
-                    <Icon src={icons.icon} size={16} color={disabled ? "gray" : "primary"} />
+                    <Icon
+                        src={icons.icon}
+                        size={16}
+                        color={disabled ? "gray" : "primary"}
+                    />
                 </IconContainer>
             )}
 
@@ -111,15 +127,23 @@ const InputFunction = ({
                 name={name}
                 $validation={validation?.status}
                 $icon={!!icons?.icon}
-                            autoFocus={autoFocus}
-                        $showHttp={options?.showHttp}
+                autoFocus={autoFocus}
+                $showHttp={options?.showHttp}
                 {...props}
             />
 
-            {(validation || password || (type === "search" && typeof value === "string" && value.length > 0)) && (
+            {(validation ||
+                password ||
+                (type === "search" &&
+                    typeof value === "string" &&
+                    value.length > 0)) && (
                 <RightContainer $disabled={disabled}>
                     {password && (
-                        <ButtonInput type="button" onClick={() => setIsVisible(!isVisible)} disabled={disabled}>
+                        <ButtonInput
+                            type="button"
+                            onClick={() => setIsVisible(!isVisible)}
+                            disabled={disabled}
+                        >
                             {isVisible ? (
                                 icons?.hidePassword ? (
                                     <Icon src={icons.hidePassword} size={24} />
@@ -137,28 +161,53 @@ const InputFunction = ({
                         </ButtonInput>
                     )}
 
-                    {validation && validation.status !== undefined &&
+                    {validation &&
+                        validation.status !== undefined &&
                         (validation.status === "passed" ? (
                             validation.iconPassed ? (
-                                <Icon src={validation.iconPassed} size={24} color="success" />
+                                <Icon
+                                    src={validation.iconPassed}
+                                    size={24}
+                                    color="success"
+                                />
                             ) : (
-                                <CheckCircleIcon size={24} color={Variables.Colors.Success500} />
+                                <CheckCircleIcon
+                                    size={24}
+                                    color={Variables.Colors.Success500}
+                                />
                             )
                         ) : validation.iconNotPassed ? (
-                            <Icon src={validation.iconNotPassed} size={24} color="danger" />
+                            <Icon
+                                src={validation.iconNotPassed}
+                                size={24}
+                                color="danger"
+                            />
                         ) : (
-                            <CloseCircleIcon size={24} color={Variables.Colors.Danger500} />
+                            <CloseCircleIcon
+                                size={24}
+                                color={Variables.Colors.Danger500}
+                            />
                         ))}
 
-                    {type === "search" && clearSearch && typeof value === "string" && value.length > 0 && (
-                        <ButtonInput type="button" onClick={clearSearch} disabled={disabled}>
-                            {icons?.clear ? (
-                                <Icon src={icons.clear} size={24} />
-                            ) : (
-                                <CloseIcon size={24} color={Variables.Colors.Primary500} />
-                            )}
-                        </ButtonInput>
-                    )}
+                    {type === "search" &&
+                        clearSearch &&
+                        typeof value === "string" &&
+                        value.length > 0 && (
+                            <ButtonInput
+                                type="button"
+                                onClick={clearSearch}
+                                disabled={disabled}
+                            >
+                                {icons?.clear ? (
+                                    <Icon src={icons.clear} size={24} />
+                                ) : (
+                                    <CloseIcon
+                                        size={24}
+                                        color={Variables.Colors.Primary500}
+                                    />
+                                )}
+                            </ButtonInput>
+                        )}
                 </RightContainer>
             )}
         </InputContent>
@@ -193,7 +242,10 @@ const Input = ({
     children,
     ...props
 }: Props) =>
-    options?.label || options?.helper || options?.helperBottom || options?.counter ? (
+    options?.label ||
+    options?.helper ||
+    options?.helperBottom ||
+    options?.counter ? (
         <InputContainer
             id={id}
             label={options.label}
@@ -266,25 +318,6 @@ const inputTypes = {
 
 type InputTypesTypes = keyof typeof inputTypes
 
-interface StyleProps extends React.HTMLAttributes<HTMLInputElement> {
-    $validation?: ValidationTypes | string
-    $iconCalendar?: string
-    $iconClock?: string
-    $iconSelect?: string
-    type?: InputTypesTypes
-    $icon?: boolean
-    $showHttp?: boolean
-}
-
-interface UrlProps {
-    $icon?: boolean
-    $disabled?: boolean
-}
-
-interface RightContainerProps {
-    $disabled?: boolean
-}
-
 interface Props extends React.HTMLAttributes<HTMLInputElement> {
     id: string
     value?: any
@@ -325,7 +358,13 @@ interface Props extends React.HTMLAttributes<HTMLInputElement> {
     options?: {
         label?: string
         helper?: string
-        helperBottom?: string
+        helperBottom?:
+            | string
+            | {
+                  text: string
+                  icon?: string
+                  iconColor?: LibColorsTypes | ColorsShortTypes | string
+              }
         counter?: boolean
         showHttp?: boolean
     }
@@ -335,7 +374,15 @@ interface Props extends React.HTMLAttributes<HTMLInputElement> {
 
 const size = 32
 
-const InputStyled = styled.input<StyleProps>`
+const InputStyled = styled.input<{
+    $validation?: ValidationTypes | string
+    $iconCalendar?: string
+    $iconClock?: string
+    $iconSelect?: string
+    type?: InputTypesTypes
+    $icon?: boolean
+    $showHttp?: boolean
+}>`
     width: 100%;
     height: ${size}px;
     border: 1px solid ${Variables.Colors.Gray200};
@@ -344,7 +391,9 @@ const InputStyled = styled.input<StyleProps>`
     font-family: ${Variables.FontFamilies.Body};
     padding: ${Variables.Spacers.XS};
     background-color: ${({ $validation }) =>
-        $validation && $validation === "not-passed" ? Variables.Colors.Danger50 : Variables.Colors.White};
+        $validation && $validation === "not-passed"
+            ? Variables.Colors.Danger50
+            : Variables.Colors.White};
     color: ${Variables.Colors.Black};
     line-height: 100%;
     outline: none;
@@ -352,7 +401,9 @@ const InputStyled = styled.input<StyleProps>`
 
     &:focus {
         border-color: ${({ $validation }) =>
-            $validation && $validation === "not-passed" ? Variables.Colors.Danger500 : Variables.Colors.Primary500};
+            $validation && $validation === "not-passed"
+                ? Variables.Colors.Danger500
+                : Variables.Colors.Primary500};
     }
 
     &:disabled {
@@ -422,13 +473,17 @@ const InputStyled = styled.input<StyleProps>`
         `}
 
     ${({ type, $icon, $showHttp }) =>
-        type === "url" && $showHttp &&
+        type === "url" &&
+        $showHttp &&
         css`
             padding-left: ${$icon ? 53 + size : 53}px;
         `}
 
     ${({ type, $iconCalendar }) =>
-        (type === "date" || type === "datetime-local" || type === "month" || type === "week") &&
+        (type === "date" ||
+            type === "datetime-local" ||
+            type === "month" ||
+            type === "week") &&
         css`
             &::-webkit-inner-spin-button,
             &::-webkit-calendar-picker-indicator {
@@ -514,7 +569,8 @@ const InputStyled = styled.input<StyleProps>`
         css`
             height: inherit;
             min-height: calc(
-                ${Variables.FontSizes.Body} * ${Variables.LineHeights.Regular} * 4 + ${Variables.Spacers.XXS} * 2
+                ${Variables.FontSizes.Body} * ${Variables.LineHeights.Regular} *
+                    4 + ${Variables.Spacers.XXS} * 2
             );
             resize: vertical;
         `}
@@ -544,7 +600,7 @@ const IconContainer = styled.span`
     }
 `
 
-const UrlContainer = styled.span<UrlProps>`
+const UrlContainer = styled.span<{ $icon?: boolean; $disabled?: boolean }>`
     position: absolute;
     left: 0;
     top: 0;
@@ -599,7 +655,7 @@ const ButtonInput = styled.button`
     }
 `
 
-const RightContainer = styled.span<RightContainerProps>`
+const RightContainer = styled.span<{ $disabled?: boolean }>`
     position: absolute;
     top: 0;
     right: 0;

@@ -6,7 +6,7 @@ import React from "react"
 import styled from "styled-components"
 import { stringifyPx } from "../utils"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Mixins from "./Mixins"
 
 import {
@@ -63,16 +63,6 @@ const positions = {
 
 type PositionsTypes = keyof typeof positions
 
-interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
-    $size?: SizeTypes | number
-    $position?: PositionsTypes
-    $justifyContent?: GridJustifyContentTypes
-    $justifyItems?: GridJustifyItemsTypes
-    $alignContent?: GridAlignContentTypes
-    $alignItems?: GridAlignItemsTypes
-    $gap?: SpacerTypes | number
-}
-
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     size?: SizeTypes | number
     position?: PositionsTypes
@@ -85,7 +75,15 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 /*==================== Styles ====================*/
 
-const StyledAside = styled.aside<StyleProps>`
+const StyledAside = styled.aside<{
+    $size?: SizeTypes | number
+    $position?: PositionsTypes
+    $justifyContent?: GridJustifyContentTypes
+    $justifyItems?: GridJustifyItemsTypes
+    $alignContent?: GridAlignContentTypes
+    $alignItems?: GridAlignItemsTypes
+    $gap?: SpacerTypes | number
+}>`
     width: ${({ $size }) =>
         $size === "small"
             ? Variables.Layouts.Aside.Small
@@ -94,7 +92,7 @@ const StyledAside = styled.aside<StyleProps>`
             : Variables.Layouts.Aside.Default};
     ${({ $justifyContent, $justifyItems, $alignContent, $alignItems, $gap }) =>
         Mixins.Grid({
-            $alignContent: $alignContent || "start",
+            $alignContent: $alignContent || "start",
             $justifyItems: $justifyItems || "start",
             $justifyContent: $justifyContent,
             $alignItems: $alignItems,
@@ -102,7 +100,8 @@ const StyledAside = styled.aside<StyleProps>`
             $padding: `${Variables.Spacers.XXL} 0`,
         })};
     min-height: 100vh;
-    grid-column: ${({ $position }) => ($position === 2 ? 3 : $position === 3 ? 4 : 2)};
+    grid-column: ${({ $position }) =>
+        $position === 2 ? 3 : $position === 3 ? 4 : 2};
 
     @media ${Variables.Breakpoints.Tablet} {
         min-height: inherit;

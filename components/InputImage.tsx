@@ -6,7 +6,7 @@ import React from "react"
 import styled, { css } from "styled-components"
 import { stringifyPx } from "../utils"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Mixins from "./Mixins"
 import InputContainer from "./InputContainer"
 import Image from "./Image"
@@ -14,17 +14,38 @@ import Icon from "./Icon"
 import ImageIcon from "../icons/ImageIcon"
 import EditIcon from "../icons/EditIcon"
 
-import { ValidationTypes } from "../common-types"
+import {
+    ValidationTypes,
+    LibColorsTypes,
+    ColorsShortTypes,
+} from "../common-types"
 
 /*==================== Component ====================*/
 
-const InputImage = ({ id, disabled, validation, width = 64, height = 64, img, options, icons, value, ...props }: Props) => {
+const InputImage = ({
+    id,
+    disabled,
+    validation,
+    width = 64,
+    height = 64,
+    img,
+    options,
+    icons,
+    value,
+    ...props
+}: Props) => {
     const EmptyContainer: React.FC = () => (
         <StyledEmptyContainer $validation={validation}>
             {icons?.empty ? (
                 <Icon
                     src={icons.empty}
-                    color={validation === "not-passed" ? "danger" : disabled ? "gray" : "primary"}
+                    color={
+                        validation === "not-passed"
+                            ? "danger"
+                            : disabled
+                            ? "gray"
+                            : "primary"
+                    }
                     size={48}
                 />
             ) : (
@@ -45,20 +66,38 @@ const InputImage = ({ id, disabled, validation, width = 64, height = 64, img, op
     const HoverContainer: React.FC = () => (
         <StyledHoverContainer>
             {icons?.hover ? (
-                <Icon src={icons.hover} size={32} color={validation === "not-passed" ? "danger" : "primary"} />
+                <Icon
+                    src={icons.hover}
+                    size={32}
+                    color={validation === "not-passed" ? "danger" : "primary"}
+                />
             ) : (
                 <EditIcon
                     size={32}
-                    color={validation === "not-passed" ? Variables.Colors.Danger500 : Variables.Colors.Primary500}
+                    color={
+                        validation === "not-passed"
+                            ? Variables.Colors.Danger500
+                            : Variables.Colors.Primary500
+                    }
                 />
             )}
         </StyledHoverContainer>
     )
 
     return options ? (
-        <InputContainer id={id} label={options.label} helper={options.helper} helperBottom={options.helperBottom}>
+        <InputContainer
+            id={id}
+            label={options.label}
+            helper={options.helper}
+            helperBottom={options.helperBottom}
+        >
             <StyledInputImage>
-                <Label htmlFor={id} $disabled={disabled} $width={width} $height={height}>
+                <Label
+                    htmlFor={id}
+                    $disabled={disabled}
+                    $width={width}
+                    $height={height}
+                >
                     {img.src === "" ? (
                         <EmptyContainer />
                     ) : (
@@ -74,22 +113,45 @@ const InputImage = ({ id, disabled, validation, width = 64, height = 64, img, op
                     <HoverContainer />
                 </Label>
 
-                <Input type="file" id={id} disabled={disabled} value={value} {...props} />
+                <Input
+                    type="file"
+                    id={id}
+                    disabled={disabled}
+                    value={value}
+                    {...props}
+                />
             </StyledInputImage>
         </InputContainer>
     ) : (
         <StyledInputImage>
-            <Label htmlFor={id} $disabled={disabled} $width={width} $height={height}>
+            <Label
+                htmlFor={id}
+                $disabled={disabled}
+                $width={width}
+                $height={height}
+            >
                 {img.src === "" ? (
                     <EmptyContainer />
                 ) : (
-                    <Img src={img.src} alt={img.alt || "Image"} width="100%" height="100%" options={{ fit: "cover" }} />
+                    <Img
+                        src={img.src}
+                        alt={img.alt || "Image"}
+                        width="100%"
+                        height="100%"
+                        options={{ fit: "cover" }}
+                    />
                 )}
 
                 <HoverContainer />
             </Label>
 
-            <Input type="file" id={id} disabled={disabled} value={value} {...props} />
+            <Input
+                type="file"
+                id={id}
+                disabled={disabled}
+                value={value}
+                {...props}
+            />
         </StyledInputImage>
     )
 }
@@ -97,13 +159,6 @@ const InputImage = ({ id, disabled, validation, width = 64, height = 64, img, op
 export default InputImage
 
 /*==================== Types ====================*/
-
-interface StyleProps extends React.HTMLAttributes<HTMLInputElement> {
-    $validation?: ValidationTypes
-    $disabled?: boolean
-    $width?: number | string
-    $height?: number | string
-}
 
 interface Props extends React.HTMLAttributes<HTMLInputElement> {
     id: string
@@ -121,7 +176,13 @@ interface Props extends React.HTMLAttributes<HTMLInputElement> {
     options?: {
         label?: string
         helper?: string
-        helperBottom?: string
+        helperBottom?:
+            | string
+            | {
+                  text: string
+                  icon?: string
+                  iconColor?: LibColorsTypes | ColorsShortTypes | string
+              }
     }
 
     icons?: {
@@ -136,7 +197,9 @@ const StyledInputImage = styled.div`
     position: relative;
 `
 
-const StyledEmptyContainer = styled.span<StyleProps>`
+const StyledEmptyContainer = styled.span<{
+    $validation?: ValidationTypes
+}>`
     width: 100%;
     height: 100%;
     ${Mixins.Flexbox({
@@ -147,7 +210,9 @@ const StyledEmptyContainer = styled.span<StyleProps>`
     position: relative;
     z-index: 0;
     background-color: ${({ $validation }) =>
-        $validation === "not-passed" ? Variables.Colors.Danger50 : Variables.Colors.Gray100};
+        $validation === "not-passed"
+            ? Variables.Colors.Danger50
+            : Variables.Colors.Gray100};
 `
 
 const StyledHoverContainer = styled.span`
@@ -167,7 +232,11 @@ const StyledHoverContainer = styled.span`
     transition: ${Variables.Transitions.Short};
 `
 
-const Label = styled.label<StyleProps>`
+const Label = styled.label<{
+    $disabled?: boolean
+    $width?: number | string
+    $height?: number | string
+}>`
     width: ${({ $width }) => stringifyPx($width)};
     height: ${({ $height }) => stringifyPx($height)};
     ${Mixins.Flexbox({

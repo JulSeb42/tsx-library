@@ -5,7 +5,7 @@
 import React from "react"
 import styled from "styled-components"
 
-import Variables from "./Variables"
+import Variables from "../Variables"
 import Text from "./Text"
 import Mixins from "./Mixins"
 
@@ -13,8 +13,13 @@ import { ColorsShortTypes } from "../common-types"
 
 /*==================== Component ====================*/
 
-const Alert = ({ color = "primary", children, modal, ...props }: Props) => (
-    <StyledAlert $color={color} as={typeof children === "string" ? Text : "div"} $modal={modal} {...props}>
+const Alert = ({ color = "primary", children, isModal, ...props }: Props) => (
+    <StyledAlert
+        $color={color}
+        as={typeof children === "string" ? Text : "div"}
+        $isModal={isModal}
+        {...props}
+    >
         {children}
     </StyledAlert>
 )
@@ -23,27 +28,26 @@ export default Alert
 
 /*==================== Types ====================*/
 
-interface StyleProps extends React.HTMLAttributes<HTMLParagraphElement> {
-    $color?: ColorsShortTypes
-    $modal?: boolean
-}
-
 interface Props extends React.HTMLAttributes<HTMLParagraphElement> {
     color?: ColorsShortTypes
     children: string | React.ReactNode | React.ReactNode[]
-    modal?: boolean
+    isModal?: boolean
 }
 
 /*==================== Styles ====================*/
 
-const StyledAlert = styled.div<StyleProps>`
-    color: ${({ $color }) => ($color === "black" ? Variables.Colors.White : Variables.Colors.Black)};
+const StyledAlert = styled.div<{
+    $color?: ColorsShortTypes
+    $isModal?: boolean
+}>`
+    color: ${({ $color }) =>
+        $color === "black" ? Variables.Colors.White : Variables.Colors.Black};
     ${Mixins.Grid({
         $gap: "s",
     })};
     padding: ${Variables.Spacers.M};
-    width: ${({ $modal }) => $modal && "100%"};
-    max-width: ${({ $modal }) => $modal && "400px"};
+    width: ${({ $isModal }) => $isModal && "100%"};
+    max-width: ${({ $isModal }) => $isModal && "400px"};
     background-color: ${({ $color }) =>
         $color === "secondary"
             ? Variables.Colors.Secondary50
