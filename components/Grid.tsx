@@ -14,7 +14,7 @@ import {
     GridAlignItemsTypes,
     GridJustifyContentTypes,
     GridAlignContentTypes
-} from "./common-types"
+} from "../common-types"
 
 /*==================== Component ====================*/
 

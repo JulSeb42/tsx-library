@@ -14,7 +14,7 @@ import Icon from "./Icon"
 import ImageIcon from "../icons/ImageIcon"
 import EditIcon from "../icons/EditIcon"
 
-import { ValidationTypes } from "./common-types"
+import { ValidationTypes } from "../common-types"
 
 /*==================== Component ====================*/
 

@@ -8,7 +8,7 @@ import styled, { keyframes } from "styled-components"
 import Variables from "./Variables"
 import Mixins from "./Mixins"
 
-import { ColorsShortTypes, LibColorsTypes } from "./common-types"
+import { ColorsShortTypes, LibColorsTypes } from "../common-types"
 
 /*==================== Component ====================*/
 

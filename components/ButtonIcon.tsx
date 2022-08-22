@@ -11,7 +11,7 @@ import Mixins from "./Mixins"
 import Icon from "./Icon"
 import Loader from "./Loader"
 
-import { ColorsHoverTypes } from "./common-types"
+import { ColorsHoverTypes } from "../common-types"
 
 /*==================== Component ====================*/
 

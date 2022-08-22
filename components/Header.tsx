@@ -11,7 +11,7 @@ import Mixins from "./Mixins"
 import Image from "./Image"
 import Burger from "./Burger"
 
-import { LibColorsTypes, ColorsShortTypes, ColorsHoverTypes } from "./common-types"
+import { LibColorsTypes, ColorsShortTypes, ColorsHoverTypes } from "../common-types"
 
 /*==================== Styles ====================*/
 

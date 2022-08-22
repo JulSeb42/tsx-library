@@ -6,7 +6,7 @@ import React from "react"
 
 import getColor from "./getColor"
 
-import { LibColorsTypes, ColorsShortTypes } from "../components/common-types"
+import { LibColorsTypes, ColorsShortTypes } from "../common-types"
 
 /*==================== Component ====================*/
 

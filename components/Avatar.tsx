@@ -10,7 +10,7 @@ import Mixins from "./Mixins"
 import Icon from "./Icon"
 import Image from "./Image"
 
-import { ColorsShortTypes, LibColorsTypes } from "./common-types"
+import { ColorsShortTypes, LibColorsTypes } from "../common-types"
 
 /*==================== Component ====================*/
 

@@ -16,7 +16,7 @@ import {
     FlexJustifyContentTypes,
     FlexJustifyItemsTypes,
     FlexWrapTypes,
-} from "./common-types"
+} from "../common-types"
 
 /*==================== Component ====================*/
 

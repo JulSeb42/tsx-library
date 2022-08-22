@@ -291,3 +291,12 @@ const Validation = {
 } as const
 
 export type ValidationTypes = keyof typeof Validation
+
+/*==================== Countries ====================*/
+
+export type CountryType = {
+    name: string
+    dial_code: string
+    code: string
+    flag: JSX.Element | any
+}

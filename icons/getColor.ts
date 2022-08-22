@@ -4,7 +4,7 @@
 
 import Variables from "../components/Variables"
 
-import { LibColorsTypes, ColorsShortTypes } from "../components/common-types"
+import { LibColorsTypes, ColorsShortTypes } from "../common-types"
 
 /*==================== Function ====================*/
 

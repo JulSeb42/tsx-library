@@ -9,7 +9,7 @@ import SVG from "react-inlinesvg"
 import Mixins from "./Mixins"
 
 import { Props as SVGProps } from "react-inlinesvg"
-import { LibColorsTypes, ColorsShortTypes } from "./common-types"
+import { LibColorsTypes, ColorsShortTypes } from "../common-types"
 
 /*==================== Component ====================*/
 

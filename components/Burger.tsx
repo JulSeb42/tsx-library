@@ -8,7 +8,7 @@ import styled from "styled-components"
 import Variables from "./Variables"
 import Mixins from "./Mixins"
 
-import { ColorsHoverTypes } from "./common-types"
+import { ColorsHoverTypes } from "../common-types"
 
 /*==================== Component ====================*/
 

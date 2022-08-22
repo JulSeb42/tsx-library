@@ -8,7 +8,7 @@ import styled, { css } from "styled-components"
 import Variables from "./Variables"
 import Mixins from "./Mixins"
 
-import { ValidationTypes } from "./common-types"
+import { ValidationTypes } from "../common-types"
 
 /*==================== Component ====================*/
 

@@ -22,7 +22,7 @@ import {
     FlexAlignItemsTypes,
     FlexJustifyItemsTypes,
     FlexAlignContentTypes,
-} from "./common-types"
+} from "../common-types"
 
 /*==================== Types ====================*/
 

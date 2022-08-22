@@ -7,7 +7,7 @@ import styled from "styled-components"
 
 import Mixins from "./Mixins"
 
-import { LibColorsTypes, ColorsShortTypes } from "./common-types"
+import { LibColorsTypes, ColorsShortTypes } from "../common-types"
 
 /*==================== Component ====================*/
 

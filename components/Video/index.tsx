@@ -4,7 +4,7 @@
 
 import React from "react"
 
-import { ObjectFitTypes } from "../common-types"
+import { ObjectFitTypes } from "../../common-types"
 
 const Vid = React.lazy(() => import("./Vid"))
 

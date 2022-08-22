@@ -7,7 +7,7 @@
 import styled from "styled-components"
 import { stringifyPx } from "../../utils"
 
-import { ObjectFitTypes } from "../common-types"
+import { ObjectFitTypes } from "../../common-types"
 
 /*==================== Types ====================*/
 

@@ -9,7 +9,7 @@ import Variables from "../Variables"
 import Text from "../Text"
 import Fallback from "../Fallback"
 
-import { ObjectFitTypes } from "../common-types"
+import { ObjectFitTypes } from "../../common-types"
 
 const Img = React.lazy(() => import("./Img"))
 

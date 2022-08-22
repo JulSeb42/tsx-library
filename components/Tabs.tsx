@@ -10,7 +10,7 @@ import Variables from "./Variables"
 import Text from "./Text"
 import Mixins from "./Mixins"
 
-import { TabsItemProps } from "./component-props"
+import { TabsItemProps } from "../component-props"
 
 /*==================== Component ====================*/
 

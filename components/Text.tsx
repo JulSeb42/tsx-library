@@ -9,7 +9,7 @@ import { stringifyPx } from "../utils"
 import Variables from "./Variables"
 import Mixins from "./Mixins"
 
-import { LibColorsTypes, ColorsShortTypes, TextAlignTypes, ColorsHoverTypes } from "./common-types"
+import { LibColorsTypes, ColorsShortTypes, TextAlignTypes, ColorsHoverTypes } from "../common-types"
 
 /*==================== Styles ====================*/
 

@@ -11,7 +11,7 @@ import Mixins from "./Mixins"
 import Icon from "./Icon"
 import CloseIcon from "../icons/CloseIcon"
 
-import { ColorsShortTypes, LibColorsTypes } from "./common-types"
+import { ColorsShortTypes, LibColorsTypes } from "../common-types"
 
 /*==================== Component ====================*/
 

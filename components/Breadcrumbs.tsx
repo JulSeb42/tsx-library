@@ -11,8 +11,8 @@ import Mixins from "./Mixins"
 import Text from "./Text"
 import ChevronRightIcon from "../icons/ChevronRightIcon"
 
-import { ColorsHoverTypes, LibColorsTypes, ColorsShortTypes } from "./common-types"
-import { BreadcrumbsItemProps } from "./component-props"
+import { ColorsHoverTypes, LibColorsTypes, ColorsShortTypes } from "../common-types"
+import { BreadcrumbsItemProps } from "../component-props"
 
 /*==================== Component ====================*/
 

@@ -11,7 +11,7 @@ import Mixins from "./Mixins"
 
 import optionsMarkdown from "../options-markdown"
 
-import { SpacerTypes } from "./common-types"
+import { SpacerTypes } from "../common-types"
 
 /*==================== Component ====================*/
 

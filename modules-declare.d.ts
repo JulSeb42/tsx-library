@@ -30,3 +30,8 @@ declare module "react-scroll-to-bottom" {
 
     export default class ScrollToBottom extends React.PureComponent<ReactScrollToBottomProps> {}
 }
+
+declare module "*.svg" {
+    const content: any
+    export default content
+}

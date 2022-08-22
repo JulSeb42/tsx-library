@@ -16,52 +16,38 @@ import Icon from "./Icon"
 import SendIcon from "../icons/SendIcon"
 import Hr from "./Hr"
 
-import { MessageProps } from "./component-props"
-
 /*==================== Component ====================*/
 
-const Messaging = ({
-    children,
-    texts,
-    button,
-    input,
-    onSubmit,
-    messages,
-    ...props
-}: Props) => (
-    <StyledMessaging>
-        <MessagesContainer $isEmpty={!messages}>
-            {messages ? (
-                messages.map(message => (
-                    <Flexbox
-                        alignItems={message.type === "sent" ? "flex-end" : "flex-start"}
-                        flexDirection="column"
-                        key={uuid()}
-                    >
-                        <StyledMessage $type={message.type}>
-                            <ReactLinkify>{message.text}</ReactLinkify>
-                        </StyledMessage>
+const Message = ({ type, content, date, time, textDateTime = "at" }: MessageTypes) => (
+    <Flexbox alignItems={type === "sent" ? "flex-end" : "flex-start"} flexDirection="column" key={uuid()}>
+        <StyledMessage $type={type}>
+            <ReactLinkify>{content}</ReactLinkify>
+        </StyledMessage>
 
-                        {(message.date || message.time) && (
-                            <Text tag="small" color="gray">
-                                {message.date && message.date}
-                                {message.date && message.time && ` ${texts?.dateTimeAt || "at"} `}
-                                {message.time && message.time}
-                            </Text>
-                        )}
-                    </Flexbox>
-                ))
-            ) : (
-                <Text>{texts?.emptyMessages || "No message yet."}</Text>
-            )}
-        </MessagesContainer>
+        {(date || time) && (
+            <Text tag="small" color="gray">
+                {date && date}
+                {date && time && ` ${textDateTime} `}
+                {time && time}
+            </Text>
+        )}
+    </Flexbox>
+)
+
+const Messaging = ({ children, textEmpty = "No message yet.", button, input, onSubmit, ...props }: Props) => (
+    <StyledMessaging>
+        <MessagesContainer $isEmpty={!children}>{children ? children : <Text>{textEmpty}</Text>}</MessagesContainer>
 
         <Hr />
 
         <InputContainer onSubmit={onSubmit} {...props}>
-            <Input onChange={input.onChange} value={input.value} placeholder={input.placeholder || "Type your message"} />
+            <Input
+                onChange={input.onChange}
+                value={input.value}
+                placeholder={input.placeholder || "Type your message"}
+            />
 
-            <SendButton $hasText={!!button?.text} type="submit">
+            <SendButton $hasText={!!button?.text} type="submit" disabled={input.value === "" && true}>
                 {button?.text ? (
                     button.text
                 ) : button?.icon ? (
@@ -74,7 +60,7 @@ const Messaging = ({
     </StyledMessaging>
 )
 
-export default Messaging
+export { Messaging, Message }
 
 /*==================== Types ====================*/
 
@@ -89,13 +75,17 @@ interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
     $isEmpty?: boolean
 }
 
-interface BaseProps extends React.HTMLAttributes<HTMLFormElement> {
-    messages?: MessageProps[]
+interface MessageTypes extends React.HTMLAttributes<HTMLDivElement> {
+    type: "sent" | "received"
+    content: string
+    date?: string
+    time?: string
+    textDateTime?: string
+}
 
-    texts?: {
-        emptyMessages?: string
-        dateTimeAt?: string
-    }
+interface BaseProps extends React.HTMLAttributes<HTMLFormElement> {
+    children?: React.ReactNode | React.ReactNode[]
+    textEmpty?: string
 
     onSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void
 
@@ -135,6 +125,7 @@ interface StyleMessageProps extends React.HTMLAttributes<HTMLParagraphElement> {
 const StyledMessaging = styled.div`
     border: 1px solid ${Variables.Colors.Gray200};
     border-radius: ${Variables.Radiuses.L};
+    min-height: 400px;
     max-height: 60vh;
     padding: ${Variables.Spacers.S};
     ${Mixins.Flexbox({
@@ -206,24 +197,28 @@ const SendButton = styled.button<StyleButtonProps>`
         ${({ $hasText }) =>
             $hasText
                 ? css`
-                      &:hover {
+                      &:not(:disabled):hover {
                           color: ${Variables.Colors.Primary300};
                       }
 
-                      &:active {
+                      &:not(:disabled):active {
                           color: ${Variables.Colors.Primary600};
                       }
                   `
                 : css`
-                      &:hover {
+                      &:not(:disabled):hover {
                           color: ${Variables.Colors.Primary300};
                           background-color: ${Variables.Colors.Gray50};
                       }
 
-                      &:active {
+                      &:not(:disabled):active {
                           color: ${Variables.Colors.Primary600};
                       }
                   `}
+    }
+
+    &:disabled {
+        color: ${Variables.Colors.Gray500};
     }
 `
 
@@ -231,8 +226,8 @@ const StyledMessage = styled(Text)<StyleMessageProps>`
     padding: ${Variables.Spacers.XS};
     border-radius: ${Variables.Radiuses.S};
     background-color: ${({ $type }) => ($type === "received" ? Variables.Colors.Gray100 : Variables.Colors.Primary500)};
-    width: 70%;
-    max-width: 400px;
+    width: fit-content;
+    max-width: 70%;
     color: ${({ $type }) => $type === "sent" && Variables.Colors.White};
 
     a {

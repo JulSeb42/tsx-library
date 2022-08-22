@@ -8,7 +8,7 @@ import styled, { css } from "styled-components"
 import Variables from "./Variables"
 import { FontCommon } from "./Text"
 
-import { TextAlignTypes } from "./common-types"
+import { TextAlignTypes } from "../common-types"
 
 /*==================== Component ====================*/
 

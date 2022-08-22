@@ -11,7 +11,7 @@ import Mixins from "./Mixins"
 import Icon from "./Icon"
 import Loader from "./Loader"
 
-import { ColorsHoverTypes } from "./common-types"
+import { ColorsHoverTypes } from "../common-types"
 
 /*==================== Component ====================*/
 
@@ -23,6 +23,7 @@ const Button = ({
     type = "button",
     isLoading,
     options,
+    form,
     ...props
 }: Props) => (
     <StyledButton
@@ -33,6 +34,7 @@ const Button = ({
         to={to ? to : undefined}
         disabled={!!isLoading || disabled}
         type={to ? undefined : type}
+        form={form}
         {...props}
     >
         {isLoading && <Loader options={{ size: 16, borderSize: 2, color: "gray" }} />}
@@ -69,6 +71,7 @@ interface BaseProps extends React.HTMLAttributes<HTMLButtonElement> {
     to?: string
     type?: "button" | "submit" | "reset" | undefined
     isLoading?: boolean
+    form?: string
 }
 
 interface Possible1 extends BaseProps {

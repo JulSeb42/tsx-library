@@ -13,7 +13,7 @@ import Mixins from "./Mixins"
 import Icon from "./Icon"
 import CheckIcon from "../icons/CheckIcon"
 
-import { StepProps } from "./component-props"
+import { StepProps } from "../component-props"
 
 /*==================== Component ====================*/
 

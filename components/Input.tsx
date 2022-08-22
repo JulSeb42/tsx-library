@@ -15,7 +15,7 @@ import ChevronDownIcon from "../icons/ChevronDownIcon"
 import CloseCircleIcon from "../icons/CloseCircleIcon"
 import CloseIcon from "../icons/CloseIcon"
 
-import { ValidationTypes } from "./common-types"
+import { ValidationTypes } from "../common-types"
 
 /*==================== Component ====================*/
 
@@ -33,6 +33,7 @@ const InputFunction = ({
     clearSearch,
     validation,
     children,
+    options,
     ...props
 }: Props) => {
     const [isVisible, setIsVisible] = useState(false)
@@ -95,7 +96,7 @@ const InputFunction = ({
                 </IconContainer>
             )}
 
-            {type === "url" && (
+            {type === "url" && options?.showHttp && (
                 <UrlContainer $icon={!!icons?.icon} $disabled={disabled}>
                     http://
                 </UrlContainer>
@@ -110,7 +111,8 @@ const InputFunction = ({
                 name={name}
                 $validation={validation?.status}
                 $icon={!!icons?.icon}
-                autoFocus={autoFocus}
+                            autoFocus={autoFocus}
+                        $showHttp={options?.showHttp}
                 {...props}
             />
 
@@ -271,6 +273,7 @@ interface StyleProps extends React.HTMLAttributes<HTMLInputElement> {
     $iconSelect?: string
     type?: InputTypesTypes
     $icon?: boolean
+    $showHttp?: boolean
 }
 
 interface UrlProps {
@@ -324,6 +327,7 @@ interface Props extends React.HTMLAttributes<HTMLInputElement> {
         helper?: string
         helperBottom?: string
         counter?: boolean
+        showHttp?: boolean
     }
 }
 
@@ -417,8 +421,8 @@ const InputStyled = styled.input<StyleProps>`
             }
         `}
 
-    ${({ type, $icon }) =>
-        type === "url" &&
+    ${({ type, $icon, $showHttp }) =>
+        type === "url" && $showHttp &&
         css`
             padding-left: ${$icon ? 53 + size : 53}px;
         `}

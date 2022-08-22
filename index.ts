@@ -11,8 +11,8 @@ import Burger from "./components/Burger"
 import Button from "./components/Button"
 import ButtonIcon from "./components/ButtonIcon"
 import CodeContainer from "./components/CodeContainer"
-import * as CommonTypes from "./components/common-types"
-import * as ComponentProps from "./components/component-props"
+import * as CommonTypes from "./common-types"
+import * as ComponentProps from "./component-props"
 import Cover from "./components/Cover"
 import { DropdownContainer, Dropdown } from "./components/Dropdown"
 import Flexbox from "./components/Flexbox"
@@ -27,12 +27,13 @@ import Image from "./components/Image"
 import Input from "./components/Input"
 import InputCheck from "./components/InputCheck"
 import InputImage from "./components/InputImage"
+import { InputPhone, InputPhoneItem } from "./components/InputPhone"
 import Loader from "./components/Loader"
 import Main from "./components/Main"
 import * as MarkdownCommands from "./markdown-commands"
 import MarkdownContainer from "./components/MarkdownContainer"
 import MarkdownEditor from "./components/MarkdownEditor"
-import Messaging from "./components/Messaging"
+import { Messaging, Message } from "./components/Messaging"
 import Mixins from "./components/Mixins"
 import Modal from "./components/Modal"
 import OptionsMarkdown from "./options-markdown"
@@ -41,6 +42,7 @@ import { Pagination, PaginationButton } from "./components/Pagination"
 import Paginator from "./components/Paginator"
 import ProgressBar from "./components/ProgressBar"
 import Section from "./components/Section"
+import { Select, SelectItem } from "./components/Select"
 import Slideshow from "./components/Slideshow"
 import SrOnly from "./components/SrOnly"
 import Stepper from "./components/Stepper"
@@ -85,11 +87,14 @@ export {
     Input,
     InputCheck,
     InputImage,
+    InputPhone,
+    InputPhoneItem,
     Loader,
     Main,
     MarkdownCommands,
     MarkdownContainer,
     MarkdownEditor,
+    Message,
     Messaging,
     Mixins,
     Modal,
@@ -100,6 +105,8 @@ export {
     Paginator,
     ProgressBar,
     Section,
+    Select,
+    SelectItem,
     Slideshow,
     SrOnly,
     Stepper,

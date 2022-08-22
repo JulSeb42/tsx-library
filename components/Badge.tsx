@@ -10,7 +10,7 @@ import Variables from "./Variables"
 import Mixins from "./Mixins"
 import Icon from "./Icon"
 
-import { LibColorsTypes, ColorsShortTypes, SpacerTypes } from "./common-types"
+import { LibColorsTypes, ColorsShortTypes, SpacerTypes } from "../common-types"
 
 /*==================== Component ====================*/
 

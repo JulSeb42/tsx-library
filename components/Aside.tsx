@@ -9,10 +9,37 @@ import { stringifyPx } from "../utils"
 import Variables from "./Variables"
 import Mixins from "./Mixins"
 
+import {
+    GridJustifyContentTypes,
+    GridJustifyItemsTypes,
+    GridAlignContentTypes,
+    GridAlignItemsTypes,
+    SpacerTypes,
+} from "../common-types"
+
 /*==================== Component ====================*/
 
-const Aside = ({ size, position, children, ...props }: Props) => (
-    <StyledAside $size={size} $position={position} {...props}>
+const Aside = ({
+    size,
+    position,
+    children,
+    alignContent,
+    alignItems,
+    justifyContent,
+    justifyItems,
+    gap = "l",
+    ...props
+}: Props) => (
+    <StyledAside
+        $size={size}
+        $position={position}
+        $alignContent={alignContent}
+        $alignItems={alignItems}
+        $justifyContent={justifyContent}
+        $justifyItems={justifyItems}
+        $gap={gap}
+        {...props}
+    >
         {children}
     </StyledAside>
 )
@@ -39,11 +66,21 @@ type PositionsTypes = keyof typeof positions
 interface StyleProps extends React.HTMLAttributes<HTMLDivElement> {
     $size?: SizeTypes | number
     $position?: PositionsTypes
+    $justifyContent?: GridJustifyContentTypes
+    $justifyItems?: GridJustifyItemsTypes
+    $alignContent?: GridAlignContentTypes
+    $alignItems?: GridAlignItemsTypes
+    $gap?: SpacerTypes | number
 }
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     size?: SizeTypes | number
     position?: PositionsTypes
+    justifyContent?: GridJustifyContentTypes
+    justifyItems?: GridJustifyItemsTypes
+    alignContent?: GridAlignContentTypes
+    alignItems?: GridAlignItemsTypes
+    gap?: SpacerTypes | number
 }
 
 /*==================== Styles ====================*/
@@ -55,12 +92,15 @@ const StyledAside = styled.aside<StyleProps>`
             : typeof $size === "number"
             ? stringifyPx($size)
             : Variables.Layouts.Aside.Default};
-    ${Mixins.Grid({
-        $alignContent: "start",
-        $justifyItems: "start",
-        $gap: "l",
-        $padding: `${Variables.Spacers.XXL} 0`,
-    })};
+    ${({ $justifyContent, $justifyItems, $alignContent, $alignItems, $gap }) =>
+        Mixins.Grid({
+            $alignContent: $alignContent || "start",
+            $justifyItems: $justifyItems || "start",
+            $justifyContent: $justifyContent,
+            $alignItems: $alignItems,
+            $gap,
+            $padding: `${Variables.Spacers.XXL} 0`,
+        })};
     min-height: 100vh;
     grid-column: ${({ $position }) => ($position === 2 ? 3 : $position === 3 ? 4 : 2)};
 

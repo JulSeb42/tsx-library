@@ -9,7 +9,7 @@ import Variables from "./Variables"
 import Text from "./Text"
 import Mixins from "./Mixins"
 
-import { ColorsShortTypes } from "./common-types"
+import { ColorsShortTypes } from "../common-types"
 
 /*==================== Component ====================*/
 

@@ -13,7 +13,7 @@ import Mixins from "./Mixins"
 import PlusIcon from "../icons/PlusIcon"
 import ChevronDownIcon from "../icons/ChevronDownIcon"
 
-import { AccordionItemProps } from "./component-props"
+import { AccordionItemProps } from "../component-props"
 
 /*==================== Styles ====================*/
 
