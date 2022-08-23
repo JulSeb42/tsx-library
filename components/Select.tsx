@@ -11,7 +11,6 @@ import ChevronDownIcon from "../icons/ChevronDownIcon"
 import Variables from "../Variables"
 
 import {
-    ValidationTypes,
     LibColorsTypes,
     ColorsShortTypes,
 } from "../common-types"
@@ -127,7 +126,6 @@ const StyledSelect = styled.div<{
     disabled?: boolean
     onClick?: any
     $isOpen: boolean
-    $validation?: ValidationTypes
     $isEmpty?: boolean
 }>`
     position: relative;
@@ -143,10 +141,7 @@ const StyledSelect = styled.div<{
     font-size: ${Variables.FontSizes.Body};
     font-family: ${Variables.FontFamilies.Body};
     padding: 0 ${Variables.Spacers.XS};
-    background-color: ${({ $validation }) =>
-        $validation && $validation === "not-passed"
-            ? Variables.Colors.Danger50
-            : Variables.Colors.White};
+    background-color: ${Variables.Colors.White};
     color: ${Variables.Colors.Black};
     line-height: 100%;
     outline: none;

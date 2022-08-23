@@ -9,6 +9,8 @@ import Variables from "../../Variables"
 import Mixins from "../Mixins"
 import Fallback from "../Fallback"
 
+import { SpacerTypes } from "../../common-types"
+
 const CoverImage = React.lazy(() => import("./CoverImage"))
 
 /*==================== Component ====================*/
@@ -27,7 +29,9 @@ const Cover = ({ src, alt, children, options, ...props }: Props) => (
             <CoverImage src={src} alt={alt} />
         </Suspense>
 
-        <Content $align={options?.align || "center"}>{children}</Content>
+        <Content $align={options?.align || "center"} $gap={options?.gap}>
+            {children}
+        </Content>
     </StyledCover>
 )
 
@@ -51,12 +55,17 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
         overlay?: "black" | "white" | "gradient-black" | "gradient-white"
         align?: AlignTypes
         height?: number | string
+        gap?: SpacerTypes | string | number
     }
 }
 
 /*==================== Styles ====================*/
 
-const Content = styled.div<{ $align?: AlignTypes; $height?: number | string }>`
+const Content = styled.div<{
+    $align?: AlignTypes
+    $height?: number | string
+    $gap?: SpacerTypes | string | number
+}>`
     position: relative;
     top: 0;
     left: 0;
@@ -64,12 +73,12 @@ const Content = styled.div<{ $align?: AlignTypes; $height?: number | string }>`
     color: ${Variables.Colors.White};
     width: 100%;
     height: 100%;
-    ${({ $align }) =>
+    ${({ $align, $gap }) =>
         Mixins.Flexbox({
             $alignItems: $align === "bottom" ? "flex-start" : "center",
             $justifyContent: $align === "bottom" ? "flex-end" : "center",
             $flexDirection: "column",
-            $gap: "s",
+            $gap: $gap || "s",
         })};
     padding: ${Variables.Spacers.XXL} 5%;
     text-align: ${({ $align }) => $align === "center" && "center"};
