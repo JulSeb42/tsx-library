@@ -52,7 +52,14 @@ const SlideshowButton = ({
     </Button>
 )
 
-const Slideshow = ({ children, height, options, icons, ...props }: Props) => {
+const Slideshow = ({
+    children,
+    height,
+    options,
+    pagination,
+    controls,
+    ...props
+}: Props) => {
     // Slideshow with buttons
     const [active, setActive] = useState(0)
     const length = children.length
@@ -85,7 +92,7 @@ const Slideshow = ({ children, height, options, icons, ...props }: Props) => {
     }, [active, length])
 
     useEffect(() => {
-        if (!options?.controls && !options?.pagination && !options?.autoplay) {
+        if (!controls && !pagination && !options?.autoplay) {
             setInterval(() => autoSlideshow(), 1500)
         } else if (options?.autoplay) {
             setInterval(() => autoSlideshow(), options.autoplay)
@@ -93,8 +100,8 @@ const Slideshow = ({ children, height, options, icons, ...props }: Props) => {
     }, [
         options?.autoplay,
         autoSlideshow,
-        options?.controls,
-        options?.pagination,
+        controls,
+        pagination,
     ])
 
     // Swipe
@@ -123,16 +130,16 @@ const Slideshow = ({ children, height, options, icons, ...props }: Props) => {
     return (
         <StyledSlideshow {...props}>
             <Wrapper flexDirection="column" $height={height}>
-                {(options?.controls || options?.controlsLarge) && (
+                {controls && (
                     <SlideshowButton
                         position="left"
                         onClick={handlePrev}
                         prev
-                        hideTouch={options?.hideControlsTouch}
-                        iconNext={icons?.next}
-                        iconPrev={icons?.prev}
-                        isLarge={options.controlsLarge}
-                        color={options?.controlsColor}
+                        hideTouch={controls.hideTouchScreens}
+                        iconNext={controls.iconNext}
+                        iconPrev={controls.iconPrev}
+                        isLarge={controls.type === "large"}
+                        color={controls.color}
                     />
                 )}
 
@@ -149,23 +156,23 @@ const Slideshow = ({ children, height, options, icons, ...props }: Props) => {
                     </Content>
                 </ContentWrapper>
 
-                {(options?.controls || options?.controlsLarge) && (
+                {controls && (
                     <SlideshowButton
                         position="right"
                         onClick={handleNext}
                         next
-                        hideTouch={options?.hideControlsTouch}
-                        iconNext={icons?.next}
-                        iconPrev={icons?.prev}
-                        isLarge={options.controlsLarge}
-                        color={options?.controlsColor}
+                        hideTouch={controls.hideTouchScreens}
+                        iconNext={controls.iconNext}
+                        iconPrev={controls.iconPrev}
+                        isLarge={controls.type === "large"}
+                        color={controls.color}
                     />
                 )}
             </Wrapper>
 
-            {options?.pagination && (
+            {pagination && (
                 <Pagination
-                    $hideTouch={options?.hidePaginationTouch}
+                    $hideTouch={pagination.hideTouchScreens}
                     justifyContent="center"
                     alignItems="center"
                     gap={Variables.Spacers.XS}
@@ -174,7 +181,7 @@ const Slideshow = ({ children, height, options, icons, ...props }: Props) => {
                         <Dot
                             onClick={() => setActive(i)}
                             $isActive={active === i && true}
-                            $color={options?.paginationColor}
+                            $color={pagination.color}
                             key={uuid()}
                         />
                     ))}
@@ -206,28 +213,90 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     color?: ColorsHoverTypes
 }
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
+interface BaseProps extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactNode[]
     height?: string | number
 
     options?: {
         show?: number
         autoplay?: number
-        controls?: boolean
-        controlsLarge?: boolean
-        controlsColor?: ColorsHoverTypes
-        hideControlsTouch?: boolean
-        hidePaginationTouch?: boolean
         speed?: number
-        pagination?: boolean
-        paginationColor?: ColorsHoverTypes
-    }
-
-    icons?: {
-        prev?: string
-        next?: string
     }
 }
+
+interface Possible1 extends BaseProps {
+    controls?: {
+        type: "small" | "large"
+        color?: ColorsHoverTypes
+        hideTouchScreens?: boolean
+        iconPrev?: string
+        iconNext?: string
+    }
+
+    pagination?: {
+        color?: ColorsHoverTypes
+        hideTouchScreens?: boolean
+    }
+}
+
+interface Possible2 extends BaseProps {
+    controls?: never
+
+    pagination?: {
+        pagination: true
+        color?: ColorsHoverTypes
+        hideTouchScreens?: boolean
+    }
+}
+
+interface Possible3 extends BaseProps {
+    controls?: {
+        type: "small" | "large"
+        color?: ColorsHoverTypes
+        hideTouchScreens?: boolean
+        iconPrev?: string
+        iconNext?: string
+    }
+
+    pagination?: never
+}
+
+interface Possible4 extends BaseProps {
+    controls?: never
+    pagination?: never
+}
+
+// interface Possible1 extends BaseProps {
+//     controls?: {
+//         type: "small" | "large"
+//         color?: ColorsHoverTypes
+//         hideTouchScreens?: boolean
+//     }
+//     pagination?: {
+//         pagination: true
+//         color?: ColorsHoverTypes
+//         hideTouchScreens?: boolean
+//     }
+// }
+
+// interface Possible2 extends BaseProps {
+//     controls?: never
+//     pagination?: never
+// }
+
+// interface Possible3 extends BaseProps {
+//     pagination?: {
+//         pagination: true
+//         color?: ColorsHoverTypes
+//         hideTouchScreens?: boolean
+//     }
+// }
+
+// interface Possible4 extends BaseProps {
+//     pagination?: never
+// }
+
+type Props = Possible1 | Possible2 | Possible3 | Possible4
 
 /*==================== Styles ====================*/
 
