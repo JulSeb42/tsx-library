@@ -10,13 +10,23 @@ import { LibColorsTypes, ColorsShortTypes } from "../common-types"
 
 /*==================== Component ====================*/
 
-const ImageIcon = ({ size = 64, color = "currentColor" }: Props) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+const ImageIcon = ({ size = 64, color = "currentColor", ...props }: Props) => (
+    <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        {...props}
+    >
         <path
             d="M7.499 11C8.32743 11 8.999 10.3284 8.999 9.5C8.999 8.67157 8.32743 8 7.499 8C6.67057 8 5.999 8.67157 5.999 9.5C5.999 10.3284 6.67057 11 7.499 11Z"
             fill={getColor(color)}
         />
-        <path d="M10.499 14L8.999 12L5.999 16H17.999L13.499 10L10.499 14Z" fill={getColor(color)} />
+        <path
+            d="M10.499 14L8.999 12L5.999 16H17.999L13.499 10L10.499 14Z"
+            fill={getColor(color)}
+        />
         <path
             fillRule="evenodd"
             clipRule="evenodd"

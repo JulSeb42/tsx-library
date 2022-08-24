@@ -10,6 +10,7 @@ import Icon from "./Icon"
 import CaretDownIcon from "../icons/CaretDownIcon"
 import CheckCircleIcon from "../icons/CheckCircleIcon"
 import CloseCircleIcon from "../icons/CloseCircleIcon"
+import SearchIcon from "../icons/SearchIcon"
 import Mixins from "./Mixins"
 import Variables from "../Variables"
 
@@ -25,17 +26,19 @@ import {
 const InputPhone = ({
     isOpen,
     setIsOpen,
+    id,
     selectedCountry,
     options,
     children,
     input,
     validation,
     disabled,
+    search,
     ...props
 }: Props) => {
     return options?.label || options?.helper || options?.helperBottom ? (
         <InputContainer
-            id={input.id}
+            id={id}
             label={options.label}
             helper={options.helper}
             helperBottom={options.helperBottom}
@@ -54,13 +57,27 @@ const InputPhone = ({
                     )}
                 </Button>
 
-                <List $isOpen={isOpen}>{children}</List>
+                <List $isOpen={isOpen}>
+                    {search && (
+                        <SearchContainer>
+                            <StyledIconSearch size={16} color="primary" />
+
+                            <InputSearch
+                                placeholder={search.placeholder || "Search"}
+                                onChange={search.handleSearch}
+                                value={search.value}
+                            />
+                        </SearchContainer>
+                    )}
+
+                    {children}
+                </List>
 
                 <CountryCode>{selectedCountry.dial_code}</CountryCode>
 
                 <Input
                     $codeLength={selectedCountry.dial_code.length}
-                    id={input.id}
+                    id={id}
                     value={input.value}
                     onChange={input.onChange}
                     type="tel"
@@ -116,13 +133,27 @@ const InputPhone = ({
                 )}
             </Button>
 
-            <List $isOpen={isOpen}>{children}</List>
+            <List $isOpen={isOpen}>
+                {search && (
+                    <SearchContainer>
+                        <StyledIconSearch size={16} color="primary" />
+
+                        <InputSearch
+                            placeholder={search.placeholder || "Search"}
+                            onChange={search.handleSearch}
+                            value={search.value}
+                        />
+                    </SearchContainer>
+                )}
+
+                {children}
+            </List>
 
             <CountryCode>{selectedCountry.dial_code}</CountryCode>
 
             <Input
                 $codeLength={selectedCountry.dial_code.length}
-                id={input.id}
+                id={id}
                 value={input.value}
                 onChange={input.onChange}
                 type="tel"
@@ -174,7 +205,9 @@ const InputPhoneItem = ({
     return (
         <Item $isActive={isActive} onClick={onClick} {...props}>
             <Flag src={country.flag} alt={`Flag ${country.name}`} />
-            {country.name} ({country.dial_code})
+            <span>
+                ({country.dial_code}) {country.name}
+            </span>
         </Item>
     )
 }
@@ -184,14 +217,14 @@ export { InputPhone, InputPhoneItem }
 /*==================== Types ====================*/
 
 interface Props extends React.HTMLAttributes<HTMLInputElement> {
-    isOpen: boolean
-    setIsOpen: any
     selectedCountry: CountryType
     children: React.ReactNode | React.ReactNode[]
     disabled?: boolean
+    id: string
+    isOpen: boolean
+    setIsOpen: any
 
     input: {
-        id: string
         value: string
         onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     }
@@ -200,6 +233,13 @@ interface Props extends React.HTMLAttributes<HTMLInputElement> {
         status: ValidationTypes | undefined
         iconPassed?: string
         iconNotPassed?: string
+    }
+
+    search?: {
+        value: string
+        handleSearch: (e: React.ChangeEvent<HTMLInputElement>) => void
+        icon?: string
+        placeholder?: string
     }
 
     options?: {
@@ -255,17 +295,18 @@ const Flag = styled.img`
 `
 
 const List = styled.div<{ $isOpen?: boolean }>`
-    height: 150px;
     width: fit-content;
     overflow-y: scroll;
-    display: ${({ $isOpen }) => ($isOpen ? "flex" : "none")};
-    flex-direction: column;
     position: absolute;
     left: 0;
     top: ${inputHeight}px;
     border-radius: ${Variables.Radiuses.M};
     box-shadow: ${Variables.Shadows.M};
     z-index: 50;
+    width: 100%;
+    max-height: ${({ $isOpen }) => ($isOpen ? "200px" : 0)};
+    transition: ${Variables.Transitions.Short};
+    background-color: ${Variables.Colors.White};
 `
 
 const Item = styled.span<{ $isActive: boolean }>`
@@ -280,6 +321,13 @@ const Item = styled.span<{ $isActive: boolean }>`
         $alignItems: "center",
         $gap: "xs",
     })};
+    height: 40px;
+
+    & > span {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
 
     @media ${Variables.Breakpoints.Hover} {
         &:hover {
@@ -294,6 +342,34 @@ const Item = styled.span<{ $isActive: boolean }>`
 
     svg {
         width: 20px;
+    }
+`
+
+const StyledIconSearch = styled(SearchIcon)`
+    position: absolute;
+    left: ${Variables.Spacers.XS};
+    top: calc(50% - 16px / 2);
+`
+
+const SearchContainer = styled.div`
+    padding: ${Variables.Spacers.XS};
+    position: relative;
+`
+
+const InputSearch = styled.input`
+    font-family: ${Variables.FontFamilies.Body};
+    font-size: ${Variables.FontSizes.Body};
+    width: 100%;
+    height: 40px;
+    padding: 0 ${Variables.Spacers.XS} 0 calc(16px + ${Variables.Spacers.XS});
+    border: none;
+    outline: none;
+    border-bottom: 1px solid ${Variables.Colors.Gray200};
+    border-radius: 0;
+    transition: ${Variables.Transitions.Short};
+
+    &:focus {
+        border-bottom-color: ${Variables.Colors.Primary500};
     }
 `
 

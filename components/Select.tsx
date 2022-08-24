@@ -10,10 +10,7 @@ import Icon from "./Icon"
 import ChevronDownIcon from "../icons/ChevronDownIcon"
 import Variables from "../Variables"
 
-import {
-    LibColorsTypes,
-    ColorsShortTypes,
-} from "../common-types"
+import { LibColorsTypes, ColorsShortTypes } from "../common-types"
 import Mixins from "./Mixins"
 
 /*==================== Component ====================*/
@@ -169,16 +166,18 @@ const Selected = styled.span`
 `
 
 const List = styled.div<{ $isOpen: boolean }>`
-    display: ${({ $isOpen }) => ($isOpen ? "flex" : "none")};
+    ${Mixins.Flexbox({
+        $flexDirection: "column",
+    })}
     position: absolute;
     top: ${inputHeight}px;
     left: 0;
     width: 100%;
-    flex-direction: column;
     background-color: ${Variables.Colors.White};
     border-radius: ${Variables.Radiuses.M};
     box-shadow: ${Variables.Shadows.M};
-    max-height: 150px;
+    max-height: ${({ $isOpen }) => ($isOpen ? "150px" : 0)};
+    transition: ${Variables.Transitions.Short};
     overflow-y: scroll;
 `
 
