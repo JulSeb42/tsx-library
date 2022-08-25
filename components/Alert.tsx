@@ -30,7 +30,7 @@ export default Alert
 /*==================== Types ====================*/
 
 interface Props extends React.HTMLAttributes<HTMLParagraphElement> {
-    color?: any
+    color?: ColorsShortTypes
     children: string | React.ReactNode | React.ReactNode[]
     isModal?: boolean
 }

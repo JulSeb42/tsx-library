@@ -18,129 +18,6 @@ import {
 
 /*==================== Styles ====================*/
 
-const FontSizeMixin = ({
-    $defaultSize,
-    $fontSize,
-}: {
-    $defaultSize: any
-    $fontSize?: FontSizeTypes | string | number
-}) =>
-    css`
-        font-size: ${$fontSize === "display-h1"
-            ? Variables.FontSizes.Display.H1
-            : $fontSize === "display-h2"
-            ? Variables.FontSizes.Display.H2
-            : $fontSize === "display-h3"
-            ? Variables.FontSizes.Display.H3
-            : $fontSize === "display-h4"
-            ? Variables.FontSizes.Display.H4
-            : $fontSize === "display-h5"
-            ? Variables.FontSizes.Display.H5
-            : $fontSize === "title-h1"
-            ? Variables.FontSizes.Titles.H1
-            : $fontSize === "title-h2"
-            ? Variables.FontSizes.Titles.H2
-            : $fontSize === "title-h3"
-            ? Variables.FontSizes.Titles.H3
-            : $fontSize === "title-h4"
-            ? Variables.FontSizes.Titles.H4
-            : $fontSize === "title-h5"
-            ? Variables.FontSizes.Titles.H5
-            : $fontSize === "title-h6"
-            ? Variables.FontSizes.Titles.H6
-            : $fontSize === "body"
-            ? Variables.FontSizes.Body
-            : $fontSize === "small"
-            ? Variables.FontSizes.Small
-            : $defaultSize === "display-h1"
-            ? Variables.FontSizes.Display.H1
-            : $defaultSize === "display-h2"
-            ? Variables.FontSizes.Display.H2
-            : $defaultSize === "display-h3"
-            ? Variables.FontSizes.Display.H3
-            : $defaultSize === "display-h4"
-            ? Variables.FontSizes.Display.H4
-            : $defaultSize === "display-h5"
-            ? Variables.FontSizes.Display.H5
-            : $defaultSize === "title-h1"
-            ? Variables.FontSizes.Titles.H1
-            : $defaultSize === "title-h2"
-            ? Variables.FontSizes.Titles.H2
-            : $defaultSize === "title-h3"
-            ? Variables.FontSizes.Titles.H3
-            : $defaultSize === "title-h4"
-            ? Variables.FontSizes.Titles.H4
-            : $defaultSize === "title-h5"
-            ? Variables.FontSizes.Titles.H5
-            : $defaultSize === "title-h6"
-            ? Variables.FontSizes.Titles.H6
-            : $defaultSize === "body"
-            ? Variables.FontSizes.Body
-            : $defaultSize === "small"
-            ? Variables.FontSizes.Small
-            : $fontSize
-            ? stringifyPx($fontSize)
-            : ""};
-
-        & > * {
-            font-size: ${$fontSize === "display-h1"
-                ? Variables.FontSizes.Display.H1
-                : $fontSize === "display-h2"
-                ? Variables.FontSizes.Display.H2
-                : $fontSize === "display-h3"
-                ? Variables.FontSizes.Display.H3
-                : $fontSize === "display-h4"
-                ? Variables.FontSizes.Display.H4
-                : $fontSize === "display-h5"
-                ? Variables.FontSizes.Display.H5
-                : $fontSize === "title-h1"
-                ? Variables.FontSizes.Titles.H1
-                : $fontSize === "title-h2"
-                ? Variables.FontSizes.Titles.H2
-                : $fontSize === "title-h3"
-                ? Variables.FontSizes.Titles.H3
-                : $fontSize === "title-h4"
-                ? Variables.FontSizes.Titles.H4
-                : $fontSize === "title-h5"
-                ? Variables.FontSizes.Titles.H5
-                : $fontSize === "title-h6"
-                ? Variables.FontSizes.Titles.H6
-                : $fontSize === "body"
-                ? Variables.FontSizes.Body
-                : $fontSize === "small"
-                ? Variables.FontSizes.Small
-                : $defaultSize === "display-h1"
-                ? Variables.FontSizes.Display.H1
-                : $defaultSize === "display-h2"
-                ? Variables.FontSizes.Display.H2
-                : $defaultSize === "display-h3"
-                ? Variables.FontSizes.Display.H3
-                : $defaultSize === "display-h4"
-                ? Variables.FontSizes.Display.H4
-                : $defaultSize === "display-h5"
-                ? Variables.FontSizes.Display.H5
-                : $defaultSize === "title-h1"
-                ? Variables.FontSizes.Titles.H1
-                : $defaultSize === "title-h2"
-                ? Variables.FontSizes.Titles.H2
-                : $defaultSize === "title-h3"
-                ? Variables.FontSizes.Titles.H3
-                : $defaultSize === "title-h4"
-                ? Variables.FontSizes.Titles.H4
-                : $defaultSize === "title-h5"
-                ? Variables.FontSizes.Titles.H5
-                : $defaultSize === "title-h6"
-                ? Variables.FontSizes.Titles.H6
-                : $defaultSize === "body"
-                ? Variables.FontSizes.Body
-                : $defaultSize === "small"
-                ? Variables.FontSizes.Small
-                : $fontSize
-                ? stringifyPx($fontSize)
-                : ""};
-        }
-    `
-
 export const FontCommon = ({
     $color,
     $textAlign,
@@ -163,7 +40,7 @@ export const FontCommon = ({
     $lineHeight?: number | string
     $defaultSize?: any
 }) => css`
-    line-height: ${$lineHeight || Variables.LineHeights.Regular};
+    line-height: ${stringifyPx($lineHeight) || Variables.LineHeights.Regular};
     text-align: ${$textAlign};
     color: ${Mixins.AllColors};
 
@@ -352,11 +229,13 @@ const StyledH1 = styled.h1<{
           }
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
+    $lineHeight?: string | number
 }>`
-    ${({ $display, $fontSize }) =>
+    ${({ $display, $fontSize, $lineHeight }) =>
         FontCommon({
             $defaultSize: $display ? "display-h1" : "title-h1",
             $fontSize,
+            $lineHeight,
         })};
     font-weight: ${Variables.FontWeights.Black};
 `
@@ -373,11 +252,13 @@ const StyledH2 = styled.h2<{
           }
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
+    $lineHeight?: string | number
 }>`
-    ${({ $display, $fontSize }) =>
+    ${({ $display, $fontSize, $lineHeight }) =>
         FontCommon({
             $defaultSize: $display ? "display-h2" : "title-h2",
             $fontSize,
+            $lineHeight,
         })};
     font-weight: ${Variables.FontWeights.Black};
 `
@@ -394,11 +275,13 @@ const StyledH3 = styled.h3<{
           }
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
+    $lineHeight?: string | number
 }>`
-    ${({ $display, $fontSize }) =>
+    ${({ $display, $fontSize, $lineHeight }) =>
         FontCommon({
             $defaultSize: $display ? "display-h3" : "title-h3",
             $fontSize,
+            $lineHeight,
         })};
     font-weight: ${Variables.FontWeights.Black};
 `
@@ -415,11 +298,13 @@ const StyledH4 = styled.h4<{
           }
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
+    $lineHeight?: string | number
 }>`
-    ${({ $display, $fontSize }) =>
+    ${({ $display, $fontSize, $lineHeight }) =>
         FontCommon({
             $defaultSize: $display ? "display-h4" : "title-h4",
             $fontSize,
+            $lineHeight,
         })};
     font-weight: ${Variables.FontWeights.Black};
 `
@@ -436,11 +321,13 @@ const StyledH5 = styled.h5<{
           }
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
+    $lineHeight?: string | number
 }>`
-    ${({ $display, $fontSize }) =>
+    ${({ $display, $fontSize, $lineHeight }) =>
         FontCommon({
             $defaultSize: $display ? "display-h5" : "title-h5",
             $fontSize,
+            $lineHeight,
         })};
     font-weight: ${Variables.FontWeights.Black};
 `
@@ -457,11 +344,13 @@ const StyledH6 = styled.h6<{
           }
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
+    $lineHeight?: string | number
 }>`
-    ${({ $fontSize }) =>
+    ${({ $fontSize, $lineHeight }) =>
         FontCommon({
             $defaultSize: "title-h6",
             $fontSize,
+            $lineHeight,
         })};
     font-weight: ${Variables.FontWeights.Black};
 `
@@ -478,11 +367,13 @@ const StyledP = styled.p<{
           }
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
+    $lineHeight?: string | number
 }>`
-    ${({ $fontSize }) =>
+    ${({ $fontSize, $lineHeight }) =>
         FontCommon({
             $defaultSize: "body",
             $fontSize,
+            $lineHeight,
         })};
 `
 
@@ -498,8 +389,9 @@ const StyledStrong = styled.strong<{
           }
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
+    $lineHeight?: string | number
 }>`
-    ${FontCommon};
+    ${({ $lineHeight }) => FontCommon({ $lineHeight })};
     font-weight: ${Variables.FontWeights.Black};
 `
 
@@ -515,8 +407,9 @@ const StyledEm = styled.em<{
           }
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
+    $lineHeight?: string | number
 }>`
-    ${FontCommon};
+    ${({ $lineHeight }) => FontCommon({ $lineHeight })};
     font-style: italic;
 `
 
@@ -532,12 +425,13 @@ const StyledSmall = styled.small<{
           }
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
+    $lineHeight?: string | number
 }>`
-    ${FontCommon};
-    ${({ $fontSize }) =>
-        FontSizeMixin({
+    ${({ $fontSize, $lineHeight }) =>
+        FontCommon({
             $defaultSize: "small",
             $fontSize,
+            $lineHeight,
         })};
 `
 
@@ -553,11 +447,13 @@ const StyledBlockquote = styled.blockquote<{
           }
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
+    $lineHeight?: string | number
 }>`
-    ${({ $fontSize }) =>
-        FontSizeMixin({
+    ${({ $fontSize, $lineHeight }) =>
+        FontCommon({
             $defaultSize: "title-h6",
             $fontSize,
+            $lineHeight,
         })};
 `
 
@@ -573,6 +469,7 @@ const StyledUl = styled.ul<{
           }
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
+    $lineHeight?: string | number
 }>`
     padding: 0;
     margin: 0;
@@ -580,10 +477,11 @@ const StyledUl = styled.ul<{
     ${Mixins.Grid({
         $gap: "xxs",
     })};
-    ${({ $fontSize }) =>
-        FontSizeMixin({
+    ${({ $fontSize, $lineHeight }) =>
+        FontCommon({
             $defaultSize: "body",
             $fontSize,
+            $lineHeight,
         })};
 
     li {
@@ -604,18 +502,19 @@ const StyledOl = styled.ol<{
           }
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
+    $lineHeight?: string | number
 }>`
-    ${FontCommon};
     padding: 0;
     margin: 0;
     padding-left: ${Variables.Spacers.S};
     ${Mixins.Grid({
         $gap: "xxs",
     })};
-    ${({ $fontSize }) =>
-        FontSizeMixin({
+    ${({ $fontSize, $lineHeight }) =>
+        FontCommon({
             $defaultSize: "body",
             $fontSize,
+            $lineHeight,
         })};
 
     li {
@@ -636,11 +535,13 @@ const StyledDl = styled.dl<{
           }
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
+    $lineHeight?: string | number
 }>`
-    ${({ $fontSize }) =>
-        FontSizeMixin({
+    ${({ $fontSize, $lineHeight }) =>
+        FontCommon({
             $defaultSize: "body",
             $fontSize,
+            $lineHeight,
         })};
 
     dt {
@@ -665,6 +566,7 @@ const H1 = ({
     linkColor,
     children,
     fontSize,
+    lineHeight,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLHeadingElement>) => (
     <StyledH1
@@ -673,6 +575,7 @@ const H1 = ({
         $textAlign={textAlign}
         $linkColor={linkColor}
         $fontSize={fontSize}
+        $lineHeight={lineHeight}
         {...props}
     >
         {children}
@@ -686,6 +589,7 @@ const H2 = ({
     linkColor,
     children,
     fontSize,
+    lineHeight,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLHeadingElement>) => (
     <StyledH2
@@ -694,6 +598,7 @@ const H2 = ({
         $textAlign={textAlign}
         $linkColor={linkColor}
         $fontSize={fontSize}
+        $lineHeight={lineHeight}
         {...props}
     >
         {children}
@@ -707,6 +612,7 @@ const H3 = ({
     linkColor,
     children,
     fontSize,
+    lineHeight,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLHeadingElement>) => (
     <StyledH3
@@ -715,6 +621,7 @@ const H3 = ({
         $textAlign={textAlign}
         $linkColor={linkColor}
         $fontSize={fontSize}
+        $lineHeight={lineHeight}
         {...props}
     >
         {children}
@@ -728,6 +635,7 @@ const H4 = ({
     linkColor,
     children,
     fontSize,
+    lineHeight,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLHeadingElement>) => (
     <StyledH4
@@ -736,6 +644,7 @@ const H4 = ({
         $textAlign={textAlign}
         $linkColor={linkColor}
         $fontSize={fontSize}
+        $lineHeight={lineHeight}
         {...props}
     >
         {children}
@@ -749,6 +658,7 @@ const H5 = ({
     linkColor,
     children,
     fontSize,
+    lineHeight,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLHeadingElement>) => (
     <StyledH5
@@ -757,6 +667,7 @@ const H5 = ({
         $textAlign={textAlign}
         $linkColor={linkColor}
         $fontSize={fontSize}
+        $lineHeight={lineHeight}
         {...props}
     >
         {children}
@@ -769,6 +680,7 @@ const H6 = ({
     linkColor,
     children,
     fontSize,
+    lineHeight,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLHeadingElement>) => (
     <StyledH6
@@ -776,6 +688,7 @@ const H6 = ({
         $textAlign={textAlign}
         $linkColor={linkColor}
         $fontSize={fontSize}
+        $lineHeight={lineHeight}
         {...props}
     >
         {children}
@@ -788,6 +701,7 @@ const P = ({
     linkColor,
     children,
     fontSize,
+    lineHeight,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLParagraphElement>) => (
     <StyledP
@@ -795,6 +709,7 @@ const P = ({
         $textAlign={textAlign}
         $linkColor={linkColor}
         $fontSize={fontSize}
+        $lineHeight={lineHeight}
         {...props}
     >
         {children}
@@ -807,6 +722,7 @@ const Strong = ({
     linkColor,
     children,
     fontSize,
+    lineHeight,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLParagraphElement>) => (
     <StyledStrong
@@ -814,6 +730,7 @@ const Strong = ({
         $textAlign={textAlign}
         $linkColor={linkColor}
         $fontSize={fontSize}
+        $lineHeight={lineHeight}
         {...props}
     >
         {children}
@@ -826,6 +743,7 @@ const Em = ({
     linkColor,
     children,
     fontSize,
+    lineHeight,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLParagraphElement>) => (
     <StyledEm
@@ -833,6 +751,7 @@ const Em = ({
         $textAlign={textAlign}
         $linkColor={linkColor}
         $fontSize={fontSize}
+        $lineHeight={lineHeight}
         {...props}
     >
         {children}
@@ -845,6 +764,7 @@ const Small = ({
     linkColor,
     children,
     fontSize,
+    lineHeight,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLParagraphElement>) => (
     <StyledSmall
@@ -852,6 +772,7 @@ const Small = ({
         $textAlign={textAlign}
         $linkColor={linkColor}
         $fontSize={fontSize}
+        $lineHeight={lineHeight}
         {...props}
     >
         {children}
@@ -864,6 +785,7 @@ const Blockquote = ({
     linkColor,
     children,
     fontSize,
+    lineHeight,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLQuoteElement>) => (
     <StyledBlockquote
@@ -871,6 +793,7 @@ const Blockquote = ({
         $textAlign={textAlign}
         $linkColor={linkColor}
         $fontSize={fontSize}
+        $lineHeight={lineHeight}
         {...props}
     >
         {children}
@@ -883,6 +806,7 @@ const Ul = ({
     linkColor,
     children,
     fontSize,
+    lineHeight,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLUListElement>) => (
     <StyledUl
@@ -890,6 +814,7 @@ const Ul = ({
         $textAlign={textAlign}
         $linkColor={linkColor}
         $fontSize={fontSize}
+        $lineHeight={lineHeight}
         {...props}
     >
         {children}
@@ -902,6 +827,7 @@ const Ol = ({
     linkColor,
     children,
     fontSize,
+    lineHeight,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLOListElement>) => (
     <StyledOl
@@ -909,6 +835,7 @@ const Ol = ({
         $textAlign={textAlign}
         $linkColor={linkColor}
         $fontSize={fontSize}
+        $lineHeight={lineHeight}
         {...props}
     >
         {children}
@@ -921,6 +848,7 @@ const Dl = ({
     linkColor,
     children,
     fontSize,
+    lineHeight,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLDListElement>) => (
     <StyledDl
@@ -928,6 +856,7 @@ const Dl = ({
         $textAlign={textAlign}
         $linkColor={linkColor}
         $fontSize={fontSize}
+        $lineHeight={lineHeight}
         {...props}
     >
         {children}
@@ -1025,6 +954,7 @@ interface BaseProps extends React.HTMLAttributes<HTMLElement> {
               active: string
           }
     fontSize?: FontSizeTypes | string | number
+    lineHeight?: string | number
 }
 
 interface Possible1 extends BaseProps {
