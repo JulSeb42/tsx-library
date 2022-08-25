@@ -4,10 +4,11 @@
 
 import React from "react"
 import styled from "styled-components"
+import { capitalize } from "ts-utils-julseb"
 
-import Variables from "../Variables"
 import Text from "./Text"
 import Mixins from "./Mixins"
+import Variables from "../Variables"
 
 import { ColorsShortTypes } from "../common-types"
 
@@ -29,7 +30,7 @@ export default Alert
 /*==================== Types ====================*/
 
 interface Props extends React.HTMLAttributes<HTMLParagraphElement> {
-    color?: ColorsShortTypes
+    color?: any
     children: string | React.ReactNode | React.ReactNode[]
     isModal?: boolean
 }
@@ -37,33 +38,23 @@ interface Props extends React.HTMLAttributes<HTMLParagraphElement> {
 /*==================== Styles ====================*/
 
 const StyledAlert = styled.div<{
-    $color?: ColorsShortTypes
+    $color: ColorsShortTypes
     $isModal?: boolean
 }>`
-    color: ${({ $color }) =>
-        $color === "black" ? Variables.Colors.White : Variables.Colors.Black};
     ${Mixins.Grid({
         $gap: "s",
     })};
     padding: ${Variables.Spacers.M};
     width: ${({ $isModal }) => $isModal && "100%"};
     max-width: ${({ $isModal }) => $isModal && "400px"};
-    background-color: ${({ $color }) =>
-        $color === "secondary"
-            ? Variables.Colors.Secondary50
-            : $color === "success"
-            ? Variables.Colors.Success50
-            : $color === "danger"
-            ? Variables.Colors.Danger50
-            : $color === "warning"
-            ? Variables.Colors.Warning50
-            : $color === "gray"
-            ? Variables.Colors.Gray50
-            : $color === "black"
-            ? Variables.Colors.Gray800
-            : $color === "white"
-            ? Variables.Colors.Gray50
-            : Variables.Colors.Primary50};
-    border: 1px solid ${Mixins.ColorsShort};
     border-radius: ${Variables.Radiuses.M};
+    color: ${({ $color }) =>
+        $color === "black" ? Variables.Colors.White : Variables.Colors.Black};
+    background-color: ${({ $color }) =>
+        $color === "black"
+            ? Variables.Colors.Gray900
+            : $color === "white"
+            ? Variables.Colors.Gray100
+            : Variables.Colors[`${capitalize($color)}50`]};
+    border: 1px solid ${Mixins.ColorsShort};
 `

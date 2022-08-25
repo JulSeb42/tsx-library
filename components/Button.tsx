@@ -2,7 +2,7 @@
 
 /*==================== Imports ====================*/
 
-import React from "react"
+import React, { forwardRef } from "react"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
 
@@ -15,40 +15,43 @@ import { ColorsHoverTypes } from "../common-types"
 
 /*==================== Component ====================*/
 
-const Button = ({
-    color = "primary",
-    disabled,
-    children,
-    to,
-    type = "button",
-    isLoading,
-    options,
-    form,
-    ...props
-}: Props) => (
-    <StyledButton
-        $color={options?.color || "primary"}
-        $buttonStyle={options?.variant || "plain"}
-        $noPadding={options?.noPadding}
-        as={to ? Link : "button"}
-        to={to ? to : undefined}
-        disabled={!!isLoading || disabled}
-        type={to ? undefined : type}
-        form={form}
-        {...props}
-    >
-        {isLoading && (
-            <Loader options={{ size: 16, borderSize: 2, color: "gray" }} />
-        )}
+const Button = forwardRef(
+    (
+        {
+            disabled,
+            children,
+            to,
+            type = "button",
+            isLoading,
+            options,
+            ...props
+        }: Props,
+        ref?: React.ForwardedRef<HTMLButtonElement>
+    ) => (
+        <StyledButton
+            $color={options?.color || "primary"}
+            $buttonStyle={options?.variant || "plain"}
+            $noPadding={options?.noPadding}
+            as={to ? Link : "button"}
+            to={to ? to : undefined}
+            disabled={!!isLoading || disabled}
+            type={to ? undefined : type}
+            ref={ref}
+            {...props}
+        >
+            {isLoading && (
+                <Loader options={{ size: 16, borderSize: 2, color: "gray" }} />
+            )}
 
-        {options?.iconLeft && !isLoading && (
-            <Icon src={options.iconLeft} size={16} />
-        )}
+            {options?.iconLeft && !isLoading && (
+                <Icon src={options.iconLeft} size={16} />
+            )}
 
-        {children}
+            {children}
 
-        {options?.iconRight && <Icon src={options.iconRight} size={16} />}
-    </StyledButton>
+            {options?.iconRight && <Icon src={options.iconRight} size={16} />}
+        </StyledButton>
+    )
 )
 
 export default Button
@@ -63,13 +66,15 @@ const buttonStyles = {
 
 export type ButtonStylesType = keyof typeof buttonStyles
 
-interface BaseProps extends React.HTMLAttributes<HTMLButtonElement> {
+interface BaseProps
+    extends React.HTMLAttributes<HTMLButtonElement>,
+        React.ButtonHTMLAttributes<HTMLButtonElement> {
     disabled?: boolean
-    children: string
+    children: any
+    ref?: any
     to?: string
     type?: "button" | "submit" | "reset" | undefined
     isLoading?: boolean
-    form?: string
 }
 
 interface Possible1 extends BaseProps {

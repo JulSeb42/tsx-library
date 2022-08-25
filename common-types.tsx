@@ -1,5 +1,7 @@
 /*=============================================== Common types ===============================================*/
 
+import React from "react"
+
 /*==================== Colors ====================*/
 
 /* Library colors */
@@ -299,4 +301,12 @@ export type CountryType = {
     dial_code: string
     code: string
     flag: JSX.Element | any
+}
+
+/*==================== useForm ====================*/
+
+export interface BaseUseFormType {
+    handleInputs: (e: React.ChangeEvent<HTMLInputElement>) => void
+    resetForm: any
+    handleSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void
 }

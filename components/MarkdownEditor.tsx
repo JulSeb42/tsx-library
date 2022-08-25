@@ -21,6 +21,20 @@ const MarkdownEditor = ({
     extraCommands,
     ...props
 }: Props) => {
+    const inputFunction = () => (
+        <StyledMarkdownEditor data-color-mode={options?.colorMode || "light"}>
+            <MDEditor
+                id={id}
+                onChange={onChange}
+                value={value}
+                preview={options?.preview || "edit"}
+                commands={commands}
+                extraCommands={extraCommands}
+                {...props}
+            />
+        </StyledMarkdownEditor>
+    )
+
     return options?.label || options?.helper || options?.helperBottom ? (
         <InputContainer
             id={id}
@@ -28,30 +42,10 @@ const MarkdownEditor = ({
             helper={options.helper}
             helperBottom={options.helperBottom}
         >
-            <StyledMarkdownEditor
-                data-color-mode={options?.colorMode || "light"}
-            >
-                <MDEditor
-                    id={id}
-                    onChange={onChange}
-                    value={value}
-                    preview={options?.preview || "edit"}
-                    commands={commands}
-                    extraCommands={extraCommands}
-                    {...props}
-                />
-            </StyledMarkdownEditor>
+            {inputFunction()}
         </InputContainer>
     ) : (
-        <StyledMarkdownEditor data-color-mode={options?.colorMode || "light"}>
-            <MDEditor
-                id={id}
-                onChange={onChange}
-                value={value}
-                preview={options?.preview || "edit"}
-                {...props}
-            />
-        </StyledMarkdownEditor>
+        inputFunction()
     )
 }
 

@@ -61,7 +61,7 @@ const StyledTable = styled.table<{
     $textAlign?: TextAlignTypes
     $vAlign?: VAlignTypes
 }>`
-    ${FontCommon};
+    ${FontCommon({ $defaultSize: "small" })};
     display: table;
     border-collapse: collapse;
     border-spacing: 0;

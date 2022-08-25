@@ -102,6 +102,7 @@ const InputFunction = ({
         </InputContainer>
     )
 }
+
 const Autocomplete = ({
     id,
     items,
@@ -112,27 +113,8 @@ const Autocomplete = ({
     options,
     validation,
     ...props
-}: Props) =>
-    options?.label || options?.helper || options?.helperBottom ? (
-        <BaseInput
-            id={id}
-            label={options.label}
-            helper={options.helper}
-            helperBottom={options.helperBottom}
-        >
-            <InputFunction
-                id={id}
-                items={items}
-                onClickItem={onClickItem}
-                disabled={disabled}
-                value={value}
-                autoFocus={autoFocus}
-                options={options}
-                validation={validation}
-                {...props}
-            />
-        </BaseInput>
-    ) : (
+}: Props) => {
+    const inputFunction = () => (
         <InputFunction
             id={id}
             items={items}
@@ -145,6 +127,20 @@ const Autocomplete = ({
             {...props}
         />
     )
+
+    return options?.label || options?.helper || options?.helperBottom ? (
+        <BaseInput
+            id={id}
+            label={options.label}
+            helper={options.helper}
+            helperBottom={options.helperBottom}
+        >
+            {inputFunction()}
+        </BaseInput>
+    ) : (
+        inputFunction()
+    )
+}
 
 export default Autocomplete
 

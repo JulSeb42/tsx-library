@@ -3,7 +3,7 @@
 /*==================== Imports ====================*/
 
 import { css } from "styled-components"
-import { stringifyPx } from "../utils"
+import { stringifyPx, capitalize } from "../utils"
 
 import Variables from "../Variables"
 
@@ -382,54 +382,24 @@ const Mixins = {
             : ""}
     `,
 
-    ColorsHoverDefault: ({ $color }: ColorsHoverProps) => css`
-        ${$color === "primary"
-            ? Variables.Colors.Primary500
-            : $color === "secondary"
-            ? Variables.Colors.Secondary500
-            : $color === "success"
-            ? Variables.Colors.Success500
-            : $color === "danger"
-            ? Variables.Colors.Danger500
-            : $color === "warning"
-            ? Variables.Colors.Warning500
-            : $color === "white"
+    ColorsHoverDefault: ({ $color = "primary" }: ColorsHoverProps) => css`
+        ${$color === "white"
             ? Variables.Colors.White
-            : ""}
+            : Variables.Colors[`${capitalize($color)}500`]};
     `,
 
-    ColorsHoverHover: ({ $color }: ColorsHoverProps) =>
+    ColorsHoverHover: ({ $color = "primary" }: ColorsHoverProps) =>
         css`
-            ${$color === "primary"
-                ? Variables.Colors.Primary300
-                : $color === "secondary"
-                ? Variables.Colors.Secondary300
-                : $color === "success"
-                ? Variables.Colors.Success300
-                : $color === "danger"
-                ? Variables.Colors.Danger300
-                : $color === "warning"
-                ? Variables.Colors.Warning300
-                : $color === "white"
+            ${$color === "white"
                 ? Variables.Colors.Gray300
-                : ""}
+                : Variables.Colors[`${capitalize($color)}300`]};
         `,
 
-    ColorsHoverActive: ({ $color }: ColorsHoverProps) =>
+    ColorsHoverActive: ({ $color = "primary" }: ColorsHoverProps) =>
         css`
-            ${$color === "primary"
-                ? Variables.Colors.Primary600
-                : $color === "secondary"
-                ? Variables.Colors.Secondary600
-                : $color === "success"
-                ? Variables.Colors.Success600
-                : $color === "danger"
-                ? Variables.Colors.Danger600
-                : $color === "warning"
-                ? Variables.Colors.Warning600
-                : $color === "white"
+            ${$color === "white"
                 ? Variables.Colors.Gray100
-                : ""}
+                : Variables.Colors[`${capitalize($color)}600`]};
         `,
 
     Spacers: ({ $spacer }: SpacersProps) =>

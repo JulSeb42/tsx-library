@@ -2,16 +2,18 @@
 
 /*==================== Imports ====================*/
 
-import React from "react"
+import React, { useRef } from "react"
 import styled, { css } from "styled-components"
 
 import InputContainer from "./InputContainer"
 import Icon from "./Icon"
 import ChevronDownIcon from "../icons/ChevronDownIcon"
 import Variables from "../Variables"
+import Mixins from "./Mixins"
+
+import useClickOutside from "../hooks/useClickOutside"
 
 import { LibColorsTypes, ColorsShortTypes } from "../common-types"
-import Mixins from "./Mixins"
 
 /*==================== Component ====================*/
 
@@ -23,41 +25,21 @@ const Select = ({
     id,
     children,
     selected,
+    ...props
 }: Props) => {
-    return options?.label || options?.helper || options?.helperBottom ? (
-        <InputContainer
-            id={id}
-            label={options.label}
-            helper={options.helper}
-            helperBottom={options.helperBottom}
-        >
-            <StyledSelect
-                $isOpen={isOpen}
-                $isEmpty={!children}
-                disabled={disabled}
-                onClick={!disabled ? () => setIsOpen(!isOpen) : ""}
-                id={id}
-            >
-                <Selected>
-                    {selected}
+    const ref = useRef<HTMLButtonElement>(null)
+    const onClickOutside = () => setIsOpen(false)
+    useClickOutside(ref, onClickOutside)
 
-                    {children &&
-                        (options?.icon ? (
-                            <Icon src={options.icon} size={16} />
-                        ) : (
-                            <ChevronDownIcon size={16} />
-                        ))}
-                </Selected>
-
-                <List $isOpen={isOpen}>{children}</List>
-            </StyledSelect>
-        </InputContainer>
-    ) : (
+    const content = () => (
         <StyledSelect
             $isOpen={isOpen}
+            $isEmpty={!children}
             disabled={disabled}
             onClick={!disabled ? () => setIsOpen(!isOpen) : ""}
             id={id}
+            ref={ref}
+            {...props}
         >
             <Selected>
                 {selected}
@@ -72,6 +54,19 @@ const Select = ({
 
             <List $isOpen={isOpen}>{children}</List>
         </StyledSelect>
+    )
+
+    return options?.label || options?.helper || options?.helperBottom ? (
+        <InputContainer
+            id={id}
+            label={options.label}
+            helper={options.helper}
+            helperBottom={options.helperBottom}
+        >
+            {content()}
+        </InputContainer>
+    ) : (
+        content()
     )
 }
 
@@ -124,6 +119,7 @@ const StyledSelect = styled.div<{
     onClick?: any
     $isOpen: boolean
     $isEmpty?: boolean
+    ref?: any
 }>`
     position: relative;
     width: 100%;
@@ -166,9 +162,6 @@ const Selected = styled.span`
 `
 
 const List = styled.div<{ $isOpen: boolean }>`
-    ${Mixins.Flexbox({
-        $flexDirection: "column",
-    })}
     position: absolute;
     top: ${inputHeight}px;
     left: 0;
@@ -182,12 +175,15 @@ const List = styled.div<{ $isOpen: boolean }>`
 `
 
 const Item = styled.span<{ $isSelected: boolean }>`
-    padding: ${Variables.Spacers.XS};
+    padding: 0 ${Variables.Spacers.XS};
     background-color: ${({ $isSelected }) =>
         $isSelected ? Variables.Colors.Primary500 : Variables.Colors.White};
     color: ${({ $isSelected }) =>
         $isSelected ? Variables.Colors.White : Variables.Colors.Black};
     transition: ${Variables.Transitions.Short};
+    height: 40px;
+    line-height: 40px;
+    display: block;
 
     @media ${Variables.Breakpoints.Hover} {
         &:hover {

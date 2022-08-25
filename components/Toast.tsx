@@ -18,6 +18,8 @@ import { ColorsShortTypes, LibColorsTypes } from "../common-types"
 const Toast = ({ title, close, children, icon, ...props }: Props) => {
     const [isClosed, setIsClosed] = useState(false)
 
+    const titleFunc = () => <Text tag="h5">{title}</Text>
+
     return (
         <StyledToast $isClosed={isClosed} {...props}>
             {icon || close ? (
@@ -30,7 +32,7 @@ const Toast = ({ title, close, children, icon, ...props }: Props) => {
                         />
                     )}
 
-                    <Text tag="h5">{title}</Text>
+                    {titleFunc()}
 
                     {close && (
                         <CloseButton onClick={() => setIsClosed(true)}>
@@ -43,7 +45,7 @@ const Toast = ({ title, close, children, icon, ...props }: Props) => {
                     )}
                 </TitleContainer>
             ) : (
-                <Text tag="h5">{title}</Text>
+                titleFunc()
             )}
 
             {children && (

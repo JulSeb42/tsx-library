@@ -5,7 +5,7 @@
 import React, { useEffect, useState, useCallback } from "react"
 import styled from "styled-components"
 import { v4 as uuid } from "uuid"
-import { stringifyPx } from "../utils"
+import { stringifyPx, capitalize } from "../utils"
 
 import Variables from "../Variables"
 import Mixins from "./Mixins"
@@ -97,12 +97,7 @@ const Slideshow = ({
         } else if (options?.autoplay) {
             setInterval(() => autoSlideshow(), options.autoplay)
         }
-    }, [
-        options?.autoplay,
-        autoSlideshow,
-        controls,
-        pagination,
-    ])
+    }, [options?.autoplay, autoSlideshow, controls, pagination])
 
     // Swipe
     const [touchPosition, setTouchPosition] = useState(null)
@@ -172,7 +167,10 @@ const Slideshow = ({
 
             {pagination && (
                 <Pagination
-                    $hideTouch={pagination.hideTouchScreens}
+                    $hideTouch={
+                        typeof pagination === "object" &&
+                        pagination.hideTouchScreens
+                    }
                     justifyContent="center"
                     alignItems="center"
                     gap={Variables.Spacers.XS}
@@ -181,7 +179,11 @@ const Slideshow = ({
                         <Dot
                             onClick={() => setActive(i)}
                             $isActive={active === i && true}
-                            $color={pagination.color}
+                            $color={
+                                typeof pagination === "object"
+                                    ? pagination.color
+                                    : "primary"
+                            }
                             key={uuid()}
                         />
                     ))}
@@ -233,10 +235,12 @@ interface Possible1 extends BaseProps {
         iconNext?: string
     }
 
-    pagination?: {
-        color?: ColorsHoverTypes
-        hideTouchScreens?: boolean
-    }
+    pagination?:
+        | boolean
+        | {
+              color?: ColorsHoverTypes
+              hideTouchScreens?: boolean
+          }
 }
 
 interface Possible2 extends BaseProps {
@@ -265,36 +269,6 @@ interface Possible4 extends BaseProps {
     controls?: never
     pagination?: never
 }
-
-// interface Possible1 extends BaseProps {
-//     controls?: {
-//         type: "small" | "large"
-//         color?: ColorsHoverTypes
-//         hideTouchScreens?: boolean
-//     }
-//     pagination?: {
-//         pagination: true
-//         color?: ColorsHoverTypes
-//         hideTouchScreens?: boolean
-//     }
-// }
-
-// interface Possible2 extends BaseProps {
-//     controls?: never
-//     pagination?: never
-// }
-
-// interface Possible3 extends BaseProps {
-//     pagination?: {
-//         pagination: true
-//         color?: ColorsHoverTypes
-//         hideTouchScreens?: boolean
-//     }
-// }
-
-// interface Possible4 extends BaseProps {
-//     pagination?: never
-// }
 
 type Props = Possible1 | Possible2 | Possible3 | Possible4
 
@@ -427,73 +401,39 @@ const Dot = styled.button<{ $isActive?: boolean; $color?: ColorsHoverTypes }>`
     border: none;
     background-color: ${({ $isActive, $color }) =>
         $isActive
-            ? $color === "secondary"
-                ? Variables.Colors.Secondary500
-                : $color === "success"
-                ? Variables.Colors.Success500
-                : $color === "danger"
-                ? Variables.Colors.Danger500
-                : $color === "warning"
-                ? Variables.Colors.Warning500
-                : $color === "white"
+            ? $color === "white"
                 ? Variables.Colors.White
-                : Variables.Colors.Primary500
+                : Variables.Colors[`${capitalize($color || "primary")}500`]
             : !$isActive &&
-              ($color === "secondary"
-                  ? Variables.Colors.Secondary300
-                  : $color === "success"
-                  ? Variables.Colors.Success300
-                  : $color === "danger"
-                  ? Variables.Colors.Danger300
-                  : $color === "warning"
-                  ? Variables.Colors.Warning300
-                  : $color === "white"
+              ($color === "white"
                   ? Variables.Colors.Gray300
-                  : Variables.Colors.Primary300)};
+                  : Variables.Colors[`${capitalize($color || "primary")}300`])};
     transition: ${Variables.Transitions.Short};
 
     @media ${Variables.Breakpoints.Hover} {
         &:hover {
             background-color: ${({ $isActive, $color }) =>
                 $isActive
-                    ? $color === "secondary"
-                        ? Variables.Colors.Secondary300
-                        : $color === "success"
-                        ? Variables.Colors.Success300
-                        : $color === "danger"
-                        ? Variables.Colors.Danger300
-                        : $color === "warning"
-                        ? Variables.Colors.Warning300
-                        : $color === "white"
+                    ? $color === "white"
                         ? Variables.Colors.Gray300
-                        : Variables.Colors.Primary300
+                        : Variables.Colors[
+                              `${capitalize($color || "primary")}300`
+                          ]
                     : !$isActive &&
-                      ($color === "secondary"
-                          ? Variables.Colors.Secondary500
-                          : $color === "success"
-                          ? Variables.Colors.Success500
-                          : $color === "danger"
-                          ? Variables.Colors.Danger500
-                          : $color === "warning"
-                          ? Variables.Colors.Warning500
-                          : $color === "white"
+                      ($color === "white"
                           ? Variables.Colors.White
-                          : Variables.Colors.Primary500)};
+                          : Variables.Colors[
+                                `${capitalize($color || "primary")}500`
+                            ])};
         }
 
         &:active {
             background-color: ${({ $color }) =>
-                $color === "secondary"
-                    ? Variables.Colors.Secondary600
-                    : $color === "success"
-                    ? Variables.Colors.Success600
-                    : $color === "danger"
-                    ? Variables.Colors.Danger600
-                    : $color === "warning"
-                    ? Variables.Colors.Warning600
-                    : $color === "white"
+                $color === "white"
                     ? Variables.Colors.Gray100
-                    : Variables.Colors.Primary600};
+                    : Variables.Colors[
+                          `${capitalize($color || "primary")}600`
+                      ]};
         }
     }
 `

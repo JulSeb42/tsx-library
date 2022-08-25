@@ -6,9 +6,9 @@ import React, { Suspense } from "react"
 import styled from "styled-components"
 import { stringifyPx } from "ts-utils-julseb"
 
-import Variables from "../../Variables"
 import Text from "../Text"
 import Fallback from "../Fallback"
+import Variables from "../../Variables"
 
 import { ObjectFitTypes } from "../../common-types"
 
@@ -23,42 +23,46 @@ const Image = ({
     width = "100%",
     height = "auto",
     ...props
-}: Props) => (
-    <Suspense fallback={<Fallback $width={width} $height={height} />}>
-        {options?.caption ? (
-            <StyledImageContainer $width={width} $height={height} {...props}>
-                <Img
-                    src={src}
-                    alt={alt}
+}: Props) => {
+    const img = () => (
+        <Img
+            src={src}
+            alt={alt}
+            $width={width}
+            $height={height}
+            $fit={options?.fit}
+            {...props}
+        />
+    )
+
+    return (
+        <Suspense fallback={<Fallback $width={width} $height={height} />}>
+            {options?.caption ? (
+                <StyledImageContainer
                     $width={width}
                     $height={height}
-                    $fit={options?.fit}
-                />
-
-                <Caption
-                    $background={
-                        typeof options.caption === "object"
-                            ? options.caption.background
-                            : "black"
-                    }
+                    {...props}
                 >
-                    {typeof options.caption === "object"
-                        ? options.caption.text
-                        : options.caption}
-                </Caption>
-            </StyledImageContainer>
-        ) : (
-            <Img
-                src={src}
-                alt={alt}
-                $width={width}
-                $height={height}
-                $fit={options?.fit}
-                {...props}
-            />
-        )}
-    </Suspense>
-)
+                    {img()}
+
+                    <Caption
+                        $background={
+                            typeof options.caption === "object"
+                                ? options.caption.background
+                                : "black"
+                        }
+                    >
+                        {typeof options.caption === "object"
+                            ? options.caption.text
+                            : options.caption}
+                    </Caption>
+                </StyledImageContainer>
+            ) : (
+                img()
+            )}
+        </Suspense>
+    )
+}
 
 export default Image
 

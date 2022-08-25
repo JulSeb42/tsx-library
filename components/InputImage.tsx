@@ -84,45 +84,7 @@ const InputImage = ({
         </StyledHoverContainer>
     )
 
-    return options ? (
-        <InputContainer
-            id={id}
-            label={options.label}
-            helper={options.helper}
-            helperBottom={options.helperBottom}
-        >
-            <StyledInputImage>
-                <Label
-                    htmlFor={id}
-                    $disabled={disabled}
-                    $width={width}
-                    $height={height}
-                >
-                    {img.src === "" ? (
-                        <EmptyContainer />
-                    ) : (
-                        <Img
-                            src={img.src}
-                            alt={img.alt || "Image"}
-                            width="100%"
-                            height="100%"
-                            options={{ fit: "cover" }}
-                        />
-                    )}
-
-                    <HoverContainer />
-                </Label>
-
-                <Input
-                    type="file"
-                    id={id}
-                    disabled={disabled}
-                    value={value}
-                    {...props}
-                />
-            </StyledInputImage>
-        </InputContainer>
-    ) : (
+    const inputFunction = () => (
         <StyledInputImage>
             <Label
                 htmlFor={id}
@@ -153,6 +115,19 @@ const InputImage = ({
                 {...props}
             />
         </StyledInputImage>
+    )
+
+    return options ? (
+        <InputContainer
+            id={id}
+            label={options.label}
+            helper={options.helper}
+            helperBottom={options.helperBottom}
+        >
+            {inputFunction()}
+        </InputContainer>
+    ) : (
+        inputFunction()
     )
 }
 

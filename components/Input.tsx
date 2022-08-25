@@ -42,22 +42,37 @@ const InputFunction = ({
 }: Props) => {
     const [isVisible, setIsVisible] = useState(false)
 
+    const inputBase = (as?: any) => (
+        <InputStyled
+            maxLength={maxLength}
+            value={value}
+            id={id}
+            type={
+                type === "select" || type === "textarea"
+                    ? undefined
+                    : password
+                    ? isVisible
+                        ? "text"
+                        : "password"
+                    : type
+            }
+            $type={type}
+            disabled={disabled}
+            name={name}
+            $validation={validation?.status}
+            as={as}
+            autoFocus={autoFocus}
+            $icon={!!icons?.icon}
+            $showHttp={options?.showHttp}
+            {...props}
+        >
+            {children}
+        </InputStyled>
+    )
+
     return type === "select" ? (
         <InputContent>
-            <InputStyled
-                maxLength={maxLength}
-                value={value}
-                id={id}
-                type={type}
-                disabled={disabled}
-                name={name}
-                $validation={validation?.status}
-                as="select"
-                autoFocus={autoFocus}
-                {...props}
-            >
-                {children}
-            </InputStyled>
+            {inputBase("select")}
 
             <RightContainer $disabled={disabled}>
                 {icons?.select ? (
@@ -79,18 +94,7 @@ const InputFunction = ({
             </RightContainer>
         </InputContent>
     ) : type === "textarea" ? (
-        <InputStyled
-            as="textarea"
-            maxLength={maxLength}
-            value={value}
-            id={id}
-            type={type}
-            disabled={disabled}
-            name={name}
-            $validation={validation?.status}
-            autoFocus={autoFocus}
-            {...props}
-        />
+        inputBase("textarea")
     ) : icons?.icon ||
       validation ||
       password ||
@@ -118,19 +122,7 @@ const InputFunction = ({
                 </UrlContainer>
             )}
 
-            <InputStyled
-                maxLength={maxLength}
-                value={value}
-                id={id}
-                type={password ? (isVisible ? "text" : "password") : type}
-                disabled={disabled}
-                name={name}
-                $validation={validation?.status}
-                $icon={!!icons?.icon}
-                autoFocus={autoFocus}
-                $showHttp={options?.showHttp}
-                {...props}
-            />
+            {inputBase()}
 
             {(validation ||
                 password ||
@@ -212,16 +204,7 @@ const InputFunction = ({
             )}
         </InputContent>
     ) : (
-        <InputStyled
-            maxLength={maxLength}
-            value={value}
-            id={id}
-            type={type}
-            disabled={disabled}
-            name={name}
-            autoFocus={autoFocus}
-            {...props}
-        />
+        inputBase()
     )
 }
 
@@ -241,39 +224,8 @@ const Input = ({
     validation,
     children,
     ...props
-}: Props) =>
-    options?.label ||
-    options?.helper ||
-    options?.helperBottom ||
-    options?.counter ? (
-        <InputContainer
-            id={id}
-            label={options.label}
-            helper={options.helper}
-            helperBottom={options.helperBottom}
-            counter={options.counter}
-            value={value}
-            maxLength={maxLength}
-        >
-            <InputFunction
-                id={id}
-                validation={validation}
-                type={type}
-                disabled={disabled}
-                name={name}
-                icons={icons}
-                value={value}
-                maxLength={maxLength}
-                clearSearch={clearSearch}
-                password={password}
-                textsPassword={textsPassword}
-                autoFocus={autoFocus}
-                {...props}
-            >
-                {children}
-            </InputFunction>
-        </InputContainer>
-    ) : (
+}: Props) => {
+    const inputFunction = () => (
         <InputFunction
             id={id}
             validation={validation}
@@ -292,6 +244,26 @@ const Input = ({
             {children}
         </InputFunction>
     )
+
+    return options?.label ||
+        options?.helper ||
+        options?.helperBottom ||
+        options?.counter ? (
+        <InputContainer
+            id={id}
+            label={options.label}
+            helper={options.helper}
+            helperBottom={options.helperBottom}
+            counter={options.counter}
+            value={value}
+            maxLength={maxLength}
+        >
+            {inputFunction()}
+        </InputContainer>
+    ) : (
+        inputFunction()
+    )
+}
 
 export default Input
 
@@ -379,7 +351,7 @@ const InputStyled = styled.input<{
     $iconCalendar?: string
     $iconClock?: string
     $iconSelect?: string
-    type?: InputTypesTypes
+    $type?: InputTypesTypes
     $icon?: boolean
     $showHttp?: boolean
 }>`
@@ -426,12 +398,12 @@ const InputStyled = styled.input<{
             padding-left: calc(${size}px + ${Variables.Spacers.XS});
         `}
 
-    ${({ type }) =>
-        type === "color" || type === "file"
+    ${({ $type }) =>
+        $type === "color" || $type === "file"
             ? css`
                   cursor: pointer;
               `
-            : type === "search" &&
+            : $type === "search" &&
               css`
                   &::-webkit-search-cancel-button {
                       -webkit-appearance: none;
@@ -439,8 +411,8 @@ const InputStyled = styled.input<{
                   }
               `}
 
-    ${({ type }) =>
-        type === "file" &&
+    ${({ $type }) =>
+        $type === "file" &&
         css`
             padding: 0;
 
@@ -472,18 +444,18 @@ const InputStyled = styled.input<{
             }
         `}
 
-    ${({ type, $icon, $showHttp }) =>
-        type === "url" &&
+    ${({ $type, $icon, $showHttp }) =>
+        $type === "url" &&
         $showHttp &&
         css`
             padding-left: ${$icon ? 53 + size : 53}px;
         `}
 
-    ${({ type, $iconCalendar }) =>
-        (type === "date" ||
-            type === "datetime-local" ||
-            type === "month" ||
-            type === "week") &&
+    ${({ $type, $iconCalendar }) =>
+        ($type === "date" ||
+            $type === "datetime-local" ||
+            $type === "month" ||
+            $type === "week") &&
         css`
             &::-webkit-inner-spin-button,
             &::-webkit-calendar-picker-indicator {
@@ -517,8 +489,8 @@ const InputStyled = styled.input<{
             }
         `}
 
-    ${({ type, $iconClock }) =>
-        type === "time" &&
+    ${({ $type, $iconClock }) =>
+        $type === "time" &&
         css`
             &::-webkit-inner-spin-button,
             &::-webkit-calendar-picker-indicator {
@@ -552,8 +524,8 @@ const InputStyled = styled.input<{
             }
         `}
 
-    ${({ type }) =>
-        type === "select" &&
+    ${({ $type }) =>
+        $type === "select" &&
         css`
             padding: 0 ${Variables.Spacers.XS};
             appearance: none;
@@ -564,8 +536,8 @@ const InputStyled = styled.input<{
             }
         `}
 
-    ${({ type }) =>
-        type === "textarea" &&
+    ${({ $type }) =>
+        $type === "textarea" &&
         css`
             height: inherit;
             min-height: calc(

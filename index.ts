@@ -22,6 +22,7 @@ import Form from "./components/Form"
 import Grid from "./components/Grid"
 import Header from "./components/Header"
 import Helmet from "./components/Helmet"
+import * as Hooks from "./hooks"
 import Hr from "./components/Hr"
 import Icon from "./components/Icon"
 import Image from "./components/Image"
@@ -84,6 +85,7 @@ export {
     Header,
     Helmet,
     Hr,
+    Hooks,
     Icon,
     Image,
     Input,

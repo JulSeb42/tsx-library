@@ -12,6 +12,7 @@ import Mixins from "./Mixins"
 
 import PlusIcon from "../icons/PlusIcon"
 import ChevronDownIcon from "../icons/ChevronDownIcon"
+import Icon from "./Icon"
 
 import { AccordionItemProps } from "../component-props"
 
@@ -24,6 +25,7 @@ const AccordionItem = ({
     content,
     $accordionStyle = "basic",
     $noBorder,
+    customIcon,
 }: ItemProps) => {
     const [open, setOpen] = useState(isOpen)
 
@@ -39,7 +41,9 @@ const AccordionItem = ({
                 {title}
 
                 <IconContainer>
-                    {icon === "plus" ? (
+                    {customIcon ? (
+                        <Icon src={customIcon} size={20} />
+                    ) : icon === "plus" ? (
                         <StyledIconPlus size={20} color="currentColor" />
                     ) : (
                         icon === "chevron" && <StyledIconChevron size={20} />
@@ -74,6 +78,7 @@ const Accordion = ({
                 title={item.title}
                 content={item.content}
                 $accordionStyle={options.style}
+                customIcon={options.customIcon}
                 $noBorder={
                     options.style === "rounded" &&
                     i === items.length - 1 &&
@@ -108,6 +113,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
     options?: {
         style?: AccordionStyleTypes
         icon?: IconTypes
+        customIcon?: string
     }
 }
 
@@ -118,6 +124,7 @@ interface ItemProps extends React.HTMLAttributes<HTMLDivElement> {
     content?: string | React.ReactNode
     $accordionStyle?: AccordionStyleTypes
     $noBorder?: boolean
+    customIcon?: string
 }
 
 /*==================== Styles ====================*/

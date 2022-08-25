@@ -18,10 +18,136 @@ import {
 
 /*==================== Styles ====================*/
 
+const FontSizeMixin = ({
+    $defaultSize,
+    $fontSize,
+}: {
+    $defaultSize: any
+    $fontSize?: FontSizeTypes | string | number
+}) =>
+    css`
+        font-size: ${$fontSize === "display-h1"
+            ? Variables.FontSizes.Display.H1
+            : $fontSize === "display-h2"
+            ? Variables.FontSizes.Display.H2
+            : $fontSize === "display-h3"
+            ? Variables.FontSizes.Display.H3
+            : $fontSize === "display-h4"
+            ? Variables.FontSizes.Display.H4
+            : $fontSize === "display-h5"
+            ? Variables.FontSizes.Display.H5
+            : $fontSize === "title-h1"
+            ? Variables.FontSizes.Titles.H1
+            : $fontSize === "title-h2"
+            ? Variables.FontSizes.Titles.H2
+            : $fontSize === "title-h3"
+            ? Variables.FontSizes.Titles.H3
+            : $fontSize === "title-h4"
+            ? Variables.FontSizes.Titles.H4
+            : $fontSize === "title-h5"
+            ? Variables.FontSizes.Titles.H5
+            : $fontSize === "title-h6"
+            ? Variables.FontSizes.Titles.H6
+            : $fontSize === "body"
+            ? Variables.FontSizes.Body
+            : $fontSize === "small"
+            ? Variables.FontSizes.Small
+            : $defaultSize === "display-h1"
+            ? Variables.FontSizes.Display.H1
+            : $defaultSize === "display-h2"
+            ? Variables.FontSizes.Display.H2
+            : $defaultSize === "display-h3"
+            ? Variables.FontSizes.Display.H3
+            : $defaultSize === "display-h4"
+            ? Variables.FontSizes.Display.H4
+            : $defaultSize === "display-h5"
+            ? Variables.FontSizes.Display.H5
+            : $defaultSize === "title-h1"
+            ? Variables.FontSizes.Titles.H1
+            : $defaultSize === "title-h2"
+            ? Variables.FontSizes.Titles.H2
+            : $defaultSize === "title-h3"
+            ? Variables.FontSizes.Titles.H3
+            : $defaultSize === "title-h4"
+            ? Variables.FontSizes.Titles.H4
+            : $defaultSize === "title-h5"
+            ? Variables.FontSizes.Titles.H5
+            : $defaultSize === "title-h6"
+            ? Variables.FontSizes.Titles.H6
+            : $defaultSize === "body"
+            ? Variables.FontSizes.Body
+            : $defaultSize === "small"
+            ? Variables.FontSizes.Small
+            : $fontSize
+            ? stringifyPx($fontSize)
+            : ""};
+
+        & > * {
+            font-size: ${$fontSize === "display-h1"
+                ? Variables.FontSizes.Display.H1
+                : $fontSize === "display-h2"
+                ? Variables.FontSizes.Display.H2
+                : $fontSize === "display-h3"
+                ? Variables.FontSizes.Display.H3
+                : $fontSize === "display-h4"
+                ? Variables.FontSizes.Display.H4
+                : $fontSize === "display-h5"
+                ? Variables.FontSizes.Display.H5
+                : $fontSize === "title-h1"
+                ? Variables.FontSizes.Titles.H1
+                : $fontSize === "title-h2"
+                ? Variables.FontSizes.Titles.H2
+                : $fontSize === "title-h3"
+                ? Variables.FontSizes.Titles.H3
+                : $fontSize === "title-h4"
+                ? Variables.FontSizes.Titles.H4
+                : $fontSize === "title-h5"
+                ? Variables.FontSizes.Titles.H5
+                : $fontSize === "title-h6"
+                ? Variables.FontSizes.Titles.H6
+                : $fontSize === "body"
+                ? Variables.FontSizes.Body
+                : $fontSize === "small"
+                ? Variables.FontSizes.Small
+                : $defaultSize === "display-h1"
+                ? Variables.FontSizes.Display.H1
+                : $defaultSize === "display-h2"
+                ? Variables.FontSizes.Display.H2
+                : $defaultSize === "display-h3"
+                ? Variables.FontSizes.Display.H3
+                : $defaultSize === "display-h4"
+                ? Variables.FontSizes.Display.H4
+                : $defaultSize === "display-h5"
+                ? Variables.FontSizes.Display.H5
+                : $defaultSize === "title-h1"
+                ? Variables.FontSizes.Titles.H1
+                : $defaultSize === "title-h2"
+                ? Variables.FontSizes.Titles.H2
+                : $defaultSize === "title-h3"
+                ? Variables.FontSizes.Titles.H3
+                : $defaultSize === "title-h4"
+                ? Variables.FontSizes.Titles.H4
+                : $defaultSize === "title-h5"
+                ? Variables.FontSizes.Titles.H5
+                : $defaultSize === "title-h6"
+                ? Variables.FontSizes.Titles.H6
+                : $defaultSize === "body"
+                ? Variables.FontSizes.Body
+                : $defaultSize === "small"
+                ? Variables.FontSizes.Small
+                : $fontSize
+                ? stringifyPx($fontSize)
+                : ""};
+        }
+    `
+
 export const FontCommon = ({
     $color,
     $textAlign,
     $linkColor,
+    $lineHeight,
+    $defaultSize,
+    $fontSize,
 }: {
     $textAlign?: TextAlignTypes
     $color?: LibColorsTypes | ColorsShortTypes | string
@@ -34,9 +160,126 @@ export const FontCommon = ({
           }
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
+    $lineHeight?: number | string
+    $defaultSize?: any
 }) => css`
+    line-height: ${$lineHeight || Variables.LineHeights.Regular};
     text-align: ${$textAlign};
     color: ${Mixins.AllColors};
+
+    font-size: ${$fontSize === "display-h1"
+        ? Variables.FontSizes.Display.H1
+        : $fontSize === "display-h2"
+        ? Variables.FontSizes.Display.H2
+        : $fontSize === "display-h3"
+        ? Variables.FontSizes.Display.H3
+        : $fontSize === "display-h4"
+        ? Variables.FontSizes.Display.H4
+        : $fontSize === "display-h5"
+        ? Variables.FontSizes.Display.H5
+        : $fontSize === "title-h1"
+        ? Variables.FontSizes.Titles.H1
+        : $fontSize === "title-h2"
+        ? Variables.FontSizes.Titles.H2
+        : $fontSize === "title-h3"
+        ? Variables.FontSizes.Titles.H3
+        : $fontSize === "title-h4"
+        ? Variables.FontSizes.Titles.H4
+        : $fontSize === "title-h5"
+        ? Variables.FontSizes.Titles.H5
+        : $fontSize === "title-h6"
+        ? Variables.FontSizes.Titles.H6
+        : $fontSize === "body"
+        ? Variables.FontSizes.Body
+        : $fontSize === "small"
+        ? Variables.FontSizes.Small
+        : $fontSize
+        ? stringifyPx($fontSize)
+        : $defaultSize === "display-h1"
+        ? Variables.FontSizes.Display.H1
+        : $defaultSize === "display-h2"
+        ? Variables.FontSizes.Display.H2
+        : $defaultSize === "display-h3"
+        ? Variables.FontSizes.Display.H3
+        : $defaultSize === "display-h4"
+        ? Variables.FontSizes.Display.H4
+        : $defaultSize === "display-h5"
+        ? Variables.FontSizes.Display.H5
+        : $defaultSize === "title-h1"
+        ? Variables.FontSizes.Titles.H1
+        : $defaultSize === "title-h2"
+        ? Variables.FontSizes.Titles.H2
+        : $defaultSize === "title-h3"
+        ? Variables.FontSizes.Titles.H3
+        : $defaultSize === "title-h4"
+        ? Variables.FontSizes.Titles.H4
+        : $defaultSize === "title-h5"
+        ? Variables.FontSizes.Titles.H5
+        : $defaultSize === "title-h6"
+        ? Variables.FontSizes.Titles.H6
+        : $defaultSize === "body"
+        ? Variables.FontSizes.Body
+        : $defaultSize === "small"
+        ? Variables.FontSizes.Small
+        : ""};
+
+    & > * {
+        font-size: ${$fontSize === "display-h1"
+            ? Variables.FontSizes.Display.H1
+            : $fontSize === "display-h2"
+            ? Variables.FontSizes.Display.H2
+            : $fontSize === "display-h3"
+            ? Variables.FontSizes.Display.H3
+            : $fontSize === "display-h4"
+            ? Variables.FontSizes.Display.H4
+            : $fontSize === "display-h5"
+            ? Variables.FontSizes.Display.H5
+            : $fontSize === "title-h1"
+            ? Variables.FontSizes.Titles.H1
+            : $fontSize === "title-h2"
+            ? Variables.FontSizes.Titles.H2
+            : $fontSize === "title-h3"
+            ? Variables.FontSizes.Titles.H3
+            : $fontSize === "title-h4"
+            ? Variables.FontSizes.Titles.H4
+            : $fontSize === "title-h5"
+            ? Variables.FontSizes.Titles.H5
+            : $fontSize === "title-h6"
+            ? Variables.FontSizes.Titles.H6
+            : $fontSize === "body"
+            ? Variables.FontSizes.Body
+            : $fontSize === "small"
+            ? Variables.FontSizes.Small
+            : $fontSize
+            ? stringifyPx($fontSize)
+            : $defaultSize === "display-h1"
+            ? Variables.FontSizes.Display.H1
+            : $defaultSize === "display-h2"
+            ? Variables.FontSizes.Display.H2
+            : $defaultSize === "display-h3"
+            ? Variables.FontSizes.Display.H3
+            : $defaultSize === "display-h4"
+            ? Variables.FontSizes.Display.H4
+            : $defaultSize === "display-h5"
+            ? Variables.FontSizes.Display.H5
+            : $defaultSize === "title-h1"
+            ? Variables.FontSizes.Titles.H1
+            : $defaultSize === "title-h2"
+            ? Variables.FontSizes.Titles.H2
+            : $defaultSize === "title-h3"
+            ? Variables.FontSizes.Titles.H3
+            : $defaultSize === "title-h4"
+            ? Variables.FontSizes.Titles.H4
+            : $defaultSize === "title-h5"
+            ? Variables.FontSizes.Titles.H5
+            : $defaultSize === "title-h6"
+            ? Variables.FontSizes.Titles.H6
+            : $defaultSize === "body"
+            ? Variables.FontSizes.Body
+            : $defaultSize === "small"
+            ? Variables.FontSizes.Small
+            : ""};
+    }
 
     & > * {
         color: ${Mixins.AllColors};
@@ -110,75 +353,12 @@ const StyledH1 = styled.h1<{
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
 }>`
-    ${FontCommon};
+    ${({ $display, $fontSize }) =>
+        FontCommon({
+            $defaultSize: $display ? "display-h1" : "title-h1",
+            $fontSize,
+        })};
     font-weight: ${Variables.FontWeights.Black};
-    font-size: ${({ $display, $fontSize }) =>
-        $display
-            ? Variables.FontSizes.Display.H1
-            : $fontSize === "display-h1"
-            ? Variables.FontSizes.Display.H1
-            : $fontSize === "display-h2"
-            ? Variables.FontSizes.Display.H2
-            : $fontSize === "display-h3"
-            ? Variables.FontSizes.Display.H3
-            : $fontSize === "display-h4"
-            ? Variables.FontSizes.Display.H4
-            : $fontSize === "display-h5"
-            ? Variables.FontSizes.Display.H5
-            : $fontSize === "title-h1"
-            ? Variables.FontSizes.Titles.H1
-            : $fontSize === "title-h2"
-            ? Variables.FontSizes.Titles.H2
-            : $fontSize === "title-h3"
-            ? Variables.FontSizes.Titles.H3
-            : $fontSize === "title-h4"
-            ? Variables.FontSizes.Titles.H4
-            : $fontSize === "title-h5"
-            ? Variables.FontSizes.Titles.H5
-            : $fontSize === "title-h6"
-            ? Variables.FontSizes.Titles.H6
-            : $fontSize === "body"
-            ? Variables.FontSizes.Body
-            : $fontSize === "small"
-            ? Variables.FontSizes.Small
-            : $fontSize
-            ? stringifyPx($fontSize)
-            : Variables.FontSizes.Titles.H1};
-
-    & > * {
-        font-size: ${({ $display, $fontSize }) =>
-            $display
-                ? Variables.FontSizes.Display.H1
-                : $fontSize === "display-h1"
-                ? Variables.FontSizes.Display.H1
-                : $fontSize === "display-h2"
-                ? Variables.FontSizes.Display.H2
-                : $fontSize === "display-h3"
-                ? Variables.FontSizes.Display.H3
-                : $fontSize === "display-h4"
-                ? Variables.FontSizes.Display.H4
-                : $fontSize === "display-h5"
-                ? Variables.FontSizes.Display.H5
-                : $fontSize === "title-h1"
-                ? Variables.FontSizes.Titles.H1
-                : $fontSize === "title-h2"
-                ? Variables.FontSizes.Titles.H2
-                : $fontSize === "title-h3"
-                ? Variables.FontSizes.Titles.H3
-                : $fontSize === "title-h4"
-                ? Variables.FontSizes.Titles.H4
-                : $fontSize === "title-h5"
-                ? Variables.FontSizes.Titles.H5
-                : $fontSize === "title-h6"
-                ? Variables.FontSizes.Titles.H6
-                : $fontSize === "body"
-                ? Variables.FontSizes.Body
-                : $fontSize === "small"
-                ? Variables.FontSizes.Small
-                : $fontSize
-                ? stringifyPx($fontSize)
-                : Variables.FontSizes.Titles.H1};
-    }
 `
 
 const StyledH2 = styled.h2<{
@@ -194,75 +374,12 @@ const StyledH2 = styled.h2<{
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
 }>`
-    ${FontCommon};
+    ${({ $display, $fontSize }) =>
+        FontCommon({
+            $defaultSize: $display ? "display-h2" : "title-h2",
+            $fontSize,
+        })};
     font-weight: ${Variables.FontWeights.Black};
-    font-size: ${({ $display, $fontSize }) =>
-        $display
-            ? Variables.FontSizes.Display.H2
-            : $fontSize === "display-h1"
-            ? Variables.FontSizes.Display.H1
-            : $fontSize === "display-h2"
-            ? Variables.FontSizes.Display.H2
-            : $fontSize === "display-h3"
-            ? Variables.FontSizes.Display.H3
-            : $fontSize === "display-h4"
-            ? Variables.FontSizes.Display.H4
-            : $fontSize === "display-h5"
-            ? Variables.FontSizes.Display.H5
-            : $fontSize === "title-h1"
-            ? Variables.FontSizes.Titles.H1
-            : $fontSize === "title-h2"
-            ? Variables.FontSizes.Titles.H2
-            : $fontSize === "title-h3"
-            ? Variables.FontSizes.Titles.H3
-            : $fontSize === "title-h4"
-            ? Variables.FontSizes.Titles.H4
-            : $fontSize === "title-h5"
-            ? Variables.FontSizes.Titles.H5
-            : $fontSize === "title-h6"
-            ? Variables.FontSizes.Titles.H6
-            : $fontSize === "body"
-            ? Variables.FontSizes.Body
-            : $fontSize === "small"
-            ? Variables.FontSizes.Small
-            : $fontSize
-            ? stringifyPx($fontSize)
-            : Variables.FontSizes.Titles.H2};
-
-    & > * {
-        font-size: ${({ $display, $fontSize }) =>
-            $display
-                ? Variables.FontSizes.Display.H2
-                : $fontSize === "display-h1"
-                ? Variables.FontSizes.Display.H1
-                : $fontSize === "display-h2"
-                ? Variables.FontSizes.Display.H2
-                : $fontSize === "display-h3"
-                ? Variables.FontSizes.Display.H3
-                : $fontSize === "display-h4"
-                ? Variables.FontSizes.Display.H4
-                : $fontSize === "display-h5"
-                ? Variables.FontSizes.Display.H5
-                : $fontSize === "title-h1"
-                ? Variables.FontSizes.Titles.H1
-                : $fontSize === "title-h2"
-                ? Variables.FontSizes.Titles.H2
-                : $fontSize === "title-h3"
-                ? Variables.FontSizes.Titles.H3
-                : $fontSize === "title-h4"
-                ? Variables.FontSizes.Titles.H4
-                : $fontSize === "title-h5"
-                ? Variables.FontSizes.Titles.H5
-                : $fontSize === "title-h6"
-                ? Variables.FontSizes.Titles.H6
-                : $fontSize === "body"
-                ? Variables.FontSizes.Body
-                : $fontSize === "small"
-                ? Variables.FontSizes.Small
-                : $fontSize
-                ? stringifyPx($fontSize)
-                : Variables.FontSizes.Titles.H2};
-    }
 `
 
 const StyledH3 = styled.h3<{
@@ -278,75 +395,12 @@ const StyledH3 = styled.h3<{
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
 }>`
-    ${FontCommon};
+    ${({ $display, $fontSize }) =>
+        FontCommon({
+            $defaultSize: $display ? "display-h3" : "title-h3",
+            $fontSize,
+        })};
     font-weight: ${Variables.FontWeights.Black};
-    font-size: ${({ $display, $fontSize }) =>
-        $display
-            ? Variables.FontSizes.Display.H3
-            : $fontSize === "display-h1"
-            ? Variables.FontSizes.Display.H1
-            : $fontSize === "display-h2"
-            ? Variables.FontSizes.Display.H2
-            : $fontSize === "display-h3"
-            ? Variables.FontSizes.Display.H3
-            : $fontSize === "display-h4"
-            ? Variables.FontSizes.Display.H4
-            : $fontSize === "display-h5"
-            ? Variables.FontSizes.Display.H5
-            : $fontSize === "title-h1"
-            ? Variables.FontSizes.Titles.H1
-            : $fontSize === "title-h2"
-            ? Variables.FontSizes.Titles.H2
-            : $fontSize === "title-h3"
-            ? Variables.FontSizes.Titles.H3
-            : $fontSize === "title-h4"
-            ? Variables.FontSizes.Titles.H4
-            : $fontSize === "title-h5"
-            ? Variables.FontSizes.Titles.H5
-            : $fontSize === "title-h6"
-            ? Variables.FontSizes.Titles.H6
-            : $fontSize === "body"
-            ? Variables.FontSizes.Body
-            : $fontSize === "small"
-            ? Variables.FontSizes.Small
-            : $fontSize
-            ? stringifyPx($fontSize)
-            : Variables.FontSizes.Titles.H3};
-
-    & > * {
-        font-size: ${({ $display, $fontSize }) =>
-            $display
-                ? Variables.FontSizes.Display.H3
-                : $fontSize === "display-h1"
-                ? Variables.FontSizes.Display.H1
-                : $fontSize === "display-h2"
-                ? Variables.FontSizes.Display.H2
-                : $fontSize === "display-h3"
-                ? Variables.FontSizes.Display.H3
-                : $fontSize === "display-h4"
-                ? Variables.FontSizes.Display.H4
-                : $fontSize === "display-h5"
-                ? Variables.FontSizes.Display.H5
-                : $fontSize === "title-h1"
-                ? Variables.FontSizes.Titles.H1
-                : $fontSize === "title-h2"
-                ? Variables.FontSizes.Titles.H2
-                : $fontSize === "title-h3"
-                ? Variables.FontSizes.Titles.H3
-                : $fontSize === "title-h4"
-                ? Variables.FontSizes.Titles.H4
-                : $fontSize === "title-h5"
-                ? Variables.FontSizes.Titles.H5
-                : $fontSize === "title-h6"
-                ? Variables.FontSizes.Titles.H6
-                : $fontSize === "body"
-                ? Variables.FontSizes.Body
-                : $fontSize === "small"
-                ? Variables.FontSizes.Small
-                : $fontSize
-                ? stringifyPx($fontSize)
-                : Variables.FontSizes.Titles.H3};
-    }
 `
 
 const StyledH4 = styled.h4<{
@@ -362,75 +416,12 @@ const StyledH4 = styled.h4<{
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
 }>`
-    ${FontCommon};
+    ${({ $display, $fontSize }) =>
+        FontCommon({
+            $defaultSize: $display ? "display-h4" : "title-h4",
+            $fontSize,
+        })};
     font-weight: ${Variables.FontWeights.Black};
-    font-size: ${({ $display, $fontSize }) =>
-        $display
-            ? Variables.FontSizes.Display.H4
-            : $fontSize === "display-h1"
-            ? Variables.FontSizes.Display.H1
-            : $fontSize === "display-h2"
-            ? Variables.FontSizes.Display.H2
-            : $fontSize === "display-h3"
-            ? Variables.FontSizes.Display.H3
-            : $fontSize === "display-h4"
-            ? Variables.FontSizes.Display.H4
-            : $fontSize === "display-h5"
-            ? Variables.FontSizes.Display.H5
-            : $fontSize === "title-h1"
-            ? Variables.FontSizes.Titles.H1
-            : $fontSize === "title-h2"
-            ? Variables.FontSizes.Titles.H2
-            : $fontSize === "title-h3"
-            ? Variables.FontSizes.Titles.H3
-            : $fontSize === "title-h4"
-            ? Variables.FontSizes.Titles.H4
-            : $fontSize === "title-h5"
-            ? Variables.FontSizes.Titles.H5
-            : $fontSize === "title-h6"
-            ? Variables.FontSizes.Titles.H6
-            : $fontSize === "body"
-            ? Variables.FontSizes.Body
-            : $fontSize === "small"
-            ? Variables.FontSizes.Small
-            : $fontSize
-            ? stringifyPx($fontSize)
-            : Variables.FontSizes.Titles.H4};
-
-    & > * {
-        font-size: ${({ $display, $fontSize }) =>
-            $display
-                ? Variables.FontSizes.Display.H4
-                : $fontSize === "display-h1"
-                ? Variables.FontSizes.Display.H1
-                : $fontSize === "display-h2"
-                ? Variables.FontSizes.Display.H2
-                : $fontSize === "display-h3"
-                ? Variables.FontSizes.Display.H3
-                : $fontSize === "display-h4"
-                ? Variables.FontSizes.Display.H4
-                : $fontSize === "display-h5"
-                ? Variables.FontSizes.Display.H5
-                : $fontSize === "title-h1"
-                ? Variables.FontSizes.Titles.H1
-                : $fontSize === "title-h2"
-                ? Variables.FontSizes.Titles.H2
-                : $fontSize === "title-h3"
-                ? Variables.FontSizes.Titles.H3
-                : $fontSize === "title-h4"
-                ? Variables.FontSizes.Titles.H4
-                : $fontSize === "title-h5"
-                ? Variables.FontSizes.Titles.H5
-                : $fontSize === "title-h6"
-                ? Variables.FontSizes.Titles.H6
-                : $fontSize === "body"
-                ? Variables.FontSizes.Body
-                : $fontSize === "small"
-                ? Variables.FontSizes.Small
-                : $fontSize
-                ? stringifyPx($fontSize)
-                : Variables.FontSizes.Titles.H4};
-    }
 `
 
 const StyledH5 = styled.h5<{
@@ -446,47 +437,12 @@ const StyledH5 = styled.h5<{
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
 }>`
-    ${FontCommon};
+    ${({ $display, $fontSize }) =>
+        FontCommon({
+            $defaultSize: $display ? "display-h5" : "title-h5",
+            $fontSize,
+        })};
     font-weight: ${Variables.FontWeights.Black};
-    font-size: ${({ $display, $fontSize }) =>
-        $display
-            ? Variables.FontSizes.Display.H5
-            : $fontSize === "display-h1"
-            ? Variables.FontSizes.Display.H1
-            : $fontSize === "display-h2"
-            ? Variables.FontSizes.Display.H2
-            : $fontSize === "display-h3"
-            ? Variables.FontSizes.Display.H3
-            : $fontSize === "display-h4"
-            ? Variables.FontSizes.Display.H4
-            : $fontSize === "display-h5"
-            ? Variables.FontSizes.Display.H5
-            : $fontSize === "title-h1"
-            ? Variables.FontSizes.Titles.H1
-            : $fontSize === "title-h2"
-            ? Variables.FontSizes.Titles.H2
-            : $fontSize === "title-h3"
-            ? Variables.FontSizes.Titles.H3
-            : $fontSize === "title-h4"
-            ? Variables.FontSizes.Titles.H4
-            : $fontSize === "title-h5"
-            ? Variables.FontSizes.Titles.H5
-            : $fontSize === "title-h6"
-            ? Variables.FontSizes.Titles.H6
-            : $fontSize === "body"
-            ? Variables.FontSizes.Body
-            : $fontSize === "small"
-            ? Variables.FontSizes.Small
-            : $fontSize
-            ? stringifyPx($fontSize)
-            : Variables.FontSizes.Titles.H5};
-
-    & > * {
-        font-size: ${({ $display }) =>
-            $display
-                ? Variables.FontSizes.Display.H5
-                : Variables.FontSizes.Titles.H5};
-    }
 `
 
 const StyledH6 = styled.h6<{
@@ -502,71 +458,12 @@ const StyledH6 = styled.h6<{
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
 }>`
-    ${FontCommon};
+    ${({ $fontSize }) =>
+        FontCommon({
+            $defaultSize: "title-h6",
+            $fontSize,
+        })};
     font-weight: ${Variables.FontWeights.Black};
-    font-size: ${({ $fontSize }) =>
-        $fontSize === "display-h1"
-            ? Variables.FontSizes.Display.H1
-            : $fontSize === "display-h2"
-            ? Variables.FontSizes.Display.H2
-            : $fontSize === "display-h3"
-            ? Variables.FontSizes.Display.H3
-            : $fontSize === "display-h4"
-            ? Variables.FontSizes.Display.H4
-            : $fontSize === "display-h5"
-            ? Variables.FontSizes.Display.H5
-            : $fontSize === "title-h1"
-            ? Variables.FontSizes.Titles.H1
-            : $fontSize === "title-h2"
-            ? Variables.FontSizes.Titles.H2
-            : $fontSize === "title-h3"
-            ? Variables.FontSizes.Titles.H3
-            : $fontSize === "title-h4"
-            ? Variables.FontSizes.Titles.H4
-            : $fontSize === "title-h5"
-            ? Variables.FontSizes.Titles.H5
-            : $fontSize === "title-h6"
-            ? Variables.FontSizes.Titles.H6
-            : $fontSize === "body"
-            ? Variables.FontSizes.Body
-            : $fontSize === "small"
-            ? Variables.FontSizes.Small
-            : $fontSize
-            ? stringifyPx($fontSize)
-            : Variables.FontSizes.Titles.H6};
-
-    & > * {
-        font-size: ${({ $fontSize }) =>
-            $fontSize === "display-h1"
-                ? Variables.FontSizes.Display.H1
-                : $fontSize === "display-h2"
-                ? Variables.FontSizes.Display.H2
-                : $fontSize === "display-h3"
-                ? Variables.FontSizes.Display.H3
-                : $fontSize === "display-h4"
-                ? Variables.FontSizes.Display.H4
-                : $fontSize === "display-h5"
-                ? Variables.FontSizes.Display.H5
-                : $fontSize === "title-h1"
-                ? Variables.FontSizes.Titles.H1
-                : $fontSize === "title-h2"
-                ? Variables.FontSizes.Titles.H2
-                : $fontSize === "title-h3"
-                ? Variables.FontSizes.Titles.H3
-                : $fontSize === "title-h4"
-                ? Variables.FontSizes.Titles.H4
-                : $fontSize === "title-h5"
-                ? Variables.FontSizes.Titles.H5
-                : $fontSize === "title-h6"
-                ? Variables.FontSizes.Titles.H6
-                : $fontSize === "body"
-                ? Variables.FontSizes.Body
-                : $fontSize === "small"
-                ? Variables.FontSizes.Small
-                : $fontSize
-                ? stringifyPx($fontSize)
-                : Variables.FontSizes.Titles.H6};
-    }
 `
 
 const StyledP = styled.p<{
@@ -582,70 +479,11 @@ const StyledP = styled.p<{
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
 }>`
-    ${FontCommon};
-    font-size: ${({ $fontSize }) =>
-        $fontSize === "display-h1"
-            ? Variables.FontSizes.Display.H1
-            : $fontSize === "display-h2"
-            ? Variables.FontSizes.Display.H2
-            : $fontSize === "display-h3"
-            ? Variables.FontSizes.Display.H3
-            : $fontSize === "display-h4"
-            ? Variables.FontSizes.Display.H4
-            : $fontSize === "display-h5"
-            ? Variables.FontSizes.Display.H5
-            : $fontSize === "title-h1"
-            ? Variables.FontSizes.Titles.H1
-            : $fontSize === "title-h2"
-            ? Variables.FontSizes.Titles.H2
-            : $fontSize === "title-h3"
-            ? Variables.FontSizes.Titles.H3
-            : $fontSize === "title-h4"
-            ? Variables.FontSizes.Titles.H4
-            : $fontSize === "title-h5"
-            ? Variables.FontSizes.Titles.H5
-            : $fontSize === "title-h6"
-            ? Variables.FontSizes.Titles.H6
-            : $fontSize === "body"
-            ? Variables.FontSizes.Body
-            : $fontSize === "small"
-            ? Variables.FontSizes.Small
-            : $fontSize
-            ? stringifyPx($fontSize)
-            : Variables.FontSizes.Body};
-
-    & > * {
-        font-size: ${({ $fontSize }) =>
-            $fontSize === "display-h1"
-                ? Variables.FontSizes.Display.H1
-                : $fontSize === "display-h2"
-                ? Variables.FontSizes.Display.H2
-                : $fontSize === "display-h3"
-                ? Variables.FontSizes.Display.H3
-                : $fontSize === "display-h4"
-                ? Variables.FontSizes.Display.H4
-                : $fontSize === "display-h5"
-                ? Variables.FontSizes.Display.H5
-                : $fontSize === "title-h1"
-                ? Variables.FontSizes.Titles.H1
-                : $fontSize === "title-h2"
-                ? Variables.FontSizes.Titles.H2
-                : $fontSize === "title-h3"
-                ? Variables.FontSizes.Titles.H3
-                : $fontSize === "title-h4"
-                ? Variables.FontSizes.Titles.H4
-                : $fontSize === "title-h5"
-                ? Variables.FontSizes.Titles.H5
-                : $fontSize === "title-h6"
-                ? Variables.FontSizes.Titles.H6
-                : $fontSize === "body"
-                ? Variables.FontSizes.Body
-                : $fontSize === "small"
-                ? Variables.FontSizes.Small
-                : $fontSize
-                ? stringifyPx($fontSize)
-                : Variables.FontSizes.Body};
-    }
+    ${({ $fontSize }) =>
+        FontCommon({
+            $defaultSize: "body",
+            $fontSize,
+        })};
 `
 
 const StyledStrong = styled.strong<{
@@ -696,69 +534,11 @@ const StyledSmall = styled.small<{
     $display?: boolean
 }>`
     ${FontCommon};
-    font-size: ${({ $fontSize }) =>
-        $fontSize === "display-h1"
-            ? Variables.FontSizes.Display.H1
-            : $fontSize === "display-h2"
-            ? Variables.FontSizes.Display.H2
-            : $fontSize === "display-h3"
-            ? Variables.FontSizes.Display.H3
-            : $fontSize === "display-h4"
-            ? Variables.FontSizes.Display.H4
-            : $fontSize === "display-h5"
-            ? Variables.FontSizes.Display.H5
-            : $fontSize === "title-h1"
-            ? Variables.FontSizes.Titles.H1
-            : $fontSize === "title-h2"
-            ? Variables.FontSizes.Titles.H2
-            : $fontSize === "title-h3"
-            ? Variables.FontSizes.Titles.H3
-            : $fontSize === "title-h4"
-            ? Variables.FontSizes.Titles.H4
-            : $fontSize === "title-h5"
-            ? Variables.FontSizes.Titles.H5
-            : $fontSize === "title-h6"
-            ? Variables.FontSizes.Titles.H6
-            : $fontSize === "body"
-            ? Variables.FontSizes.Body
-            : $fontSize === "small"
-            ? Variables.FontSizes.Small
-            : $fontSize
-            ? stringifyPx($fontSize)
-            : Variables.FontSizes.Small};
-
-    & > * {
-        font-size: ${({ $fontSize }) =>
-            $fontSize === "display-h1"
-                ? Variables.FontSizes.Display.H1
-                : $fontSize === "display-h2"
-                ? Variables.FontSizes.Display.H2
-                : $fontSize === "display-h3"
-                ? Variables.FontSizes.Display.H3
-                : $fontSize === "display-h4"
-                ? Variables.FontSizes.Display.H4
-                : $fontSize === "display-h5"
-                ? Variables.FontSizes.Display.H5
-                : $fontSize === "title-h1"
-                ? Variables.FontSizes.Titles.H1
-                : $fontSize === "title-h2"
-                ? Variables.FontSizes.Titles.H2
-                : $fontSize === "title-h3"
-                ? Variables.FontSizes.Titles.H3
-                : $fontSize === "title-h4"
-                ? Variables.FontSizes.Titles.H4
-                : $fontSize === "title-h5"
-                ? Variables.FontSizes.Titles.H5
-                : $fontSize === "title-h6"
-                ? Variables.FontSizes.Titles.H6
-                : $fontSize === "body"
-                ? Variables.FontSizes.Body
-                : $fontSize === "small"
-                ? Variables.FontSizes.Small
-                : $fontSize
-                ? stringifyPx($fontSize)
-                : Variables.FontSizes.Small};
-    }
+    ${({ $fontSize }) =>
+        FontSizeMixin({
+            $defaultSize: "small",
+            $fontSize,
+        })};
 `
 
 const StyledBlockquote = styled.blockquote<{
@@ -774,38 +554,11 @@ const StyledBlockquote = styled.blockquote<{
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
 }>`
-    ${FontCommon};
-    font-size: ${({ $fontSize }) =>
-        $fontSize === "display-h1"
-            ? Variables.FontSizes.Display.H1
-            : $fontSize === "display-h2"
-            ? Variables.FontSizes.Display.H2
-            : $fontSize === "display-h3"
-            ? Variables.FontSizes.Display.H3
-            : $fontSize === "display-h4"
-            ? Variables.FontSizes.Display.H4
-            : $fontSize === "display-h5"
-            ? Variables.FontSizes.Display.H5
-            : $fontSize === "title-h1"
-            ? Variables.FontSizes.Titles.H1
-            : $fontSize === "title-h2"
-            ? Variables.FontSizes.Titles.H2
-            : $fontSize === "title-h3"
-            ? Variables.FontSizes.Titles.H3
-            : $fontSize === "title-h4"
-            ? Variables.FontSizes.Titles.H4
-            : $fontSize === "title-h5"
-            ? Variables.FontSizes.Titles.H5
-            : $fontSize === "title-h6"
-            ? Variables.FontSizes.Titles.H6
-            : $fontSize === "body"
-            ? Variables.FontSizes.Body
-            : $fontSize === "small"
-            ? Variables.FontSizes.Small
-            : $fontSize
-            ? stringifyPx($fontSize)
-            : Variables.FontSizes.Titles.H6};
-    font-style: italic;
+    ${({ $fontSize }) =>
+        FontSizeMixin({
+            $defaultSize: "title-h6",
+            $fontSize,
+        })};
 `
 
 const StyledUl = styled.ul<{
@@ -821,43 +574,17 @@ const StyledUl = styled.ul<{
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
 }>`
-    ${FontCommon};
     padding: 0;
     margin: 0;
-    font-size: ${({ $fontSize }) =>
-        $fontSize === "display-h1"
-            ? Variables.FontSizes.Display.H1
-            : $fontSize === "display-h2"
-            ? Variables.FontSizes.Display.H2
-            : $fontSize === "display-h3"
-            ? Variables.FontSizes.Display.H3
-            : $fontSize === "display-h4"
-            ? Variables.FontSizes.Display.H4
-            : $fontSize === "display-h5"
-            ? Variables.FontSizes.Display.H5
-            : $fontSize === "title-h1"
-            ? Variables.FontSizes.Titles.H1
-            : $fontSize === "title-h2"
-            ? Variables.FontSizes.Titles.H2
-            : $fontSize === "title-h3"
-            ? Variables.FontSizes.Titles.H3
-            : $fontSize === "title-h4"
-            ? Variables.FontSizes.Titles.H4
-            : $fontSize === "title-h5"
-            ? Variables.FontSizes.Titles.H5
-            : $fontSize === "title-h6"
-            ? Variables.FontSizes.Titles.H6
-            : $fontSize === "body"
-            ? Variables.FontSizes.Body
-            : $fontSize === "small"
-            ? Variables.FontSizes.Small
-            : $fontSize
-            ? stringifyPx($fontSize)
-            : Variables.FontSizes.Body};
     padding-left: ${Variables.Spacers.S};
     ${Mixins.Grid({
         $gap: "xxs",
     })};
+    ${({ $fontSize }) =>
+        FontSizeMixin({
+            $defaultSize: "body",
+            $fontSize,
+        })};
 
     li {
         padding-inline-start: ${Variables.Spacers.XXS};
@@ -881,40 +608,15 @@ const StyledOl = styled.ol<{
     ${FontCommon};
     padding: 0;
     margin: 0;
-    font-size: ${({ $fontSize }) =>
-        $fontSize === "display-h1"
-            ? Variables.FontSizes.Display.H1
-            : $fontSize === "display-h2"
-            ? Variables.FontSizes.Display.H2
-            : $fontSize === "display-h3"
-            ? Variables.FontSizes.Display.H3
-            : $fontSize === "display-h4"
-            ? Variables.FontSizes.Display.H4
-            : $fontSize === "display-h5"
-            ? Variables.FontSizes.Display.H5
-            : $fontSize === "title-h1"
-            ? Variables.FontSizes.Titles.H1
-            : $fontSize === "title-h2"
-            ? Variables.FontSizes.Titles.H2
-            : $fontSize === "title-h3"
-            ? Variables.FontSizes.Titles.H3
-            : $fontSize === "title-h4"
-            ? Variables.FontSizes.Titles.H4
-            : $fontSize === "title-h5"
-            ? Variables.FontSizes.Titles.H5
-            : $fontSize === "title-h6"
-            ? Variables.FontSizes.Titles.H6
-            : $fontSize === "body"
-            ? Variables.FontSizes.Body
-            : $fontSize === "small"
-            ? Variables.FontSizes.Small
-            : $fontSize
-            ? stringifyPx($fontSize)
-            : Variables.FontSizes.Body};
     padding-left: ${Variables.Spacers.S};
     ${Mixins.Grid({
         $gap: "xxs",
     })};
+    ${({ $fontSize }) =>
+        FontSizeMixin({
+            $defaultSize: "body",
+            $fontSize,
+        })};
 
     li {
         padding-inline-start: ${Variables.Spacers.XXS};
@@ -935,37 +637,11 @@ const StyledDl = styled.dl<{
     $fontSize?: FontSizeTypes | string | number
     $display?: boolean
 }>`
-    ${FontCommon};
-    font-size: ${({ $fontSize }) =>
-        $fontSize === "display-h1"
-            ? Variables.FontSizes.Display.H1
-            : $fontSize === "display-h2"
-            ? Variables.FontSizes.Display.H2
-            : $fontSize === "display-h3"
-            ? Variables.FontSizes.Display.H3
-            : $fontSize === "display-h4"
-            ? Variables.FontSizes.Display.H4
-            : $fontSize === "display-h5"
-            ? Variables.FontSizes.Display.H5
-            : $fontSize === "title-h1"
-            ? Variables.FontSizes.Titles.H1
-            : $fontSize === "title-h2"
-            ? Variables.FontSizes.Titles.H2
-            : $fontSize === "title-h3"
-            ? Variables.FontSizes.Titles.H3
-            : $fontSize === "title-h4"
-            ? Variables.FontSizes.Titles.H4
-            : $fontSize === "title-h5"
-            ? Variables.FontSizes.Titles.H5
-            : $fontSize === "title-h6"
-            ? Variables.FontSizes.Titles.H6
-            : $fontSize === "body"
-            ? Variables.FontSizes.Body
-            : $fontSize === "small"
-            ? Variables.FontSizes.Small
-            : $fontSize
-            ? stringifyPx($fontSize)
-            : Variables.FontSizes.Body};
+    ${({ $fontSize }) =>
+        FontSizeMixin({
+            $defaultSize: "body",
+            $fontSize,
+        })};
 
     dt {
         font-weight: ${Variables.FontWeights.Black};

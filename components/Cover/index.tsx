@@ -5,9 +5,9 @@
 import React, { Suspense } from "react"
 import styled, { css } from "styled-components"
 
-import Variables from "../../Variables"
 import Mixins from "../Mixins"
 import Fallback from "../Fallback"
+import Variables from "../../Variables"
 
 import { SpacerTypes } from "../../common-types"
 

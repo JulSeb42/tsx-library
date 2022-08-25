@@ -2,7 +2,7 @@
 
 /*==================== Imports ====================*/
 
-import React from "react"
+import React, { useRef } from "react"
 import styled, { css } from "styled-components"
 
 import InputContainer from "./InputContainer"
@@ -13,6 +13,7 @@ import CloseCircleIcon from "../icons/CloseCircleIcon"
 import SearchIcon from "../icons/SearchIcon"
 import Mixins from "./Mixins"
 import Variables from "../Variables"
+import useClickOutside from "../hooks/useClickOutside"
 
 import {
     CountryType,
@@ -36,89 +37,11 @@ const InputPhone = ({
     search,
     ...props
 }: Props) => {
-    return options?.label || options?.helper || options?.helperBottom ? (
-        <InputContainer
-            id={id}
-            label={options.label}
-            helper={options.helper}
-            helperBottom={options.helperBottom}
-        >
-            <StyledInputPhone $isOpen={isOpen}>
-                <Button type="button" onClick={() => setIsOpen(!isOpen)}>
-                    <Flag
-                        src={selectedCountry.flag}
-                        alt={`Flag ${selectedCountry.name}`}
-                    />
+    const ref = useRef<HTMLButtonElement>(null)
+    const onClickOutside = () => setIsOpen(false)
+    useClickOutside(ref, onClickOutside)
 
-                    {options?.iconButton ? (
-                        <Icon src={options.iconButton} size={12} />
-                    ) : (
-                        <CaretDownIcon size={12} />
-                    )}
-                </Button>
-
-                <List $isOpen={isOpen}>
-                    {search && (
-                        <SearchContainer>
-                            <StyledIconSearch size={16} color="primary" />
-
-                            <InputSearch
-                                placeholder={search.placeholder || "Search"}
-                                onChange={search.handleSearch}
-                                value={search.value}
-                            />
-                        </SearchContainer>
-                    )}
-
-                    {children}
-                </List>
-
-                <CountryCode>{selectedCountry.dial_code}</CountryCode>
-
-                <Input
-                    $codeLength={selectedCountry.dial_code.length}
-                    id={id}
-                    value={input.value}
-                    onChange={input.onChange}
-                    type="tel"
-                    disabled={disabled}
-                    {...props}
-                />
-
-                {validation && (
-                    <RightContainer $disabled={disabled}>
-                        {validation &&
-                            validation.status !== undefined &&
-                            (validation.status === "passed" ? (
-                                validation.iconPassed ? (
-                                    <Icon
-                                        src={validation.iconPassed}
-                                        size={24}
-                                        color="success"
-                                    />
-                                ) : (
-                                    <CheckCircleIcon
-                                        size={24}
-                                        color={Variables.Colors.Success500}
-                                    />
-                                )
-                            ) : validation.iconNotPassed ? (
-                                <Icon
-                                    src={validation.iconNotPassed}
-                                    size={24}
-                                    color="danger"
-                                />
-                            ) : (
-                                <CloseCircleIcon
-                                    size={24}
-                                    color={Variables.Colors.Danger500}
-                                />
-                            ))}
-                    </RightContainer>
-                )}
-            </StyledInputPhone>
-        </InputContainer>
-    ) : (
+    const inputContent = () => (
         <StyledInputPhone $isOpen={isOpen}>
             <Button type="button" onClick={() => setIsOpen(!isOpen)}>
                 <Flag
@@ -133,7 +56,7 @@ const InputPhone = ({
                 )}
             </Button>
 
-            <List $isOpen={isOpen}>
+            <List $isOpen={isOpen} ref={ref}>
                 {search && (
                     <SearchContainer>
                         <StyledIconSearch size={16} color="primary" />
@@ -193,6 +116,19 @@ const InputPhone = ({
                 </RightContainer>
             )}
         </StyledInputPhone>
+    )
+
+    return options?.label || options?.helper || options?.helperBottom ? (
+        <InputContainer
+            id={id}
+            label={options.label}
+            helper={options.helper}
+            helperBottom={options.helperBottom}
+        >
+            {inputContent()}
+        </InputContainer>
+    ) : (
+        inputContent()
     )
 }
 
@@ -294,17 +230,16 @@ const Flag = styled.img`
     width: 16px;
 `
 
-const List = styled.div<{ $isOpen?: boolean }>`
-    width: fit-content;
-    overflow-y: scroll;
+const List = styled.div<{ $isOpen?: boolean; ref?: any }>`
+    width: 100%;
     position: absolute;
     left: 0;
     top: ${inputHeight}px;
     border-radius: ${Variables.Radiuses.M};
     box-shadow: ${Variables.Shadows.M};
     z-index: 50;
-    width: 100%;
     max-height: ${({ $isOpen }) => ($isOpen ? "200px" : 0)};
+    overflow-y: scroll;
     transition: ${Variables.Transitions.Short};
     background-color: ${Variables.Colors.White};
 `
