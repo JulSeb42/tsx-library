@@ -1,3 +1,6 @@
+/*=============================================== Utils ===============================================*/
+
+import { v4 as uuid } from "uuid"
 import {
     calculateTotalSum,
     capitalize,
@@ -52,4 +55,5 @@ export {
     slugify,
     stringifyPx,
     unslugify,
+    uuid,
 }

@@ -37,6 +37,7 @@ const AccordionItem = ({
                 $icon={icon}
                 $accordionStyle={$accordionStyle}
                 $noBorder={$noBorder}
+                $hasIconCustom={customIcon ? true : false}
             >
                 {title}
 
@@ -182,6 +183,7 @@ const Button = styled.button<{
     $isOpen?: boolean
     $icon?: IconTypes
     $noBorder?: boolean
+    $hasIconCustom?: boolean
 }>`
     width: 100%;
     ${Mixins.Flexbox({
@@ -218,17 +220,8 @@ const Button = styled.button<{
     ${IconContainer} {
         transition: ${Variables.Transitions.Short};
 
-        ${({ $isOpen, $icon }) =>
-            $isOpen &&
-            css`
-                transform: rotate(${$icon === "chevron" ? 180 : 45}deg);
-            `}
-    }
-
-    ${StyledIconPlus}, ${StyledIconChevron} {
-        transition: ${Variables.Transitions.Short};
-
-        ${({ $isOpen, $icon }) =>
+        ${({ $isOpen, $icon, $hasIconCustom }) =>
+            !$hasIconCustom &&
             $isOpen &&
             css`
                 transform: rotate(${$icon === "chevron" ? 180 : 45}deg);

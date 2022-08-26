@@ -2,7 +2,7 @@
 
 /*==================== Imports ====================*/
 
-import React, { useState } from "react"
+import React, { useState, forwardRef } from "react"
 import styled, { css } from "styled-components"
 
 import InputContainer from "./InputContainer"
@@ -23,247 +23,265 @@ import {
 
 /*==================== Component ====================*/
 
-const InputFunction = ({
-    id,
-    value,
-    name,
-    disabled,
-    autoFocus,
-    type,
-    password,
-    textsPassword,
-    maxLength,
-    icons,
-    clearSearch,
-    validation,
-    children,
-    options,
-    ...props
-}: Props) => {
-    const [isVisible, setIsVisible] = useState(false)
+const InputFunction = forwardRef(
+    (
+        {
+            id,
+            value,
+            name,
+            disabled,
+            autoFocus,
+            type,
+            password,
+            textsPassword,
+            maxLength,
+            icons,
+            clearSearch,
+            validation,
+            children,
+            options,
+            ...props
+        }: Props,
+        ref?: React.ForwardedRef<HTMLInputElement>
+    ) => {
+        const [isVisible, setIsVisible] = useState(false)
 
-    const inputBase = (as?: any) => (
-        <InputStyled
-            maxLength={maxLength}
-            value={value}
-            id={id}
-            type={
-                type === "select" || type === "textarea"
-                    ? undefined
-                    : password
-                    ? isVisible
-                        ? "text"
-                        : "password"
-                    : type
-            }
-            $type={type}
-            disabled={disabled}
-            name={name}
-            $validation={validation?.status}
-            as={as}
-            autoFocus={autoFocus}
-            $icon={!!icons?.icon}
-            $showHttp={options?.showHttp}
-            {...props}
-        >
-            {children}
-        </InputStyled>
-    )
+        const inputBase = (as?: any) => (
+            <InputStyled
+                maxLength={maxLength}
+                value={value}
+                id={id}
+                type={
+                    type === "select" || type === "textarea"
+                        ? undefined
+                        : password
+                        ? isVisible
+                            ? "text"
+                            : "password"
+                        : type
+                }
+                $type={type}
+                disabled={disabled}
+                name={name}
+                $validation={validation?.status}
+                as={as}
+                autoFocus={autoFocus}
+                $icon={!!icons?.icon}
+                $showHttp={options?.showHttp}
+                ref={ref}
+                {...props}
+            >
+                {children}
+            </InputStyled>
+        )
 
-    return type === "select" ? (
-        <InputContent>
-            {inputBase("select")}
+        return type === "select" ? (
+            <InputContent>
+                {inputBase("select")}
 
-            <RightContainer $disabled={disabled}>
-                {icons?.select ? (
-                    <Icon
-                        src={icons.select}
-                        size={24}
-                        color={disabled ? "gray" : "primary"}
-                    />
-                ) : (
-                    <ChevronDownIcon
-                        size={24}
-                        color={
-                            disabled
-                                ? Variables.Colors.Gray500
-                                : Variables.Colors.Primary500
-                        }
-                    />
-                )}
-            </RightContainer>
-        </InputContent>
-    ) : type === "textarea" ? (
-        inputBase("textarea")
-    ) : icons?.icon ||
-      validation ||
-      password ||
-      type === "url" ||
-      type === "search" ||
-      type === "date" ||
-      type === "datetime-local" ||
-      type === "month" ||
-      type === "week" ||
-      type === "time" ? (
-        <InputContent>
-            {icons?.icon && (
-                <IconContainer>
-                    <Icon
-                        src={icons.icon}
-                        size={16}
-                        color={disabled ? "gray" : "primary"}
-                    />
-                </IconContainer>
-            )}
-
-            {type === "url" && options?.showHttp && (
-                <UrlContainer $icon={!!icons?.icon} $disabled={disabled}>
-                    http://
-                </UrlContainer>
-            )}
-
-            {inputBase()}
-
-            {(validation ||
-                password ||
-                (type === "search" &&
-                    typeof value === "string" &&
-                    value.length > 0)) && (
                 <RightContainer $disabled={disabled}>
-                    {password && (
-                        <ButtonInput
-                            type="button"
-                            onClick={() => setIsVisible(!isVisible)}
-                            disabled={disabled}
-                        >
-                            {isVisible ? (
-                                icons?.hidePassword ? (
-                                    <Icon src={icons.hidePassword} size={24} />
-                                ) : (
-                                    textsPassword?.hide || "Hide"
-                                )
-                            ) : (
-                                !isVisible &&
-                                (icons?.showPassword ? (
-                                    <Icon src={icons.showPassword} size={24} />
-                                ) : (
-                                    textsPassword?.show || "Show"
-                                ))
-                            )}
-                        </ButtonInput>
+                    {icons?.select ? (
+                        <Icon
+                            src={icons.select}
+                            size={24}
+                            color={disabled ? "gray" : "primary"}
+                        />
+                    ) : (
+                        <ChevronDownIcon
+                            size={24}
+                            color={
+                                disabled
+                                    ? Variables.Colors.Gray500
+                                    : Variables.Colors.Primary500
+                            }
+                        />
                     )}
+                </RightContainer>
+            </InputContent>
+        ) : type === "textarea" ? (
+            inputBase("textarea")
+        ) : icons?.icon ||
+          validation ||
+          password ||
+          type === "url" ||
+          type === "search" ||
+          type === "date" ||
+          type === "datetime-local" ||
+          type === "month" ||
+          type === "week" ||
+          type === "time" ? (
+            <InputContent>
+                {icons?.icon && (
+                    <IconContainer>
+                        <Icon
+                            src={icons.icon}
+                            size={16}
+                            color={disabled ? "gray" : "primary"}
+                        />
+                    </IconContainer>
+                )}
 
-                    {validation &&
-                        validation.status !== undefined &&
-                        (validation.status === "passed" ? (
-                            validation.iconPassed ? (
-                                <Icon
-                                    src={validation.iconPassed}
-                                    size={24}
-                                    color="success"
-                                />
-                            ) : (
-                                <CheckCircleIcon
-                                    size={24}
-                                    color={Variables.Colors.Success500}
-                                />
-                            )
-                        ) : validation.iconNotPassed ? (
-                            <Icon
-                                src={validation.iconNotPassed}
-                                size={24}
-                                color="danger"
-                            />
-                        ) : (
-                            <CloseCircleIcon
-                                size={24}
-                                color={Variables.Colors.Danger500}
-                            />
-                        ))}
+                {type === "url" && options?.showHttp && (
+                    <UrlContainer $icon={!!icons?.icon} $disabled={disabled}>
+                        http://
+                    </UrlContainer>
+                )}
 
-                    {type === "search" &&
-                        clearSearch &&
+                {inputBase()}
+
+                {(validation ||
+                    password ||
+                    (type === "search" &&
                         typeof value === "string" &&
-                        value.length > 0 && (
+                        value.length > 0)) && (
+                    <RightContainer $disabled={disabled}>
+                        {password && (
                             <ButtonInput
                                 type="button"
-                                onClick={clearSearch}
+                                onClick={() => setIsVisible(!isVisible)}
                                 disabled={disabled}
                             >
-                                {icons?.clear ? (
-                                    <Icon src={icons.clear} size={24} />
+                                {isVisible ? (
+                                    icons?.hidePassword ? (
+                                        <Icon
+                                            src={icons.hidePassword}
+                                            size={24}
+                                        />
+                                    ) : (
+                                        textsPassword?.hide || "Hide"
+                                    )
                                 ) : (
-                                    <CloseIcon
-                                        size={24}
-                                        color={Variables.Colors.Primary500}
-                                    />
+                                    !isVisible &&
+                                    (icons?.showPassword ? (
+                                        <Icon
+                                            src={icons.showPassword}
+                                            size={24}
+                                        />
+                                    ) : (
+                                        textsPassword?.show || "Show"
+                                    ))
                                 )}
                             </ButtonInput>
                         )}
-                </RightContainer>
-            )}
-        </InputContent>
-    ) : (
-        inputBase()
-    )
-}
 
-const Input = ({
-    id,
-    value,
-    name,
-    disabled,
-    autoFocus,
-    type = undefined,
-    password,
-    textsPassword,
-    maxLength,
-    icons,
-    clearSearch,
-    options,
-    validation,
-    children,
-    ...props
-}: Props) => {
-    const inputFunction = () => (
-        <InputFunction
-            id={id}
-            validation={validation}
-            type={type}
-            disabled={disabled}
-            name={name}
-            icons={icons}
-            value={value}
-            maxLength={maxLength}
-            clearSearch={clearSearch}
-            password={password}
-            textsPassword={textsPassword}
-            autoFocus={autoFocus}
-            {...props}
-        >
-            {children}
-        </InputFunction>
-    )
+                        {validation &&
+                            validation.status !== undefined &&
+                            (validation.status === "passed" ? (
+                                validation.iconPassed ? (
+                                    <Icon
+                                        src={validation.iconPassed}
+                                        size={24}
+                                        color="success"
+                                    />
+                                ) : (
+                                    <CheckCircleIcon
+                                        size={24}
+                                        color={Variables.Colors.Success500}
+                                    />
+                                )
+                            ) : validation.iconNotPassed ? (
+                                <Icon
+                                    src={validation.iconNotPassed}
+                                    size={24}
+                                    color="danger"
+                                />
+                            ) : (
+                                <CloseCircleIcon
+                                    size={24}
+                                    color={Variables.Colors.Danger500}
+                                />
+                            ))}
 
-    return options?.label ||
-        options?.helper ||
-        options?.helperBottom ||
-        options?.counter ? (
-        <InputContainer
-            id={id}
-            label={options.label}
-            helper={options.helper}
-            helperBottom={options.helperBottom}
-            counter={options.counter}
-            value={value}
-            maxLength={maxLength}
-        >
-            {inputFunction()}
-        </InputContainer>
-    ) : (
-        inputFunction()
-    )
-}
+                        {type === "search" &&
+                            clearSearch &&
+                            typeof value === "string" &&
+                            value.length > 0 && (
+                                <ButtonInput
+                                    type="button"
+                                    onClick={clearSearch}
+                                    disabled={disabled}
+                                >
+                                    {icons?.clear ? (
+                                        <Icon src={icons.clear} size={24} />
+                                    ) : (
+                                        <CloseIcon
+                                            size={24}
+                                            color={Variables.Colors.Primary500}
+                                        />
+                                    )}
+                                </ButtonInput>
+                            )}
+                    </RightContainer>
+                )}
+            </InputContent>
+        ) : (
+            inputBase()
+        )
+    }
+)
+
+const Input = forwardRef(
+    (
+        {
+            id,
+            value,
+            name,
+            disabled,
+            autoFocus,
+            type = undefined,
+            password,
+            textsPassword,
+            maxLength,
+            icons,
+            clearSearch,
+            options,
+            validation,
+            children,
+            ...props
+        }: Props,
+        ref?: React.ForwardedRef<HTMLInputElement>
+    ) => {
+        const inputFunction = () => (
+            <InputFunction
+                id={id}
+                validation={validation}
+                type={type}
+                disabled={disabled}
+                name={name}
+                icons={icons}
+                value={value}
+                maxLength={maxLength}
+                clearSearch={clearSearch}
+                password={password}
+                textsPassword={textsPassword}
+                autoFocus={autoFocus}
+                ref={ref}
+                {...props}
+            >
+                {children}
+            </InputFunction>
+        )
+
+        return options?.label ||
+            options?.helper ||
+            options?.helperBottom ||
+            options?.counter ? (
+            <InputContainer
+                id={id}
+                label={options.label}
+                helper={options.helper}
+                helperBottom={options.helperBottom}
+                counter={options.counter}
+                value={value}
+                maxLength={maxLength}
+            >
+                {inputFunction()}
+            </InputContainer>
+        ) : (
+            inputFunction()
+        )
+    }
+)
 
 export default Input
 
@@ -297,6 +315,7 @@ interface Props extends React.HTMLAttributes<HTMLInputElement> {
     disabled?: boolean
     as?: any
     autoFocus?: boolean
+    ref?: any
 
     type?: InputTypesTypes | undefined
     password?: boolean

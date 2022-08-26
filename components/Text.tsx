@@ -22,7 +22,7 @@ export const FontCommon = ({
     $color,
     $textAlign,
     $linkColor,
-    $lineHeight,
+    $lineHeight = Variables.LineHeights.Regular,
     $defaultSize,
     $fontSize,
 }: {
@@ -40,7 +40,7 @@ export const FontCommon = ({
     $lineHeight?: number | string
     $defaultSize?: any
 }) => css`
-    line-height: ${stringifyPx($lineHeight) || Variables.LineHeights.Regular};
+    line-height: ${stringifyPx($lineHeight)};
     text-align: ${$textAlign};
     color: ${Mixins.AllColors};
 
@@ -231,11 +231,14 @@ const StyledH1 = styled.h1<{
     $display?: boolean
     $lineHeight?: string | number
 }>`
-    ${({ $display, $fontSize, $lineHeight }) =>
+    ${({ $display, $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
         FontCommon({
             $defaultSize: $display ? "display-h1" : "title-h1",
             $fontSize,
-            $lineHeight,
+            $lineHeight: $lineHeight || Variables.LineHeights.Regular,
+            $color,
+            $textAlign,
+            $linkColor,
         })};
     font-weight: ${Variables.FontWeights.Black};
 `
@@ -254,11 +257,14 @@ const StyledH2 = styled.h2<{
     $display?: boolean
     $lineHeight?: string | number
 }>`
-    ${({ $display, $fontSize, $lineHeight }) =>
+    ${({ $display, $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
         FontCommon({
             $defaultSize: $display ? "display-h2" : "title-h2",
             $fontSize,
-            $lineHeight,
+            $lineHeight: $lineHeight || Variables.LineHeights.Regular,
+            $color,
+            $textAlign,
+            $linkColor,
         })};
     font-weight: ${Variables.FontWeights.Black};
 `
@@ -277,11 +283,14 @@ const StyledH3 = styled.h3<{
     $display?: boolean
     $lineHeight?: string | number
 }>`
-    ${({ $display, $fontSize, $lineHeight }) =>
+    ${({ $display, $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
         FontCommon({
             $defaultSize: $display ? "display-h3" : "title-h3",
             $fontSize,
-            $lineHeight,
+            $lineHeight: $lineHeight || Variables.LineHeights.Regular,
+            $color,
+            $textAlign,
+            $linkColor,
         })};
     font-weight: ${Variables.FontWeights.Black};
 `
@@ -300,11 +309,14 @@ const StyledH4 = styled.h4<{
     $display?: boolean
     $lineHeight?: string | number
 }>`
-    ${({ $display, $fontSize, $lineHeight }) =>
+    ${({ $display, $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
         FontCommon({
             $defaultSize: $display ? "display-h4" : "title-h4",
             $fontSize,
-            $lineHeight,
+            $lineHeight: $lineHeight || Variables.LineHeights.Regular,
+            $color,
+            $textAlign,
+            $linkColor,
         })};
     font-weight: ${Variables.FontWeights.Black};
 `
@@ -323,11 +335,14 @@ const StyledH5 = styled.h5<{
     $display?: boolean
     $lineHeight?: string | number
 }>`
-    ${({ $display, $fontSize, $lineHeight }) =>
+    ${({ $display, $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
         FontCommon({
             $defaultSize: $display ? "display-h5" : "title-h5",
             $fontSize,
-            $lineHeight,
+            $lineHeight: $lineHeight || Variables.LineHeights.Regular,
+            $color,
+            $textAlign,
+            $linkColor,
         })};
     font-weight: ${Variables.FontWeights.Black};
 `
@@ -346,11 +361,14 @@ const StyledH6 = styled.h6<{
     $display?: boolean
     $lineHeight?: string | number
 }>`
-    ${({ $fontSize, $lineHeight }) =>
+    ${({ $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
         FontCommon({
             $defaultSize: "title-h6",
             $fontSize,
-            $lineHeight,
+            $lineHeight: $lineHeight || Variables.LineHeights.Regular,
+            $color,
+            $textAlign,
+            $linkColor,
         })};
     font-weight: ${Variables.FontWeights.Black};
 `
@@ -369,11 +387,14 @@ const StyledP = styled.p<{
     $display?: boolean
     $lineHeight?: string | number
 }>`
-    ${({ $fontSize, $lineHeight }) =>
+    ${({ $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
         FontCommon({
             $defaultSize: "body",
             $fontSize,
-            $lineHeight,
+            $lineHeight: $lineHeight || Variables.LineHeights.Regular,
+            $color,
+            $textAlign,
+            $linkColor,
         })};
 `
 
@@ -391,7 +412,8 @@ const StyledStrong = styled.strong<{
     $display?: boolean
     $lineHeight?: string | number
 }>`
-    ${({ $lineHeight }) => FontCommon({ $lineHeight })};
+    ${({ $lineHeight, $color, $textAlign, $linkColor }) =>
+        FontCommon({ $lineHeight, $color, $textAlign, $linkColor })};
     font-weight: ${Variables.FontWeights.Black};
 `
 
@@ -409,7 +431,8 @@ const StyledEm = styled.em<{
     $display?: boolean
     $lineHeight?: string | number
 }>`
-    ${({ $lineHeight }) => FontCommon({ $lineHeight })};
+    ${({ $lineHeight, $color, $textAlign, $linkColor }) =>
+        FontCommon({ $lineHeight, $color, $textAlign, $linkColor })};
     font-style: italic;
 `
 
@@ -427,11 +450,14 @@ const StyledSmall = styled.small<{
     $display?: boolean
     $lineHeight?: string | number
 }>`
-    ${({ $fontSize, $lineHeight }) =>
+    ${({ $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
         FontCommon({
             $defaultSize: "small",
             $fontSize,
             $lineHeight,
+            $color,
+            $textAlign,
+            $linkColor,
         })};
 `
 
@@ -449,11 +475,14 @@ const StyledBlockquote = styled.blockquote<{
     $display?: boolean
     $lineHeight?: string | number
 }>`
-    ${({ $fontSize, $lineHeight }) =>
+    ${({ $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
         FontCommon({
             $defaultSize: "title-h6",
             $fontSize,
             $lineHeight,
+            $color,
+            $textAlign,
+            $linkColor,
         })};
 `
 
@@ -477,16 +506,18 @@ const StyledUl = styled.ul<{
     ${Mixins.Grid({
         $gap: "xxs",
     })};
-    ${({ $fontSize, $lineHeight }) =>
+    ${({ $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
         FontCommon({
             $defaultSize: "body",
             $fontSize,
             $lineHeight,
+            $color,
+            $textAlign,
+            $linkColor,
         })};
 
     li {
         padding-inline-start: ${Variables.Spacers.XXS};
-        line-height: ${Variables.LineHeights.Regular};
     }
 `
 
@@ -510,16 +541,18 @@ const StyledOl = styled.ol<{
     ${Mixins.Grid({
         $gap: "xxs",
     })};
-    ${({ $fontSize, $lineHeight }) =>
+    ${({ $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
         FontCommon({
             $defaultSize: "body",
             $fontSize,
             $lineHeight,
+            $color,
+            $textAlign,
+            $linkColor,
         })};
 
     li {
         padding-inline-start: ${Variables.Spacers.XXS};
-        line-height: ${Variables.LineHeights.Regular};
     }
 `
 
@@ -537,11 +570,14 @@ const StyledDl = styled.dl<{
     $display?: boolean
     $lineHeight?: string | number
 }>`
-    ${({ $fontSize, $lineHeight }) =>
+    ${({ $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
         FontCommon({
             $defaultSize: "body",
             $fontSize,
             $lineHeight,
+            $color,
+            $textAlign,
+            $linkColor,
         })};
 
     dt {

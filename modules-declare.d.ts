@@ -1,5 +1,3 @@
-// declare module "js-utils-julseb"
-
 declare module "react-scroll-to-bottom" {
     import * as React from "react"
 

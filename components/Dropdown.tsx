@@ -2,13 +2,12 @@
 
 /*==================== Imports ====================*/
 
-import React, { useRef } from "react"
+import React from "react"
 import styled from "styled-components"
 
 import Variables from "../Variables"
 import Mixins from "./Mixins"
 import Flexbox from "./Flexbox"
-import useClickOutside from "../hooks/useClickOutside"
 
 /*==================== Component ====================*/
 
@@ -26,17 +25,11 @@ const DropdownContainer = ({
     </StyledDropdownContainer>
 )
 
-const Dropdown = ({ children, isOpen, setIsOpen, ...props }: Props) => {
-    const ref = useRef<HTMLButtonElement>(null)
-    const onClickOutside = () => setIsOpen(false)
-    useClickOutside(ref, onClickOutside)
-
-    return (
-        <StyledDropdown $isOpen={isOpen} ref={ref} {...props}>
-            {children}
-        </StyledDropdown>
-    )
-}
+const Dropdown = ({ children, isOpen, ...props }: Props) => (
+    <StyledDropdown $isOpen={isOpen} {...props}>
+        {children}
+    </StyledDropdown>
+)
 
 export { DropdownContainer, Dropdown }
 
@@ -55,7 +48,6 @@ interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     isOpen: boolean
-    setIsOpen: any
 }
 
 /*==================== Styles ====================*/
