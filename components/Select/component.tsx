@@ -1,6 +1,6 @@
 /*=============================================== Select ===============================================*/
 
-import React, { useRef } from "react"
+import React, { useRef, forwardRef } from "react"
 
 import InputContainer from "../InputContainer"
 import Icon from "../Icon"
@@ -64,12 +64,22 @@ const Select = ({
     )
 }
 
-const SelectItem = ({ children, onClick, isSelected }: ItemProps) => {
-    return (
-        <Styles.Item $isSelected={isSelected} onClick={onClick}>
-            {children}
-        </Styles.Item>
-    )
-}
+const SelectItem = forwardRef(
+    (
+        { children, onClick, isSelected, ...props }: ItemProps,
+        ref?: React.ForwardedRef<HTMLSpanElement>
+    ) => {
+        return (
+            <Styles.Item
+                $isSelected={isSelected}
+                onClick={onClick}
+                ref={ref}
+                {...props}
+            >
+                {children}
+            </Styles.Item>
+        )
+    }
+)
 
 export { Select, SelectItem }

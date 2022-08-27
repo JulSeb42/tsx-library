@@ -15,7 +15,7 @@ const Avatar = ({ options, content, ...props }: AvatarProps) => {
         <Styles.StyledAvatar
             $color={options?.color || "primary"}
             $size={options?.size || defaultSize}
-            $contentColor={options?.contentColor || "white"}
+            $contentColor={options?.contentColor}
             {...props}
         >
             {content.img ? (

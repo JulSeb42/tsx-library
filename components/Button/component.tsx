@@ -9,8 +9,6 @@ import Loader from "../Loader"
 import * as Styles from "./styles"
 import { ButtonProps } from "./types"
 
-
-
 const Button = forwardRef(
     (
         {

@@ -1,6 +1,6 @@
 /*=============================================== Messaging ===============================================*/
 
-import React from "react"
+import React, { forwardRef } from "react"
 import ReactLinkify from "react-linkify"
 
 import Text from "../Text"
@@ -39,43 +39,49 @@ const Message = ({
     </Flexbox>
 )
 
-const Messaging = ({
-    children,
-    textEmpty = "No message yet.",
-    button,
-    input,
-    onSubmit,
-    ...props
-}: MessagingProps) => (
-    <Styles.StyledMessaging>
-        <Styles.MessagesContainer $isEmpty={!children}>
-            {children ? children : <Text>{textEmpty}</Text>}
-        </Styles.MessagesContainer>
+const Messaging = forwardRef(
+    (
+        {
+            children,
+            textEmpty = "No message yet.",
+            button,
+            input,
+            onSubmit,
+            ...props
+        }: MessagingProps,
+        ref?: React.ForwardedRef<HTMLTextAreaElement>
+    ) => (
+        <Styles.StyledMessaging>
+            <Styles.MessagesContainer $isEmpty={!children}>
+                {children ? children : <Text>{textEmpty}</Text>}
+            </Styles.MessagesContainer>
 
-        <Hr />
+            <Hr />
 
-        <Styles.InputContainer onSubmit={onSubmit} {...props}>
-            <Styles.Input
-                onChange={input.onChange}
-                value={input.value}
-                placeholder={input.placeholder || "Type your message"}
-            />
+            <Styles.InputContainer onSubmit={onSubmit} {...props}>
+                <Styles.Input
+                    onChange={input.onChange}
+                    value={input.value}
+                    placeholder={input.placeholder || "Type your message"}
+                    ref={ref}
+                />
 
-            <Styles.SendButton
-                $hasText={!!button?.text}
-                type="submit"
-                disabled={input.value === "" && true}
-            >
-                {button?.text ? (
-                    button.text
-                ) : button?.icon ? (
-                    <Icon src={button.icon} size={24} />
-                ) : (
-                    <SendIcon size={24} />
-                )}
-            </Styles.SendButton>
-        </Styles.InputContainer>
-    </Styles.StyledMessaging>
+                <Styles.SendButton
+                    $hasText={!!button?.text}
+                    type="submit"
+                    disabled={input.value === "" && true}
+                >
+                    {button?.text ? (
+                        button.text
+                    ) : button?.icon ? (
+                        <Icon src={button.icon} size={24} />
+                    ) : (
+                        <SendIcon size={24} />
+                    )}
+                </Styles.SendButton>
+            </Styles.InputContainer>
+        </Styles.StyledMessaging>
+    )
 )
 
 export { Messaging, Message }

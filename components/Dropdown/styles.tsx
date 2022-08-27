@@ -49,7 +49,10 @@ const StyledDropdown = styled.div<{
     }
 `
 
-const StyledDropdownContainer = styled(Flexbox)<{ $justify?: JustifyTypes }>`
+const StyledDropdownContainer = styled(Flexbox)<{
+    $justify?: JustifyTypes
+    ref?: any
+}>`
     position: relative;
 
     ${StyledDropdown} {
