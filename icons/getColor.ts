@@ -4,11 +4,11 @@
 
 import Variables from "../Variables"
 
-import { LibColorsTypes, ColorsShortTypes } from "../common-types"
+import { LibColorsTypes, ColorsShortTypes } from "../utils/common-types"
 
 /*==================== Function ====================*/
 
-const getColor = (color: LibColorsTypes | ColorsShortTypes | string) => {
+const getColor = (color: LibColorsTypes | ColorsShortTypes | string) => {
     return color === "black"
         ? Variables.Colors.Black
         : color === "white"

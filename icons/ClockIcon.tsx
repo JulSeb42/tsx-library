@@ -6,11 +6,15 @@ import React from "react"
 
 import getColor from "./getColor"
 
-import { LibColorsTypes, ColorsShortTypes } from "../common-types"
+import { IconProps } from "./type"
 
 /*==================== Component ====================*/
 
-const ClockIcon = ({ size = 64, color = "currentColor", ...props }: Props) => (
+const ClockIcon = ({
+    size = 64,
+    color = "currentColor",
+    ...props
+}: IconProps) => (
     <svg
         width={size}
         height={size}
@@ -30,10 +34,3 @@ const ClockIcon = ({ size = 64, color = "currentColor", ...props }: Props) => (
 )
 
 export default ClockIcon
-
-/*==================== Types ====================*/
-
-interface Props extends React.HTMLAttributes<HTMLOrSVGElement> {
-    size?: number
-    color?: LibColorsTypes | ColorsShortTypes | string
-}

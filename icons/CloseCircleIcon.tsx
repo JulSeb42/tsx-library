@@ -6,7 +6,7 @@ import React from "react"
 
 import getColor from "./getColor"
 
-import { LibColorsTypes, ColorsShortTypes } from "../common-types"
+import { IconProps } from "./type"
 
 /*==================== Component ====================*/
 
@@ -14,7 +14,7 @@ const CloseCircleIcon = ({
     size = 64,
     color = "currentColor",
     ...props
-}: Props) => (
+}: IconProps) => (
     <svg
         width={size}
         height={size}
@@ -37,10 +37,3 @@ const CloseCircleIcon = ({
 )
 
 export default CloseCircleIcon
-
-/*==================== Types ====================*/
-
-interface Props extends React.HTMLAttributes<HTMLOrSVGElement> {
-    size?: number
-    color?: LibColorsTypes | ColorsShortTypes | string
-}

@@ -6,11 +6,15 @@ import React from "react"
 
 import getColor from "./getColor"
 
-import { LibColorsTypes, ColorsShortTypes } from "../common-types"
+import { IconProps } from "./type"
 
 /*==================== Component ====================*/
 
-const SearchIcon = ({ size = 64, color = "currentColor", ...props }: Props) => (
+const SearchIcon = ({
+    size = 64,
+    color = "currentColor",
+    ...props
+}: IconProps) => (
     <svg
         width={size}
         height={size}
@@ -33,10 +37,3 @@ const SearchIcon = ({ size = 64, color = "currentColor", ...props }: Props) => (
 )
 
 export default SearchIcon
-
-/*==================== Types ====================*/
-
-interface Props extends React.HTMLAttributes<HTMLOrSVGElement> {
-    size?: number
-    color?: LibColorsTypes | ColorsShortTypes | string
-}

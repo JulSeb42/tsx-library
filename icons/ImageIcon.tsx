@@ -6,11 +6,15 @@ import React from "react"
 
 import getColor from "./getColor"
 
-import { LibColorsTypes, ColorsShortTypes } from "../common-types"
+import { IconProps } from "./type"
 
 /*==================== Component ====================*/
 
-const ImageIcon = ({ size = 64, color = "currentColor", ...props }: Props) => (
+const ImageIcon = ({
+    size = 64,
+    color = "currentColor",
+    ...props
+}: IconProps) => (
     <svg
         width={size}
         height={size}
@@ -37,10 +41,3 @@ const ImageIcon = ({ size = 64, color = "currentColor", ...props }: Props) => (
 )
 
 export default ImageIcon
-
-/*==================== Types ====================*/
-
-interface Props extends React.HTMLAttributes<HTMLOrSVGElement> {
-    size?: number
-    color?: LibColorsTypes | ColorsShortTypes | string
-}

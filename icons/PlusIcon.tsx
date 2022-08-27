@@ -6,11 +6,15 @@ import React from "react"
 
 import getColor from "./getColor"
 
-import { LibColorsTypes, ColorsShortTypes } from "../common-types"
+import { IconProps } from "./type"
 
 /*==================== Component ====================*/
 
-const PlusIcon = ({ size = 64, color = "currentColor", ...props }: Props) => (
+const PlusIcon = ({
+    size = 64,
+    color = "currentColor",
+    ...props
+}: IconProps) => (
     <svg
         width={size}
         height={size}
@@ -27,10 +31,3 @@ const PlusIcon = ({ size = 64, color = "currentColor", ...props }: Props) => (
 )
 
 export default PlusIcon
-
-/*==================== Types ====================*/
-
-interface Props extends React.HTMLAttributes<HTMLOrSVGElement> {
-    size?: number
-    color?: LibColorsTypes | ColorsShortTypes | string
-}

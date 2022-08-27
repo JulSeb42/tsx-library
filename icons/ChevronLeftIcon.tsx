@@ -6,7 +6,7 @@ import React from "react"
 
 import getColor from "./getColor"
 
-import { LibColorsTypes, ColorsShortTypes } from "../common-types"
+import { IconProps } from "./type"
 
 /*==================== Component ====================*/
 
@@ -14,7 +14,7 @@ const ChevronLeftIcon = ({
     size = 64,
     color = "currentColor",
     ...props
-}: Props) => (
+}: IconProps) => (
     <svg
         width={size}
         height={size}
@@ -31,10 +31,3 @@ const ChevronLeftIcon = ({
 )
 
 export default ChevronLeftIcon
-
-/*==================== Types ====================*/
-
-interface Props extends React.HTMLAttributes<HTMLOrSVGElement> {
-    size?: number
-    color?: LibColorsTypes | ColorsShortTypes | string
-}
