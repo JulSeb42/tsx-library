@@ -4,7 +4,6 @@ import styled from "styled-components"
 
 import Variables from "../../Variables"
 import Mixins from "../../Mixins"
-import Input from "../Input"
 
 import { JustifyTypes } from "./types"
 
@@ -17,8 +16,24 @@ const StyledPaginator = styled.div<{ $justify?: JustifyTypes }>`
         })};
 `
 
-const StyledInput = styled(Input)`
+const StyledInput = styled.input`
+    height: 32px;
     width: 48px;
+    border: 1px solid ${Variables.Colors.Gray200};
+    border-radius: ${Variables.Radiuses.S};
+    font-size: ${Variables.FontSizes.Body};
+    font-family: ${Variables.FontFamilies.Body};
+    padding: ${Variables.Spacers.XS};
+    background-color: ${Variables.Colors.White};
+    color: ${Variables.Colors.Black};
+    line-height: 100%;
+    outline: none;
+    z-index: 0;
+    -moz-appearance: textfield;
+
+    &:focus {
+        border-color: ${Variables.Colors.Primary500};
+    }
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {

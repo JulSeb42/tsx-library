@@ -33,7 +33,7 @@ export type InputTypesTypes = keyof typeof inputTypes
 
 /*==================== Component Types ====================*/
 
-export interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
+export interface InputProps extends React.HTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
     id: string
     value?: any
     name?: string
@@ -41,6 +41,7 @@ export interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
     as?: any
     autoFocus?: boolean
     ref?: any
+    onChange?: any
 
     type?: InputTypesTypes | undefined
     password?: boolean

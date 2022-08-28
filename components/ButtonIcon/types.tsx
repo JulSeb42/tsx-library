@@ -2,6 +2,8 @@
 
 import React from "react"
 
+import { RequireAtLeastOne } from "../../utils/RequireAtLeastOne"
+
 import { ColorsHoverTypes } from "../../utils/common-types"
 
 /*==================== List possibilities ====================*/
@@ -16,7 +18,10 @@ export type ButtonStylesProps = keyof typeof buttonStyles
 /*==================== Component Types ====================*/
 
 interface BaseProps extends React.HTMLAttributes<HTMLButtonElement> {
-    icon: string
+    icon?: string
+    libicon?: JSX.Element
+    type?: "button" | "submit" | "reset" | undefined
+
     isLoading?: boolean
     to?: string
     disabled?: boolean
@@ -44,4 +49,9 @@ interface Possible2 extends BaseProps {
     }
 }
 
-export type ButtonIconProps = Possible1 | Possible2
+type PossibleProps = Possible1 | Possible2
+
+export type ButtonIconProps = RequireAtLeastOne<
+    PossibleProps,
+    "icon" | "libicon"
+>

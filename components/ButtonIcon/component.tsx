@@ -11,7 +11,16 @@ import { ButtonIconProps } from "./types"
 
 const ButtonIcon = forwardRef(
     (
-        { icon, disabled, isLoading, to, options, ...props }: ButtonIconProps,
+        {
+            icon,
+            libicon,
+            disabled,
+            isLoading,
+            to,
+            options,
+            type = "button",
+            ...props
+        }: ButtonIconProps,
         ref?: React.ForwardedRef<HTMLButtonElement>
     ) => (
         <Styles.StyledButtonIcon
@@ -23,6 +32,7 @@ const ButtonIcon = forwardRef(
             disabled={isLoading ? true : disabled}
             $hoverBackground={options?.hoverBackground}
             ref={ref}
+            type={type}
             {...props}
         >
             {isLoading ? (
@@ -33,11 +43,13 @@ const ButtonIcon = forwardRef(
                         borderSize: options?.loaderBorder || 4,
                     }}
                 />
-            ) : (
+            ) : icon ? (
                 <Icon
                     src={icon}
                     size={options?.size ? options?.size * 0.6 : 48 * 0.6}
                 />
+            ) : (
+                libicon
             )}
         </Styles.StyledButtonIcon>
     )
