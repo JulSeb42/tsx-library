@@ -2,11 +2,11 @@
 
 import React, { useEffect, useState, useCallback } from "react"
 
-import Variables from "../../Variables"
 import Icon from "../Icon"
 import ChevronLeftIcon from "../../icons/ChevronLeftIcon"
 import ChevronRightIcon from "../../icons/ChevronRightIcon"
 import { uuid } from "../../utils/utils"
+import Flexbox from "../Flexbox"
 
 import * as Styles from "./styles"
 import { SlideshowProps, ButtonProps } from "./types"
@@ -51,6 +51,9 @@ const Slideshow = ({
     options,
     pagination,
     controls,
+    aspectRatio,
+    borderRadius,
+    thumbnails,
     ...props
 }: SlideshowProps) => {
     // Slideshow with buttons
@@ -117,23 +120,49 @@ const Slideshow = ({
 
     return (
         <Styles.StyledSlideshow {...props}>
-            <Styles.Wrapper flexDirection="column" $height={height}>
+            <Styles.Wrapper
+                $aspectRatio={aspectRatio}
+                flexDirection="column"
+                $height={height}
+            >
                 {controls && (
                     <SlideshowButton
                         position="left"
                         onClick={handlePrev}
                         prev
-                        hideTouch={controls.hideTouchScreens}
-                        iconNext={controls.iconNext}
-                        iconPrev={controls.iconPrev}
-                        isLarge={controls.type === "large"}
-                        color={controls.color}
+                        hideTouch={
+                            typeof controls === "object" &&
+                            controls.hideTouchScreens
+                                ? controls.hideTouchScreens
+                                : true
+                        }
+                        iconNext={
+                            typeof controls === "object"
+                                ? controls.iconNext
+                                : undefined
+                        }
+                        iconPrev={
+                            typeof controls === "object"
+                                ? controls.iconPrev
+                                : undefined
+                        }
+                        isLarge={
+                            typeof controls === "object"
+                                ? controls.type === "large"
+                                : false
+                        }
+                        color={
+                            typeof controls === "object"
+                                ? controls.color
+                                : "primary"
+                        }
                     />
                 )}
 
                 <Styles.ContentWrapper
                     onTouchStart={handleTouchStart}
                     onTouchMove={handleTouchMove}
+                    $borderRadius={borderRadius}
                 >
                     <Styles.Content
                         $show={options?.show}
@@ -149,14 +178,48 @@ const Slideshow = ({
                         position="right"
                         onClick={handleNext}
                         next
-                        hideTouch={controls.hideTouchScreens}
-                        iconNext={controls.iconNext}
-                        iconPrev={controls.iconPrev}
-                        isLarge={controls.type === "large"}
-                        color={controls.color}
+                        hideTouch={
+                            typeof controls === "object" &&
+                            controls.hideTouchScreens
+                                ? controls.hideTouchScreens
+                                : true
+                        }
+                        iconNext={
+                            typeof controls === "object"
+                                ? controls.iconNext
+                                : undefined
+                        }
+                        iconPrev={
+                            typeof controls === "object"
+                                ? controls.iconPrev
+                                : undefined
+                        }
+                        isLarge={
+                            typeof controls === "object"
+                                ? controls.type === "large"
+                                : false
+                        }
+                        color={
+                            typeof controls === "object"
+                                ? controls.color
+                                : "primary"
+                        }
                     />
                 )}
             </Styles.Wrapper>
+
+            {thumbnails && (
+                <Flexbox justifyContent="center" alignItems="center" gap="xs">
+                    {thumbnails.map((image, i) => (
+                        <Styles.Thumbnail
+                            src={image}
+                            alt={`Image ${i}`}
+                            $isActive={active === i && true}
+                            onClick={() => setActive(i)}
+                        />
+                    ))}
+                </Flexbox>
+            )}
 
             {pagination && (
                 <Styles.Pagination
@@ -164,11 +227,13 @@ const Slideshow = ({
                         typeof pagination === "object" &&
                         pagination.hideTouchScreens
                     }
-                    justifyContent="center"
-                    alignItems="center"
-                    gap={Variables.Spacers.XS}
+                    $position={
+                        typeof pagination === "object" && pagination.position
+                            ? pagination.position
+                            : "outside"
+                    }
                 >
-                    {children.map((_: any, i: any) => (
+                    {children.map((_: any, i: number) => (
                         <Styles.Dot
                             onClick={() => setActive(i)}
                             $isActive={active === i && true}
@@ -176,6 +241,12 @@ const Slideshow = ({
                                 typeof pagination === "object"
                                     ? pagination.color
                                     : "primary"
+                            }
+                            $variant={
+                                typeof pagination === "object" &&
+                                pagination.variant
+                                    ? pagination.variant
+                                    : "dots"
                             }
                             key={uuid()}
                         />

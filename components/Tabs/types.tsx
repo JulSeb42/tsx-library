@@ -2,6 +2,8 @@
 
 import React from "react"
 
+import { ColorsHoverTypes, AllColorsTypes } from "../../utils/common-types"
+
 import { TabsItemProps } from "../../utils/component-props"
 
 /*==================== List possibilities ====================*/
@@ -11,7 +13,7 @@ const TableStyles = {
     rounded: "rounded",
 } as const
 
-export type TableStylesTypes = keyof typeof TableStyles
+export type TabsVariantTypes = keyof typeof TableStyles
 
 const Justify = {
     start: "start",
@@ -22,11 +24,25 @@ export type JustifyTypes = keyof typeof Justify
 
 /*==================== Component Types ====================*/
 
-export interface TabsProps extends React.HTMLAttributes<HTMLDivElement> {
+interface BaseProps extends React.HTMLAttributes<HTMLDivElement> {
     items: TabsItemProps[]
-    options?: {
-        style?: TableStylesTypes
-        justify?: JustifyTypes
-        active?: number
-    }
+    contentColor?: AllColorsTypes
+    justify?: JustifyTypes
+    active?: number
+    accentColor?: ColorsHoverTypes
+    buttonColor?: AllColorsTypes
 }
+
+interface Possible1 extends BaseProps {
+    variant?: "basic"
+    separatorColor?: AllColorsTypes
+    backgroundColor?: never
+}
+
+interface Possible2 extends BaseProps {
+    variant?: "rounded"
+    separatorColor?: never
+    backgroundColor?: AllColorsTypes
+}
+
+export type TabsProps = Possible1 | Possible2

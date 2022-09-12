@@ -2,8 +2,11 @@
 
 import styled, { css } from "styled-components"
 
-import Variables from "../../Variables"
+import { Radiuses, Transitions, Breakpoints } from "../../Variables"
 import Mixins from "../../Mixins"
+import setDefaultTheme from "../../utils/setDefaultTheme"
+
+import { ColorsHoverTypes } from "../../utils/common-types"
 
 import { JustifyTypes } from "./types"
 
@@ -21,48 +24,61 @@ const StyledPagination = styled.div<{ $justify?: JustifyTypes }>`
         })};
 `
 
-const Button = styled.button<{ $isActive?: boolean; $more?: boolean }>`
+const Button = styled.button<{
+    $isActive?: boolean
+    $more?: boolean
+    $color?: ColorsHoverTypes
+}>`
     --button-size: 32px;
     width: var(--button-size);
     height: var(--button-size);
-    border-radius: ${Variables.Radiuses.Circle};
+    border-radius: ${Radiuses.Circle};
     border: none;
     ${Mixins.Flexbox({
         $alignItems: "center",
         $justifyContent: "center",
         $inline: true,
     })};
-    color: ${({ $isActive }) =>
-        $isActive ? Variables.Colors.White : Variables.Colors.Primary500};
-    background-color: ${({ $isActive }) =>
-        $isActive ? Variables.Colors.Primary500 : "transparent"};
+    color: ${({ $isActive, $color, theme }) =>
+        $isActive && $color === "white"
+            ? theme.Primary500
+            : $isActive
+            ? theme.Background
+            : theme.ColorsHoverDefault};
+    background-color: ${({ $isActive, $color, theme }) =>
+        $isActive ? theme.ColorsHoverDefault : "transparent"};
     text-decoration: none;
+    cursor: ${({ $more }) => $more && "default"};
 
-    ${({ $more, disabled }) =>
+    ${({ $more, disabled, theme, $color }) =>
         !$more &&
         !disabled &&
         css`
-            transition: ${Variables.Transitions.Short};
+            transition: ${Transitions.Short};
 
-            @media ${Variables.Breakpoints.Hover} {
+            @media ${Breakpoints.Hover} {
                 &:hover {
-                    background-color: ${Variables.Colors.Primary300};
-                    color: ${Variables.Colors.White};
+                    background-color: ${theme.ColorsHoverHover};
+                    color: ${$color === "white"
+                        ? theme.Primary500
+                        : theme.Background};
                 }
 
                 &:active {
-                    background-color: ${Variables.Colors.Primary600};
+                    background-color: ${theme.ColorsHoverActive};
                 }
             }
         `}
 
     &:disabled {
-        color: ${Variables.Colors.Gray500};
+        color: ${({ theme }) => theme.Gray500};
     }
 
-    @media ${Variables.Breakpoints.Mobile} {
+    @media ${Breakpoints.Mobile} {
         --button-size: 24px;
     }
 `
+
+setDefaultTheme([StyledPagination, Button])
 
 export { StyledPagination, Button }

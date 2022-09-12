@@ -2,32 +2,48 @@
 
 import React from "react"
 
-import { LibColorsTypes, ColorsShortTypes } from "../../utils/common-types"
+import { ColorsHoverTypes, ShadowsTypes } from "../../utils/common-types"
+import { InputContainerProps } from "../InputContainer/types"
+import { InputBackgroundTypes } from "../Input/types"
+import { ListDirectionTypes } from "../ListInputs/types"
 
-export interface SelectProps extends React.HTMLAttributes<HTMLDivElement> {
+interface BaseProps
+    extends React.HTMLAttributes<HTMLDivElement>,
+        InputContainerProps {
     isOpen: boolean
-    setIsOpen: any
+    setIsOpen: (isOpen: boolean) => void
     disabled?: boolean
     id: string
-    children?: React.ReactNode | React.ReactNode[]
-    selected: string | number
-
-    options?: {
-        label?: string
-        helper?: string
-        helperBottom?:
-            | string
-            | {
-                  text: string
-                  icon?: string
-                  iconColor?: LibColorsTypes | ColorsShortTypes | string
-              }
-        icon?: string
-    }
+    children?: never
+    selected: string
+    setSelected: (selected: string) => void
+    icon?:
+        | string
+        | {
+              name: string
+              hasAnimation?: boolean
+          }
+    items?: string[]
+    backgroundColor?: InputBackgroundTypes
+    listDirection?: ListDirectionTypes
 }
+
+interface PossibleList1 extends BaseProps {
+    listVariant?: "bordered"
+    listShadow?: never
+}
+
+interface PossibleList2 extends BaseProps {
+    listVariant?: "shadow"
+    listShadow?: ShadowsTypes
+}
+
+export type SelectProps = PossibleList1 | PossibleList2
 
 export interface ItemProps extends React.HTMLAttributes<HTMLSpanElement> {
     children: string | number
     onClick: (e: React.MouseEvent<HTMLSpanElement>) => void
     isSelected: boolean
+    accentColor?: ColorsHoverTypes
+    backgroundColor?: InputBackgroundTypes
 }

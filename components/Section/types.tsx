@@ -16,5 +16,5 @@ export type SizesTypes = keyof typeof sizes
 
 export interface SectionProps extends React.HTMLAttributes<HTMLDivElement> {
     gap?: SizesTypes | number
-    div?: boolean
+    as?: React.ElementType
 }

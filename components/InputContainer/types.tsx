@@ -1,11 +1,11 @@
 /*=============================================== InputContainer types ===============================================*/
 
-import React from "react"
+import { ReactNode } from "react"
 
-import { LibColorsTypes, ColorsShortTypes } from "../../utils/common-types"
+import { AllColorsTypes, ColorsHoverTypes } from "../../utils/common-types"
 
-export interface InputContainerProps
-    extends React.HTMLAttributes<HTMLDivElement> {
+export interface InputContainerProps {
+    id: string
     label?: string
     helper?: string
     helperBottom?:
@@ -13,10 +13,14 @@ export interface InputContainerProps
         | {
               text: string
               icon?: string
-              iconColor?: LibColorsTypes | ColorsShortTypes | string
+              iconColor?: AllColorsTypes
           }
+    children?: ReactNode | ReactNode[] | JSX.Element | JSX.Element[]
+    accentColor?: ColorsHoverTypes
+}
+
+export interface ExtendedInputContainerProps extends InputContainerProps {
     counter?: boolean
     maxLength?: number
     value?: any
-    id: string
 }

@@ -2,11 +2,12 @@
 
 import styled from "styled-components"
 
-import Variables from "../../Variables"
+import { FontWeights } from "../../Variables"
 import Mixins from "../../Mixins"
 import Text from "../Text"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { LibColorsTypes, ColorsShortTypes } from "../../utils/common-types"
+import { ColorsHoverTypes } from "../../utils/common-types"
 
 const StyledInputContainer = styled.div`
     ${Mixins.Grid({
@@ -15,11 +16,10 @@ const StyledInputContainer = styled.div`
 `
 
 const Label = styled.label<{
-    $color?: LibColorsTypes | ColorsShortTypes | string
+    $color?: ColorsHoverTypes
 }>`
-    color: ${({ $color }) =>
-        Mixins.AllColors({ $color: $color || Variables.Colors.Primary500 })};
-    font-weight: ${Variables.FontWeights.Black};
+    color: ${({ theme }) => theme.AllColors};
+    font-weight: ${FontWeights.Black};
 `
 
 const HelperBottom = styled(Text)`
@@ -36,5 +36,7 @@ const IconContainer = styled.span`
         $justifyContent: "center",
     })}
 `
+
+setDefaultTheme([StyledInputContainer, Label, HelperBottom, IconContainer])
 
 export { StyledInputContainer, Label, HelperBottom, IconContainer }

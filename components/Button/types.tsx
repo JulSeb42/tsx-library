@@ -2,7 +2,8 @@
 
 import React from "react"
 
-import { ColorsHoverTypes } from "../../utils/common-types"
+import { ColorsHoverTypes, ShadowsTypes } from "../../utils/common-types"
+import { LoaderVariantsTypes } from "../Loader/types"
 
 /*==================== List possibilities ====================*/
 
@@ -20,33 +21,85 @@ interface BaseProps
     extends React.HTMLAttributes<HTMLButtonElement>,
         React.ButtonHTMLAttributes<HTMLButtonElement> {
     disabled?: boolean
-    children: any
-    ref?: any
     to?: string
     type?: "button" | "submit" | "reset" | undefined
-    isLoading?: boolean
+    color?: ColorsHoverTypes
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
+    shadow?:
+        | ShadowsTypes
+        | {
+              default: ShadowsTypes
+              hover: ShadowsTypes
+              active: ShadowsTypes
+          }
 }
 
-interface Possible1 extends BaseProps {
-    options?: {
-        variant?: "plain" | "outline"
-        color?: ColorsHoverTypes
-        noPadding?: never
-
-        iconLeft?: string
-        iconRight?: string
+interface PossibleIcons1 extends BaseProps {
+    children?: any
+    libicon?: never
+    icons?: {
+        left?: string | JSX.Element
+        right?: string | JSX.Element
+        only?: never
     }
 }
 
-interface Possible2 extends BaseProps {
-    options?: {
-        variant?: "text"
-        color?: ColorsHoverTypes
-        noPadding?: boolean
-
-        iconLeft?: string
-        iconRight?: string
+interface PossibleIcons2 extends BaseProps {
+    children?: never
+    libicon?: never
+    icons?: {
+        left?: never
+        right?: never
+        only?: string | JSX.Element
     }
 }
 
-export type ButtonProps = Possible1 | Possible2
+interface PossibleIcons3 extends BaseProps {
+    children?: any
+    libicon?: {
+        left?: JSX.Element
+        right?: JSX.Element
+        only?: never
+    }
+    icons?: never
+}
+
+interface PossibleIcons4 extends BaseProps {
+    children?: never
+    libicon?: {
+        left?: never
+        right?: never
+        only?: JSX.Element
+    }
+    icons?: never
+}
+
+type PossibleIcons =
+    | PossibleIcons1
+    | PossibleIcons2
+    | PossibleIcons3
+    | PossibleIcons4
+
+type PossibleVariant1 = PossibleIcons & {
+    variant?: "plain" | "outline"
+    noPadding?: never
+}
+
+type PossibleVariant2 = PossibleIcons & {
+    variant?: "text"
+    noPadding?: boolean
+}
+
+type PossibleVariant = PossibleVariant1 | PossibleVariant2
+
+type PossibleLoading1 = PossibleVariant & {
+    isLoading?: true
+    loaderVariant?: LoaderVariantsTypes
+}
+
+type PossibleLoading2 = PossibleVariant & {
+    isLoading?: false
+    loaderVariant?: never
+}
+
+export type ButtonProps = PossibleLoading1 | PossibleLoading2

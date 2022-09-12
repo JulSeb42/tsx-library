@@ -2,6 +2,9 @@
 
 import React from "react"
 
+import { ColorsHoverTypes } from "../../utils/common-types"
+import { ListDirectionTypes } from "../ListInputs/types"
+
 /*==================== List possibilities ====================*/
 
 const justify = {
@@ -20,4 +23,7 @@ export interface DropdownContainerProps
 
 export interface DropdownProps extends React.HTMLAttributes<HTMLDivElement> {
     isOpen: boolean
+    setIsOpen: (isOpen: boolean) => void
+    accentColor?: ColorsHoverTypes
+    direction?: ListDirectionTypes
 }

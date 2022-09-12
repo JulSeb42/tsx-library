@@ -10,28 +10,35 @@ import { TabsProps } from "./types"
 
 const Tabs = ({
     items,
-    options = {
-        active: 0,
-        style: "basic",
-        justify: "start",
-    },
+    active = 0,
+    variant = "basic",
+    justify = "start",
+    accentColor = "primary",
+    separatorColor = "gray-200",
+    backgroundColor = "gray-50",
+    buttonColor = "font",
+    contentColor,
     ...props
 }: TabsProps) => {
-    const [isActive, setIsActive] = useState(options.active || 0)
+    const [isActive, setIsActive] = useState(active)
 
     return (
         <Styles.StyledTabs {...props}>
             <Styles.ButtonsContainer
-                $tabsStyle={options.style}
-                $justify={options.justify}
+                $variant={variant}
+                $justify={justify}
                 $col={items.length}
+                $separatorColor={separatorColor}
+                $backgroundColor={backgroundColor}
             >
                 {items.map((item, i) => (
                     <Styles.Button
                         $isActive={isActive === i}
                         onClick={() => setIsActive(i)}
-                        $tabsStyle={options.style}
-                        $justify={options.justify}
+                        $variant={variant}
+                        $justify={justify}
+                        $accentColor={accentColor}
+                        $buttonColor={buttonColor}
                         key={uuid()}
                     >
                         {item.title}
@@ -42,6 +49,11 @@ const Tabs = ({
             {items.map((item, i) => (
                 <Styles.TabItem
                     as={typeof item.content === "string" ? Text : "div"}
+                    color={
+                        typeof item.content === "string"
+                            ? contentColor
+                            : "black"
+                    }
                     $isActive={isActive === i}
                     key={uuid()}
                 >

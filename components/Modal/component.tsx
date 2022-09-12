@@ -2,8 +2,6 @@
 
 import React, { useEffect, forwardRef } from "react"
 
-import Variables from "../../Variables"
-import Icon from "../Icon"
 import CloseIcon from "../../icons/CloseIcon"
 
 import * as Styles from "./styles"
@@ -22,22 +20,26 @@ const Modal = forwardRef(
 
         return (
             <Styles.StyledModal $isOpen={isOpen} ref={ref} {...props}>
-                {close && (
-                    <Styles.CloseButton onClick={close}>
-                        {iconClose ? (
-                            <Icon
-                                src={iconClose}
-                                size={32}
-                                color={Variables.Colors.White}
-                            />
-                        ) : (
-                            <CloseIcon
-                                size={32}
-                                color={Variables.Colors.White}
-                            />
-                        )}
-                    </Styles.CloseButton>
-                )}
+                {close &&
+                    (iconClose ? (
+                        <Styles.CloseButton
+                            icon={iconClose}
+                            onClick={close}
+                            variant="transparent"
+                            color="white"
+                            size={48}
+                            hoverBackground
+                        />
+                    ) : (
+                        <Styles.CloseButton
+                            libicon={<CloseIcon size={48 * 0.7} />}
+                            onClick={close}
+                            variant="transparent"
+                            color="white"
+                            size={48}
+                            hoverBackground
+                        />
+                    ))}
 
                 <Styles.Content>{children}</Styles.Content>
             </Styles.StyledModal>

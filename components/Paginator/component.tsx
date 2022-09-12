@@ -2,9 +2,9 @@
 
 import React, { forwardRef } from "react"
 
-import Icon from "../Icon"
 import ChevronLeftIcon from "../../icons/ChevronLeftIcon"
 import ChevronRightIcon from "../../icons/ChevronRightIcon"
+import ButtonIcon from "../ButtonIcon"
 
 import * as Styles from "./styles"
 import { PaginatorProps } from "./types"
@@ -18,6 +18,12 @@ const Paginator = forwardRef(
             handles,
             pages,
             icons,
+            accentColor = "primary",
+            buttons = {
+                variant: "transparent",
+                hoverBackground: true,
+            },
+            backgroundColor,
             ...props
         }: PaginatorProps,
         ref?: React.ForwardedRef<HTMLInputElement>
@@ -29,6 +35,24 @@ const Paginator = forwardRef(
                 ? 1
                 : pages.active
 
+        const basePropsButton = {
+            size: 24,
+            color: accentColor,
+            ...buttons,
+        }
+
+        const propsButtonPrev = {
+            ...basePropsButton,
+            onClick: handles.prev,
+            disabled: activePage === 1 && true,
+        }
+
+        const propsButtonNext = {
+            ...basePropsButton,
+            onClick: handles.next,
+            disabled: activePage === pages.total && true,
+        }
+
         return (
             <Styles.StyledPaginator $justify={justify}>
                 {text?.page || "Page"}{" "}
@@ -38,29 +62,27 @@ const Paginator = forwardRef(
                     value={activePage}
                     onChange={handles.change}
                     ref={ref}
+                    $accentColor={accentColor}
+                    $background={backgroundColor}
                     {...props}
                 />{" "}
                 {`${text?.of || "of"} ${pages.total}`}
-                <Styles.Button
-                    onClick={handles.prev}
-                    disabled={activePage === 1 && true}
-                >
-                    {icons?.prev ? (
-                        <Icon src={icons.prev} size={16} />
-                    ) : (
-                        <ChevronLeftIcon size={20} />
-                    )}
-                </Styles.Button>
-                <Styles.Button
-                    onClick={handles.next}
-                    disabled={activePage === pages.total && true}
-                >
-                    {icons?.next ? (
-                        <Icon src={icons.next} size={16} />
-                    ) : (
-                        <ChevronRightIcon size={20} />
-                    )}
-                </Styles.Button>
+                {icons?.prev ? (
+                    <ButtonIcon icon={icons.prev} {...propsButtonPrev} />
+                ) : (
+                    <ButtonIcon
+                        libicon={<ChevronLeftIcon />}
+                        {...propsButtonPrev}
+                    />
+                )}
+                {icons?.next ? (
+                    <ButtonIcon icon={icons.next} {...propsButtonNext} />
+                ) : (
+                    <ButtonIcon
+                        libicon={<ChevronRightIcon />}
+                        {...propsButtonNext}
+                    />
+                )}
             </Styles.StyledPaginator>
         )
     }

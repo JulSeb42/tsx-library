@@ -3,592 +3,939 @@
 import styled, { css } from "styled-components"
 import { stringifyPx } from "ts-utils-julseb"
 
-import Variables from "../../Variables"
+import {
+    FontSizes,
+    LineHeights,
+    FontFamilies,
+    FontWeights,
+    Radiuses,
+    Spacers,
+    Transitions,
+    Breakpoints,
+} from "../../Variables"
 import Mixins from "../../Mixins"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 import {
     TextAlignTypes,
-    LibColorsTypes,
-    ColorsShortTypes,
     ColorsHoverTypes,
+    AllColorsTypes,
+    FontSizeTypes,
+    CustomFontSizeTypes,
 } from "../../utils/common-types"
 
-import { FontSizeTypes } from "./types"
-
-const FontCommon = ({
-    $color,
-    $textAlign,
-    $linkColor,
-    $lineHeight = Variables.LineHeights.Regular,
-    $defaultSize,
+const FontSize = ({
     $fontSize,
+    $defaultSize,
+    $customFontSize,
 }: {
-    $textAlign?: TextAlignTypes
-    $color?: LibColorsTypes | ColorsShortTypes | string
-    $linkColor?:
-        | ColorsHoverTypes
-        | {
-              default: string
-              hover: string
-              active: string
-          }
-    $fontSize?: FontSizeTypes | string | number
-    $display?: boolean
-    $lineHeight?: number | string
-    $defaultSize?: any
+    $fontSize?: FontSizeTypes
+    $defaultSize?: FontSizeTypes
+    $customFontSize?: CustomFontSizeTypes
 }) => css`
-    line-height: ${stringifyPx($lineHeight)};
-    text-align: ${$textAlign};
-    color: ${Mixins.AllColors};
-
-    font-size: ${$fontSize === "display-h1"
-        ? Variables.FontSizes.Display.H1
+    font-size: ${$customFontSize
+        ? stringifyPx($customFontSize)
+        : $fontSize === "display-h1"
+        ? FontSizes.Display.H1
         : $fontSize === "display-h2"
-        ? Variables.FontSizes.Display.H2
+        ? FontSizes.Display.H2
         : $fontSize === "display-h3"
-        ? Variables.FontSizes.Display.H3
+        ? FontSizes.Display.H3
         : $fontSize === "display-h4"
-        ? Variables.FontSizes.Display.H4
+        ? FontSizes.Display.H4
         : $fontSize === "display-h5"
-        ? Variables.FontSizes.Display.H5
+        ? FontSizes.Display.H5
         : $fontSize === "title-h1"
-        ? Variables.FontSizes.Titles.H1
+        ? FontSizes.Titles.H1
         : $fontSize === "title-h2"
-        ? Variables.FontSizes.Titles.H2
+        ? FontSizes.Titles.H2
         : $fontSize === "title-h3"
-        ? Variables.FontSizes.Titles.H3
+        ? FontSizes.Titles.H3
         : $fontSize === "title-h4"
-        ? Variables.FontSizes.Titles.H4
+        ? FontSizes.Titles.H4
         : $fontSize === "title-h5"
-        ? Variables.FontSizes.Titles.H5
+        ? FontSizes.Titles.H5
         : $fontSize === "title-h6"
-        ? Variables.FontSizes.Titles.H6
+        ? FontSizes.Titles.H6
         : $fontSize === "body"
-        ? Variables.FontSizes.Body
+        ? FontSizes.Body
         : $fontSize === "small"
-        ? Variables.FontSizes.Small
+        ? FontSizes.Small
         : $fontSize
         ? stringifyPx($fontSize)
         : $defaultSize === "display-h1"
-        ? Variables.FontSizes.Display.H1
+        ? FontSizes.Display.H1
         : $defaultSize === "display-h2"
-        ? Variables.FontSizes.Display.H2
+        ? FontSizes.Display.H2
         : $defaultSize === "display-h3"
-        ? Variables.FontSizes.Display.H3
+        ? FontSizes.Display.H3
         : $defaultSize === "display-h4"
-        ? Variables.FontSizes.Display.H4
+        ? FontSizes.Display.H4
         : $defaultSize === "display-h5"
-        ? Variables.FontSizes.Display.H5
+        ? FontSizes.Display.H5
         : $defaultSize === "title-h1"
-        ? Variables.FontSizes.Titles.H1
+        ? FontSizes.Titles.H1
         : $defaultSize === "title-h2"
-        ? Variables.FontSizes.Titles.H2
+        ? FontSizes.Titles.H2
         : $defaultSize === "title-h3"
-        ? Variables.FontSizes.Titles.H3
+        ? FontSizes.Titles.H3
         : $defaultSize === "title-h4"
-        ? Variables.FontSizes.Titles.H4
+        ? FontSizes.Titles.H4
         : $defaultSize === "title-h5"
-        ? Variables.FontSizes.Titles.H5
+        ? FontSizes.Titles.H5
         : $defaultSize === "title-h6"
-        ? Variables.FontSizes.Titles.H6
+        ? FontSizes.Titles.H6
         : $defaultSize === "body"
-        ? Variables.FontSizes.Body
+        ? FontSizes.Body
         : $defaultSize === "small"
-        ? Variables.FontSizes.Small
+        ? FontSizes.Small
         : ""};
 
     & > * {
-        font-size: ${$fontSize === "display-h1"
-            ? Variables.FontSizes.Display.H1
+        font-size: ${$customFontSize
+            ? stringifyPx($customFontSize)
+            : $fontSize === "display-h1"
+            ? FontSizes.Display.H1
             : $fontSize === "display-h2"
-            ? Variables.FontSizes.Display.H2
+            ? FontSizes.Display.H2
             : $fontSize === "display-h3"
-            ? Variables.FontSizes.Display.H3
+            ? FontSizes.Display.H3
             : $fontSize === "display-h4"
-            ? Variables.FontSizes.Display.H4
+            ? FontSizes.Display.H4
             : $fontSize === "display-h5"
-            ? Variables.FontSizes.Display.H5
+            ? FontSizes.Display.H5
             : $fontSize === "title-h1"
-            ? Variables.FontSizes.Titles.H1
+            ? FontSizes.Titles.H1
             : $fontSize === "title-h2"
-            ? Variables.FontSizes.Titles.H2
+            ? FontSizes.Titles.H2
             : $fontSize === "title-h3"
-            ? Variables.FontSizes.Titles.H3
+            ? FontSizes.Titles.H3
             : $fontSize === "title-h4"
-            ? Variables.FontSizes.Titles.H4
+            ? FontSizes.Titles.H4
             : $fontSize === "title-h5"
-            ? Variables.FontSizes.Titles.H5
+            ? FontSizes.Titles.H5
             : $fontSize === "title-h6"
-            ? Variables.FontSizes.Titles.H6
+            ? FontSizes.Titles.H6
             : $fontSize === "body"
-            ? Variables.FontSizes.Body
+            ? FontSizes.Body
             : $fontSize === "small"
-            ? Variables.FontSizes.Small
+            ? FontSizes.Small
             : $fontSize
             ? stringifyPx($fontSize)
             : $defaultSize === "display-h1"
-            ? Variables.FontSizes.Display.H1
+            ? FontSizes.Display.H1
             : $defaultSize === "display-h2"
-            ? Variables.FontSizes.Display.H2
+            ? FontSizes.Display.H2
             : $defaultSize === "display-h3"
-            ? Variables.FontSizes.Display.H3
+            ? FontSizes.Display.H3
             : $defaultSize === "display-h4"
-            ? Variables.FontSizes.Display.H4
+            ? FontSizes.Display.H4
             : $defaultSize === "display-h5"
-            ? Variables.FontSizes.Display.H5
+            ? FontSizes.Display.H5
             : $defaultSize === "title-h1"
-            ? Variables.FontSizes.Titles.H1
+            ? FontSizes.Titles.H1
             : $defaultSize === "title-h2"
-            ? Variables.FontSizes.Titles.H2
+            ? FontSizes.Titles.H2
             : $defaultSize === "title-h3"
-            ? Variables.FontSizes.Titles.H3
+            ? FontSizes.Titles.H3
             : $defaultSize === "title-h4"
-            ? Variables.FontSizes.Titles.H4
+            ? FontSizes.Titles.H4
             : $defaultSize === "title-h5"
-            ? Variables.FontSizes.Titles.H5
+            ? FontSizes.Titles.H5
             : $defaultSize === "title-h6"
-            ? Variables.FontSizes.Titles.H6
+            ? FontSizes.Titles.H6
             : $defaultSize === "body"
-            ? Variables.FontSizes.Body
+            ? FontSizes.Body
             : $defaultSize === "small"
-            ? Variables.FontSizes.Small
+            ? FontSizes.Small
             : ""};
     }
+`
 
-    & > * {
-        color: ${Mixins.AllColors};
-    }
-
-    a {
-        color: ${$color === "white" || $linkColor === "white"
-            ? Variables.Colors.White
-            : $linkColor === "primary" ||
-              $linkColor === "secondary" ||
-              $linkColor === "success" ||
-              $linkColor === "danger" ||
-              $linkColor === "warning"
-            ? Mixins.ColorsHoverDefault({ $color: $linkColor })
-            : $linkColor?.default
-            ? $linkColor.default
-            : Variables.Colors.Primary500};
-        text-decoration: none;
-
-        @media ${Variables.Breakpoints.Hover} {
-            &:hover {
-                color: ${$color === "white" || $linkColor === "white"
-                    ? Variables.Colors.Gray300
-                    : $linkColor === "primary" ||
-                      $linkColor === "secondary" ||
-                      $linkColor === "success" ||
-                      $linkColor === "danger" ||
-                      $linkColor === "warning"
-                    ? Mixins.ColorsHoverHover({ $color: $linkColor })
-                    : $linkColor?.hover
-                    ? $linkColor.hover
-                    : Variables.Colors.Primary300};
-            }
-
-            &:active {
-                color: ${$color === "white" || $linkColor === "white"
-                    ? Variables.Colors.Gray100
-                    : $linkColor === "primary" ||
-                      $linkColor === "secondary" ||
-                      $linkColor === "success" ||
-                      $linkColor === "danger" ||
-                      $linkColor === "warning"
-                    ? Mixins.ColorsHoverActive({ $color: $linkColor })
-                    : $linkColor?.active
-                    ? $linkColor.active
-                    : Variables.Colors.Primary600};
-            }
-        }
-    }
+const FontCommon = ({
+    $textAlign,
+    $lineHeight = LineHeights.Regular,
+    $defaultSize,
+    $fontSize,
+    $customFontSize,
+}: {
+    $fontSize?: FontSizeTypes
+    $defaultSize?: FontSizeTypes
+    $customFontSize?: CustomFontSizeTypes
+    $textAlign?: TextAlignTypes
+    $lineHeight?: string | number
+}) => css`
+    text-align: ${$textAlign};
+    ${FontSize({
+        $fontSize: $fontSize,
+        $defaultSize: $defaultSize,
+        $customFontSize: $customFontSize,
+    })};
+    line-height: ${$lineHeight};
 
     code {
-        font-family: ${Variables.FontFamilies.Code};
-        line-height: ${Variables.LineHeights.Code};
-        color: ${Variables.Colors.Primary500};
-        padding: ${Variables.Spacers.XXS};
-        border-radius: ${Variables.Radiuses.XS};
-        background-color: ${Variables.Colors.Gray50};
+        font-family: ${FontFamilies.Code};
+        line-height: ${LineHeights.Code};
+        color: ${({ theme }) => theme.Primary500};
+        padding: ${Spacers.XXS};
+        border-radius: ${Radiuses.XS};
+        background-color: ${({ theme }) => theme.Gray50};
     }
 `
 
 const StyledH1 = styled.h1<{
+    $color?: AllColorsTypes
+    $linkColor?: ColorsHoverTypes
+    $fontSize?: FontSizeTypes
+    $defaultSize?: FontSizeTypes
+    $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
-    $color?: LibColorsTypes | ColorsShortTypes | string
-    $linkColor?:
-        | ColorsHoverTypes
-        | {
-              default: string
-              hover: string
-              active: string
-          }
-    $fontSize?: FontSizeTypes | string | number
-    $display?: boolean
     $lineHeight?: string | number
+    $display?: boolean
 }>`
-    ${({ $display, $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
+    ${({ $display, $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
         FontCommon({
+            $textAlign,
+            $lineHeight,
             $defaultSize: $display ? "display-h1" : "title-h1",
             $fontSize,
-            $lineHeight: $lineHeight || Variables.LineHeights.Regular,
-            $color,
-            $textAlign,
-            $linkColor,
+            $customFontSize,
         })};
-    font-weight: ${Variables.FontWeights.Black};
+    font-weight: ${FontWeights.Black};
+    color: ${({ theme, $color }) =>
+        theme.AllColors({
+            $color: $color,
+        })};
+
+    & > * {
+        color: ${({ theme, $color }) =>
+            theme.AllColors({
+                $color: $color,
+            })};
+    }
+
+    a {
+        color: ${({ theme, $linkColor }) =>
+            theme.ColorsHoverDefault({ $color: $linkColor })};
+        transition: ${Transitions.Short};
+        text-decoration: none;
+
+        @media ${Breakpoints.Hover} {
+            &:hover {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverHover({ $color: $linkColor })};
+            }
+
+            &:active {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverActive({ $color: $linkColor })};
+            }
+        }
+    }
 `
 
 const StyledH2 = styled.h2<{
+    $color?: AllColorsTypes
+    $linkColor?: ColorsHoverTypes
+    $fontSize?: FontSizeTypes
+    $defaultSize?: FontSizeTypes
+    $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
-    $color?: LibColorsTypes | ColorsShortTypes | string
-    $linkColor?:
-        | ColorsHoverTypes
-        | {
-              default: string
-              hover: string
-              active: string
-          }
-    $fontSize?: FontSizeTypes | string | number
-    $display?: boolean
     $lineHeight?: string | number
+    $display?: boolean
 }>`
-    ${({ $display, $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
+    ${({ $display, $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
         FontCommon({
+            $textAlign,
+            $lineHeight,
             $defaultSize: $display ? "display-h2" : "title-h2",
             $fontSize,
-            $lineHeight: $lineHeight || Variables.LineHeights.Regular,
-            $color,
-            $textAlign,
-            $linkColor,
+            $customFontSize,
         })};
-    font-weight: ${Variables.FontWeights.Black};
+    font-weight: ${FontWeights.Black};
+    color: ${({ theme, $color }) =>
+        theme.AllColors({
+            $color: $color,
+        })};
+
+    & > * {
+        color: ${({ theme, $color }) =>
+            theme.AllColors({
+                $color: $color,
+            })};
+    }
+
+    a {
+        color: ${({ theme, $linkColor }) =>
+            theme.ColorsHoverDefault({ $color: $linkColor })};
+        transition: ${Transitions.Short};
+        text-decoration: none;
+
+        @media ${Breakpoints.Hover} {
+            &:hover {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverHover({ $color: $linkColor })};
+            }
+
+            &:active {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverActive({ $color: $linkColor })};
+            }
+        }
+    }
 `
 
 const StyledH3 = styled.h3<{
+    $color?: AllColorsTypes
+    $linkColor?: ColorsHoverTypes
+    $fontSize?: FontSizeTypes
+    $defaultSize?: FontSizeTypes
+    $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
-    $color?: LibColorsTypes | ColorsShortTypes | string
-    $linkColor?:
-        | ColorsHoverTypes
-        | {
-              default: string
-              hover: string
-              active: string
-          }
-    $fontSize?: FontSizeTypes | string | number
-    $display?: boolean
     $lineHeight?: string | number
+    $display?: boolean
 }>`
-    ${({ $display, $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
+    ${({ $display, $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
         FontCommon({
+            $textAlign,
+            $lineHeight,
             $defaultSize: $display ? "display-h3" : "title-h3",
             $fontSize,
-            $lineHeight: $lineHeight || Variables.LineHeights.Regular,
-            $color,
-            $textAlign,
-            $linkColor,
+            $customFontSize,
         })};
-    font-weight: ${Variables.FontWeights.Black};
+    font-weight: ${FontWeights.Black};
+    color: ${({ theme, $color }) =>
+        theme.AllColors({
+            $color: $color,
+        })};
+
+    & > * {
+        color: ${({ theme, $color }) =>
+            theme.AllColors({
+                $color: $color,
+            })};
+    }
+
+    a {
+        color: ${({ theme, $linkColor }) =>
+            theme.ColorsHoverDefault({ $color: $linkColor })};
+        transition: ${Transitions.Short};
+        text-decoration: none;
+
+        @media ${Breakpoints.Hover} {
+            &:hover {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverHover({ $color: $linkColor })};
+            }
+
+            &:active {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverActive({ $color: $linkColor })};
+            }
+        }
+    }
 `
 
 const StyledH4 = styled.h4<{
+    $color?: AllColorsTypes
+    $linkColor?: ColorsHoverTypes
+    $fontSize?: FontSizeTypes
+    $defaultSize?: FontSizeTypes
+    $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
-    $color?: LibColorsTypes | ColorsShortTypes | string
-    $linkColor?:
-        | ColorsHoverTypes
-        | {
-              default: string
-              hover: string
-              active: string
-          }
-    $fontSize?: FontSizeTypes | string | number
-    $display?: boolean
     $lineHeight?: string | number
+    $display?: boolean
 }>`
-    ${({ $display, $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
+    ${({ $display, $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
         FontCommon({
+            $textAlign,
+            $lineHeight,
             $defaultSize: $display ? "display-h4" : "title-h4",
             $fontSize,
-            $lineHeight: $lineHeight || Variables.LineHeights.Regular,
-            $color,
-            $textAlign,
-            $linkColor,
+            $customFontSize,
         })};
-    font-weight: ${Variables.FontWeights.Black};
+    font-weight: ${FontWeights.Black};
+    color: ${({ theme, $color }) =>
+        theme.AllColors({
+            $color: $color,
+        })};
+
+    & > * {
+        color: ${({ theme, $color }) =>
+            theme.AllColors({
+                $color: $color,
+            })};
+    }
+
+    a {
+        color: ${({ theme, $linkColor }) =>
+            theme.ColorsHoverDefault({ $color: $linkColor })};
+        transition: ${Transitions.Short};
+        text-decoration: none;
+
+        @media ${Breakpoints.Hover} {
+            &:hover {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverHover({ $color: $linkColor })};
+            }
+
+            &:active {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverActive({ $color: $linkColor })};
+            }
+        }
+    }
 `
 
 const StyledH5 = styled.h5<{
+    $color?: AllColorsTypes
+    $linkColor?: ColorsHoverTypes
+    $fontSize?: FontSizeTypes
+    $defaultSize?: FontSizeTypes
+    $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
-    $color?: LibColorsTypes | ColorsShortTypes | string
-    $linkColor?:
-        | ColorsHoverTypes
-        | {
-              default: string
-              hover: string
-              active: string
-          }
-    $fontSize?: FontSizeTypes | string | number
-    $display?: boolean
     $lineHeight?: string | number
+    $display?: boolean
 }>`
-    ${({ $display, $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
+    ${({ $display, $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
         FontCommon({
+            $textAlign,
+            $lineHeight,
             $defaultSize: $display ? "display-h5" : "title-h5",
             $fontSize,
-            $lineHeight: $lineHeight || Variables.LineHeights.Regular,
-            $color,
-            $textAlign,
-            $linkColor,
+            $customFontSize,
         })};
-    font-weight: ${Variables.FontWeights.Black};
+    font-weight: ${FontWeights.Black};
+    color: ${({ theme, $color }) =>
+        theme.AllColors({
+            $color: $color,
+        })};
+
+    & > * {
+        color: ${({ theme, $color }) =>
+            theme.AllColors({
+                $color: $color,
+            })};
+    }
+
+    a {
+        color: ${({ theme, $linkColor }) =>
+            theme.ColorsHoverDefault({ $color: $linkColor })};
+        transition: ${Transitions.Short};
+        text-decoration: none;
+
+        @media ${Breakpoints.Hover} {
+            &:hover {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverHover({ $color: $linkColor })};
+            }
+
+            &:active {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverActive({ $color: $linkColor })};
+            }
+        }
+    }
 `
 
 const StyledH6 = styled.h6<{
+    $color?: AllColorsTypes
+    $linkColor?: ColorsHoverTypes
+    $fontSize?: FontSizeTypes
+    $defaultSize?: FontSizeTypes
+    $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
-    $color?: LibColorsTypes | ColorsShortTypes | string
-    $linkColor?:
-        | ColorsHoverTypes
-        | {
-              default: string
-              hover: string
-              active: string
-          }
-    $fontSize?: FontSizeTypes | string | number
-    $display?: boolean
     $lineHeight?: string | number
 }>`
-    ${({ $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
+    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
         FontCommon({
+            $textAlign,
+            $lineHeight,
             $defaultSize: "title-h6",
             $fontSize,
-            $lineHeight: $lineHeight || Variables.LineHeights.Regular,
-            $color,
-            $textAlign,
-            $linkColor,
+            $customFontSize,
         })};
-    font-weight: ${Variables.FontWeights.Black};
+    font-weight: ${FontWeights.Black};
+    color: ${({ theme, $color }) =>
+        theme.AllColors({
+            $color: $color,
+        })};
+
+    & > * {
+        color: ${({ theme, $color }) =>
+            theme.AllColors({
+                $color: $color,
+            })};
+    }
+
+    a {
+        color: ${({ theme, $linkColor }) =>
+            theme.ColorsHoverDefault({ $color: $linkColor })};
+        transition: ${Transitions.Short};
+        text-decoration: none;
+
+        @media ${Breakpoints.Hover} {
+            &:hover {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverHover({ $color: $linkColor })};
+            }
+
+            &:active {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverActive({ $color: $linkColor })};
+            }
+        }
+    }
 `
 
 const StyledP = styled.p<{
+    $color?: AllColorsTypes
+    $linkColor?: ColorsHoverTypes
+    $fontSize?: FontSizeTypes
+    $defaultSize?: FontSizeTypes
+    $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
-    $color?: LibColorsTypes | ColorsShortTypes | string
-    $linkColor?:
-        | ColorsHoverTypes
-        | {
-              default: string
-              hover: string
-              active: string
-          }
-    $fontSize?: FontSizeTypes | string | number
-    $display?: boolean
     $lineHeight?: string | number
 }>`
-    ${({ $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
+    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
         FontCommon({
+            $textAlign,
+            $lineHeight,
             $defaultSize: "body",
             $fontSize,
-            $lineHeight: $lineHeight || Variables.LineHeights.Regular,
-            $color,
-            $textAlign,
-            $linkColor,
+            $customFontSize,
         })};
+    color: ${({ theme, $color }) =>
+        theme.AllColors({
+            $color: $color,
+        })};
+
+    & > * {
+        color: ${({ theme, $color }) =>
+            theme.AllColors({
+                $color: $color,
+            })};
+    }
+
+    a {
+        color: ${({ theme, $linkColor }) =>
+            theme.ColorsHoverDefault({ $color: $linkColor })};
+        transition: ${Transitions.Short};
+        text-decoration: none;
+
+        @media ${Breakpoints.Hover} {
+            &:hover {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverHover({ $color: $linkColor })};
+            }
+
+            &:active {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverActive({ $color: $linkColor })};
+            }
+        }
+    }
 `
 
 const StyledStrong = styled.strong<{
-    $textAlign?: TextAlignTypes
-    $color?: LibColorsTypes | ColorsShortTypes | string
-    $linkColor?:
-        | ColorsHoverTypes
-        | {
-              default: string
-              hover: string
-              active: string
-          }
-    $fontSize?: FontSizeTypes | string | number
-    $display?: boolean
-    $lineHeight?: string | number
+    $color?: AllColorsTypes
+    $linkColor?: ColorsHoverTypes
 }>`
-    ${({ $lineHeight, $color, $textAlign, $linkColor }) =>
-        FontCommon({ $lineHeight, $color, $textAlign, $linkColor })};
-    font-weight: ${Variables.FontWeights.Black};
+    ${FontCommon({})};
+    font-weight: ${FontWeights.Black};
+    color: ${({ theme, $color }) =>
+        theme.AllColors({
+            $color: $color,
+        })};
+
+    & > * {
+        color: ${({ theme, $color }) =>
+            theme.AllColors({
+                $color: $color,
+            })};
+    }
+
+    a {
+        color: ${({ theme, $linkColor }) =>
+            theme.ColorsHoverDefault({ $color: $linkColor })};
+        transition: ${Transitions.Short};
+        text-decoration: none;
+
+        @media ${Breakpoints.Hover} {
+            &:hover {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverHover({ $color: $linkColor })};
+            }
+
+            &:active {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverActive({ $color: $linkColor })};
+            }
+        }
+    }
 `
 
 const StyledEm = styled.em<{
-    $textAlign?: TextAlignTypes
-    $color?: LibColorsTypes | ColorsShortTypes | string
-    $linkColor?:
-        | ColorsHoverTypes
-        | {
-              default: string
-              hover: string
-              active: string
-          }
-    $fontSize?: FontSizeTypes | string | number
-    $display?: boolean
-    $lineHeight?: string | number
+    $color?: AllColorsTypes
+    $linkColor?: ColorsHoverTypes
 }>`
-    ${({ $lineHeight, $color, $textAlign, $linkColor }) =>
-        FontCommon({ $lineHeight, $color, $textAlign, $linkColor })};
+    ${FontCommon({})};
     font-style: italic;
+    color: ${({ theme, $color }) =>
+        theme.AllColors({
+            $color: $color,
+        })};
+
+    & > * {
+        color: ${({ theme, $color }) =>
+            theme.AllColors({
+                $color: $color,
+            })};
+    }
+
+    a {
+        color: ${({ theme, $linkColor }) =>
+            theme.ColorsHoverDefault({ $color: $linkColor })};
+        transition: ${Transitions.Short};
+        text-decoration: none;
+
+        @media ${Breakpoints.Hover} {
+            &:hover {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverHover({ $color: $linkColor })};
+            }
+
+            &:active {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverActive({ $color: $linkColor })};
+            }
+        }
+    }
 `
 
 const StyledSmall = styled.small<{
+    $color?: AllColorsTypes
+    $linkColor?: ColorsHoverTypes
+    $fontSize?: FontSizeTypes
+    $defaultSize?: FontSizeTypes
+    $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
-    $color?: LibColorsTypes | ColorsShortTypes | string
-    $linkColor?:
-        | ColorsHoverTypes
-        | {
-              default: string
-              hover: string
-              active: string
-          }
-    $fontSize?: FontSizeTypes | string | number
-    $display?: boolean
     $lineHeight?: string | number
 }>`
-    ${({ $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
+    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
         FontCommon({
+            $textAlign,
+            $lineHeight,
             $defaultSize: "small",
             $fontSize,
-            $lineHeight,
-            $color,
-            $textAlign,
-            $linkColor,
+            $customFontSize,
         })};
+    color: ${({ theme, $color }) =>
+        theme.AllColors({
+            $color: $color,
+        })};
+
+    & > * {
+        color: ${({ theme, $color }) =>
+            theme.AllColors({
+                $color: $color,
+            })};
+    }
+
+    a {
+        color: ${({ theme, $linkColor }) =>
+            theme.ColorsHoverDefault({ $color: $linkColor })};
+        transition: ${Transitions.Short};
+        text-decoration: none;
+
+        @media ${Breakpoints.Hover} {
+            &:hover {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverHover({ $color: $linkColor })};
+            }
+
+            &:active {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverActive({ $color: $linkColor })};
+            }
+        }
+    }
 `
 
 const StyledBlockquote = styled.blockquote<{
+    $color?: AllColorsTypes
+    $linkColor?: ColorsHoverTypes
+    $fontSize?: FontSizeTypes
+    $defaultSize?: FontSizeTypes
+    $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
-    $color?: LibColorsTypes | ColorsShortTypes | string
-    $linkColor?:
-        | ColorsHoverTypes
-        | {
-              default: string
-              hover: string
-              active: string
-          }
-    $fontSize?: FontSizeTypes | string | number
-    $display?: boolean
     $lineHeight?: string | number
 }>`
-    ${({ $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
+    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
         FontCommon({
+            $textAlign,
+            $lineHeight,
             $defaultSize: "title-h6",
             $fontSize,
-            $lineHeight,
-            $color,
-            $textAlign,
-            $linkColor,
+            $customFontSize,
         })};
+    color: ${({ theme, $color }) =>
+        theme.AllColors({
+            $color: $color,
+        })};
+
+    & > * {
+        color: ${({ theme, $color }) =>
+            theme.AllColors({
+                $color: $color,
+            })};
+    }
+
+    a {
+        color: ${({ theme, $linkColor }) =>
+            theme.ColorsHoverDefault({ $color: $linkColor })};
+        transition: ${Transitions.Short};
+        text-decoration: none;
+
+        @media ${Breakpoints.Hover} {
+            &:hover {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverHover({ $color: $linkColor })};
+            }
+
+            &:active {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverActive({ $color: $linkColor })};
+            }
+        }
+    }
 `
 
 const StyledUl = styled.ul<{
+    $color?: AllColorsTypes
+    $linkColor?: ColorsHoverTypes
+    $fontSize?: FontSizeTypes
+    $defaultSize?: FontSizeTypes
+    $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
-    $color?: LibColorsTypes | ColorsShortTypes | string
-    $linkColor?:
-        | ColorsHoverTypes
-        | {
-              default: string
-              hover: string
-              active: string
-          }
-    $fontSize?: FontSizeTypes | string | number
-    $display?: boolean
     $lineHeight?: string | number
 }>`
     padding: 0;
     margin: 0;
-    padding-left: ${Variables.Spacers.S};
+    padding-left: ${Spacers.S};
     ${Mixins.Grid({
         $gap: "xxs",
     })};
-    ${({ $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
+    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
         FontCommon({
+            $textAlign,
+            $lineHeight,
             $defaultSize: "body",
             $fontSize,
-            $lineHeight,
-            $color,
-            $textAlign,
-            $linkColor,
+            $customFontSize,
         })};
 
     li {
-        padding-inline-start: ${Variables.Spacers.XXS};
+        padding-inline-start: ${Spacers.XXS};
+        color: ${({ theme, $color }) =>
+            theme.AllColors({
+                $color: $color,
+            })};
+
+        & > * {
+            color: ${({ theme, $color }) =>
+                theme.AllColors({
+                    $color: $color,
+                })};
+        }
+
+        a {
+            color: ${({ theme, $linkColor }) =>
+                theme.ColorsHoverDefault({ $color: $linkColor })};
+            transition: ${Transitions.Short};
+            text-decoration: none;
+
+            @media ${Breakpoints.Hover} {
+                &:hover {
+                    color: ${({ theme, $linkColor }) =>
+                        theme.ColorsHoverHover({ $color: $linkColor })};
+                }
+
+                &:active {
+                    color: ${({ theme, $linkColor }) =>
+                        theme.ColorsHoverActive({ $color: $linkColor })};
+                }
+            }
+        }
     }
 `
 
 const StyledOl = styled.ol<{
+    $color?: AllColorsTypes
+    $linkColor?: ColorsHoverTypes
+    $fontSize?: FontSizeTypes
+    $defaultSize?: FontSizeTypes
+    $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
-    $color?: LibColorsTypes | ColorsShortTypes | string
-    $linkColor?:
-        | ColorsHoverTypes
-        | {
-              default: string
-              hover: string
-              active: string
-          }
-    $fontSize?: FontSizeTypes | string | number
-    $display?: boolean
     $lineHeight?: string | number
 }>`
+    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
+        FontCommon({
+            $textAlign,
+            $lineHeight,
+            $defaultSize: "body",
+            $fontSize,
+            $customFontSize,
+        })};
     padding: 0;
     margin: 0;
-    padding-left: ${Variables.Spacers.S};
+    padding-left: ${Spacers.S};
     ${Mixins.Grid({
         $gap: "xxs",
     })};
-    ${({ $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
-        FontCommon({
-            $defaultSize: "body",
-            $fontSize,
-            $lineHeight,
-            $color,
-            $textAlign,
-            $linkColor,
-        })};
 
     li {
-        padding-inline-start: ${Variables.Spacers.XXS};
+        padding-inline-start: ${Spacers.XXS};
+        color: ${({ theme, $color }) =>
+            theme.AllColors({
+                $color: $color,
+            })};
+
+        & > * {
+            color: ${({ theme, $color }) =>
+                theme.AllColors({
+                    $color: $color,
+                })};
+        }
+
+        a {
+            color: ${({ theme, $linkColor }) =>
+                theme.ColorsHoverDefault({ $color: $linkColor })};
+            transition: ${Transitions.Short};
+            text-decoration: none;
+
+            @media ${Breakpoints.Hover} {
+                &:hover {
+                    color: ${({ theme, $linkColor }) =>
+                        theme.ColorsHoverHover({ $color: $linkColor })};
+                }
+
+                &:active {
+                    color: ${({ theme, $linkColor }) =>
+                        theme.ColorsHoverActive({ $color: $linkColor })};
+                }
+            }
+        }
     }
 `
 
 const StyledDl = styled.dl<{
+    $color?: AllColorsTypes
+    $linkColor?: ColorsHoverTypes
+    $fontSize?: FontSizeTypes
+    $defaultSize?: FontSizeTypes
+    $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
-    $color?: LibColorsTypes | ColorsShortTypes | string
-    $linkColor?:
-        | ColorsHoverTypes
-        | {
-              default: string
-              hover: string
-              active: string
-          }
-    $fontSize?: FontSizeTypes | string | number
-    $display?: boolean
     $lineHeight?: string | number
 }>`
-    ${({ $fontSize, $lineHeight, $color, $textAlign, $linkColor }) =>
+    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
         FontCommon({
+            $textAlign,
+            $lineHeight,
             $defaultSize: "body",
             $fontSize,
-            $lineHeight,
-            $color,
-            $textAlign,
-            $linkColor,
+            $customFontSize,
         })};
 
     dt {
-        font-weight: ${Variables.FontWeights.Black};
+        font-weight: ${FontWeights.Black};
+        color: ${({ theme, $color }) =>
+            theme.AllColors({
+                $color: $color,
+            })};
+
+        & > * {
+            color: ${({ theme, $color }) =>
+                theme.AllColors({
+                    $color: $color,
+                })};
+        }
+
+        a {
+            color: ${({ theme, $linkColor }) =>
+                theme.ColorsHoverDefault({ $color: $linkColor })};
+            transition: ${Transitions.Short};
+            text-decoration: none;
+
+            @media ${Breakpoints.Hover} {
+                &:hover {
+                    color: ${({ theme, $linkColor }) =>
+                        theme.ColorsHoverHover({ $color: $linkColor })};
+                }
+
+                &:active {
+                    color: ${({ theme, $linkColor }) =>
+                        theme.ColorsHoverActive({ $color: $linkColor })};
+                }
+            }
+        }
     }
 
     dd {
-        padding-inline-start: ${Variables.Spacers.M};
+        padding-inline-start: ${Spacers.M};
+        color: ${({ theme, $color }) =>
+            theme.AllColors({
+                $color: $color,
+            })};
+
+        & > * {
+            color: ${({ theme, $color }) =>
+                theme.AllColors({
+                    $color: $color,
+                })};
+        }
+
+        a {
+            color: ${({ theme, $linkColor }) =>
+                theme.ColorsHoverDefault({ $color: $linkColor })};
+            transition: ${Transitions.Short};
+            text-decoration: none;
+
+            @media ${Breakpoints.Hover} {
+                &:hover {
+                    color: ${({ theme, $linkColor }) =>
+                        theme.ColorsHoverHover({ $color: $linkColor })};
+                }
+
+                &:active {
+                    color: ${({ theme, $linkColor }) =>
+                        theme.ColorsHoverActive({ $color: $linkColor })};
+                }
+            }
+        }
 
         &:not(:last-of-type) {
-            margin-bottom: ${Variables.Spacers.XS};
+            margin-bottom: ${Spacers.XS};
         }
     }
 `
+
+setDefaultTheme([
+    StyledH1,
+    StyledH2,
+    StyledH3,
+    StyledH4,
+    StyledH5,
+    StyledH6,
+    StyledP,
+    StyledStrong,
+    StyledEm,
+    StyledSmall,
+    StyledBlockquote,
+    StyledUl,
+    StyledOl,
+    StyledDl,
+])
 
 export {
     FontCommon,

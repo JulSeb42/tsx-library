@@ -5,13 +5,19 @@ import React, { useState } from "react"
 import * as Styles from "./styles"
 import { TooltipProps } from "./types"
 
-const Tooltip = ({ tooltip, children, options, ...props }: TooltipProps) => {
+const Tooltip = ({
+    tooltip,
+    children,
+    textStyle = "dotted",
+    color = "primary",
+    ...props
+}: TooltipProps) => {
     const [isVisible, setIsVisible] = useState(false)
 
     return (
         <Styles.StyledTooltip
-            $textStyle={options?.textStyle || "dotted"}
-            $color={options?.color || "primary"}
+            $textStyle={textStyle}
+            $color={color}
             onMouseEnter={() => setIsVisible(true)}
             onMouseLeave={() => setIsVisible(false)}
             {...props}

@@ -1,7 +1,6 @@
 /*=============================================== MarkdownEditor ===============================================*/
 
-import React from "react"
-import MDEditor from "@uiw/react-md-editor"
+import React, { useState } from "react"
 
 import InputContainer from ".././InputContainer"
 
@@ -12,33 +11,48 @@ const MarkdownEditor = ({
     id,
     onChange,
     value,
-    options,
+    label,
+    helper,
+    helperBottom,
+    accentColor = "primary",
     commands,
     extraCommands,
+    colorMode = "dark",
+    preview = "edit",
+    validation,
     ...props
 }: MarkdownEditorProps) => {
+    const [isFocus, setIsFocus] = useState(false)
+
     const inputFunction = () => (
-        <Styles.StyledMarkdownEditor
-            data-color-mode={options?.colorMode || "light"}
+        <Styles.StyledContainer
+            $accentColor={accentColor}
+            data-color-mode={colorMode}
         >
-            <MDEditor
+            <Styles.Editor
                 id={id}
                 onChange={onChange}
                 value={value}
-                preview={options?.preview || "edit"}
+                preview={preview}
                 commands={commands}
                 extraCommands={extraCommands}
+                $validation={validation}
+                onFocus={() => setIsFocus(true)}
+                onBlur={() => setIsFocus(false)}
+                $isFocus={isFocus}
+                $accentColor={accentColor}
                 {...props}
             />
-        </Styles.StyledMarkdownEditor>
+        </Styles.StyledContainer>
     )
 
-    return options?.label || options?.helper || options?.helperBottom ? (
+    return label || helper || helperBottom ? (
         <InputContainer
             id={id}
-            label={options.label}
-            helper={options.helper}
-            helperBottom={options.helperBottom}
+            label={label}
+            helper={helper}
+            helperBottom={helperBottom}
+            accentColor={accentColor}
         >
             {inputFunction()}
         </InputContainer>

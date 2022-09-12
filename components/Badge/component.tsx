@@ -7,37 +7,37 @@ import Icon from "../Icon"
 import * as Styles from "./styles"
 import { BadgeProps } from "./types"
 
-const Badge = ({ content, options, ...props }: BadgeProps) => {
-    const defaultSize = 16
-
-    return (
-        <Styles.StyledBadge
-            $color={options?.color || "primary"}
-            $size={options?.size || defaultSize}
-            $children={!!content}
-            $childrenLength={
-                typeof content === "number"
-                    ? content.toString().length
-                    : undefined
-            }
-            $padding={options?.padding}
-            $textColor={options?.textColor}
-            {...props}
-        >
-            {typeof content === "number" ? (
-                content
-            ) : typeof content === "string" ? (
-                <Icon
-                    src={content}
-                    size={
-                        options?.size ? options?.size * 0.6 : defaultSize * 0.6
-                    }
-                />
-            ) : (
-                ""
-            )}
-        </Styles.StyledBadge>
-    )
-}
+const Badge = ({
+    content,
+    color = "primary",
+    textColor,
+    size = 16,
+    padding,
+    as,
+    ...props
+}: BadgeProps) => (
+    <Styles.StyledBadge
+        $children={!!content}
+        $childrenLength={
+            typeof content === "number"
+                ? content?.toString().length
+                : content?.length
+        }
+        $color={color}
+        $padding={padding}
+        $size={size}
+        $textColor={textColor}
+        as={as}
+        {...props}
+    >
+        {typeof content === "number" ? (
+            content
+        ) : typeof content === "string" ? (
+            <Icon src={content} size={size * 0.7} />
+        ) : (
+            ""
+        )}
+    </Styles.StyledBadge>
+)
 
 export default Badge

@@ -7,14 +7,30 @@ import { ProgressBarProps } from "./types"
 
 const ProgressBar = ({
     value,
-    options = { animated: true },
+    animated = true,
+    color = "primary",
+    backgroundColor,
+    as,
+    width = "100%",
+    height = "m",
+    direction = "horizontal",
     ...props
 }: ProgressBarProps) => (
     <Styles.StyledProgressBar
         $value={value}
-        $animated={options.animated}
-        $color={options.color || "primary"}
-        $backgroundColor={options.backgroundColor || "gray-100"}
+        $animated={animated}
+        $color={color}
+        $backgroundColor={
+            !backgroundColor && color === "white"
+                ? "gray-900"
+                : !backgroundColor
+                ? "gray-100"
+                : backgroundColor
+        }
+        as={as}
+        $direction={direction}
+        $width={width}
+        $height={height}
         {...props}
     />
 )

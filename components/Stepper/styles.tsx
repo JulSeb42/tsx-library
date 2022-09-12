@@ -2,13 +2,25 @@
 
 import styled, { css } from "styled-components"
 
-import Variables from "../../Variables"
+import {
+    Radiuses,
+    FontWeights,
+    FontSizes,
+    Breakpoints,
+    Transitions,
+} from "../../Variables"
 import Mixins from "../../Mixins"
 import TextComponent from "../Text"
+import setDefaultTheme from "../../utils/setDefaultTheme"
+
+import { ColorsHoverTypes } from "../../utils/common-types"
 
 import { DirectionTypes } from "./types"
 
-const StyledStepper = styled.div<{ $direction?: DirectionTypes }>`
+const StyledStepper = styled.div<{
+    $direction?: DirectionTypes
+    $accentColor?: ColorsHoverTypes
+}>`
     position: relative;
     ${({ $direction }) =>
         Mixins.Flexbox({
@@ -28,15 +40,14 @@ const StyledStepper = styled.div<{ $direction?: DirectionTypes }>`
         position: absolute;
         left: 12px;
         top: 12px;
-        background-color: ${Variables.Colors.Primary500};
+        background-color: ${({ $accentColor, theme }) =>
+            theme.AllColors({ $color: $accentColor })};
         z-index: 0;
     }
 `
 
 const Item = styled.span<{
     $direction?: DirectionTypes
-    $to?: string
-    icon?: string
 }>`
     position: relative;
     z-index: 1;
@@ -53,42 +64,60 @@ const Item = styled.span<{
 
 const numberSize = 24
 
-const Number = styled.span<{ $isActive?: boolean }>`
+const Number = styled.span<{
+    $isActive?: boolean
+    $accentColor?: ColorsHoverTypes
+}>`
     width: ${numberSize}px;
     height: ${numberSize}px;
-    border-radius: ${Variables.Radiuses.Circle};
-    background-color: ${({ $isActive }) =>
-        $isActive ? Variables.Colors.Primary500 : Variables.Colors.Primary300};
-    color: ${Variables.Colors.White};
-    outline: 2px solid ${Variables.Colors.White};
+    border-radius: ${Radiuses.Circle};
+    background-color: ${({ $isActive, $accentColor, theme }) =>
+        $isActive
+            ? theme.ColorsHoverDefault({ $color: $accentColor })
+            : theme.ColorsHoverHover({ $color: $accentColor })};
+    color: ${({ $accentColor, theme }) =>
+        $accentColor === "white" ? theme.Primary500 : theme.Background};
+    outline: 2px solid ${({ theme }) => theme.Background};
     ${Mixins.Flexbox({
         $inline: true,
         $alignItems: "center",
         $justifyContent: "center",
     })};
-    font-weight: ${Variables.FontWeights.Black};
+    font-weight: ${FontWeights.Black};
 `
 
-const Text = styled(TextComponent)<{ to?: string; tag: "small" }>`
-    font-size: ${Variables.FontSizes.Small};
+const Text = styled(TextComponent).attrs({
+    tag: "small",
+})<{
+    to?: string
+    $accentColor?: ColorsHoverTypes
+}>`
+    font-size: ${FontSizes.Small};
     text-decoration: none;
-    color: ${Variables.Colors.Primary500};
+    color: ${({ theme }) => theme.Font};
 
-    ${({ to }) =>
+    ${({ to, $accentColor, theme }) =>
         to &&
         css`
-            transition: ${Variables.Transitions.Short};
+            transition: ${Transitions.Short};
+            color: ${theme.ColorsHoverDefault({ $color: $accentColor })};
 
-            @media ${Variables.Breakpoints.Hover} {
+            @media ${Breakpoints.Hover} {
                 &:hover {
-                    color: ${Variables.Colors.Primary300};
+                    color: ${theme.ColorsHoverHover({
+                        $color: $accentColor,
+                    })};
                 }
 
                 &:active {
-                    color: ${Variables.Colors.Primary600};
+                    color: ${theme.ColorsHoverActive({
+                        $color: $accentColor,
+                    })};
                 }
             }
         `}
 `
+
+setDefaultTheme([StyledStepper, Item, Number, Text])
 
 export { StyledStepper, Item, Number, Text }

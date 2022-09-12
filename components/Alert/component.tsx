@@ -11,11 +11,12 @@ const Alert = ({
     color = "primary",
     children,
     isModal,
+    as,
     ...props
 }: AlertProps) => (
     <Styles.StyledAlert
         $color={color}
-        as={typeof children === "string" ? Text : "div"}
+        as={as ? as : typeof children === "string" ? Text : "div"}
         $isModal={isModal}
         {...props}
     >

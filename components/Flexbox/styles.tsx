@@ -3,6 +3,7 @@
 import styled from "styled-components"
 
 import Mixins from "../../Mixins"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 import {
     SpacersTypes,
@@ -29,5 +30,7 @@ const StyledFlexbox = styled.div<{
 }>`
     ${Mixins.Flexbox};
 `
+
+setDefaultTheme([StyledFlexbox])
 
 export { StyledFlexbox }

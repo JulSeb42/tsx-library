@@ -4,6 +4,7 @@ import styled from "styled-components"
 
 import Mixins from "../../Mixins"
 import Text from "../Text"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 import { SeparatorTypes } from "./types"
 
@@ -17,12 +18,18 @@ const StyledBreacrumbs = styled(Text)<{ $separator?: SeparatorTypes }>`
         })};
 `
 
-const Separator = styled.span<{ $separator?: SeparatorTypes }>`
+const Separator = styled.span<{
+    $separator?: SeparatorTypes
+    $customIcon?: boolean
+}>`
     color: currentColor;
     position: relative;
-    top: ${({ $separator }) => $separator === "icon" && "4px"};
+    top: ${({ $separator, $customIcon }) =>
+        ($separator === "icon" || $customIcon) && "4px"};
 `
 
 const Item = styled.span``
+
+setDefaultTheme([StyledBreacrumbs, Separator, Item])
 
 export { StyledBreacrumbs, Separator, Item }

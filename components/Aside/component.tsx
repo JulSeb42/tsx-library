@@ -14,6 +14,7 @@ const Aside = ({
     justifyContent,
     justifyItems,
     gap = "l",
+    as,
     ...props
 }: AsideProps) => (
     <Styles.StyledAside
@@ -24,6 +25,7 @@ const Aside = ({
         $justifyContent={justifyContent}
         $justifyItems={justifyItems}
         $gap={gap}
+        as={as}
         {...props}
     >
         {children}

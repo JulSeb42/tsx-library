@@ -7,20 +7,24 @@ import { AllProps } from "../types"
 import { StyledUl } from "../styles"
 
 const Ul = ({
-    color,
     textAlign,
-    linkColor,
-    children,
-    fontSize,
+    color,
+    linkColor = "primary",
     lineHeight,
+    fontSize,
+    customFontSize,
+    children,
+    as,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLUListElement>) => (
     <StyledUl
-        $color={color}
         $textAlign={textAlign}
+        $color={color}
         $linkColor={linkColor}
-        $fontSize={fontSize}
         $lineHeight={lineHeight}
+        $fontSize={fontSize}
+        $customFontSize={customFontSize}
+        as={as}
         {...props}
     >
         {children}

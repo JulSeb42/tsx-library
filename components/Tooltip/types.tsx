@@ -2,7 +2,7 @@
 
 import React from "react"
 
-import { ColorsShortTypes, LibColorsTypes } from "../../utils/common-types"
+import { AllColorsTypes } from "../../utils/common-types"
 
 /*==================== List possibilities ====================*/
 
@@ -19,8 +19,6 @@ export type TextStylesTypes = keyof typeof textStyles
 export interface TooltipProps extends React.HTMLAttributes<HTMLSpanElement> {
     tooltip: string
     children: string
-    options?: {
-        textStyle?: TextStylesTypes
-        color?: ColorsShortTypes | LibColorsTypes | string
-    }
+    textStyle?: TextStylesTypes
+    color?: AllColorsTypes
 }

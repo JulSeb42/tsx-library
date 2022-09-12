@@ -2,38 +2,36 @@
 
 import React from "react"
 
-import {
-    ValidationTypes,
-    LibColorsTypes,
-    ColorsShortTypes,
-} from "../../utils/common-types"
+import { ShadowsTypes } from "../../utils/common-types"
+import { InputContainerProps } from "../InputContainer/types"
+import { ValidationProps, InputBackgroundTypes } from "../Input/types"
+import { ListDirectionTypes } from "../ListInputs/types"
 
-export interface AutocompleteProps
-    extends React.HTMLAttributes<HTMLInputElement> {
+export interface BaseProps
+    extends React.HTMLAttributes<HTMLInputElement>,
+        InputContainerProps,
+        ValidationProps {
     id: string
-    items: string[] | number[]
-    onClickItem: (e: React.MouseEvent<HTMLLIElement>) => void
+    items: string[]
     disabled?: boolean
-    value: any
+    value: string
+    setValue: (value: string) => void
     autoFocus?: boolean
-
-    validation?: {
-        status: ValidationTypes | undefined
-        iconPassed?: string
-        iconNotPassed?: string
-    }
-
-    options?: {
-        label?: string
-        helper?: string
-        helperBottom?:
-            | string
-            | {
-                  text: string
-                  icon?: string
-                  iconColor?: LibColorsTypes | ColorsShortTypes | string
-              }
-        icon?: string
-        textEmpty?: string
-    }
+    children?: never
+    icon?: string
+    emptyText?: string
+    backgroundColor?: InputBackgroundTypes
+    listDirection?: ListDirectionTypes
 }
+
+interface PossibleList1 extends BaseProps {
+    listVariant?: "bordered"
+    listShadow?: never
+}
+
+interface PossibleList2 extends BaseProps {
+    listVariant?: "shadow"
+    listShadow?: ShadowsTypes
+}
+
+export type AutocompleteProps = PossibleList1 | PossibleList2

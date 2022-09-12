@@ -2,11 +2,7 @@
 
 import React from "react"
 
-import {
-    LibColorsTypes,
-    ColorsShortTypes,
-    ColorsHoverTypes,
-} from "../../utils/common-types"
+import { AllColorsTypes, ColorsHoverTypes } from "../../utils/common-types"
 import { BreadcrumbsItemProps } from "../../utils/component-props"
 
 /*==================== List possibilities ====================*/
@@ -20,19 +16,20 @@ export type SeparatorTypes = keyof typeof separators
 
 /*==================== Component Types ====================*/
 
-export interface BreadcrumbsProps
-    extends React.HTMLAttributes<HTMLParagraphElement> {
+export interface BaseProps extends React.HTMLAttributes<HTMLParagraphElement> {
     items: BreadcrumbsItemProps[]
-
-    options?: {
-        separator?: SeparatorTypes
-        color?: LibColorsTypes | ColorsShortTypes | string
-        linkColor?:
-            | ColorsHoverTypes
-            | {
-                  default: string
-                  hover: string
-                  active: string
-              }
-    }
+    color?: AllColorsTypes
+    linkColor?: ColorsHoverTypes
 }
+
+interface Possible1 extends BaseProps {
+    separator?: SeparatorTypes
+    customIcon?: never
+}
+
+interface Possible2 extends BaseProps {
+    separator?: never
+    customIcon?: string | JSX.Element
+}
+
+export type BreadcrumbsProps = Possible1 | Possible2

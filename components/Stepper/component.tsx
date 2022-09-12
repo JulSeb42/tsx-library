@@ -10,14 +10,28 @@ import { uuid } from "../../utils/utils"
 import * as Styles from "./styles"
 import { StepperProps } from "./types"
 
-const Stepper = ({ steps, active, options, ...props }: StepperProps) => (
-    <Styles.StyledStepper $direction={options?.direction || "row"} {...props}>
+const Stepper = ({
+    steps,
+    active,
+    direction,
+    iconActive,
+    accentColor = "primary",
+    ...props
+}: StepperProps) => (
+    <Styles.StyledStepper
+        $direction={direction || "row"}
+        $accentColor={accentColor}
+        {...props}
+    >
         {steps.map((step, i) => (
-            <Styles.Item $direction={options?.direction || "row"} key={uuid()}>
-                <Styles.Number $isActive={active >= i ? true : false}>
+            <Styles.Item $direction={direction || "row"} key={uuid()}>
+                <Styles.Number
+                    $accentColor={accentColor}
+                    $isActive={active >= i ? true : false}
+                >
                     {active >= i + 1 ? (
-                        options?.iconActive ? (
-                            <Icon src={options?.iconActive} size={16} />
+                        iconActive ? (
+                            <Icon src={iconActive} size={16} />
                         ) : (
                             <CheckIcon size={16} />
                         )
@@ -27,9 +41,9 @@ const Stepper = ({ steps, active, options, ...props }: StepperProps) => (
                 </Styles.Number>
 
                 <Styles.Text
-                    tag="small"
                     as={step.to ? Link : "small"}
                     to={step.to}
+                    $accentColor={accentColor}
                 >
                     {step.text}
                 </Styles.Text>

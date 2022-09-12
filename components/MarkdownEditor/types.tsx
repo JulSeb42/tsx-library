@@ -2,27 +2,19 @@
 
 import React from "react"
 
-import { LibColorsTypes, ColorsShortTypes } from "../../utils/common-types"
+import { InputContainerProps } from "../InputContainer/types"
+import { ValidationTypes } from "../../utils/common-types"
 
 export interface MarkdownEditorProps
-    extends React.HTMLAttributes<HTMLInputElement> {
+    extends React.HTMLAttributes<HTMLInputElement>,
+        InputContainerProps {
     id: string
-    value: any
+    value: string
     onChange: any
     commands?: any
     extraCommands?: any
-
-    options?: {
-        colorMode?: "light" | "dark"
-        label?: string
-        helper?: string
-        helperBottom?:
-            | string
-            | {
-                  text: string
-                  icon?: string
-                  iconColor?: LibColorsTypes | ColorsShortTypes | string
-              }
-        preview?: "live" | "edit" | "preview"
-    }
+    children?: never
+    colorMode?: "light" | "dark"
+    preview?: "live" | "edit" | "preview"
+    validation?: ValidationTypes
 }

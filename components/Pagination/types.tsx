@@ -2,6 +2,8 @@
 
 import React from "react"
 
+import { ColorsHoverTypes } from "../../utils/common-types"
+
 /*==================== List possibilities ====================*/
 
 const justify = {
@@ -20,6 +22,7 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLDivElement> {
 
 interface BaseButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     disabled?: boolean
+    color?: ColorsHoverTypes
 }
 
 interface Possible1 extends BaseButtonProps {

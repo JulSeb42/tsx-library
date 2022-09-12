@@ -16,6 +16,7 @@ const InputCheck = forwardRef(
             validation,
             iconCheck,
             checkStyle,
+            accentColor = "primary",
             ...props
         }: InputCheckProps,
         ref?: React.ForwardedRef<HTMLInputElement>
@@ -29,6 +30,7 @@ const InputCheck = forwardRef(
                 $validation={validation}
                 $tile={checkStyle === "tile"}
                 ref={ref}
+                $accentColor={accentColor}
                 {...props}
             />
 
@@ -37,6 +39,7 @@ const InputCheck = forwardRef(
                     htmlFor={id}
                     $disabled={disabled}
                     $validation={validation}
+                    $accentColor={accentColor}
                 >
                     {label}
                 </Styles.Toggle>
@@ -45,6 +48,7 @@ const InputCheck = forwardRef(
                     htmlFor={id}
                     $disabled={disabled}
                     $validation={validation}
+                    $accentColor={accentColor}
                 >
                     {label}
                 </Styles.Selector>
@@ -55,6 +59,7 @@ const InputCheck = forwardRef(
                     $disabled={disabled}
                     $validation={validation}
                     $iconCheck={iconCheck}
+                    $accentColor={accentColor}
                 >
                     {label}
                 </Styles.Checkbox>
@@ -64,6 +69,7 @@ const InputCheck = forwardRef(
                     $tile={checkStyle === "tile"}
                     $disabled={disabled}
                     $validation={validation}
+                    $accentColor={accentColor}
                 >
                     {label}
                 </Styles.Radio>

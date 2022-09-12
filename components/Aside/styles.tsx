@@ -3,8 +3,9 @@
 import styled from "styled-components"
 import { stringifyPx } from "ts-utils-julseb"
 
-import Variables from "../../Variables"
+import { Layouts, Spacers, Breakpoints } from "../../Variables"
 import Mixins from "../../Mixins"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 import {
     GridJustifyContentTypes,
@@ -27,10 +28,10 @@ const StyledAside = styled.aside<{
 }>`
     width: ${({ $size }) =>
         $size === "small"
-            ? Variables.Layouts.Aside.Small
+            ? Layouts.Aside.Small
             : typeof $size === "number"
             ? stringifyPx($size)
-            : Variables.Layouts.Aside.Default};
+            : Layouts.Aside.Default};
     ${({ $justifyContent, $justifyItems, $alignContent, $alignItems, $gap }) =>
         Mixins.Grid({
             $alignContent: $alignContent || "start",
@@ -38,13 +39,13 @@ const StyledAside = styled.aside<{
             $justifyContent: $justifyContent,
             $alignItems: $alignItems,
             $gap,
-            $padding: `${Variables.Spacers.XXL} 0`,
+            $padding: `${Spacers.XXL} 0`,
         })};
     min-height: 100vh;
     grid-column: ${({ $position }) =>
         $position === 2 ? 3 : $position === 3 ? 4 : 2};
 
-    @media ${Variables.Breakpoints.Tablet} {
+    @media ${Breakpoints.Tablet} {
         min-height: inherit;
         grid-column: 2;
     }
@@ -78,5 +79,7 @@ const StyledAside = styled.aside<{
         justify-self: stretch;
     }
 `
+
+setDefaultTheme([StyledAside])
 
 export { StyledAside }

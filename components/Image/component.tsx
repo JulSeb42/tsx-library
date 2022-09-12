@@ -12,9 +12,11 @@ const Img = React.lazy(() => import("./styles"))
 const Image = ({
     src,
     alt,
-    options,
+    fit,
+    caption,
     width = "100%",
     height = "auto",
+    borderRadius,
     ...props
 }: ImageProps) => {
     const img = () => (
@@ -23,31 +25,32 @@ const Image = ({
             alt={alt}
             $width={width}
             $height={height}
-            $fit={options?.fit}
+            $fit={fit}
+            $borderRadius={!caption ? borderRadius : undefined}
             {...props}
         />
     )
 
     return (
         <Suspense fallback={<Fallback $width={width} $height={height} />}>
-            {options?.caption ? (
+            {caption ? (
                 <Styles.StyledImageContainer
                     $width={width}
                     $height={height}
+                    $borderRadius={borderRadius}
                     {...props}
                 >
                     {img()}
 
                     <Styles.Caption
                         $background={
-                            typeof options.caption === "object"
-                                ? options.caption.background
+                            typeof caption === "object"
+                                ? caption.background
                                 : "black"
                         }
+                        as="figcaption"
                     >
-                        {typeof options.caption === "object"
-                            ? options.caption.text
-                            : options.caption}
+                        {typeof caption === "object" ? caption.text : caption}
                     </Styles.Caption>
                 </Styles.StyledImageContainer>
             ) : (

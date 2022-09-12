@@ -17,35 +17,79 @@ const Button = forwardRef(
             to,
             type = "button",
             isLoading,
-            options,
+            icons,
+            variant = "plain",
+            noPadding,
+            color = "primary",
+            libicon,
+            shadow,
+            loaderVariant = 1,
             ...props
         }: ButtonProps,
         ref?: React.ForwardedRef<HTMLButtonElement>
-    ) => (
-        <Styles.StyledButton
-            $color={options?.color || "primary"}
-            $buttonStyle={options?.variant || "plain"}
-            $noPadding={options?.noPadding}
-            as={to ? Link : "button"}
-            to={to ? to : undefined}
-            disabled={!!isLoading || disabled}
-            type={to ? undefined : type}
-            ref={ref}
-            {...props}
-        >
-            {isLoading && (
-                <Loader options={{ size: 16, borderSize: 2, color: "gray" }} />
-            )}
+    ) => {
+        const loaderFunction = () => (
+            <Loader size={16} borderSize={2} color="gray" variant={loaderVariant} speed={loaderVariant === 3 ? 1200 : 1000} />
+        )
 
-            {options?.iconLeft && !isLoading && (
-                <Icon src={options.iconLeft} size={16} />
-            )}
+        return (
+            <Styles.StyledButton
+                disabled={!!isLoading || disabled}
+                $variant={variant}
+                $color={color}
+                $noPadding={noPadding}
+                as={to ? Link : "button"}
+                to={to ? to : undefined}
+                type={to ? undefined : type}
+                ref={ref}
+                $shadow={typeof shadow === "object" ? shadow.default : shadow}
+                $shadowHover={
+                    typeof shadow === "object" ? shadow.hover : shadow
+                }
+                $shadowActive={
+                    typeof shadow === "object" ? shadow.active : shadow
+                }
+                {...props}
+            >
+                {icons?.only ? (
+                    isLoading ? (
+                        loaderFunction()
+                    ) : typeof icons.only === "string" ? (
+                        <Icon src={icons.only} size={16} />
+                    ) : (
+                        icons.only
+                    )
+                ) : libicon?.only ? (
+                    libicon.only
+                ) : (
+                    <>
+                        {isLoading && loaderFunction()}
 
-            {children}
+                        {!isLoading && libicon?.left && libicon.left}
 
-            {options?.iconRight && <Icon src={options.iconRight} size={16} />}
-        </Styles.StyledButton>
-    )
+                        {!isLoading &&
+                            icons?.left &&
+                            (typeof icons.left === "string" ? (
+                                <Icon src={icons.left} size={16} />
+                            ) : (
+                                icons.left
+                            ))}
+
+                        {children}
+
+                        {icons?.right &&
+                            (typeof icons.right === "string" ? (
+                                <Icon src={icons.right} size={16} />
+                            ) : (
+                                icons.right
+                            ))}
+
+                        {libicon?.right && libicon.right}
+                    </>
+                )}
+            </Styles.StyledButton>
+        )
+    }
 )
 
 export default Button

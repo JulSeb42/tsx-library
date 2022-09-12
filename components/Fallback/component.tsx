@@ -3,7 +3,7 @@
 import styled from "styled-components"
 import { stringifyPx } from "ts-utils-julseb"
 
-import Variables from "../../Variables"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const Fallback = styled.div<{
     $width?: number | string
@@ -12,7 +12,9 @@ const Fallback = styled.div<{
     position: relative;
     width: ${({ $width }) => ($width ? stringifyPx($width) : "100%")};
     height: ${({ $height }) => ($height ? stringifyPx($height) : "auto")};
-    background-color: ${Variables.Colors.Gray500};
+    background-color: ${({ theme }) => theme.Gray500};
 `
+
+setDefaultTheme([Fallback])
 
 export default Fallback

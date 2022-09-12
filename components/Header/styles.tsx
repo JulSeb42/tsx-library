@@ -3,27 +3,34 @@
 import styled, { css } from "styled-components"
 import { Link } from "react-router-dom"
 
-import Variables from "../../Variables"
+import {
+    FontSizes,
+    FontWeights,
+    Breakpoints,
+    Spacers,
+    Transitions,
+    Overlays,
+} from "../../Variables"
 import Mixins from "../../Mixins"
 import Image from "../Image"
 import Burger from "../Burger"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import {
-    ColorsHoverTypes,
-    LibColorsTypes,
-    ColorsShortTypes,
-} from "../../utils/common-types"
+import { ColorsHoverTypes, AllColorsTypes } from "../../utils/common-types"
 
-import { PositionsTypes } from "./types"
+import { PositionsTypes, NavVariantsTypes } from "./types"
 
 const LogoImg = styled(Image)`
     object-position: left center;
+    position: relative;
+    z-index: 999;
 `
 
 const HeaderBurger = styled(Burger)`
     display: none;
+    z-index: 999;
 
-    @media ${Variables.Breakpoints.Mobile} {
+    @media ${Breakpoints.Mobile} {
         display: inherit;
     }
 `
@@ -31,26 +38,28 @@ const HeaderBurger = styled(Burger)`
 const Logo = styled(Link)``
 
 const LinkStyles = ({ $linkColor }: { $linkColor?: ColorsHoverTypes }) => css`
-    font-size: ${Variables.FontSizes.Body};
+    font-size: ${FontSizes.Body};
     padding: 0;
     border: none;
     background-color: transparent;
     text-decoration: none;
-    color: ${Mixins.ColorsHoverDefault({ $color: $linkColor })};
-    font-weight: ${Variables.FontWeights.Regular};
+    color: ${({ theme }) => theme.ColorsHoverDefault({ $color: $linkColor })};
+    font-weight: ${FontWeights.Regular};
 
     &.active,
     &${Logo} {
-        font-weight: ${Variables.FontWeights.Black};
+        font-weight: ${FontWeights.Black};
     }
 
-    @media ${Variables.Breakpoints.Hover} {
+    @media ${Breakpoints.Hover} {
         &:hover {
-            color: ${Mixins.ColorsHoverHover({ $color: $linkColor })};
+            color: ${({ theme }) =>
+                theme.ColorsHoverHover({ $color: $linkColor })};
         }
 
         &:active {
-            color: ${Mixins.ColorsHoverActive({ $color: $linkColor })};
+            color: ${({ theme }) =>
+                theme.ColorsHoverActive({ $color: $linkColor })};
         }
     }
 `
@@ -58,9 +67,12 @@ const LinkStyles = ({ $linkColor }: { $linkColor?: ColorsHoverTypes }) => css`
 const StyledHeader = styled.header<{
     $isOpen: boolean
     $position?: PositionsTypes
-    $backgroundColor?: LibColorsTypes | ColorsShortTypes | string
+    $backgroundColor?: AllColorsTypes
     $linkColor?: ColorsHoverTypes
-    $navColor?: LibColorsTypes | ColorsShortTypes | string
+    $navColor?: AllColorsTypes
+    $burgerPosition?: "left" | "right"
+    $navVariant?: NavVariantsTypes
+    ref?: any
 }>`
     position: ${({ $position }) => $position};
     z-index: 999;
@@ -70,31 +82,48 @@ const StyledHeader = styled.header<{
         $justifyContent: "space-between",
         $gap: "l",
     })};
-    padding: ${Variables.Spacers.M} 5vw;
-    background-color: ${({ $backgroundColor }) =>
-        Mixins.AllColors({
+    padding: ${Spacers.M} 5vw;
+    background-color: ${({ $backgroundColor, theme }) =>
+        theme.AllColors({
             $color: $backgroundColor,
         })};
 
-    @media ${Variables.Breakpoints.Mobile} {
-        background-color: ${({ $backgroundColor, $navColor, $isOpen }) =>
-            $backgroundColor === "transparent" && $isOpen
-                ? Mixins.AllColors({ $color: $navColor })
-                : Mixins.AllColors({ $color: $backgroundColor })};
+    @media ${Breakpoints.Mobile} {
+        background-color: ${({
+            $navVariant,
+            $backgroundColor,
+            $navColor,
+            $isOpen,
+            theme,
+        }) =>
+            $navVariant === "top" &&
+            ($backgroundColor === "transparent" && $isOpen
+                ? theme.AllColors({ $color: $navColor })
+                : theme.AllColors({ $color: $backgroundColor }))};
     }
 
     & > a,
     & > button {
         ${LinkStyles};
     }
+
+    ${({ $burgerPosition }) =>
+        $burgerPosition === "left" &&
+        css`
+            @media ${Breakpoints.Mobile} {
+                justify-content: flex-start;
+                gap: ${Spacers.XS};
+            }
+        `}
 `
 
 const Nav = styled.nav<{
     $isOpen: boolean
     $headerHeight: number
-    $backgroundColor?: LibColorsTypes | ColorsShortTypes | string
-    $navColor?: LibColorsTypes | ColorsShortTypes | string
+    $backgroundColor?: AllColorsTypes
+    $navColor?: AllColorsTypes
     $linkColor?: ColorsHoverTypes
+    $variant?: NavVariantsTypes
 }>`
     ${Mixins.Flexbox({
         $alignItems: "center",
@@ -106,23 +135,87 @@ const Nav = styled.nav<{
         ${LinkStyles};
     }
 
-    @media ${Variables.Breakpoints.Mobile} {
+    @media ${Breakpoints.Mobile} {
         position: absolute;
-        top: ${({ $headerHeight, $isOpen }) =>
-            $isOpen ? $headerHeight : -300}px;
-        background-color: ${({ $backgroundColor, $navColor }) =>
+        background-color: ${({ $backgroundColor, $navColor, theme }) =>
             $backgroundColor === "transparent"
-                ? Mixins.AllColors({ $color: $navColor })
-                : Mixins.AllColors({
+                ? theme.AllColors({ $color: $navColor })
+                : theme.AllColors({
                       $color: $backgroundColor,
                   })};
-        left: 0;
-        padding: ${Variables.Spacers.M} 5vw;
-        width: 100%;
-        flex-direction: column;
-        align-items: flex-start;
-        transition: ${Variables.Transitions.Short};
+        transition: ${Transitions.Short};
+        z-index: 998;
+
+        ${({ $variant, $headerHeight, $isOpen }) =>
+            $variant === "full"
+                ? css`
+                      width: 100vw;
+                      height: 100vh;
+                      top: 0;
+                      left: ${$isOpen ? 0 : "-600px"};
+                      flex-direction: column;
+                      justify-content: center;
+                      padding: ${Spacers.L};
+
+                      & > a,
+                      & > button {
+                          font-size: ${FontSizes.Titles.H5};
+                      }
+                  `
+                : $variant === "drawer"
+                ? css`
+                      width: 70%;
+                      height: 100vh;
+                      top: 0;
+                      left: ${$isOpen ? 0 : "-600px"};
+                      flex-direction: column;
+                      justify-content: flex-start;
+                      align-items: flex-start;
+                      padding: calc(${$headerHeight}px + ${Spacers.L}) 5vw
+                          ${Spacers.S};
+                  `
+                : $variant === "top" &&
+                  css`
+                      top: ${$isOpen ? $headerHeight : -300}px;
+                      left: 0;
+                      padding: ${Spacers.M} 5vw;
+                      width: 100%;
+                      flex-direction: column;
+                      align-items: flex-start;
+                  `}
     }
 `
 
-export { LogoImg, HeaderBurger, Logo, StyledHeader, Nav }
+const Overlay = styled.span<{ $isOpen?: boolean }>`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: ${Overlays.Plain.Black80};
+    z-index: 995;
+    visibility: ${({ $isOpen }) => ($isOpen ? "visible" : "hidden")};
+    opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
+    transition: ${Transitions.Short};
+`
+
+const SearchForm = styled.form`
+    width: 100%;
+    max-width: 300px;
+
+    @media ${Breakpoints.Mobile} {
+        max-width: 100%;
+    }
+`
+
+setDefaultTheme([
+    LogoImg,
+    HeaderBurger,
+    Logo,
+    StyledHeader,
+    Nav,
+    Overlay,
+    SearchForm,
+])
+
+export { LogoImg, HeaderBurger, Logo, StyledHeader, Nav, Overlay, SearchForm }

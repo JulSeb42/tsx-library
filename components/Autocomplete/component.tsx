@@ -1,28 +1,40 @@
 /*=============================================== Autocomplete component ===============================================*/
 
 import React, { useState, forwardRef } from "react"
+import { slugify } from "ts-utils-julseb"
 
-import Variables from "../../Variables"
-import Icon from "../Icon"
 import BaseInput from "../InputContainer"
-import CloseCircleIcon from "../../icons/CloseCircleIcon"
-import CheckCircleIcon from "../../icons/CheckCircleIcon"
+import {
+    IconComponent,
+    ValidationComponent,
+    RightContainer,
+} from "../InputComponents"
+import { ListInputs, ListItem } from "../ListInputs"
 import { uuid } from "../../utils/utils"
 
 import * as Styles from "./styles"
 import { AutocompleteProps } from "./types"
 
-const InputFunction = forwardRef(
+const Autocomplete = forwardRef(
     (
         {
             id,
-            items,
-            onClickItem,
             disabled,
+            items,
             value,
+            setValue,
             autoFocus,
-            options,
+            icon,
+            emptyText = "No result.",
+            label,
+            helper,
+            helperBottom,
             validation,
+            accentColor = "primary",
+            backgroundColor,
+            listVariant,
+            listShadow,
+            listDirection,
             ...props
         }: AutocompleteProps,
         ref?: React.ForwardedRef<HTMLInputElement>
@@ -31,12 +43,78 @@ const InputFunction = forwardRef(
         const handleOpen = () => setIsOpen(true)
         const handleClose = () => setTimeout(() => setIsOpen(false), 100)
 
-        return (
+        // Handles
+        const [filteredValues, setFilteredValues] = useState("")
+
+        const handleFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
+            setValue(e.target.value)
+            setFilteredValues(e.target.value)
+        }
+
+        const results = items
+            .sort()
+            .filter(item => slugify(item).includes(slugify(filteredValues)))
+        const handleClick = (e: any) => setValue(e.target.innerText)
+
+        // Component functions
+
+        const listItemsFunction = () =>
+            results.length > 0 ? (
+                results.slice(0, 20).map(item => (
+                    <ListItem
+                        accentColor={accentColor}
+                        validation={validation?.status}
+                        backgroundColor={backgroundColor}
+                        onClick={handleClick}
+                        isActive={value === item && true}
+                        key={uuid()}
+                    >
+                        {item}
+                    </ListItem>
+                ))
+            ) : (
+                <ListItem
+                    accentColor={accentColor}
+                    validation={validation?.status}
+                    backgroundColor={backgroundColor}
+                    readOnly
+                >
+                    {emptyText}
+                </ListItem>
+            )
+
+        const listProps = {
+            isOpen: isOpen,
+            accentColor: accentColor,
+            backgroundColor: backgroundColor,
+            validation: validation?.status,
+            direction: listDirection,
+        }
+
+        const listFunction = () =>
+            listVariant === "bordered" ? (
+                <ListInputs {...listProps} variant={listVariant}>
+                    {listItemsFunction()}
+                </ListInputs>
+            ) : (
+                <ListInputs
+                    {...listProps}
+                    variant={listVariant}
+                    shadow={listShadow}
+                >
+                    {listItemsFunction()}
+                </ListInputs>
+            )
+
+        const inputFunction = () => (
             <Styles.InputContainer>
-                {options?.icon && (
-                    <Styles.IconContainer>
-                        <Icon src={options.icon} size={20} color="primary" />
-                    </Styles.IconContainer>
+                {icon && (
+                    <IconComponent
+                        accentColor={accentColor}
+                        disabled={disabled}
+                        icon={icon}
+                        validation={validation?.status}
+                    />
                 )}
 
                 <Styles.StyledInput
@@ -44,100 +122,34 @@ const InputFunction = forwardRef(
                     onFocus={!disabled ? handleOpen : undefined}
                     onBlur={!disabled ? handleClose : undefined}
                     type="text"
-                    $icon={!!options?.icon}
+                    $hasIcon={!!icon}
                     value={value}
                     autoFocus={autoFocus}
                     $validation={validation?.status}
                     ref={ref}
+                    $accentColor={accentColor}
+                    $backgroundColor={backgroundColor}
+                    onChange={handleFilter}
                     {...props}
                 />
 
                 {validation && (
-                    <Styles.RightContainer $disabled={disabled}>
-                        {validation &&
-                            validation.status !== undefined &&
-                            (validation.status === "passed" ? (
-                                validation.iconPassed ? (
-                                    <Icon
-                                        src={validation.iconPassed}
-                                        size={24}
-                                        color="success"
-                                    />
-                                ) : (
-                                    <CheckCircleIcon
-                                        size={24}
-                                        color={Variables.Colors.Success500}
-                                    />
-                                )
-                            ) : validation.iconNotPassed ? (
-                                <Icon
-                                    src={validation.iconNotPassed}
-                                    size={24}
-                                    color="danger"
-                                />
-                            ) : (
-                                <CloseCircleIcon
-                                    size={24}
-                                    color={Variables.Colors.Danger500}
-                                />
-                            ))}
-                    </Styles.RightContainer>
+                    <RightContainer disabled={disabled}>
+                        <ValidationComponent validation={validation} />
+                    </RightContainer>
                 )}
 
-                <Styles.List $isOpen={isOpen}>
-                    {items.length > 0 ? (
-                        items.slice(0, 20).map(item => (
-                            <Styles.Item key={uuid()} onClick={onClickItem}>
-                                {item}
-                            </Styles.Item>
-                        ))
-                    ) : (
-                        <Styles.Item $readOnly>
-                            {options?.textEmpty || "No result!"}
-                        </Styles.Item>
-                    )}
-                </Styles.List>
+                {listFunction()}
             </Styles.InputContainer>
         )
-    }
-)
 
-const Autocomplete = forwardRef(
-    (
-        {
-            id,
-            items,
-            onClickItem,
-            disabled,
-            value,
-            autoFocus,
-            options,
-            validation,
-            ...props
-        }: AutocompleteProps,
-        ref?: React.ForwardedRef<HTMLInputElement>
-    ) => {
-        const inputFunction = () => (
-            <InputFunction
-                id={id}
-                items={items}
-                onClickItem={onClickItem}
-                disabled={disabled}
-                value={value}
-                autoFocus={autoFocus}
-                options={options}
-                validation={validation}
-                ref={ref}
-                {...props}
-            />
-        )
-
-        return options?.label || options?.helper || options?.helperBottom ? (
+        return label || helper || helperBottom ? (
             <BaseInput
                 id={id}
-                label={options.label}
-                helper={options.helper}
-                helperBottom={options.helperBottom}
+                label={label}
+                helper={helper}
+                helperBottom={helperBottom}
+                accentColor={accentColor}
             >
                 {inputFunction()}
             </BaseInput>

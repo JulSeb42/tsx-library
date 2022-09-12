@@ -2,11 +2,8 @@
 
 import React from "react"
 
-import {
-    ColorsHoverTypes,
-    LibColorsTypes,
-    ColorsShortTypes,
-} from "../../utils/common-types"
+import { ColorsHoverTypes, AllColorsTypes } from "../../utils/common-types"
+import { InputBackgroundTypes } from "../Input/types"
 
 /*==================== List possibilities ====================*/
 
@@ -18,15 +15,36 @@ const positions = {
 
 export type PositionsTypes = keyof typeof positions
 
+const navVariants = {
+    full: "full",
+    top: "top",
+    drawer: "drawer",
+} as const
+
+export type NavVariantsTypes = keyof typeof navVariants
+
 /*==================== Component Types ====================*/
 
 interface BaseProps extends React.HTMLAttributes<HTMLDivElement> {
     position?: PositionsTypes
     children: React.ReactNode | React.ReactNode[]
-    backgroundColor?: LibColorsTypes | ColorsShortTypes | string
+    backgroundColor?: AllColorsTypes
     linkColor?: ColorsHoverTypes
     burgerColor?: ColorsHoverTypes
-    navColor?: LibColorsTypes | ColorsShortTypes | string
+    burgerPosition?: "left" | "right"
+    navColor?: AllColorsTypes
+    navVariant?: NavVariantsTypes
+    search?: {
+        search: string
+        setSearch: (search: string) => void
+        handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+        icon?: string
+        iconClear?: string
+        placeholder?: string
+        id?: string
+        keyboardShortcut?: string[]
+        backgroundColor?: InputBackgroundTypes
+    }
 }
 
 interface Possible1 extends BaseProps {

@@ -8,14 +8,31 @@ import Image from "../Image"
 import * as Styles from "./styles"
 import { AvatarProps } from "./types"
 
-const Avatar = ({ options, content, ...props }: AvatarProps) => {
-    const defaultSize = 48
-
-    return (
+const Avatar = ({
+    content,
+    color = "primary",
+    contentColor,
+    size = 48,
+    as,
+    border,
+    badge,
+    ...props
+}: AvatarProps) => {
+    const avatarFunction = () => (
         <Styles.StyledAvatar
-            $color={options?.color || "primary"}
-            $size={options?.size || defaultSize}
-            $contentColor={options?.contentColor}
+            $color={color}
+            $size={size}
+            $contentColor={contentColor}
+            as={as}
+            $border={typeof border === "object" ? true : border}
+            $borderWidth={
+                typeof border === "object" && border.width ? border.width : 2
+            }
+            $borderColor={
+                typeof border === "object" && border.color
+                    ? border.color
+                    : "primary"
+            }
             {...props}
         >
             {content.img ? (
@@ -24,19 +41,51 @@ const Avatar = ({ options, content, ...props }: AvatarProps) => {
                     alt={content.img.alt || "Avatar"}
                     width="100%"
                     height="100%"
-                    options={{ fit: "cover" }}
+                    fit="cover"
                 />
-            ) : content.icon && options?.size ? (
-                <Icon
-                    src={content.icon}
-                    size={
-                        options?.size ? options?.size * 0.6 : defaultSize * 0.6
-                    }
-                />
+            ) : content.icon ? (
+                <Icon src={content.icon} size={size * 0.7} />
             ) : (
                 content.letter
             )}
         </Styles.StyledAvatar>
+    )
+
+    return badge ? (
+        <Styles.AvatarContainer $size={size}>
+            {avatarFunction()}
+
+            <Styles.Badge
+                $background={
+                    typeof badge === "object" ? badge.color : "primary"
+                }
+                $length={
+                    typeof badge === "object" && badge.content
+                        ? badge.content.toString().length
+                        : typeof badge === "number"
+                        ? badge.toString().length
+                        : 0
+                }
+                $textColor={
+                    typeof badge === "object" && badge.contentColor
+                        ? badge.contentColor
+                        : "background"
+                }
+                $position={
+                    typeof badge === "object" && badge.position
+                        ? badge.position
+                        : "top"
+                }
+            >
+                {typeof badge === "object" && badge.content
+                    ? badge.content
+                    : typeof badge === "number"
+                    ? badge
+                    : ""}
+            </Styles.Badge>
+        </Styles.AvatarContainer>
+    ) : (
+        avatarFunction()
     )
 }
 

@@ -3,21 +3,23 @@
 import styled from "styled-components"
 import SVG from "react-inlinesvg"
 
-import Mixins from "../../Mixins"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { LibColorsTypes, ColorsShortTypes } from "../../utils/common-types"
+import { AllColorsTypes } from "../../utils/common-types"
 
 const StyledIcon = styled(SVG)<{
     $size?: number
-    $color?: LibColorsTypes | ColorsShortTypes | string
+    $color?: AllColorsTypes
 }>`
     width: ${({ $size }) => $size}px;
     height: ${({ $size }) => $size}px;
-    fill: ${Mixins.AllColors};
+    fill: ${({ theme, $color }) => theme.AllColors({ $color: $color })};
 
     path {
-        fill: ${Mixins.AllColors};
+        fill: ${({ theme, $color }) => theme.AllColors({ $color: $color })};
     }
 `
+
+setDefaultTheme([StyledIcon])
 
 export { StyledIcon }

@@ -18,6 +18,7 @@ const Flexbox = ({
     columnGap,
     padding,
     children,
+    as,
     ...props
 }: FlexboxProps) => (
     <Styles.StyledFlexbox
@@ -32,6 +33,7 @@ const Flexbox = ({
         $rowGap={rowGap}
         $columnGap={columnGap}
         $padding={padding}
+        as={as}
         {...props}
     >
         {children}

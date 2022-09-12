@@ -1,9 +1,9 @@
 /*=============================================== Burger styles ===============================================*/
 
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
-import Variables from "../../Variables"
-import Mixins from "../../Mixins"
+import { Breakpoints, Radiuses, Transitions } from "../../Variables"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 import { ColorsHoverTypes } from "../../utils/common-types"
 
@@ -12,33 +12,39 @@ const StyledBurger = styled.button<{
     $color?: ColorsHoverTypes
     $width?: number
     $height?: number
+    $noHover?: boolean
+    $borderWidth?: number
 }>`
     position: relative;
     border: none;
     background-color: transparent;
     width: ${({ $width }) => $width}px;
     height: ${({ $height }) => $height}px;
-    color: ${Mixins.ColorsHoverDefault};
+    color: ${({ theme }) => theme.ColorsHoverDefault};
 
-    @media ${Variables.Breakpoints.Hover} {
-        &:hover {
-            color: ${Mixins.ColorsHoverHover};
-        }
+    ${({ $noHover }) =>
+        !$noHover &&
+        css`
+            @media ${Breakpoints.Hover} {
+                &:hover {
+                    color: ${({ theme }) => theme.ColorsHoverHover};
+                }
 
-        &:active {
-            color: ${Mixins.ColorsHoverActive};
-        }
-    }
+                &:active {
+                    color: ${({ theme }) => theme.ColorsHoverActive};
+                }
+            }
+        `}
 
     span {
         display: block;
         width: 100%;
-        height: 2px;
-        border-radius: ${Variables.Radiuses.Round};
+        height: ${({ $borderWidth }) => $borderWidth}px;
+        border-radius: ${Radiuses.Round};
         position: absolute;
         left: 0;
         background-color: currentColor;
-        transition: ${Variables.Transitions.Short};
+        transition: ${Transitions.Short};
 
         &:first-child {
             top: ${({ $isOpen }) => ($isOpen ? "45%" : 0)};
@@ -56,5 +62,7 @@ const StyledBurger = styled.button<{
         }
     }
 `
+
+setDefaultTheme([StyledBurger])
 
 export { StyledBurger }

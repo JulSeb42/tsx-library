@@ -4,33 +4,27 @@ import React from "react"
 
 import {
     ValidationTypes,
-    LibColorsTypes,
-    ColorsShortTypes,
+    ColorsHoverTypes,
+    RadiusesTypes,
 } from "../../utils/common-types"
+import { InputContainerProps } from "../InputContainer/types"
 
-export interface InputImageProps extends React.HTMLAttributes<HTMLInputElement> {
+export interface InputImageProps
+    extends React.HTMLAttributes<HTMLInputElement>,
+        InputContainerProps {
     id: string
     disabled?: boolean
     validation?: ValidationTypes
     width?: number | string
     height?: number | string
     value?: never
+    accentColor?: ColorsHoverTypes
+    children?: never
+    borderRadius?: RadiusesTypes
 
     img: {
         src: string
         alt?: string
-    }
-
-    options?: {
-        label?: string
-        helper?: string
-        helperBottom?:
-            | string
-            | {
-                  text: string
-                  icon?: string
-                  iconColor?: LibColorsTypes | ColorsShortTypes | string
-              }
     }
 
     icons?: {

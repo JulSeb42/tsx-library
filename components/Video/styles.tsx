@@ -4,6 +4,7 @@
 
 import styled from "styled-components"
 import { stringifyPx } from "ts-utils-julseb"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 import { ObjectFitTypes } from "../../utils/common-types"
 
@@ -19,5 +20,7 @@ const Vid = styled.video<{
     height: ${({ $height }) => ($height ? stringifyPx($height) : "auto")};
     aspect-ratio: ${({ $aspectRatio }) => $aspectRatio};
 `
+
+setDefaultTheme([Vid])
 
 export default Vid

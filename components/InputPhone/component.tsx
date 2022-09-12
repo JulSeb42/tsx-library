@@ -1,128 +1,215 @@
 /*=============================================== InputPhone ===============================================*/
 
-import React, { useRef, forwardRef } from "react"
+import React, { useRef, forwardRef, useState, useEffect } from "react"
+import { uuid } from "../../utils/utils"
 
 import InputContainer from "../InputContainer"
 import Icon from "../Icon"
 import CaretDownIcon from "../../icons/CaretDownIcon"
-import CheckCircleIcon from "../../icons/CheckCircleIcon"
-import CloseCircleIcon from "../../icons/CloseCircleIcon"
-import Variables from "../../Variables"
 import useClickOutside from "../../hooks/useClickOutside"
+import { ValidationComponent, RightContainer } from "../InputComponents"
+import countries from "../../utils/countries"
+import { ListInputs, ListItem } from "../ListInputs"
 
 import * as Styles from "./styles"
-import { InputPhoneProps, ItemProps } from "./types"
+import { InputPhoneProps, CountryType } from "./types"
 
 const InputPhone = forwardRef(
     (
         {
-            isOpen,
-            setIsOpen,
             id,
-            selectedCountry,
-            options,
-            children,
-            input,
-            validation,
             disabled,
-            search,
+            value,
+            onChange,
+            defaultCountry = "de",
+            selectedCountry = undefined,
+            setSelectedCountry,
+            iconButton,
+            label,
+            helper,
+            helperBottom,
+            accentColor = "primary",
+            validation,
+            searchPlaceholder = "Search",
+            hasSearch = true,
+            backgroundColor,
+            listVariant,
+            listShadow,
+            listDirection,
             ...props
         }: InputPhoneProps,
         ref?: React.ForwardedRef<HTMLInputElement>
     ) => {
+        useEffect(() => {
+            setSelectedCountry(
+                countries.filter(country => country.code === defaultCountry)[0]
+            )
+        }, [defaultCountry, setSelectedCountry])
+
+        const [isOpen, setIsOpen] = useState(false)
+
         const listRef = useRef<HTMLButtonElement>(null)
         const onClickOutside = () => setIsOpen(false)
         useClickOutside(listRef, onClickOutside)
 
+        const [search, setSearch] = useState("")
+        const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
+            setSearch(e.target.value)
+
+        const results = countries.filter(
+            country =>
+                country.name.toLowerCase().includes(search.toLowerCase()) ||
+                country.dial_code.includes(search.toLowerCase()) ||
+                country.code.toLowerCase().includes(search.toLowerCase())
+        )
+
+        const selectCountry = (value: CountryType) => {
+            setSelectedCountry(value)
+            setIsOpen(false)
+            setSearch("")
+        }
+
+        const listItems = () => (
+            <>
+                {hasSearch && (
+                    <Styles.SearchContainer>
+                        <Styles.StyledIconSearch
+                            size={16}
+                            color={
+                                validation?.status === "not-passed"
+                                    ? "danger"
+                                    : accentColor
+                            }
+                        />
+
+                        <Styles.InputSearch
+                            placeholder={searchPlaceholder}
+                            onChange={handleSearch}
+                            value={search}
+                            $accentColor={accentColor}
+                            $validation={validation?.status}
+                            $backgroundColor={backgroundColor}
+                        />
+                    </Styles.SearchContainer>
+                )}
+
+                {results.map(country => (
+                    <ListItem
+                        isActive={country === selectedCountry && true}
+                        onClick={() => selectCountry(country)}
+                        accentColor={accentColor}
+                        validation={validation?.status}
+                        backgroundColor={backgroundColor}
+                        key={uuid()}
+                        {...props}
+                    >
+                        <Styles.Flag
+                            src={country.flag}
+                            alt={`Flag ${country.name}`}
+                        />
+                        <span>
+                            ({country.dial_code}) {country.name}
+                        </span>
+                    </ListItem>
+                ))}
+            </>
+        )
+
+        const listProps = {
+            isOpen: isOpen,
+            accentColor: accentColor,
+            validation: validation?.status,
+            backgroundColor: backgroundColor,
+            direction: listDirection,
+        }
+
+        const listFunction = () =>
+            listVariant === "bordered" ? (
+                <ListInputs {...listProps} variant={listVariant}>
+                    {listItems()}
+                </ListInputs>
+            ) : (
+                <ListInputs
+                    {...listProps}
+                    variant={listVariant}
+                    shadow={listShadow}
+                >
+                    {listItems()}
+                </ListInputs>
+            )
+
         const inputContent = () => (
-            <Styles.StyledInputPhone $isOpen={isOpen}>
+            <Styles.StyledInputPhone $isOpen={isOpen} ref={listRef}>
                 <Styles.Button type="button" onClick={() => setIsOpen(!isOpen)}>
                     <Styles.Flag
-                        src={selectedCountry.flag}
-                        alt={`Flag ${selectedCountry.name}`}
+                        src={selectedCountry && selectedCountry.flag}
+                        alt={`Flag ${selectedCountry && selectedCountry.name}`}
                     />
 
-                    {options?.iconButton ? (
-                        <Icon src={options.iconButton} size={12} />
+                    {iconButton ? (
+                        <Icon
+                            src={iconButton}
+                            size={12}
+                            color={
+                                validation?.status === "not-passed" && isOpen
+                                    ? "danger"
+                                    : isOpen
+                                    ? accentColor
+                                    : "gray"
+                            }
+                        />
                     ) : (
-                        <CaretDownIcon size={12} />
+                        <CaretDownIcon
+                            size={12}
+                            color={
+                                validation?.status === "not-passed" && isOpen
+                                    ? "danger"
+                                    : isOpen
+                                    ? accentColor
+                                    : "gray"
+                            }
+                        />
                     )}
                 </Styles.Button>
 
-                <Styles.List $isOpen={isOpen} ref={listRef}>
-                    {search && (
-                        <Styles.SearchContainer>
-                            <Styles.StyledIconSearch
-                                size={16}
-                                color="primary"
-                            />
+                {listFunction()}
 
-                            <Styles.InputSearch
-                                placeholder={search.placeholder || "Search"}
-                                onChange={search.handleSearch}
-                                value={search.value}
-                            />
-                        </Styles.SearchContainer>
-                    )}
-
-                    {children}
-                </Styles.List>
-
-                <Styles.CountryCode>
-                    {selectedCountry.dial_code}
+                <Styles.CountryCode $backgroundColor={backgroundColor}>
+                    {selectedCountry && selectedCountry.dial_code}
                 </Styles.CountryCode>
 
                 <Styles.Input
-                    $codeLength={selectedCountry.dial_code.length}
+                    $codeLength={
+                        selectedCountry ? selectedCountry.dial_code.length : 3
+                    }
                     id={id}
-                    value={input.value}
-                    onChange={input.onChange}
+                    value={value}
+                    onChange={onChange}
                     type="tel"
                     disabled={disabled}
                     ref={ref}
+                    $accentColor={accentColor}
+                    $isListOpen={isOpen}
+                    $validation={validation?.status}
+                    $backgroundColor={backgroundColor}
                     {...props}
                 />
 
                 {validation && (
-                    <Styles.RightContainer $disabled={disabled}>
-                        {validation &&
-                            validation.status !== undefined &&
-                            (validation.status === "passed" ? (
-                                validation.iconPassed ? (
-                                    <Icon
-                                        src={validation.iconPassed}
-                                        size={24}
-                                        color="success"
-                                    />
-                                ) : (
-                                    <CheckCircleIcon
-                                        size={24}
-                                        color={Variables.Colors.Success500}
-                                    />
-                                )
-                            ) : validation.iconNotPassed ? (
-                                <Icon
-                                    src={validation.iconNotPassed}
-                                    size={24}
-                                    color="danger"
-                                />
-                            ) : (
-                                <CloseCircleIcon
-                                    size={24}
-                                    color={Variables.Colors.Danger500}
-                                />
-                            ))}
-                    </Styles.RightContainer>
+                    <RightContainer disabled={disabled}>
+                        <ValidationComponent validation={validation} />
+                    </RightContainer>
                 )}
             </Styles.StyledInputPhone>
         )
 
-        return options?.label || options?.helper || options?.helperBottom ? (
+        return label || helper || helperBottom ? (
             <InputContainer
                 id={id}
-                label={options.label}
-                helper={options.helper}
-                helperBottom={options.helperBottom}
+                label={label}
+                helper={helper}
+                helperBottom={helperBottom}
+                accentColor={accentColor}
             >
                 {inputContent()}
             </InputContainer>
@@ -132,25 +219,4 @@ const InputPhone = forwardRef(
     }
 )
 
-const InputPhoneItem = forwardRef(
-    (
-        { country, onClick, isActive, ...props }: ItemProps,
-        ref?: React.ForwardedRef<HTMLSpanElement>
-    ) => {
-        return (
-            <Styles.Item
-                $isActive={isActive}
-                onClick={onClick}
-                ref={ref}
-                {...props}
-            >
-                <Styles.Flag src={country.flag} alt={`Flag ${country.name}`} />
-                <span>
-                    ({country.dial_code}) {country.name}
-                </span>
-            </Styles.Item>
-        )
-    }
-)
-
-export { InputPhone, InputPhoneItem }
+export default InputPhone

@@ -2,10 +2,18 @@
 
 import styled, { css } from "styled-components"
 
-import Variables from "../../Variables"
+import {
+    Transitions,
+    Spacers,
+    FontSizes,
+    Radiuses,
+    Breakpoints,
+    FontWeights,
+} from "../../Variables"
 import Mixins from "../../Mixins"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { ValidationTypes } from "../../utils/common-types"
+import { ValidationTypes, ColorsHoverTypes } from "../../utils/common-types"
 
 const StyledInputCheck = styled.div``
 
@@ -18,25 +26,26 @@ const Tile = ({
     $disabled?: boolean
     $iconCheck?: string
 }) => css`
-    background-color: ${Variables.Colors.White};
-    border-radius: ${Variables.Radiuses.M};
-    border: 1px solid ${Variables.Colors.Gray200};
-    padding: ${Variables.Spacers.S};
+    background-color: ${({ theme }) => theme.Background};
+    border-radius: ${Radiuses.M};
+    border: 1px solid ${({ theme }) => theme.Gray200};
+    padding: ${Spacers.S};
     width: 100%;
-    transition: ${Variables.Transitions.Short};
+    transition: ${Transitions.Short};
 
-    @media ${Variables.Breakpoints.Hover} {
+    @media ${Breakpoints.Hover} {
         &:hover {
-            border-color: ${$validation === "not-passed" && !$disabled
-                ? Variables.Colors.Danger300
-                : $disabled
-                ? Variables.Colors.Gray200
-                : Variables.Colors.Primary300};
+            border-color: ${({ theme }) =>
+                $validation === "not-passed" && !$disabled
+                    ? theme.Danger300
+                    : $disabled
+                    ? theme.Gray200
+                    : theme.Primary300};
         }
     }
 `
 
-const Common = css`
+const Common = ({ $accentColor }: { $accentColor?: ColorsHoverTypes }) => css`
     ${Mixins.Flexbox({
         $inline: true,
         $alignItems: "center",
@@ -44,9 +53,14 @@ const Common = css`
         $justifyContent: "flex-start",
     })};
     position: relative;
-    font-size: ${Variables.FontSizes.Body};
-    color: ${Variables.Colors.Black};
-    font-weight: ${Variables.FontWeights.Regular};
+    font-size: ${FontSizes.Body};
+    color: ${({ theme }) =>
+        theme
+            ? theme.Font
+            : $accentColor === "white"
+            ? theme.White
+            : theme.Black};
+    font-weight: ${FontWeights.Regular};
 `
 
 const radioSize = 16
@@ -56,6 +70,7 @@ const Radio = styled.label<{
     $tile?: boolean
     $validation?: ValidationTypes
     $disabled?: boolean
+    $accentColor?: ColorsHoverTypes
 }>`
     ${Common};
 
@@ -64,14 +79,14 @@ const Radio = styled.label<{
         width: ${radioSize}px;
         height: ${radioSize}px;
         border: 2px solid
-            ${({ $validation, $disabled }) =>
+            ${({ $validation, $disabled, $accentColor, theme }) =>
                 $disabled
-                    ? Variables.Colors.Gray500
+                    ? theme.Gray500
                     : $validation === "not-passed"
-                    ? Variables.Colors.Danger500
-                    : Variables.Colors.Primary500};
+                    ? theme.Danger500
+                    : theme.AllColors({ $color: $accentColor })};
         display: block;
-        border-radius: ${Variables.Radiuses.Circle};
+        border-radius: ${Radiuses.Circle};
     }
 
     &:after {
@@ -82,8 +97,8 @@ const Radio = styled.label<{
         width: ${radioDotSize}px;
         height: ${radioDotSize}px;
         background-color: transparent;
-        border-radius: ${Variables.Radiuses.Circle};
-        transition: ${Variables.Transitions.Short};
+        border-radius: ${Radiuses.Circle};
+        transition: ${Transitions.Short};
     }
 
     ${({ $tile }) =>
@@ -105,6 +120,7 @@ const Checkbox = styled.label<{
     $validation?: ValidationTypes
     $disabled?: boolean
     $iconCheck?: string
+    $accentColor?: ColorsHoverTypes
 }>`
     ${Common};
 
@@ -114,25 +130,27 @@ const Checkbox = styled.label<{
         width: ${checkboxSize}px;
         height: ${checkboxSize}px;
         border: 2px solid
-            ${({ $validation }) =>
+            ${({ $validation, $accentColor, theme }) =>
                 $validation === "not-passed"
-                    ? Variables.Colors.Danger500
-                    : Variables.Colors.Primary500};
-        border-radius: ${Variables.Radiuses.S};
-        transition: ${Variables.Transitions.Short};
+                    ? theme.Danger500
+                    : theme.AllColors({ $color: $accentColor })};
+        border-radius: ${Radiuses.S};
+        transition: ${Transitions.Short};
     }
 
     &:after {
-        ${({ $iconCheck }) =>
+        ${({ $iconCheck, $accentColor, theme }) =>
             $iconCheck
-                ? Mixins.Icon({
+                ? theme.Icon({
                       $name: $iconCheck,
-                      $color: Variables.Colors.White,
+                      $color:
+                          $accentColor === "white" ? "primary" : "background",
                       $size: 8,
                   })
-                : Mixins.LibIcon({
+                : theme.LibIcon({
                       $name: "check",
-                      $color: Variables.Colors.White,
+                      $color:
+                          $accentColor === "white" ? "primary" : "background",
                       $size: 12,
                   })};
         ${Mixins.Flexbox({
@@ -143,6 +161,7 @@ const Checkbox = styled.label<{
         position: absolute;
         left: ${({ $iconCheck }) => ($iconCheck ? 4 : 2)}px;
         top: ${({ $iconCheck }) => ($iconCheck ? 8 : 6)}px;
+        opacity: 0;
     }
 
     ${({ $tile }) =>
@@ -162,6 +181,7 @@ const toggleDotSize = 8
 const Toggle = styled.label<{
     $validation?: ValidationTypes
     $disabled?: boolean
+    $accentColor?: ColorsHoverTypes
 }>`
     ${Common};
 
@@ -169,65 +189,63 @@ const Toggle = styled.label<{
         content: "";
         width: 24px;
         height: 16px;
-        border-radius: ${Variables.Radiuses.Round};
+        border-radius: ${Radiuses.Round};
         border: 2px solid
-            ${({ $validation, $disabled }) =>
+            ${({ $validation, $disabled, $accentColor, theme }) =>
                 $validation === "not-passed" && !$disabled
-                    ? Variables.Colors.Danger500
+                    ? theme.Danger500
                     : $disabled
-                    ? Variables.Colors.Gray500
-                    : Variables.Colors.Primary500};
-        transition: ${Variables.Transitions.Short};
+                    ? theme.Gray500
+                    : theme.AllColors({ $color: $accentColor })};
+        transition: ${Transitions.Short};
     }
 
     &:after {
         content: "";
         width: ${toggleDotSize}px;
         height: ${toggleDotSize}px;
-        border-radius: ${Variables.Radiuses.Circle};
+        border-radius: ${Radiuses.Circle};
         position: absolute;
-        background-color: ${({ $validation, $disabled }) =>
+        background-color: ${({ $validation, $disabled, $accentColor, theme }) =>
             $validation === "not-passed" && !$disabled
-                ? Variables.Colors.Danger500
+                ? theme.Danger500
                 : $disabled
-                ? Variables.Colors.Gray500
-                : Variables.Colors.Primary500};
+                ? theme.Gray500
+                : theme.AllColors({ $color: $accentColor })};
         top: 8px;
         left: 4px;
-        transition: ${Variables.Transitions.Short};
+        transition: ${Transitions.Short};
     }
 `
 
 const Selector = styled.label<{
     $validation?: ValidationTypes
     $disabled?: boolean
+    $accentColor?: ColorsHoverTypes
 }>`
-    padding: ${Variables.Spacers.XXS} ${Variables.Spacers.M};
-    border-radius: ${Variables.Radiuses.Round};
-    transition: ${Variables.Transitions.Short};
-    background-color: ${({ $validation }) =>
-        $validation === "not-passed"
-            ? Variables.Colors.Danger50
-            : Variables.Colors.Gray100};
-    color: ${({ $validation }) =>
-        $validation === "not-passed"
-            ? Variables.Colors.Danger500
-            : Variables.Colors.Black};
+    padding: ${Spacers.XXS} ${Spacers.M};
+    border-radius: ${Radiuses.Round};
+    transition: ${Transitions.Short};
+    background-color: ${({ $validation, theme }) =>
+        $validation === "not-passed" ? theme.Danger50 : theme.Gray100};
+    color: ${({ $validation, theme }) =>
+        $validation === "not-passed" ? theme.Danger500 : theme.Font};
 
-    @media ${Variables.Breakpoints.Hover} {
+    @media ${Breakpoints.Hover} {
         &:hover {
-            background-color: ${({ $validation }) =>
+            background-color: ${({ $validation, $accentColor, theme }) =>
                 $validation === "not-passed"
-                    ? Variables.Colors.Danger300
-                    : Variables.Colors.Primary300};
-            color: ${Variables.Colors.White};
+                    ? theme.Danger300
+                    : theme.ColorsHoverHover({ $color: $accentColor })};
+            color: ${({ $accentColor, theme }) =>
+                $accentColor === "white" ? theme.Primary500 : theme.Background};
         }
 
         &:active {
-            background-color: ${({ $validation }) =>
+            background-color: ${({ $validation, $accentColor, theme }) =>
                 $validation === "not-passed"
-                    ? Variables.Colors.Danger600
-                    : Variables.Colors.Primary600};
+                    ? theme.Danger600
+                    : theme.ColorsHoverActive({ $color: $accentColor })};
         }
     }
 `
@@ -235,6 +253,7 @@ const Selector = styled.label<{
 const Input = styled.input<{
     $tile?: boolean
     $validation?: ValidationTypes
+    $accentColor?: ColorsHoverTypes
 }>`
     display: none;
 
@@ -243,69 +262,91 @@ const Input = styled.input<{
     }
 
     &:disabled ~ label {
-        color: ${Variables.Colors.Gray500};
+        color: ${({ theme }) => theme.Gray500};
         cursor: not-allowed;
     }
 
     &:checked {
         & ~ ${Radio}:after {
-            background-color: ${({ $validation }) =>
+            background-color: ${({ $validation, $accentColor, theme }) =>
                 $validation === "not-passed"
-                    ? Variables.Colors.Danger500
-                    : Variables.Colors.Primary500};
+                    ? theme.Danger500
+                    : theme.AllColors({ $color: $accentColor })};
         }
 
-        & ~ ${Checkbox}:before {
-            background-color: ${({ $validation }) =>
-                $validation === "not-passed"
-                    ? Variables.Colors.Danger500
-                    : Variables.Colors.Primary500};
+        & ~ ${Checkbox} {
+            &:before {
+                background-color: ${({ $validation, $accentColor, theme }) =>
+                    $validation === "not-passed"
+                        ? theme.Danger500
+                        : theme.AllColors({ $color: $accentColor })};
+            }
+
+            &:after {
+                opacity: 1;
+            }
         }
 
         & ~ ${Toggle} {
             &:before {
-                border-color: ${({ $validation, disabled }) =>
+                border-color: ${({ $validation, disabled, theme }) =>
                     $validation === "not-passed" && !disabled
-                        ? Variables.Colors.Danger500
+                        ? theme.Danger500
                         : disabled
-                        ? Variables.Colors.Gray100
-                        : Variables.Colors.Success500};
-                background-color: ${({ $validation, disabled }) =>
+                        ? theme.Gray100
+                        : theme.Success500};
+                background-color: ${({ $validation, disabled, theme }) =>
                     $validation === "not-passed" && !disabled
-                        ? Variables.Colors.Danger500
+                        ? theme.Danger500
                         : disabled
-                        ? Variables.Colors.Gray100
-                        : Variables.Colors.Success500};
+                        ? theme.Gray100
+                        : theme.Success500};
             }
 
             &:after {
-                background-color: ${({ disabled }) =>
-                    !disabled && Variables.Colors.White};
+                background-color: ${({ disabled, theme }) =>
+                    !disabled && theme.Background};
                 left: 12px;
             }
         }
 
         & ~ ${Selector} {
-            background-color: ${({ $validation }) =>
+            background-color: ${({ $validation, $accentColor, theme }) =>
                 $validation === "not-passed"
-                    ? Variables.Colors.Danger500
-                    : Variables.Colors.Primary500};
-            color: ${Variables.Colors.White};
+                    ? theme.Danger500
+                    : theme.AllColors({ $color: $accentColor })};
+            color: ${({ $accentColor, theme }) =>
+                $accentColor === "white" ? theme.Primary500 : theme.Background};
 
-            @media ${Variables.Breakpoints.Hover} {
+            @media ${Breakpoints.Hover} {
                 &:hover {
-                    background-color: ${({ $validation }) =>
+                    background-color: ${({
+                        $validation,
+                        $accentColor,
+                        theme,
+                    }) =>
                         $validation === "not-passed"
-                            ? Variables.Colors.Danger300
-                            : Variables.Colors.Primary300};
-                    color: ${Variables.Colors.White};
+                            ? theme.Danger300
+                            : theme.ColorsHoverHover({
+                                  $color: $accentColor,
+                              })};
+                    color: ${({ $accentColor, theme }) =>
+                        $accentColor === "white"
+                            ? theme.Primary500
+                            : theme.Background};
                 }
 
                 &:active {
-                    background-color: ${({ $validation }) =>
+                    background-color: ${({
+                        $validation,
+                        $accentColor,
+                        theme,
+                    }) =>
                         $validation === "not-passed"
-                            ? Variables.Colors.Danger600
-                            : Variables.Colors.Primary600};
+                            ? theme.Danger300
+                            : theme.ColorsHoverActive({
+                                  $color: $accentColor,
+                              })};
                 }
             }
         }
@@ -313,57 +354,59 @@ const Input = styled.input<{
 
     &:disabled {
         & ~ ${Checkbox}:before {
-            border-color: ${Variables.Colors.Gray500};
+            border-color: ${({ theme }) => theme.Gray500};
         }
 
         & ~ ${Selector} {
-            background-color: ${Variables.Colors.Gray50};
-            color: ${Variables.Colors.Gray500};
+            background-color: ${({ theme }) => theme.Gray50};
+            color: ${({ theme }) => theme.Gray500};
 
-            @media ${Variables.Breakpoints.Hover} {
+            @media ${Breakpoints.Hover} {
                 &:hover {
-                    color: ${Variables.Colors.Gray500};
+                    color: ${({ theme }) => theme.Gray500};
                 }
             }
         }
 
         &:checked {
             & ~ ${Radio}:after {
-                background-color: ${Variables.Colors.Gray500};
+                background-color: ${({ theme }) => theme.Gray500};
             }
 
             & ~ ${Checkbox}:before {
-                background-color: ${Variables.Colors.Gray500};
+                background-color: ${({ theme }) => theme.Gray500};
             }
 
             & ~ ${Selector} {
-                background-color: ${Variables.Colors.Gray100};
+                background-color: ${({ theme }) => theme.Gray100};
             }
         }
     }
 
-    ${({ $tile, $validation, disabled }) =>
+    ${({ $tile, $validation, disabled, $accentColor, theme }) =>
         $tile &&
         css`
             &:checked ~ ${Radio}, &:checked ~ ${Checkbox} {
                 border-color: ${$validation === "not-passed" && !disabled
-                    ? Variables.Colors.Danger500
+                    ? theme.Danger500
                     : disabled
-                    ? Variables.Colors.Gray500
-                    : Variables.Colors.Primary500};
+                    ? theme.Gray500
+                    : theme.AllColors({ $color: $accentColor })};
             }
 
-            @media ${Variables.Breakpoints.Hover} {
+            @media ${Breakpoints.Hover} {
                 &:not(:disabled)
                     ~ ${Radio}:hover,
                     &:not(:disabled)
                     ~ ${Checkbox}:hover {
                     border-color: ${$validation === "not-passed" && !disabled
-                        ? Variables.Colors.Danger300
-                        : Variables.Colors.Primary300};
+                        ? theme.Danger300
+                        : theme.ColorsHoverHover({ $color: $accentColor })};
                 }
             }
         `}
 `
+
+setDefaultTheme([StyledInputCheck, Radio, Checkbox, Toggle, Selector, Input])
 
 export { StyledInputCheck, Radio, Checkbox, Toggle, Selector, Input }

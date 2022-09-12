@@ -2,6 +2,8 @@
 
 import React from "react"
 
+import { AllColorsTypes, ColorsHoverTypes } from "../../utils/common-types"
+
 export interface CodeContainerProps
     extends React.HTMLAttributes<HTMLDivElement> {
     language?:
@@ -197,10 +199,17 @@ export interface CodeContainerProps
         | "yaml"
         | "zephir"
     children: string
-    options?: {
-        style?: any
-        copyButton?: boolean
-        iconCopy?: string
-        iconCopied?: string
-    }
+    style?: any
+    copyButton?:
+        | boolean
+        | {
+              colorCopy?: ColorsHoverTypes
+              colorCopied?: ColorsHoverTypes
+              iconColorCopy?: AllColorsTypes
+              iconColorCopied?: AllColorsTypes
+              iconCopy?: string
+              iconCopied?: string
+          }
+    backgroundColor?: AllColorsTypes
+    textColor?: AllColorsTypes
 }

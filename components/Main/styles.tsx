@@ -1,10 +1,11 @@
 /*=============================================== Main styles ===============================================*/
 
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { stringifyPx } from "ts-utils-julseb"
 
-import Variables from "../../Variables"
+import { Layouts, Spacers, Breakpoints } from "../../Variables"
 import Mixins from "../../Mixins"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 import {
     GridAlignContentTypes,
@@ -24,15 +25,18 @@ const StyledMain = styled.main<{
     $alignContent?: GridAlignContentTypes
     $alignItems?: GridAlignItemsTypes
     $gap?: SpacersTypes | number
+    $contentWidth?: "default" | "large" | "form"
 }>`
     width: ${({ $size }) =>
         $size === "large"
-            ? Variables.Layouts.Main.Large
+            ? Layouts.Main.Large
             : $size === "form"
-            ? Variables.Layouts.Main.Form
+            ? Layouts.Main.Form
+            : $size === "full"
+            ? Layouts.Main.Full
             : typeof $size === "number"
             ? stringifyPx($size)
-            : Variables.Layouts.Main.Default};
+            : Layouts.Main.Default};
     ${({ $justifyContent, $justifyItems, $alignContent, $alignItems, $gap }) =>
         Mixins.Grid({
             $alignContent: $alignContent || "start",
@@ -40,15 +44,29 @@ const StyledMain = styled.main<{
             $justifyContent: $justifyContent,
             $alignItems: $alignItems,
             $gap,
-            $padding: `${Variables.Spacers.XXL} 0`,
+            $padding: `${Spacers.XXL} 0`,
         })};
     min-height: 100vh;
     grid-column: ${({ $position }) => ($position === 2 ? 3 : 2)};
 
-    @media ${Variables.Breakpoints.Tablet} {
+    @media ${Breakpoints.Tablet} {
         min-height: inherit;
         grid-column: 2;
     }
+
+    ${({ $size, $contentWidth }) =>
+        $size === "full" &&
+        css`
+            grid-template-columns: 1fr ${$contentWidth === "large"
+                    ? Layouts.Main.Large
+                    : $contentWidth === "form"
+                    ? Layouts.Main.Form
+                    : Layouts.Main.Default} 1fr;
+
+            & > * {
+                grid-column: 2;
+            }
+        `}
 
     & > div,
     & > h1,
@@ -79,5 +97,7 @@ const StyledMain = styled.main<{
         justify-self: stretch;
     }
 `
+
+setDefaultTheme([StyledMain])
 
 export { StyledMain }

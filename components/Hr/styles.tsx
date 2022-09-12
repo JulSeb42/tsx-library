@@ -2,19 +2,21 @@
 
 import styled from "styled-components"
 
-import Mixins from "../../Mixins"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { LibColorsTypes, ColorsShortTypes } from "../../utils/common-types"
+import { AllColorsTypes } from "../../utils/common-types"
 
 const StyledHr = styled.hr<{
-    $color?: LibColorsTypes | ColorsShortTypes | string
+    $color?: AllColorsTypes
     $height?: number
 }>`
     width: 100%;
     height: ${({ $height }) => $height}px;
     border: none;
-    background-color: ${Mixins.AllColors};
+    background-color: ${({ theme }) => theme.AllColors};
     display: block;
 `
+
+setDefaultTheme([StyledHr])
 
 export { StyledHr }

@@ -8,4 +8,5 @@ export interface AlertProps extends React.HTMLAttributes<HTMLParagraphElement> {
     color?: ColorsShortTypes
     children: string | React.ReactNode | React.ReactNode[]
     isModal?: boolean
+    as?: React.ElementType
 }

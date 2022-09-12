@@ -2,80 +2,61 @@
 
 import styled, { css } from "styled-components"
 
-import Variables from "../../Variables"
-import Mixins from "../../Mixins"
+import setDefaultTheme from "../../utils/setDefaultTheme"
+import {
+    Breakpoints,
+    FontSizes,
+    LineHeights,
+    Spacers,
+    ThemeDark,
+    ThemeLight,
+    Transitions,
+} from "../../Variables"
+import { InputBaseMixin } from "../InputComponents"
 
-import { ValidationTypes } from "../../utils/common-types"
+import { ColorsHoverTypes, ValidationTypes } from "../../utils/common-types"
+import { InputBackgroundTypes, InputTypesTypes } from "./types"
 
-import { InputTypesTypes } from "./types"
+const StyledInputContent = styled.div`
+    width: 100%;
+    position: relative;
+`
 
-const size = 32
+const inputHeight = 32
 
-const InputStyled = styled.input<{
-    $validation?: ValidationTypes | string
+const StyledInput = styled.input<{
+    $type?: InputTypesTypes
+    $validation?: ValidationTypes
     $iconCalendar?: string
     $iconClock?: string
-    $iconSelect?: string
-    $type?: InputTypesTypes
-    $icon?: boolean
     $showHttp?: boolean
+    $hasIcon?: boolean
+    $accentColor?: ColorsHoverTypes
+    $backgroundColor?: InputBackgroundTypes
 }>`
-    width: 100%;
-    height: ${size}px;
-    border: 1px solid ${Variables.Colors.Gray200};
-    border-radius: ${Variables.Radiuses.S};
-    font-size: ${Variables.FontSizes.Body};
-    font-family: ${Variables.FontFamilies.Body};
-    padding: ${Variables.Spacers.XS};
-    background-color: ${({ $validation }) =>
-        $validation && $validation === "not-passed"
-            ? Variables.Colors.Danger50
-            : Variables.Colors.White};
-    color: ${Variables.Colors.Black};
-    line-height: 100%;
-    outline: none;
-    z-index: 0;
+    ${({ $accentColor, $backgroundColor, $hasIcon, $validation }) =>
+        InputBaseMixin({
+            $accentColor: $accentColor,
+            $backgroundColor: $backgroundColor,
+            $hasIcon: $hasIcon,
+            $validation: $validation,
+        })};
 
-    &:focus {
-        border-color: ${({ $validation }) =>
-            $validation && $validation === "not-passed"
-                ? Variables.Colors.Danger500
-                : Variables.Colors.Primary500};
-    }
-
-    &:disabled {
-        cursor: not-allowed;
-        background-color: ${Variables.Colors.Gray50};
-        color: ${Variables.Colors.Gray500};
-
-        &::placeholder {
-            color: ${Variables.Colors.Gray500};
-        }
-    }
-
-    &::placeholder {
-        color: ${Variables.Colors.Gray200};
-    }
-
-    ${({ $icon }) =>
-        $icon &&
+    ${({ $type }) =>
+        ($type === "color" || $type === "file") &&
         css`
-            padding-left: calc(${size}px + ${Variables.Spacers.XS});
+            cursor: pointer;
         `}
 
     ${({ $type }) =>
-        $type === "color" || $type === "file"
-            ? css`
-                  cursor: pointer;
-              `
-            : $type === "search" &&
-              css`
-                  &::-webkit-search-cancel-button {
-                      -webkit-appearance: none;
-                      appearance: none;
-                  }
-              `}
-
+        $type === "search" &&
+        css`
+            &::-webkit-search-cancel-button {
+                -webkit-appearance: none;
+                appearance: none;
+            }
+        `}
+              
     ${({ $type }) =>
         $type === "file" &&
         css`
@@ -83,107 +64,96 @@ const InputStyled = styled.input<{
 
             &::file-selector-button {
                 height: 100%;
-                background-color: ${Variables.Colors.Gray100};
+                background-color: ${({ theme }) => theme.Gray100};
+                color: ${({ theme }) => theme.Font};
                 border: none;
                 height: 100%;
-                padding: 0 ${Variables.Spacers.XS};
+                padding: 0 ${Spacers.XS};
                 line-height: 100%;
-                transition: ${Variables.Transitions.Short};
+                transition: ${Transitions.Short};
                 cursor: pointer;
             }
 
-            @media ${Variables.Breakpoints.Hover} {
+            @media ${Breakpoints.Hover} {
                 &:hover::file-selector-button {
-                    background-color: ${Variables.Colors.Gray300};
+                    background-color: ${({ theme }) => theme.Gray300};
                 }
 
                 &:disabled:hover::file-selector-button {
-                    background-color: ${Variables.Colors.Gray100};
-                    color: ${Variables.Colors.Gray500};
+                    background-color: ${({ theme }) => theme.Gray100};
+                    color: ${({ theme }) => theme.Gray500};
                     cursor: not-allowed;
                 }
             }
 
             &:disabled::file-selector-button {
-                color: ${Variables.Colors.Gray500};
+                color: ${({ theme }) => theme.Gray500};
             }
         `}
 
-    ${({ $type, $icon, $showHttp }) =>
+    ${({ $type, $hasIcon, $showHttp }) =>
         $type === "url" &&
         $showHttp &&
         css`
-            padding-left: ${$icon ? 53 + size : 53}px;
+            padding-left: ${$hasIcon ? 53 + inputHeight : 53}px;
         `}
 
-    ${({ $type, $iconCalendar }) =>
+    ${({ $type, $iconCalendar, $iconClock, $accentColor, theme, $validation }) =>
         ($type === "date" ||
             $type === "datetime-local" ||
             $type === "month" ||
-            $type === "week") &&
+            $type === "week" ||
+            $type === "time") &&
         css`
             &::-webkit-inner-spin-button,
             &::-webkit-calendar-picker-indicator {
                 -webkit-appearance: none;
                 appearance: none;
                 background: rgba(0, 0, 0, 0);
-                ${$iconCalendar
-                    ? Mixins.Icon({
+                right: ${$validation === "not-passed" && "24px"};
+                position: relative;
+
+                ${$type !== "time" &&
+                ($iconCalendar
+                    ? theme.Icon({
                           $name: $iconCalendar,
-                          $color: Variables.Colors.Primary500,
-                          $size: 18,
+                          $color: $accentColor,
+                          $size: 16,
                       })
-                    : Mixins.LibIcon({
+                    : theme.LibIcon({
                           $name: "calendar",
-                          $color: Variables.Colors.Primary500,
-                          $size: 18,
-                      })};
-                cursor: pointer;
-                transform: translateX(1px);
-                transition: ${Variables.Transitions.Short};
+                          $color: $accentColor,
+                          $size: 16,
+                      }))};
 
-                @media ${Variables.Breakpoints.Hover} {
-                    &:hover {
-                        background-color: ${Variables.Colors.Primary300};
-                    }
-
-                    &:active {
-                        background-color: ${Variables.Colors.Primary600};
-                    }
-                }
-            }
-        `}
-
-    ${({ $type, $iconClock }) =>
-        $type === "time" &&
-        css`
-            &::-webkit-inner-spin-button,
-            &::-webkit-calendar-picker-indicator {
-                -webkit-appearance: none;
-                appearance: none;
-                background: rgba(0, 0, 0, 0);
-                ${$iconClock
-                    ? Mixins.Icon({
+                ${$type === "time" &&
+                ($iconClock
+                    ? theme.Icon({
                           $name: $iconClock,
-                          $color: Variables.Colors.Primary500,
-                          $size: 18,
+                          $color: $accentColor,
+                          $size: 16,
                       })
-                    : Mixins.LibIcon({
+                    : theme.LibIcon({
                           $name: "clock",
-                          $color: Variables.Colors.Primary500,
-                          $size: 18,
-                      })};
+                          $color: $accentColor,
+                          $size: 16,
+                      }))}
+
                 cursor: pointer;
                 transform: translateX(1px);
-                transition: ${Variables.Transitions.Short};
+                transition: ${Transitions.Short};
 
-                @media ${Variables.Breakpoints.Hover} {
+                @media ${Breakpoints.Hover} {
                     &:hover {
-                        background-color: ${Variables.Colors.Primary300};
+                        background-color: ${theme.ColorsHoverHover({
+                            $color: $accentColor,
+                        })};
                     }
 
                     &:active {
-                        background-color: ${Variables.Colors.Primary600};
+                        background-color: ${theme.ColorsHoverActive({
+                            $color: $accentColor,
+                        })};
                     }
                 }
             }
@@ -192,7 +162,7 @@ const InputStyled = styled.input<{
     ${({ $type }) =>
         $type === "select" &&
         css`
-            padding: 0 ${Variables.Spacers.XS};
+            padding: 0 ${Spacers.XS};
             appearance: none;
             cursor: pointer;
 
@@ -206,117 +176,47 @@ const InputStyled = styled.input<{
         css`
             height: inherit;
             min-height: calc(
-                ${Variables.FontSizes.Body} * ${Variables.LineHeights.Regular} *
-                    4 + ${Variables.Spacers.XXS} * 2
+                ${FontSizes.Body} * ${LineHeights.Regular} * 4 + ${Spacers.XXS} *
+                    2
             );
             resize: vertical;
         `}
 `
 
-const IconContainer = styled.span`
+const UrlContainer = styled.span<{
+    $hasIcon?: boolean
+    $disabled?: boolean
+    $backgroundColor?: InputBackgroundTypes
+}>`
     position: absolute;
     left: 0;
     top: 0;
-    z-index: 2;
-    width: ${size}px;
-    height: ${size}px;
-    ${Mixins.Flexbox({
-        $inline: true,
-        $alignItems: "center",
-        $justifyContent: "center",
-    })};
-
-    &:after {
-        content: "";
-        position: absolute;
-        right: 0;
-        width: 1px;
-        top: 1px;
-        height: 30px;
-        background-color: ${Variables.Colors.Gray200};
-    }
-`
-
-const UrlContainer = styled.span<{ $icon?: boolean; $disabled?: boolean }>`
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: ${size}px;
-    z-index: 2;
-    line-height: ${size}px;
-    padding-left: ${Variables.Spacers.XS};
-
-    ${({ $disabled }) =>
-        $disabled &&
-        css`
-            color: ${Variables.Colors.Gray500};
-            cursor: not-allowed;
-        `}
-
-    ${({ $icon }) =>
-        $icon &&
-        css`
-            padding-left: calc(${size}px + ${Variables.Spacers.XS});
-        `}
-`
-
-const InputContent = styled.span`
-    position: relative;
-    width: 100%;
-`
-
-const ButtonInput = styled.button`
-    border: none;
-    height: 100%;
-    padding: 0;
-    background-color: transparent;
-    ${Mixins.Flexbox({
-        $alignItems: "center",
-        $justifyContent: "center",
-        $inline: true,
-    })};
-    color: ${Variables.Colors.Primary500};
-
-    @media ${Variables.Breakpoints.Hover} {
-        &:hover {
-            color: ${Variables.Colors.Primary300};
-        }
-
-        &:active {
-            color: ${Variables.Colors.Primary600};
-        }
-    }
-
-    &:disabled {
-        color: ${Variables.Colors.Gray500};
-    }
-`
-
-const RightContainer = styled.span<{ $disabled?: boolean }>`
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 32px;
-    padding: 0 ${Variables.Spacers.XS};
-    ${Mixins.Flexbox({
-        $inline: true,
-        $alignItems: "center",
-        $justifyContent: "center",
-    })};
-    gap: ${Variables.Spacers.XS};
+    height: ${inputHeight}px;
+    z-index: 5;
+    line-height: ${inputHeight}px;
+    padding-left: ${Spacers.XS};
+    color: ${({ theme, $backgroundColor, $disabled }) =>
+        $disabled
+            ? theme.Gray500
+            : $backgroundColor === "dark"
+            ? ThemeDark.Background
+            : $backgroundColor === "light"
+            ? ThemeLight.Background
+            : theme.Font};
 
     ${({ $disabled }) =>
         $disabled &&
         css`
             cursor: not-allowed;
         `}
+
+    ${({ $hasIcon }) =>
+        $hasIcon &&
+        css`
+            padding-left: calc(${inputHeight}px + ${Spacers.XS});
+        `}
 `
 
-export {
-    InputStyled,
-    IconContainer,
-    UrlContainer,
-    InputContent,
-    ButtonInput,
-    RightContainer,
-}
+setDefaultTheme([StyledInputContent, StyledInput, UrlContainer])
+
+export { StyledInputContent, StyledInput, UrlContainer }

@@ -19,6 +19,7 @@ const Grid = ({
     colTablet,
     colMobile,
     children,
+    as,
     ...props
 }: GridProps) => (
     <Styles.StyledGrid
@@ -34,6 +35,7 @@ const Grid = ({
         $padding={padding}
         $colTablet={colTablet}
         $colMobile={colMobile}
+        as={as}
         {...props}
     >
         {children}

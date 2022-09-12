@@ -6,20 +6,25 @@ import Text from "../Text"
 import Icon from "../Icon"
 
 import * as Styles from "./styles"
-import { InputContainerProps } from "./types"
+import { ExtendedInputContainerProps } from "./types"
 
 const InputContainer = ({
+    id,
     label,
     helper,
     helperBottom,
+    children,
     counter,
     maxLength,
     value,
-    children,
-    id,
-}: InputContainerProps) => (
+    accentColor = "primary",
+}: ExtendedInputContainerProps) => (
     <Styles.StyledInputContainer>
-        {label && <Styles.Label htmlFor={id}>{label}</Styles.Label>}
+        {label && (
+            <Styles.Label $color={accentColor} htmlFor={id}>
+                {label}
+            </Styles.Label>
+        )}
 
         {helper && <Text>{helper}</Text>}
 
@@ -32,7 +37,7 @@ const InputContainer = ({
                         <Icon
                             src={helperBottom.icon}
                             size={14}
-                            color={helperBottom.iconColor}
+                            color={helperBottom.iconColor || "primary"}
                         />
                     </Styles.IconContainer>
                 )}
@@ -43,10 +48,12 @@ const InputContainer = ({
             </Styles.HelperBottom>
         )}
 
-        {counter && typeof value === "string" && (
-            <Text tag="small" color="gray-500">
-                {value.length}
-                {maxLength ? ` / ${maxLength}` : ""}
+        {typeof value === "string" && counter && (
+            <Text tag="small" color="gray">
+                <Text tag="em">
+                    {value.length}
+                    {maxLength ? ` / ${maxLength}` : ""}
+                </Text>
             </Text>
         )}
     </Styles.StyledInputContainer>

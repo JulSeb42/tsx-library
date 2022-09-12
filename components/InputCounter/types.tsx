@@ -2,18 +2,17 @@
 
 import React from "react"
 
-import {
-    ColorsHoverTypes,
-    LibColorsTypes,
-    ColorsShortTypes,
-} from "../../utils/common-types"
+import { InputContainerProps } from "../InputContainer/types"
+import { InputBackgroundTypes } from "../Input/types"
 
-interface BaseProps extends React.HTMLAttributes<HTMLElement> {
-    value: number
-    setValue: any
+interface BaseProps
+    extends React.HTMLAttributes<HTMLElement>,
+        InputContainerProps {
     id: string
-
-    isInputEditable?: boolean
+    children?: never
+    value: number
+    setValue: (value: number) => void
+    disabled?: boolean
 
     step?: number
     min?: number
@@ -23,24 +22,11 @@ interface BaseProps extends React.HTMLAttributes<HTMLElement> {
         minus?: string
         plus?: string
     }
-
-    options?: {
-        label?: string
-        helper?: string
-        helperBottom?:
-            | string
-            | {
-                  text: string
-                  icon?: string
-                  iconColor?: LibColorsTypes | ColorsShortTypes | string
-              }
-    }
 }
 
 interface Possible1 extends BaseProps {
     buttons?: {
         variant?: "plain"
-        color?: ColorsHoverTypes
         hoverBackground?: never
     }
 }
@@ -48,9 +34,20 @@ interface Possible1 extends BaseProps {
 interface Possible2 extends BaseProps {
     buttons?: {
         variant?: "transparent"
-        color?: ColorsHoverTypes
         hoverBackground?: boolean
     }
 }
 
-export type InputCounterProps = Possible1 | Possible2
+type PossibleButtons = Possible1 | Possible2
+
+type PossibleInput1 = PossibleButtons & {
+    isInputEditable?: true
+    backgroundColorInput?: InputBackgroundTypes
+}
+
+type PossibleInput2 = PossibleButtons & {
+    isInputEditable?: false
+    backgroundColorInput?: never
+}
+
+export type InputCounterProps = PossibleInput1 | PossibleInput2

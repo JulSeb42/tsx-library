@@ -3,76 +3,49 @@
 import styled from "styled-components"
 import SyntaxHighlighter from "react-syntax-highlighter"
 
-import Variables from "../../Variables"
+import {
+    FontFamilies,
+    LineHeights,
+    FontSizes,
+    Spacers,
+    ThemeLight,
+} from "../../Variables"
 import Mixins from "../../Mixins"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
-const StyledCodeContainer = styled.div`
-    background-color: ${Variables.Colors.Gray800};
+import { AllColorsTypes } from "../../utils/common-types"
+
+const StyledCodeContainer = styled.div<{
+    $backgroundColor?: AllColorsTypes
+    $textColor?: AllColorsTypes
+}>`
+    background-color: ${ThemeLight.Gray800};
     position: relative;
     overflow-x: scroll;
-    padding: ${Variables.Spacers.M};
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
+    padding: ${Spacers.M};
+    ${Mixins.HideScrollbar};
 `
 
-const Code = styled(SyntaxHighlighter)`
+const Code = styled(SyntaxHighlighter)<{
+    $textColor?: AllColorsTypes
+}>`
     background-color: transparent !important;
-    font-family: ${Variables.FontFamilies.Code};
-    line-height: ${Variables.LineHeights.Code};
-    font-size: ${Variables.FontSizes.Small};
+    font-family: ${FontFamilies.Code};
+    line-height: ${LineHeights.Code};
+    font-size: ${FontSizes.Small};
     padding: 0 !important;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
+    ${Mixins.HideScrollbar};
+    color: ${({ $textColor, theme }) =>
+        $textColor && theme.AllColors({ $color: $textColor })};
+    white-space: pre;
+    line-height: ${LineHeights.Code};
 
     & > code {
         background-color: transparent !important;
+        line-height: ${LineHeights.Code};
     }
 `
 
-const buttonSize = 32
+setDefaultTheme([StyledCodeContainer, Code])
 
-const Button = styled.button<{ $hasCopied: boolean }>`
-    width: ${buttonSize}px;
-    height: ${buttonSize}px;
-    border-radius: ${Variables.Radiuses.Circle};
-    padding: 0;
-    border: none;
-    ${Mixins.Flexbox({
-        $alignItems: "center",
-        $justifyContent: "center",
-    })};
-    position: absolute;
-    right: ${Variables.Spacers.M};
-    top: 12px;
-    background-color: ${({ $hasCopied }) =>
-        $hasCopied ? Variables.Colors.Success500 : Variables.Colors.White};
-    color: ${({ $hasCopied }) =>
-        $hasCopied ? Variables.Colors.White : Variables.Colors.Primary500};
-    transition: ${Variables.Transitions.Short};
-
-    @media ${Variables.Breakpoints.Hover} {
-        &:hover {
-            background-color: ${({ $hasCopied }) =>
-                $hasCopied
-                    ? Variables.Colors.Success300
-                    : Variables.Colors.Gray300};
-        }
-
-        &:active {
-            background-color: ${({ $hasCopied }) =>
-                $hasCopied
-                    ? Variables.Colors.Success600
-                    : Variables.Colors.Gray100};
-        }
-    }
-`
-
-export { StyledCodeContainer, Code, Button }
+export { StyledCodeContainer, Code }

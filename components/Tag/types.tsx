@@ -2,24 +2,23 @@
 
 import React from "react"
 
-import { ColorsShortTypes, LibColorsTypes } from "../../utils/common-types"
+import { AllColorsTypes } from "../../utils/common-types"
 
 /*==================== List possibilities ====================*/
 
-const tagStyles = {
+const TagVariants = {
     pill: "pill",
     rounded: "rounded",
 } as const
 
-export type TagStylesTypes = keyof typeof tagStyles
+export type TagVariantsTypes = keyof typeof TagVariants
 
 /*==================== Component Types ====================*/
 
 export interface TagProps extends React.HTMLAttributes<HTMLSpanElement> {
-    children: string
-    options?: {
-        variant?: TagStylesTypes
-        color?: ColorsShortTypes | LibColorsTypes | string
-        textColor?: ColorsShortTypes | LibColorsTypes | string
-    }
+    children?: string | (string & JSX.Element) | (string & React.ReactNode)
+    variant?: TagVariantsTypes
+    color?: AllColorsTypes
+    textColor?: AllColorsTypes
+    as?: React.ElementType
 }

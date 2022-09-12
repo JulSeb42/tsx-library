@@ -7,20 +7,24 @@ import { AllProps } from "../types"
 import { StyledH6 } from "../styles"
 
 const H6 = ({
-    color,
     textAlign,
-    linkColor,
-    children,
-    fontSize,
+    color,
+    linkColor = "primary",
     lineHeight,
+    fontSize,
+    customFontSize,
+    children,
+    as,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLHeadingElement>) => (
     <StyledH6
-        $color={color}
         $textAlign={textAlign}
+        $color={color}
         $linkColor={linkColor}
-        $fontSize={fontSize}
         $lineHeight={lineHeight}
+        $fontSize={fontSize}
+        $customFontSize={customFontSize}
+        as={as}
         {...props}
     >
         {children}

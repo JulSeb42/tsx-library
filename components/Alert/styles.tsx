@@ -2,8 +2,9 @@
 
 import styled from "styled-components"
 
-import Variables from "../../Variables"
+import { Spacers, Radiuses } from "../../Variables"
 import Mixins from "../../Mixins"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 import { ColorsShortTypes } from "../../utils/common-types"
 
@@ -14,29 +15,31 @@ const StyledAlert = styled.div<{
     ${Mixins.Grid({
         $gap: "s",
     })};
-    padding: ${Variables.Spacers.M};
+    padding: ${Spacers.M};
     width: ${({ $isModal }) => $isModal && "100%"};
     max-width: ${({ $isModal }) => $isModal && "400px"};
-    border-radius: ${Variables.Radiuses.M};
-    color: ${({ $color }) =>
-        $color === "black" ? Variables.Colors.White : Variables.Colors.Black};
-    background-color: ${({ $color }) =>
+    border-radius: ${Radiuses.M};
+    color: ${({ $color, theme }) =>
+        $color === "black" ? theme.Background : theme.Font};
+    background-color: ${({ $color, theme }) =>
         $color === "secondary"
-            ? Variables.Colors.Secondary50
+            ? theme.Secondary50
             : $color === "success"
-            ? Variables.Colors.Success50
+            ? theme.Success50
             : $color === "danger"
-            ? Variables.Colors.Danger50
+            ? theme.Danger50
             : $color === "warning"
-            ? Variables.Colors.Warning50
+            ? theme.Warning50
             : $color === "gray"
-            ? Variables.Colors.Gray50
+            ? theme.Gray50
             : $color === "black"
-            ? Variables.Colors.Gray800
+            ? theme.Gray800
             : $color === "white"
-            ? Variables.Colors.Gray50
-            : Variables.Colors.Primary50};
-    border: 1px solid ${Mixins.ColorsShort};
+            ? theme.Gray50
+            : theme.Primary50};
+    border: 1px solid ${({ theme }) => theme.ColorsShort};
 `
+
+setDefaultTheme([StyledAlert])
 
 export { StyledAlert }

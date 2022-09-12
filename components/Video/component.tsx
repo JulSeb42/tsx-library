@@ -10,22 +10,27 @@ const Video = ({
     src,
     width = "100%",
     height = "auto",
-    options,
+    fit,
+    aspectRatio,
+    emptyText,
+    autoPlay,
+    muted,
+    controls,
     ...props
 }: VideoProps) => (
     <Vid
         $width={width}
         $height={height}
-        $fit={options?.fit}
-        $aspectRatio={options?.aspectRatio}
-        autoPlay={options?.autoPlay}
-        muted={options?.autoPlay ? true : options?.autoPlay}
-        controls={!options?.autoPlay ? true : options?.controls}
+        $fit={fit}
+        $aspectRatio={aspectRatio}
+        autoPlay={autoPlay}
+        muted={autoPlay ? true : autoPlay}
+        controls={!autoPlay ? true : controls}
         {...props}
     >
         <source src={src} type="video/mp4" />
 
-        {options?.emptyText || "Your browser doesn't support the video tag."}
+        {emptyText || "Your browser doesn't support the video tag."}
     </Vid>
 )
 

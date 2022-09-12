@@ -1,7 +1,85 @@
 /*=============================================== MarkdownEditor styles ===============================================*/
 
 import styled from "styled-components"
+import MDEditor from "@uiw/react-md-editor"
 
-const StyledMarkdownEditor = styled.div``
+import { Transitions, Radiuses, Spacers, FontFamilies } from "../../Variables"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
-export { StyledMarkdownEditor }
+import { ValidationTypes, ColorsHoverTypes } from "../../utils/common-types"
+
+const StyledContainer = styled.div<{ $accentColor?: ColorsHoverTypes }>`
+    .wmde-markdown-var {
+        --color-accent-fg: ${({ $accentColor, theme }) =>
+            theme.AllColors({ $color: $accentColor })};
+    }
+`
+
+const Editor = styled(MDEditor)<{
+    $validation?: ValidationTypes
+    $isFocus?: boolean
+    $accentColor?: ColorsHoverTypes
+}>`
+    box-shadow: none;
+    border: 1px solid
+        ${({ $isFocus, $accentColor, $validation, theme }) =>
+            $isFocus
+                ? $validation === "not-passed"
+                    ? theme.Danger500
+                    : theme.AllColors({ $color: $accentColor })
+                : theme.Gray200};
+    transition: ${Transitions.Short};
+    border-radius: ${Radiuses.S};
+    overflow: hidden;
+    background-color: ${({ theme }) => theme.Background};
+
+    .w-md-editor-toolbar {
+        background-color: ${({ theme }) => theme.Gray50};
+        border-bottom-color: ${({ theme }) => theme.Gray200};
+    }
+
+    & * {
+        border-radius: 0;
+    }
+
+    .w-md-editor-toolbar {
+        border-radius: 0;
+
+        li > button {
+            color: ${({ $accentColor, theme }) =>
+                theme.ColorsHoverDefault({ $color: $accentColor })};
+
+            &:hover {
+                color: ${({ $accentColor, theme }) =>
+                    theme.ColorsHoverHover({ $color: $accentColor })};
+            }
+
+            &:active {
+                color: ${({ $accentColor, theme }) =>
+                    theme.ColorsHoverActive({ $color: $accentColor })};
+            }
+        }
+    }
+
+    .w-md-editor-content,
+    .w-md-editor-aree {
+        border-radius: 0 !important;
+    }
+
+    textarea {
+        background-color: ${({ $validation, theme }) =>
+            $validation === "not-passed" && theme.Danger50};
+        padding: ${Spacers.XS};
+        font-family: ${FontFamilies.Body} !important;
+    }
+
+    .w-md-editor-bar {
+        margin-top: 0;
+        bottom: ${Spacers.XS};
+        right: ${Spacers.XS};
+    }
+`
+
+setDefaultTheme([StyledContainer, Editor])
+
+export { StyledContainer, Editor }

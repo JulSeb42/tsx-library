@@ -2,13 +2,21 @@
 
 import React from "react"
 
-import { ColorsShortTypes, LibColorsTypes } from "../../utils/common-types"
+import { AllColorsTypes } from "../../utils/common-types"
+
+const LoaderVariants = {
+    1: 1,
+    2: 2,
+    3: 3,
+    4: 4,
+} as const
+
+export type LoaderVariantsTypes = keyof typeof LoaderVariants
 
 export interface LoaderProps extends React.HTMLAttributes<HTMLSpanElement> {
-    options?: {
-        size?: number
-        borderSize?: number
-        color?: ColorsShortTypes | LibColorsTypes | string
-        speed?: number
-    }
+    size?: number
+    borderSize?: number
+    speed?: number
+    color?: AllColorsTypes
+    variant?: LoaderVariantsTypes
 }

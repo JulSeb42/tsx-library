@@ -1,7 +1,5 @@
 /*=============================================== Common types ===============================================*/
 
-import React from "react"
-
 /*==================== Colors ====================*/
 
 /* Library colors */
@@ -69,24 +67,13 @@ const LibColors = {
     "warning-700": "warning-700",
     "warning-800": "warning-800",
     "warning-900": "warning-900",
+    currentColor: "currentColor",
+    transparent: "transparent",
+    background: "background",
+    font: "font",
 } as const
 
 export type LibColorsTypes = keyof typeof LibColors
-
-/* Colors short */
-
-const ColorsShort = {
-    primary: "primary",
-    secondary: "secondary",
-    success: "success",
-    danger: "danger",
-    warning: "warning",
-    gray: "gray",
-    black: "black",
-    white: "white",
-} as const
-
-export type ColorsShortTypes = keyof typeof ColorsShort
 
 /* Colors hover */
 
@@ -97,9 +84,96 @@ const ColorsHover = {
     danger: "danger",
     warning: "warning",
     white: "white",
+    font: "font",
+    background: "background",
 } as const
 
 export type ColorsHoverTypes = keyof typeof ColorsHover
+
+/* Colors input */
+
+const ColorsInput = {
+    ...ColorsHover,
+    gray: "gray",
+} as const
+
+export type ColorsInputTypes = keyof typeof ColorsInput
+
+/* Colors short */
+
+const ColorsShort = {
+    ...ColorsInput,
+    black: "black",
+} as const
+
+export type ColorsShortTypes = keyof typeof ColorsShort
+
+/* Overlays */
+
+const Overlays = {
+    "overlay-black-50": "overlay-black-50",
+    "overlay-black-80": "overlay-black-80",
+    "overlay-white-50": "overlay-white-50",
+    "overlay-white-80": "overlay-white-80",
+    "overlay-gradient-black": "overlay-gradient-black",
+    "overlay-gradient-white": "overlay-gradient-white",
+} as const
+
+export type OverlayTypes = keyof typeof Overlays
+
+/* All colors */
+
+export type AllColorsTypes = LibColorsTypes | ColorsShortTypes
+
+/*==================== Font sizes ====================*/
+
+const fontSizes = {
+    "display-h1": "display-h1",
+    "display-h2": "display-h2",
+    "display-h3": "display-h3",
+    "display-h4": "display-h4",
+    "display-h5": "display-h5",
+    "title-h1": "title-h1",
+    "title-h2": "title-h2",
+    "title-h3": "title-h3",
+    "title-h4": "title-h4",
+    "title-h5": "title-h5",
+    "title-h6": "title-h6",
+    body: "body",
+    small: "small",
+} as const
+
+export type FontSizeTypes = keyof typeof fontSizes
+
+export type CustomFontSizeTypes = string | number
+
+/*==================== Shadows ====================*/
+
+const shadows = {
+    xxl: "xxl",
+    xl: "xl",
+    l: "l",
+    m: "m",
+    s: "s",
+    xs: "xs",
+} as const
+
+export type ShadowsTypes = keyof typeof shadows
+
+/*==================== Radiuses ====================*/
+
+const radiuses = {
+    xxl: "xxl",
+    xl: "xl",
+    l: "l",
+    m: "m",
+    s: "s",
+    xs: "xs",
+    round: "round",
+    circle: "circle",
+} as const
+
+export type RadiusesTypes = keyof typeof radiuses
 
 /*==================== Text align ====================*/
 
@@ -292,21 +366,4 @@ const Validation = {
     "not-passed": "not-passed",
 } as const
 
-export type ValidationTypes = keyof typeof Validation
-
-/*==================== Countries ====================*/
-
-export type CountryType = {
-    name: string
-    dial_code: string
-    code: string
-    flag: JSX.Element | any
-}
-
-/*==================== useForm ====================*/
-
-export interface BaseUseFormType {
-    handleInputs: (e: React.ChangeEvent<HTMLInputElement>) => void
-    resetForm: any
-    handleSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void
-}
+export type ValidationTypes = keyof typeof Validation | undefined

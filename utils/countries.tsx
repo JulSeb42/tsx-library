@@ -1,6 +1,6 @@
 /*=============================================== Countries & flags ===============================================*/
 
-import { CountryType } from "./common-types"
+import { CountryType } from "../components/InputPhone/types"
 
 import AF from "./flags/af.svg"
 import AX from "./flags/ax.svg"

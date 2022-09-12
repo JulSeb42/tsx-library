@@ -14,9 +14,11 @@ const AccordionItem = ({
     icon = "plus",
     title,
     content,
-    $accordionStyle = "basic",
+    $variant = "basic",
     $noBorder,
     customIcon,
+    accentColor = "primary",
+    separatorColor,
 }: ItemProps) => {
     const [open, setOpen] = useState(isOpen)
 
@@ -26,9 +28,11 @@ const AccordionItem = ({
                 onClick={() => setOpen(!open)}
                 $isOpen={open}
                 $icon={icon}
-                $accordionStyle={$accordionStyle}
+                $variant={$variant}
                 $noBorder={$noBorder}
                 $hasIconCustom={customIcon ? true : false}
+                $accentColor={accentColor}
+                $separatorColor={separatorColor}
             >
                 {title}
 
@@ -36,7 +40,7 @@ const AccordionItem = ({
                     {customIcon ? (
                         <Icon src={customIcon} size={20} />
                     ) : icon === "plus" ? (
-                        <Styles.StyledIconPlus size={20} color="currentColor" />
+                        <Styles.StyledIconPlus size={20} />
                     ) : (
                         icon === "chevron" && (
                             <Styles.StyledIconChevron size={20} />
@@ -48,7 +52,7 @@ const AccordionItem = ({
             <Styles.Content
                 as={typeof content === "string" ? Text : "div"}
                 $isOpen={open}
-                $accordionStyle={$accordionStyle}
+                $variant={$variant}
             >
                 {content}
             </Styles.Content>
@@ -57,27 +61,32 @@ const AccordionItem = ({
 }
 
 const Accordion = ({
-    options = {
-        style: "basic",
-        icon: "plus",
-    },
+    variant = "basic",
+    icon = "plus",
+    accentColor,
+    separatorColor,
+    customIcon,
     items,
     ...props
 }: AccordionProps) => (
-    <Styles.StyledAccordion $accordionStyle={options.style} {...props}>
+    <Styles.StyledAccordion
+        $variant={variant}
+        $separatorColor={separatorColor}
+        {...props}
+    >
         {items.map((item, i) => (
             <AccordionItem
-                icon={options.icon}
+                icon={icon}
                 isOpen={item.isOpen}
                 title={item.title}
                 content={item.content}
-                $accordionStyle={options.style}
-                customIcon={options.customIcon}
+                $variant={variant}
+                customIcon={customIcon}
                 $noBorder={
-                    options.style === "rounded" &&
-                    i === items.length - 1 &&
-                    true
+                    variant === "rounded" && i === items.length - 1 && true
                 }
+                separatorColor={separatorColor}
+                accentColor={accentColor}
                 key={uuid()}
             />
         ))}

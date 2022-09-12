@@ -5,8 +5,8 @@ import React from "react"
 import * as Styles from "./styles"
 import { SectionProps } from "./types"
 
-const Section = ({ gap = "large", children, div, ...props }: SectionProps) => (
-    <Styles.StyledSection $gap={gap} as={div ? "div" : "section"} {...props}>
+const Section = ({ gap = "large", children, as, ...props }: SectionProps) => (
+    <Styles.StyledSection $gap={gap} as={as} {...props}>
         {children}
     </Styles.StyledSection>
 )

@@ -1,6 +1,7 @@
 /*=============================================== Accordion types ===============================================*/
 
 import { AccordionItemProps } from "../../utils/component-props"
+import { ColorsHoverTypes, AllColorsTypes } from "../../utils/common-types"
 
 /*==================== List possibilities ====================*/
 
@@ -20,21 +21,33 @@ export type IconTypes = keyof typeof icons
 
 /*==================== Component types ====================*/
 
-export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
+interface BaseProps extends React.HTMLAttributes<HTMLDivElement> {
     items: AccordionItemProps[]
-    options?: {
-        style?: AccordionStyleTypes
-        icon?: IconTypes
-        customIcon?: string
-    }
+    variant?: AccordionStyleTypes
+    accentColor?: ColorsHoverTypes
+    separatorColor?: AllColorsTypes
 }
+
+interface Possible1 extends BaseProps {
+    icon?: IconTypes
+    customIcon?: never
+}
+
+interface Possible2 extends BaseProps {
+    icon?: never
+    customIcon?: string
+}
+
+export type AccordionProps = Possible1 | Possible2
 
 export interface ItemProps extends React.HTMLAttributes<HTMLDivElement> {
     icon?: IconTypes
     title: string
     isOpen?: boolean
     content?: string | React.ReactNode
-    $accordionStyle?: AccordionStyleTypes
+    $variant?: AccordionStyleTypes
     $noBorder?: boolean
     customIcon?: string
+    accentColor?: ColorsHoverTypes
+    separatorColor?: AllColorsTypes
 }

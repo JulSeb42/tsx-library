@@ -2,7 +2,7 @@
 
 import React from "react"
 
-import { LibColorsTypes, ColorsShortTypes } from "../../utils/common-types"
+import { AllColorsTypes } from "../../utils/common-types"
 
 type AvatarImg = {
     src: string
@@ -10,11 +10,26 @@ type AvatarImg = {
 }
 
 interface BaseProps extends React.HTMLAttributes<HTMLSpanElement> {
-    options?: {
-        size?: number
-        color?: LibColorsTypes | ColorsShortTypes | string
-        contentColor?: LibColorsTypes | ColorsShortTypes | string
-    }
+    size?: number
+    color?: AllColorsTypes
+    contentColor?: AllColorsTypes
+    as?: React.ElementType
+    border?:
+        | boolean
+        | {
+              width?: number
+              color?: AllColorsTypes
+              outline?: number
+          }
+    badge?:
+        | boolean
+        | number
+        | {
+              content?: number
+              color?: AllColorsTypes
+              contentColor?: AllColorsTypes
+              position?: "top" | "bottom"
+          }
 }
 
 interface Possible1 extends BaseProps {

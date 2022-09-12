@@ -2,10 +2,16 @@
 
 import styled, { css } from "styled-components"
 
-import Variables from "../../Variables"
+import { Transitions, Breakpoints, Spacers, FontSizes } from "../../Variables"
+import Mixins from "../../Mixins"
 import { FontCommon } from "../Text/styles"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { TextAlignTypes } from "../../utils/common-types"
+import {
+    TextAlignTypes,
+    ColorsHoverTypes,
+    AllColorsTypes,
+} from "../../utils/common-types"
 
 import { TableStyleTypes, VAlignTypes } from "./types"
 
@@ -13,68 +19,167 @@ const StyledTable = styled.table<{
     $tableStyle?: TableStyleTypes
     $textAlign?: TextAlignTypes
     $vAlign?: VAlignTypes
+    $headerBackground?: ColorsHoverTypes
+    $headerTextColor?: AllColorsTypes
+    $textColor?: AllColorsTypes
+    $linkColor?: ColorsHoverTypes
+    $borderColor?: AllColorsTypes
+    $headerBorderColor?: AllColorsTypes
+    $backgroundEven?: AllColorsTypes
+    $backgroundOdd?: AllColorsTypes
+    $textColorEven?: AllColorsTypes
+    $textColorOdd?: AllColorsTypes
+    $linkColorHeader?: ColorsHoverTypes
 }>`
-    ${FontCommon({ $defaultSize: "small" })};
+    ${FontCommon({
+        $defaultSize: "small",
+    })};
     display: table;
     border-collapse: collapse;
     border-spacing: 0;
-    font-size: ${Variables.FontSizes.Small};
     table-layout: fixed;
     width: 100%;
-    text-align: ${({ $textAlign }) => $textAlign};
+    color: ${({ theme, $textColor }) =>
+        theme.AllColors({
+            $color: $textColor,
+        })};
+
+    & > * {
+        color: ${({ theme, $textColor }) =>
+            theme.AllColors({
+                $color: $textColor,
+            })};
+    }
+
+    a {
+        color: ${({ theme, $linkColor }) =>
+            theme.ColorsHoverDefault({ $color: $linkColor })};
+        transition: ${Transitions.Short};
+        text-decoration: none;
+
+        @media ${Breakpoints.Hover} {
+            &:hover {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverHover({ $color: $linkColor })};
+            }
+
+            &:active {
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverActive({ $color: $linkColor })};
+            }
+        }
+    }
 
     td,
     th {
-        padding: ${Variables.Spacers.XXS} ${Variables.Spacers.XS};
-        text-align: left;
+        text-align: ${({ $textAlign }) => $textAlign};
+        padding: ${Spacers.XXS} ${Spacers.XS};
         display: table-cell;
         overflow-x: scroll;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
+        ${Mixins.HideScrollbar};
         vertical-align: ${({ $vAlign }) => $vAlign};
 
-        &::-webkit-scrollbar {
-            display: none;
-        }
-
         & > * {
-            font-size: ${Variables.FontSizes.Small};
+            font-size: ${FontSizes.Small};
         }
 
-        @media ${Variables.Breakpoints.Mobile} {
+        @media ${Breakpoints.Mobile} {
             display: block;
         }
     }
 
     thead {
-        text-align: left;
-        background-color: ${Variables.Colors.Primary500};
-        color: ${Variables.Colors.White};
+        text-align: ${({ $textAlign }) => $textAlign};
+        background-color: ${({ $headerBackground, theme }) =>
+            theme.AllColors({ $color: $headerBackground })};
+        color: ${({ $headerTextColor, theme }) =>
+            $headerTextColor
+                ? theme.AllColors({ $color: $headerTextColor })
+                : theme.Background};
 
         a {
-            color: ${Variables.Colors.White};
+            color: ${({ $linkColorHeader, theme }) =>
+                theme.ColorsHoverDefault({ $color: $linkColorHeader })};
+
+            @media ${Breakpoints.Hover} {
+                &:hover {
+                    color: ${({ $linkColorHeader, theme }) =>
+                        theme.ColorsHoverHover({
+                            $color: $linkColorHeader,
+                        })};
+                }
+
+                &:active {
+                    color: ${({ $linkColorHeader, theme }) =>
+                        theme.ColorsHoverActive({
+                            $color: $linkColorHeader,
+                        })};
+                }
+            }
         }
     }
 
-    ${({ $tableStyle }) =>
+    ${({
+        $tableStyle,
+        $borderColor,
+        $backgroundEven,
+        $backgroundOdd,
+        $headerBorderColor,
+        $textColorEven,
+        $textColorOdd,
+        theme,
+    }) =>
         $tableStyle === "bordered"
             ? css`
-                  border: 1px solid ${Variables.Colors.Gray200};
+                  border: 1px solid
+                      ${$borderColor
+                          ? theme.AllColors({ $color: $borderColor })
+                          : theme.Gray200};
 
                   thead th:not(:last-child) {
-                      border-right: 1px solid ${Variables.Colors.White};
+                      border-right: 1px solid
+                          ${$headerBorderColor
+                              ? theme.AllColors({
+                                    $color: $headerBorderColor,
+                                })
+                              : theme.Background};
                   }
 
                   td {
-                      border: 1px solid ${Variables.Colors.Gray200};
+                      border: 1px solid
+                          ${$borderColor
+                              ? theme.AllColors({ $color: $borderColor })
+                              : theme.Gray200};
                   }
               `
             : $tableStyle === "stripped" &&
               css`
+                  tbody tr:nth-child(odd) {
+                      background-color: ${$backgroundOdd
+                          ? theme.AllColors({
+                                $color: $backgroundOdd,
+                            })
+                          : theme.Background};
+                      color: ${$textColorOdd
+                          ? theme.AllColors({
+                                $color: $textColorOdd,
+                            })
+                          : theme.Font};
+                  }
+
                   tbody tr:nth-child(even) {
-                      background-color: ${Variables.Colors.Gray50};
+                      background-color: ${$backgroundEven
+                          ? theme.AllColors({
+                                $color: $backgroundEven,
+                            })
+                          : theme.Gray50};
+                      color: ${$textColorEven
+                          ? theme.AllColors({ $color: $textColorEven })
+                          : theme.Font};
                   }
               `}
 `
+
+setDefaultTheme([StyledTable])
 
 export { StyledTable }

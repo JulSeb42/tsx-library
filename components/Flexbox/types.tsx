@@ -24,4 +24,5 @@ export interface FlexboxProps extends React.HTMLAttributes<HTMLDivElement> {
     rowGap?: SpacersTypes | number | string
     columnGap?: SpacersTypes | number | string
     padding?: SpacersTypes | number | string
+    as?: React.ElementType
 }

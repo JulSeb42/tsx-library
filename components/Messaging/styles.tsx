@@ -3,18 +3,22 @@
 import styled, { css } from "styled-components"
 import ScrollToBottom from "react-scroll-to-bottom"
 
-import Variables from "../../Variables"
+import { Radiuses, Spacers, FontSizes, LineHeights, FontFamilies, Breakpoints, Transitions } from "../../Variables"
 import Mixins from "../../Mixins"
 import Text from "../Text"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
+import { AllColorsTypes, ColorsHoverTypes } from "../../utils/common-types"
 import { MessageTypesTypes } from "./types"
 
-const StyledMessaging = styled.div`
-    border: 1px solid ${Variables.Colors.Gray200};
-    border-radius: ${Variables.Radiuses.L};
+const StyledMessaging = styled.div<{ $borderColor?: AllColorsTypes }>`
+    border: 1px solid
+        ${({ $borderColor, theme }) =>
+            theme.AllColors({ $color: $borderColor })};
+    border-radius: ${Radiuses.L};
     min-height: 400px;
     max-height: 60vh;
-    padding: ${Variables.Spacers.S};
+    padding: ${Spacers.S};
     ${Mixins.Flexbox({
         $flexDirection: "column",
         $gap: "xs",
@@ -25,6 +29,11 @@ const MessagesContainer = styled(ScrollToBottom)<{ $isEmpty?: boolean }>`
     flex-grow: 1;
     overflow-y: scroll;
     width: 100%;
+    ${Mixins.HideScrollbar};
+
+    & > div {
+        ${Mixins.HideScrollbar};
+    }
 
     ${({ $isEmpty }) =>
         $isEmpty &&
@@ -47,27 +56,35 @@ const InputContainer = styled.form`
     })};
 `
 
-const minHeight = `${Variables.FontSizes.Body} * ${Variables.LineHeights.Regular} * 3`
+const minHeight = `${FontSizes.Body} * ${LineHeights.Regular} * 3`
 
-const Input = styled.textarea`
+const Input = styled.textarea<{
+    $color?: AllColorsTypes
+    $colorPlaceholder?: AllColorsTypes
+}>`
     flex-grow: 1;
     padding: 0;
-    font-size: ${Variables.FontSizes.Body};
-    font-family: ${Variables.FontFamilies.Body};
-    line-height: ${Variables.LineHeights.Regular};
+    font-size: ${FontSizes.Body};
+    font-family: ${FontFamilies.Body};
+    line-height: ${LineHeights.Regular};
     resize: none;
     border: none;
-    color: ${Variables.Colors.Black};
+    color: ${({ theme }) => theme.AllColors};
     min-height: calc(${minHeight});
+    background-color: transparent;
 
     &::placeholder {
-        color: ${Variables.Colors.Gray200};
+        color: ${({ $colorPlaceholder, theme }) =>
+            theme.AllColors({ $color: $colorPlaceholder })};
     }
 `
 
 const buttonSize = 32
 
-const SendButton = styled.button<{ $hasText?: boolean }>`
+const SendButton = styled.button<{
+    $hasText?: boolean
+    $color?: ColorsHoverTypes
+}>`
     width: ${buttonSize}px;
     height: ${buttonSize}px;
     padding: 0;
@@ -76,68 +93,79 @@ const SendButton = styled.button<{ $hasText?: boolean }>`
         $alignItems: "center",
         $justifyContent: "center",
     })};
-    border-radius: ${Variables.Radiuses.Circle};
+    border-radius: ${Radiuses.Circle};
     border: none;
     background-color: transparent;
-    transition: ${Variables.Transitions.Short};
-    color: ${Variables.Colors.Primary500};
+    transition: ${Transitions.Short};
+    color: ${({ theme }) => theme.ColorsHoverDefault};
 
-    @media ${Variables.Breakpoints.Hover} {
-        ${({ $hasText }) =>
-            $hasText
-                ? css`
-                      &:not(:disabled):hover {
-                          color: ${Variables.Colors.Primary300};
-                      }
+    @media ${Breakpoints.Hover} {
+        &:not(:disabled):hover {
+            color: ${({ theme }) => theme.ColorsHoverHover};
+            background-color: ${({ $hasText, theme }) =>
+                !$hasText && theme.Gray50};
+        }
 
-                      &:not(:disabled):active {
-                          color: ${Variables.Colors.Primary600};
-                      }
-                  `
-                : css`
-                      &:not(:disabled):hover {
-                          color: ${Variables.Colors.Primary300};
-                          background-color: ${Variables.Colors.Gray50};
-                      }
-
-                      &:not(:disabled):active {
-                          color: ${Variables.Colors.Primary600};
-                      }
-                  `}
+        &:not(:disabled):active {
+            color: ${({ theme }) => theme.ColorsHoverActive};
+        }
     }
 
     &:disabled {
-        color: ${Variables.Colors.Gray500};
+        color: ${({ theme }) => theme.Gray500};
     }
 `
 
-const StyledMessage = styled(Text)<{ $type?: MessageTypesTypes }>`
-    padding: ${Variables.Spacers.XS};
-    border-radius: ${Variables.Radiuses.S};
-    background-color: ${({ $type }) =>
-        $type === "received"
-            ? Variables.Colors.Gray100
-            : Variables.Colors.Primary500};
+const StyledMessage = styled(Text)<{
+    $type?: MessageTypesTypes
+    $backgroundColor?: AllColorsTypes
+    $textColor?: AllColorsTypes
+    $linkColor?: ColorsHoverTypes
+}>`
+    padding: ${Spacers.XS};
+    border-radius: ${Radiuses.S};
+    background-color: ${({ $backgroundColor, theme }) =>
+        theme.AllColors({ $color: $backgroundColor })};
     width: fit-content;
     max-width: 70%;
-    color: ${({ $type }) => $type === "sent" && Variables.Colors.White};
+    color: ${({ $textColor, theme }) =>
+        theme.AllColors({ $color: $textColor })};
+
+    & > * {
+        color: ${({ theme, $textColor }) =>
+            theme.AllColors({
+                $color: $textColor,
+            })};
+    }
 
     a {
-        color: ${({ $type }) => $type === "sent" && Variables.Colors.White};
+        color: ${({ theme, $linkColor }) =>
+            theme.ColorsHoverDefault({ $color: $linkColor })};
+        transition: ${Transitions.Short};
+        text-decoration: none;
 
-        @media ${Variables.Breakpoints.Hover} {
+        @media ${Breakpoints.Hover} {
             &:hover {
-                color: ${({ $type }) =>
-                    $type === "sent" && Variables.Colors.Gray300};
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverHover({ $color: $linkColor })};
             }
 
             &:active {
-                color: ${({ $type }) =>
-                    $type === "sent" && Variables.Colors.Gray100};
+                color: ${({ theme, $linkColor }) =>
+                    theme.ColorsHoverActive({ $color: $linkColor })};
             }
         }
     }
 `
+
+setDefaultTheme([
+    StyledMessaging,
+    MessagesContainer,
+    InputContainer,
+    Input,
+    SendButton,
+    StyledMessage,
+])
 
 export {
     StyledMessaging,

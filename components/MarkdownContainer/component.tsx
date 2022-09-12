@@ -11,9 +11,15 @@ const MarkdownContainer = ({
     gap = "s",
     content,
     options = optionsMarkdown,
+    as,
     ...props
 }: MarkdownContainerProps) => (
-    <Styles.StyledMarkdownContainer $gap={gap} options={options} {...props}>
+    <Styles.StyledMarkdownContainer
+        $gap={gap}
+        options={options}
+        as={as}
+        {...props}
+    >
         {content}
     </Styles.StyledMarkdownContainer>
 )

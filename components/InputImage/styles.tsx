@@ -3,11 +3,12 @@
 import styled, { css } from "styled-components"
 import { stringifyPx } from "ts-utils-julseb"
 
-import Variables from "../../Variables"
+import { Overlays, Transitions, Breakpoints } from "../../Variables"
 import Mixins from "../../Mixins"
 import Image from "../Image"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { ValidationTypes } from "../../utils/common-types"
+import { ValidationTypes, RadiusesTypes } from "../../utils/common-types"
 
 const StyledInputImage = styled.div`
     position: relative;
@@ -25,10 +26,8 @@ const StyledEmptyContainer = styled.span<{
     })};
     position: relative;
     z-index: 0;
-    background-color: ${({ $validation }) =>
-        $validation === "not-passed"
-            ? Variables.Colors.Danger50
-            : Variables.Colors.Gray100};
+    background-color: ${({ $validation, theme }) =>
+        $validation === "not-passed" ? theme.Danger50 : theme.Gray100};
 `
 
 const StyledHoverContainer = styled.span`
@@ -43,15 +42,16 @@ const StyledHoverContainer = styled.span`
     top: 0;
     left: 0;
     z-index: 1;
-    background-color: ${Variables.Overlays.Plain.White50};
+    background-color: ${Overlays.Plain.White50};
     opacity: 0;
-    transition: ${Variables.Transitions.Short};
+    transition: ${Transitions.Short};
 `
 
 const Label = styled.label<{
     $disabled?: boolean
     $width?: number | string
     $height?: number | string
+    $radius?: RadiusesTypes
 }>`
     width: ${({ $width }) => stringifyPx($width)};
     height: ${({ $height }) => stringifyPx($height)};
@@ -60,11 +60,11 @@ const Label = styled.label<{
         $justifyContent: "center",
     })};
     position: relative;
-    border-radius: ${Variables.Radiuses.M};
+    ${({ $radius }) => Mixins.BorderRadius({ $borderRadius: $radius })};
     overflow: hidden;
     cursor: pointer;
 
-    @media ${Variables.Breakpoints.Hover} {
+    @media ${Breakpoints.Hover} {
         &:hover ${StyledHoverContainer} {
             opacity: 1;
         }
@@ -75,7 +75,7 @@ const Label = styled.label<{
         css`
             cursor: not-allowed;
 
-            @media ${Variables.Breakpoints.Hover} {
+            @media ${Breakpoints.Hover} {
                 &:hover ${StyledHoverContainer} {
                     opacity: 0;
                 }
@@ -91,6 +91,14 @@ const Img = styled(Image)`
 const Input = styled.input`
     display: none;
 `
+setDefaultTheme([
+    StyledInputImage,
+    StyledHoverContainer,
+    StyledEmptyContainer,
+    Label,
+    Img,
+    Input,
+])
 
 export {
     StyledInputImage,

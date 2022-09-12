@@ -2,18 +2,25 @@
 
 import styled from "styled-components"
 
-import Variables from "../../Variables"
+import {
+    Spacers,
+    Shadows,
+    Radiuses,
+    Breakpoints,
+    Transitions,
+} from "../../Variables"
 import Mixins from "../../Mixins"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledToast = styled.div<{ $isClosed?: boolean }>`
     width: 100%;
     max-width: 400px;
-    background-color: ${Variables.Colors.White};
+    background-color: ${({ theme }) => theme.Background};
     display: ${({ $isClosed }) => ($isClosed ? "none" : "grid")};
-    gap: ${Variables.Spacers.XXS};
-    box-shadow: ${Variables.Shadows.M};
-    padding: ${Variables.Spacers.M};
-    border-radius: ${Variables.Radiuses.M};
+    gap: ${Spacers.XXS};
+    box-shadow: ${Shadows.M};
+    padding: ${Spacers.M};
+    border-radius: ${Radiuses.M};
 `
 
 const TitleContainer = styled.div`
@@ -39,7 +46,7 @@ const buttonSize = 32
 const CloseButton = styled.button`
     width: ${buttonSize}px;
     height: ${buttonSize}px;
-    border-radius: ${Variables.Radiuses.Circle};
+    border-radius: ${Radiuses.Circle};
     border: none;
     ${Mixins.Flexbox({
         $alignItems: "center",
@@ -47,14 +54,16 @@ const CloseButton = styled.button`
         $inline: true,
     })};
     background-color: transparent;
-    transition: ${Variables.Transitions.Short};
-    color: ${Variables.Colors.Primary500};
+    transition: ${Transitions.Short};
+    color: ${({ theme }) => theme.Primary500};
 
-    @media ${Variables.Breakpoints.Hover} {
+    @media ${Breakpoints.Hover} {
         &:hover {
-            background-color: ${Variables.Colors.Gray50};
+            background-color: ${({ theme }) => theme.Gray50};
         }
     }
 `
+
+setDefaultTheme([StyledToast, TitleContainer, Content, CloseButton])
 
 export { StyledToast, TitleContainer, Content, CloseButton }

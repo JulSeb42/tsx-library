@@ -2,10 +2,13 @@
 
 import styled, { css } from "styled-components"
 
-import Variables from "../../Variables"
+import { Radiuses, Spacers, Breakpoints, Transitions } from "../../Variables"
 import Mixins from "../../Mixins"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { TableStylesTypes, JustifyTypes } from "./types"
+import { ColorsHoverTypes, AllColorsTypes } from "../../utils/common-types"
+
+import { TabsVariantTypes, JustifyTypes } from "./types"
 
 const StyledTabs = styled.div`
     ${Mixins.Grid({
@@ -14,14 +17,16 @@ const StyledTabs = styled.div`
 `
 
 const ButtonsContainer = styled.div<{
-    $tabsStyle?: TableStylesTypes
+    $variant?: TabsVariantTypes
     $justify?: JustifyTypes
     $col: number
+    $separatorColor?: AllColorsTypes
+    $backgroundColor?: AllColorsTypes
 }>`
     position: relative;
 
-    ${({ $tabsStyle }) =>
-        $tabsStyle === "basic"
+    ${({ $variant, $separatorColor, $backgroundColor, theme }) =>
+        $variant === "basic"
             ? css`
                   &:after {
                       content: "";
@@ -30,17 +35,21 @@ const ButtonsContainer = styled.div<{
                       left: 0;
                       width: 100%;
                       height: 1px;
-                      background-color: ${Variables.Colors.Gray200};
+                      background-color: ${theme.AllColors({
+                          $color: $separatorColor,
+                      })};
                       z-index: 0;
                   }
               `
             : css`
-                  background-color: ${Variables.Colors.Gray50};
-                  border-radius: ${Variables.Radiuses.M};
-                  padding: ${Variables.Spacers.XS};
+                  background-color: ${theme.AllColors({
+                      $color: $backgroundColor,
+                  })};
+                  border-radius: ${Radiuses.M};
+                  padding: ${Spacers.XS};
               `}
 
-    ${({ $justify, $col, $tabsStyle }) =>
+    ${({ $justify, $col, $variant }) =>
         $justify === "start"
             ? css`
                   ${Mixins.Flexbox({
@@ -49,9 +58,9 @@ const ButtonsContainer = styled.div<{
                       $flexWrap: "wrap",
                       $inline: true,
                   })};
-                  width: ${$tabsStyle === "rounded" ? "fit-content" : "100%"};
+                  width: ${$variant === "rounded" ? "fit-content" : "100%"};
 
-                  @media ${Variables.Breakpoints.Mobile} {
+                  @media ${Breakpoints.Mobile} {
                       flex-direction: column;
                   }
               `
@@ -61,7 +70,7 @@ const ButtonsContainer = styled.div<{
                       $gap: "xs",
                   })};
 
-                  @media ${Variables.Breakpoints.Mobile} {
+                  @media ${Breakpoints.Mobile} {
                       grid-template-columns: repeat(1, 1fr);
                   }
               `}
@@ -69,43 +78,59 @@ const ButtonsContainer = styled.div<{
 
 const Button = styled.button<{
     $isActive: boolean
-    $tabsStyle?: TableStylesTypes
+    $variant?: TabsVariantTypes
     $justify?: JustifyTypes
+    $accentColor?: ColorsHoverTypes
+    $buttonColor?: AllColorsTypes
 }>`
     border: none;
     padding: 0;
     background-color: transparent;
 
-    ${({ $tabsStyle, $isActive, $justify }) =>
-        $tabsStyle === "basic"
+    ${({ $variant, $isActive, $justify, $accentColor, $buttonColor, theme }) =>
+        $variant === "basic"
             ? css`
                   min-width: 100px;
                   text-align: left;
-                  padding-bottom: ${Variables.Spacers.XXS};
+                  padding-bottom: ${Spacers.XXS};
                   border-bottom: 2px solid
-                      ${$isActive ? Variables.Colors.Primary500 : "transparent"};
+                      ${$isActive
+                          ? theme.AllColors({ $color: $accentColor })
+                          : "transparent"};
                   z-index: 2;
+                  color: ${theme.AllColors({ $color: $buttonColor })};
 
-                  @media ${Variables.Breakpoints.Mobile} {
+                  @media ${Breakpoints.Mobile} {
                       width: 100%;
                   }
               `
             : css`
-                  background-color: ${$isActive && Variables.Colors.Primary500};
-                  border-radius: ${Variables.Radiuses.S};
-                  padding: ${Variables.Spacers.XXS};
-                  color: ${$isActive && Variables.Colors.White};
-                  transition: ${Variables.Transitions.Short};
+                  background-color: ${$isActive &&
+                  theme.ColorsHoverDefault({ $color: $accentColor })};
+                  border-radius: ${Radiuses.S};
+                  padding: ${Spacers.XXS};
+                  color: ${$isActive
+                      ? $accentColor === "white"
+                          ? theme.Primary500
+                          : theme.Background
+                      : theme.AllColors({ $color: $buttonColor })};
+                  transition: ${Transitions.Short};
                   min-width: ${$justify === "start" && "100px"};
 
-                  @media ${Variables.Breakpoints.Hover} {
+                  @media ${Breakpoints.Hover} {
                       &:hover {
-                          background-color: ${Variables.Colors.Primary300};
-                          color: ${Variables.Colors.White};
+                          background-color: ${theme.ColorsHoverHover({
+                              $color: $accentColor,
+                          })};
+                          color: ${$accentColor === "white"
+                              ? theme.Primary500
+                              : theme.Background};
                       }
 
                       &:active {
-                          background-color: ${Variables.Colors.Primary600};
+                          background-color: ${theme.ColorsHoverActive({
+                              $color: $accentColor,
+                          })};
                       }
                   }
               `}
@@ -114,5 +139,7 @@ const Button = styled.button<{
 const TabItem = styled.div<{ $isActive: boolean }>`
     display: ${({ $isActive }) => ($isActive ? "inherit" : "none")};
 `
+
+setDefaultTheme([StyledTabs, ButtonsContainer, Button, TabItem])
 
 export { StyledTabs, ButtonsContainer, Button, TabItem }

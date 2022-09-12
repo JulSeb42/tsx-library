@@ -2,74 +2,89 @@
 
 import styled, { css } from "styled-components"
 
-import Variables from "../../Variables"
+import { Breakpoints, Spacers } from "../../Variables"
 import Mixins from "../../Mixins"
 import Image from "../Image"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { ColorsShortTypes, LibColorsTypes } from "../../utils/common-types"
+import { AllColorsTypes, ColorsHoverTypes } from "../../utils/common-types"
+import { DirectionTypes } from "./types"
 
 const StyledFooter = styled.footer<{
     $separator?: boolean
-    $separatorColor?: ColorsShortTypes | LibColorsTypes | string
+    $separatorColor?: AllColorsTypes
+    $accentColor?: ColorsHoverTypes
+    $direction?: DirectionTypes
 }>`
     width: 100%;
     position: relative;
     z-index: 10;
-    background-color: ${Variables.Colors.Background};
-    ${Mixins.Flexbox({
-        $alignItems: "center",
-        $justifyContent: "space-between",
-    })};
-    padding: ${Variables.Spacers.L} 5%;
+    background-color: ${({ theme }) => theme.Background};
+    ${({ $direction }) =>
+        Mixins.Flexbox({
+            $alignItems: "center",
+            $justifyContent:
+                $direction === "vertical" ? "center" : "space-between",
+            $gap: $direction === "vertical" ? "xs" : "l",
+            $flexDirection: $direction === "vertical" ? "column" : "row",
+        })};
+    padding: ${Spacers.L} 5%;
 
     a,
     button {
-        color: ${Variables.Colors.Primary500};
+        color: ${({ $accentColor, theme }) =>
+            theme.ColorsHoverDefault({ $color: $accentColor })};
         text-decoration: none;
         border: none;
         padding: 0;
         background-color: transparent;
 
-        @media ${Variables.Breakpoints.Hover} {
+        @media ${Breakpoints.Hover} {
             &:hover {
-                color: ${Variables.Colors.Primary300};
+                color: ${({ $accentColor, theme }) =>
+                    theme.ColorsHoverHover({ $color: $accentColor })};
             }
 
             &:active {
-                color: ${Variables.Colors.Primary600};
+                color: ${({ $accentColor, theme }) =>
+                    theme.ColorsHoverActive({ $color: $accentColor })};
             }
         }
     }
 
-    @media ${Variables.Breakpoints.Mobile} {
+    @media ${Breakpoints.Mobile} {
         flex-direction: column;
-        gap: ${Variables.Spacers.L};
+        gap: ${Spacers.XS};
     }
 
-    ${({ $separator, $separatorColor }) =>
+    ${({ $separator, $separatorColor, theme }) =>
         $separator &&
         css`
-            padding-top: ${Variables.Spacers.XXL};
+            padding-top: ${Spacers.XXL};
 
             &:before {
                 content: "";
                 width: calc(100% - 10%);
                 height: 1px;
                 position: absolute;
-                top: ${Variables.Spacers.L};
+                top: ${Spacers.L};
                 left: 5%;
-                background-color: ${Mixins.AllColors({
+                background-color: ${theme.AllColors({
                     $color: $separatorColor,
                 })};
             }
         `}
 `
 
-const LogoImg = styled(Image)`
+const LogoImg = styled(Image).attrs({ fit: "contain" })`
     object-position: left center;
 `
 
-const FooterLinks = styled.div`
+const FooterLinks = styled.div<{
+    $symbolSeparator?: string
+    $iconSeparator?: string
+    $colorSeparator?: AllColorsTypes
+}>`
     ${Mixins.Flexbox({
         $alignItems: "center",
         $justifyContent: "flex-start",
@@ -77,19 +92,23 @@ const FooterLinks = styled.div`
         $flexWrap: "wrap",
     })};
 
-    & > *:not(:last-child):after {
-        content: "•";
-        color: ${Variables.Colors.Black};
-        margin-left: ${Variables.Spacers.XS};
-        font-size: 12px;
-        position: relative;
-        top: -2px;
-    }
-
-    @media ${Variables.Breakpoints.Mobile} {
+    @media ${Breakpoints.Mobile} {
         justify-content: center;
         align-items: center;
     }
 `
 
-export { StyledFooter, LogoImg, FooterLinks }
+const SeparatorContainer = styled.span<{ $color?: AllColorsTypes }>`
+    height: 24px;
+    font-size: 12;
+    line-height: 24px;
+    ${Mixins.Flexbox({
+        $inline: true,
+        $alignItems: "center",
+    })};
+    color: ${({ theme }) => theme.AllColors};
+`
+
+setDefaultTheme([StyledFooter, LogoImg, FooterLinks, SeparatorContainer])
+
+export { StyledFooter, LogoImg, FooterLinks, SeparatorContainer }

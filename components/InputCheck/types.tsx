@@ -2,7 +2,7 @@
 
 import React from "react"
 
-import { ValidationTypes } from "../../utils/common-types"
+import { ValidationTypes, ColorsHoverTypes } from "../../utils/common-types"
 
 interface BaseProps extends React.HTMLAttributes<HTMLInputElement> {
     id: string
@@ -11,6 +11,7 @@ interface BaseProps extends React.HTMLAttributes<HTMLInputElement> {
     name?: string
     validation?: ValidationTypes
     checkStyle?: "tile" | "toggle" | "selector" | undefined
+    accentColor?: ColorsHoverTypes
 }
 
 interface Possible1 extends BaseProps {

@@ -2,8 +2,9 @@
 
 import styled, { css } from "styled-components"
 
-import Variables from "../../Variables"
+import { Breakpoints } from "../../Variables"
 import Mixins from "../../Mixins"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 import {
     SpacersTypes,
@@ -31,7 +32,7 @@ const StyledGrid = styled.div<{
 }>`
     ${Mixins.Grid};
 
-    @media ${Variables.Breakpoints.Tablet} {
+    @media ${Breakpoints.Tablet} {
         grid-template-columns: ${({ $col }) =>
             $col && $col >= 6
                 ? "repeat(4, 1fr)"
@@ -40,7 +41,7 @@ const StyledGrid = styled.div<{
                 : "repeat(2, 1fr)"};
     }
 
-    @media ${Variables.Breakpoints.Mobile} {
+    @media ${Breakpoints.Mobile} {
         grid-template-columns: ${({ $col }) =>
             $col && $col >= 6 ? "repeat(2, 1fr)" : "repeat(1, 1fr)"};
     }
@@ -48,7 +49,7 @@ const StyledGrid = styled.div<{
     ${({ $col, $colTablet, $colMobile }) =>
         typeof $col === "number"
             ? css`
-                  @media ${Variables.Breakpoints.Tablet} {
+                  @media ${Breakpoints.Tablet} {
                       grid-template-columns: repeat(
                           ${!$col
                               ? 1
@@ -63,7 +64,7 @@ const StyledGrid = styled.div<{
                       );
                   }
 
-                  @media ${Variables.Breakpoints.Mobile} {
+                  @media ${Breakpoints.Mobile} {
                       grid-template-columns: repeat(
                           ${!$col ? 1 : $col >= 6 ? 2 : 1},
                           1fr
@@ -71,14 +72,16 @@ const StyledGrid = styled.div<{
                   }
               `
             : css`
-                  @media ${Variables.Breakpoints.Tablet} {
+                  @media ${Breakpoints.Tablet} {
                       grid-template-columns: ${$colTablet};
                   }
 
-                  @media ${Variables.Breakpoints.Mobile} {
+                  @media ${Breakpoints.Mobile} {
                       grid-template-columns: ${$colMobile};
                   }
               `}
 `
+
+setDefaultTheme([StyledGrid])
 
 export { StyledGrid }

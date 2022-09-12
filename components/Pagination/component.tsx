@@ -23,7 +23,15 @@ const Pagination = forwardRef(
 
 const PaginationButton = forwardRef(
     (
-        { isActive, to, content, icon, disabled, ...props }: ButtonProps,
+        {
+            isActive,
+            to,
+            content,
+            icon,
+            disabled,
+            color = "primary",
+            ...props
+        }: ButtonProps,
         ref?: React.ForwardedRef<HTMLButtonElement>
     ) => (
         <Styles.Button
@@ -33,6 +41,7 @@ const PaginationButton = forwardRef(
             to={to}
             disabled={disabled}
             ref={ref}
+            $color={color}
             {...props}
         >
             {content === "more" ? (

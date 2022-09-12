@@ -2,7 +2,6 @@
 
 import React, { forwardRef } from "react"
 
-import Variables from "../../Variables"
 import InputContainer from "../InputContainer"
 import Icon from "../Icon"
 import ImageIcon from "../../icons/ImageIcon"
@@ -20,9 +19,12 @@ const InputImage = forwardRef(
             width = 64,
             height = 64,
             img,
-            options,
             icons,
-            value,
+            label,
+            helper,
+            helperBottom,
+            accentColor,
+            borderRadius = "m",
             ...props
         }: InputImageProps,
         ref?: React.ForwardedRef<HTMLInputElement>
@@ -37,6 +39,8 @@ const InputImage = forwardRef(
                                 ? "danger"
                                 : disabled
                                 ? "gray"
+                                : accentColor
+                                ? accentColor
                                 : "primary"
                         }
                         size={48}
@@ -46,10 +50,12 @@ const InputImage = forwardRef(
                         size={48}
                         color={
                             validation === "not-passed"
-                                ? Variables.Colors.Danger500
+                                ? "danger"
                                 : disabled
-                                ? Variables.Colors.Gray500
-                                : Variables.Colors.Primary500
+                                ? "gray"
+                                : accentColor
+                                ? accentColor
+                                : "primary"
                         }
                     />
                 )}
@@ -63,7 +69,11 @@ const InputImage = forwardRef(
                         src={icons.hover}
                         size={32}
                         color={
-                            validation === "not-passed" ? "danger" : "primary"
+                            validation === "not-passed"
+                                ? "danger"
+                                : accentColor
+                                ? accentColor
+                                : "primary"
                         }
                     />
                 ) : (
@@ -71,8 +81,10 @@ const InputImage = forwardRef(
                         size={32}
                         color={
                             validation === "not-passed"
-                                ? Variables.Colors.Danger500
-                                : Variables.Colors.Primary500
+                                ? "danger"
+                                : accentColor
+                                ? accentColor
+                                : "primary"
                         }
                     />
                 )}
@@ -86,6 +98,7 @@ const InputImage = forwardRef(
                     $disabled={disabled}
                     $width={width}
                     $height={height}
+                    $radius={borderRadius}
                 >
                     {img.src === "" ? (
                         emptyContainer()
@@ -95,7 +108,7 @@ const InputImage = forwardRef(
                             alt={img.alt || "Image"}
                             width="100%"
                             height="100%"
-                            options={{ fit: "cover" }}
+                            fit="cover"
                         />
                     )}
 
@@ -106,19 +119,19 @@ const InputImage = forwardRef(
                     type="file"
                     id={id}
                     disabled={disabled}
-                    value={value}
                     ref={ref}
                     {...props}
                 />
             </Styles.StyledInputImage>
         )
 
-        return options ? (
+        return label || helper || helperBottom ? (
             <InputContainer
                 id={id}
-                label={options.label}
-                helper={options.helper}
-                helperBottom={options.helperBottom}
+                label={label}
+                helper={helper}
+                helperBottom={helperBottom}
+                accentColor={accentColor}
             >
                 {inputFunction()}
             </InputContainer>

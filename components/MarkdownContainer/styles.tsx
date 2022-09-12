@@ -5,6 +5,7 @@ import Markdown from "markdown-to-jsx"
 import { stringifyPx } from "ts-utils-julseb"
 
 import Mixins from "../../Mixins"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 import { SpacersTypes } from "../../utils/common-types"
 
@@ -16,5 +17,7 @@ const StyledMarkdownContainer = styled(Markdown)<{
             $gap: typeof $gap === "number" ? stringifyPx($gap) : $gap,
         })};
 `
+
+setDefaultTheme([StyledMarkdownContainer])
 
 export { StyledMarkdownContainer }

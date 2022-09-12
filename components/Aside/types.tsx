@@ -37,4 +37,5 @@ export interface AsideProps extends React.HTMLAttributes<HTMLDivElement> {
     alignContent?: GridAlignContentTypes
     alignItems?: GridAlignItemsTypes
     gap?: SpacersTypes | number
+    as?: React.ElementType
 }

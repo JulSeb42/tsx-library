@@ -8,7 +8,6 @@ import Flexbox from "../Flexbox"
 import Icon from "../Icon"
 import SendIcon from "../../icons/SendIcon"
 import Hr from "../Hr"
-import { uuid } from "../../utils/utils"
 
 import * as Styles from "./styles"
 import { MessageProps, MessagingProps } from "./types"
@@ -19,18 +18,42 @@ const Message = ({
     date,
     time,
     textDateTime = "at",
+    backgroundColor,
+    dateTimeColor = "gray",
+    textColor,
+    linkColor,
+    ...props
 }: MessageProps) => (
     <Flexbox
         alignItems={type === "sent" ? "flex-end" : "flex-start"}
         flexDirection="column"
-        key={uuid()}
+        {...props}
     >
-        <Styles.StyledMessage $type={type}>
+        <Styles.StyledMessage
+            $type={type}
+            $backgroundColor={
+                backgroundColor
+                    ? backgroundColor
+                    : type === "received"
+                    ? "gray-100"
+                    : "primary"
+            }
+            $textColor={
+                textColor
+                    ? textColor
+                    : type === "sent"
+                    ? "background"
+                    : "currentColor"
+            }
+            $linkColor={
+                linkColor ? linkColor : type === "sent" ? "white" : "primary"
+            }
+        >
             <ReactLinkify>{content}</ReactLinkify>
         </Styles.StyledMessage>
 
         {(date || time) && (
-            <Text tag="small" color="gray">
+            <Text tag="small" color={dateTimeColor}>
                 {date && date}
                 {date && time && ` ${textDateTime} `}
                 {time && time}
@@ -43,45 +66,70 @@ const Messaging = forwardRef(
     (
         {
             children,
-            textEmpty = "No message yet.",
+            emptyText = "No message yet.",
             button,
             input,
             onSubmit,
+            borderColor = "gray-200",
             ...props
         }: MessagingProps,
         ref?: React.ForwardedRef<HTMLTextAreaElement>
-    ) => (
-        <Styles.StyledMessaging>
-            <Styles.MessagesContainer $isEmpty={!children}>
-                {children ? children : <Text>{textEmpty}</Text>}
-            </Styles.MessagesContainer>
+    ) => {
+        const handleMessage = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
+            input.setMessage(e.target.value)
 
-            <Hr />
-
-            <Styles.InputContainer onSubmit={onSubmit} {...props}>
-                <Styles.Input
-                    onChange={input.onChange}
-                    value={input.value}
-                    placeholder={input.placeholder || "Type your message"}
-                    ref={ref}
-                />
-
-                <Styles.SendButton
-                    $hasText={!!button?.text}
-                    type="submit"
-                    disabled={input.value === "" && true}
-                >
-                    {button?.text ? (
-                        button.text
-                    ) : button?.icon ? (
-                        <Icon src={button.icon} size={24} />
+        return (
+            <Styles.StyledMessaging $borderColor={borderColor}>
+                <Styles.MessagesContainer $isEmpty={!children}>
+                    {children ? (
+                        children
                     ) : (
-                        <SendIcon size={24} />
+                        <Text
+                            color={
+                                typeof emptyText === "object"
+                                    ? emptyText.color
+                                    : "currentColor"
+                            }
+                        >
+                            {typeof emptyText === "object"
+                                ? emptyText.text
+                                : emptyText}
+                        </Text>
                     )}
-                </Styles.SendButton>
-            </Styles.InputContainer>
-        </Styles.StyledMessaging>
-    )
+                </Styles.MessagesContainer>
+
+                <Hr color={borderColor} />
+
+                <Styles.InputContainer onSubmit={onSubmit} {...props}>
+                    <Styles.Input
+                        value={input.message}
+                        onChange={handleMessage}
+                        placeholder={
+                            input.placeholder || "Type your message..."
+                        }
+                        ref={ref}
+                        $color={input.textColor || "currentColor"}
+                        $colorPlaceholder={input.placeholderColor || "gray-200"}
+                    />
+
+                    <Styles.SendButton
+                        $hasText={!!button?.text}
+                        type="submit"
+                        disabled={input.message === "" && true}
+                        $color={button?.color || "primary"}
+                    >
+                        {button?.text ? (
+                            button.text
+                        ) : button?.icon ? (
+                            <Icon src={button.icon} size={24} />
+                        ) : (
+                            <SendIcon size={24} />
+                        )}
+                    </Styles.SendButton>
+                </Styles.InputContainer>
+            </Styles.StyledMessaging>
+        )
+    }
 )
 
 export { Messaging, Message }

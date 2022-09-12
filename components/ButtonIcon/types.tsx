@@ -2,9 +2,12 @@
 
 import React from "react"
 
-import { RequireAtLeastOne } from "../../utils/RequireAtLeastOne"
-
-import { ColorsHoverTypes } from "../../utils/common-types"
+import {
+    ColorsHoverTypes,
+    ShadowsTypes,
+    SpacersTypes,
+} from "../../utils/common-types"
+import { PositionsTypes } from "../Header/types"
 
 /*==================== List possibilities ====================*/
 
@@ -18,40 +21,61 @@ export type ButtonStylesProps = keyof typeof buttonStyles
 /*==================== Component Types ====================*/
 
 interface BaseProps extends React.HTMLAttributes<HTMLButtonElement> {
-    icon?: string
-    libicon?: JSX.Element
     type?: "button" | "submit" | "reset" | undefined
-
     isLoading?: boolean
     to?: string
     disabled?: boolean
-}
-
-interface Possible1 extends BaseProps {
-    options?: {
-        variant?: "plain"
-        hoverBackground?: never
-
-        color?: ColorsHoverTypes
-        size?: number
-        loaderBorder?: number
+    color?: ColorsHoverTypes
+    size?: number
+    loaderBorder?: number
+    shadow?:
+        | ShadowsTypes
+        | {
+              default: ShadowsTypes
+              hover: ShadowsTypes
+              active: ShadowsTypes
+          }
+    position?: {
+        position?: PositionsTypes
+        left?: number | string | SpacersTypes
+        top?: number | string | SpacersTypes
+        right?: number | string | SpacersTypes
+        bottom?: number | string | SpacersTypes
+        zIndex?: number
     }
 }
 
-interface Possible2 extends BaseProps {
-    options?: {
-        variant?: "transparent"
-        hoverBackground?: boolean
-
-        color?: ColorsHoverTypes
-        size?: number
-        loaderBorder?: number
-    }
+interface PossibleIcon1 extends BaseProps {
+    icon?: never
+    libicon: JSX.Element
+    burger?: never
+    isBurgerOpen?: never
 }
 
-type PossibleProps = Possible1 | Possible2
+interface PossibleIcon2 extends BaseProps {
+    icon: string
+    libicon?: never
+    burger?: never
+    isBurgerOpen?: never
+}
 
-export type ButtonIconProps = RequireAtLeastOne<
-    PossibleProps,
-    "icon" | "libicon"
->
+interface PossibleIcon3 extends BaseProps {
+    icon?: never
+    libicon?: never
+    burger: boolean
+    isBurgerOpen: boolean
+}
+
+type IconProps = PossibleIcon1 | PossibleIcon2 | PossibleIcon3
+
+type Possible1 = IconProps & {
+    variant?: "plain"
+    hoverBackground?: never
+}
+
+type Possible2 = IconProps & {
+    variant?: "transparent"
+    hoverBackground?: boolean
+}
+
+export type ButtonIconProps = Possible1 | Possible2

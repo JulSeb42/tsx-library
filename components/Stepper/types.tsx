@@ -3,6 +3,7 @@
 import React from "react"
 
 import { StepProps } from "../../utils/component-props"
+import { ColorsHoverTypes } from "../../utils/common-types"
 
 /*==================== List possibilities ====================*/
 
@@ -18,9 +19,7 @@ export type DirectionTypes = keyof typeof direction
 export interface StepperProps extends React.HTMLAttributes<HTMLDivElement> {
     steps: StepProps[]
     active: number
-
-    options?: {
-        direction?: DirectionTypes
-        iconActive?: string
-    }
+    direction?: DirectionTypes
+    iconActive?: string
+    accentColor?: ColorsHoverTypes
 }

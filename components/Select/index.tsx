@@ -1,3 +1,3 @@
 /*=============================================== Select exports ===============================================*/
 
-export { Select, SelectItem } from "./component"
+export { default} from "./component"

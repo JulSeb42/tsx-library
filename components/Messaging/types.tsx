@@ -2,6 +2,8 @@
 
 import React from "react"
 
+import { AllColorsTypes, ColorsHoverTypes } from "../../utils/common-types"
+
 /*==================== List possibilities ====================*/
 
 const message = {
@@ -14,35 +16,51 @@ export type MessageTypesTypes = keyof typeof message
 /*==================== Component Types ====================*/
 
 export interface MessageProps extends React.HTMLAttributes<HTMLDivElement> {
-    type: "sent" | "received"
+    type: MessageTypesTypes
     content: string
     date?: string
     time?: string
     textDateTime?: string
+    backgroundColor?: AllColorsTypes
+    textColor?: AllColorsTypes
+    linkColor?: ColorsHoverTypes
+    dateTimeColor?: AllColorsTypes
 }
 
 interface BaseProps extends React.HTMLAttributes<HTMLFormElement> {
     children?: React.ReactNode | React.ReactNode[]
-    textEmpty?: string
+
+    borderColor?: AllColorsTypes
+
+    emptyText?:
+        | string
+        | {
+              text: string
+              color?: AllColorsTypes
+          }
 
     onSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void
 
     input: {
-        onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
-        value: string
+        message: string
+        setMessage: (message: string) => void
         placeholder?: string
+        textColor?: AllColorsTypes
+        placeholderColor?: AllColorsTypes
     }
 }
 
 interface Possible1 extends BaseProps {
     button?: {
-        icon: string
+        color?: ColorsHoverTypes
+        icon?: string
         text?: never
     }
 }
 
 interface Possible2 extends BaseProps {
     button?: {
+        color?: ColorsHoverTypes
         icon?: never
         text?: string
     }

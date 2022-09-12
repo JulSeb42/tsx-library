@@ -2,33 +2,39 @@
 
 import styled, { css } from "styled-components"
 
-import Variables from "../../Variables"
+import { Transitions, Spacers, Radiuses } from "../../Variables"
 import Mixins from "../../Mixins"
 import PlusIcon from "../../icons/PlusIcon"
 import ChevronDownIcon from "../../icons/ChevronDownIcon"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 import { AccordionStyleTypes, IconTypes } from "./types"
+import { ColorsHoverTypes, AllColorsTypes } from "../../utils/common-types"
 
 const StyledIconPlus = styled(PlusIcon)``
 
 const StyledIconChevron = styled(ChevronDownIcon)``
 
 const StyledAccordion = styled.div<{
-    $accordionStyle?: AccordionStyleTypes
+    $variant?: AccordionStyleTypes
     $isOpen?: boolean
+    $separatorColor?: AllColorsTypes
 }>`
     position: relative;
-    ${({ $accordionStyle }) =>
+    ${({ $variant }) =>
         Mixins.Grid({
-            $gap: $accordionStyle === "rounded" ? 0 : "xxs",
+            $gap: $variant === "rounded" ? 0 : "xxs",
         })};
 
-    ${({ $accordionStyle }) =>
-        $accordionStyle === "rounded" &&
+    ${({ $variant, $separatorColor, theme }) =>
+        $variant === "rounded" &&
         css`
-            border-radius: ${Variables.Radiuses.M};
+            border-radius: ${Radiuses.M};
             overflow: hidden;
-            border: 1px solid ${Variables.Colors.Gray200};
+            border: 1px solid
+                ${$separatorColor
+                    ? theme.AllColors({ $color: $separatorColor })
+                    : theme.Gray200};
             gap: 0;
         `}
 `
@@ -37,58 +43,60 @@ const Item = styled.div``
 
 const Content = styled.div<{
     $isOpen?: boolean
-    $accordionStyle?: AccordionStyleTypes
+    $variant?: AccordionStyleTypes
 }>`
     max-height: ${({ $isOpen }) => ($isOpen ? "600px" : 0)};
     overflow: hidden;
-    transition: ${Variables.Transitions.Long};
+    transition: ${Transitions.Long};
+    color: ${({ theme }) => theme.Font};
 
-    ${({ $accordionStyle, $isOpen }) =>
-        $accordionStyle === "rounded"
+    ${({ $variant, $isOpen }) =>
+        $variant === "rounded"
             ? css`
-                  padding: ${$isOpen
-                      ? Variables.Spacers.S
-                      : `0 ${Variables.Spacers.S}`};
+                  padding: ${$isOpen ? Spacers.S : `0 ${Spacers.S}`};
               `
             : css`
-                  padding: ${$isOpen ? `${Variables.Spacers.XS} 0` : 0};
+                  padding: ${$isOpen ? `${Spacers.XS} 0` : 0};
               `}
 `
 
 const IconContainer = styled.span``
 
 const Button = styled.button<{
-    $accordionStyle?: AccordionStyleTypes
+    $variant?: AccordionStyleTypes
     $isOpen?: boolean
     $icon?: IconTypes
     $noBorder?: boolean
     $hasIconCustom?: boolean
+    $accentColor?: ColorsHoverTypes
+    $separatorColor?: AllColorsTypes
 }>`
     width: 100%;
     ${Mixins.Flexbox({
         $alignItems: "center",
         $justifyContent: "space-between",
     })};
-    padding: ${({ $accordionStyle }) =>
-        $accordionStyle === "rounded" ? Variables.Spacers.S : 0};
+    padding: ${({ $variant }) => ($variant === "rounded" ? Spacers.S : 0)};
     border: none;
     border-bottom: 1px solid
-        ${({ $accordionStyle }) =>
-            $accordionStyle === "rounded"
-                ? Variables.Colors.White
-                : Variables.Colors.Gray200};
-    background-color: ${({ $accordionStyle }) =>
-        $accordionStyle === "rounded"
-            ? Variables.Colors.Primary500
+        ${({ $variant, $separatorColor, theme }) =>
+            $separatorColor
+                ? theme.AllColors({ $color: $separatorColor })
+                : $variant === "rounded"
+                ? theme.Background
+                : theme.Gray200};
+    background-color: ${({ $variant, $accentColor, theme }) =>
+        $variant === "rounded"
+            ? theme.AllColors({ $color: $accentColor })
             : "transparent"};
-    padding-bottom: ${({ $accordionStyle }) =>
-        $accordionStyle === "basic" && Variables.Spacers.XXS};
-    color: ${({ $accordionStyle }) =>
-        $accordionStyle === "rounded"
-            ? Variables.Colors.White
-            : Variables.Colors.Primary500};
-    height: ${({ $accordionStyle }) =>
-        $accordionStyle === "rounded" ? "49px" : "29px"};
+    padding-bottom: ${({ $variant }) => $variant === "basic" && Spacers.XXS};
+    color: ${({ $variant, $accentColor, theme }) =>
+        $variant === "rounded"
+            ? $accentColor === "white"
+                ? theme.Primary500
+                : theme.Background
+            : theme.AllColors({ $color: $accentColor })};
+    height: ${({ $variant }) => ($variant === "rounded" ? "49px" : "29px")};
 
     ${({ $noBorder }) =>
         $noBorder &&
@@ -97,7 +105,7 @@ const Button = styled.button<{
         `}
 
     ${IconContainer} {
-        transition: ${Variables.Transitions.Short};
+        transition: ${Transitions.Short};
 
         ${({ $isOpen, $icon, $hasIconCustom }) =>
             !$hasIconCustom &&
@@ -107,6 +115,16 @@ const Button = styled.button<{
             `}
     }
 `
+
+setDefaultTheme([
+    StyledIconPlus,
+    StyledIconChevron,
+    StyledAccordion,
+    Item,
+    Content,
+    IconContainer,
+    Button,
+])
 
 export {
     StyledIconPlus,

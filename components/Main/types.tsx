@@ -15,7 +15,8 @@ import {
 const sizes = {
     default: "default",
     large: "large",
-    form: "form,",
+    form: "form",
+    full: "full",
 } as const
 
 export type SizesTypes = keyof typeof sizes
@@ -26,12 +27,24 @@ export type PositionsTypes = keyof typeof positions
 
 /*==================== Component Types ====================*/
 
-export interface MainProps extends React.HTMLAttributes<HTMLDivElement> {
-    size?: SizesTypes | number
+interface BaseProps extends React.HTMLAttributes<HTMLDivElement> {
     position?: PositionsTypes
     justifyContent?: GridJustifyContentTypes
     justifyItems?: GridJustifyItemsTypes
     alignContent?: GridAlignContentTypes
     alignItems?: GridAlignItemsTypes
     gap?: SpacersTypes | number
+    as?: React.ElementType
 }
+
+interface Possible1 extends BaseProps {
+    size?: "default" | "large" | "form" | number
+    contentWidth?: never
+}
+
+interface Possible2 extends BaseProps {
+    size?: "full"
+    contentWidth?: "default" | "large" | "form"
+}
+
+export type MainProps = Possible1 | Possible2

@@ -4,6 +4,7 @@ import styled from "styled-components"
 import { stringifyPx } from "ts-utils-julseb"
 
 import Mixins from "../../Mixins"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 import { SizesTypes } from "./types"
 
@@ -51,5 +52,7 @@ const StyledSection = styled.section<{ $gap?: SizesTypes | number }>`
         justify-self: stretch;
     }
 `
+
+setDefaultTheme([StyledSection])
 
 export { StyledSection }

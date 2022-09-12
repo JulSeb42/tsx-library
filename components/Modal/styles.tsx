@@ -2,8 +2,10 @@
 
 import styled from "styled-components"
 
-import Variables from "../../Variables"
+import { Overlays, Spacers } from "../../Variables"
 import Mixins from "../../Mixins"
+import ButtonIcon from "../ButtonIcon"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledModal = styled.div<{ $isOpen: boolean }>`
     position: fixed;
@@ -15,7 +17,7 @@ const StyledModal = styled.div<{ $isOpen: boolean }>`
     display: ${({ $isOpen }) => ($isOpen ? "flex" : "none")};
     align-items: center;
     justify-content: center;
-    background-color: ${Variables.Overlays.Plain.Black80};
+    background-color: ${Overlays.Plain.Black80};
 `
 
 const Content = styled.div`
@@ -29,29 +31,13 @@ const Content = styled.div`
     })};
 `
 
-const buttonSize = 48
-
-const CloseButton = styled.button`
+const CloseButton = styled(ButtonIcon)`
     position: absolute;
-    top: ${Variables.Spacers.XXL};
-    right: ${Variables.Spacers.XXL};
-    width: ${buttonSize}px;
-    height: ${buttonSize}px;
-    border-radius: ${Variables.Radiuses.Circle};
-    border: none;
-    background-color: transparent;
-    transition: ${Variables.Transitions.Short};
-    ${Mixins.Flexbox({
-        $alignItems: "center",
-        $justifyContent: "center",
-    })};
+    top: ${Spacers.XXL};
+    right: ${Spacers.XXL};
     z-index: 20;
-
-    @media ${Variables.Breakpoints.Hover} {
-        &:hover {
-            background-color: ${Variables.Colors.Gray800};
-        }
-    }
 `
+
+setDefaultTheme([StyledModal, Content, CloseButton])
 
 export { StyledModal, Content, CloseButton }

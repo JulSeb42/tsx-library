@@ -2,92 +2,72 @@
 
 import styled, { css } from "styled-components"
 
-import Variables from "../../Variables"
+import ChevronDownIcon from "../../icons/ChevronDownIcon"
 import Mixins from "../../Mixins"
+import setDefaultTheme from "../../utils/setDefaultTheme"
+import { Transitions } from "../../Variables"
+import Icon from "../Icon"
+import { InputBaseMixin } from "../InputComponents"
+
+import { ColorsHoverTypes } from "../../utils/common-types"
+import { InputBackgroundTypes } from "../Input/types"
 
 const inputHeight = 32
 
 const StyledSelect = styled.div<{
     disabled?: boolean
-    onClick?: any
     $isOpen: boolean
     $isEmpty?: boolean
     ref?: any
+    onClick?: any
 }>`
     position: relative;
     width: 100%;
     height: ${inputHeight}px;
-    border: 1px solid
-        ${({ $isOpen, $isEmpty }) =>
-            $isOpen && !$isEmpty
-                ? Variables.Colors.Primary500
-                : Variables.Colors.Gray200};
-    cursor: ${({ $isEmpty }) => ($isEmpty ? "default" : "pointer")};
-    border-radius: ${Variables.Radiuses.S};
-    font-size: ${Variables.FontSizes.Body};
-    font-family: ${Variables.FontFamilies.Body};
-    padding: 0 ${Variables.Spacers.XS};
-    background-color: ${Variables.Colors.White};
-    color: ${Variables.Colors.Black};
-    line-height: 100%;
-    outline: none;
+    cursor: ${({ $isEmpty, disabled }) =>
+        $isEmpty ? "default" : disabled ? "not-allowed" : "pointer"};
     z-index: ${({ $isOpen }) => ($isOpen ? 30 : 0)};
-
-    ${({ disabled }) =>
-        disabled &&
-        css`
-            cursor: not-allowed;
-            background-color: ${Variables.Colors.Gray50};
-            color: ${Variables.Colors.Gray500};
-        `}
 `
 
-const Selected = styled.span`
-    padding: 0;
+const Selected = styled.span<{
+    $isOpen?: boolean
+    $accentColor?: ColorsHoverTypes
+    $disabled?: boolean
+    $backgroundColor?: InputBackgroundTypes
+}>`
+    ${({ $accentColor, $isOpen, $disabled, $backgroundColor }) =>
+        InputBaseMixin({
+            $accentColor: $accentColor,
+            $isFocus: $isOpen,
+            $disabled: $disabled,
+            $backgroundColor: $backgroundColor,
+        })};
     ${Mixins.Flexbox({
         $alignItems: "center",
         $justifyContent: "space-between",
     })};
-    width: 100%;
-    height: 100%;
-    line-height: 100%;
-    user-select: none;
 `
 
-const List = styled.div<{ $isOpen: boolean }>`
-    position: absolute;
-    top: ${inputHeight}px;
-    left: 0;
-    width: 100%;
-    background-color: ${Variables.Colors.White};
-    border-radius: ${Variables.Radiuses.M};
-    box-shadow: ${Variables.Shadows.M};
-    max-height: ${({ $isOpen }) => ($isOpen ? "150px" : 0)};
-    transition: ${Variables.Transitions.Short};
-    overflow-y: scroll;
+const IconAnim = ({
+    $isOpen,
+    $hasAnimation,
+}: {
+    $isOpen: boolean
+    $hasAnimation?: boolean
+}) => css`
+    transform: ${$isOpen && $hasAnimation && "rotate(180deg)"};
+    transition: ${Transitions.Short};
 `
 
-const Item = styled.span<{ $isSelected: boolean }>`
-    padding: 0 ${Variables.Spacers.XS};
-    background-color: ${({ $isSelected }) =>
-        $isSelected ? Variables.Colors.Primary500 : Variables.Colors.White};
-    color: ${({ $isSelected }) =>
-        $isSelected ? Variables.Colors.White : Variables.Colors.Black};
-    transition: ${Variables.Transitions.Short};
-    height: 40px;
-    line-height: 40px;
-    display: block;
-
-    @media ${Variables.Breakpoints.Hover} {
-        &:hover {
-            background-color: ${Variables.Colors.Primary300};
-            color: ${Variables.Colors.White};
-        }
-
-        &:active {
-            background-color: ${Variables.Colors.Primary600};
-        }
-    }
+const StyledChevronDown = styled(ChevronDownIcon)<{ $isOpen: boolean }>`
+    ${({ $isOpen }) => IconAnim({ $isOpen: $isOpen, $hasAnimation: true })}
 `
 
-export { StyledSelect, Selected, List, Item }
+const StyledIcon = styled(Icon)<{ $isOpen: boolean; $hasAnimation?: boolean }>`
+    ${({ $isOpen, $hasAnimation }) =>
+        IconAnim({ $isOpen: $isOpen, $hasAnimation: $hasAnimation })}
+`
+
+setDefaultTheme([StyledSelect, Selected, StyledChevronDown, StyledIcon])
+
+export { StyledSelect, Selected, StyledChevronDown, StyledIcon }

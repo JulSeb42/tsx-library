@@ -2,17 +2,29 @@
 
 import React from "react"
 
-import * as Styles from "./styles"
-import { LoaderProps } from "./types"
+import VariantOne from "./templates/VariantOne"
+import VariantTwo from "./templates/VariantTwo"
+import VariantThree from "./templates/VariantThree"
+import VariantFour from "./templates/VariantFour"
 
-const Loader = ({ options, ...props }: LoaderProps) => (
-    <Styles.StyledLoader
-        $size={options?.size || 48}
-        $borderSize={options?.borderSize || 8}
-        $speed={options?.speed || 1000}
-        $color={options?.color || "primary"}
-        {...props}
-    />
-)
+import { LoaderProps, LoaderVariantsTypes } from "./types"
+
+const renderComponent = (props: any, variant?: LoaderVariantsTypes) => {
+    switch (variant) {
+        case 1:
+            return <VariantOne {...props} />
+        case 2:
+            return <VariantTwo {...props} />
+        case 3:
+            return <VariantThree {...props} />
+        case 4:
+            return <VariantFour {...props} />
+        default:
+            return <VariantOne {...props} />
+    }
+}
+
+const Loader = ({ variant, ...props }: LoaderProps) =>
+    renderComponent(props, variant)
 
 export default Loader

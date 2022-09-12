@@ -2,15 +2,27 @@
 
 import React from "react"
 
-import { ColorsShortTypes, LibColorsTypes } from "../../utils/common-types"
+import { AllColorsTypes, SpacersTypes } from "../../utils/common-types"
+
+/*==================== List possibilities ====================*/
+
+const direction = {
+    horizontal: "horizontal",
+    vertical: "vertical",
+} as const
+
+export type DirectionTypes = keyof typeof direction
+
+/*==================== Component Types ====================*/
 
 export interface ProgressBarProps
     extends React.HTMLAttributes<HTMLSpanElement> {
     value: number
-
-    options?: {
-        color?: ColorsShortTypes | LibColorsTypes | string
-        backgroundColor?: ColorsShortTypes | LibColorsTypes | string
-        animated?: boolean
-    }
+    as?: React.ElementType
+    color?: AllColorsTypes
+    backgroundColor?: AllColorsTypes
+    animated?: boolean
+    width?: number | string | SpacersTypes
+    height?: number | string | SpacersTypes
+    direction?: DirectionTypes
 }

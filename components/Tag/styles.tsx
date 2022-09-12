@@ -2,32 +2,36 @@
 
 import styled from "styled-components"
 
-import Variables from "../../Variables"
-import Mixins from "../../Mixins"
+import { FontSizes, Spacers, Radiuses } from "../../Variables"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { ColorsShortTypes, LibColorsTypes } from "../../utils/common-types"
+import { AllColorsTypes } from "../../utils/common-types"
 
-import { TagStylesTypes } from "./types"
+import { TagVariantsTypes } from "./types"
 
 const StyledTag = styled.span<{
-    $tagStyle?: TagStylesTypes
-    $color?: ColorsShortTypes | LibColorsTypes | string
-    $textColor?: ColorsShortTypes | LibColorsTypes | string
+    $variant?: TagVariantsTypes
+    $color?: AllColorsTypes
+    $textColor?: AllColorsTypes
 }>`
-    font-size: ${Variables.FontSizes.Small};
-    padding: ${({ $tagStyle }) =>
-        $tagStyle === "pill"
-            ? `${Variables.Spacers.XXS} ${Variables.Spacers.M}`
-            : `${Variables.Spacers.XXS} ${Variables.Spacers.S}`};
-    border-radius: ${({ $tagStyle }) =>
-        $tagStyle === "pill" ? Variables.Radiuses.Round : Variables.Radiuses.S};
-    background-color: ${Mixins.AllColors};
-    color: ${({ $color, $textColor }) =>
+    font-size: ${FontSizes.Small};
+    padding: ${({ $variant }) =>
+        $variant === "pill"
+            ? `${Spacers.XXS} ${Spacers.M}`
+            : `${Spacers.XXS} ${Spacers.S}`};
+    border-radius: ${({ $variant }) =>
+        $variant === "pill" ? Radiuses.Round : Radiuses.S};
+    background-color: ${({ theme }) => theme.AllColors};
+    color: ${({ $color, $textColor, theme }) =>
         $color === "white"
-            ? Variables.Colors.Primary500
+            ? theme.Primary500
+            : $color === "black"
+            ? theme.White
             : $textColor
-            ? Mixins.AllColors({ $color: $textColor })
-            : Variables.Colors.White};
+            ? theme.AllColors({ $color: $textColor })
+            : theme.Background};
 `
+
+setDefaultTheme([StyledTag])
 
 export { StyledTag }

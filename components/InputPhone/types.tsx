@@ -2,56 +2,47 @@
 
 import React from "react"
 
-import {
-    CountryType,
-    ValidationTypes,
-    LibColorsTypes,
-    ColorsShortTypes,
-} from "../../utils/common-types"
+import { ShadowsTypes } from "../../utils/common-types"
 
-export interface InputPhoneProps
-    extends React.HTMLAttributes<HTMLInputElement> {
-    selectedCountry: CountryType
-    children: React.ReactNode | React.ReactNode[]
-    disabled?: boolean
+import { InputContainerProps } from "../InputContainer/types"
+import { ValidationProps } from "../Input/types"
+import { InputBackgroundTypes } from "../Input/types"
+import { ListDirectionTypes } from "../ListInputs/types"
+
+export type CountryType = {
+    name: string
+    dial_code: string
+    code: string
+    flag: string
+}
+
+interface BaseProps
+    extends React.HTMLAttributes<HTMLInputElement>,
+        InputContainerProps,
+        ValidationProps {
     id: string
-    isOpen: boolean
-    setIsOpen: any
-
-    input: {
-        value: string
-        onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-    }
-
-    validation?: {
-        status: ValidationTypes | undefined
-        iconPassed?: string
-        iconNotPassed?: string
-    }
-
-    search?: {
-        value: string
-        handleSearch: (e: React.ChangeEvent<HTMLInputElement>) => void
-        icon?: string
-        placeholder?: string
-    }
-
-    options?: {
-        iconButton?: string
-        label?: string
-        helper?: string
-        helperBottom?:
-            | string
-            | {
-                  text: string
-                  icon?: string
-                  iconColor?: LibColorsTypes | ColorsShortTypes | string
-              }
-    }
+    children?: never
+    disabled?: boolean
+    backgroundColor?: InputBackgroundTypes
+    value?: string
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+    defaultCountry?: string
+    selectedCountry: CountryType | undefined
+    setSelectedCountry: (country: CountryType | undefined | any) => void
+    hasSearch?: boolean
+    iconButton?: string
+    searchPlaceholder?: string
+    listDirection?: ListDirectionTypes
 }
 
-export interface ItemProps extends React.HTMLAttributes<HTMLSpanElement> {
-    country: CountryType
-    onClick: (e: React.MouseEvent<HTMLSpanElement>) => void
-    isActive: boolean
+interface PossibleList1 extends BaseProps {
+    listVariant?: "bordered"
+    listShadow?: never
 }
+
+interface PossibleList2 extends BaseProps {
+    listVariant?: "shadow"
+    listShadow?: ShadowsTypes
+}
+
+export type InputPhoneProps = PossibleList1 | PossibleList2

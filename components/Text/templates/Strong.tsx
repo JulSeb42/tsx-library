@@ -8,21 +8,12 @@ import { StyledStrong } from "../styles"
 
 const Strong = ({
     color,
-    textAlign,
-    linkColor,
+    linkColor = "primary",
     children,
-    fontSize,
-    lineHeight,
+    as,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLParagraphElement>) => (
-    <StyledStrong
-        $color={color}
-        $textAlign={textAlign}
-        $linkColor={linkColor}
-        $fontSize={fontSize}
-        $lineHeight={lineHeight}
-        {...props}
-    >
+    <StyledStrong $color={color} $linkColor={linkColor} as={as} {...props}>
         {children}
     </StyledStrong>
 )

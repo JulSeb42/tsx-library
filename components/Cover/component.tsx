@@ -9,21 +9,33 @@ import { CoverProps } from "./types"
 
 const CoverImage = React.lazy(() => import("./styles"))
 
-const Cover = ({ src, alt, children, options, ...props }: CoverProps) => (
-    <Styles.StyledCover
-        $overlay={options?.overlay}
-        $height={options?.height || "100vh"}
-        {...props}
-    >
-        <Suspense
-            fallback={
-                <Fallback $width="100%" $height={options?.height || "100vh"} />
-            }
-        >
+const Cover = ({
+    src,
+    alt,
+    children,
+    overlay,
+    align = "center",
+    height = "100vh",
+    gap,
+    textColor,
+    ...props
+}: CoverProps) => (
+    <Styles.StyledCover $overlay={overlay} $height={height} {...props}>
+        <Suspense fallback={<Fallback $width="100%" $height={height} />}>
             <CoverImage src={src} alt={alt} />
         </Suspense>
 
-        <Styles.Content $align={options?.align || "center"} $gap={options?.gap}>
+        <Styles.Content
+            $color={
+                textColor
+                    ? textColor
+                    : overlay === "gradient-white" || overlay === "white"
+                    ? "black"
+                    : "white"
+            }
+            $align={align}
+            $gap={gap}
+        >
             {children}
         </Styles.Content>
     </Styles.StyledCover>

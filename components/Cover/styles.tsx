@@ -2,10 +2,11 @@
 
 import styled, { css } from "styled-components"
 
-import Variables from "../../Variables"
+import { Spacers, Overlays } from "../../Variables"
 import Mixins from "../../Mixins"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { SpacersTypes } from "../../utils/common-types"
+import { SpacersTypes, AllColorsTypes } from "../../utils/common-types"
 
 import { AlignTypes } from "./types"
 
@@ -26,12 +27,12 @@ const Content = styled.div<{
     $align?: AlignTypes
     $height?: number | string
     $gap?: SpacersTypes | string | number
+    $color?: AllColorsTypes
 }>`
     position: relative;
     top: 0;
     left: 0;
     z-index: 2;
-    color: ${Variables.Colors.White};
     width: 100%;
     height: 100%;
     ${({ $align, $gap }) =>
@@ -41,8 +42,9 @@ const Content = styled.div<{
             $flexDirection: "column",
             $gap: $gap || "s",
         })};
-    padding: ${Variables.Spacers.XXL} 5%;
+    padding: ${Spacers.XXL} 5%;
     text-align: ${({ $align }) => $align === "center" && "center"};
+    color: ${({ theme }) => theme.AllColors};
 
     & > * {
         position: relative;
@@ -58,14 +60,14 @@ const StyledCover = styled.div<{
     width: 100%;
     height: ${({ $height }) => $height};
 
-    ${({ $overlay }) =>
+    ${({ $overlay, theme }) =>
         $overlay &&
         css`
-            ${Content} {
+            ${""/* ${Content} {
                 color: ${$overlay === "white" || $overlay === "gradient-white"
-                    ? Variables.Colors.Black
-                    : Variables.Colors.White};
-            }
+                    ? theme.Black
+                    : theme.White} !important;
+            } */}
 
             &:before {
                 content: "";
@@ -76,14 +78,16 @@ const StyledCover = styled.div<{
                 width: 100%;
                 height: 100%;
                 background: ${$overlay === "white"
-                    ? Variables.Overlays.Plain.White50
+                    ? Overlays.Plain.White50
                     : $overlay === "gradient-black"
-                    ? Variables.Overlays.Gradient.Black
+                    ? Overlays.Gradient.Black
                     : $overlay === "gradient-white"
-                    ? Variables.Overlays.Gradient.White
-                    : Variables.Overlays.Plain.Black50};
+                    ? Overlays.Gradient.White
+                    : Overlays.Plain.Black50};
             }
         `}
 `
+
+setDefaultTheme([Content, StyledCover, CoverImage])
 
 export { Content, StyledCover }

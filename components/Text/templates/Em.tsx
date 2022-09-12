@@ -8,21 +8,12 @@ import { StyledEm } from "../styles"
 
 const Em = ({
     color,
-    textAlign,
-    linkColor,
+    linkColor = "primary",
     children,
-    fontSize,
-    lineHeight,
+    as,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLParagraphElement>) => (
-    <StyledEm
-        $color={color}
-        $textAlign={textAlign}
-        $linkColor={linkColor}
-        $fontSize={fontSize}
-        $lineHeight={lineHeight}
-        {...props}
-    >
+    <StyledEm $color={color} $linkColor={linkColor} as={as} {...props}>
         {children}
     </StyledEm>
 )

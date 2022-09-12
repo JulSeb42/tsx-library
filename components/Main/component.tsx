@@ -7,6 +7,7 @@ import { MainProps } from "./types"
 
 const Main = ({
     size,
+    contentWidth = "default",
     position,
     children,
     alignContent,
@@ -14,6 +15,7 @@ const Main = ({
     justifyContent,
     justifyItems,
     gap = "l",
+    as,
     ...props
 }: MainProps) => (
     <Styles.StyledMain
@@ -24,6 +26,8 @@ const Main = ({
         $justifyContent={justifyContent}
         $justifyItems={justifyItems}
         $gap={gap}
+        $contentWidth={contentWidth}
+        as={as}
         {...props}
     >
         {children}

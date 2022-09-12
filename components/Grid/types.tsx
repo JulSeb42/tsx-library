@@ -44,4 +44,5 @@ export interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
     padding?: SpacersTypes | number | string
     colTablet?: string
     colMobile?: string
+    as?: React.ElementType
 }

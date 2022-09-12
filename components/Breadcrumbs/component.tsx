@@ -5,15 +5,23 @@ import { Link } from "react-router-dom"
 
 import ChevronRightIcon from "../../icons/ChevronRightIcon"
 import { uuid } from "../../utils/utils"
+import Icon from "../Icon"
 
 import * as Styles from "./styles"
 import { BreadcrumbsProps } from "./types"
 
-const Breadcrumbs = ({ items, options, ...props }: BreadcrumbsProps) => (
+const Breadcrumbs = ({
+    items,
+    color = "currentColor",
+    linkColor = "primary",
+    separator = "slash",
+    customIcon,
+    ...props
+}: BreadcrumbsProps) => (
     <Styles.StyledBreacrumbs
-        color={options?.color}
-        linkColor={options?.linkColor || "primary"}
-        $separator={options?.separator || "slash"}
+        color={color}
+        linkColor={linkColor}
+        $separator={separator}
         {...props}
     >
         {items.map(({ text, to }) => (
@@ -23,10 +31,14 @@ const Breadcrumbs = ({ items, options, ...props }: BreadcrumbsProps) => (
                 </Styles.Item>
 
                 {to && (
-                    <Styles.Separator
-                        $separator={options?.separator || "slash"}
-                    >
-                        {options?.separator === "icon" ? (
+                    <Styles.Separator $separator={separator || "slash"} $customIcon={!!customIcon}>
+                        {customIcon ? (
+                            typeof customIcon === "string" ? (
+                                <Icon src={customIcon} size={20} />
+                            ) : (
+                                customIcon
+                            )
+                        ) : separator === "icon" ? (
                             <ChevronRightIcon size={20} />
                         ) : (
                             "/"

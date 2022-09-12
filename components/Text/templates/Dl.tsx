@@ -7,20 +7,24 @@ import { AllProps } from "../types"
 import { StyledDl } from "../styles"
 
 const Dl = ({
-    color,
     textAlign,
-    linkColor,
-    children,
-    fontSize,
+    color,
+    linkColor = "primary",
     lineHeight,
+    fontSize,
+    customFontSize,
+    children,
+    as,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLDListElement>) => (
     <StyledDl
-        $color={color}
         $textAlign={textAlign}
+        $color={color}
         $linkColor={linkColor}
-        $fontSize={fontSize}
         $lineHeight={lineHeight}
+        $fontSize={fontSize}
+        $customFontSize={customFontSize}
+        as={as}
         {...props}
     >
         {children}

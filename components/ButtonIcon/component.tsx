@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 
 import Icon from "../Icon"
 import Loader from "../Loader"
+import Burger from "../Burger"
 
 import * as Styles from "./styles"
 import { ButtonIconProps } from "./types"
@@ -12,41 +13,62 @@ import { ButtonIconProps } from "./types"
 const ButtonIcon = forwardRef(
     (
         {
-            icon,
-            libicon,
-            disabled,
+            type = "button",
             isLoading,
             to,
-            options,
-            type = "button",
+            disabled,
+            color = "primary",
+            size = 48,
+            loaderBorder = 4,
+            icon,
+            libicon,
+            variant = "plain",
+            hoverBackground,
+            shadow,
+            position,
+            burger,
+            isBurgerOpen,
             ...props
         }: ButtonIconProps,
         ref?: React.ForwardedRef<HTMLButtonElement>
     ) => (
         <Styles.StyledButtonIcon
-            $buttonStyle={options?.variant || "plain"}
-            $size={options?.size || 48}
-            $color={options?.color || "primary"}
+            $hoverBackground={hoverBackground}
+            $color={color}
+            $size={size}
+            $variant={variant}
             to={to ? to : undefined}
             as={to ? Link : "button"}
-            disabled={isLoading ? true : disabled}
-            $hoverBackground={options?.hoverBackground}
+            disabled={!!isLoading || disabled}
             ref={ref}
             type={type}
+            $shadow={typeof shadow === "object" ? shadow.default : shadow}
+            $shadowHover={typeof shadow === "object" ? shadow.hover : shadow}
+            $shadowActive={typeof shadow === "object" ? shadow.active : shadow}
+            $position={position?.position || "relative"}
+            $left={position?.left}
+            $top={position?.top}
+            $right={position?.right}
+            $bottom={position?.bottom}
+            $zIndex={position?.zIndex}
             {...props}
         >
             {isLoading ? (
                 <Loader
-                    options={{
-                        size: options?.size ? options?.size * 0.6 : 48 * 0.6,
-                        color: "gray",
-                        borderSize: options?.loaderBorder || 4,
-                    }}
+                    size={size * 0.7}
+                    color="gray"
+                    borderSize={loaderBorder}
                 />
             ) : icon ? (
-                <Icon
-                    src={icon}
-                    size={options?.size ? options?.size * 0.6 : 48 * 0.6}
+                <Icon src={icon} size={size * 0.7} />
+            ) : burger ? (
+                <Burger
+                    isOpen={isBurgerOpen}
+                    color={color === "white" ? "primary" : "white"}
+                    width={size * 0.5}
+                    height={size * 0.4}
+                    noHover
+                    as="span"
                 />
             ) : (
                 libicon

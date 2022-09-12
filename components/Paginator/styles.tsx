@@ -2,8 +2,19 @@
 
 import styled from "styled-components"
 
-import Variables from "../../Variables"
+import {
+    ThemeDark,
+    ThemeLight,
+    Radiuses,
+    FontSizes,
+    FontFamilies,
+    Spacers,
+} from "../../Variables"
 import Mixins from "../../Mixins"
+import setDefaultTheme from "../../utils/setDefaultTheme"
+
+import { InputBackgroundTypes } from "../Input/types"
+import { ColorsHoverTypes } from "../../utils/common-types"
 
 import { JustifyTypes } from "./types"
 
@@ -16,23 +27,37 @@ const StyledPaginator = styled.div<{ $justify?: JustifyTypes }>`
         })};
 `
 
-const StyledInput = styled.input`
+const StyledInput = styled.input<{
+    $accentColor?: ColorsHoverTypes
+    $background?: InputBackgroundTypes
+}>`
     height: 32px;
     width: 48px;
-    border: 1px solid ${Variables.Colors.Gray200};
-    border-radius: ${Variables.Radiuses.S};
-    font-size: ${Variables.FontSizes.Body};
-    font-family: ${Variables.FontFamilies.Body};
-    padding: ${Variables.Spacers.XS};
-    background-color: ${Variables.Colors.White};
-    color: ${Variables.Colors.Black};
+    border: 1px solid ${({ theme }) => theme.Gray200};
+    border-radius: ${Radiuses.S};
+    font-size: ${FontSizes.Body};
+    font-family: ${FontFamilies.Body};
+    padding: ${Spacers.XS};
+    background-color: ${({ theme, $background }) =>
+        $background === "dark"
+            ? ThemeDark.Background
+            : $background === "light"
+            ? ThemeLight.Background
+            : theme.Background};
+    color: ${({ theme, $background }) =>
+        $background === "dark"
+            ? ThemeDark.Font
+            : $background === "light"
+            ? ThemeLight.Font
+            : theme.Font};
     line-height: 100%;
     outline: none;
     z-index: 0;
     -moz-appearance: textfield;
 
     &:focus {
-        border-color: ${Variables.Colors.Primary500};
+        border-color: ${({ $accentColor, theme }) =>
+            theme.AllColors({ $color: $accentColor })};
     }
 
     &::-webkit-outer-spin-button,
@@ -41,37 +66,6 @@ const StyledInput = styled.input`
     }
 `
 
-const buttonSize = 24
+setDefaultTheme([StyledPaginator, StyledInput])
 
-const Button = styled.button`
-    width: ${buttonSize}px;
-    height: ${buttonSize}px;
-    border-radius: ${Variables.Radiuses.Circle};
-    padding: 0;
-    ${Mixins.Flexbox({
-        $alignItems: "center",
-        $justifyContent: "center",
-        $inline: true,
-    })};
-    border: none;
-    background-color: transparent;
-    color: ${Variables.Colors.Primary500};
-    transition: ${Variables.Transitions.Short};
-
-    @media ${Variables.Breakpoints.Hover} {
-        &:not(:disabled):hover {
-            background-color: ${Variables.Colors.Primary300};
-            color: ${Variables.Colors.White};
-        }
-
-        &:not(:disabled):active {
-            background-color: ${Variables.Colors.Primary600};
-        }
-    }
-
-    &:disabled {
-        color: ${Variables.Colors.Gray500};
-    }
-`
-
-export { StyledPaginator, StyledInput, Button }
+export { StyledPaginator, StyledInput }

@@ -7,20 +7,24 @@ import { AllProps } from "../types"
 import { StyledSmall } from "../styles"
 
 const Small = ({
-    color,
     textAlign,
-    linkColor,
-    children,
-    fontSize,
+    color,
+    linkColor = "primary",
     lineHeight,
+    fontSize,
+    customFontSize,
+    children,
+    as,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLParagraphElement>) => (
     <StyledSmall
-        $color={color}
         $textAlign={textAlign}
+        $color={color}
         $linkColor={linkColor}
-        $fontSize={fontSize}
         $lineHeight={lineHeight}
+        $fontSize={fontSize}
+        $customFontSize={customFontSize}
+        as={as}
         {...props}
     >
         {children}

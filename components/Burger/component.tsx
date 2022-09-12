@@ -13,6 +13,8 @@ const Burger = forwardRef(
             color = "primary",
             width = 32,
             height = 24,
+            noHover,
+            borderWidth = 2,
             ...props
         }: BurgerProps,
         ref?: React.ForwardedRef<HTMLButtonElement>
@@ -24,6 +26,8 @@ const Burger = forwardRef(
             $width={width}
             $height={height}
             ref={ref}
+            $noHover={noHover}
+            $borderWidth={borderWidth}
             {...props}
         >
             <span />

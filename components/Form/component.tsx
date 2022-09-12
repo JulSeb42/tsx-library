@@ -15,6 +15,7 @@ const Form = forwardRef(
             buttonPrimary,
             buttonSecondary,
             isLoading,
+            accentColor = "primary",
             ...props
         }: FormProps,
         ref?: React.ForwardedRef<HTMLFormElement>
@@ -27,9 +28,11 @@ const Form = forwardRef(
                     {buttonPrimary && (
                         <Button
                             type="submit"
-                            options={{
-                                iconLeft: buttonPrimary.iconLeft,
-                                iconRight: buttonPrimary.iconRight,
+                            variant="plain"
+                            color={accentColor}
+                            icons={{
+                                left: buttonPrimary.iconLeft,
+                                right: buttonPrimary.iconRight,
                             }}
                             isLoading={isLoading}
                         >
@@ -41,11 +44,11 @@ const Form = forwardRef(
                         <Button
                             onClick={buttonSecondary.onClick}
                             to={buttonSecondary.to}
-                            options={{
-                                variant: "text",
-                                color: "primary",
-                                iconLeft: buttonSecondary.iconLeft,
-                                iconRight: buttonSecondary.iconRight,
+                            variant="text"
+                            color={accentColor}
+                            icons={{
+                                left: buttonSecondary.iconLeft,
+                                right: buttonSecondary.iconRight,
                             }}
                         >
                             {!buttonSecondary.text && buttonSecondary.to

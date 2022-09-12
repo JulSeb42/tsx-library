@@ -10,4 +10,7 @@ export interface BurgerProps extends React.HTMLAttributes<HTMLButtonElement> {
     color?: ColorsHoverTypes
     width?: number
     height?: number
+    noHover?: boolean
+    as?: React.ElementType
+    borderWidth?: number
 }

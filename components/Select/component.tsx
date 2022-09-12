@@ -1,61 +1,123 @@
 /*=============================================== Select ===============================================*/
 
-import React, { useRef, forwardRef } from "react"
+import React, { useRef } from "react"
+import { uuid } from "../../utils/utils"
 
 import InputContainer from "../InputContainer"
-import Icon from "../Icon"
-import ChevronDownIcon from "../../icons/ChevronDownIcon"
+import { Chevron, ListInputs, ListItem } from "../ListInputs"
 
 import useClickOutside from "../../hooks/useClickOutside"
 
 import * as Styles from "./styles"
-import { SelectProps, ItemProps } from "./types"
+import { SelectProps } from "./types"
 
 const Select = ({
+    id,
     isOpen,
     setIsOpen,
     disabled,
-    options,
-    id,
-    children,
     selected,
+    setSelected,
+    label,
+    helper,
+    helperBottom,
+    icon,
+    accentColor = "primary",
+    items,
+    backgroundColor,
+    listVariant,
+    listShadow,
+    listDirection,
     ...props
 }: SelectProps) => {
-    const ref = useRef<HTMLButtonElement>(null)
+    const el = useRef<HTMLButtonElement>(null)
     const onClickOutside = () => setIsOpen(false)
-    useClickOutside(ref, onClickOutside)
+    useClickOutside(el, onClickOutside)
+
+    const selectItem = (value: string) => {
+        setSelected(value)
+        setIsOpen(false)
+    }
+
+    const listProps = {
+        isOpen: isOpen,
+        accentColor: accentColor,
+        backgroundColor: backgroundColor,
+        direction: listDirection,
+    }
+
+    const itemsfunction = () =>
+        items?.map(item => (
+            <ListItem
+                isActive={selected === item && true}
+                onClick={() => selectItem(item)}
+                accentColor={accentColor}
+                backgroundColor={backgroundColor}
+                key={uuid()}
+            >
+                {item}
+            </ListItem>
+        ))
+
+    const listFunction = () =>
+        listVariant === "shadow" ? (
+            <ListInputs
+                {...listProps}
+                variant={listVariant}
+                shadow={listShadow}
+            >
+                {itemsfunction()}
+            </ListInputs>
+        ) : (
+            <ListInputs {...listProps} variant={listVariant}>
+                {itemsfunction()}
+            </ListInputs>
+        )
 
     const content = () => (
         <Styles.StyledSelect
             $isOpen={isOpen}
-            $isEmpty={!children}
+            $isEmpty={!items}
             disabled={disabled}
             onClick={!disabled ? () => setIsOpen(!isOpen) : ""}
             id={id}
-            ref={ref}
+            ref={el}
             {...props}
         >
-            <Styles.Selected>
+            <Styles.Selected
+                $isOpen={items && isOpen}
+                $accentColor={accentColor}
+                $disabled={disabled}
+                $backgroundColor={backgroundColor}
+            >
                 {selected}
 
-                {children &&
-                    (options?.icon ? (
-                        <Icon src={options.icon} size={16} />
-                    ) : (
-                        <ChevronDownIcon size={16} />
-                    ))}
+                {items && (
+                    <Chevron
+                        icon={
+                            icon && typeof icon === "object"
+                                ? icon.name
+                                : icon
+                                ? icon
+                                : undefined
+                        }
+                        isOpen={isOpen}
+                        color={accentColor}
+                    />
+                )}
             </Styles.Selected>
 
-            <Styles.List $isOpen={isOpen}>{children}</Styles.List>
+            {listFunction()}
         </Styles.StyledSelect>
     )
 
-    return options?.label || options?.helper || options?.helperBottom ? (
+    return label || helper || helperBottom ? (
         <InputContainer
             id={id}
-            label={options.label}
-            helper={options.helper}
-            helperBottom={options.helperBottom}
+            label={label}
+            helper={helper}
+            helperBottom={helperBottom}
+            accentColor={accentColor}
         >
             {content()}
         </InputContainer>
@@ -64,22 +126,4 @@ const Select = ({
     )
 }
 
-const SelectItem = forwardRef(
-    (
-        { children, onClick, isSelected, ...props }: ItemProps,
-        ref?: React.ForwardedRef<HTMLSpanElement>
-    ) => {
-        return (
-            <Styles.Item
-                $isSelected={isSelected}
-                onClick={onClick}
-                ref={ref}
-                {...props}
-            >
-                {children}
-            </Styles.Item>
-        )
-    }
-)
-
-export { Select, SelectItem }
+export default Select

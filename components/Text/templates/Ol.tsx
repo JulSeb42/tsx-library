@@ -7,20 +7,24 @@ import { AllProps } from "../types"
 import { StyledOl } from "../styles"
 
 const Ol = ({
-    color,
     textAlign,
-    linkColor,
-    children,
-    fontSize,
+    color,
+    linkColor = "primary",
     lineHeight,
+    fontSize,
+    customFontSize,
+    children,
+    as,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLOListElement>) => (
     <StyledOl
-        $color={color}
         $textAlign={textAlign}
+        $color={color}
         $linkColor={linkColor}
-        $fontSize={fontSize}
         $lineHeight={lineHeight}
+        $fontSize={fontSize}
+        $customFontSize={customFontSize}
+        as={as}
         {...props}
     >
         {children}

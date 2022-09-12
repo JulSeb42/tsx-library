@@ -11,16 +11,21 @@ import * as Styles from "./styles"
 import { InputCounterProps } from "./types"
 
 const InputCounter = ({
-    value,
     id,
+    value,
+    setValue,
     isInputEditable = true,
-    icons,
     step = 1,
     min,
     max,
-    setValue,
+    icons,
     buttons,
-    options,
+    label,
+    helper,
+    helperBottom,
+    accentColor = "primary",
+    disabled,
+    backgroundColorInput,
     ...props
 }: InputCounterProps) => {
     const handleMinus = () =>
@@ -48,34 +53,30 @@ const InputCounter = ({
 
     const optionsButton = {
         size: 32,
+        color: accentColor,
         ...buttons,
     }
 
     const propsButtons = {
         minus: {
-            options: optionsButton,
+            ...optionsButton,
             onClick: handleMinus,
-            disabled: !!(min && value <= min),
+            disabled: !!(min && value <= min) || disabled,
         },
         plus: {
-            options: optionsButton,
+            ...optionsButton,
             onClick: handlePlus,
-            disabled: !!(max && value >= max),
+            disabled: !!(max && value >= max) || disabled,
         },
     }
 
     const inputFunction = () => (
         <Styles.StyledInputCounter>
             {icons?.minus ? (
-                <ButtonIcon
-                    icon={icons?.minus}
-                    type="button"
-                    {...propsButtons.minus}
-                />
+                <ButtonIcon icon={icons?.minus} {...propsButtons.minus} />
             ) : (
                 <ButtonIcon
-                    libicon={<MinusIcon size={optionsButton.size * 0.6} />}
-                    type="button"
+                    libicon={<MinusIcon size={optionsButton.size * 0.7} />}
                     {...propsButtons.minus}
                 />
             )}
@@ -87,10 +88,20 @@ const InputCounter = ({
                     value={value}
                     onChange={handleChange}
                     type="number"
+                    disabled={disabled}
+                    $accentColor={accentColor}
+                    $disabled={disabled}
+                    $backgroundColor={backgroundColorInput}
                     {...props}
                 />
             ) : (
-                <Styles.Input as="span" $isEditable={false} {...props}>
+                <Styles.Input
+                    as="span"
+                    $isEditable={false}
+                    $accentColor={accentColor}
+                    $disabled={disabled}
+                    {...props}
+                >
                     {value}
                 </Styles.Input>
             )}
@@ -103,7 +114,7 @@ const InputCounter = ({
                 />
             ) : (
                 <ButtonIcon
-                    libicon={<PlusIcon size={optionsButton.size * 0.6} />}
+                    libicon={<PlusIcon size={optionsButton.size * 0.7} />}
                     type="button"
                     {...propsButtons.plus}
                 />
@@ -111,12 +122,13 @@ const InputCounter = ({
         </Styles.StyledInputCounter>
     )
 
-    return options ? (
+    return label || helper || helperBottom ? (
         <InputContainer
             id={id}
-            label={options.label}
-            helper={options.helper}
-            helperBottom={options.helperBottom}
+            label={label}
+            helper={helper}
+            helperBottom={helperBottom}
+            accentColor={accentColor}
         >
             {inputFunction()}
         </InputContainer>
