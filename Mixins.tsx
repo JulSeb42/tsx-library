@@ -81,6 +81,15 @@ interface FlexProps {
     $padding?: SpacersTypes | string | number
 }
 
+export type {
+    OverlayProps,
+    SpacersProps,
+    RadiusesProps,
+    ShadowsProps,
+    GridProps,
+    FlexProps,
+}
+
 /*==================== Mixins ====================*/
 
 const Mixins = {

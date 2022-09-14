@@ -54,7 +54,7 @@ const Header = ({
     const inputRef = useRef<any>(null)
     const handleFocus = () => inputRef.current.focus()
 
-    const keys = search?.keyboardShortcut ? search?.keyboardShortcut : ""
+    const keys = search?.keyboardShortcut ? search?.keyboardShortcut : [""]
     useKeyPress(() => handleFocus(), keys)
 
     const searchInputFunc = () =>

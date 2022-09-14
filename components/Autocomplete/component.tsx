@@ -84,7 +84,7 @@ const Autocomplete = forwardRef(
             )
 
         const listProps = {
-            isOpen: isOpen,
+            isOpen: value.length > 0 ? isOpen : false,
             accentColor: accentColor,
             backgroundColor: backgroundColor,
             validation: validation?.status,

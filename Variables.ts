@@ -8,6 +8,21 @@ import {
     ColorsHoverTypes,
 } from "./utils/common-types"
 
+import {
+    // eslint-disable-next-line
+    OverlayProps,
+    // eslint-disable-next-line
+    SpacersProps,
+    // eslint-disable-next-line
+    RadiusesProps,
+    // eslint-disable-next-line
+    ShadowsProps,
+    // eslint-disable-next-line
+    GridProps,
+    // eslint-disable-next-line
+    FlexProps,
+} from "./Mixins"
+
 /*==================== Types ====================*/
 
 interface AllColorProps {

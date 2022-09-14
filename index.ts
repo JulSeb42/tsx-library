@@ -68,6 +68,7 @@ import Tag from "./components/Tag"
 import Text from "./components/Text"
 import TextIcon from "./components/TextIcon"
 import { ThemeContext, ThemeProviderWrapper } from "./context/ThemeContext"
+import { ThemeProvider } from "styled-components"
 import TimePicker from "./components/TimePicker"
 import Toast from "./components/Toast"
 import Tooltip from "./components/Tooltip"
@@ -164,6 +165,7 @@ export {
     TextIcon,
     ThemeContext,
     ThemeProviderWrapper,
+    ThemeProvider,
     TimePicker,
     Toast,
     Tooltip,
