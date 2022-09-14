@@ -44,7 +44,7 @@ interface Possible1 extends BaseProps {
 
 interface Possible2 extends BaseProps {
     size?: "full"
-    contentWidth?: "default" | "large" | "form"
+    contentWidth?: "default" | "large" | "form" | number
 }
 
 export type MainProps = Possible1 | Possible2

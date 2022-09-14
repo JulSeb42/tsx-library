@@ -36,8 +36,8 @@ const StyledAside = styled.aside<{
         Mixins.Grid({
             $alignContent: $alignContent || "start",
             $justifyItems: $justifyItems || "start",
-            $justifyContent: $justifyContent,
-            $alignItems: $alignItems,
+            $justifyContent: $justifyContent || "start",
+            $alignItems: $alignItems || "start",
             $gap,
             $padding: `${Spacers.XXL} 0`,
         })};
