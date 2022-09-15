@@ -34,7 +34,7 @@ export type NavMobileVariantsTypes = keyof typeof navMobileVariants
 
 interface BaseProps extends React.HTMLAttributes<HTMLDivElement> {
     position?: PositionsTypes
-    children: React.ReactNode | React.ReactNode[]
+    children?: React.ReactNode | React.ReactNode[]
     backgroundColor?: AllColorsTypes
     linkColor?: ColorsHoverTypes
     burgerColor?: ColorsHoverTypes

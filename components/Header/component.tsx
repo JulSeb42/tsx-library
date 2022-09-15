@@ -94,7 +94,7 @@ const Header = ({
         >
             {isMobile && searchInputFunc()}
 
-            {children}
+            {children && children}
         </Styles.Nav>
     )
 
