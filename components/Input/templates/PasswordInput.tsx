@@ -25,6 +25,8 @@ const PasswordInput = forwardRef(
             autoFocus,
             accentColor,
             backgroundColor,
+            iconSize,
+            variant = "rounded",
             ...props
         }: PasswordInputProps,
         ref?: React.ForwardedRef<HTMLInputElement>
@@ -46,6 +48,8 @@ const PasswordInput = forwardRef(
                         disabled={disabled}
                         accentColor={accentColor}
                         validation={validation?.status}
+                        size={iconSize}
+                        variant={variant}
                     />
                 )}
 
@@ -61,10 +65,11 @@ const PasswordInput = forwardRef(
                     autoFocus={autoFocus}
                     $accentColor={accentColor}
                     $backgroundColor={backgroundColor}
+                    $variant={variant}
                     {...props}
                 />
 
-                <RightContainer disabled={disabled}>
+                <RightContainer disabled={disabled} variant={variant}>
                     {isVisible ? (
                         button?.iconHide ? (
                             <Button

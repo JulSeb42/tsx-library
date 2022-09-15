@@ -17,7 +17,8 @@ const Header = ({
     children,
     burgerColor = "white",
     navColor = "primary",
-    navVariant = "top",
+    navMobileVariant = "top",
+    navDesktopVariant = "right",
     burgerPosition = "right",
     search,
     ...props
@@ -59,7 +60,10 @@ const Header = ({
 
     const searchInputFunc = () =>
         search && (
-            <Styles.SearchForm onSubmit={search.handleSubmit}>
+            <Styles.SearchForm
+                onSubmit={search.handleSubmit}
+                $maxWidth={search?.maxWidth || 300}
+            >
                 <Input
                     id={search.id || "global-search"}
                     type="search"
@@ -71,9 +75,28 @@ const Header = ({
                     icon={search.icon}
                     ref={inputRef}
                     backgroundColor={search.backgroundColor}
+                    accentColor={search.accentColor}
+                    iconSize={search.iconSize}
+                    variant={search.variant}
                 />
             </Styles.SearchForm>
         )
+
+    const navFunc = () => (
+        <Styles.Nav
+            $isOpen={isOpen}
+            $headerHeight={headerHeight}
+            $backgroundColor={backgroundColor}
+            $navColor={navColor}
+            $linkColor={linkColor}
+            $variant={navMobileVariant}
+            $desktopVariant={navDesktopVariant}
+        >
+            {isMobile && searchInputFunc()}
+
+            {children}
+        </Styles.Nav>
+    )
 
     return (
         <Styles.StyledHeader
@@ -82,9 +105,9 @@ const Header = ({
             $position={position}
             $linkColor={linkColor}
             $navColor={navColor}
-            ref={navVariant === "top" && isMobile ? el : undefined}
+            ref={navMobileVariant === "top" && isMobile ? el : undefined}
             $burgerPosition={burgerPosition}
-            $navVariant={navVariant}
+            $navVariant={navMobileVariant}
             {...props}
         >
             {burgerPosition === "left" && burgerFunction()}
@@ -103,29 +126,22 @@ const Header = ({
                 )}
             </Styles.Logo>
 
-            {!isMobile && searchInputFunc()}
+            {navDesktopVariant === "left" && navFunc()}
+
+            {!isMobile && navDesktopVariant === "right" && searchInputFunc()}
 
             {burgerPosition === "right" && burgerFunction()}
 
-            <Styles.Nav
-                $isOpen={isOpen}
-                $headerHeight={headerHeight}
-                $backgroundColor={backgroundColor}
-                $navColor={navColor}
-                $linkColor={linkColor}
-                $variant={navVariant}
-            >
-                {isMobile && searchInputFunc()}
+            {navDesktopVariant === "right" && navFunc()}
 
-                {children}
-            </Styles.Nav>
-
-            {isMobile && navVariant === "drawer" && (
+            {isMobile && navMobileVariant === "drawer" && (
                 <Styles.Overlay
                     $isOpen={isOpen}
                     onClick={() => setIsOpen(false)}
                 />
             )}
+
+            {!isMobile && navDesktopVariant === "left" && searchInputFunc()}
         </Styles.StyledHeader>
     )
 }

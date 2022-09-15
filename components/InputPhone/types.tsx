@@ -6,7 +6,7 @@ import { ShadowsTypes } from "../../utils/common-types"
 
 import { InputContainerProps } from "../InputContainer/types"
 import { ValidationProps } from "../Input/types"
-import { InputBackgroundTypes } from "../Input/types"
+import { InputBackgroundTypes, InputsVariantsTypes } from "../Input/types"
 import { ListDirectionTypes } from "../ListInputs/types"
 
 export type CountryType = {
@@ -33,6 +33,7 @@ interface BaseProps
     iconButton?: string
     searchPlaceholder?: string
     listDirection?: ListDirectionTypes
+    variant?: InputsVariantsTypes
 }
 
 interface PossibleList1 extends BaseProps {

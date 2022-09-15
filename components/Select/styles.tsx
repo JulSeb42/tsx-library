@@ -10,7 +10,7 @@ import Icon from "../Icon"
 import { InputBaseMixin } from "../InputComponents"
 
 import { ColorsHoverTypes } from "../../utils/common-types"
-import { InputBackgroundTypes } from "../Input/types"
+import { InputBackgroundTypes, InputsVariantsTypes } from "../Input/types"
 
 const inputHeight = 32
 
@@ -34,13 +34,15 @@ const Selected = styled.span<{
     $accentColor?: ColorsHoverTypes
     $disabled?: boolean
     $backgroundColor?: InputBackgroundTypes
+    $variant?: InputsVariantsTypes
 }>`
-    ${({ $accentColor, $isOpen, $disabled, $backgroundColor }) =>
+    ${({ $accentColor, $isOpen, $disabled, $backgroundColor, $variant }) =>
         InputBaseMixin({
             $accentColor: $accentColor,
             $isFocus: $isOpen,
             $disabled: $disabled,
             $backgroundColor: $backgroundColor,
+            $variant: $variant,
         })};
     ${Mixins.Flexbox({
         $alignItems: "center",

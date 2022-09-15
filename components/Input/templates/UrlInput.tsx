@@ -25,6 +25,8 @@ const UrlInput = forwardRef(
             autoFocus,
             accentColor,
             backgroundColor,
+            iconSize,
+            variant = "rounded",
             ...props
         }: UrlInputProps,
         ref?: React.ForwardedRef<HTMLInputElement>
@@ -36,11 +38,17 @@ const UrlInput = forwardRef(
                     disabled={disabled}
                     accentColor={accentColor}
                     validation={validation?.status}
+                    size={iconSize}
+                    variant={variant}
                 />
             )}
 
             {showHttp && (
-                <Styles.UrlContainer $hasIcon={!!icon} $disabled={disabled}>
+                <Styles.UrlContainer
+                    $hasIcon={!!icon}
+                    $disabled={disabled}
+                    $variant={variant}
+                >
                     http://
                 </Styles.UrlContainer>
             )}
@@ -59,11 +67,12 @@ const UrlInput = forwardRef(
                 autoFocus={autoFocus}
                 $accentColor={accentColor}
                 $backgroundColor={backgroundColor}
+                $variant={variant}
                 {...props}
             />
 
             {validation && (
-                <RightContainer disabled={disabled}>
+                <RightContainer disabled={disabled} variant={variant}>
                     <ValidationComponent validation={validation} />
                 </RightContainer>
             )}

@@ -19,6 +19,7 @@ const FileInput = forwardRef(
             autoFocus,
             backgroundColor,
             accentColor,
+            variant = "rounded",
             ...props
         }: FileInputProps,
         ref?: React.ForwardedRef<HTMLInputElement>
@@ -36,6 +37,7 @@ const FileInput = forwardRef(
                 $type={type}
                 $accentColor={accentColor}
                 $backgroundColor={backgroundColor}
+                $variant={variant}
                 {...props}
             />
         )
@@ -44,7 +46,7 @@ const FileInput = forwardRef(
             <Styles.StyledInputContent>
                 {inputFunction()}
 
-                <RightContainer disabled={disabled}>
+                <RightContainer disabled={disabled} variant={variant}>
                     <ValidationComponent validation={validation} />
                 </RightContainer>
             </Styles.StyledInputContent>

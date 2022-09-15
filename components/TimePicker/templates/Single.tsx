@@ -27,6 +27,8 @@ const SingleTimePicker = ({
     listShadow,
     id,
     listDirection,
+    iconSize,
+    inputVariant,
     ...props
 }: SingleTimepickerProps) => {
     const [isOpen, setIsOpen] = useState(false)
@@ -88,6 +90,7 @@ const SingleTimePicker = ({
                 $disabled={disabled}
                 id={id}
                 $hasIcon={!!icon}
+                $variant={inputVariant}
             >
                 {icon && (
                     <IconComponent
@@ -95,6 +98,8 @@ const SingleTimePicker = ({
                         disabled={disabled}
                         accentColor={accentColor}
                         validation={validation?.status}
+                        size={iconSize}
+                        variant={inputVariant}
                     />
                 )}
 

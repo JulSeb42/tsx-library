@@ -22,6 +22,7 @@ const SelectInput = forwardRef(
             autoFocus,
             accentColor,
             backgroundColor,
+            variant = "rounded",
             ...props
         }: SelectInputProps,
         ref?: React.ForwardedRef<HTMLSelectElement>
@@ -38,12 +39,13 @@ const SelectInput = forwardRef(
                 autoFocus={autoFocus}
                 $accentColor={accentColor}
                 $backgroundColor={backgroundColor}
+                $variant={variant}
                 {...props}
             >
                 {children}
             </Styles.StyledInput>
 
-            <RightContainer disabled={disabled}>
+            <RightContainer disabled={disabled} variant={variant}>
                 {iconSelect ? (
                     <Icon
                         src={iconSelect}

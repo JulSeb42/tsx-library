@@ -35,6 +35,13 @@ const backgroundTypes = {
 
 export type InputBackgroundTypes = keyof typeof backgroundTypes
 
+const inputVariants = {
+    rounded: "rouned",
+    pill: "pill",
+} as const
+
+export type InputsVariantsTypes = keyof typeof inputVariants
+
 /*==================== Component Types ====================*/
 
 interface BaseInputProps extends ExtendedInputContainerProps {
@@ -56,6 +63,7 @@ export interface ValidationProps {
 
 export interface IconInputProps {
     icon?: string
+    iconSize?: number
 }
 
 export interface TextInputProps
@@ -69,6 +77,7 @@ export interface TextInputProps
     children?: never
     maxLength?: number
     counter?: boolean
+    variant?: InputsVariantsTypes
 }
 
 export interface ColorInputProps
@@ -78,6 +87,7 @@ export interface ColorInputProps
     id: string
     children?: never
     showColor?: boolean
+    variant?: InputsVariantsTypes
 }
 
 export interface DateInputProps
@@ -89,6 +99,7 @@ export interface DateInputProps
     children?: never
     id: string
     iconCalendar?: string
+    variant?: InputsVariantsTypes
 }
 
 export interface FileInputProps
@@ -98,6 +109,7 @@ export interface FileInputProps
     type?: "file"
     id: string
     children?: never
+    variant?: InputsVariantsTypes
 }
 
 interface BasePasswordProps
@@ -109,6 +121,7 @@ interface BasePasswordProps
     password?: boolean
     id: string
     children?: never
+    variant?: InputsVariantsTypes
 }
 
 interface PossiblePasswordProps1 extends BasePasswordProps {
@@ -144,6 +157,7 @@ export interface SearchInputProps
     clearSearch: (e: React.MouseEvent<HTMLButtonElement>) => void
     iconClear?: string
     validation?: never
+    variant?: InputsVariantsTypes
 }
 
 export interface SelectInputProps
@@ -153,6 +167,7 @@ export interface SelectInputProps
     id: string
     children?: React.ReactNode | React.ReactNode[] | JSX.Element | JSX.Element[]
     iconSelect?: string
+    variant?: InputsVariantsTypes
 }
 
 export interface TextareaProps
@@ -173,6 +188,7 @@ export interface TimeInputProps
     id: string
     children?: never
     iconClock?: string
+    variant?: InputsVariantsTypes
 }
 
 export interface UrlInputProps
@@ -184,6 +200,7 @@ export interface UrlInputProps
     id: string
     children?: never
     showHttp?: boolean
+    variant?: InputsVariantsTypes
 }
 
 export type InputProps =

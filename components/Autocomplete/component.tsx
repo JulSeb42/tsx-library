@@ -35,6 +35,8 @@ const Autocomplete = forwardRef(
             listVariant,
             listShadow,
             listDirection,
+            iconSize,
+            variant = "rounded",
             ...props
         }: AutocompleteProps,
         ref?: React.ForwardedRef<HTMLInputElement>
@@ -114,6 +116,8 @@ const Autocomplete = forwardRef(
                         disabled={disabled}
                         icon={icon}
                         validation={validation?.status}
+                        size={iconSize}
+                        variant={variant}
                     />
                 )}
 
@@ -130,11 +134,12 @@ const Autocomplete = forwardRef(
                     $accentColor={accentColor}
                     $backgroundColor={backgroundColor}
                     onChange={handleFilter}
+                    $variant={variant}
                     {...props}
                 />
 
                 {validation && (
-                    <RightContainer disabled={disabled}>
+                    <RightContainer disabled={disabled} variant={variant}>
                         <ValidationComponent validation={validation} />
                     </RightContainer>
                 )}

@@ -15,8 +15,12 @@ import {
     ValidationComponentProps,
 } from "./types"
 
-const RightContainer = ({ disabled, children }: RightContainerProps) => (
-    <Styles.RightContainer $disabled={disabled}>
+const RightContainer = ({
+    disabled,
+    children,
+    variant = "rounded",
+}: RightContainerProps) => (
+    <Styles.RightContainer $disabled={disabled} $variant={variant}>
         {children}
     </Styles.RightContainer>
 )
@@ -26,6 +30,8 @@ const IconComponent = ({
     disabled,
     accentColor = "primary",
     validation,
+    size = 24,
+    variant = "rounded",
 }: IconComponentProps) => (
     <Styles.IconContainer
         $color={
@@ -35,8 +41,9 @@ const IconComponent = ({
                 ? "danger"
                 : accentColor
         }
+        $variant={variant}
     >
-        <Icon src={icon} size={24} />
+        <Icon src={icon} size={size} />
     </Styles.IconContainer>
 )
 

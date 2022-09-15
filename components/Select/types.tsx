@@ -4,7 +4,7 @@ import React from "react"
 
 import { ColorsHoverTypes, ShadowsTypes } from "../../utils/common-types"
 import { InputContainerProps } from "../InputContainer/types"
-import { InputBackgroundTypes } from "../Input/types"
+import { InputBackgroundTypes, InputsVariantsTypes } from "../Input/types"
 import { ListDirectionTypes } from "../ListInputs/types"
 
 interface BaseProps
@@ -26,6 +26,7 @@ interface BaseProps
     items?: string[]
     backgroundColor?: InputBackgroundTypes
     listDirection?: ListDirectionTypes
+    inputVariant?: InputsVariantsTypes
 }
 
 interface PossibleList1 extends BaseProps {

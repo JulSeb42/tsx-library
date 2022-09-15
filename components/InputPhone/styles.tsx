@@ -16,7 +16,7 @@ import {
 import { InputBaseMixin } from "../InputComponents"
 
 import { ColorsHoverTypes, ValidationTypes } from "../../utils/common-types"
-import { InputBackgroundTypes } from "../Input/types"
+import { InputBackgroundTypes, InputsVariantsTypes } from "../Input/types"
 
 const inputHeight = 32
 
@@ -26,9 +26,9 @@ const StyledInputPhone = styled.div<{ $isOpen: boolean; ref?: any }>`
     z-index: ${({ $isOpen }) => ($isOpen ? 20 : 0)};
 `
 
-const Button = styled.button`
+const Button = styled.button<{ $variant?: InputsVariantsTypes }>`
     height: ${inputHeight}px;
-    padding: 0 ${Spacers.XS};
+    padding: 0 ${({ $variant }) => $variant === "pill" ? Spacers.S : Spacers.XS};
     border: none;
     background-color: transparent;
     position: absolute;
@@ -112,13 +112,14 @@ const Input = styled.input<{
     $isListOpen?: boolean
     $accentColor?: ColorsHoverTypes
     $backgroundColor?: InputBackgroundTypes
+    $variant?: InputsVariantsTypes
 }>`
-    ${({ $accentColor, $backgroundColor, $validation }) =>
+    ${({ $accentColor, $backgroundColor, $validation, $variant }) =>
         InputBaseMixin({
             $accentColor: $accentColor,
             $backgroundColor: $backgroundColor,
-
             $validation: $validation,
+            $variant: $variant,
         })};
     border-color: ${({
         $accentColor,

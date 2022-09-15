@@ -3,7 +3,7 @@
 import React from "react"
 
 import { ColorsHoverTypes, AllColorsTypes } from "../../utils/common-types"
-import { InputBackgroundTypes } from "../Input/types"
+import { InputBackgroundTypes, InputsVariantsTypes } from "../Input/types"
 
 /*==================== List possibilities ====================*/
 
@@ -15,13 +15,20 @@ const positions = {
 
 export type PositionsTypes = keyof typeof positions
 
-const navVariants = {
+const navDesktopVariants = {
+    left: "left",
+    right: "right",
+} as const
+
+export type NavDesktopVariantsTypes = keyof typeof navDesktopVariants
+
+const navMobileVariants = {
     full: "full",
     top: "top",
     drawer: "drawer",
 } as const
 
-export type NavVariantsTypes = keyof typeof navVariants
+export type NavMobileVariantsTypes = keyof typeof navMobileVariants
 
 /*==================== Component Types ====================*/
 
@@ -33,7 +40,8 @@ interface BaseProps extends React.HTMLAttributes<HTMLDivElement> {
     burgerColor?: ColorsHoverTypes
     burgerPosition?: "left" | "right"
     navColor?: AllColorsTypes
-    navVariant?: NavVariantsTypes
+    navDesktopVariant?: NavDesktopVariantsTypes
+    navMobileVariant?: NavMobileVariantsTypes
     search?: {
         search: string
         setSearch: (search: string) => void
@@ -44,6 +52,10 @@ interface BaseProps extends React.HTMLAttributes<HTMLDivElement> {
         id?: string
         keyboardShortcut?: string[]
         backgroundColor?: InputBackgroundTypes
+        maxWidth?: string | number
+        accentColor?: ColorsHoverTypes
+        iconSize?: number
+        variant?: InputsVariantsTypes
     }
 }
 

@@ -34,7 +34,6 @@ const StyledListInputs = styled.div<{
     $direction?: ListDirectionTypes
 }>`
     position: absolute;
-
     left: 0;
     width: 100%;
     z-index: 0;
@@ -65,25 +64,15 @@ const StyledListInputs = styled.div<{
     ${({ $direction, $isOpen }) =>
         $direction === "up"
             ? css`
-                  bottom: ${ConstantValues.InputHeight / 2}px;
-                  padding-bottom: ${$isOpen
-                      ? `${ConstantValues.InputHeight / 2}px`
-                      : 0};
+                  bottom: ${$isOpen ? "12px" : "16px"};
+                  padding-bottom: ${$isOpen ? "19px" : 0};
               `
             : css`
-                  top: ${ConstantValues.InputHeight / 2}px;
-                  padding-top: ${$isOpen
-                      ? `${ConstantValues.InputHeight / 2}px`
-                      : 0};
+                  top: ${$isOpen ? "12px" : "16px"};
+                  padding-top: ${$isOpen ? "19px" : 0};
               `}
 
-    ${({
-        $variant,
-        $accentColor,
-        $validation,
-        $shadow,
-        $isOpen,
-    }) =>
+    ${({ $variant, $accentColor, $validation, $shadow, $isOpen }) =>
         $variant === "bordered"
             ? css`
                   border: 1px solid
@@ -106,12 +95,7 @@ const Item = styled.span<{
     $readOnly?: boolean
 }>`
     padding: 0 ${Spacers.XS};
-    background-color: ${({
-        $isActive,
-        $accentColor,
-        theme,
-        $validation,
-    }) =>
+    background-color: ${({ $isActive, $accentColor, theme, $validation }) =>
         $isActive
             ? $validation === "not-passed"
                 ? theme.Danger500

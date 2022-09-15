@@ -2,7 +2,7 @@
 
 import React from "react"
 
-import { InputBackgroundTypes, ValidationProps } from "../Input/types"
+import { InputBackgroundTypes, ValidationProps, InputsVariantsTypes } from "../Input/types"
 import { InputContainerProps } from "../InputContainer/types"
 import { ListDirectionTypes } from "../ListInputs/types"
 import { ShadowsTypes } from "../../utils/common-types"
@@ -51,6 +51,8 @@ interface BaseProps
     backgroundColor?: InputBackgroundTypes
     disabled?: boolean
     calendarDirection?: ListDirectionTypes
+    iconSize?: number
+    inputVariant?: InputsVariantsTypes
 }
 
 interface PossibleList1 extends BaseProps {

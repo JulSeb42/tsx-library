@@ -25,6 +25,8 @@ const TimeInput = forwardRef(
             autoFocus,
             accentColor,
             backgroundColor,
+            iconSize,
+            variant = "rounded",
             ...props
         }: TimeInputProps,
         ref?: React.ForwardedRef<HTMLInputElement>
@@ -36,6 +38,8 @@ const TimeInput = forwardRef(
                     disabled={disabled}
                     accentColor={accentColor}
                     validation={validation?.status}
+                    size={iconSize}
+                    variant={variant}
                 />
             )}
 
@@ -53,11 +57,12 @@ const TimeInput = forwardRef(
                 autoFocus={autoFocus}
                 $accentColor={accentColor}
                 $backgroundColor={backgroundColor}
+                $variant={variant}
                 {...props}
             />
 
             {validation && (
-                <RightContainer disabled={disabled}>
+                <RightContainer disabled={disabled} variant={variant}>
                     <ValidationComponent validation={validation} />
                 </RightContainer>
             )}

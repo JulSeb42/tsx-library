@@ -6,7 +6,7 @@ import setDefaultTheme from "../../utils/setDefaultTheme"
 import { InputBaseMixin } from "../InputComponents"
 
 import { ColorsHoverTypes, ValidationTypes } from "../../utils/common-types"
-import { InputBackgroundTypes } from "../Input/types"
+import { InputBackgroundTypes, InputsVariantsTypes } from "../Input/types"
 
 const InputContainer = styled.div`
     position: relative;
@@ -18,13 +18,15 @@ const StyledInput = styled.input<{
     $validation?: ValidationTypes
     $accentColor?: ColorsHoverTypes
     $backgroundColor?: InputBackgroundTypes
+    $variant?: InputsVariantsTypes
 }>`
-    ${({ $accentColor, $backgroundColor, $hasIcon, $validation }) =>
+    ${({ $accentColor, $backgroundColor, $hasIcon, $validation, $variant }) =>
         InputBaseMixin({
             $accentColor: $accentColor,
             $backgroundColor: $backgroundColor,
             $hasIcon: $hasIcon,
             $validation: $validation,
+            $variant: $variant,
         })};
 `
 

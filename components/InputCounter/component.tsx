@@ -26,6 +26,7 @@ const InputCounter = ({
     accentColor = "primary",
     disabled,
     backgroundColorInput,
+    inputVariant = "rounded",
     ...props
 }: InputCounterProps) => {
     const handleMinus = () =>
@@ -92,6 +93,7 @@ const InputCounter = ({
                     $accentColor={accentColor}
                     $disabled={disabled}
                     $backgroundColor={backgroundColorInput}
+                    $variant={inputVariant}
                     {...props}
                 />
             ) : (

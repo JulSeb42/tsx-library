@@ -28,6 +28,7 @@ const Select = ({
     listVariant,
     listShadow,
     listDirection,
+    inputVariant = "rounded",
     ...props
 }: SelectProps) => {
     const el = useRef<HTMLButtonElement>(null)
@@ -89,6 +90,7 @@ const Select = ({
                 $accentColor={accentColor}
                 $disabled={disabled}
                 $backgroundColor={backgroundColor}
+                $variant={inputVariant}
             >
                 {selected}
 

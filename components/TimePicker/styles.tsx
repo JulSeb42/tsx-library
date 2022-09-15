@@ -7,9 +7,8 @@ import setDefaultTheme from "../../utils/setDefaultTheme"
 import ChevronDownIcon from "../../icons/ChevronDownIcon"
 import { InputBaseMixin } from "../InputComponents"
 
-import { ValidationTypes } from "../../utils/common-types"
-import { InputBackgroundTypes } from "../Input/types"
-import { ColorsHoverTypes } from "../../utils/common-types"
+import { ValidationTypes, ColorsHoverTypes } from "../../utils/common-types"
+import { InputBackgroundTypes, InputsVariantsTypes } from "../Input/types"
 
 const StyledTimePicker = styled.div<{
     $isOpen?: boolean
@@ -29,6 +28,7 @@ const Selected = styled.div<{
     $isOpen?: boolean
     $disabled?: boolean
     $hasIcon?: boolean
+    $variant?: InputsVariantsTypes
 }>`
     ${({
         $accentColor,
@@ -37,6 +37,7 @@ const Selected = styled.div<{
         $backgroundColor,
         $validation,
         $hasIcon,
+        $variant,
     }) =>
         InputBaseMixin({
             $accentColor: $accentColor,
@@ -45,6 +46,7 @@ const Selected = styled.div<{
             $backgroundColor: $backgroundColor,
             $validation: $validation,
             $hasIcon: $hasIcon,
+            $variant: $variant,
         })};
     ${Mixins.Flexbox({
         $alignItems: "center",

@@ -13,8 +13,7 @@ import {
 import Mixins from "../../Mixins"
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { InputBackgroundTypes } from "../Input/types"
-
+import { InputBackgroundTypes, InputsVariantsTypes } from "../Input/types"
 import { ColorsHoverTypes } from "../../utils/common-types"
 
 const StyledInputCounter = styled.div`
@@ -29,6 +28,7 @@ const Input = styled.input<{
     $accentColor?: ColorsHoverTypes
     $disabled?: boolean
     $backgroundColor?: InputBackgroundTypes
+    $variant?: InputsVariantsTypes
 }>`
     width: ${({ $isEditable }) => ($isEditable ? 48 : 32)}px;
     height: 32px;
@@ -50,12 +50,12 @@ const Input = styled.input<{
                 : theme.Font
             : theme.Font};
 
-    ${({ $isEditable, $accentColor, $backgroundColor, theme }) =>
+    ${({ $isEditable, $accentColor, $backgroundColor, theme, $variant }) =>
         $isEditable &&
         css`
             border: 1px solid ${theme.Gray200};
             -moz-appearance: textfield;
-            border-radius: ${Radiuses.S};
+            border-radius: ${$variant === "pill" ? Radiuses.Round : Radiuses.S};
             outline: none;
             background-color: ${$backgroundColor === "dark"
                 ? ThemeDark.Background

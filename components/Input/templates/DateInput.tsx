@@ -25,6 +25,8 @@ const DateInput = forwardRef(
             autoFocus,
             accentColor,
             backgroundColor,
+            iconSize,
+            variant = "rounded",
             ...props
         }: DateInputProps,
         ref?: React.ForwardedRef<HTMLInputElement>
@@ -44,6 +46,7 @@ const DateInput = forwardRef(
                 autoFocus={autoFocus}
                 $accentColor={accentColor}
                 $backgroundColor={backgroundColor}
+                $variant={variant}
                 {...props}
             />
         )
@@ -56,13 +59,15 @@ const DateInput = forwardRef(
                         disabled={disabled}
                         accentColor={accentColor}
                         validation={validation?.status}
+                        size={iconSize}
+                        variant={variant}
                     />
                 )}
 
                 {inputFunction()}
 
                 {validation && (
-                    <RightContainer disabled={disabled}>
+                    <RightContainer disabled={disabled} variant={variant}>
                         <ValidationComponent validation={validation} />
                     </RightContainer>
                 )}

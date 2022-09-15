@@ -7,6 +7,7 @@ import {
     Breakpoints,
     FontSizes,
     LineHeights,
+    Radiuses,
     Spacers,
     ThemeDark,
     ThemeLight,
@@ -15,14 +16,17 @@ import {
 import { InputBaseMixin } from "../InputComponents"
 
 import { ColorsHoverTypes, ValidationTypes } from "../../utils/common-types"
-import { InputBackgroundTypes, InputTypesTypes } from "./types"
+import { InputBackgroundTypes, InputTypesTypes, InputsVariantsTypes } from "./types"
+
+const inputHeight = 32
 
 const StyledInputContent = styled.div`
     width: 100%;
     position: relative;
+    height: fit-content;
+    display: inline-block;
+    height: ${inputHeight}px;
 `
-
-const inputHeight = 32
 
 const StyledInput = styled.input<{
     $type?: InputTypesTypes
@@ -33,19 +37,46 @@ const StyledInput = styled.input<{
     $hasIcon?: boolean
     $accentColor?: ColorsHoverTypes
     $backgroundColor?: InputBackgroundTypes
+    $variant?: InputsVariantsTypes
 }>`
-    ${({ $accentColor, $backgroundColor, $hasIcon, $validation }) =>
+    ${({ $accentColor, $backgroundColor, $hasIcon, $validation, $variant }) =>
         InputBaseMixin({
             $accentColor: $accentColor,
             $backgroundColor: $backgroundColor,
             $hasIcon: $hasIcon,
             $validation: $validation,
+            $variant: $variant,
         })};
 
     ${({ $type }) =>
         ($type === "color" || $type === "file") &&
         css`
             cursor: pointer;
+        `}
+
+    ${({ $type, $variant }) =>
+        $type === "color" &&
+        css`
+            padding: ${Spacers.XS};
+            overflow: hidden;
+
+            &::-webkit-color-swatch-wrapper {
+                padding: 0;
+                margin: 0;
+                width: 100%;
+                border-radius: ${$variant === "pill"
+                    ? Radiuses.Round
+                    : Radiuses.S};
+            }
+
+            &::-webkit-color-swatch {
+                padding: 0;
+                margin: 0;
+                width: 100%;
+                border-radius: ${$variant === "pill"
+                    ? Radiuses.Round
+                    : Radiuses.S};
+            }
         `}
 
     ${({ $type }) =>
@@ -91,14 +122,27 @@ const StyledInput = styled.input<{
             }
         `}
 
-    ${({ $type, $hasIcon, $showHttp }) =>
+    ${({ $type, $hasIcon, $showHttp, $variant }) =>
         $type === "url" &&
         $showHttp &&
         css`
-            padding-left: ${$hasIcon ? 53 + inputHeight : 53}px;
+            padding-left: ${$variant === "pill"
+                ? $hasIcon
+                    ? 42 + 50
+                    : 57
+                : $hasIcon
+                ? 53 + inputHeight
+                : 53}px;
         `}
 
-    ${({ $type, $iconCalendar, $iconClock, $accentColor, theme, $validation }) =>
+    ${({
+        $type,
+        $iconCalendar,
+        $iconClock,
+        $accentColor,
+        theme,
+        $validation,
+    }) =>
         ($type === "date" ||
             $type === "datetime-local" ||
             $type === "month" ||
@@ -162,7 +206,6 @@ const StyledInput = styled.input<{
     ${({ $type }) =>
         $type === "select" &&
         css`
-            padding: 0 ${Spacers.XS};
             appearance: none;
             cursor: pointer;
 
@@ -180,6 +223,8 @@ const StyledInput = styled.input<{
                     2
             );
             resize: vertical;
+            padding-top: ${Spacers.XS};
+            padding-bottom: ${Spacers.XS};
         `}
 `
 
@@ -187,6 +232,7 @@ const UrlContainer = styled.span<{
     $hasIcon?: boolean
     $disabled?: boolean
     $backgroundColor?: InputBackgroundTypes
+    $variant?: InputsVariantsTypes
 }>`
     position: absolute;
     left: 0;
@@ -194,7 +240,8 @@ const UrlContainer = styled.span<{
     height: ${inputHeight}px;
     z-index: 5;
     line-height: ${inputHeight}px;
-    padding-left: ${Spacers.XS};
+    padding-left: ${({ $variant }) =>
+        $variant === "pill" ? Spacers.S : Spacers.XS};
     color: ${({ theme, $backgroundColor, $disabled }) =>
         $disabled
             ? theme.Gray500
@@ -210,10 +257,12 @@ const UrlContainer = styled.span<{
             cursor: not-allowed;
         `}
 
-    ${({ $hasIcon }) =>
+    ${({ $hasIcon, $variant }) =>
         $hasIcon &&
         css`
-            padding-left: calc(${inputHeight}px + ${Spacers.XS});
+            padding-left: ${$variant === "pill"
+                ? `calc(40px + ${Spacers.XS})`
+                : `calc(${inputHeight}px + ${Spacers.XS})`};
         `}
 `
 

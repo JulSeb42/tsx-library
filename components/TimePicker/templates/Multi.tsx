@@ -30,6 +30,8 @@ const MultiTimePicker = ({
     validationMax,
     accentColor = "primary",
     listDirection,
+    iconSize,
+    inputVariant,
     ...props
 }: MultiTimepickerProps) => {
     const [isMinOpen, setIsMinOpen] = useState(false)
@@ -147,6 +149,7 @@ const MultiTimePicker = ({
                     $disabled={disabled}
                     id={`${id}-min`}
                     $hasIcon={!!iconMin}
+                    $variant={inputVariant}
                 >
                     {iconMin && (
                         <IconComponent
@@ -154,6 +157,8 @@ const MultiTimePicker = ({
                             disabled={disabled}
                             accentColor={accentColor}
                             validation={validationMin?.status}
+                            size={iconSize}
+                            variant={inputVariant}
                         />
                     )}
 
@@ -184,6 +189,7 @@ const MultiTimePicker = ({
                     $disabled={disabled}
                     id={`${id}-max`}
                     $hasIcon={!!iconMax}
+                    $variant={inputVariant}
                 >
                     {iconMax && (
                         <IconComponent
@@ -191,6 +197,8 @@ const MultiTimePicker = ({
                             disabled={disabled}
                             accentColor={accentColor}
                             validation={validationMax?.status}
+                            size={iconSize}
+                            variant={inputVariant}
                         />
                     )}
 

@@ -18,7 +18,7 @@ import {
     ColorsHoverTypes,
     ColorsInputTypes,
 } from "../../utils/common-types"
-import { InputBackgroundTypes } from "../Input/types"
+import { InputBackgroundTypes, InputsVariantsTypes } from "../Input/types"
 
 interface BaseInputProps {
     $validation?: ValidationTypes
@@ -27,6 +27,7 @@ interface BaseInputProps {
     $disabled?: boolean
     $isFocus?: boolean
     $hasIcon?: boolean
+    $variant?: InputsVariantsTypes
 }
 
 const ConstantValues = {
@@ -41,6 +42,7 @@ const InputBaseMixin = ({
     $disabled,
     $isFocus,
     $hasIcon,
+    $variant,
 }: BaseInputProps) => css`
     width: 100%;
     height: ${ConstantValues.InputHeight}px;
@@ -66,11 +68,14 @@ const InputBaseMixin = ({
             : $backgroundColor === "light"
             ? ThemeLight.Background
             : theme.Background};
-    border-radius: ${Radiuses.S};
+    border-radius: ${$variant === "pill" ? Radiuses.Round : Radiuses.S};
     font-size: ${FontSizes.Body};
     font-family: ${FontFamilies.Body};
-    padding: ${Spacers.XS};
-    padding-left: ${$hasIcon && `calc(${ConstantValues.InputHeight}px + ${Spacers.XS})`};
+    padding: ${$variant === "pill" ? `0 ${Spacers.S}` : `0 ${Spacers.XS}`};
+    padding-left: ${$hasIcon &&
+    ($variant === "pill"
+        ? `calc(40px + ${Spacers.XS})`
+        : `calc(${ConstantValues.InputHeight}px + ${Spacers.XS})`)};
     color: ${({ theme }) =>
         $disabled
             ? theme.Gray500
@@ -117,12 +122,16 @@ const InputBaseMixin = ({
     }
 `
 
-const RightContainer = styled.span<{ $disabled?: boolean }>`
+const RightContainer = styled.span<{
+    $disabled?: boolean
+    $variant?: InputsVariantsTypes
+}>`
     position: absolute;
     top: 0;
     right: 0;
     height: ${ConstantValues.InputHeight}px;
-    padding: 0 ${Spacers.XS};
+    padding: 0
+        ${({ $variant }) => ($variant === "pill" ? Spacers.S : Spacers.XS)};
     ${Mixins.Flexbox({
         $inline: true,
         $alignItems: "center",
@@ -138,12 +147,18 @@ const RightContainer = styled.span<{ $disabled?: boolean }>`
         `}
 `
 
-const IconContainer = styled.span<{ $color?: ColorsInputTypes }>`
+const IconContainer = styled.span<{
+    $color?: ColorsInputTypes
+    $variant?: InputsVariantsTypes
+}>`
     position: absolute;
     left: 0;
     top: 0;
     z-index: 5;
-    width: ${ConstantValues.InputHeight}px;
+    width: ${({ $variant }) =>
+        $variant === "pill"
+            ? `calc(${Spacers.XS} + ${ConstantValues.InputHeight}px)`
+            : `${ConstantValues.InputHeight}px`};
     height: ${ConstantValues.InputHeight}px;
     ${Mixins.Flexbox({
         $inline: true,

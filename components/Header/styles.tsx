@@ -2,6 +2,7 @@
 
 import styled, { css } from "styled-components"
 import { Link } from "react-router-dom"
+import { stringifyPx } from "ts-utils-julseb"
 
 import {
     FontSizes,
@@ -18,7 +19,11 @@ import setDefaultTheme from "../../utils/setDefaultTheme"
 
 import { ColorsHoverTypes, AllColorsTypes } from "../../utils/common-types"
 
-import { PositionsTypes, NavVariantsTypes } from "./types"
+import {
+    PositionsTypes,
+    NavMobileVariantsTypes,
+    NavDesktopVariantsTypes,
+} from "./types"
 
 const LogoImg = styled(Image)`
     object-position: left center;
@@ -71,7 +76,7 @@ const StyledHeader = styled.header<{
     $linkColor?: ColorsHoverTypes
     $navColor?: AllColorsTypes
     $burgerPosition?: "left" | "right"
-    $navVariant?: NavVariantsTypes
+    $navVariant?: NavMobileVariantsTypes
     ref?: any
 }>`
     position: ${({ $position }) => $position};
@@ -123,12 +128,15 @@ const Nav = styled.nav<{
     $backgroundColor?: AllColorsTypes
     $navColor?: AllColorsTypes
     $linkColor?: ColorsHoverTypes
-    $variant?: NavVariantsTypes
+    $variant?: NavMobileVariantsTypes
+    $desktopVariant?: NavDesktopVariantsTypes
 }>`
     ${Mixins.Flexbox({
         $alignItems: "center",
         $gap: "s",
     })};
+
+    flex-grow: ${({ $desktopVariant }) => $desktopVariant === "left" && 1};
 
     & > a,
     & > button {
@@ -199,9 +207,9 @@ const Overlay = styled.span<{ $isOpen?: boolean }>`
     transition: ${Transitions.Short};
 `
 
-const SearchForm = styled.form`
+const SearchForm = styled.form<{ $maxWidth?: string | number }>`
     width: 100%;
-    max-width: 300px;
+    max-width: ${({ $maxWidth }) => stringifyPx($maxWidth)};
 
     @media ${Breakpoints.Mobile} {
         max-width: 100%;

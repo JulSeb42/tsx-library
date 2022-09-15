@@ -32,6 +32,8 @@ const Datepicker = ({
     label,
     helper,
     helperBottom,
+    iconSize,
+    inputVariant,
     ...props
 }: DatepickerProps) => {
     const [isOpen, setIsOpen] = useState(false)
@@ -85,6 +87,7 @@ const Datepicker = ({
                 onClick={() => (!disabled ? setIsOpen(!isOpen) : undefined)}
                 $validation={validation?.status}
                 $hasIcon={!!icons?.icon}
+                $variant={inputVariant}
             >
                 {icons?.icon && (
                     <IconComponent
@@ -92,6 +95,7 @@ const Datepicker = ({
                         accentColor={accentColor}
                         disabled={disabled}
                         validation={validation?.status}
+                        size={iconSize}
                     />
                 )}
                 {convertDateShort(selectedDate)}

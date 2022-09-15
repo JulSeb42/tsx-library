@@ -17,23 +17,27 @@ const ColorInput = forwardRef(
             accentColor,
             backgroundColor,
             showColor,
+            variant = "rounded",
             ...props
         }: ColorInputProps,
         ref?: React.ForwardedRef<HTMLInputElement>
     ) => (
-        <Styles.StyledInput
-            id={id}
-            type={type}
-            value={value}
-            name={name}
-            disabled={disabled}
-            ref={ref}
-            $type={type}
-            autoFocus={autoFocus}
-            $accentColor={accentColor}
-            $backgroundColor={backgroundColor}
-            {...props}
-        />
+        <Styles.StyledInputContent>
+            <Styles.StyledInput
+                id={id}
+                type={type}
+                value={value}
+                name={name}
+                disabled={disabled}
+                ref={ref}
+                $type={type}
+                autoFocus={autoFocus}
+                $accentColor={accentColor}
+                $backgroundColor={backgroundColor}
+                $variant={variant}
+                {...props}
+            />
+        </Styles.StyledInputContent>
     )
 )
 

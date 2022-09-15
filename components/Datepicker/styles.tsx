@@ -14,7 +14,7 @@ import Mixins from "../../Mixins"
 import setDefaultTheme from "../../utils/setDefaultTheme"
 import { InputBaseMixin } from "../InputComponents"
 
-import { InputBackgroundTypes } from "../Input/types"
+import { InputBackgroundTypes, InputsVariantsTypes } from "../Input/types"
 import {
     ColorsHoverTypes,
     ShadowsTypes,
@@ -45,6 +45,7 @@ const Selected = styled.span<{
     $backgroundColor?: InputBackgroundTypes
     $validation?: ValidationTypes
     $hasIcon?: boolean
+    $variant?: InputsVariantsTypes
 }>`
     ${({
         $accentColor,
@@ -53,6 +54,7 @@ const Selected = styled.span<{
         $backgroundColor,
         $validation,
         $hasIcon,
+        $variant,
     }) =>
         InputBaseMixin({
             $accentColor: $accentColor,
@@ -61,6 +63,7 @@ const Selected = styled.span<{
             $backgroundColor: $backgroundColor,
             $validation: $validation,
             $hasIcon: $hasIcon,
+            $variant: $variant,
         })};
     ${Mixins.Flexbox({
         $alignItems: "center",

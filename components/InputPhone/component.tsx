@@ -36,6 +36,7 @@ const InputPhone = forwardRef(
             listVariant,
             listShadow,
             listDirection,
+            variant,
             ...props
         }: InputPhoneProps,
         ref?: React.ForwardedRef<HTMLInputElement>
@@ -140,7 +141,11 @@ const InputPhone = forwardRef(
 
         const inputContent = () => (
             <Styles.StyledInputPhone $isOpen={isOpen} ref={listRef}>
-                <Styles.Button type="button" onClick={() => setIsOpen(!isOpen)}>
+                <Styles.Button
+                    type="button"
+                    onClick={() => setIsOpen(!isOpen)}
+                    $variant={variant}
+                >
                     <Styles.Flag
                         src={selectedCountry && selectedCountry.flag}
                         alt={`Flag ${selectedCountry && selectedCountry.name}`}
@@ -192,11 +197,12 @@ const InputPhone = forwardRef(
                     $isListOpen={isOpen}
                     $validation={validation?.status}
                     $backgroundColor={backgroundColor}
+                    $variant={variant}
                     {...props}
                 />
 
                 {validation && (
-                    <RightContainer disabled={disabled}>
+                    <RightContainer disabled={disabled} variant={variant}>
                         <ValidationComponent validation={validation} />
                     </RightContainer>
                 )}

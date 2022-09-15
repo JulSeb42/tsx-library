@@ -23,6 +23,8 @@ const SearchInput = forwardRef(
             autoFocus,
             accentColor,
             backgroundColor,
+            iconSize,
+            variant = "rounded",
             ...props
         }: SearchInputProps,
         ref?: React.ForwardedRef<HTMLInputElement>
@@ -41,6 +43,8 @@ const SearchInput = forwardRef(
                         icon={icon}
                         disabled={disabled}
                         accentColor={accentColor}
+                        size={iconSize}
+                        variant={variant}
                     />
                 )}
 
@@ -56,10 +60,11 @@ const SearchInput = forwardRef(
                     disabled={disabled}
                     $accentColor={accentColor}
                     $backgroundColor={backgroundColor}
+                    $variant={variant}
                     {...props}
                 />
 
-                <RightContainer disabled={disabled}>
+                <RightContainer disabled={disabled} variant={variant}>
                     {typeof value === "string" &&
                         value.length > 0 &&
                         (iconClear ? (
