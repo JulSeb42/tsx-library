@@ -8,9 +8,9 @@ import { YoutubeProps } from "./types"
 
 const Youtube = ({
     src,
-    width,
+    width = "100%",
     height,
-    aspectRatio,
+    aspectRatio = "16/9",
     ...props
 }: YoutubeProps) => (
     <Styles.StyledYoutube

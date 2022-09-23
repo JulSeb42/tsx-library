@@ -13,6 +13,7 @@ import {
 const tableStyle = {
     bordered: "bordered",
     stripped: "stripped",
+    "border-bottom": "border-bottom",
 } as const
 
 export type TableStyleTypes = keyof typeof tableStyle
@@ -41,7 +42,7 @@ interface BaseProps extends React.HTMLAttributes<HTMLTableElement> {
 }
 
 interface Possible1 extends BaseProps {
-    variant?: "bordered"
+    variant?: "bordered" | "border-bottom"
     borderColor?: AllColorsTypes
     headerBorderColor?: AllColorsTypes
     backgroundEven?: never

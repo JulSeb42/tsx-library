@@ -15,6 +15,7 @@ const P = ({
     customFontSize,
     children,
     as,
+    fontWeight,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLParagraphElement>) => (
     <StyledP
@@ -25,6 +26,7 @@ const P = ({
         $fontSize={fontSize}
         $customFontSize={customFontSize}
         as={as}
+        $fontWeight={fontWeight}
         {...props}
     >
         {children}

@@ -51,6 +51,7 @@ import OptionsMarkdown from "./utils/options-markdown"
 import PageLoading from "./components/PageLoading"
 import { Pagination, PaginationButton } from "./components/Pagination"
 import Paginator from "./components/Paginator"
+import Placeholder from "./components/Placeholder"
 import ProgressBar from "./components/ProgressBar"
 import ProgressCircle from "./components/ProgressCircle"
 import Rating from "./components/Rating"
@@ -147,6 +148,7 @@ export {
     Pagination,
     PaginationButton,
     Paginator,
+    Placeholder,
     ProgressBar,
     ProgressCircle,
     Rating,

@@ -15,6 +15,8 @@ const Dl = ({
     customFontSize,
     children,
     as,
+    fontWeightDt,
+    fontWeightDd,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLDListElement>) => (
     <StyledDl
@@ -25,6 +27,8 @@ const Dl = ({
         $fontSize={fontSize}
         $customFontSize={customFontSize}
         as={as}
+        $fontWeightDt={fontWeightDt}
+        $fontWeightDd={fontWeightDd}
         {...props}
     >
         {children}

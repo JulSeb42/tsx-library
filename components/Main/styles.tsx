@@ -40,8 +40,8 @@ const StyledMain = styled.main<{
     ${({ $justifyContent, $justifyItems, $alignContent, $alignItems, $gap }) =>
         Mixins.Grid({
             $alignContent: $alignContent || "start",
-            $justifyItems: $justifyItems || "start",
-            $justifyContent: $justifyContent || "start",
+            $justifyItems: $justifyItems || "stretch",
+            $justifyContent: $justifyContent || "stretch",
             $alignItems: $alignItems || "start",
             $gap,
             $padding: `${Spacers.XXL} 0`,

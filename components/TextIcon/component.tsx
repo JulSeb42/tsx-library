@@ -17,6 +17,7 @@ const TextIcon = ({
     lineHeight,
     display,
     gap = "xxs",
+    fontWeight,
     ...props
 }: TextIconProps) => {
     return (
@@ -58,8 +59,8 @@ const TextIcon = ({
                     }
                 />
             </Styles.IconContainer>
-
-            <Text tag={tag} color={color} {...props}>
+            
+            <Text tag={tag} fontWeight={fontWeight} color={color} {...props}>
                 {children}
             </Text>
         </Styles.StyledTextIcon>

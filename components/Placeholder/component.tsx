@@ -10,8 +10,8 @@ import { PlaceholderProps } from "./types"
 const Placeholder = forwardRef(
     (
         {
-            width = "100px",
-            height = "100px",
+            width = 100,
+            height = 100,
             aspectRatio,
             background = "gray-200",
             shadow,
@@ -19,6 +19,9 @@ const Placeholder = forwardRef(
             children,
             textColor,
             as,
+            fontSize,
+            customFontSize,
+            fontWeight,
             ...props
         }: PlaceholderProps,
         ref?: React.ForwardedRef<HTMLDivElement | HTMLParagraphElement>
@@ -33,6 +36,9 @@ const Placeholder = forwardRef(
             $background={background}
             $shadow={shadow}
             $borderRadius={borderRadius}
+            $fontSize={fontSize}
+            $customFontSize={customFontSize}
+            $fontWeight={fontWeight}
             {...props}
         >
             {children}

@@ -11,9 +11,16 @@ const Strong = ({
     linkColor = "primary",
     children,
     as,
+    fontWeight,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLParagraphElement>) => (
-    <StyledStrong $color={color} $linkColor={linkColor} as={as} {...props}>
+    <StyledStrong
+        $color={color}
+        $linkColor={linkColor}
+        as={as}
+        $fontWeight={fontWeight}
+        {...props}
+    >
         {children}
     </StyledStrong>
 )

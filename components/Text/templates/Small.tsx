@@ -15,6 +15,7 @@ const Small = ({
     customFontSize,
     children,
     as,
+    fontWeight,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLParagraphElement>) => (
     <StyledSmall
@@ -25,6 +26,7 @@ const Small = ({
         $fontSize={fontSize}
         $customFontSize={customFontSize}
         as={as}
+        $fontWeight={fontWeight}
         {...props}
     >
         {children}

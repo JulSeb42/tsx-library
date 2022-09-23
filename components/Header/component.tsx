@@ -21,6 +21,7 @@ const Header = ({
     navDesktopVariant = "right",
     burgerPosition = "right",
     search,
+    shadow,
     ...props
 }: HeaderProps) => {
     const [isOpen, setIsOpen] = useState(false)
@@ -108,6 +109,7 @@ const Header = ({
             ref={navMobileVariant === "top" && isMobile ? el : undefined}
             $burgerPosition={burgerPosition}
             $navVariant={navMobileVariant}
+            $shadow={shadow}
             {...props}
         >
             {burgerPosition === "left" && burgerFunction()}

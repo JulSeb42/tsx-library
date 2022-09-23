@@ -2,7 +2,7 @@
 
 import React from "react"
 
-import { ColorsHoverTypes, AllColorsTypes } from "../../utils/common-types"
+import { ColorsHoverTypes, AllColorsTypes, ShadowsTypes } from "../../utils/common-types"
 import { InputBackgroundTypes, InputsVariantsTypes } from "../Input/types"
 
 /*==================== List possibilities ====================*/
@@ -57,6 +57,7 @@ interface BaseProps extends React.HTMLAttributes<HTMLDivElement> {
         iconSize?: number
         variant?: InputsVariantsTypes
     }
+    shadow?: ShadowsTypes
 }
 
 interface Possible1 extends BaseProps {

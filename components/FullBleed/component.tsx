@@ -11,6 +11,8 @@ const FullBleed = ({
     height,
     aspectRatio,
     as,
+    paddingLeftRight,
+    paddingTopBottom,
     ...props
 }: FullBleedProps) => {
     return (
@@ -22,6 +24,8 @@ const FullBleed = ({
             $paddingBottom={typeof padding === "object" ? padding.bottom : 0}
             $height={height}
             $aspectRatio={aspectRatio}
+            $paddingLeftRight={paddingLeftRight}
+            $paddingTopBottom={paddingTopBottom}
             as={as}
             {...props}
         >

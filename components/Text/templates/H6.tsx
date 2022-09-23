@@ -15,6 +15,7 @@ const H6 = ({
     customFontSize,
     children,
     as,
+    fontWeight,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLHeadingElement>) => (
     <StyledH6
@@ -25,6 +26,7 @@ const H6 = ({
         $fontSize={fontSize}
         $customFontSize={customFontSize}
         as={as}
+        $fontWeight={fontWeight}
         {...props}
     >
         {children}

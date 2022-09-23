@@ -5,13 +5,17 @@ import { stringifyPx } from "ts-utils-julseb"
 
 import Mixins from "../../Mixins"
 import setDefaultTheme from "../../utils/setDefaultTheme"
+import { FontSize, FontWeight } from "../Text/styles"
 
 import {
     AllColorsTypes,
     RadiusesTypes,
     ShadowsTypes,
     OverlayTypes,
+    FontSizeTypes,
+    CustomFontSizeTypes,
 } from "../../utils/common-types"
+import { WeightTypes } from "../Text/types"
 
 const StyledPlaceholder = styled.div<{
     $width?: string | number
@@ -20,6 +24,9 @@ const StyledPlaceholder = styled.div<{
     $background?: AllColorsTypes | OverlayTypes
     $shadow?: ShadowsTypes
     $borderRadius?: RadiusesTypes | number
+    $fontSize?: FontSizeTypes
+    $customFontSize?: CustomFontSizeTypes
+    $fontWeight?: WeightTypes
 }>`
     ${Mixins.Flexbox({
         $alignItems: "center",
@@ -40,6 +47,14 @@ const StyledPlaceholder = styled.div<{
             : theme.AllColors({ $color: $background })};
     ${Mixins.Shadow};
     ${Mixins.BorderRadius};
+    ${({ $fontSize, $customFontSize }) =>
+        FontSize({
+            $fontSize: $fontSize,
+            $customFontSize: $customFontSize,
+            $defaultSize: "body",
+        })};
+    ${({ $fontWeight }) =>
+        FontWeight({ $defaultWeight: "regular", $fontWeight: $fontWeight })};
 `
 
 setDefaultTheme([StyledPlaceholder])

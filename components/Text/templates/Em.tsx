@@ -11,9 +11,16 @@ const Em = ({
     linkColor = "primary",
     children,
     as,
+    fontWeight,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLParagraphElement>) => (
-    <StyledEm $color={color} $linkColor={linkColor} as={as} {...props}>
+    <StyledEm
+        $color={color}
+        $linkColor={linkColor}
+        as={as}
+        $fontWeight={fontWeight}
+        {...props}
+    >
         {children}
     </StyledEm>
 )

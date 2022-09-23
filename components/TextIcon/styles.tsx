@@ -8,7 +8,7 @@ import setDefaultTheme from "../../utils/setDefaultTheme"
 import { SpacersTypes } from "../../utils/common-types"
 import { PossibleTextIconTags } from "./types"
 
-const StyledTextIcon = styled.div<{ $gap?: SpacersTypes }>`
+const StyledTextIcon = styled.div<{ $gap?: SpacersTypes | number }>`
     ${({ $gap }) =>
         Mixins.Flexbox({
             $alignItems: "flex-start",

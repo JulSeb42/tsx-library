@@ -12,10 +12,9 @@ const StyledYoutube = styled.iframe<{
     frameborder?: string
     allowfullscreen?: boolean
 }>`
-    width: ${({ $width }) => ($width ? stringifyPx($width) : "100%")};
+    width: ${({ $width }) => stringifyPx($width)};
     height: ${({ $height }) => $height};
-    aspect-ratio: ${({ $aspectRatio, $height }) =>
-        $aspectRatio ? $aspectRatio : !$height && !$aspectRatio ? "16/9" : ""};
+    aspect-ratio: ${({ $aspectRatio, $height }) => !$height && $aspectRatio};
 `
 
 setDefaultTheme([StyledYoutube])

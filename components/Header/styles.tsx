@@ -17,7 +17,7 @@ import Image from "../Image"
 import Burger from "../Burger"
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { ColorsHoverTypes, AllColorsTypes } from "../../utils/common-types"
+import { ColorsHoverTypes, AllColorsTypes, ShadowsTypes } from "../../utils/common-types"
 
 import {
     PositionsTypes,
@@ -78,6 +78,7 @@ const StyledHeader = styled.header<{
     $burgerPosition?: "left" | "right"
     $navVariant?: NavMobileVariantsTypes
     ref?: any
+    $shadow?: ShadowsTypes
 }>`
     position: ${({ $position }) => $position};
     z-index: 999;
@@ -92,6 +93,7 @@ const StyledHeader = styled.header<{
         theme.AllColors({
             $color: $backgroundColor,
         })};
+    ${Mixins.Shadow};
 
     @media ${Breakpoints.Mobile} {
         background-color: ${({

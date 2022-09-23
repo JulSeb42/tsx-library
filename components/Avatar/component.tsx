@@ -9,7 +9,10 @@ import * as Styles from "./styles"
 import { AvatarProps } from "./types"
 
 const Avatar = ({
-    content,
+    img,
+    alt,
+    letter,
+    icon,
     color = "primary",
     contentColor,
     size = 48,
@@ -35,18 +38,18 @@ const Avatar = ({
             }
             {...props}
         >
-            {content.img ? (
+            {img ? (
                 <Image
-                    src={content.img.src}
-                    alt={content.img.alt || "Avatar"}
+                    src={img}
+                    alt={alt || "Avatar"}
                     width="100%"
                     height="100%"
                     fit="cover"
                 />
-            ) : content.icon ? (
-                <Icon src={content.icon} size={size * 0.7} />
+            ) : icon ? (
+                <Icon src={icon} size={size * 0.7} />
             ) : (
-                content.letter
+                letter
             )}
         </Styles.StyledAvatar>
     )
@@ -61,7 +64,7 @@ const Avatar = ({
                 }
                 $length={
                     typeof badge === "object" && badge.content
-                        ? badge.content.toString().length
+                        ? badge.toString().length
                         : typeof badge === "number"
                         ? badge.toString().length
                         : 0

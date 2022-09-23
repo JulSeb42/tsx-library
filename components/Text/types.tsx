@@ -31,6 +31,14 @@ const tags = {
 
 export type TagTypes = keyof typeof tags
 
+const weights = {
+    regular: "regular",
+    bold: "bold",
+    black: "black",
+} as const
+
+export type WeightTypes = keyof typeof weights
+
 /*==================== Component Types ====================*/
 
 interface BaseProps extends React.HTMLAttributes<HTMLElement> {
@@ -46,6 +54,9 @@ interface BaseProps extends React.HTMLAttributes<HTMLElement> {
 interface Possible1 extends BaseProps {
     tag?: "h1" | "h2" | "h3" | "h4" | "h5"
     display?: boolean
+    fontWeight?: WeightTypes | number
+    fontWeightDt?: never
+    fontWeightDd?: never
 }
 
 interface Possible2 extends BaseProps {
@@ -60,6 +71,9 @@ interface Possible2 extends BaseProps {
         | "ol"
         | "dl"
     display?: never
+    fontWeight?: WeightTypes | number
+    fontWeightDt?: WeightTypes | number
+    fontWeightDd?: WeightTypes | number
 }
 
 export type AllProps = Possible1 | Possible2

@@ -12,7 +12,7 @@ const Video = ({
     height = "auto",
     fit,
     aspectRatio,
-    emptyText,
+    emptyText = "Your browser doesn't support the video tag.",
     autoPlay,
     muted,
     controls,
@@ -30,7 +30,7 @@ const Video = ({
     >
         <source src={src} type="video/mp4" />
 
-        {emptyText || "Your browser doesn't support the video tag."}
+        {emptyText}
     </Vid>
 )
 

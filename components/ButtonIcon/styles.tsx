@@ -49,33 +49,7 @@ const StyledButtonIcon = styled.button<{
             ? theme.Background
             : $variant === "transparent" && theme.ColorsHoverDefault};
     ${Mixins.Shadow};
-    position: ${({ $position }) => $position};
-    z-index: ${({ $zIndex }) => $zIndex};
-
-    ${({ $left }) =>
-        $left &&
-        css`
-            left: ${Mixins.Spacers({ $spacer: $left })};
-        `}
-
-    ${({ $top }) =>
-        $top &&
-        css`
-            top: ${Mixins.Spacers({ $spacer: $top })};
-        `}
-
-    ${({ $right }) =>
-        $right &&
-        css`
-            right: ${Mixins.Spacers({ $spacer: $right })};
-        `}
-
-    ${({ $bottom }) =>
-        $bottom &&
-        css`
-            bottom: ${Mixins.Spacers({ $spacer: $bottom })};
-        `}
-
+    
     @media ${Breakpoints.Hover} {
         &:hover {
             background-color: ${({ $variant, $hoverBackground, theme }) =>
@@ -103,6 +77,33 @@ const StyledButtonIcon = styled.button<{
             $variant === "plain" && theme.Gray100};
         color: ${({ theme }) => theme.Gray500};
     }
+
+    position: ${({ $position }) => $position};
+    z-index: ${({ $zIndex }) => $zIndex};
+
+    ${({ $left }) =>
+        $left &&
+        css`
+            left: ${Mixins.Spacers({ $spacer: $left })};
+        `}
+
+    ${({ $top }) =>
+        $top &&
+        css`
+            top: ${Mixins.Spacers({ $spacer: $top })};
+        `}
+
+    ${({ $right }) =>
+        $right &&
+        css`
+            right: ${Mixins.Spacers({ $spacer: $right })};
+        `}
+
+    ${({ $bottom }) =>
+        $bottom &&
+        css`
+            bottom: ${Mixins.Spacers({ $spacer: $bottom })};
+        `}
 `
 
 setDefaultTheme([StyledButtonIcon])

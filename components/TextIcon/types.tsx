@@ -1,7 +1,7 @@
 /*=============================================== TextIcon types ===============================================*/
 
 import { AllColorsTypes, SpacersTypes } from "../../utils/common-types"
-import { AllProps as TextProps } from "../Text/types"
+import { AllProps as TextProps, WeightTypes } from "../Text/types"
 
 /*==================== List possibilities ====================*/
 
@@ -26,5 +26,8 @@ export type TextIconProps = TextProps & {
     iconColor?: AllColorsTypes
     children: string
     tag?: PossibleTextIconTags
-    gap?: SpacersTypes
+    gap?: SpacersTypes | number
+    fontWeight?: WeightTypes | number
+    fontWeightDt?: never
+    fontWeightDd?: never
 }

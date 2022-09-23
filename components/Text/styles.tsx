@@ -7,11 +7,11 @@ import {
     FontSizes,
     LineHeights,
     FontFamilies,
-    FontWeights,
     Radiuses,
     Spacers,
     Transitions,
     Breakpoints,
+    FontWeights,
 } from "../../Variables"
 import Mixins from "../../Mixins"
 import setDefaultTheme from "../../utils/setDefaultTheme"
@@ -23,6 +23,7 @@ import {
     FontSizeTypes,
     CustomFontSizeTypes,
 } from "../../utils/common-types"
+import { WeightTypes } from "./types"
 
 const FontSize = ({
     $fontSize,
@@ -152,6 +153,28 @@ const FontSize = ({
     }
 `
 
+const FontWeight = ({
+    $fontWeight,
+    $defaultWeight,
+}: {
+    $fontWeight?: WeightTypes | number
+    $defaultWeight: WeightTypes | number
+}) => css`
+    font-weight: ${$fontWeight === "black"
+        ? FontWeights.Black
+        : $fontWeight === "bold"
+        ? FontWeights.Bold
+        : $fontWeight === "regular"
+        ? FontWeights.Regular
+        : $defaultWeight === "black"
+        ? FontWeights.Black
+        : $defaultWeight === "bold"
+        ? FontWeights.Bold
+        : $defaultWeight === "regular"
+        ? FontWeights.Regular
+        : ""};
+`
+
 const FontCommon = ({
     $textAlign,
     $lineHeight = LineHeights.Regular,
@@ -192,6 +215,7 @@ const StyledH1 = styled.h1<{
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
     $display?: boolean
+    $fontWeight?: WeightTypes | number
 }>`
     ${({ $display, $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
         FontCommon({
@@ -201,7 +225,8 @@ const StyledH1 = styled.h1<{
             $fontSize,
             $customFontSize,
         })};
-    font-weight: ${FontWeights.Black};
+    ${({ $fontWeight }) =>
+        FontWeight({ $defaultWeight: "black", $fontWeight: $fontWeight })};
     color: ${({ theme, $color }) =>
         theme.AllColors({
             $color: $color,
@@ -243,6 +268,7 @@ const StyledH2 = styled.h2<{
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
     $display?: boolean
+    $fontWeight?: WeightTypes | number
 }>`
     ${({ $display, $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
         FontCommon({
@@ -252,7 +278,8 @@ const StyledH2 = styled.h2<{
             $fontSize,
             $customFontSize,
         })};
-    font-weight: ${FontWeights.Black};
+    ${({ $fontWeight }) =>
+        FontWeight({ $defaultWeight: "black", $fontWeight: $fontWeight })};
     color: ${({ theme, $color }) =>
         theme.AllColors({
             $color: $color,
@@ -294,6 +321,7 @@ const StyledH3 = styled.h3<{
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
     $display?: boolean
+    $fontWeight?: WeightTypes | number
 }>`
     ${({ $display, $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
         FontCommon({
@@ -303,7 +331,8 @@ const StyledH3 = styled.h3<{
             $fontSize,
             $customFontSize,
         })};
-    font-weight: ${FontWeights.Black};
+    ${({ $fontWeight }) =>
+        FontWeight({ $defaultWeight: "black", $fontWeight: $fontWeight })};
     color: ${({ theme, $color }) =>
         theme.AllColors({
             $color: $color,
@@ -345,6 +374,7 @@ const StyledH4 = styled.h4<{
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
     $display?: boolean
+    $fontWeight?: WeightTypes | number
 }>`
     ${({ $display, $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
         FontCommon({
@@ -354,7 +384,8 @@ const StyledH4 = styled.h4<{
             $fontSize,
             $customFontSize,
         })};
-    font-weight: ${FontWeights.Black};
+    ${({ $fontWeight }) =>
+        FontWeight({ $defaultWeight: "black", $fontWeight: $fontWeight })};
     color: ${({ theme, $color }) =>
         theme.AllColors({
             $color: $color,
@@ -396,6 +427,7 @@ const StyledH5 = styled.h5<{
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
     $display?: boolean
+    $fontWeight?: WeightTypes | number
 }>`
     ${({ $display, $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
         FontCommon({
@@ -405,7 +437,8 @@ const StyledH5 = styled.h5<{
             $fontSize,
             $customFontSize,
         })};
-    font-weight: ${FontWeights.Black};
+    ${({ $fontWeight }) =>
+        FontWeight({ $defaultWeight: "black", $fontWeight: $fontWeight })};
     color: ${({ theme, $color }) =>
         theme.AllColors({
             $color: $color,
@@ -446,6 +479,7 @@ const StyledH6 = styled.h6<{
     $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
+    $fontWeight?: WeightTypes | number
 }>`
     ${({ $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
         FontCommon({
@@ -455,7 +489,8 @@ const StyledH6 = styled.h6<{
             $fontSize,
             $customFontSize,
         })};
-    font-weight: ${FontWeights.Black};
+    ${({ $fontWeight }) =>
+        FontWeight({ $defaultWeight: "black", $fontWeight: $fontWeight })};
     color: ${({ theme, $color }) =>
         theme.AllColors({
             $color: $color,
@@ -496,6 +531,7 @@ const StyledP = styled.p<{
     $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
+    $fontWeight?: WeightTypes | number
 }>`
     ${({ $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
         FontCommon({
@@ -509,6 +545,8 @@ const StyledP = styled.p<{
         theme.AllColors({
             $color: $color,
         })};
+    ${({ $fontWeight }) =>
+        FontWeight({ $defaultWeight: "regular", $fontWeight: $fontWeight })};
 
     & > * {
         color: ${({ theme, $color }) =>
@@ -540,9 +578,11 @@ const StyledP = styled.p<{
 const StyledStrong = styled.strong<{
     $color?: AllColorsTypes
     $linkColor?: ColorsHoverTypes
+    $fontWeight?: WeightTypes | number
 }>`
     ${FontCommon({})};
-    font-weight: ${FontWeights.Black};
+    ${({ $fontWeight }) =>
+        FontWeight({ $defaultWeight: "black", $fontWeight: $fontWeight })};
     color: ${({ theme, $color }) =>
         theme.AllColors({
             $color: $color,
@@ -578,6 +618,7 @@ const StyledStrong = styled.strong<{
 const StyledEm = styled.em<{
     $color?: AllColorsTypes
     $linkColor?: ColorsHoverTypes
+    $fontWeight?: WeightTypes | number
 }>`
     ${FontCommon({})};
     font-style: italic;
@@ -585,6 +626,8 @@ const StyledEm = styled.em<{
         theme.AllColors({
             $color: $color,
         })};
+    ${({ $fontWeight }) =>
+        FontWeight({ $defaultWeight: "regular", $fontWeight: $fontWeight })};
 
     & > * {
         color: ${({ theme, $color }) =>
@@ -621,6 +664,7 @@ const StyledSmall = styled.small<{
     $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
+    $fontWeight?: WeightTypes | number
 }>`
     ${({ $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
         FontCommon({
@@ -634,6 +678,8 @@ const StyledSmall = styled.small<{
         theme.AllColors({
             $color: $color,
         })};
+    ${({ $fontWeight }) =>
+        FontWeight({ $defaultWeight: "regular", $fontWeight: $fontWeight })};
 
     & > * {
         color: ${({ theme, $color }) =>
@@ -670,6 +716,7 @@ const StyledBlockquote = styled.blockquote<{
     $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
+    $fontWeight?: WeightTypes | number
 }>`
     ${({ $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
         FontCommon({
@@ -683,6 +730,9 @@ const StyledBlockquote = styled.blockquote<{
         theme.AllColors({
             $color: $color,
         })};
+    ${({ $fontWeight }) =>
+        FontWeight({ $defaultWeight: "regular", $fontWeight: $fontWeight })};
+    font-style: italic;
 
     & > * {
         color: ${({ theme, $color }) =>
@@ -719,6 +769,7 @@ const StyledUl = styled.ul<{
     $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
+    $fontWeight?: WeightTypes | number
 }>`
     padding: 0;
     margin: 0;
@@ -734,6 +785,8 @@ const StyledUl = styled.ul<{
             $fontSize,
             $customFontSize,
         })};
+    ${({ $fontWeight }) =>
+        FontWeight({ $defaultWeight: "regular", $fontWeight: $fontWeight })};
 
     li {
         padding-inline-start: ${Spacers.XXS};
@@ -778,6 +831,7 @@ const StyledOl = styled.ol<{
     $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
+    $fontWeight?: WeightTypes | number
 }>`
     ${({ $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
         FontCommon({
@@ -793,6 +847,8 @@ const StyledOl = styled.ol<{
     ${Mixins.Grid({
         $gap: "xxs",
     })};
+    ${({ $fontWeight }) =>
+        FontWeight({ $defaultWeight: "regular", $fontWeight: $fontWeight })};
 
     li {
         padding-inline-start: ${Spacers.XXS};
@@ -837,6 +893,8 @@ const StyledDl = styled.dl<{
     $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
+    $fontWeightDt?: WeightTypes | number
+    $fontWeightDd?: WeightTypes | number
 }>`
     ${({ $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
         FontCommon({
@@ -848,7 +906,11 @@ const StyledDl = styled.dl<{
         })};
 
     dt {
-        font-weight: ${FontWeights.Black};
+        ${({ $fontWeightDt }) =>
+            FontWeight({
+                $defaultWeight: "black",
+                $fontWeight: $fontWeightDt,
+            })};
         color: ${({ theme, $color }) =>
             theme.AllColors({
                 $color: $color,
@@ -882,6 +944,11 @@ const StyledDl = styled.dl<{
     }
 
     dd {
+        ${({ $fontWeightDd }) =>
+            FontWeight({
+                $defaultWeight: "regular",
+                $fontWeight: $fontWeightDd,
+            })};
         padding-inline-start: ${Spacers.M};
         color: ${({ theme, $color }) =>
             theme.AllColors({
@@ -938,7 +1005,9 @@ setDefaultTheme([
 ])
 
 export {
+    FontSize,
     FontCommon,
+    FontWeight,
     StyledH1,
     StyledH2,
     StyledH3,

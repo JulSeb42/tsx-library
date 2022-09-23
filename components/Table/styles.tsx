@@ -152,8 +152,8 @@ const StyledTable = styled.table<{
                               : theme.Gray200};
                   }
               `
-            : $tableStyle === "stripped" &&
-              css`
+            : $tableStyle === "stripped"
+            ? css`
                   tbody tr:nth-child(odd) {
                       background-color: ${$backgroundOdd
                           ? theme.AllColors({
@@ -176,6 +176,15 @@ const StyledTable = styled.table<{
                       color: ${$textColorEven
                           ? theme.AllColors({ $color: $textColorEven })
                           : theme.Font};
+                  }
+              `
+            : $tableStyle === "border-bottom" &&
+              css`
+                  tbody tr {
+                      border-bottom: 1px solid
+                          ${$borderColor
+                              ? theme.AllColors({ $color: $borderColor })
+                              : theme.Gray200};
                   }
               `}
 `

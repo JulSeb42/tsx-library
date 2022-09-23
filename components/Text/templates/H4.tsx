@@ -16,6 +16,7 @@ const H4 = ({
     display,
     children,
     as,
+    fontWeight,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLHeadingElement>) => (
     <StyledH4
@@ -27,6 +28,7 @@ const H4 = ({
         $customFontSize={customFontSize}
         $display={display}
         as={as}
+        $fontWeight={fontWeight}
         {...props}
     >
         {children}

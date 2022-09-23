@@ -4,11 +4,6 @@ import React from "react"
 
 import { AllColorsTypes } from "../../utils/common-types"
 
-type AvatarImg = {
-    src: string
-    alt?: string
-}
-
 interface BaseProps extends React.HTMLAttributes<HTMLSpanElement> {
     size?: number
     color?: AllColorsTypes
@@ -33,27 +28,24 @@ interface BaseProps extends React.HTMLAttributes<HTMLSpanElement> {
 }
 
 interface Possible1 extends BaseProps {
-    content: {
-        img: AvatarImg
-        letter?: never
-        icon?: never
-    }
+    img: string
+    alt?: string
+    letter?: never
+    icon?: never
 }
 
 interface Possible2 extends BaseProps {
-    content: {
-        img?: never
-        letter: string
-        icon?: never
-    }
+    img?: never
+    alt?: never
+    letter: string
+    icon?: never
 }
 
 interface Possible3 extends BaseProps {
-    content: {
-        img?: never
-        letter?: never
-        icon: string
-    }
+    img?: never
+    alt?: never
+    letter?: never
+    icon: string
 }
 
 export type AvatarProps = Possible1 | Possible2 | Possible3

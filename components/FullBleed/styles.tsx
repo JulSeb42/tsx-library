@@ -14,19 +14,21 @@ const StyledFullBleed = styled.div<{
     $paddingTop?: SpacersTypes | number
     $paddingRight?: SpacersTypes | number
     $paddingBottom?: SpacersTypes | number
+    $paddingLeftRight?: SpacersTypes | number
+    $paddingTopBottom?: SpacersTypes | number
     $height?: string | number
     $aspectRatio?: string
 }>`
     grid-column: 1/4 !important;
     padding: ${({ $padding }) => Mixins.Spacers({ $spacer: $padding })};
-    padding-left: ${({ $paddingLeft }) =>
-        Mixins.Spacers({ $spacer: $paddingLeft })};
-    padding-top: ${({ $paddingTop }) =>
-        Mixins.Spacers({ $spacer: $paddingTop })};
-    padding-right: ${({ $paddingRight }) =>
-        Mixins.Spacers({ $spacer: $paddingRight })};
-    padding-bottom: ${({ $paddingBottom }) =>
-        Mixins.Spacers({ $spacer: $paddingBottom })};
+    padding-left: ${({ $paddingLeft, $paddingLeftRight }) =>
+        Mixins.Spacers({ $spacer: $paddingLeft || $paddingLeftRight })};
+    padding-top: ${({ $paddingTop, $paddingTopBottom }) =>
+        Mixins.Spacers({ $spacer: $paddingTop || $paddingTopBottom })};
+    padding-right: ${({ $paddingRight, $paddingLeftRight }) =>
+        Mixins.Spacers({ $spacer: $paddingRight || $paddingLeftRight })};
+    padding-bottom: ${({ $paddingBottom, $paddingTopBottom }) =>
+        Mixins.Spacers({ $spacer: $paddingBottom || $paddingTopBottom })};
     width: 100%;
     aspect-ratio: ${({ $aspectRatio }) => $aspectRatio};
 

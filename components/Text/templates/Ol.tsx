@@ -15,6 +15,7 @@ const Ol = ({
     customFontSize,
     children,
     as,
+    fontWeight,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLOListElement>) => (
     <StyledOl
@@ -25,6 +26,7 @@ const Ol = ({
         $fontSize={fontSize}
         $customFontSize={customFontSize}
         as={as}
+        $fontWeight={fontWeight}
         {...props}
     >
         {children}

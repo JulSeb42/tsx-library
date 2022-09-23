@@ -15,6 +15,7 @@ const Ul = ({
     customFontSize,
     children,
     as,
+    fontWeight,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLUListElement>) => (
     <StyledUl
@@ -25,6 +26,7 @@ const Ul = ({
         $fontSize={fontSize}
         $customFontSize={customFontSize}
         as={as}
+        $fontWeight={fontWeight}
         {...props}
     >
         {children}

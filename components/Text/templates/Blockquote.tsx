@@ -15,6 +15,7 @@ const Blockquote = ({
     customFontSize,
     children,
     as,
+    fontWeight,
     ...props
 }: AllProps & React.HTMLAttributes<HTMLQuoteElement>) => (
     <StyledBlockquote
@@ -25,6 +26,7 @@ const Blockquote = ({
         $fontSize={fontSize}
         $customFontSize={customFontSize}
         as={as}
+        $fontWeight={fontWeight}
         {...props}
     >
         {children}
