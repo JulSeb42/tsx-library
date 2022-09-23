@@ -9,7 +9,7 @@ const VariantOne = ({
     color = "primary",
     size = 48,
     borderSize = 8,
-    speed = 1000,
+    speed = 1200,
     ...props
 }: LoaderProps) => (
     <Styles.StyledLoaderOne

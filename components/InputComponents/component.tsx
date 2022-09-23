@@ -54,10 +54,14 @@ const ValidationComponent = ({ validation }: ValidationComponentProps) =>
         ) : (
             <CheckCircleIcon size={16} color="success" />
         )
-    ) : validation.iconNotPassed ? (
-        <Icon src={validation.iconNotPassed} size={16} color="danger" />
+    ) : validation.status === "not-passed" ? (
+        validation.iconNotPassed ? (
+            <Icon src={validation.iconNotPassed} size={16} color="danger" />
+        ) : (
+            <CloseCircleIcon size={16} color="danger" />
+        )
     ) : (
-        <CloseCircleIcon size={16} color="danger" />
+        <></>
     )
 
 export { RightContainer, InputBaseMixin, IconComponent, ValidationComponent }

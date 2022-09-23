@@ -17,6 +17,7 @@ export interface InputImageProps
     validation?: ValidationTypes
     width?: number | string
     height?: number | string
+    iconSize?: number
     value?: never
     accentColor?: ColorsHoverTypes
     children?: never

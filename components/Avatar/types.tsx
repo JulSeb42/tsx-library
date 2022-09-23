@@ -14,7 +14,6 @@ interface BaseProps extends React.HTMLAttributes<HTMLSpanElement> {
         | {
               width?: number
               color?: AllColorsTypes
-              outline?: number
           }
     badge?:
         | boolean

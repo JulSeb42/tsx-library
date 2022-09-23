@@ -18,6 +18,7 @@ const InputImage = forwardRef(
             validation,
             width = 64,
             height = 64,
+            iconSize = 48,
             img,
             icons,
             label,
@@ -43,11 +44,11 @@ const InputImage = forwardRef(
                                 ? accentColor
                                 : "primary"
                         }
-                        size={48}
+                        size={iconSize}
                     />
                 ) : (
                     <ImageIcon
-                        size={48}
+                        size={iconSize}
                         color={
                             validation === "not-passed"
                                 ? "danger"
@@ -67,7 +68,7 @@ const InputImage = forwardRef(
                 {icons?.hover ? (
                     <Icon
                         src={icons.hover}
-                        size={32}
+                        size={iconSize - 8}
                         color={
                             validation === "not-passed"
                                 ? "danger"
@@ -78,7 +79,7 @@ const InputImage = forwardRef(
                     />
                 ) : (
                     <EditIcon
-                        size={32}
+                        size={iconSize - 8}
                         color={
                             validation === "not-passed"
                                 ? "danger"

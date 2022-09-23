@@ -8,8 +8,8 @@ import { LoaderProps } from "../types"
 const VariantTwo = ({
     size = 48,
     color = "primary",
-    borderSize = 4,
-    speed = 1000,
+    borderSize = 8,
+    speed = 1200,
     ...props
 }: LoaderProps) => (
     <Styles.StyledLoaderTwo

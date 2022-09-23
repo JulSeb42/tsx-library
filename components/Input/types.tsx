@@ -126,7 +126,6 @@ interface BasePasswordProps
 
 interface PossiblePasswordProps1 extends BasePasswordProps {
     button?: {
-        color?: ColorsHoverTypes
         textShow?: string
         textHide?: string
         iconShow?: never
@@ -136,7 +135,6 @@ interface PossiblePasswordProps1 extends BasePasswordProps {
 
 interface PossiblePasswordProps2 extends BasePasswordProps {
     button?: {
-        color?: ColorsHoverTypes
         textShow?: never
         textHide?: never
         iconShow?: string

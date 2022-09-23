@@ -10,7 +10,7 @@ import { BadgeProps } from "./types"
 const Badge = ({
     content,
     color = "primary",
-    textColor,
+    contentColor,
     size = 16,
     padding,
     as,
@@ -26,7 +26,7 @@ const Badge = ({
         $color={color}
         $padding={padding}
         $size={size}
-        $textColor={textColor}
+        $textColor={contentColor}
         as={as}
         {...props}
     >

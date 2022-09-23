@@ -43,15 +43,17 @@ const StyledButtonIcon = styled.button<{
     background-color: ${({ $variant, theme }) =>
         $variant === "plain" ? theme.ColorsHoverDefault : "transparent"};
     color: ${({ $variant, $color, theme }) =>
-        $variant === "plain" && $color === "white"
-            ? theme.Primary500
-            : $variant === "plain" && $color !== "white"
-            ? theme.Background
-            : $variant === "transparent" && theme.ColorsHoverDefault};
+        $variant === "plain"
+            ? $color === "white"
+                ? theme.Primary500
+                : $color === "background"
+                ? theme.Font
+                : theme.Background
+            : theme.ColorsHoverDefault};
     ${Mixins.Shadow};
-    
+
     @media ${Breakpoints.Hover} {
-        &:hover {
+        &:not(:disabled):hover {
             background-color: ${({ $variant, $hoverBackground, theme }) =>
                 $variant === "plain"
                     ? theme.ColorsHoverHover
@@ -63,7 +65,7 @@ const StyledButtonIcon = styled.button<{
             ${({ $shadowHover }) => Mixins.Shadow({ $shadow: $shadowHover })};
         }
 
-        &:active {
+        &:not(:disabled):active {
             background-color: ${({ $variant, theme }) =>
                 $variant === "plain" && theme.ColorsHoverActive};
             color: ${({ $variant, theme }) =>

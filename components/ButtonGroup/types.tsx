@@ -9,5 +9,4 @@ export interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {
     variant?: "plain" | "transparent"
     color?: ColorsHoverTypes
     buttons: ButtonProps[]
-    borderColor?: ColorsHoverTypes
 }

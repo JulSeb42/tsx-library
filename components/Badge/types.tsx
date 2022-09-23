@@ -6,7 +6,7 @@ import { AllColorsTypes, SpacersTypes } from "../../utils/common-types"
 
 interface BaseProps extends React.HTMLAttributes<HTMLSpanElement> {
     color?: AllColorsTypes
-    textColor?: AllColorsTypes
+    contentColor?: AllColorsTypes
     size?: number
     as?: React.ElementType
 }
