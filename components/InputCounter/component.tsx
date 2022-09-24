@@ -48,7 +48,7 @@ const InputCounter = ({
         )
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const active = parseInt(e.target.value)
+        const active = parseFloat(e.target.value)
         setValue(min && active < min ? min : max && active > max ? max : active)
     }
 

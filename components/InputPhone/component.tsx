@@ -37,6 +37,8 @@ const InputPhone = forwardRef(
             listShadow,
             listDirection,
             variant,
+            textEmpty = "Your search did not return any result.",
+            searchIcon,
             ...props
         }: InputPhoneProps,
         ref?: React.ForwardedRef<HTMLInputElement>
@@ -74,14 +76,26 @@ const InputPhone = forwardRef(
             <>
                 {hasSearch && (
                     <Styles.SearchContainer>
-                        <Styles.StyledIconSearch
-                            size={16}
-                            color={
-                                validation?.status === "not-passed"
-                                    ? "danger"
-                                    : accentColor
-                            }
-                        />
+                        {searchIcon ? (
+                            <Icon
+                                src={searchIcon}
+                                size={16}
+                                color={
+                                    validation?.status === "not-passed"
+                                        ? "danger"
+                                        : accentColor
+                                }
+                            />
+                        ) : (
+                            <Styles.StyledIconSearch
+                                size={16}
+                                color={
+                                    validation?.status === "not-passed"
+                                        ? "danger"
+                                        : accentColor
+                                }
+                            />
+                        )}
 
                         <Styles.InputSearch
                             placeholder={searchPlaceholder}
@@ -94,25 +108,31 @@ const InputPhone = forwardRef(
                     </Styles.SearchContainer>
                 )}
 
-                {results.map(country => (
-                    <ListItem
-                        isActive={country === selectedCountry && true}
-                        onClick={() => selectCountry(country)}
-                        accentColor={accentColor}
-                        validation={validation?.status}
-                        backgroundColor={backgroundColor}
-                        key={uuid()}
-                        {...props}
-                    >
-                        <Styles.Flag
-                            src={country.flag}
-                            alt={`Flag ${country.name}`}
-                        />
-                        <span>
-                            ({country.dial_code}) {country.name}
-                        </span>
+                {results.length > 0 ? (
+                    results.map(country => (
+                        <ListItem
+                            isActive={country === selectedCountry && true}
+                            onClick={() => selectCountry(country)}
+                            accentColor={accentColor}
+                            validation={validation?.status}
+                            backgroundColor={backgroundColor}
+                            key={uuid()}
+                            {...props}
+                        >
+                            <Styles.Flag
+                                src={country.flag}
+                                alt={`Flag ${country.name}`}
+                            />
+                            <span>
+                                ({country.dial_code}) {country.name}
+                            </span>
+                        </ListItem>
+                    ))
+                ) : (
+                    <ListItem accentColor={accentColor} readOnly>
+                        {textEmpty}
                     </ListItem>
-                ))}
+                )}
             </>
         )
 

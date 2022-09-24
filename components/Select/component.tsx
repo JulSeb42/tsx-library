@@ -1,6 +1,6 @@
 /*=============================================== Select ===============================================*/
 
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import { uuid } from "../../utils/utils"
 
 import InputContainer from "../InputContainer"
@@ -13,8 +13,8 @@ import { SelectProps } from "./types"
 
 const Select = ({
     id,
-    isOpen,
-    setIsOpen,
+    // isOpen,
+    // setIsOpen,
     disabled,
     selected,
     setSelected,
@@ -31,6 +31,8 @@ const Select = ({
     inputVariant = "rounded",
     ...props
 }: SelectProps) => {
+    const [isOpen, setIsOpen] = useState(false)
+    
     const el = useRef<HTMLButtonElement>(null)
     const onClickOutside = () => setIsOpen(false)
     useClickOutside(el, onClickOutside)

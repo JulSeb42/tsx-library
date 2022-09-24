@@ -10,8 +10,6 @@ import { ListDirectionTypes } from "../ListInputs/types"
 interface BaseProps
     extends React.HTMLAttributes<HTMLDivElement>,
         InputContainerProps {
-    isOpen: boolean
-    setIsOpen: (isOpen: boolean) => void
     disabled?: boolean
     id: string
     children?: never

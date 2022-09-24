@@ -30,10 +30,12 @@ interface BaseProps
     selectedCountry: CountryType | undefined
     setSelectedCountry: (country: CountryType | undefined | any) => void
     hasSearch?: boolean
+    searchIcon?: string
     iconButton?: string
     searchPlaceholder?: string
     listDirection?: ListDirectionTypes
     variant?: InputsVariantsTypes
+    textEmpty?: string
 }
 
 interface PossibleList1 extends BaseProps {
