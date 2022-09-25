@@ -1,4 +1,4 @@
-/*=============================================== TimePicker types ===============================================*/
+/*=============================================== Timepicker types ===============================================*/
 
 import React from "react"
 
@@ -72,4 +72,4 @@ export type MultiTimepickerProps = PossibleList & {
     iconMax?: string
 }
 
-export type TimePickerProps = SingleTimepickerProps | MultiTimepickerProps
+export type TimepickerProps = SingleTimepickerProps | MultiTimepickerProps

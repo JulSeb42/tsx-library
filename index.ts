@@ -70,7 +70,7 @@ import Text from "./components/Text"
 import TextIcon from "./components/TextIcon"
 import { ThemeContext, ThemeProviderWrapper } from "./context/ThemeContext"
 import { ThemeProvider } from "styled-components"
-import TimePicker from "./components/TimePicker"
+import Timepicker from "./components/Timepicker"
 import Toast from "./components/Toast"
 import Tooltip from "./components/Tooltip"
 import * as Utils from "./utils/utils"
@@ -168,7 +168,7 @@ export {
     ThemeContext,
     ThemeProviderWrapper,
     ThemeProvider,
-    TimePicker,
+    Timepicker,
     Toast,
     Tooltip,
     Utils,

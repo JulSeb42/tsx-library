@@ -12,7 +12,7 @@ import { Chevron, ListInputs, ListItem } from "../../ListInputs"
 import * as Styles from "../styles"
 import { MultiTimepickerProps } from "../types"
 
-const MultiTimePicker = ({
+const MultiTimepicker = ({
     minTime = 0,
     maxTime = 24,
     step = 1,
@@ -134,7 +134,7 @@ const MultiTimePicker = ({
 
     return (
         <Flexbox gap="xs">
-            <Styles.StyledTimePicker
+            <Styles.StyledTimepicker
                 $isOpen={isMinOpen}
                 $disabled={disabled}
                 ref={elMin}
@@ -172,9 +172,9 @@ const MultiTimePicker = ({
                 </Styles.Selected>
 
                 {listMin()}
-            </Styles.StyledTimePicker>
+            </Styles.StyledTimepicker>
 
-            <Styles.StyledTimePicker
+            <Styles.StyledTimepicker
                 $isOpen={isMaxOpen}
                 $disabled={disabled}
                 ref={elMax}
@@ -212,9 +212,9 @@ const MultiTimePicker = ({
                 </Styles.Selected>
 
                 {listMax()}
-            </Styles.StyledTimePicker>
+            </Styles.StyledTimepicker>
         </Flexbox>
     )
 }
 
-export default MultiTimePicker
+export default MultiTimepicker

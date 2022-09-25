@@ -1,4 +1,4 @@
-/*=============================================== TimePicker styles ===============================================*/
+/*=============================================== Timepicker styles ===============================================*/
 
 import styled from "styled-components"
 
@@ -10,7 +10,7 @@ import { InputBaseMixin } from "../InputComponents"
 import { ValidationTypes, ColorsHoverTypes } from "../../utils/common-types"
 import { InputBackgroundTypes, InputsVariantsTypes } from "../Input/types"
 
-const StyledTimePicker = styled.div<{
+const StyledTimepicker = styled.div<{
     $isOpen?: boolean
     ref?: any
     $disabled?: boolean
@@ -56,6 +56,6 @@ const Selected = styled.div<{
 
 const StyledChevron = styled(ChevronDownIcon)<{ $isOpen?: boolean }>``
 
-setDefaultTheme([StyledTimePicker, Selected, StyledChevron])
+setDefaultTheme([StyledTimepicker, Selected, StyledChevron])
 
-export { StyledTimePicker, Selected, StyledChevron }
+export { StyledTimepicker, Selected, StyledChevron }

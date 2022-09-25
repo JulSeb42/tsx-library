@@ -98,7 +98,7 @@ const Calendar = ({
                 new Date(
                     currentYear,
                     currentMonth,
-                    parseInt(target.id.replace("day-", ""))
+                    parseFloat(target.id.replace("day-", ""))
                 )
             )
         }

@@ -11,7 +11,7 @@ import { Chevron, ListInputs, ListItem } from "../../ListInputs"
 import * as Styles from "../styles"
 import { SingleTimepickerProps } from "../types"
 
-const SingleTimePicker = ({
+const SingleTimepicker = ({
     selectedTime,
     setSelectedTime,
     minTime = 0,
@@ -75,7 +75,7 @@ const SingleTimePicker = ({
         )
 
     return (
-        <Styles.StyledTimePicker
+        <Styles.StyledTimepicker
             $isOpen={isOpen}
             onClick={() => !disabled && setIsOpen(!isOpen)}
             ref={el}
@@ -113,8 +113,8 @@ const SingleTimePicker = ({
             </Styles.Selected>
 
             {listInput()}
-        </Styles.StyledTimePicker>
+        </Styles.StyledTimepicker>
     )
 }
 
-export default SingleTimePicker
+export default SingleTimepicker

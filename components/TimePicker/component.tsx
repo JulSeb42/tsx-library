@@ -3,23 +3,23 @@
 import React from "react"
 
 import InputContainer from "../InputContainer"
-import SingleTimePicker from "./templates/Single"
-import MultiTimePicker from "./templates/Multi"
+import SingleTimepicker from "./templates/Single"
+import MultiTimepicker from "./templates/Multi"
 
-import { TimePickerProps } from "./types"
+import { TimepickerProps } from "./types"
 
 const renderComponents = (props: any, variant?: "single" | "multi") => {
     switch (variant) {
         case "single":
-            return <SingleTimePicker {...props} />
+            return <SingleTimepicker {...props} />
         case "multi":
-            return <MultiTimePicker {...props} />
+            return <MultiTimepicker {...props} />
         default:
-            return <SingleTimePicker {...props} />
+            return <SingleTimepicker {...props} />
     }
 }
 
-const TimePicker = ({
+const Timepicker = ({
     id,
     label,
     helper,
@@ -27,7 +27,7 @@ const TimePicker = ({
     accentColor,
     variant,
     ...props
-}: TimePickerProps) => {
+}: TimepickerProps) => {
     const rendered = () =>
         renderComponents(
             { id, label, helper, helperBottom, accentColor, ...props },
@@ -49,4 +49,4 @@ const TimePicker = ({
     )
 }
 
-export default TimePicker
+export default Timepicker
