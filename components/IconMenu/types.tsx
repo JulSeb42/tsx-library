@@ -34,7 +34,5 @@ export interface IconMenuProps extends React.HTMLAttributes<HTMLDivElement> {
         bottom?: number | string | SpacersTypes
         zIndex?: number
     }
-    isOpen: boolean
-    setIsOpen: (isOpen: boolean) => void
     color?: ColorsHoverTypes
 }

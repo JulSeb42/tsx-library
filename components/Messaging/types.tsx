@@ -2,7 +2,7 @@
 
 import React from "react"
 
-import { AllColorsTypes, ColorsHoverTypes } from "../../utils/common-types"
+import { AllColorsTypes, ColorsHoverTypes, SpacersTypes } from "../../utils/common-types"
 
 /*==================== List possibilities ====================*/
 
@@ -29,25 +29,20 @@ export interface MessageProps extends React.HTMLAttributes<HTMLDivElement> {
 
 interface BaseProps extends React.HTMLAttributes<HTMLFormElement> {
     children?: React.ReactNode | React.ReactNode[]
-
     borderColor?: AllColorsTypes
-
     emptyText?:
         | string
         | {
               text: string
               color?: AllColorsTypes
           }
-
     onSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void
-
     input: {
         message: string
         setMessage: (message: string) => void
         placeholder?: string
-        textColor?: AllColorsTypes
-        placeholderColor?: AllColorsTypes
     }
+    messagesGap?: SpacersTypes | number
 }
 
 interface Possible1 extends BaseProps {

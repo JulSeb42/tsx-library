@@ -40,7 +40,7 @@ const Content = styled.div<{
             $alignItems: $align === "bottom" ? "flex-start" : "center",
             $justifyContent: $align === "bottom" ? "flex-end" : "center",
             $flexDirection: "column",
-            $gap: $gap || "s",
+            $gap: $gap,
         })};
     padding: ${Spacers.XXL} 5%;
     text-align: ${({ $align }) => $align === "center" && "center"};

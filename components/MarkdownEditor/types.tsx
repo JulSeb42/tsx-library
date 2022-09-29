@@ -10,11 +10,11 @@ export interface MarkdownEditorProps
         InputContainerProps {
     id: string
     value: string
-    onChange: any
+    setValue: any
     commands?: any
     extraCommands?: any
     children?: never
-    colorMode?: "light" | "dark"
+    backgroundColor?: "light" | "dark"
     preview?: "live" | "edit" | "preview"
     validation?: ValidationTypes
 }

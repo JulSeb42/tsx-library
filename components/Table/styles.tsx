@@ -93,9 +93,7 @@ const StyledTable = styled.table<{
         background-color: ${({ $headerBackground, theme }) =>
             theme.AllColors({ $color: $headerBackground })};
         color: ${({ $headerTextColor, theme }) =>
-            $headerTextColor
-                ? theme.AllColors({ $color: $headerTextColor })
-                : theme.Background};
+            theme.AllColors({ $color: $headerTextColor })};
 
         a {
             color: ${({ $linkColorHeader, theme }) =>
@@ -131,60 +129,43 @@ const StyledTable = styled.table<{
     }) =>
         $tableStyle === "bordered"
             ? css`
-                  border: 1px solid
-                      ${$borderColor
-                          ? theme.AllColors({ $color: $borderColor })
-                          : theme.Gray200};
+                  border: 1px solid ${theme.AllColors({ $color: $borderColor })};
 
                   thead th:not(:last-child) {
                       border-right: 1px solid
-                          ${$headerBorderColor
-                              ? theme.AllColors({
-                                    $color: $headerBorderColor,
-                                })
-                              : theme.Background};
+                          ${theme.AllColors({
+                              $color: $headerBorderColor,
+                          })};
                   }
 
                   td {
                       border: 1px solid
-                          ${$borderColor
-                              ? theme.AllColors({ $color: $borderColor })
-                              : theme.Gray200};
+                          ${theme.AllColors({ $color: $borderColor })};
                   }
               `
             : $tableStyle === "stripped"
             ? css`
                   tbody tr:nth-child(odd) {
-                      background-color: ${$backgroundOdd
-                          ? theme.AllColors({
-                                $color: $backgroundOdd,
-                            })
-                          : theme.Background};
-                      color: ${$textColorOdd
-                          ? theme.AllColors({
-                                $color: $textColorOdd,
-                            })
-                          : theme.Font};
+                      background-color: ${theme.AllColors({
+                          $color: $backgroundOdd,
+                      })};
+                      color: ${theme.AllColors({
+                          $color: $textColorOdd,
+                      })};
                   }
 
                   tbody tr:nth-child(even) {
-                      background-color: ${$backgroundEven
-                          ? theme.AllColors({
-                                $color: $backgroundEven,
-                            })
-                          : theme.Gray50};
-                      color: ${$textColorEven
-                          ? theme.AllColors({ $color: $textColorEven })
-                          : theme.Font};
+                      background-color: ${theme.AllColors({
+                          $color: $backgroundEven,
+                      })};
+                      color: ${theme.AllColors({ $color: $textColorEven })};
                   }
               `
             : $tableStyle === "border-bottom" &&
               css`
                   tbody tr {
                       border-bottom: 1px solid
-                          ${$borderColor
-                              ? theme.AllColors({ $color: $borderColor })
-                              : theme.Gray200};
+                          ${theme.AllColors({ $color: $borderColor })};
                   }
               `}
 `

@@ -3,12 +3,24 @@
 import styled, { css } from "styled-components"
 import ScrollToBottom from "react-scroll-to-bottom"
 
-import { Radiuses, Spacers, FontSizes, LineHeights, FontFamilies, Breakpoints, Transitions } from "../../Variables"
+import {
+    Radiuses,
+    Spacers,
+    FontSizes,
+    LineHeights,
+    FontFamilies,
+    Breakpoints,
+    Transitions,
+} from "../../Variables"
 import Mixins from "../../Mixins"
 import Text from "../Text"
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { AllColorsTypes, ColorsHoverTypes } from "../../utils/common-types"
+import {
+    AllColorsTypes,
+    ColorsHoverTypes,
+    SpacersTypes,
+} from "../../utils/common-types"
 import { MessageTypesTypes } from "./types"
 
 const StyledMessaging = styled.div<{ $borderColor?: AllColorsTypes }>`
@@ -25,7 +37,10 @@ const StyledMessaging = styled.div<{ $borderColor?: AllColorsTypes }>`
     })}
 `
 
-const MessagesContainer = styled(ScrollToBottom)<{ $isEmpty?: boolean }>`
+const MessagesContainer = styled(ScrollToBottom)<{
+    $isEmpty?: boolean
+    $gap?: SpacersTypes | number
+}>`
     flex-grow: 1;
     overflow-y: scroll;
     width: 100%;
@@ -33,6 +48,11 @@ const MessagesContainer = styled(ScrollToBottom)<{ $isEmpty?: boolean }>`
 
     & > div {
         ${Mixins.HideScrollbar};
+        ${({ $gap }) =>
+            Mixins.Flexbox({
+                $flexDirection: "column",
+                $gap: $gap,
+            })};
     }
 
     ${({ $isEmpty }) =>
@@ -58,10 +78,7 @@ const InputContainer = styled.form`
 
 const minHeight = `${FontSizes.Body} * ${LineHeights.Regular} * 3`
 
-const Input = styled.textarea<{
-    $color?: AllColorsTypes
-    $colorPlaceholder?: AllColorsTypes
-}>`
+const Input = styled.textarea`
     flex-grow: 1;
     padding: 0;
     font-size: ${FontSizes.Body};
@@ -69,13 +86,12 @@ const Input = styled.textarea<{
     line-height: ${LineHeights.Regular};
     resize: none;
     border: none;
-    color: ${({ theme }) => theme.AllColors};
+    color: ${({ theme }) => theme.Font};
     min-height: calc(${minHeight});
     background-color: transparent;
 
     &::placeholder {
-        color: ${({ $colorPlaceholder, theme }) =>
-            theme.AllColors({ $color: $colorPlaceholder })};
+        color: ${({ theme }) => theme.Gray200};
     }
 `
 

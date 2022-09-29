@@ -15,7 +15,7 @@ const Header = ({
     backgroundColor = "primary",
     linkColor = "background",
     children,
-    burgerColor = "white",
+    burgerColor = "background",
     navColor = "primary",
     navMobileVariant = "top",
     navDesktopVariant = "right",
@@ -42,8 +42,11 @@ const Header = ({
 
     const logoHeight = logo.height || 30
     const burgerHeight = 30
-    const valueForHeight =
-        logoHeight > burgerHeight || logoHeight > 32 ? logoHeight : burgerHeight
+    const valueForHeight = logo.text
+        ? 24
+        : logoHeight > burgerHeight || logoHeight > 32
+        ? logoHeight
+        : burgerHeight
 
     const headerHeight = valueForHeight + 16 * 2
 
@@ -92,6 +95,7 @@ const Header = ({
             $linkColor={linkColor}
             $variant={navMobileVariant}
             $desktopVariant={navDesktopVariant}
+            $shadow={shadow}
         >
             {isMobile && searchInputFunc()}
 

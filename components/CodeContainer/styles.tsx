@@ -43,6 +43,9 @@ const Code = styled(SyntaxHighlighter)<{
     & > code {
         background-color: transparent !important;
         line-height: ${LineHeights.Code};
+
+        color: ${({ theme, $textColor }) =>
+            $textColor && theme.AllColors({ $color: $textColor })};
     }
 `
 

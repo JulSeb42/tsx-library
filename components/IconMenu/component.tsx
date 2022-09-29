@@ -1,6 +1,6 @@
 /*=============================================== IconMenu ===============================================*/
 
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import { useClickOutside } from "../../hooks"
 
@@ -16,14 +16,14 @@ const IconMenu = ({
     direction = "up",
     shadow,
     position,
-    isOpen,
-    setIsOpen,
     color = "primary",
     ...props
 }: IconMenuProps) => {
     const el = useRef<HTMLButtonElement>(null)
     const onClickOutside = () => setIsOpen(false)
     useClickOutside(el, onClickOutside)
+
+    const [isOpen, setIsOpen] = useState(false)
 
     return (
         <Styles.StyledIconMenu

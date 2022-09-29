@@ -5,9 +5,7 @@ import Table from "../components/Table"
 
 const optionsMarkdown = {
     forceBlock: true,
-
     wrapper: "div",
-
     overrides: {
         h1: {
             component: Text,

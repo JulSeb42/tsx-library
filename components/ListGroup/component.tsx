@@ -11,7 +11,7 @@ import Icon from "../Icon"
 import * as Styles from "./styles"
 import { ListGroupProps, ListGroupItemProps } from "./types"
 
-const ListItem = ({ item, number, borderColor }: ListGroupItemProps) => {
+const ListItem = ({ item, number, borderColor, color }: ListGroupItemProps) => {
     const {
         text,
         subtext,
@@ -22,7 +22,6 @@ const ListItem = ({ item, number, borderColor }: ListGroupItemProps) => {
         to,
         onClick,
         disabled,
-        color = "primary",
     } = item
 
     return (
@@ -87,6 +86,7 @@ const ListGroup = ({
     showNumbers,
     maxHeight,
     bordersColor = "gray-200",
+    accentColor,
     ...props
 }: ListGroupProps) => {
     return (
@@ -98,6 +98,7 @@ const ListGroup = ({
             {items.map((item, i) => (
                 <ListItem
                     item={item}
+                    color={accentColor}
                     number={showNumbers ? i + 1 : undefined}
                     borderColor={bordersColor}
                     key={uuid()}

@@ -2,7 +2,7 @@
 
 import React from "react"
 
-import { AllColorsTypes } from "../../utils/common-types"
+import { AllColorsTypes, ColorsHoverTypes } from "../../utils/common-types"
 import { ListGroupItemProps as ItemTypes } from "../../utils/component-props"
 
 export interface ListGroupItemProps
@@ -10,6 +10,7 @@ export interface ListGroupItemProps
     item: ItemTypes
     number?: number
     borderColor?: AllColorsTypes
+    color?: ColorsHoverTypes
 }
 
 export interface ListGroupProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -17,4 +18,5 @@ export interface ListGroupProps extends React.HTMLAttributes<HTMLDivElement> {
     showNumbers?: boolean
     maxHeight?: number
     bordersColor?: AllColorsTypes
+    accentColor?: ColorsHoverTypes
 }

@@ -4,7 +4,6 @@ import styled from "styled-components"
 
 import {
     Spacers,
-    Shadows,
     Radiuses,
     Breakpoints,
     Transitions,
@@ -12,13 +11,22 @@ import {
 import Mixins from "../../Mixins"
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
-const StyledToast = styled.div<{ $isClosed?: boolean }>`
+import { ShadowsTypes } from "../../utils/common-types"
+
+const StyledToast = styled.div<{
+    $isClosed?: boolean
+    $maxWidth?: number
+    $shadow?: ShadowsTypes
+}>`
     width: 100%;
-    max-width: 400px;
+    max-width: ${({ $maxWidth }) => $maxWidth}px;
     background-color: ${({ theme }) => theme.Background};
     display: ${({ $isClosed }) => ($isClosed ? "none" : "grid")};
     gap: ${Spacers.XXS};
-    box-shadow: ${Shadows.M};
+    ${({ $shadow }) =>
+        Mixins.Shadow({
+            $shadow: $shadow,
+        })};
     padding: ${Spacers.M};
     border-radius: ${Radiuses.M};
 `

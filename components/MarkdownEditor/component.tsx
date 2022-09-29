@@ -9,7 +9,7 @@ import { MarkdownEditorProps } from "./types"
 
 const MarkdownEditor = ({
     id,
-    onChange,
+    setValue,
     value,
     label,
     helper,
@@ -17,7 +17,7 @@ const MarkdownEditor = ({
     accentColor = "primary",
     commands,
     extraCommands,
-    colorMode = "dark",
+    backgroundColor = "dark",
     preview = "edit",
     validation,
     ...props
@@ -27,11 +27,11 @@ const MarkdownEditor = ({
     const inputFunction = () => (
         <Styles.StyledContainer
             $accentColor={accentColor}
-            data-color-mode={colorMode}
+            data-color-mode={backgroundColor}
         >
             <Styles.Editor
                 id={id}
-                onChange={onChange}
+                onChange={setValue}
                 value={value}
                 preview={preview}
                 commands={commands}

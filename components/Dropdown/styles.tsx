@@ -29,7 +29,7 @@ const StyledDropdown = styled.div<{
     border-radius: ${Radiuses.M};
     overflow-y: scroll;
     box-shadow: ${({ $isOpen }) => $isOpen && Shadows.M};
-    transition: ${Transitions.Long};
+    transition: ${Transitions.Short};
     z-index: 50;
     ${Mixins.HideScrollbar};
     max-height: ${({ $isOpen }) => ($isOpen ? `${40 * 4}px` : 0)};

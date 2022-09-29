@@ -19,6 +19,7 @@ import countries from "./utils/countries"
 import Cover from "./components/Cover"
 import Datepicker from "./components/Datepicker"
 import { DropdownContainer, Dropdown } from "./components/Dropdown"
+import Fade from "./components/Fade"
 import Flexbox from "./components/Flexbox"
 import Footer from "./components/Footer"
 import Form from "./components/Form"
@@ -114,6 +115,7 @@ export {
     Datepicker,
     Dropdown,
     DropdownContainer,
+    Fade,
     Flexbox,
     Footer,
     Form,

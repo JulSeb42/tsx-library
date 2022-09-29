@@ -28,7 +28,7 @@ type MessageTypesTypes = keyof typeof message
 
 export type MessageProps = {
     type: MessageTypesTypes
-    text: string
+    content: string
     date?: string
     time?: string
 }
@@ -62,17 +62,19 @@ export interface BaseUseFormType {
 /*==================== Footer links ====================*/
 
 type PossibleFooterLinks1 = {
-    text: string
+    content: string | JSX.Element
     to: string
     blank?: boolean
     onClick?: never
+    as?: "a" | "link"
 }
 
 type PossibleFooterLinks2 = {
-    text: string
+    content: string | JSX.Element
     to?: never
     blank?: never
     onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+    as?: never
 }
 
 export type FooterItemProps = PossibleFooterLinks1 | PossibleFooterLinks2

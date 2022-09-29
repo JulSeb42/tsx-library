@@ -2,10 +2,21 @@
 
 import React from "react"
 
-import { ColorsShortTypes } from "../../utils/common-types"
+const ColorsAlerts = {
+    primary: "primary",
+    secondary: "secondary",
+    success: "success",
+    danger: "danger",
+    warning: "warning",
+    white: "white",
+    gray: "gray",
+    black: "black",
+} as const
+
+export type ColorsAlertsTypes = keyof typeof ColorsAlerts
 
 export interface AlertProps extends React.HTMLAttributes<HTMLParagraphElement> {
-    color?: ColorsShortTypes
+    color?: ColorsAlertsTypes
     children: string | React.ReactNode | React.ReactNode[]
     isModal?: boolean
     as?: React.ElementType

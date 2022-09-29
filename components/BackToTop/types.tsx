@@ -14,8 +14,6 @@ export interface BaseProps extends React.HTMLAttributes<HTMLButtonElement> {
     icon?: string
     color?: ColorsHoverTypes
     size?: number
-
-    textColor?: AllColorsTypes
     shadow?:
         | ShadowsTypes
         | {

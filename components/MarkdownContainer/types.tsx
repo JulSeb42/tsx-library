@@ -5,7 +5,7 @@ import React from "react"
 import { SpacersTypes } from "../../utils/common-types"
 
 export interface MarkdownContainerProps extends React.HTMLAttributes<HTMLDivElement> {
-    gap?: SpacersTypes | string | number
+    gap?: SpacersTypes | string
     options?: any
     content: string | React.ReactNode | React.ReactNode[]
     as?: React.ElementType

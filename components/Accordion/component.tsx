@@ -63,7 +63,7 @@ const AccordionItem = ({
 const Accordion = ({
     variant = "basic",
     icon = "plus",
-    accentColor,
+    accentColor = "primary",
     separatorColor,
     customIcon,
     items,

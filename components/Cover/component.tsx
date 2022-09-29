@@ -16,7 +16,7 @@ const Cover = ({
     overlay,
     align = "center",
     height = "100vh",
-    gap,
+    gap = "s",
     textColor,
     ...props
 }: CoverProps) => (

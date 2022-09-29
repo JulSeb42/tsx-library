@@ -17,7 +17,11 @@ import Image from "../Image"
 import Burger from "../Burger"
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { ColorsHoverTypes, AllColorsTypes, ShadowsTypes } from "../../utils/common-types"
+import {
+    ColorsHoverTypes,
+    AllColorsTypes,
+    ShadowsTypes,
+} from "../../utils/common-types"
 
 import {
     PositionsTypes,
@@ -40,7 +44,10 @@ const HeaderBurger = styled(Burger)`
     }
 `
 
-const Logo = styled(Link)``
+const Logo = styled(Link)`
+    position: relative;
+    z-index: 999;
+`
 
 const LinkStyles = ({ $linkColor }: { $linkColor?: ColorsHoverTypes }) => css`
     font-size: ${FontSizes.Body};
@@ -132,6 +139,7 @@ const Nav = styled.nav<{
     $linkColor?: ColorsHoverTypes
     $variant?: NavMobileVariantsTypes
     $desktopVariant?: NavDesktopVariantsTypes
+    $shadow?: ShadowsTypes
 }>`
     ${Mixins.Flexbox({
         $alignItems: "center",
@@ -155,6 +163,7 @@ const Nav = styled.nav<{
                   })};
         transition: ${Transitions.Short};
         z-index: 998;
+        ${({ $shadow }) => $shadow && Mixins.Shadow({ $shadow: $shadow })};
 
         ${({ $variant, $headerHeight, $isOpen }) =>
             $variant === "full"
@@ -192,6 +201,7 @@ const Nav = styled.nav<{
                       width: 100%;
                       flex-direction: column;
                       align-items: flex-start;
+                      z-index: 997;
                   `}
     }
 `

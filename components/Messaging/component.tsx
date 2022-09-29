@@ -71,6 +71,7 @@ const Messaging = forwardRef(
             input,
             onSubmit,
             borderColor = "gray-200",
+            messagesGap = "xs",
             ...props
         }: MessagingProps,
         ref?: React.ForwardedRef<HTMLTextAreaElement>
@@ -80,7 +81,10 @@ const Messaging = forwardRef(
 
         return (
             <Styles.StyledMessaging $borderColor={borderColor}>
-                <Styles.MessagesContainer $isEmpty={!children}>
+                <Styles.MessagesContainer
+                    $isEmpty={!children}
+                    $gap={messagesGap}
+                >
                     {children ? (
                         children
                     ) : (
@@ -108,8 +112,6 @@ const Messaging = forwardRef(
                             input.placeholder || "Type your message..."
                         }
                         ref={ref}
-                        $color={input.textColor || "currentColor"}
-                        $colorPlaceholder={input.placeholderColor || "gray-200"}
                     />
 
                     <Styles.SendButton

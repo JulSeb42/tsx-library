@@ -10,7 +10,15 @@ import ButtonIcon from "../ButtonIcon"
 import * as Styles from "./styles"
 import { ToastProps } from "./types"
 
-const Toast = ({ title, close, children, icon, ...props }: ToastProps) => {
+const Toast = ({
+    title,
+    close,
+    children,
+    icon,
+    maxWidth = 400,
+    shadow = "m",
+    ...props
+}: ToastProps) => {
     const [isClosed, setIsClosed] = useState(false)
 
     const titleFunc = () => <Text tag="h5">{title}</Text>
@@ -22,7 +30,12 @@ const Toast = ({ title, close, children, icon, ...props }: ToastProps) => {
     }
 
     return (
-        <Styles.StyledToast $isClosed={isClosed} {...props}>
+        <Styles.StyledToast
+            $isClosed={isClosed}
+            $maxWidth={maxWidth}
+            $shadow={shadow}
+            {...props}
+        >
             {icon || close ? (
                 <Styles.TitleContainer>
                     {icon && (
