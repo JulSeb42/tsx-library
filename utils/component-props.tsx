@@ -55,7 +55,7 @@ export type ValidationStatusProps = "not-passed" | "passed" | undefined
 
 export interface BaseUseFormType {
     handleInputs: (e: React.ChangeEvent<HTMLInputElement>) => void
-    resetForm: any
+    resetForm: () => void
     handleSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void
 }
 
