@@ -9,4 +9,5 @@ export interface PageLoadingProps extends React.HTMLAttributes<HTMLDivElement> {
     backgroundColor?: AllColorsTypes
     loaderColor?: AllColorsTypes
     loaderVariant?: LoaderVariantsTypes
+    stopScrolling?: boolean
 }

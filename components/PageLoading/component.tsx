@@ -11,9 +11,14 @@ const PageLoading = ({
     backgroundColor = "primary",
     loaderColor,
     loaderVariant = 1,
+    stopScrolling,
     ...props
 }: PageLoadingProps) => {
-    useEffect(() => document.body.classList.add("stop-scrolling"), [])
+    useEffect(() => {
+        if (stopScrolling) {
+            document.body.classList.add("stop-scrolling")
+        }
+    }, [stopScrolling])
 
     return (
         <Styles.StyledPageLoading $backgroundColor={backgroundColor} {...props}>
