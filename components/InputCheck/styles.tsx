@@ -148,7 +148,7 @@ const Checkbox = styled.label<{
                       $size: 8,
                   })
                 : theme.LibIcon({
-                      $name: "check",
+                      $icon: "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 15.586L6.707 12.293L5.293 13.707L10 18.414L19.707 8.707L18.293 7.293L10 15.586Z' fill='currentColor'/%3E%3C/svg%3E",
                       $color:
                           $accentColor === "white" ? "primary" : "background",
                       $size: 12,

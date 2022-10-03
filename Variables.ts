@@ -45,6 +45,12 @@ interface IconProps {
     $color?: AllColorsTypes
 }
 
+interface LibIconProps {
+    $icon: string
+    $size?: number
+    $color?: AllColorsTypes
+}
+
 /*==================== Theme, Variables & Mixins ====================*/
 
 const BaseColors = {
@@ -366,9 +372,9 @@ const ThemeLight = {
         height: ${$size}px;
     `,
 
-    LibIcon: ({ $name, $color = "currentColor", $size }: IconProps) => css`
+    LibIcon: ({ $icon, $color = "currentColor", $size }: LibIconProps) => css`
         content: "";
-        mask: url("../icons/${$name}.svg") no-repeat 50% 50%;
+        mask: url("${$icon}") no-repeat 50% 50%;
         mask-size: cover;
         background-color: ${ThemeLight.AllColors({
             $color: $color,
@@ -692,9 +698,9 @@ const ThemeDark = {
         height: ${$size}px;
     `,
 
-    LibIcon: ({ $name, $color = "currentColor", $size }: IconProps) => css`
+    LibIcon: ({ $icon, $color = "currentColor", $size }: LibIconProps) => css`
         content: "";
-        mask: url("./icons-svg/${$name}.svg") no-repeat 50% 50%;
+        mask: url("${$icon}") no-repeat 50% 50%;
         mask-size: cover;
         background-color: ${ThemeDark.AllColors({
             $color: $color,
