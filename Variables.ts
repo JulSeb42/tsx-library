@@ -694,7 +694,7 @@ const ThemeDark = {
 
     LibIcon: ({ $name, $color = "currentColor", $size }: IconProps) => css`
         content: "";
-        mask: url("../icons/${$name}.svg") no-repeat 50% 50%;
+        mask: url("./icons-svg/${$name}.svg") no-repeat 50% 50%;
         mask-size: cover;
         background-color: ${ThemeDark.AllColors({
             $color: $color,
