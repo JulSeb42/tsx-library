@@ -6,7 +6,7 @@ import { FontWeights, Radiuses, Spacers } from "../../Variables"
 import Mixins from "../../Mixins"
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { AllColorsTypes } from "../../utils/common-types"
+import { AllColorsTypes, RadiusesTypes } from "../../utils/common-types"
 
 const AvatarContainer = styled.span<{ $size?: number }>`
     position: relative;
@@ -21,10 +21,12 @@ const StyledAvatar = styled.span<{
     $border?: boolean
     $borderWidth?: number
     $borderColor?: AllColorsTypes
+    $borderRadius?: RadiusesTypes
 }>`
     width: ${({ $size }) => $size}px;
     height: ${({ $size }) => $size}px;
-    border-radius: ${Radiuses.Circle};
+    ${({ $borderRadius }) =>
+        Mixins.BorderRadius({ $borderRadius: $borderRadius })};
     background-color: ${({ theme }) => theme.AllColors};
     color: ${({ $color, $contentColor, theme }) =>
         $color === "white" && !$contentColor

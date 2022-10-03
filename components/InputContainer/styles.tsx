@@ -22,10 +22,16 @@ const Label = styled.label<{
     font-weight: ${FontWeights.Black};
 `
 
-const HelperBottom = styled(Text)`
+const HelperBottomContainer = styled.span`
     ${Mixins.Flexbox({
         $gap: "xxs",
     })};
+`
+
+const HelperBottom = styled(Text).attrs({ tag: "small" })<{
+    $style?: "default" | "italic"
+}>`
+    font-style: ${({ $style }) => $style === "italic" && "italic"};
 `
 
 const IconContainer = styled.span`
@@ -37,6 +43,18 @@ const IconContainer = styled.span`
     })}
 `
 
-setDefaultTheme([StyledInputContainer, Label, HelperBottom, IconContainer])
+setDefaultTheme([
+    StyledInputContainer,
+    Label,
+    HelperBottom,
+    HelperBottomContainer,
+    IconContainer,
+])
 
-export { StyledInputContainer, Label, HelperBottom, IconContainer }
+export {
+    StyledInputContainer,
+    Label,
+    HelperBottomContainer,
+    HelperBottom,
+    IconContainer,
+}

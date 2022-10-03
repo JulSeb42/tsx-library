@@ -18,19 +18,54 @@ const InputContainer = ({
     maxLength,
     value,
     accentColor = "primary",
-}: ExtendedInputContainerProps) => (
-    <Styles.StyledInputContainer>
-        {label && (
-            <Styles.Label $color={accentColor} htmlFor={id}>
-                {label}
-            </Styles.Label>
-        )}
+}: ExtendedInputContainerProps) => {
+    const helperBottomFunc = () => (
+        <Styles.HelperBottom
+            $style={
+                typeof helperBottom === "object"
+                    ? helperBottom.style
+                    : "default"
+            }
+            color={
+                typeof helperBottom === "object" ? helperBottom.color : "font"
+            }
+        >
+            {typeof helperBottom === "object"
+                ? helperBottom.text
+                : helperBottom}
+        </Styles.HelperBottom>
+    )
 
-        {helper && <Text>{helper}</Text>}
+    return (
+        <Styles.StyledInputContainer>
+            {label && (
+                <Styles.Label $color={accentColor} htmlFor={id}>
+                    {label}
+                </Styles.Label>
+            )}
 
-        {children}
+            {helper && <Text>{helper}</Text>}
 
-        {helperBottom && (
+            {children}
+
+            {helperBottom &&
+                (typeof helperBottom === "object" && helperBottom.icon ? (
+                    <Styles.HelperBottomContainer>
+                        <Styles.IconContainer>
+                            <Icon
+                                src={helperBottom.icon}
+                                size={14}
+                                color={helperBottom.iconColor || "primary"}
+                            />
+                        </Styles.IconContainer>
+
+                        {helperBottomFunc()}
+                    </Styles.HelperBottomContainer>
+                ) : (
+                    helperBottomFunc()
+                ))}
+
+            {/* {helperBottom && (
             <Styles.HelperBottom tag="small">
                 {typeof helperBottom === "object" && helperBottom.icon && (
                     <Styles.IconContainer>
@@ -46,17 +81,18 @@ const InputContainer = ({
                     ? helperBottom.text
                     : helperBottom}
             </Styles.HelperBottom>
-        )}
+        )} */}
 
-        {typeof value === "string" && counter && (
-            <Text tag="small" color="gray">
-                <Text tag="em">
-                    {value.length}
-                    {maxLength ? ` / ${maxLength}` : ""}
+            {typeof value === "string" && counter && (
+                <Text tag="small" color="gray">
+                    <Text tag="em">
+                        {value.length}
+                        {maxLength ? ` / ${maxLength}` : ""}
+                    </Text>
                 </Text>
-            </Text>
-        )}
-    </Styles.StyledInputContainer>
-)
+            )}
+        </Styles.StyledInputContainer>
+    )
+}
 
 export default InputContainer

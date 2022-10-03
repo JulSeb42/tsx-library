@@ -14,6 +14,8 @@ export interface InputContainerProps {
               text: string
               icon?: string
               iconColor?: AllColorsTypes
+              color?: AllColorsTypes
+              style?: "default" | "italic"
           }
     children?: ReactNode | ReactNode[] | JSX.Element | JSX.Element[]
     accentColor?: ColorsHoverTypes

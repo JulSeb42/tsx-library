@@ -19,6 +19,7 @@ const Avatar = ({
     as,
     border,
     badge,
+    borderRadius = "circle",
     ...props
 }: AvatarProps) => {
     const avatarFunction = () => (
@@ -36,6 +37,7 @@ const Avatar = ({
                     ? border.color
                     : "primary"
             }
+            $borderRadius={borderRadius}
             {...props}
         >
             {img ? (

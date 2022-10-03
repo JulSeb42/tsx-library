@@ -2,7 +2,7 @@
 
 import React from "react"
 
-import { AllColorsTypes } from "../../utils/common-types"
+import { AllColorsTypes, RadiusesTypes } from "../../utils/common-types"
 
 interface BaseProps extends React.HTMLAttributes<HTMLSpanElement> {
     size?: number
@@ -24,6 +24,7 @@ interface BaseProps extends React.HTMLAttributes<HTMLSpanElement> {
               contentColor?: AllColorsTypes
               position?: "top" | "bottom"
           }
+    borderRadius?: RadiusesTypes
 }
 
 interface Possible1 extends BaseProps {
