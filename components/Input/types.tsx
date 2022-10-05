@@ -73,11 +73,13 @@ export interface TextInputProps
         React.HTMLAttributes<HTMLInputElement> {
     id: string
     type?: "email" | "number" | "password" | "tel" | "text" | undefined
-
     children?: never
     maxLength?: number
     counter?: boolean
     variant?: InputsVariantsTypes
+    min?: number
+    max?: number
+    step?: number
 }
 
 export interface ColorInputProps
@@ -100,6 +102,8 @@ export interface DateInputProps
     id: string
     iconCalendar?: string
     variant?: InputsVariantsTypes
+    min?: any
+    max?: any
 }
 
 export interface FileInputProps
