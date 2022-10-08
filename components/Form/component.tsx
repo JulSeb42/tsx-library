@@ -31,12 +31,20 @@ const Form = forwardRef(
                             variant="plain"
                             color={accentColor}
                             icons={{
-                                left: buttonPrimary.iconLeft,
-                                right: buttonPrimary.iconRight,
+                                left:
+                                    typeof buttonPrimary === "object"
+                                        ? buttonPrimary.iconLeft
+                                        : undefined,
+                                right:
+                                    typeof buttonPrimary === "object"
+                                        ? buttonPrimary.iconRight
+                                        : undefined,
                             }}
                             isLoading={isLoading}
                         >
-                            {buttonPrimary.text}
+                            {typeof buttonPrimary === "object"
+                                ? buttonPrimary.text
+                                : buttonPrimary}
                         </Button>
                     )}
 

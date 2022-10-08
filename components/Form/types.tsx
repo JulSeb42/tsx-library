@@ -5,11 +5,13 @@ import React from "react"
 import { ColorsHoverTypes } from "../../utils/common-types"
 
 interface BaseProps extends React.HTMLAttributes<HTMLFormElement> {
-    buttonPrimary?: {
-        text: string
-        iconLeft?: string
-        iconRight?: string
-    }
+    buttonPrimary?:
+        | string
+        | {
+              text: string
+              iconLeft?: string
+              iconRight?: string
+          }
     accentColor?: ColorsHoverTypes
     isLoading?: boolean
 }

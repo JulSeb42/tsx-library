@@ -27,7 +27,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 }
 
 interface BaseProps extends React.HTMLAttributes<HTMLDivElement> {
-    children: React.ReactNode[]
+    children?: React.ReactNode[]
     borderRadius?: RadiusesTypes
 
     controls?:

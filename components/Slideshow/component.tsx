@@ -58,7 +58,7 @@ const Slideshow = ({
 }: SlideshowProps) => {
     // Slideshow with buttons
     const [active, setActive] = useState(0)
-    const length = children.length
+    const length = children ? children.length : 0
 
     const handleNext = () => {
         if (!options?.show) {
@@ -125,7 +125,7 @@ const Slideshow = ({
                 flexDirection="column"
                 $height={height}
             >
-                {controls && (
+                {children && length > 1 && controls && (
                     <SlideshowButton
                         position="left"
                         onClick={handlePrev}
@@ -137,12 +137,12 @@ const Slideshow = ({
                                 : true
                         }
                         iconNext={
-                            typeof controls === "object"
+                            typeof controls === "object" && controls.iconNext
                                 ? controls.iconNext
                                 : undefined
                         }
                         iconPrev={
-                            typeof controls === "object"
+                            typeof controls === "object" && controls.iconPrev
                                 ? controls.iconPrev
                                 : undefined
                         }
@@ -152,7 +152,7 @@ const Slideshow = ({
                                 : false
                         }
                         color={
-                            typeof controls === "object"
+                            typeof controls === "object" && controls.color
                                 ? controls.color
                                 : "primary"
                         }
@@ -173,7 +173,7 @@ const Slideshow = ({
                     </Styles.Content>
                 </Styles.ContentWrapper>
 
-                {controls && (
+                {children && length > 1 && controls && (
                     <SlideshowButton
                         position="right"
                         onClick={handleNext}
@@ -185,12 +185,12 @@ const Slideshow = ({
                                 : true
                         }
                         iconNext={
-                            typeof controls === "object"
+                            typeof controls === "object" && controls.iconNext
                                 ? controls.iconNext
                                 : undefined
                         }
                         iconPrev={
-                            typeof controls === "object"
+                            typeof controls === "object" && controls.iconNext
                                 ? controls.iconPrev
                                 : undefined
                         }
@@ -200,7 +200,7 @@ const Slideshow = ({
                                 : false
                         }
                         color={
-                            typeof controls === "object"
+                            typeof controls === "object" && controls.color
                                 ? controls.color
                                 : "primary"
                         }
@@ -221,7 +221,7 @@ const Slideshow = ({
                 </Flexbox>
             )}
 
-            {pagination && (
+            {children && length > 1 && pagination && (
                 <Styles.Pagination
                     $hideTouch={
                         typeof pagination === "object" &&
@@ -238,13 +238,12 @@ const Slideshow = ({
                             onClick={() => setActive(i)}
                             $isActive={active === i && true}
                             $color={
-                                typeof pagination === "object"
+                                typeof pagination === "object" && pagination.color
                                     ? pagination.color
                                     : "primary"
                             }
                             $variant={
-                                typeof pagination === "object" &&
-                                pagination.variant
+                                typeof pagination === "object" && pagination.variant
                                     ? pagination.variant
                                     : "dots"
                             }
