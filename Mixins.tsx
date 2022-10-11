@@ -126,6 +126,8 @@ const Mixins = {
             ? Radiuses.Circle
             : $borderRadius === "round"
             ? Radiuses.Round
+            : $borderRadius === "none"
+            ? ""
             : $borderRadius
             ? stringifyPx($borderRadius)
             : ""};
@@ -144,6 +146,8 @@ const Mixins = {
             ? Shadows.S
             : $shadow === "xs"
             ? Shadows.XS
+            : $shadow === "none"
+            ? ""
             : ""};
     `,
 

@@ -156,6 +156,7 @@ const shadows = {
     m: "m",
     s: "s",
     xs: "xs",
+    none: "",
 } as const
 
 export type ShadowsTypes = keyof typeof shadows
@@ -171,6 +172,7 @@ const radiuses = {
     xs: "xs",
     round: "round",
     circle: "circle",
+    none: "",
 } as const
 
 export type RadiusesTypes = keyof typeof radiuses
