@@ -2,6 +2,7 @@
 
 import { v4 as uuid } from "uuid"
 import {
+    calculateAverage,
     calculateTotalSum,
     capitalize,
     convertDate,
@@ -33,6 +34,7 @@ import {
 } from "ts-utils-julseb"
 
 export {
+    calculateAverage,
     calculateTotalSum,
     capitalize,
     convertDate,
