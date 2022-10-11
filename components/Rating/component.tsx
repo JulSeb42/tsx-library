@@ -22,13 +22,15 @@ const Rating = ({
     helper,
     helperBottom,
     id,
+    readOnly,
     ...props
 }: RatingProps) => {
     const ratingFunc = () => (
         <Flexbox alignItems="center" gap="xs" {...props}>
-            {generateNumbers(0, 5).map((_, i) => (
+            {/* {generateNumbers(0, 5).map((_, i) => (
                 <Styles.Button
-                    onClick={() => setRating(i + 1)}
+                    as={readOnly ? "span" : "button"}
+                    onClick={!readOnly && () => setRating(i + 1)}
                     $color={accentColor}
                     key={uuid()}
                 >
@@ -43,7 +45,53 @@ const Rating = ({
                         <StarFullIcon size={24} />
                     )}
                 </Styles.Button>
-            ))}
+            ))} */}
+            {readOnly
+                ? generateNumbers(0, 5).map((_, i) => (
+                      <Styles.Button
+                          as="span"
+                          $color={accentColor}
+                          key={uuid()}
+                      >
+                          {icons ? (
+                              <Icon
+                                  src={
+                                      i >= rating
+                                          ? icons.default
+                                          : icons.checked
+                                  }
+                                  size={24}
+                              />
+                          ) : i >= rating ? (
+                              <StarIcon size={24} />
+                          ) : (
+                              <StarFullIcon size={24} />
+                          )}
+                      </Styles.Button>
+                  ))
+                : generateNumbers(0, 5).map((_, i) => (
+                      <Styles.Button
+                          onClick={() => setRating(i + 1)}
+                          $color={accentColor}
+                          $isButton
+                          key={uuid()}
+                      >
+                          {icons ? (
+                              <Icon
+                                  src={
+                                      i >= rating
+                                          ? icons.default
+                                          : icons.checked
+                                  }
+                                  size={24}
+                              />
+                          ) : i >= rating ? (
+                              <StarIcon size={24} />
+                          ) : (
+                              <StarFullIcon size={24} />
+                          )}
+                      </Styles.Button>
+                  ))}
         </Flexbox>
     )
 
