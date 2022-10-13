@@ -54,6 +54,7 @@ const Slideshow = ({
     aspectRatio,
     borderRadius,
     thumbnails,
+    imgFit = "cover",
     ...props
 }: SlideshowProps) => {
     // Slideshow with buttons
@@ -168,6 +169,7 @@ const Slideshow = ({
                         $show={options?.show}
                         $active={active}
                         $speed={options?.speed || 1000}
+                        $imgFit={imgFit}
                     >
                         {children}
                     </Styles.Content>

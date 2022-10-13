@@ -9,7 +9,7 @@ import Flexbox from "../Flexbox"
 import Image from "../Image"
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { ColorsHoverTypes, RadiusesTypes } from "../../utils/common-types"
+import { ColorsHoverTypes, RadiusesTypes, ObjectFitTypes } from "../../utils/common-types"
 
 import { PositionsTypes } from "./types"
 
@@ -45,6 +45,7 @@ const Content = styled(Flexbox)<{
     $speed?: number
     $show?: number
     $active: number
+    $imgFit?: ObjectFitTypes
 }>`
     transition: all ${({ $speed }) => $speed}ms ease;
     ${Mixins.HideScrollbar};
@@ -66,7 +67,7 @@ const Content = styled(Flexbox)<{
     img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: ${({ $imgFit }) => $imgFit};
     }
 `
 

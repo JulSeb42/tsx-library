@@ -2,7 +2,7 @@
 
 import React from "react"
 
-import { ColorsHoverTypes, RadiusesTypes } from "../../utils/common-types"
+import { ColorsHoverTypes, RadiusesTypes, ObjectFitTypes } from "../../utils/common-types"
 
 /*==================== List possibilities ====================*/
 
@@ -29,6 +29,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 interface BaseProps extends React.HTMLAttributes<HTMLDivElement> {
     children?: React.ReactNode[]
     borderRadius?: RadiusesTypes
+    imgFit?: ObjectFitTypes
 
     controls?:
         | boolean
