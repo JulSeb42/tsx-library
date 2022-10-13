@@ -7,4 +7,5 @@ import { AllColorsTypes } from "../../utils/common-types"
 export interface HrProps extends React.HTMLAttributes<HTMLHRElement> {
     color?: AllColorsTypes
     height?: number
+    width?: number | string
 }
