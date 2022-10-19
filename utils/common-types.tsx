@@ -207,6 +207,25 @@ const Spacers = {
 
 export type SpacersTypes = keyof typeof Spacers
 
+/*==================== Custom position ====================*/
+
+const positions = {
+    relative: "relative",
+    absolute: "absolute",
+    fixed: "fixed",
+} as const
+
+export type PositionsTypes = keyof typeof positions
+
+export type ObjectPositionTypes = {
+    position?: PositionsTypes
+    left?: number | string | SpacersTypes
+    top?: number | string | SpacersTypes
+    right?: number | string | SpacersTypes
+    bottom?: number | string | SpacersTypes
+    zIndex?: number
+}
+
 /*==================== Grid ====================*/
 
 /* Justify items */

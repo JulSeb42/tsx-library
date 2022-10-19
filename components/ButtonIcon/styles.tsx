@@ -10,10 +10,10 @@ import {
     ColorsHoverTypes,
     ShadowsTypes,
     SpacersTypes,
+    PositionsTypes,
 } from "../../utils/common-types"
 
 import { ButtonStylesProps } from "./types"
-import { PositionsTypes } from "../Header/types"
 
 const StyledButtonIcon = styled.button<{
     $variant?: ButtonStylesProps

@@ -4,10 +4,9 @@ import React from "react"
 
 import {
     ShadowsTypes,
-    SpacersTypes,
     ColorsHoverTypes,
+    ObjectPositionTypes,
 } from "../../utils/common-types"
-import { PositionsTypes } from "../Header/types"
 import { IconMenuItemProps } from "../../utils/component-props"
 
 export interface IconMenuProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -26,13 +25,6 @@ export interface IconMenuProps extends React.HTMLAttributes<HTMLDivElement> {
               hover: ShadowsTypes
               active: ShadowsTypes
           }
-    position?: {
-        position?: PositionsTypes
-        left?: number | string | SpacersTypes
-        top?: number | string | SpacersTypes
-        right?: number | string | SpacersTypes
-        bottom?: number | string | SpacersTypes
-        zIndex?: number
-    }
+    position?: ObjectPositionTypes
     color?: ColorsHoverTypes
 }

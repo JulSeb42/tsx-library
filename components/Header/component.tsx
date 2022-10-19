@@ -1,6 +1,6 @@
 /*=============================================== Header ===============================================*/
 
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { useClickOutside, useMaxWidth } from "../../hooks"
 
 import Input from "../Input"
@@ -22,6 +22,7 @@ const Header = ({
     burgerPosition = "right",
     search,
     shadow,
+    hideOnScroll,
     ...props
 }: HeaderProps) => {
     const [isOpen, setIsOpen] = useState(false)
@@ -103,6 +104,28 @@ const Header = ({
         </Styles.Nav>
     )
 
+    // Hide header on scroll
+    const [isHidden, setIsHidden] = useState(false)
+    const hidePosition = typeof hideOnScroll === "boolean" ? 400 : hideOnScroll
+
+    useEffect(() => {
+        if (hidePosition) {
+            if (window.pageYOffset >= hidePosition) {
+                setIsHidden(true)
+            } else {
+                setIsHidden(false)
+            }
+
+            window.addEventListener("scroll", () => {
+                if (window.pageYOffset >= hidePosition) {
+                    setIsHidden(true)
+                } else {
+                    setIsHidden(false)
+                }
+            })
+        }
+    }, [hidePosition])
+
     return (
         <Styles.StyledHeader
             $backgroundColor={backgroundColor}
@@ -114,6 +137,8 @@ const Header = ({
             $burgerPosition={burgerPosition}
             $navVariant={navMobileVariant}
             $shadow={shadow}
+            $isHidden={isHidden}
+            $headerHeight={headerHeight}
             {...props}
         >
             {burgerPosition === "left" && burgerFunction()}

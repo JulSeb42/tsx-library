@@ -5,9 +5,8 @@ import React from "react"
 import {
     ColorsHoverTypes,
     ShadowsTypes,
-    SpacersTypes,
+    ObjectPositionTypes,
 } from "../../utils/common-types"
-import { PositionsTypes } from "../Header/types"
 
 /*==================== List possibilities ====================*/
 
@@ -35,14 +34,7 @@ interface BaseProps extends React.HTMLAttributes<HTMLButtonElement> {
               hover: ShadowsTypes
               active: ShadowsTypes
           }
-    position?: {
-        position?: PositionsTypes
-        left?: number | string | SpacersTypes
-        top?: number | string | SpacersTypes
-        right?: number | string | SpacersTypes
-        bottom?: number | string | SpacersTypes
-        zIndex?: number
-    }
+    position?: ObjectPositionTypes
 }
 
 interface PossibleIcon1 extends BaseProps {

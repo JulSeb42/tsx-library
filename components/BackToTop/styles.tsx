@@ -7,8 +7,7 @@ import Mixins from "../../Mixins"
 import Text from "../Text"
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { SpacersTypes } from "../../utils/common-types"
-import { PositionsTypes } from "../Header/types"
+import { SpacersTypes, PositionsTypes } from "../../utils/common-types"
 
 const StyledBackToTop = styled.div<{
     ref?: any

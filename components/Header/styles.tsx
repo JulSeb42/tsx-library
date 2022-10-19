@@ -21,13 +21,10 @@ import {
     ColorsHoverTypes,
     AllColorsTypes,
     ShadowsTypes,
+    PositionsTypes,
 } from "../../utils/common-types"
 
-import {
-    PositionsTypes,
-    NavMobileVariantsTypes,
-    NavDesktopVariantsTypes,
-} from "./types"
+import { NavMobileVariantsTypes, NavDesktopVariantsTypes } from "./types"
 
 const LogoImg = styled(Image)`
     object-position: left center;
@@ -86,8 +83,13 @@ const StyledHeader = styled.header<{
     $navVariant?: NavMobileVariantsTypes
     ref?: any
     $shadow?: ShadowsTypes
+    $isHidden?: boolean
+    $headerHeight: number
 }>`
     position: ${({ $position }) => $position};
+    left: 0;
+    top: ${({ $isHidden, $headerHeight }) =>
+        $isHidden ? `-${$headerHeight + 16}px` : 0};
     z-index: 999;
     width: 100vw;
     ${Mixins.Flexbox({
@@ -101,6 +103,7 @@ const StyledHeader = styled.header<{
             $color: $backgroundColor,
         })};
     ${Mixins.Shadow};
+    transition: ${Transitions.Short};
 
     @media ${Breakpoints.Mobile} {
         background-color: ${({

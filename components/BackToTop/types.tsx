@@ -6,9 +6,8 @@ import {
     ColorsHoverTypes,
     ShadowsTypes,
     AllColorsTypes,
-    SpacersTypes
+    ObjectPositionTypes
 } from "../../utils/common-types"
-import { PositionsTypes } from "../Header/types"
 
 export interface BaseProps extends React.HTMLAttributes<HTMLButtonElement> {
     icon?: string
@@ -22,14 +21,7 @@ export interface BaseProps extends React.HTMLAttributes<HTMLButtonElement> {
               active: ShadowsTypes
           }
     variant?: "plain" | "transparent"
-    position?: {
-        position?: PositionsTypes
-        left?: number | string | SpacersTypes
-        top?: number | string | SpacersTypes
-        right?: number | string | SpacersTypes
-        bottom?: number | string | SpacersTypes
-        zIndex?: number
-    }
+    position?: ObjectPositionTypes
 }
 
 interface Possible1 extends BaseProps {

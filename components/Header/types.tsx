@@ -2,18 +2,14 @@
 
 import React from "react"
 
-import { ColorsHoverTypes, AllColorsTypes, ShadowsTypes } from "../../utils/common-types"
+import {
+    ColorsHoverTypes,
+    AllColorsTypes,
+    ShadowsTypes,
+} from "../../utils/common-types"
 import { InputBackgroundTypes, InputsVariantsTypes } from "../Input/types"
 
 /*==================== List possibilities ====================*/
-
-const positions = {
-    relative: "relative",
-    absolute: "absolute",
-    fixed: "fixed",
-} as const
-
-export type PositionsTypes = keyof typeof positions
 
 const navDesktopVariants = {
     left: "left",
@@ -33,7 +29,6 @@ export type NavMobileVariantsTypes = keyof typeof navMobileVariants
 /*==================== Component Types ====================*/
 
 interface BaseProps extends React.HTMLAttributes<HTMLDivElement> {
-    position?: PositionsTypes
     children?: React.ReactNode | React.ReactNode[]
     backgroundColor?: AllColorsTypes
     linkColor?: ColorsHoverTypes
@@ -86,4 +81,16 @@ interface Possible2 extends BaseProps {
     }
 }
 
-export type HeaderProps = Possible1 | Possible2
+type Possible = Possible1 | Possible2
+
+type PossiblePosition1 = Possible & {
+    position?: "relative" | "absolute"
+    hideOnScroll?: never
+}
+
+type PossiblePosition2 = Possible & {
+    position?: "fixed"
+    hideOnScroll?: number | boolean
+}
+
+export type HeaderProps = PossiblePosition1 | PossiblePosition2

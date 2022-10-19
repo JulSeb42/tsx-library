@@ -11,8 +11,8 @@ import {
     ColorsHoverTypes,
     ShadowsTypes,
     SpacersTypes,
+    PositionsTypes,
 } from "../../utils/common-types"
-import { PositionsTypes } from "../Header/types"
 
 const buttonSize = 48
 
