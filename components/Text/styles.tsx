@@ -239,11 +239,15 @@ const StyledH1 = styled.h1<{
             })};
     }
 
-    a {
+    a, button {
         color: ${({ theme, $linkColor }) =>
             theme.ColorsHoverDefault({ $color: $linkColor })};
         transition: ${Transitions.Short};
         text-decoration: none;
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        font-family: ${FontFamilies.Body};
 
         @media ${Breakpoints.Hover} {
             &:hover {
@@ -292,11 +296,16 @@ const StyledH2 = styled.h2<{
             })};
     }
 
-    a {
+    a,
+    button {
         color: ${({ theme, $linkColor }) =>
             theme.ColorsHoverDefault({ $color: $linkColor })};
         transition: ${Transitions.Short};
         text-decoration: none;
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        font-family: ${FontFamilies.Body};
 
         @media ${Breakpoints.Hover} {
             &:hover {
@@ -345,11 +354,16 @@ const StyledH3 = styled.h3<{
             })};
     }
 
-    a {
+    a,
+    button {
         color: ${({ theme, $linkColor }) =>
             theme.ColorsHoverDefault({ $color: $linkColor })};
         transition: ${Transitions.Short};
         text-decoration: none;
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        font-family: ${FontFamilies.Body};
 
         @media ${Breakpoints.Hover} {
             &:hover {
@@ -398,11 +412,16 @@ const StyledH4 = styled.h4<{
             })};
     }
 
-    a {
+    a,
+    button {
         color: ${({ theme, $linkColor }) =>
             theme.ColorsHoverDefault({ $color: $linkColor })};
         transition: ${Transitions.Short};
         text-decoration: none;
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        font-family: ${FontFamilies.Body};
 
         @media ${Breakpoints.Hover} {
             &:hover {
@@ -451,11 +470,16 @@ const StyledH5 = styled.h5<{
             })};
     }
 
-    a {
+    a,
+    button {
         color: ${({ theme, $linkColor }) =>
             theme.ColorsHoverDefault({ $color: $linkColor })};
         transition: ${Transitions.Short};
         text-decoration: none;
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        font-family: ${FontFamilies.Body};
 
         @media ${Breakpoints.Hover} {
             &:hover {
@@ -503,11 +527,16 @@ const StyledH6 = styled.h6<{
             })};
     }
 
-    a {
+    a,
+    button {
         color: ${({ theme, $linkColor }) =>
             theme.ColorsHoverDefault({ $color: $linkColor })};
         transition: ${Transitions.Short};
         text-decoration: none;
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        font-family: ${FontFamilies.Body};
 
         @media ${Breakpoints.Hover} {
             &:hover {
@@ -555,11 +584,16 @@ const StyledP = styled.p<{
             })};
     }
 
-    a {
+    a,
+    button {
         color: ${({ theme, $linkColor }) =>
             theme.ColorsHoverDefault({ $color: $linkColor })};
         transition: ${Transitions.Short};
         text-decoration: none;
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        font-family: ${FontFamilies.Body};
 
         @media ${Breakpoints.Hover} {
             &:hover {
@@ -595,11 +629,16 @@ const StyledStrong = styled.strong<{
             })};
     }
 
-    a {
+    a,
+    button {
         color: ${({ theme, $linkColor }) =>
             theme.ColorsHoverDefault({ $color: $linkColor })};
         transition: ${Transitions.Short};
         text-decoration: none;
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        font-family: ${FontFamilies.Body};
 
         @media ${Breakpoints.Hover} {
             &:hover {
@@ -636,11 +675,16 @@ const StyledEm = styled.em<{
             })};
     }
 
-    a {
+    a,
+    button {
         color: ${({ theme, $linkColor }) =>
             theme.ColorsHoverDefault({ $color: $linkColor })};
         transition: ${Transitions.Short};
         text-decoration: none;
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        font-family: ${FontFamilies.Body};
 
         @media ${Breakpoints.Hover} {
             &:hover {
@@ -688,11 +732,16 @@ const StyledSmall = styled.small<{
             })};
     }
 
-    a {
+    a,
+    button {
         color: ${({ theme, $linkColor }) =>
             theme.ColorsHoverDefault({ $color: $linkColor })};
         transition: ${Transitions.Short};
         text-decoration: none;
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        font-family: ${FontFamilies.Body};
 
         @media ${Breakpoints.Hover} {
             &:hover {
@@ -741,11 +790,16 @@ const StyledBlockquote = styled.blockquote<{
             })};
     }
 
-    a {
+    a,
+    button {
         color: ${({ theme, $linkColor }) =>
             theme.ColorsHoverDefault({ $color: $linkColor })};
         transition: ${Transitions.Short};
         text-decoration: none;
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        font-family: ${FontFamilies.Body};
 
         @media ${Breakpoints.Hover} {
             &:hover {
@@ -802,11 +856,16 @@ const StyledUl = styled.ul<{
                 })};
         }
 
-        a {
+        a,
+        button {
             color: ${({ theme, $linkColor }) =>
                 theme.ColorsHoverDefault({ $color: $linkColor })};
             transition: ${Transitions.Short};
             text-decoration: none;
+            padding: 0;
+            border: none;
+            background-color: transparent;
+            font-family: ${FontFamilies.Body};
 
             @media ${Breakpoints.Hover} {
                 &:hover {
@@ -864,11 +923,16 @@ const StyledOl = styled.ol<{
                 })};
         }
 
-        a {
+        a,
+        button {
             color: ${({ theme, $linkColor }) =>
                 theme.ColorsHoverDefault({ $color: $linkColor })};
             transition: ${Transitions.Short};
             text-decoration: none;
+            padding: 0;
+            border: none;
+            background-color: transparent;
+            font-family: ${FontFamilies.Body};
 
             @media ${Breakpoints.Hover} {
                 &:hover {
@@ -923,11 +987,16 @@ const StyledDl = styled.dl<{
                 })};
         }
 
-        a {
+        a,
+        button {
             color: ${({ theme, $linkColor }) =>
                 theme.ColorsHoverDefault({ $color: $linkColor })};
             transition: ${Transitions.Short};
             text-decoration: none;
+            padding: 0;
+            border: none;
+            background-color: transparent;
+            font-family: ${FontFamilies.Body};
 
             @media ${Breakpoints.Hover} {
                 &:hover {
@@ -962,11 +1031,16 @@ const StyledDl = styled.dl<{
                 })};
         }
 
-        a {
+        a,
+        button {
             color: ${({ theme, $linkColor }) =>
                 theme.ColorsHoverDefault({ $color: $linkColor })};
             transition: ${Transitions.Short};
             text-decoration: none;
+            padding: 0;
+            border: none;
+            background-color: transparent;
+            font-family: ${FontFamilies.Body};
 
             @media ${Breakpoints.Hover} {
                 &:hover {

@@ -1,6 +1,7 @@
 /*=============================================== Cover styles ===============================================*/
 
 import styled, { css } from "styled-components"
+import { stringifyPx } from "ts-utils-julseb"
 
 import { Spacers, Overlays } from "../../Variables"
 import Mixins from "../../Mixins"
@@ -12,12 +13,12 @@ import { AlignTypes } from "./types"
 
 /*==================== Styles ====================*/
 
-const CoverImage = styled.img`
+const CoverImage = styled.img<{ $height?: number | string }>`
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: ${({ $height }) => stringifyPx($height)};
     object-fit: cover;
 `
 
@@ -58,16 +59,18 @@ const StyledCover = styled.div<{
 }>`
     position: relative;
     width: 100%;
-    height: ${({ $height }) => $height};
+    height: ${({ $height }) => stringifyPx($height)};
 
     ${({ $overlay, theme }) =>
         $overlay &&
         css`
-            ${""/* ${Content} {
+            ${
+                "" /* ${Content} {
                 color: ${$overlay === "white" || $overlay === "gradient-white"
                     ? theme.Black
                     : theme.White} !important;
-            } */}
+            } */
+            }
 
             &:before {
                 content: "";

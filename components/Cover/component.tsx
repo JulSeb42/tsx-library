@@ -22,7 +22,7 @@ const Cover = ({
 }: CoverProps) => (
     <Styles.StyledCover $overlay={overlay} $height={height} {...props}>
         <Suspense fallback={<Fallback $width="100%" $height={height} />}>
-            <CoverImage src={src} alt={alt} />
+            <CoverImage src={src} alt={alt} $height={height} />
         </Suspense>
 
         <Styles.Content

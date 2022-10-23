@@ -24,7 +24,7 @@ export type PossibleTextIconTags = keyof typeof possibleTags
 export type TextIconProps = TextProps & {
     icon: string
     iconColor?: AllColorsTypes
-    children: string
+    children?: any
     tag?: PossibleTextIconTags
     gap?: SpacersTypes | number
     fontWeight?: WeightTypes | number
