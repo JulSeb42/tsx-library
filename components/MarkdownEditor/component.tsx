@@ -18,7 +18,7 @@ const MarkdownEditor = ({
     commands,
     extraCommands,
     backgroundColor = "light",
-    preview = "edit",
+    preview = "live",
     validation,
     ...props
 }: MarkdownEditorProps) => {

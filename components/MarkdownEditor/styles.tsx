@@ -67,7 +67,7 @@ const Editor = styled(MDEditor)<{
         border-radius: 0 !important;
     }
 
-    .wmde-markdown-color {
+    .wmde-markdown-color pre {
         display: none;
     }
 
