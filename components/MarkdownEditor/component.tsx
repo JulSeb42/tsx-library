@@ -17,7 +17,7 @@ const MarkdownEditor = ({
     accentColor = "primary",
     commands,
     extraCommands,
-    backgroundColor = "dark",
+    backgroundColor = "light",
     preview = "edit",
     validation,
     ...props
@@ -41,6 +41,7 @@ const MarkdownEditor = ({
                 onBlur={() => setIsFocus(false)}
                 $isFocus={isFocus}
                 $accentColor={accentColor}
+                $backgroundColor={backgroundColor}
                 {...props}
             />
         </Styles.StyledContainer>

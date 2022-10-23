@@ -19,6 +19,7 @@ const Editor = styled(MDEditor)<{
     $validation?: ValidationTypes
     $isFocus?: boolean
     $accentColor?: ColorsHoverTypes
+    $backgroundColor?: "light" | "dark"
 }>`
     box-shadow: none;
     border: 1px solid
@@ -66,11 +67,19 @@ const Editor = styled(MDEditor)<{
         border-radius: 0 !important;
     }
 
+    .wmde-markdown-color {
+        display: none;
+    }
+
     textarea {
         background-color: ${({ $validation, theme }) =>
             $validation === "not-passed" && theme.Danger50};
         padding: ${Spacers.XS};
         font-family: ${FontFamilies.Body} !important;
+        color: ${({ $backgroundColor, theme }) =>
+            $backgroundColor === "dark" ? theme.White : theme.Black};
+        -webkit-text-fill-color: ${({ $backgroundColor, theme }) =>
+            $backgroundColor === "dark" ? theme.White : theme.Black};
     }
 
     .w-md-editor-bar {
