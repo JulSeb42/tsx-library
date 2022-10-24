@@ -19,7 +19,7 @@ export type ButtonStylesProps = keyof typeof buttonStyles
 
 /*==================== Component Types ====================*/
 
-interface BaseProps extends React.HTMLAttributes<HTMLButtonElement> {
+interface BaseProps extends React.HTMLAttributes<HTMLButtonElement & HTMLHyperlinkElementUtils> {
     type?: "button" | "submit" | "reset" | undefined
     isLoading?: boolean
     to?: string

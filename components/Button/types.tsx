@@ -18,8 +18,10 @@ export type ButtonStylesType = keyof typeof buttonStyles
 /*==================== Component props ====================*/
 
 interface BaseProps
-    extends React.HTMLAttributes<HTMLButtonElement>,
-        React.ButtonHTMLAttributes<HTMLButtonElement> {
+    extends React.HTMLAttributes<HTMLButtonElement & HTMLHyperlinkElementUtils>,
+        React.ButtonHTMLAttributes<
+            HTMLButtonElement & HTMLHyperlinkElementUtils
+        > {
     disabled?: boolean
     to?: string
     type?: "button" | "submit" | "reset" | undefined

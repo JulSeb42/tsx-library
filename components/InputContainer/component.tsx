@@ -49,6 +49,8 @@ const InputContainer = ({
             {children}
 
             {helperBottom &&
+                ((typeof helperBottom === "object" && helperBottom.text) ||
+                    typeof helperBottom === "string") &&
                 (typeof helperBottom === "object" && helperBottom.icon ? (
                     <Styles.HelperBottomContainer>
                         <Styles.IconContainer>
@@ -64,24 +66,6 @@ const InputContainer = ({
                 ) : (
                     helperBottomFunc()
                 ))}
-
-            {/* {helperBottom && (
-            <Styles.HelperBottom tag="small">
-                {typeof helperBottom === "object" && helperBottom.icon && (
-                    <Styles.IconContainer>
-                        <Icon
-                            src={helperBottom.icon}
-                            size={14}
-                            color={helperBottom.iconColor || "primary"}
-                        />
-                    </Styles.IconContainer>
-                )}
-
-                {typeof helperBottom === "object"
-                    ? helperBottom.text
-                    : helperBottom}
-            </Styles.HelperBottom>
-        )} */}
 
             {typeof value === "string" && counter && (
                 <Text tag="small" color="gray">

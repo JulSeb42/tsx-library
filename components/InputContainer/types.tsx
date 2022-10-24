@@ -9,13 +9,14 @@ export interface InputContainerProps {
     label?: string
     helper?: string
     helperBottom?:
+        | undefined
         | string
         | {
-              text: string
+              text: string | undefined
               icon?: string
               iconColor?: AllColorsTypes
               color?: AllColorsTypes
-              style?: "default" | "italic"
+              style?: "default" | "italic"
           }
     children?: ReactNode | ReactNode[] | JSX.Element | JSX.Element[]
     accentColor?: ColorsHoverTypes

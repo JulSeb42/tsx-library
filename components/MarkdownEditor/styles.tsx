@@ -65,6 +65,7 @@ const Editor = styled(MDEditor)<{
     .w-md-editor-content,
     .w-md-editor-aree {
         border-radius: 0 !important;
+        overflow-y: scroll;
     }
 
     .wmde-markdown-color pre {
@@ -80,6 +81,7 @@ const Editor = styled(MDEditor)<{
             $backgroundColor === "dark" ? theme.White : theme.Black};
         -webkit-text-fill-color: ${({ $backgroundColor, theme }) =>
             $backgroundColor === "dark" ? theme.White : theme.Black};
+        overflow-y: scroll;
     }
 
     .w-md-editor-bar {
