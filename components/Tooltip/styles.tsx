@@ -39,8 +39,9 @@ const StyledTooltip = styled.span<{
               `}
 `
 
-const Tip = styled.span<{ $isVisible: boolean }>`
-    width: 150px;
+const Tip = styled.span<{ $isVisible: boolean; $width: number }>`
+    width: ${({ $width }) => $width}px;
+    min-width: 60px;
     background-color: ${({ theme }) =>
         theme === ThemeDark ? Overlays.Plain.White80 : Overlays.Plain.Black80};
     color: ${({ theme }) => theme.Background};
@@ -48,7 +49,7 @@ const Tip = styled.span<{ $isVisible: boolean }>`
     padding: ${Spacers.XS};
     border-radius: ${Radiuses.S};
     bottom: 125%;
-    left: calc(50% - 150px / 2);
+    left: ${({ $width }) => `calc(50% - ${$width}px / 2)`};
     font-size: ${FontSizes.Small};
     font-weight: ${FontWeights.Regular};
     opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
@@ -60,7 +61,7 @@ const Tip = styled.span<{ $isVisible: boolean }>`
     &:after {
         content: "";
         bottom: calc(${Spacers.XS} * -1 - 2px);
-        left: 50%;
+        left: ${({ $width }) => `calc(${$width}px / 2 - 5px)`};
         margin-left: 2px;
         border-width: 5px;
         border-style: solid;

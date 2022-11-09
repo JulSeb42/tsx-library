@@ -16,6 +16,7 @@ const Form = forwardRef(
             buttonSecondary,
             isLoading,
             accentColor = "primary",
+            disabled,
             ...props
         }: FormProps,
         ref?: React.ForwardedRef<HTMLFormElement>
@@ -41,6 +42,7 @@ const Form = forwardRef(
                                         : undefined,
                             }}
                             isLoading={isLoading}
+                            disabled={disabled}
                         >
                             {typeof buttonPrimary === "object"
                                 ? buttonPrimary.text

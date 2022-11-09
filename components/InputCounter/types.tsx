@@ -22,6 +22,12 @@ interface BaseProps
         minus?: string
         plus?: string
     }
+
+    labelButtons?: {
+        minus?: string
+        plus?: string
+    }
+    showButtonsLabels?: boolean
 }
 
 interface Possible1 extends BaseProps {

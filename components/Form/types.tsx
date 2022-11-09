@@ -14,25 +14,26 @@ interface BaseProps extends React.HTMLAttributes<HTMLFormElement> {
           }
     accentColor?: ColorsHoverTypes
     isLoading?: boolean
+    disabled?: boolean
 }
 
 interface Possible1 extends BaseProps {
     buttonSecondary?: {
-        text?: string
+        text?: string | undefined
         iconLeft?: string
         iconRight?: string
-        to: string
+        to: string | undefined
         onClick?: never
     }
 }
 
 interface Possible2 extends BaseProps {
     buttonSecondary?: {
-        text?: string
+        text?: string | undefined
         iconLeft?: string
         iconRight?: string
         to?: never
-        onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+        onClick: (e: React.MouseEvent<HTMLButtonElement>) => void | undefined
     }
 }
 

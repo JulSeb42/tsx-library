@@ -7,7 +7,7 @@ import { GridProps } from "./types"
 
 const Grid = ({
     inline,
-    col,
+    col = 1,
     gap,
     columnGap,
     rowGap,

@@ -9,7 +9,7 @@ import { ModalProps } from "./types"
 
 const Modal = forwardRef(
     (
-        { children, isOpen, close, iconClose, ...props }: ModalProps,
+        { children, isOpen, close, iconClose, labelClose = "Close", ...props }: ModalProps,
         ref?: React.ForwardedRef<HTMLDivElement>
     ) => {
         useEffect(() => {
@@ -29,6 +29,7 @@ const Modal = forwardRef(
                             color="white"
                             size={48}
                             hoverBackground
+                            label={labelClose}
                         />
                     ) : (
                         <Styles.CloseButton
@@ -38,6 +39,7 @@ const Modal = forwardRef(
                             color="white"
                             size={48}
                             hoverBackground
+                            label={labelClose}
                         />
                     ))}
 

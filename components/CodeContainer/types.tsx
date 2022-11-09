@@ -209,6 +209,7 @@ export interface CodeContainerProps
               iconColorCopied?: AllColorsTypes
               iconCopy?: string
               iconCopied?: string
+              label?: string
           }
     backgroundColor?: AllColorsTypes
     textColor?: AllColorsTypes

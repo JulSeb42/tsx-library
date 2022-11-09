@@ -45,12 +45,14 @@ const Paginator = forwardRef(
             ...basePropsButton,
             onClick: handles.prev,
             disabled: activePage === 1 && true,
+            label: buttons?.labelPrev || "Previous"
         }
 
         const propsButtonNext = {
             ...basePropsButton,
             onClick: handles.next,
             disabled: activePage === pages.total && true,
+            label: buttons?.labelNext || "Next",
         }
 
         return (

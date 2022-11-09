@@ -35,6 +35,8 @@ interface BaseProps extends React.HTMLAttributes<HTMLButtonElement & HTMLHyperli
               active: ShadowsTypes
           }
     position?: ObjectPositionTypes
+    label: string
+    showLabel?: boolean
 }
 
 interface PossibleIcon1 extends BaseProps {
@@ -71,3 +73,10 @@ type Possible2 = IconProps & {
 }
 
 export type ButtonIconProps = Possible1 | Possible2
+
+export interface TipsProps {
+    label: string
+    children: any
+    position?: ObjectPositionTypes
+    size?: number
+}

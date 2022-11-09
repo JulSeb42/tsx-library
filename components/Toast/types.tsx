@@ -18,4 +18,5 @@ export interface ToastProps extends React.HTMLAttributes<HTMLDivElement> {
           }
 
     close?: boolean | string
+    labelClose?: string
 }

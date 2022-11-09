@@ -27,6 +27,8 @@ const InputCounter = ({
     disabled,
     backgroundColorInput,
     inputVariant = "rounded",
+    labelButtons,
+    showButtonsLabels,
     ...props
 }: InputCounterProps) => {
     const handleMinus = () =>
@@ -55,6 +57,7 @@ const InputCounter = ({
     const optionsButton = {
         size: 32,
         color: accentColor,
+        showLabel: showButtonsLabels,
         ...buttons,
     }
 
@@ -63,11 +66,13 @@ const InputCounter = ({
             ...optionsButton,
             onClick: handleMinus,
             disabled: !!(min && value <= min) || disabled,
+            label: labelButtons?.minus || "minus",
         },
         plus: {
             ...optionsButton,
             onClick: handlePlus,
             disabled: !!(max && value >= max) || disabled,
+            label: labelButtons?.plus || "plus",
         },
     }
 

@@ -7,4 +7,5 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
     isOpen: boolean
     close?: (e: React.MouseEvent<HTMLButtonElement>) => void
     iconClose?: string
+    labelClose?: string
 }

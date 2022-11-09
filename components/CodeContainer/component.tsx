@@ -58,6 +58,11 @@ const CodeContainer = ({
                                 top: "s",
                                 right: "m",
                             }}
+                            label={
+                                (typeof copyButton === "object"
+                                    ? copyButton?.label
+                                    : "Copy") || "Copy"
+                            }
                         />
                     ) : (
                         <ButtonIcon
@@ -74,6 +79,11 @@ const CodeContainer = ({
                                 top: "s",
                                 right: "m",
                             }}
+                            label={
+                                (typeof copyButton === "object"
+                                    ? copyButton?.label
+                                    : "Copy") || "Copy"
+                            }
                         />
                     )
                 ) : typeof copyButton === "object" && copyButton.iconCopy ? (
@@ -87,6 +97,11 @@ const CodeContainer = ({
                             top: "s",
                             right: "m",
                         }}
+                        label={
+                            (typeof copyButton === "object"
+                                ? copyButton?.label
+                                : "Copy") || "Copy"
+                        }
                     />
                 ) : (
                     <ButtonIcon
@@ -103,6 +118,11 @@ const CodeContainer = ({
                             top: "s",
                             right: "m",
                         }}
+                        label={
+                            (typeof copyButton === "object"
+                                ? copyButton?.label
+                                : "Copy") || "Copy"
+                        }
                     />
                 ))}
         </Styles.StyledCodeContainer>

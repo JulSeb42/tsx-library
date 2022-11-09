@@ -48,6 +48,8 @@ interface Possible1 extends BaseProps {
     buttons?: {
         variant?: "plain"
         hoverBackground?: never
+        labelPrev?: string
+        labelNext?: string
     }
 }
 
@@ -55,6 +57,8 @@ interface Possible2 extends BaseProps {
     buttons?: {
         variant?: "transparent"
         hoverBackground?: boolean
+        labelPrev?: string
+        labelNext?: string
     }
 }
 

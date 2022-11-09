@@ -16,9 +16,20 @@ export type TextStylesTypes = keyof typeof textStyles
 
 /*==================== Component Types ====================*/
 
-export interface TooltipProps extends React.HTMLAttributes<HTMLSpanElement> {
+interface BaseProps extends React.HTMLAttributes<HTMLSpanElement> {
     tooltip: string
+}
+
+interface Possible1 extends BaseProps {
     children: string
     textStyle?: TextStylesTypes
     color?: AllColorsTypes
 }
+
+interface Possible2 extends BaseProps {
+    children: React.ReactNode | JSX.Element
+    textStyle?: never
+    color?: never
+}
+
+export type TooltipProps = Possible1 | Possible2

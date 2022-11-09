@@ -9,6 +9,7 @@ import useLocalStorage from "./useLocalStorage"
 import useMaxWidth from "./useMaxWidth"
 import useMinWidth from "./useMinWidth"
 import useTranslation from "./useTranslation"
+import useTouchScreen from "./useTouchScreen"
 
 export {
     useClickOutside,
@@ -20,4 +21,5 @@ export {
     useMaxWidth,
     useMinWidth,
     useTranslation,
+    useTouchScreen,
 }

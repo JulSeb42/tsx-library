@@ -17,6 +17,7 @@ const Toast = ({
     icon,
     maxWidth = 400,
     shadow = "m",
+    labelClose = "Close",
     ...props
 }: ToastProps) => {
     const [isClosed, setIsClosed] = useState(false)
@@ -57,12 +58,14 @@ const Toast = ({
                             <ButtonIcon
                                 icon={close}
                                 variant="transparent"
+                                label={labelClose}
                                 {...closeProps}
                             />
                         ) : (
                             <ButtonIcon
                                 libicon={<CloseIcon size={32 * 0.7} />}
                                 variant="transparent"
+                                label={labelClose}
                                 {...closeProps}
                             />
                         ))}

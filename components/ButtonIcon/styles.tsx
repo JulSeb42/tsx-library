@@ -2,7 +2,16 @@
 
 import styled, { css } from "styled-components"
 
-import { Radiuses, Breakpoints } from "../../Variables"
+import {
+    Radiuses,
+    Breakpoints,
+    ThemeDark,
+    Overlays,
+    FontSizes,
+    FontWeights,
+    Transitions,
+    Spacers,
+} from "../../Variables"
 import Mixins from "../../Mixins"
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
@@ -29,6 +38,7 @@ const StyledButtonIcon = styled.button<{
     $right?: string | number | SpacersTypes
     $bottom?: string | number | SpacersTypes
     $zIndex?: number
+    $showLabel?: boolean
 }>`
     width: ${({ $size }) => $size}px;
     height: ${({ $size }) => $size}px;
@@ -80,8 +90,52 @@ const StyledButtonIcon = styled.button<{
         color: ${({ theme }) => theme.Gray500};
     }
 
+    position: ${({ $position, $showLabel }) =>
+        !$showLabel ? $position : "relative"};
+    z-index: ${({ $zIndex, $showLabel }) => (!$showLabel ? $zIndex : 0)};
+
+    ${({ $left, $showLabel }) =>
+        !$showLabel &&
+        $left &&
+        css`
+            left: ${Mixins.Spacers({ $spacer: $left })};
+        `}
+
+    ${({ $top, $showLabel }) =>
+        !$showLabel &&
+        $top &&
+        css`
+            top: ${Mixins.Spacers({ $spacer: $top })};
+        `}
+
+    ${({ $right, $showLabel }) =>
+        !$showLabel &&
+        $right &&
+        css`
+            right: ${Mixins.Spacers({ $spacer: $right })};
+        `}
+
+    ${({ $bottom, $showLabel }) =>
+        !$showLabel &&
+        $bottom &&
+        css`
+            bottom: ${Mixins.Spacers({ $spacer: $bottom })};
+        `}
+`
+
+const TooltipContainer = styled.span<{
+    $position?: PositionsTypes
+    $left?: string | number | SpacersTypes
+    $top?: string | number | SpacersTypes
+    $right?: string | number | SpacersTypes
+    $bottom?: string | number | SpacersTypes
+    $zIndex?: number
+    $size?: number
+}>`
     position: ${({ $position }) => $position};
     z-index: ${({ $zIndex }) => $zIndex};
+    width: ${({ $size }) => $size}px;
+    height: ${({ $size }) => $size}px;
 
     ${({ $left }) =>
         $left &&
@@ -108,6 +162,45 @@ const StyledButtonIcon = styled.button<{
         `}
 `
 
-setDefaultTheme([StyledButtonIcon])
+const Tip = styled.span<{ $isVisible: boolean; $width: number }>`
+    width: ${({ $width }) => $width}px;
+    min-width: 60px;
+    background-color: ${({ theme }) =>
+        theme === ThemeDark ? Overlays.Plain.White80 : Overlays.Plain.Black80};
+    color: ${({ theme }) => theme.Background};
+    text-align: center;
+    padding: ${Spacers.XXS};
+    border-radius: ${Radiuses.S};
+    font-size: ${FontSizes.Small};
+    font-weight: ${FontWeights.Regular};
+    opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
+    visibility: ${({ $isVisible }) => ($isVisible ? "visible" : "hidden")};
+    z-index: 1;
+    transition: ${Transitions.Short};
+    position: absolute;
+    bottom: 125%;
+    left: ${({ $width }) => `calc(50% - ${$width}px / 2 - 2px)`};
 
-export { StyledButtonIcon }
+    &:after {
+        content: "";
+        bottom: calc(${Spacers.XS} * -1 - 2px);
+        left: ${({ $width }) => `calc(${$width}px / 2 - 5px)`};
+        margin-left: 2px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: ${({ theme }) =>
+                theme === ThemeDark
+                    ? Overlays.Plain.White80
+                    : Overlays.Plain.Black80}
+            transparent transparent transparent;
+        opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
+        visibility: ${({ $isVisible }) => ($isVisible ? "visible" : "hidden")};
+        z-index: 1;
+        transition: ${Transitions.Short};
+        position: absolute;
+    }
+`
+
+setDefaultTheme([StyledButtonIcon, TooltipContainer, Tip])
+
+export { StyledButtonIcon, TooltipContainer, Tip }

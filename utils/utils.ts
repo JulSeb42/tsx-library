@@ -1,39 +1,8 @@
 /*=============================================== Utils ===============================================*/
 
-import { v4 as uuid } from "uuid"
-import {
-    calculateAverage,
-    calculateTotalSum,
-    capitalize,
-    convertDate,
-    convertDateShort,
-    convertPrice,
-    convertToEmail,
-    convertToPascal,
-    convertYoutube,
-    detectLanguage,
-    formatHour,
-    generateNumbers,
-    getFirstName,
-    getLastName,
-    getPercentage,
-    getRandom,
-    getRandomAvatar,
-    getRandomDate,
-    getRandomNumber,
-    getRandomString,
-    getRandomTime,
-    getTimeNow,
-    getToday,
-    emailRegex,
-    passwordRegex,
-    scrollToTop,
-    slugify,
-    stringifyPx,
-    unslugify,
-} from "ts-utils-julseb"
+import * as utils from "ts-utils-julseb"
 
-export {
+export const {
     calculateAverage,
     calculateTotalSum,
     capitalize,
@@ -64,4 +33,4 @@ export {
     stringifyPx,
     unslugify,
     uuid,
-}
+} = utils

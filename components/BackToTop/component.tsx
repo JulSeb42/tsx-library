@@ -58,7 +58,7 @@ const BackToTop = forwardRef(
             onClick: scrollToTop,
             onMouseEnter: () => setIsTextVisible(true),
             onMouseLeave: () => setIsTextVisible(false),
-            "aria-label": text || "Back to top",
+            label: text || "Back to top",
         }
 
         return (
