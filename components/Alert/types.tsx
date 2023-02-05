@@ -17,7 +17,7 @@ export type ColorsAlertsTypes = keyof typeof ColorsAlerts
 
 export interface AlertProps extends React.HTMLAttributes<HTMLParagraphElement> {
     color?: ColorsAlertsTypes
-    children: string | React.ReactNode | React.ReactNode[]
+    children?: any
     isModal?: boolean
     as?: React.ElementType
 }

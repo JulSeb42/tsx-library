@@ -2,7 +2,7 @@
 
 import { useEffect } from "react"
 
-const useKeyPress = (
+export const useKeyPress = (
     callback: () => void,
     keyCodes: string | string[]
 ): void => {
@@ -48,5 +48,3 @@ const useKeyPress = (
             )
     }, [callback, keyCodes])
 }
-
-export default useKeyPress

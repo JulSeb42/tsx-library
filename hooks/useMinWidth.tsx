@@ -2,7 +2,7 @@
 
 import { useState, useLayoutEffect } from "react"
 
-const useMinWidth = (width: number) => {
+export const useMinWidth = (width: number) => {
     const [isMin, setIsMin] = useState<undefined | boolean>(undefined)
 
     useLayoutEffect(() => {
@@ -21,5 +21,3 @@ const useMinWidth = (width: number) => {
 
     return isMin
 }
-
-export default useMinWidth

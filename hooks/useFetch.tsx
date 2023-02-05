@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 
-const useFetch = <T,>(fetchFunction: any) => {
+export const useFetch = <T,>(fetchFunction: any) => {
     const [response, setResponse] = useState<T | null>(null)
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState<undefined | string>(undefined)
@@ -21,5 +21,3 @@ const useFetch = <T,>(fetchFunction: any) => {
 
     return { response, error, isLoading } as const
 }
-
-export default useFetch

@@ -13,7 +13,6 @@ import SelectInput from "./templates/SelectInput"
 import Textarea from "./templates/Textarea"
 import TextInput from "./templates/TextInput"
 import TimeInput from "./templates/TimeInput"
-import UrlInput from "./templates/UrlInput"
 
 import { InputProps, InputTypesTypes } from "./types"
 
@@ -47,8 +46,6 @@ const renderComponent = (
             return <Textarea ref={ref} type={type} {...props} />
         case "time":
             return <TimeInput ref={ref} type={type} {...props} />
-        case "url":
-            return <UrlInput ref={ref} type={type} {...props} />
         default:
             return <TextInput ref={ref} type={type} {...props} />
     }

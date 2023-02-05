@@ -9,8 +9,6 @@ import {
     LineHeights,
     Radiuses,
     Spacers,
-    ThemeDark,
-    ThemeLight,
     Transitions,
 } from "../../Variables"
 import { InputBaseMixin } from "../InputComponents"
@@ -33,7 +31,7 @@ const StyledInput = styled.input<{
     $validation?: ValidationTypes
     $iconCalendar?: string
     $iconClock?: string
-    $showHttp?: boolean
+    // $showHttp?: boolean
     $hasIcon?: boolean
     $accentColor?: ColorsHoverTypes
     $backgroundColor?: InputBackgroundTypes
@@ -120,19 +118,6 @@ const StyledInput = styled.input<{
             &:disabled::file-selector-button {
                 color: ${({ theme }) => theme.Gray500};
             }
-        `}
-
-    ${({ $type, $hasIcon, $showHttp, $variant }) =>
-        $type === "url" &&
-        $showHttp &&
-        css`
-            padding-left: ${$variant === "pill"
-                ? $hasIcon
-                    ? 42 + 50
-                    : 57
-                : $hasIcon
-                ? 53 + inputHeight
-                : 53}px;
         `}
 
     ${({
@@ -228,44 +213,6 @@ const StyledInput = styled.input<{
         `}
 `
 
-const UrlContainer = styled.span<{
-    $hasIcon?: boolean
-    $disabled?: boolean
-    $backgroundColor?: InputBackgroundTypes
-    $variant?: InputsVariantsTypes
-}>`
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: ${inputHeight}px;
-    z-index: 5;
-    line-height: ${inputHeight}px;
-    padding-left: ${({ $variant }) =>
-        $variant === "pill" ? Spacers.S : Spacers.XS};
-    color: ${({ theme, $backgroundColor, $disabled }) =>
-        $disabled
-            ? theme.Gray500
-            : $backgroundColor === "dark"
-            ? ThemeDark.Background
-            : $backgroundColor === "light"
-            ? ThemeLight.Background
-            : theme.Font};
+setDefaultTheme([StyledInputContent, StyledInput])
 
-    ${({ $disabled }) =>
-        $disabled &&
-        css`
-            cursor: not-allowed;
-        `}
-
-    ${({ $hasIcon, $variant }) =>
-        $hasIcon &&
-        css`
-            padding-left: ${$variant === "pill"
-                ? `calc(40px + ${Spacers.XS})`
-                : `calc(${inputHeight}px + ${Spacers.XS})`};
-        `}
-`
-
-setDefaultTheme([StyledInputContent, StyledInput, UrlContainer])
-
-export { StyledInputContent, StyledInput, UrlContainer }
+export { StyledInputContent, StyledInput }

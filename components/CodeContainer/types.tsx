@@ -4,8 +4,7 @@ import React from "react"
 
 import { AllColorsTypes, ColorsHoverTypes } from "../../utils/common-types"
 
-export interface CodeContainerProps
-    extends React.HTMLAttributes<HTMLDivElement> {
+export interface CodeContainerProps extends React.HTMLAttributes<HTMLDivElement> {
     language?:
         | "oneC (1c)"
         | "abnf"
@@ -198,7 +197,7 @@ export interface CodeContainerProps
         | "xquery"
         | "yaml"
         | "zephir"
-    children: string
+    children?: any
     style?: any
     copyButton?:
         | boolean

@@ -3,7 +3,7 @@
 import React from "react"
 
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
-    children: React.ReactNode
+    children?: any
     isOpen: boolean
     close?: (e: React.MouseEvent<HTMLButtonElement>) => void
     iconClose?: string

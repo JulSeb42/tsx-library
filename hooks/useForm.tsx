@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 
-const useForm = (initialState = {}, onSubmit?: any) => {
+export const useForm = (initialState = {}, onSubmit?: any) => {
     const [formData, setFormData] = useState(initialState)
 
     const handleInputs = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -17,5 +17,3 @@ const useForm = (initialState = {}, onSubmit?: any) => {
 
     return { formData, handleInputs, resetForm, handleSubmit }
 }
-
-export default useForm

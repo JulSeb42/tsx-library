@@ -1,6 +1,6 @@
 /*=============================================== useLocalStorage ===============================================*/
 
-const useLocalStorage = () => {
+export const useLocalStorage = () => {
     const saveInStorage = (key: string, content: any) =>
         localStorage.setItem(key, JSON.stringify(content))
     const getFromStorage = (key: string) => localStorage.getItem(key)
@@ -14,5 +14,3 @@ const useLocalStorage = () => {
         clearLocalStorage,
     }
 }
-
-export default useLocalStorage

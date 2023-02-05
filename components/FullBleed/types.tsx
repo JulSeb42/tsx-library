@@ -5,7 +5,7 @@ import React from "react"
 import { SpacersTypes } from "../../utils/common-types"
 
 interface BaseProps extends React.HTMLAttributes<HTMLDivElement> {
-    children: React.ReactNode | React.ReactNode[] | JSX.Element | JSX.Element[]
+    children?: any
     height?: number | string
     aspectRatio?: string
     as?: React.ElementType

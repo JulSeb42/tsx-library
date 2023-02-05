@@ -72,7 +72,7 @@ export interface TextInputProps
         IconInputProps,
         React.HTMLAttributes<HTMLInputElement> {
     id: string
-    type?: "email" | "number" | "password" | "tel" | "text" | undefined
+    type?: "email" | "number" | "password" | "tel" | "text" | "url" | undefined
     children?: never
     maxLength?: number
     counter?: boolean

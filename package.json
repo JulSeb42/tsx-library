@@ -1,6 +1,6 @@
 {
     "name": "tsx-library-julseb",
-    "version": "5.2.3",
+    "version": "6.0.4",
     "private": false,
     "main": "./index.js",
     "exports": {

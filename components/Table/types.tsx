@@ -32,7 +32,7 @@ export type VAlignTypes = keyof typeof vAlign
 /*==================== Component Types ====================*/
 
 interface BaseProps extends React.HTMLAttributes<HTMLTableElement> {
-    children: React.ReactNode | React.ReactNode[]
+    children?: any
     textAlign?: TextAlignTypes
     vAlign?: VAlignTypes
     headerBackground?: ColorsHoverTypes

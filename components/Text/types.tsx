@@ -49,6 +49,7 @@ interface BaseProps extends React.HTMLAttributes<HTMLElement> {
     fontSize?: FontSizeTypes
     customFontSize?: CustomFontSizeTypes
     as?: React.ElementType
+    children?: any
 }
 
 interface Possible1 extends BaseProps {

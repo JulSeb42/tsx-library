@@ -6,7 +6,7 @@ import { uuid } from "../../utils/utils"
 import InputContainer from "../InputContainer"
 import { Chevron, ListInputs, ListItem } from "../ListInputs"
 
-import useClickOutside from "../../hooks/useClickOutside"
+import { useClickOutside } from "../../hooks"
 
 import * as Styles from "./styles"
 import { SelectProps } from "./types"
@@ -32,7 +32,7 @@ const Select = ({
     ...props
 }: SelectProps) => {
     const [isOpen, setIsOpen] = useState(false)
-    
+
     const el = useRef<HTMLButtonElement>(null)
     const onClickOutside = () => setIsOpen(false)
     useClickOutside(el, onClickOutside)

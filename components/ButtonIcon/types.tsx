@@ -76,7 +76,7 @@ export type ButtonIconProps = Possible1 | Possible2
 
 export interface TipsProps {
     label: string
-    children: any
+    children?: any
     position?: ObjectPositionTypes
     size?: number
 }

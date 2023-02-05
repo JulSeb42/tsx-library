@@ -21,13 +21,13 @@ interface BaseProps extends React.HTMLAttributes<HTMLSpanElement> {
 }
 
 interface Possible1 extends BaseProps {
-    children: string
+    children?: any
     textStyle?: TextStylesTypes
     color?: AllColorsTypes
 }
 
 interface Possible2 extends BaseProps {
-    children: React.ReactNode | JSX.Element
+    children?: any
     textStyle?: never
     color?: never
 }

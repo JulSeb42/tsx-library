@@ -40,7 +40,7 @@ interface PossibleList2 extends BaseProps {
 export type SelectProps = PossibleList1 | PossibleList2
 
 export interface ItemProps extends React.HTMLAttributes<HTMLSpanElement> {
-    children: string | number
+    children?: any
     onClick: (e: React.MouseEvent<HTMLSpanElement>) => void
     isSelected: boolean
     accentColor?: ColorsHoverTypes

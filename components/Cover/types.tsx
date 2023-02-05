@@ -18,7 +18,7 @@ export type AlignTypes = keyof typeof align
 export interface CoverProps extends React.HTMLAttributes<HTMLDivElement> {
     src: string
     alt: string
-    children: React.ReactNode | React.ReactNode[]
+    children?: any
     overlay?: "black" | "white" | "gradient-black" | "gradient-white"
     align?: AlignTypes
     height?: number | string

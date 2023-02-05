@@ -2,7 +2,7 @@
 
 import { useState, useLayoutEffect } from "react"
 
-const useMaxWidth = (width: number) => {
+export const useMaxWidth = (width: number) => {
     const [isMax, setIsMax] = useState<undefined | boolean>(undefined)
 
     useLayoutEffect(() => {
@@ -21,5 +21,3 @@ const useMaxWidth = (width: number) => {
 
     return isMax
 }
-
-export default useMaxWidth

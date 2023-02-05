@@ -5,7 +5,7 @@ import { detectLanguage } from "ts-utils-julseb"
 
 let currentLanguage = detectLanguage()
 
-const useTranslation = (translations: any) => {
+export const useTranslation = (translations: any) => {
     const [language, setLanguage] = useState<any>(currentLanguage)
     const languages = Object.keys(translations)
 
@@ -22,5 +22,3 @@ const useTranslation = (translations: any) => {
         languages,
     }
 }
-
-export default useTranslation

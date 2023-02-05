@@ -4,7 +4,7 @@ import { useEffect, RefObject } from "react"
 
 type Event = MouseEvent | TouchEvent
 
-const useClickOutside = <T extends HTMLElement = HTMLElement>(
+export const useClickOutside = <T extends HTMLElement = HTMLElement>(
     ref: RefObject<T>,
     handler: (event: Event) => void
 ) => {
@@ -32,4 +32,3 @@ const useClickOutside = <T extends HTMLElement = HTMLElement>(
     }, [ref, handler])
 }
 
-export default useClickOutside
