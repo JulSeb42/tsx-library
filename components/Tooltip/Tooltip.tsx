@@ -7,7 +7,14 @@ import { TooltipProps } from "./types"
 
 const Tooltip = forwardRef(
     (
-        { as, textStyle, color, children, tooltip, ...rest }: TooltipProps,
+        {
+            as,
+            textStyle = "dotted",
+            color = "primary",
+            children,
+            tooltip,
+            ...rest
+        }: TooltipProps,
         ref?: React.ForwardedRef<HTMLSpanElement>
     ) => {
         const [isVisible, setIsVisible] = useState(false)

@@ -33,7 +33,6 @@ const fillCols = (children: any, cols: any) =>
 
 const Masonry = ({
     as,
-
     col = 4,
     gap = "l",
     children,

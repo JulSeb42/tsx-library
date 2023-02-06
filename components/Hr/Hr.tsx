@@ -23,7 +23,7 @@ const Hr = forwardRef(
             $width={width}
             $height={height}
             $color={color}
-            $margin={margin}
+            $margin={typeof margin !== "object" ? margin : undefined}
             $marginLeft={typeof margin === "object" ? margin.left : undefined}
             $marginTop={typeof margin === "object" ? margin.top : undefined}
             $marginRight={typeof margin === "object" ? margin.right : undefined}

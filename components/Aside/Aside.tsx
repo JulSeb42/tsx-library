@@ -9,13 +9,13 @@ const Aside = forwardRef(
     (
         {
             as,
-            gap,
-            position,
-            alignContent,
-            alignItems,
-            justifyContent,
-            justifyItems,
-            size,
+            gap = "l",
+            position = 1,
+            alignContent = "start",
+            alignItems = "start",
+            justifyContent = "start",
+            justifyItems = "start",
+            size = "default",
             children,
             paddingTopBottom = "xxl",
             ...rest

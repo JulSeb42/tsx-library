@@ -1,7 +1,7 @@
 {
     "name": "tsx-library-julseb",
     "private": false,
-    "version": "6.0.5",
+    "version": "6.0.8",
     "license": "MIT",
     "main": "./index.js",
     "exports": {
@@ -13,7 +13,7 @@
             "import": "./index.css",
             "require": "./index.css"
         },
-         "./types": {
+        "./types": {
             "import": "./types.js",
             "require": "./types.js"
         }
@@ -22,11 +22,13 @@
         "dev": "vite",
         "build": "tsc && vite build",
         "preview": "vite preview",
-        "copy-to-lib": "rm -rf lib && mkdir lib && cp -a ./src/lib/* ./package.json ./.gitignore ./.prettierrc ./README.md ./lib",
-        "copy-to-build": "rm -rf build && mkdir build && cp ./package.json ./.gitignore ./.prettierrc ./README.md ./makefile ./lib/index.css ./lib/modules-declare.d.ts ./build",
+        "clean": "rm -rf lib build && mkdir lib build",
+        "add-git": "cd lib && git init && git remote add origin https://github.com/JulSeb42/tsx-library.git && git pull origin master && rm -rf * && rm -rf .gitignore && rm -rf .prettierrc",
+        "copy-to-lib": "cp -a ./src/lib/* ./package.json ./.gitignore ./.prettierrc ./README.md ./lib",
+        "copy-to-build": "cp ./package.json ./.gitignore ./.prettierrc ./README.md ./makefile ./lib/index.css ./lib/modules-declare.d.ts ./build",
         "copy-flags": "mkdir build/utils && cp -a lib/utils/flags build/utils/flags",
         "copy-icons": "mkdir build/icons-svg && cp lib/icons-svg/* build/icons-svg",
-        "build-lib": "yarn copy-to-lib && yarn copy-to-build && yarn copy-flags && yarn copy-icons && tsc",
+        "build-lib": "yarn clean && yarn add-git && yarn copy-to-lib && yarn copy-to-build && yarn copy-flags && yarn copy-icons && tsc",
         "publish-lib": "yarn publish ./build"
     },
     "dependencies": {

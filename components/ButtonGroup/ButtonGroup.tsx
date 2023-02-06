@@ -11,8 +11,8 @@ const ButtonGroup = forwardRef(
     (
         {
             as,
-            variant,
-            color,
+            variant = "plain",
+            color = "primary",
             buttons,
             borderRadius = "m",
             ...rest

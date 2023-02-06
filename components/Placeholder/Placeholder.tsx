@@ -9,17 +9,17 @@ const Placeholder = forwardRef(
     (
         {
             as,
-            width,
-            height,
+            width = 100,
+            height = 100,
             aspectRatio,
-            background,
+            background = "gray-200",
             shadow,
-            borderRadius,
+            borderRadius = "m",
             children,
-            fontSize,
+            fontSize = "body",
             customFontSize,
-            fontWeight,
-            textColor,
+            fontWeight = "regular",
+            textColor = "font",
             ...rest
         }: PlaceholderProps,
         ref?: React.ForwardedRef<HTMLDivElement>

@@ -11,7 +11,7 @@ const Avatar = forwardRef(
     (
         {
             as,
-            size = 24,
+            size = 48,
             border,
             badge,
             borderRadius = "circle",
@@ -19,8 +19,8 @@ const Avatar = forwardRef(
             alt = "Avatar",
             letter,
             icon,
-            color,
-            contentColor,
+            color = "primary",
+            contentColor = "background",
             ...rest
         }: AvatarProps,
         ref?: React.ForwardedRef<HTMLSpanElement>

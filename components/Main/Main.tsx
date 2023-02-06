@@ -9,14 +9,14 @@ const Main = forwardRef(
     (
         {
             as,
-            gap,
-            position,
-            alignContent,
-            alignItems,
-            justifyContent,
-            justifyItems,
-            size,
-            contentSize,
+            gap = "l",
+            position = 1,
+            alignContent = "start",
+            alignItems = "start",
+            justifyContent = "start",
+            justifyItems = "start",
+            size = "default",
+            contentSize = "default",
             children,
             paddingTopBottom = "xxl",
             ...rest

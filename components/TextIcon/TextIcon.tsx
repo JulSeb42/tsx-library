@@ -13,13 +13,14 @@ const TextIcon = forwardRef(
             as,
             icon,
             iconSize,
-            iconColor = "currentColor",
+            iconColor = "primary",
             tag = "p",
             display,
             gap = "xxs",
             lineHeight,
             children,
             color,
+            fontWeight = "regular",
             ...rest
         }: TextIconProps,
         ref?: React.ForwardedRef<HTMLDivElement>
@@ -74,12 +75,18 @@ const TextIcon = forwardRef(
                         tag={tag}
                         lineHeight={lineHeight}
                         display={display}
+                        fontWeight={fontWeight}
                         {...rest}
                     >
                         {children}
                     </Text>
                 ) : (
-                    <Text tag={tag} lineHeight={lineHeight} {...rest}>
+                    <Text
+                        tag={tag}
+                        lineHeight={lineHeight}
+                        fontWeight={fontWeight}
+                        {...rest}
+                    >
                         {children}
                     </Text>
                 )}

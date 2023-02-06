@@ -5,7 +5,8 @@ import { SyntaxHighlighterProps } from "react-syntax-highlighter"
 
 import { AllColorsTypes, ColorsHoverTypes } from "../../types"
 
-export interface CodeContainerProps extends SyntaxHighlighterProps {
+export interface CodeContainerProps
+    extends React.HTMLAttributes<HTMLDivElement> {
     as?: React.ElementType
     language?:
         | "oneC (1c)"

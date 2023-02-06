@@ -9,8 +9,8 @@ export const Skeleton = forwardRef(
     (
         {
             as,
-            width,
-            height,
+            width = 100,
+            height = 100,
             aspectRatio,
             backgroundColor = "gray-100",
             borderRadius,
