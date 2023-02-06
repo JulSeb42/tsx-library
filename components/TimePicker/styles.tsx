@@ -2,17 +2,18 @@
 
 import styled from "styled-components"
 
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
-import ChevronDownIcon from "../../icons/ChevronDownIcon"
+import { Mixins } from "../../"
 import { InputBaseMixin } from "../InputComponents"
+import { ValidationTypes, ColorsHoverTypes } from "../../types"
+import {
+    InputBackgroundTypes,
+    InputVariantTypes,
+} from "../InputComponents/types"
 
-import { ValidationTypes, ColorsHoverTypes } from "../../utils/common-types"
-import { InputBackgroundTypes, InputsVariantsTypes } from "../Input/types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledTimepicker = styled.div<{
     $isOpen?: boolean
-    ref?: any
     $disabled?: boolean
 }>`
     position: relative;
@@ -28,7 +29,7 @@ const Selected = styled.div<{
     $isOpen?: boolean
     $disabled?: boolean
     $hasIcon?: boolean
-    $variant?: InputsVariantsTypes
+    $variant?: InputVariantTypes
 }>`
     ${({
         $accentColor,
@@ -54,8 +55,6 @@ const Selected = styled.div<{
     })};
 `
 
-const StyledChevron = styled(ChevronDownIcon)<{ $isOpen?: boolean }>``
+setDefaultTheme([StyledTimepicker, Selected])
 
-setDefaultTheme([StyledTimepicker, Selected, StyledChevron])
-
-export { StyledTimepicker, Selected, StyledChevron }
+export { StyledTimepicker, Selected }

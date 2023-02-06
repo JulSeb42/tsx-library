@@ -2,18 +2,17 @@
 
 import styled, { css } from "styled-components"
 
-import { Radiuses } from "../../Variables"
-import Mixins from "../../Mixins"
-import Button from "../Button/component"
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { Button, Mixins, ButtonIcon } from "../../"
+import { AllColorsTypes, ColorsHoverTypes, RadiusesTypes } from "../../types"
 
-import { AllColorsTypes, ColorsHoverTypes } from "../../utils/common-types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledButtonGroup = styled.div<{
     $borders?: ColorsHoverTypes
+    $borderRadius?: RadiusesTypes
     $hasBorders?: boolean
 }>`
-    border-radius: ${Radiuses.M};
+   ${Mixins.BorderRadius};
     overflow: hidden;
     width: fit-content;
     ${Mixins.Flexbox({
@@ -30,9 +29,17 @@ const StyledButtonGroup = styled.div<{
         `}
 `
 
-const StyledButton = styled(Button)`
+const ButtonStyles = css`
     border-radius: 0;
     height: 100%;
+`
+
+const StyledButton = styled(Button)`
+    ${ButtonStyles}
+`
+
+const StyledButtonIcon = styled(ButtonIcon)`
+    ${ButtonStyles}
 `
 
 const Separator = styled.span<{ $color?: AllColorsTypes }>`
@@ -42,6 +49,6 @@ const Separator = styled.span<{ $color?: AllColorsTypes }>`
     width: 1px;
 `
 
-setDefaultTheme([StyledButtonGroup, StyledButton, Separator])
+setDefaultTheme([StyledButtonGroup, StyledButton, StyledButtonIcon, Separator])
 
-export { StyledButtonGroup, StyledButton, Separator }
+export { StyledButtonGroup, StyledButton, StyledButtonIcon, Separator }

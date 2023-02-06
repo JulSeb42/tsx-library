@@ -2,8 +2,8 @@
 
 import React, { forwardRef } from "react"
 
-import { IconComponent, RightContainer } from "../../InputComponents"
-import Button from "../../Button"
+import { ButtonIcon } from "../../../"
+import { RightContainer, IconComponent } from "../../InputComponents"
 import CloseIcon from "../../../icons/CloseIcon"
 
 import * as Styles from "../styles"
@@ -13,26 +13,23 @@ const SearchInput = forwardRef(
     (
         {
             icon,
-            disabled,
-            value,
-            name,
-            id,
             type = "search",
             clearSearch,
             iconClear,
-            autoFocus,
-            accentColor,
+            accentColor = "primary",
             backgroundColor,
             iconSize,
             variant = "rounded",
-            ...props
+            disabled,
+            value,
+            ...rest
         }: SearchInputProps,
         ref?: React.ForwardedRef<HTMLInputElement>
     ) => {
         const buttonProps = {
             noPadding: true,
             onClick: clearSearch,
-            disabled: disabled,
+            disabled,
             color: accentColor,
         }
 
@@ -49,34 +46,35 @@ const SearchInput = forwardRef(
                 )}
 
                 <Styles.StyledInput
-                    value={value}
-                    name={name}
-                    id={id}
                     type={type}
                     ref={ref}
                     $type={type}
                     $hasIcon={!!icon}
-                    autoFocus={autoFocus}
                     disabled={disabled}
                     $accentColor={accentColor}
                     $backgroundColor={backgroundColor}
                     $variant={variant}
-                    {...props}
+                    value={value}
+                    {...rest}
                 />
 
                 <RightContainer disabled={disabled} variant={variant}>
                     {typeof value === "string" &&
                         value.length > 0 &&
                         (iconClear ? (
-                            <Button
-                                icons={{ only: iconClear }}
-                                variant="text"
+                            <ButtonIcon
+                                icon={iconClear}
+                                variant="transparent"
+                                type="button"
+                                size={24}
                                 {...buttonProps}
                             />
                         ) : (
-                            <Button
-                                libicon={{ only: <CloseIcon size={16} /> }}
-                                variant="text"
+                            <ButtonIcon
+                                libicon={<CloseIcon size={20} />}
+                                variant="transparent"
+                                type="button"
+                                size={24}
                                 {...buttonProps}
                             />
                         ))}

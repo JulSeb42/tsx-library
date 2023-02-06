@@ -3,10 +3,10 @@
 import styled from "styled-components"
 import MDEditor from "@uiw/react-md-editor"
 
-import { Transitions, Radiuses, Spacers, FontFamilies } from "../../Variables"
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { Transitions, Radiuses, Spacers, FontFamilies } from "../../"
+import { ValidationTypes, ColorsHoverTypes } from "../../types"
 
-import { ValidationTypes, ColorsHoverTypes } from "../../utils/common-types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledContainer = styled.div<{ $accentColor?: ColorsHoverTypes }>`
     .wmde-markdown-var {

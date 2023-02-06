@@ -1,36 +1,43 @@
-/*=============================================== Small ===============================================*/
+/*=============================================== Small component ===============================================*/
 
-import React from "react"
+import React, { forwardRef } from "react"
 
-import { AllProps } from "../types"
-
+import { TextProps } from "../types"
 import { StyledSmall } from "../styles"
 
-const Small = ({
-    textAlign,
-    color,
-    linkColor = "primary",
-    lineHeight,
-    fontSize,
-    customFontSize,
-    children,
-    as,
-    fontWeight,
-    ...props
-}: AllProps & React.HTMLAttributes<HTMLParagraphElement>) => (
-    <StyledSmall
-        $textAlign={textAlign}
-        $color={color}
-        $linkColor={linkColor}
-        $lineHeight={lineHeight}
-        $fontSize={fontSize}
-        $customFontSize={customFontSize}
-        as={as}
-        $fontWeight={fontWeight}
-        {...props}
-    >
-        {children}
-    </StyledSmall>
+const Small = forwardRef(
+    (
+        {
+            children,
+            textAlign,
+            color,
+            linkColor = "primary",
+            lineHeight,
+            fontSize,
+            customFontSize,
+            as,
+            fontWeight,
+            maxLines,
+            ...rest
+        }: TextProps,
+        ref?: React.ForwardedRef<HTMLParagraphElement>
+    ) => (
+        <StyledSmall
+            ref={ref}
+            as={as}
+            $color={color}
+            $customFontSize={customFontSize}
+            $textAlign={textAlign}
+            $linkColor={linkColor}
+            $lineHeight={lineHeight}
+            $fontSize={fontSize}
+            $fontWeight={fontWeight}
+            $maxLines={maxLines}
+            {...rest}
+        >
+            {children}
+        </StyledSmall>
+    )
 )
 
 export default Small

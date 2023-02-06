@@ -9,16 +9,15 @@ import {
     FontSizes,
     FontFamilies,
     Spacers,
-} from "../../Variables"
-import Mixins from "../../Mixins"
+    Mixins,
+} from "../../"
+import { ColorsHoverTypes } from "../../types"
+import { InputBackgroundTypes } from "../InputComponents/types"
+import { PaginatorJustifyType } from "./types"
+
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { InputBackgroundTypes } from "../Input/types"
-import { ColorsHoverTypes } from "../../utils/common-types"
-
-import { JustifyTypes } from "./types"
-
-const StyledPaginator = styled.div<{ $justify?: JustifyTypes }>`
+const StyledPaginator = styled.div<{ $justify?: PaginatorJustifyType }>`
     ${({ $justify }) =>
         Mixins.Flexbox({
             $alignItems: "center",
@@ -32,12 +31,13 @@ const StyledInput = styled.input<{
     $background?: InputBackgroundTypes
 }>`
     height: 32px;
+    line-height: 32px;
     width: 48px;
     border: 1px solid ${({ theme }) => theme.Gray200};
     border-radius: ${Radiuses.S};
     font-size: ${FontSizes.Body};
     font-family: ${FontFamilies.Body};
-    padding: ${Spacers.XS};
+    padding: 0 ${Spacers.XS};
     background-color: ${({ theme, $background }) =>
         $background === "dark"
             ? ThemeDark.Background

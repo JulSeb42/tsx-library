@@ -1,17 +1,21 @@
 /*=============================================== Slideshow styles ===============================================*/
 
 import styled, { css } from "styled-components"
-import { stringifyPx } from "ts-utils-julseb"
 
-import { Transitions, Radiuses, Breakpoints, Spacers } from "../../Variables"
-import Mixins from "../../Mixins"
-import Flexbox from "../Flexbox"
-import Image from "../Image"
+import {
+    stringifyPx,
+    Transitions,
+    Radiuses,
+    Breakpoints,
+    Spacers,
+    Mixins,
+    Flexbox,
+    Image,
+} from "../../"
+import { ColorsHoverTypes, RadiusesTypes, ObjectFitTypes } from "../../types"
+import { ButtonPositionsTypes } from "./types"
+
 import setDefaultTheme from "../../utils/setDefaultTheme"
-
-import { ColorsHoverTypes, RadiusesTypes, ObjectFitTypes } from "../../utils/common-types"
-
-import { PositionsTypes } from "./types"
 
 const StyledSlideshow = styled.div`
     width: 100%;
@@ -75,7 +79,7 @@ const buttonSize = 32
 const buttonSizeLarge = 48
 
 const Button = styled.button<{
-    $position: PositionsTypes
+    $position: ButtonPositionsTypes
     $hideTouch?: boolean
     $isLarge?: boolean
     $color?: ColorsHoverTypes
@@ -141,10 +145,12 @@ const Pagination = styled(Flexbox).attrs({
         display: ${({ $hideTouch }) => $hideTouch && "none"};
     }
 
-    ${({ $position }) => $position === "inside" && css`
-        position: absolute;
-        bottom: 8px;
-    `}
+    ${({ $position }) =>
+        $position === "inside" &&
+        css`
+            position: absolute;
+            bottom: 8px;
+        `}
 `
 
 const dotSize = 8

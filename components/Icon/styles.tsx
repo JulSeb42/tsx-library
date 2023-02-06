@@ -3,9 +3,9 @@
 import styled from "styled-components"
 import SVG from "react-inlinesvg"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { AllColorsTypes } from "../../types"
 
-import { AllColorsTypes } from "../../utils/common-types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledIcon = styled(SVG)<{
     $size?: number

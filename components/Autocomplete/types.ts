@@ -1,0 +1,39 @@
+/*=============================================== Autocomplete types ===============================================*/
+
+import React from "react"
+
+import { ShadowsTypes } from "../../types"
+import { InputBaseProps } from "../InputContainer/types"
+import {
+    InputVariantTypes,
+    ValidationComponentProps,
+    InputBackgroundTypes,
+} from "../InputComponents/types"
+import { ListDirectionTypes } from "../ListInputs/types"
+
+interface AutocompletePropsBase
+    extends React.InputHTMLAttributes<HTMLInputElement>,
+        InputBaseProps,
+        ValidationComponentProps {
+    items: string[]
+    value: string
+    setValue: (value: string) => void
+    icon?: string
+    iconSize?: number
+    emptyText?: string
+    backgroundColor?: InputBackgroundTypes
+    listDirection?: ListDirectionTypes
+    variant?: InputVariantTypes
+}
+
+interface AutocompleteList1 extends AutocompletePropsBase {
+    listVariant?: "bordered"
+    listShadow?: never
+}
+
+interface AutocompleteList2 extends AutocompletePropsBase {
+    listVariant?: "shadow"
+    listShadow?: ShadowsTypes
+}
+
+export type AutocompleteProps = AutocompleteList1 | AutocompleteList2

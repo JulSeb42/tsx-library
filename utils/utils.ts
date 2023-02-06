@@ -1,8 +1,6 @@
 /*=============================================== Utils ===============================================*/
 
-import * as utils from "ts-utils-julseb"
-
-export const {
+export {
     calculateAverage,
     calculateTotalSum,
     capitalize,
@@ -33,4 +31,4 @@ export const {
     stringifyPx,
     unslugify,
     uuid,
-} = utils
+} from "ts-utils-julseb"

@@ -1,6 +1,6 @@
 /*=============================================== Messaging styles ===============================================*/
 
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 import ScrollToBottom from "react-scroll-to-bottom"
 
 import {
@@ -11,17 +11,13 @@ import {
     FontFamilies,
     Breakpoints,
     Transitions,
-} from "../../Variables"
-import Mixins from "../../Mixins"
-import Text from "../Text"
-import setDefaultTheme from "../../utils/setDefaultTheme"
+    Mixins,
+    Text,
+} from "../../"
+import { AllColorsTypes, ColorsHoverTypes, SpacersTypes } from "../../types"
+import { MessageTypeTypes } from "./types"
 
-import {
-    AllColorsTypes,
-    ColorsHoverTypes,
-    SpacersTypes,
-} from "../../utils/common-types"
-import { MessageTypesTypes } from "./types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledMessaging = styled.div<{ $borderColor?: AllColorsTypes }>`
     border: 1px solid
@@ -34,16 +30,24 @@ const StyledMessaging = styled.div<{ $borderColor?: AllColorsTypes }>`
     ${Mixins.Flexbox({
         $flexDirection: "column",
         $gap: "xs",
-    })}
+    })};
+`
+
+const EmptyContainer = styled.div`
+    width: 100%;
+    height: 40vh;
+    flex-grow: 1;
+    ${Mixins.Flexbox({
+        $alignItems: "center",
+        $justifyContent: "center",
+    })};
 `
 
 const MessagesContainer = styled(ScrollToBottom)<{
-    $isEmpty?: boolean
-    $gap?: SpacersTypes | number
+    $gap?: SpacersTypes
 }>`
-    flex-grow: 1;
     overflow-y: scroll;
-    width: 100%;
+    flex-grow: 1;
     ${Mixins.HideScrollbar};
 
     & > div {
@@ -51,22 +55,9 @@ const MessagesContainer = styled(ScrollToBottom)<{
         ${({ $gap }) =>
             Mixins.Flexbox({
                 $flexDirection: "column",
-                $gap: $gap,
+                $gap,
             })};
     }
-
-    ${({ $isEmpty }) =>
-        $isEmpty &&
-        css`
-            height: 40vh;
-
-            & > div {
-                ${Mixins.Flexbox({
-                    $alignItems: "center",
-                    $justifyContent: "center",
-                })}
-            }
-        `}
 `
 
 const InputContainer = styled.form`
@@ -133,7 +124,7 @@ const SendButton = styled.button<{
 `
 
 const StyledMessage = styled(Text)<{
-    $type?: MessageTypesTypes
+    $type?: MessageTypeTypes
     $backgroundColor?: AllColorsTypes
     $textColor?: AllColorsTypes
     $linkColor?: ColorsHoverTypes
@@ -176,6 +167,7 @@ const StyledMessage = styled(Text)<{
 
 setDefaultTheme([
     StyledMessaging,
+    EmptyContainer,
     MessagesContainer,
     InputContainer,
     Input,
@@ -185,6 +177,7 @@ setDefaultTheme([
 
 export {
     StyledMessaging,
+    EmptyContainer,
     MessagesContainer,
     InputContainer,
     Input,

@@ -2,9 +2,8 @@
 
 import styled from "styled-components"
 
-import { Overlays, Spacers } from "../../Variables"
-import Mixins from "../../Mixins"
-import ButtonIcon from "../ButtonIcon"
+import { Overlays, Mixins, ButtonIcon, Spacers } from "../../"
+
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledModal = styled.div<{ $isOpen: boolean }>`

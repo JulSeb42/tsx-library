@@ -2,12 +2,12 @@
 
 import styled from "styled-components"
 
-import Mixins from "../../Mixins"
+import { Mixins } from "../../"
+import { SpacersTypes } from "../../types"
+
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { SpacersTypes } from "../../utils/common-types"
-
-const StyledSticky = styled.div<{ $top?: SpacersTypes | number; ref?: any }>`
+const StyledSticky = styled.div<{ $top?: SpacersTypes }>`
     position: -webkit-sticky;
     position: sticky;
     top: ${({ $top }) => Mixins.Spacers({ $spacer: $top })};

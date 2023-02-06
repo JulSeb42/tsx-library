@@ -1,33 +1,23 @@
 /*=============================================== Cover styles ===============================================*/
 
 import styled, { css } from "styled-components"
-import { stringifyPx } from "ts-utils-julseb"
 
-import { Spacers, Overlays } from "../../Variables"
-import Mixins from "../../Mixins"
+import { stringifyPx, Spacers, Overlays, Mixins, Image } from "../../"
+import { SpacersTypes, AllColorsTypes } from "../../types"
+import { CoverAlignTypes } from "./types"
+
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { SpacersTypes, AllColorsTypes } from "../../utils/common-types"
-
-import { AlignTypes } from "./types"
-
-/*==================== Styles ====================*/
-
-const CoverImage = styled.img<{ $height?: number | string }>`
+const CoverImage = styled(Image).attrs({ width: "100%", fit: "cover" })`
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: ${({ $height }) => stringifyPx($height)};
-    object-fit: cover;
 `
 
-export default CoverImage
-
 const Content = styled.div<{
-    $align?: AlignTypes
+    $align?: CoverAlignTypes
     $height?: number | string
-    $gap?: SpacersTypes | string | number
+    $gap?: SpacersTypes
     $color?: AllColorsTypes
 }>`
     position: relative;
@@ -61,17 +51,9 @@ const StyledCover = styled.div<{
     width: 100%;
     height: ${({ $height }) => stringifyPx($height)};
 
-    ${({ $overlay, theme }) =>
+    ${({ $overlay }) =>
         $overlay &&
         css`
-            ${
-                "" /* ${Content} {
-                color: ${$overlay === "white" || $overlay === "gradient-white"
-                    ? theme.Black
-                    : theme.White} !important;
-            } */
-            }
-
             &:before {
                 content: "";
                 position: absolute;
@@ -91,6 +73,6 @@ const StyledCover = styled.div<{
         `}
 `
 
-setDefaultTheme([Content, StyledCover, CoverImage])
+setDefaultTheme([StyledCover, Content, CoverImage])
 
-export { Content, StyledCover }
+export { StyledCover, Content, CoverImage }

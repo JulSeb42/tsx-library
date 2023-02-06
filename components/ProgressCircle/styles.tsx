@@ -2,11 +2,10 @@
 
 import styled from "styled-components"
 
-import {} from "../../Variables"
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { Mixins } from "../../"
+import { AllColorsTypes } from "../../types"
 
-import { AllColorsTypes } from "../../utils/common-types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const ProgressCircleContainer = styled.span`
     position: relative;

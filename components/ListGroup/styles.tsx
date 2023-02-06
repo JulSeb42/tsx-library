@@ -8,12 +8,13 @@ import {
     Transitions,
     Breakpoints,
     FontWeights,
-} from "../../Variables"
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
-import Text from "../Text"
+    Mixins,
+    Text,
+    stringifyPx,
+} from "../../"
+import { AllColorsTypes, ColorsHoverTypes } from "../../types"
 
-import { AllColorsTypes, ColorsHoverTypes } from "../../utils/common-types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledListGroup = styled.div<{
     $borderColor?: AllColorsTypes
@@ -29,7 +30,7 @@ const StyledListGroup = styled.div<{
     ${({ $maxHeight }) =>
         $maxHeight &&
         css`
-            max-height: ${$maxHeight}px;
+            max-height: ${stringifyPx($maxHeight)};
             overflow-y: scroll;
         `}
 `
@@ -120,6 +121,6 @@ const Badge = styled.span<{
     font-size: ${badgeSize * 0.7}px;
 `
 
-setDefaultTheme([StyledListGroup, Item, NumberContainer, Badge, Title])
+setDefaultTheme([StyledListGroup, Item, Title, NumberContainer, Badge])
 
-export { StyledListGroup, Item, NumberContainer, Badge, Title }
+export { StyledListGroup, Item, Title, NumberContainer, Badge }

@@ -2,42 +2,38 @@
 
 import styled from "styled-components"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
-import { stringifyPx } from "ts-utils-julseb"
-import Mixins from "../../Mixins"
+import { stringifyPx, Mixins } from "../../"
+import { AllColorsTypes, SpacersTypes } from "../../types"
 
-import { AllColorsTypes, SpacersTypes } from "../../utils/common-types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledHr = styled.hr<{
-    $color?: AllColorsTypes
+    $width?: string | number
     $height?: number
-    $width?: number | string
-    $margin?: number | SpacersTypes | "0 auto" | "auto"
-    $marginLeft?: number | SpacersTypes
-    $marginTop?: number | SpacersTypes
-    $marginRight?: number | SpacersTypes
-    $marginBottom?: number | SpacersTypes
+    $color?: AllColorsTypes
+    $margin?: SpacersTypes | "0 auto" | "auto"
+    $marginLeft?: SpacersTypes
+    $marginTop?: SpacersTypes
+    $marginRight?: SpacersTypes
+    $marginBottom?: SpacersTypes
 }>`
-    width: ${({ $width }) => stringifyPx($width)};
-    height: ${({ $height }) => $height}px;
     border: none;
-    background-color: ${({ theme }) => theme.AllColors};
-    display: block;
+    width: ${({ $width }) => stringifyPx($width)};
+    height: ${({ $height }) => stringifyPx($height)};
+    background-color: ${({ $color, theme }) => theme.AllColors({ $color })};
     margin: ${({ $margin }) =>
-        $margin &&
-        ($margin === "0 auto"
+        $margin === "0 auto"
             ? "0 auto"
             : $margin === "auto"
             ? "auto"
-            : Mixins.Spacers({ $spacer: $margin }))};
+            : Mixins.Spacers({ $spacer: $margin })};
     margin-left: ${({ $marginLeft }) =>
-        $marginLeft && Mixins.Spacers({ $spacer: $marginLeft })};
-    margin-top: ${({ $marginTop }) =>
-        $marginTop && Mixins.Spacers({ $spacer: $marginTop })};
+        Mixins.Spacers({ $spacer: $marginLeft })};
+    margin-top: ${({ $marginTop }) => Mixins.Spacers({ $spacer: $marginTop })};
     margin-right: ${({ $marginRight }) =>
-        $marginRight && Mixins.Spacers({ $spacer: $marginRight })};
+        Mixins.Spacers({ $spacer: $marginRight })};
     margin-bottom: ${({ $marginBottom }) =>
-        $marginBottom && Mixins.Spacers({ $spacer: $marginBottom })};
+        Mixins.Spacers({ $spacer: $marginBottom })};
 `
 
 setDefaultTheme([StyledHr])

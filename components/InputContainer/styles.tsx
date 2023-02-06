@@ -2,12 +2,10 @@
 
 import styled from "styled-components"
 
-import { FontWeights } from "../../Variables"
-import Mixins from "../../Mixins"
-import Text from "../Text"
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { FontWeights, Mixins, Text } from "../../"
+import { ColorsHoverTypes } from "../../types"
 
-import { ColorsHoverTypes } from "../../utils/common-types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledInputContainer = styled.div`
     ${Mixins.Grid({
@@ -43,12 +41,17 @@ const IconContainer = styled.span`
     })}
 `
 
+const Counter = styled(Text).attrs({ tag: "small", color: "gray" })`
+    font-style: italic;
+`
+
 setDefaultTheme([
     StyledInputContainer,
     Label,
     HelperBottom,
     HelperBottomContainer,
     IconContainer,
+    Counter,
 ])
 
 export {
@@ -57,4 +60,5 @@ export {
     HelperBottomContainer,
     HelperBottom,
     IconContainer,
+    Counter,
 }

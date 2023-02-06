@@ -1,36 +1,43 @@
-/*=============================================== Ul ===============================================*/
+/*=============================================== Ul component ===============================================*/
 
-import React from "react"
+import React, { forwardRef } from "react"
 
-import { AllProps } from "../types"
-
+import { TextProps } from "../types"
 import { StyledUl } from "../styles"
 
-const Ul = ({
-    textAlign,
-    color,
-    linkColor = "primary",
-    lineHeight,
-    fontSize,
-    customFontSize,
-    children,
-    as,
-    fontWeight,
-    ...props
-}: AllProps & React.HTMLAttributes<HTMLUListElement>) => (
-    <StyledUl
-        $textAlign={textAlign}
-        $color={color}
-        $linkColor={linkColor}
-        $lineHeight={lineHeight}
-        $fontSize={fontSize}
-        $customFontSize={customFontSize}
-        as={as}
-        $fontWeight={fontWeight}
-        {...props}
-    >
-        {children}
-    </StyledUl>
+const Ul = forwardRef(
+    (
+        {
+            children,
+            textAlign,
+            color,
+            linkColor = "primary",
+            lineHeight,
+            fontSize,
+            customFontSize,
+            as,
+            fontWeight,
+            maxLines,
+            ...rest
+        }: TextProps,
+        ref?: React.ForwardedRef<HTMLUListElement>
+    ) => (
+        <StyledUl
+            ref={ref}
+            as={as}
+            $color={color}
+            $customFontSize={customFontSize}
+            $textAlign={textAlign}
+            $linkColor={linkColor}
+            $lineHeight={lineHeight}
+            $fontSize={fontSize}
+            $fontWeight={fontWeight}
+            $maxLines={maxLines}
+            {...rest}
+        >
+            {children}
+        </StyledUl>
+    )
 )
 
 export default Ul

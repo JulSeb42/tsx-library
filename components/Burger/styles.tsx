@@ -2,10 +2,10 @@
 
 import styled, { css } from "styled-components"
 
-import { Breakpoints, Radiuses, Transitions } from "../../Variables"
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { Breakpoints, Radiuses, Transitions } from "../../"
+import { ColorsHoverTypes } from "../../types"
 
-import { ColorsHoverTypes } from "../../utils/common-types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledBurger = styled.button<{
     $isOpen: boolean

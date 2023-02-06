@@ -1,14 +1,18 @@
 /*=============================================== InputImage styles ===============================================*/
 
-import styled, { css } from "styled-components"
-import { stringifyPx } from "ts-utils-julseb"
+import styled from "styled-components"
 
-import { Overlays, Transitions, Breakpoints } from "../../Variables"
-import Mixins from "../../Mixins"
-import Image from "../Image"
+import {
+    Image,
+    Mixins,
+    Transitions,
+    Overlays,
+    stringifyPx,
+    Breakpoints,
+} from "../../"
+import { ValidationTypes, RadiusesTypes } from "../../types"
+
 import setDefaultTheme from "../../utils/setDefaultTheme"
-
-import { ValidationTypes, RadiusesTypes } from "../../utils/common-types"
 
 const StyledInputImage = styled.div`
     position: relative;
@@ -53,8 +57,8 @@ const Label = styled.label<{
     $height?: number | string
     $radius?: RadiusesTypes
 }>`
-    width: ${({ $width }) => stringifyPx($width)};
-    height: ${({ $height }) => stringifyPx($height)};
+    width: ${({ $width }) => $width && stringifyPx($width)};
+    height: ${({ $height }) => $height && stringifyPx($height)};
     ${Mixins.Flexbox({
         $alignItems: "center",
         $justifyContent: "center",
@@ -62,25 +66,13 @@ const Label = styled.label<{
     position: relative;
     ${({ $radius }) => Mixins.BorderRadius({ $borderRadius: $radius })};
     overflow: hidden;
-    cursor: pointer;
+    cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
 
     @media ${Breakpoints.Hover} {
         &:hover ${StyledHoverContainer} {
-            opacity: 1;
+            opacity: ${({ $disabled }) => !$disabled && 1};
         }
     }
-
-    ${({ $disabled }) =>
-        $disabled &&
-        css`
-            cursor: not-allowed;
-
-            @media ${Breakpoints.Hover} {
-                &:hover ${StyledHoverContainer} {
-                    opacity: 0;
-                }
-            }
-        `}
 `
 
 const Img = styled(Image)`
@@ -91,10 +83,11 @@ const Img = styled(Image)`
 const Input = styled.input`
     display: none;
 `
+
 setDefaultTheme([
     StyledInputImage,
-    StyledHoverContainer,
     StyledEmptyContainer,
+    StyledHoverContainer,
     Label,
     Img,
     Input,
@@ -102,8 +95,8 @@ setDefaultTheme([
 
 export {
     StyledInputImage,
-    StyledHoverContainer,
     StyledEmptyContainer,
+    StyledHoverContainer,
     Label,
     Img,
     Input,

@@ -1,14 +1,13 @@
-/*=============================================== Video component ===============================================*/
-
-// Exported as default for lazyloading
+/*=============================================== Video styles ===============================================*/
 
 import styled from "styled-components"
-import { stringifyPx } from "ts-utils-julseb"
+
+import { stringifyPx } from "../../"
+import { ObjectFitTypes } from "../../types"
+
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { ObjectFitTypes } from "../../utils/common-types"
-
-const Vid = styled.video<{
+const StyledVideo = styled.video<{
     $width?: string | number
     $height?: string | number
     $fit?: ObjectFitTypes
@@ -16,11 +15,11 @@ const Vid = styled.video<{
 }>`
     display: block;
     object-fit: ${({ $fit }) => $fit};
-    width: ${({ $width }) => ($width ? stringifyPx($width) : "100%")};
-    height: ${({ $height }) => ($height ? stringifyPx($height) : "auto")};
+    width: ${({ $width }) => stringifyPx($width)};
+    height: ${({ $height }) => stringifyPx($height)};
     aspect-ratio: ${({ $aspectRatio }) => $aspectRatio};
 `
 
-setDefaultTheme([Vid])
+setDefaultTheme([StyledVideo])
 
-export default Vid
+export default StyledVideo

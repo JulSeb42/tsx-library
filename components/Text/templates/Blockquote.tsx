@@ -1,36 +1,43 @@
-/*=============================================== Blockquote ===============================================*/
+/*=============================================== Blockquote component ===============================================*/
 
-import React from "react"
+import React, { forwardRef } from "react"
 
-import { AllProps } from "../types"
-
+import { TextProps } from "../types"
 import { StyledBlockquote } from "../styles"
 
-const Blockquote = ({
-    textAlign,
-    color,
-    linkColor = "primary",
-    lineHeight,
-    fontSize,
-    customFontSize,
-    children,
-    as,
-    fontWeight,
-    ...props
-}: AllProps & React.HTMLAttributes<HTMLQuoteElement>) => (
-    <StyledBlockquote
-        $textAlign={textAlign}
-        $color={color}
-        $linkColor={linkColor}
-        $lineHeight={lineHeight}
-        $fontSize={fontSize}
-        $customFontSize={customFontSize}
-        as={as}
-        $fontWeight={fontWeight}
-        {...props}
-    >
-        {children}
-    </StyledBlockquote>
+const Blockquote = forwardRef(
+    (
+        {
+            as,
+            children,
+            textAlign,
+            color,
+            linkColor = "primary",
+            lineHeight,
+            fontSize,
+            customFontSize,
+            fontWeight,
+            maxLines,
+            ...rest
+        }: TextProps,
+        ref?: React.ForwardedRef<HTMLQuoteElement>
+    ) => (
+        <StyledBlockquote
+            ref={ref}
+            as={as}
+            $color={color}
+            $customFontSize={customFontSize}
+            $textAlign={textAlign}
+            $linkColor={linkColor}
+            $lineHeight={lineHeight}
+            $fontSize={fontSize}
+            $fontWeight={fontWeight}
+            $maxLines={maxLines}
+            {...rest}
+        >
+            {children}
+        </StyledBlockquote>
+    )
 )
 
 export default Blockquote

@@ -8,34 +8,29 @@ import { TextareaProps } from "../types"
 const Textarea = forwardRef(
     (
         {
-            id,
-            disabled,
-            name,
-            value,
             validation,
             type = "textarea",
-            autoFocus,
-            accentColor,
+            accentColor = "primary",
             backgroundColor,
-            ...props
+            ...rest
         }: TextareaProps,
-        ref?: React.ForwardedRef<HTMLTextAreaElement>
-    ) => (
-        <Styles.StyledInput
-            as="textarea"
-            $type={type}
-            $validation={validation?.status}
-            id={id}
-            disabled={disabled}
-            name={name}
-            value={value}
-            ref={ref}
-            autoFocus={autoFocus}
-            $accentColor={accentColor}
-            $backgroundColor={backgroundColor}
-            {...props}
-        />
-    )
+        ref?: React.ForwardedRef<HTMLInputElement>
+    ) => {
+        const getValidationStatus =
+            typeof validation === "object" ? validation?.status : validation
+
+        return (
+            <Styles.StyledInput
+                ref={ref}
+                as="textarea"
+                $type={type}
+                $validation={getValidationStatus}
+                $accentColor={accentColor}
+                $backgroundColor={backgroundColor}
+                {...rest}
+            />
+        )
+    }
 )
 
 export default Textarea

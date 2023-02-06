@@ -2,14 +2,13 @@
 
 import styled, { css } from "styled-components"
 
-import { Transitions, Spacers, Radiuses } from "../../Variables"
-import Mixins from "../../Mixins"
+import { Transitions, Spacers, Radiuses, Mixins } from "../../"
 import PlusIcon from "../../icons/PlusIcon"
 import ChevronDownIcon from "../../icons/ChevronDownIcon"
-import setDefaultTheme from "../../utils/setDefaultTheme"
-
+import { ColorsHoverTypes, AllColorsTypes } from "../../types"
 import { AccordionStyleTypes, IconTypes } from "./types"
-import { ColorsHoverTypes, AllColorsTypes } from "../../utils/common-types"
+
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledIconPlus = styled(PlusIcon)``
 
@@ -117,9 +116,9 @@ const Button = styled.button<{
 `
 
 setDefaultTheme([
-    StyledIconPlus,
-    StyledIconChevron,
     StyledAccordion,
+    StyledIconChevron,
+    StyledIconPlus,
     Item,
     Content,
     IconContainer,
@@ -127,9 +126,9 @@ setDefaultTheme([
 ])
 
 export {
-    StyledIconPlus,
-    StyledIconChevron,
     StyledAccordion,
+    StyledIconChevron,
+    StyledIconPlus,
     Item,
     Content,
     IconContainer,

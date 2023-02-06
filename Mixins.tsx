@@ -3,9 +3,15 @@
 /*==================== Imports ====================*/
 
 import { css } from "styled-components"
-import { stringifyPx } from "./utils/utils"
 
-import { Overlays, Radiuses, Spacers, Shadows } from "./Variables"
+import {
+    Overlays,
+    Radiuses,
+    Spacers,
+    Shadows,
+    Breakpoints,
+    stringifyPx,
+} from "./"
 
 import {
     SpacersTypes,
@@ -22,52 +28,64 @@ import {
     OverlayTypes,
     RadiusesTypes,
     ShadowsTypes,
-} from "./utils/common-types"
+    PaddingTypes,
+    PositionsTypes,
+} from "./types"
 
 /*==================== Types ====================*/
 
 /*==== Colors ====*/
 
-interface OverlayProps {
+export interface OverlayProps {
     $overlay?: OverlayTypes
 }
 
 /*==== Spacers ====*/
 
-interface SpacersProps {
-    $spacer?: SpacersTypes | string | number
+export interface SpacersProps {
+    $spacer?: SpacersTypes | string
 }
 
 /*==== Radiuses ====*/
 
-interface RadiusesProps {
-    $borderRadius?: RadiusesTypes | number
+export interface RadiusesProps {
+    $borderRadius?: RadiusesTypes
 }
 
 /*==== Shadows ====*/
 
-interface ShadowsProps {
+export interface ShadowsProps {
     $shadow?: ShadowsTypes
+    $isExtended?: boolean
+    $shadowDefault?: ShadowsTypes
+    $shadowHover?: ShadowsTypes
+    $shadowActive?: ShadowsTypes
+}
+
+/*==== Padding ====*/
+
+export interface PaddingProps {
+    $padding?: PaddingTypes
 }
 
 /*==== Grid ====*/
 
-interface GridProps {
+export interface GridProps {
     $inline?: boolean
     $col?: number | string
-    $gap?: SpacersTypes | string | number
-    $columnGap?: SpacersTypes | string | number
-    $rowGap?: SpacersTypes | string | number
+    $gap?: SpacersTypes
+    $columnGap?: SpacersTypes
+    $rowGap?: SpacersTypes
     $justifyItems?: GridJustifyItemsTypes
     $alignItems?: GridAlignItemsTypes
     $justifyContent?: GridJustifyContentTypes
     $alignContent?: GridAlignContentTypes
-    $padding?: SpacersTypes | string | number
+    $padding?: PaddingTypes
 }
 
 /*==== Flexbox ====*/
 
-interface FlexProps {
+export interface FlexProps {
     $inline?: boolean
     $flexDirection?: FlexDirectionTypes
     $flexWrap?: FlexWrapTypes
@@ -75,19 +93,21 @@ interface FlexProps {
     $alignItems?: FlexAlignItemsTypes
     $justifyItems?: FlexJustifyItemsTypes
     $alignContent?: FlexAlignContentTypes
-    $gap?: SpacersTypes | string | number
-    $columnGap?: SpacersTypes | string | number
-    $rowGap?: SpacersTypes | string | number
-    $padding?: SpacersTypes | string | number
+    $gap?: SpacersTypes
+    $columnGap?: SpacersTypes
+    $rowGap?: SpacersTypes
+    $padding?: PaddingTypes
 }
 
-export type {
-    OverlayProps,
-    SpacersProps,
-    RadiusesProps,
-    ShadowsProps,
-    GridProps,
-    FlexProps,
+/*==== Absolute ====*/
+
+export interface PositionProps {
+    $left?: SpacersTypes | string
+    $top?: SpacersTypes | string
+    $right?: SpacersTypes | string
+    $bottom?: SpacersTypes | string
+    $position?: PositionsTypes
+    $zIndex?: number
 }
 
 /*==================== Mixins ====================*/
@@ -110,7 +130,93 @@ const Mixins = {
     `,
 
     BorderRadius: ({ $borderRadius }: RadiusesProps) => css`
-        border-radius: ${$borderRadius === "xxl"
+        border-radius: ${(typeof $borderRadius === "object" &&
+            $borderRadius.topLeft) ||
+        (typeof $borderRadius === "object" && $borderRadius.topRight) ||
+        (typeof $borderRadius === "object" && $borderRadius.bottomRight) ||
+        (typeof $borderRadius === "object" && $borderRadius.bottomLeft)
+            ? `${
+                  $borderRadius.topLeft === "xxl"
+                      ? Radiuses.XXL
+                      : $borderRadius.topLeft === "xl"
+                      ? Radiuses.XL
+                      : $borderRadius.topLeft === "l"
+                      ? Radiuses.L
+                      : $borderRadius.topLeft === "m"
+                      ? Radiuses.M
+                      : $borderRadius.topLeft === "s"
+                      ? Radiuses.S
+                      : $borderRadius.topLeft === "xs"
+                      ? Radiuses.XS
+                      : $borderRadius.topLeft === "circle"
+                      ? Radiuses.Circle
+                      : $borderRadius.topLeft === "round"
+                      ? Radiuses.Round
+                      : $borderRadius.topLeft
+                      ? stringifyPx($borderRadius.topLeft)
+                      : 0
+              } ${
+                  $borderRadius.topRight === "xxl"
+                      ? Radiuses.XXL
+                      : $borderRadius.topRight === "xl"
+                      ? Radiuses.XL
+                      : $borderRadius.topRight === "l"
+                      ? Radiuses.L
+                      : $borderRadius.topRight === "m"
+                      ? Radiuses.M
+                      : $borderRadius.topRight === "s"
+                      ? Radiuses.S
+                      : $borderRadius.topRight === "xs"
+                      ? Radiuses.XS
+                      : $borderRadius.topRight === "circle"
+                      ? Radiuses.Circle
+                      : $borderRadius.topRight === "round"
+                      ? Radiuses.Round
+                      : $borderRadius.topRight
+                      ? stringifyPx($borderRadius.topRight)
+                      : 0
+              } ${
+                  $borderRadius.bottomRight === "xxl"
+                      ? Radiuses.XXL
+                      : $borderRadius.bottomRight === "xl"
+                      ? Radiuses.XL
+                      : $borderRadius.bottomRight === "l"
+                      ? Radiuses.L
+                      : $borderRadius.bottomRight === "m"
+                      ? Radiuses.M
+                      : $borderRadius.bottomRight === "s"
+                      ? Radiuses.S
+                      : $borderRadius.bottomRight === "xs"
+                      ? Radiuses.XS
+                      : $borderRadius.bottomRight === "circle"
+                      ? Radiuses.Circle
+                      : $borderRadius.bottomRight === "round"
+                      ? Radiuses.Round
+                      : $borderRadius.bottomRight
+                      ? stringifyPx($borderRadius.bottomRight)
+                      : 0
+              } ${
+                  $borderRadius.bottomLeft === "xxl"
+                      ? Radiuses.XXL
+                      : $borderRadius.bottomLeft === "xl"
+                      ? Radiuses.XL
+                      : $borderRadius.bottomLeft === "l"
+                      ? Radiuses.L
+                      : $borderRadius.bottomLeft === "m"
+                      ? Radiuses.M
+                      : $borderRadius.bottomLeft === "s"
+                      ? Radiuses.S
+                      : $borderRadius.bottomLeft === "xs"
+                      ? Radiuses.XS
+                      : $borderRadius.bottomLeft === "circle"
+                      ? Radiuses.Circle
+                      : $borderRadius.bottomLeft === "round"
+                      ? Radiuses.Round
+                      : $borderRadius.bottomLeft
+                      ? stringifyPx($borderRadius.bottomLeft)
+                      : 0
+              }`
+            : $borderRadius === "xxl"
             ? Radiuses.XXL
             : $borderRadius === "xl"
             ? Radiuses.XL
@@ -128,27 +234,75 @@ const Mixins = {
             ? Radiuses.Round
             : $borderRadius === "none"
             ? ""
-            : $borderRadius
+            : typeof $borderRadius === "string" ||
+              typeof $borderRadius === "number"
             ? stringifyPx($borderRadius)
             : ""};
     `,
 
-    Shadow: ({ $shadow }: ShadowsProps) => css`
-        box-shadow: ${$shadow === "xxl"
+    Shadow: ({
+        $shadow,
+        $shadowDefault,
+        $shadowHover,
+        $shadowActive,
+        $isExtended,
+    }: ShadowsProps) => css`
+        box-shadow: ${$shadow === "xxl" ||
+        ($isExtended && $shadowDefault === "xxl")
             ? Shadows.XXL
-            : $shadow === "xl"
+            : $shadow === "xl" || ($isExtended && $shadowDefault === "xl")
             ? Shadows.XL
-            : $shadow === "l"
+            : $shadow === "l" || ($isExtended && $shadowDefault === "l")
             ? Shadows.L
-            : $shadow === "m"
+            : $shadow === "m" || ($isExtended && $shadowDefault === "m")
             ? Shadows.M
-            : $shadow === "s"
+            : $shadow === "s" || ($isExtended && $shadowDefault === "s")
             ? Shadows.S
-            : $shadow === "xs"
+            : $shadow === "xs" || ($isExtended && $shadowDefault === "xs")
             ? Shadows.XS
-            : $shadow === "none"
-            ? ""
             : ""};
+
+        ${$isExtended &&
+        ($shadowHover || $shadowActive) &&
+        css`
+            @media ${Breakpoints.Hover} {
+                &:hover {
+                    box-shadow: ${$shadowHover === "xxl"
+                        ? Shadows.XXL
+                        : $shadowHover === "xl"
+                        ? Shadows.XL
+                        : $shadowHover === "l"
+                        ? Shadows.L
+                        : $shadowHover === "m"
+                        ? Shadows.M
+                        : $shadowHover === "s"
+                        ? Shadows.S
+                        : $shadowHover === "xs"
+                        ? Shadows.XS
+                        : $shadowHover === "none"
+                        ? "inherit"
+                        : ""};
+                }
+
+                &:active {
+                    box-shadow: ${$shadowActive === "xxl"
+                        ? Shadows.XXL
+                        : $shadowActive === "xl"
+                        ? Shadows.XL
+                        : $shadowActive === "l"
+                        ? Shadows.L
+                        : $shadowActive === "m"
+                        ? Shadows.M
+                        : $shadowActive === "s"
+                        ? Shadows.S
+                        : $shadowActive === "xs"
+                        ? Shadows.XS
+                        : $shadowHover === "none"
+                        ? "inherit"
+                        : ""};
+                }
+            }
+        `}
     `,
 
     Spacers: ({ $spacer }: SpacersProps) =>
@@ -181,6 +335,41 @@ const Mixins = {
         }
     `,
 
+    Padding: ({ $padding }: PaddingProps) => css`
+        padding-left: ${Mixins.Spacers({
+            $spacer:
+                typeof $padding === "object"
+                    ? $padding.left || $padding.leftRight
+                    : $padding
+                    ? $padding
+                    : 0,
+        })};
+        padding-right: ${Mixins.Spacers({
+            $spacer:
+                typeof $padding === "object"
+                    ? $padding.right || $padding.leftRight
+                    : $padding
+                    ? $padding
+                    : 0,
+        })};
+        padding-top: ${Mixins.Spacers({
+            $spacer:
+                typeof $padding === "object"
+                    ? $padding.top || $padding.topBottom
+                    : $padding
+                    ? $padding
+                    : 0,
+        })};
+        padding-bottom: ${Mixins.Spacers({
+            $spacer:
+                typeof $padding === "object"
+                    ? $padding.bottom || $padding.topBottom
+                    : $padding
+                    ? $padding
+                    : 0,
+        })};
+    `,
+
     Grid: ({
         $inline,
         $col,
@@ -204,7 +393,7 @@ const Mixins = {
         align-items: ${$alignItems};
         justify-content: ${$justifyContent};
         align-content: ${$alignContent};
-        padding: ${Mixins.Spacers({ $spacer: $padding })};
+        ${Mixins.Padding({ $padding: $padding })}
     `,
 
     Flexbox: ({
@@ -230,7 +419,71 @@ const Mixins = {
         gap: ${Mixins.Spacers({ $spacer: $gap })};
         column-gap: ${Mixins.Spacers({ $spacer: $columnGap })};
         row-gap: ${Mixins.Spacers({ $spacer: $rowGap })};
-        padding: ${Mixins.Spacers({ $spacer: $padding })};
+        ${Mixins.Padding({ $padding })};
+    `,
+
+    Position: ({
+        $position,
+        $left,
+        $top,
+        $right,
+        $bottom,
+        $zIndex,
+    }: PositionProps) => css`
+        position: ${$position};
+        z-index: ${$zIndex};
+
+        ${$left &&
+        css`
+            left: ${$left === "xxl" ||
+            $left === "xl" ||
+            $left === "l" ||
+            $left === "m" ||
+            $left === "s" ||
+            $left === "xs" ||
+            $left === "xxs"
+                ? Mixins.Spacers({ $spacer: $left })
+                : stringifyPx($left)};
+        `}
+
+        ${$top &&
+        css`
+            top: ${$top === "xxl" ||
+            $top === "xl" ||
+            $top === "l" ||
+            $top === "m" ||
+            $top === "s" ||
+            $top === "xs" ||
+            $top === "xxs"
+                ? Mixins.Spacers({ $spacer: $top })
+                : stringifyPx($top)};
+        `}
+
+    ${$right &&
+        css`
+            right: ${$right === "xxl" ||
+            $right === "xl" ||
+            $right === "l" ||
+            $right === "m" ||
+            $right === "s" ||
+            $right === "xs" ||
+            $right === "xxs"
+                ? Mixins.Spacers({ $spacer: $right })
+                : stringifyPx($right)};
+        `}
+
+    ${$bottom &&
+        css`
+            bottom: ${$bottom === "xxl" ||
+            $bottom === "xl" ||
+            $bottom === "l" ||
+            $bottom === "m" ||
+            $bottom === "s" ||
+            $bottom === "xs" ||
+            $bottom === "xxs"
+                ? Mixins.Spacers({ $spacer: $bottom })
+                : stringifyPx($bottom)};
+        `}
     `,
 }
 

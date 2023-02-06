@@ -3,24 +3,27 @@
 import styled, { css } from "styled-components"
 
 import {
+    Mixins,
     FontFamilies,
-    FontWeights,
     FontSizes,
-    Radiuses,
-    ThemeLight,
+    FontWeights,
     ThemeDark,
-} from "../../Variables"
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
+    ThemeLight,
+    Radiuses,
+} from "../../"
+import { ColorsHoverTypes } from "../../types"
+import {
+    InputBackgroundTypes,
+    InputVariantTypes,
+} from "../InputComponents/types"
 
-import { InputBackgroundTypes, InputsVariantsTypes } from "../Input/types"
-import { ColorsHoverTypes } from "../../utils/common-types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledInputCounter = styled.div`
     ${Mixins.Flexbox({
         $alignItems: "center",
         $gap: "xs",
-    })}
+    })};
 `
 
 const Input = styled.input<{
@@ -28,7 +31,7 @@ const Input = styled.input<{
     $accentColor?: ColorsHoverTypes
     $disabled?: boolean
     $backgroundColor?: InputBackgroundTypes
-    $variant?: InputsVariantsTypes
+    $variant?: InputVariantTypes
 }>`
     width: ${({ $isEditable }) => ($isEditable ? 48 : 32)}px;
     height: 32px;

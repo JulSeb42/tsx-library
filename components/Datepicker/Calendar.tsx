@@ -1,17 +1,14 @@
-/*=============================================== Calendar ===============================================*/
+/*=============================================== Calendar component ===============================================*/
 
 import React, { useState } from "react"
-import { uuid } from "../../utils/utils"
 
-import Icon from "../Icon"
+import { Icon, Text, uuid } from "../../"
+import { monthsEn, weekDaysEn } from "./data"
 import ChevronLeftIcon from "../../icons/ChevronLeftIcon"
 import ChevronRightIcon from "../../icons/ChevronRightIcon"
-import Text from "../Text"
 
 import * as Styles from "./styles"
 import { CalendarProps } from "./types"
-
-import { monthsEn, weekDaysEn } from "./data"
 
 const Calendar = ({
     minDate,
@@ -29,6 +26,9 @@ const Calendar = ({
     validation,
     backgroundColor,
 }: CalendarProps) => {
+    const getValidationStatus =
+        typeof validation === "object" ? validation?.status : validation
+
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
 
@@ -130,12 +130,12 @@ const Calendar = ({
             $calendarDirection={calendarDirection}
             $variant={calendarVariant}
             $shadow={calendarShadow}
-            $validation={validation?.status}
+            $validation={getValidationStatus}
             $backgroundColor={backgroundColor}
         >
             <Styles.Header
                 $accentColor={accentColor}
-                $validation={validation?.status}
+                $validation={getValidationStatus}
                 $backgroundColor={backgroundColor}
             >
                 <Styles.NavButton
@@ -144,7 +144,7 @@ const Calendar = ({
                         minDate && minDate?.getTime() > getTimeFromState(1, 1)
                     }
                     $accentColor={accentColor}
-                    $validation={validation?.status}
+                    $validation={getValidationStatus}
                 >
                     {icons?.prev ? (
                         <Icon src={icons.prev} size={24} />
@@ -163,7 +163,7 @@ const Calendar = ({
                         maxDate && maxDate?.getTime() < getTimeFromState(1, 2)
                     }
                     $accentColor={accentColor}
-                    $validation={validation?.status}
+                    $validation={getValidationStatus}
                 >
                     {icons?.next ? (
                         <Icon src={icons.next} size={24} />
@@ -217,7 +217,7 @@ const Calendar = ({
                             $isActive={formatedDate === formatedSelected}
                             $isToday={formatedDate === today}
                             $accentColor={accentColor}
-                            $validation={validation?.status}
+                            $validation={getValidationStatus}
                             disabled={
                                 (minDate &&
                                     minDate?.getTime() >

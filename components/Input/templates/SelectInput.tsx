@@ -2,9 +2,9 @@
 
 import React, { forwardRef } from "react"
 
-import Icon from "../../Icon"
-import ChevronDownIcon from "../../../icons/ChevronDownIcon"
+import { Icon } from "../../../"
 import { RightContainer } from "../../InputComponents"
+import ChevronDownIcon from "../../../icons/ChevronDownIcon"
 
 import * as Styles from "../styles"
 import { SelectInputProps } from "../types"
@@ -12,67 +12,44 @@ import { SelectInputProps } from "../types"
 const SelectInput = forwardRef(
     (
         {
-            id,
-            name,
-            value,
-            type,
             children,
+            type,
             iconSelect,
-            disabled,
-            autoFocus,
-            accentColor,
+            accentColor = "primary",
             backgroundColor,
             variant = "rounded",
-            ...props
+            disabled,
+            ...rest
         }: SelectInputProps,
-        ref?: React.ForwardedRef<HTMLSelectElement>
-    ) => (
-        <Styles.StyledInputContent>
-            <Styles.StyledInput
-                $type={type}
-                id={id}
-                name={name}
-                value={value}
-                as="select"
-                ref={ref}
-                disabled={disabled}
-                autoFocus={autoFocus}
-                $accentColor={accentColor}
-                $backgroundColor={backgroundColor}
-                $variant={variant}
-                {...props}
-            >
-                {children}
-            </Styles.StyledInput>
+        ref?: React.ForwardedRef<HTMLInputElement>
+    ) => {
+        const iconColor = disabled ? "gray" : accentColor
 
-            <RightContainer disabled={disabled} variant={variant}>
-                {iconSelect ? (
-                    <Icon
-                        src={iconSelect}
-                        size={16}
-                        color={
-                            disabled
-                                ? "gray"
-                                : accentColor
-                                ? accentColor
-                                : "primary"
-                        }
-                    />
-                ) : (
-                    <ChevronDownIcon
-                        size={16}
-                        color={
-                            disabled
-                                ? "gray"
-                                : accentColor
-                                ? accentColor
-                                : "primary"
-                        }
-                    />
-                )}
-            </RightContainer>
-        </Styles.StyledInputContent>
-    )
+        return (
+            <Styles.StyledInputContent>
+                <Styles.StyledInput
+                    $type={type}
+                    as="select"
+                    ref={ref}
+                    disabled={disabled}
+                    $accentColor={accentColor}
+                    $backgroundColor={backgroundColor}
+                    $variant={variant}
+                    {...rest}
+                >
+                    {children}
+                </Styles.StyledInput>
+
+                <RightContainer disabled={disabled} variant={variant}>
+                    {iconSelect ? (
+                        <Icon src={iconSelect} size={16} color={iconColor} />
+                    ) : (
+                        <ChevronDownIcon size={16} color={iconColor} />
+                    )}
+                </RightContainer>
+            </Styles.StyledInputContent>
+        )
+    }
 )
 
 export default SelectInput

@@ -1,30 +1,28 @@
 /*=============================================== Aside styles ===============================================*/
 
 import styled from "styled-components"
-import { stringifyPx } from "ts-utils-julseb"
 
-import { Layouts, Spacers, Breakpoints } from "../../Variables"
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
-
+import { AsidePositionTypes, AsideSizeTypes } from "./types"
+import { Mixins, Layouts, Breakpoints, stringifyPx } from "../../"
 import {
-    GridJustifyContentTypes,
+    SpacersTypes,
     GridAlignContentTypes,
     GridAlignItemsTypes,
+    GridJustifyContentTypes,
     GridJustifyItemsTypes,
-    SpacersTypes,
-} from "../../utils/common-types"
+} from "../../types"
 
-import { SizeTypes, PositionsTypes } from "./types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledAside = styled.aside<{
-    $size?: SizeTypes | number
-    $position?: PositionsTypes
+    $size?: AsideSizeTypes
+    $position?: AsidePositionTypes
     $justifyContent?: GridJustifyContentTypes
     $justifyItems?: GridJustifyItemsTypes
     $alignContent?: GridAlignContentTypes
     $alignItems?: GridAlignItemsTypes
-    $gap?: SpacersTypes | number
+    $gap?: SpacersTypes
+    $paddingTopBottom?: SpacersTypes
 }>`
     width: ${({ $size }) =>
         $size === "small"
@@ -32,14 +30,23 @@ const StyledAside = styled.aside<{
             : typeof $size === "number"
             ? stringifyPx($size)
             : Layouts.Aside.Default};
-    ${({ $justifyContent, $justifyItems, $alignContent, $alignItems, $gap }) =>
+    ${({
+        $justifyContent,
+        $justifyItems,
+        $alignContent,
+        $alignItems,
+        $gap,
+        $paddingTopBottom,
+    }) =>
         Mixins.Grid({
             $alignContent: $alignContent || "start",
-            $justifyItems: $justifyItems || "stretch",
+            $justifyItems: $justifyItems || "start",
             $justifyContent: $justifyContent || "stretch",
             $alignItems: $alignItems || "start",
             $gap,
-            $padding: `${Spacers.XXL} 0`,
+            $padding: {
+                topBottom: $paddingTopBottom,
+            },
         })};
     min-height: 100vh;
     grid-column: ${({ $position }) =>

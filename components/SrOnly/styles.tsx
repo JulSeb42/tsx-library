@@ -2,6 +2,8 @@
 
 import styled from "styled-components"
 
+import setDefaultTheme from "../../utils/setDefaultTheme"
+
 const StyledSrOnly = styled.div`
     border: 0 !important;
     clip: rect(1px, 1px, 1px, 1px) !important;
@@ -14,5 +16,7 @@ const StyledSrOnly = styled.div`
     width: 1px !important;
     white-space: nowrap !important;
 `
+
+setDefaultTheme([StyledSrOnly])
 
 export { StyledSrOnly }

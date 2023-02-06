@@ -2,15 +2,13 @@
 
 import styled, { css } from "styled-components"
 
-import { Radiuses, Transitions, Breakpoints } from "../../Variables"
-import Mixins from "../../Mixins"
+import { Radiuses, Transitions, Breakpoints, Mixins } from "../../"
+import { ColorsHoverTypes } from "../../types"
+import { JustifyType } from "./types"
+
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { ColorsHoverTypes } from "../../utils/common-types"
-
-import { JustifyTypes } from "./types"
-
-const StyledPagination = styled.div<{ $justify?: JustifyTypes }>`
+const StyledPagination = styled.div<{ $justify?: JustifyType }>`
     ${({ $justify }) =>
         Mixins.Flexbox({
             $alignItems: "center",

@@ -9,11 +9,11 @@ import {
     FontSizes,
     Spacers,
     ThemeLight,
-} from "../../Variables"
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
+    Mixins,
+} from "../../"
+import { AllColorsTypes } from "../../types"
 
-import { AllColorsTypes } from "../../utils/common-types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledCodeContainer = styled.div<{
     $backgroundColor?: AllColorsTypes

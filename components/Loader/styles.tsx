@@ -2,11 +2,10 @@
 
 import styled, { keyframes } from "styled-components"
 
-import { Radiuses } from "../../Variables"
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { Radiuses, Mixins } from "../../"
+import { AllColorsTypes } from "../../types"
 
-import { AllColorsTypes } from "../../utils/common-types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const SpinLoaderOne = keyframes`
     0% {
@@ -20,14 +19,14 @@ const SpinLoaderOne = keyframes`
 
 const StyledLoaderOne = styled.span<{
     $size?: number
-    $borderSize?: number
     $color?: AllColorsTypes
     $speed?: number
+    $borderWidth?: number
 }>`
     width: ${({ $size }) => $size}px;
     height: ${({ $size }) => $size}px;
     border-radius: ${Radiuses.Circle};
-    border: ${({ $borderSize }) => $borderSize}px solid transparent;
+    border: ${({ $borderWidth }) => $borderWidth}px solid transparent;
     border-bottom-color: ${({ theme }) => theme.AllColors};
     animation: ${SpinLoaderOne} ${({ $speed }) => $speed}ms linear infinite;
 `
@@ -43,19 +42,18 @@ const SpinLoaderTwo = keyframes`
 `
 
 const StyledLoaderTwo = styled.span<{
-    $size: number
-    $borderSize?: number
+    $size?: number
     $color?: AllColorsTypes
     $speed?: number
+    $borderWidth?: number
 }>`
     width: ${({ $size }) => $size}px;
     height: ${({ $size }) => $size}px;
     display: inline-block;
     border-radius: ${Radiuses.Circle};
-    border: ${({ $borderSize }) => $borderSize}px solid
-        ${({ theme }) => theme.AllColors};
-    border-color: ${({ theme }) => theme.AllColors} transparent
-        ${({ theme }) => theme.AllColors} transparent;
+    border: ${({ $borderWidth }) => $borderWidth}px solid transparent;
+    border-top-color: ${({ theme }) => theme.AllColors};
+    border-bottom-color: ${({ theme }) => theme.AllColors};
     animation: ${SpinLoaderTwo} ${({ $speed }) => $speed}ms linear infinite;
 `
 
@@ -71,27 +69,25 @@ const SpinLoaderThree = keyframes`
 
 const StyledLoaderThree = styled.span<{
     $size?: number
-    $borderSize?: number
     $color?: AllColorsTypes
     $speed?: number
+    $borderWidth?: number
 }>`
     width: ${({ $size }) => $size}px;
     height: ${({ $size }) => $size}px;
     display: inline-block;
     position: relative;
 
-    div {
+    span {
         display: block;
         position: absolute;
         width: 100%;
         height: 100%;
-        border: ${({ $borderSize }) => $borderSize}px solid
-            ${({ theme }) => theme.AllColors};
+        border: ${({ $borderWidth }) => $borderWidth}px solid transparent;
         border-radius: ${Radiuses.Circle};
         animation: ${SpinLoaderThree} ${({ $speed }) => $speed}ms
             cubic-bezier(0.5, 0, 0.5, 1) infinite;
-        border-color: ${({ theme }) => theme.AllColors} transparent transparent
-            transparent;
+        border-top-color: ${({ theme }) => theme.AllColors};
 
         &:nth-child(1) {
             animation-delay: -0.45s;
@@ -109,45 +105,50 @@ const StyledLoaderThree = styled.span<{
 
 const Flash = keyframes`
     0% {
-        opacity: 0.3;
-    }
-
-    50% {
-        opacity: 0.3;
-    }
-
-    100% {
         opacity: 1;
+    }
+
+    50%, 100% {
+        opacity: 0.5;
     }
 `
 
+const durationLoaderFour = 1000
+
 const StyledLoaderFour = styled.span<{
+    $size: number
     $color?: AllColorsTypes
-    $size?: number
 }>`
     width: ${({ $size }) => $size}px;
     height: ${({ $size }) => $size}px;
     ${Mixins.Flexbox({
-        $inline: true,
         $alignItems: "center",
-        $justifyContent: "space-between",
-        $gap: "xs",
-    })};
+        $justifyContent: "center",
+        $gap: "xxs",
+    })}
+    position: relative;
 
     span {
         aspect-ratio: 1;
         flex-grow: 1;
-        background-color: ${({ $color, theme }) =>
-            theme.AllColors({ $color: $color })};
+        display: inline-block;
         border-radius: ${Radiuses.Circle};
-        animation: ${Flash} 0.6s infinite linear alternate;
+        background-color: ${({ $color, theme }) => theme.AllColors({ $color })};
 
-        &:nth-child(2) {
-            animation-delay: 0.3s;
+        &:first-child {
+            animation: ${Flash} ${durationLoaderFour}ms infinite alternate;
+            animation-delay: 0ms;
         }
 
-        &:nth-child(3) {
-            animation-delay: 0.6s;
+        &:nth-child(2) {
+            animation: ${Flash} ${durationLoaderFour}ms infinite linear
+                alternate;
+            animation-delay: 250ms;
+        }
+
+        &:last-child {
+            animation: ${Flash} ${durationLoaderFour}ms infinite alternate;
+            animation-delay: 500ms;
         }
     }
 `

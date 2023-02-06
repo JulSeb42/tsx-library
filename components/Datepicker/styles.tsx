@@ -9,18 +9,17 @@ import {
     ThemeDark,
     ThemeLight,
     FontSizes,
-} from "../../Variables"
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
+    Mixins,
+} from "../../"
 import { InputBaseMixin } from "../InputComponents"
-
-import { InputBackgroundTypes, InputsVariantsTypes } from "../Input/types"
+import { ColorsHoverTypes, ShadowsTypes, ValidationTypes } from "../../types"
 import {
-    ColorsHoverTypes,
-    ShadowsTypes,
-    ValidationTypes,
-} from "../../utils/common-types"
+    InputBackgroundTypes,
+    InputVariantTypes,
+} from "../InputComponents/types"
 import { ListDirectionTypes } from "../ListInputs/types"
+
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const buttonSize = 32
 const buttonMobile = 24
@@ -28,8 +27,6 @@ const buttonMobile = 24
 const DatepickerContainer = styled.div<{
     disabled?: boolean
     $isOpen: boolean
-    ref?: any
-    onClick?: any
 }>`
     position: relative;
     width: 100%;
@@ -45,7 +42,7 @@ const Selected = styled.span<{
     $backgroundColor?: InputBackgroundTypes
     $validation?: ValidationTypes
     $hasIcon?: boolean
-    $variant?: InputsVariantsTypes
+    $variant?: InputVariantTypes
 }>`
     ${({
         $accentColor,

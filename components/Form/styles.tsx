@@ -2,13 +2,13 @@
 
 import styled from "styled-components"
 
-import Mixins from "../../Mixins"
+import { Mixins } from "../../"
+import { SpacersTypes } from "../../types"
+
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
-const StyledForm = styled.form`
-    ${Mixins.Grid({
-        $gap: "m",
-    })};
+const StyledForm = styled.form<{ $gap?: SpacersTypes }>`
+    ${Mixins.Grid};
 `
 
 setDefaultTheme([StyledForm])

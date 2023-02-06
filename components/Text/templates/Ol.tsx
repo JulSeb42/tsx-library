@@ -1,36 +1,43 @@
-/*=============================================== Ol ===============================================*/
+/*=============================================== Ol component ===============================================*/
 
-import React from "react"
+import React, { forwardRef } from "react"
 
-import { AllProps } from "../types"
-
+import { TextProps } from "../types"
 import { StyledOl } from "../styles"
 
-const Ol = ({
-    textAlign,
-    color,
-    linkColor = "primary",
-    lineHeight,
-    fontSize,
-    customFontSize,
-    children,
-    as,
-    fontWeight,
-    ...props
-}: AllProps & React.HTMLAttributes<HTMLOListElement>) => (
-    <StyledOl
-        $textAlign={textAlign}
-        $color={color}
-        $linkColor={linkColor}
-        $lineHeight={lineHeight}
-        $fontSize={fontSize}
-        $customFontSize={customFontSize}
-        as={as}
-        $fontWeight={fontWeight}
-        {...props}
-    >
-        {children}
-    </StyledOl>
+const Ol = forwardRef(
+    (
+        {
+            children,
+            textAlign,
+            color,
+            linkColor = "primary",
+            lineHeight,
+            fontSize,
+            customFontSize,
+            as,
+            fontWeight,
+            maxLines,
+            ...rest
+        }: TextProps,
+        ref?: React.ForwardedRef<HTMLOListElement>
+    ) => (
+        <StyledOl
+            ref={ref}
+            as={as}
+            $color={color}
+            $customFontSize={customFontSize}
+            $textAlign={textAlign}
+            $linkColor={linkColor}
+            $lineHeight={lineHeight}
+            $fontSize={fontSize}
+            $fontWeight={fontWeight}
+            $maxLines={maxLines}
+            {...rest}
+        >
+            {children}
+        </StyledOl>
+    )
 )
 
 export default Ol

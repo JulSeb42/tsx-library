@@ -1,28 +1,43 @@
-/*=============================================== Strong ===============================================*/
+/*=============================================== Strong component ===============================================*/
 
-import React from "react"
+import React, { forwardRef } from "react"
 
-import { AllProps } from "../types"
-
+import { TextProps } from "../types"
 import { StyledStrong } from "../styles"
 
-const Strong = ({
-    color,
-    linkColor = "primary",
-    children,
-    as,
-    fontWeight,
-    ...props
-}: AllProps & React.HTMLAttributes<HTMLParagraphElement>) => (
-    <StyledStrong
-        $color={color}
-        $linkColor={linkColor}
-        as={as}
-        $fontWeight={fontWeight}
-        {...props}
-    >
-        {children}
-    </StyledStrong>
+const Strong = forwardRef(
+    (
+        {
+            children,
+            textAlign,
+            color,
+            linkColor = "primary",
+            lineHeight,
+            fontSize,
+            customFontSize,
+            as,
+            fontWeight,
+            maxLines,
+            ...rest
+        }: TextProps,
+        ref?: React.ForwardedRef<HTMLParagraphElement>
+    ) => (
+        <StyledStrong
+            ref={ref}
+            as={as}
+            $color={color}
+            $customFontSize={customFontSize}
+            $textAlign={textAlign}
+            $linkColor={linkColor}
+            $lineHeight={lineHeight}
+            $fontSize={fontSize}
+            $fontWeight={fontWeight}
+            $maxLines={maxLines}
+            {...rest}
+        >
+            {children}
+        </StyledStrong>
+    )
 )
 
 export default Strong

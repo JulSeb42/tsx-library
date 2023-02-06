@@ -2,19 +2,18 @@
 
 import styled, { keyframes, css } from "styled-components"
 
-import Mixins from "../../Mixins"
-import { Radiuses, Transitions } from "../../Variables"
+import { Mixins, Radiuses, Transitions, getPercentage } from "../../"
+import { AllColorsTypes, SpacersTypes } from "../../types"
+import { ProgressDirectionType } from "./types"
+
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { AllColorsTypes, SpacersTypes } from "../../utils/common-types"
-import { DirectionTypes } from "./types"
-
 const Progress = ({
-    $value,
+    value,
     $direction,
 }: {
-    $value: number
-    $direction?: DirectionTypes
+    value: number
+    $direction?: ProgressDirectionType
 }) => keyframes`
     0% {
         width: ${$direction === "horizontal" && 0};
@@ -22,19 +21,21 @@ const Progress = ({
     }
 
     100% {
-        width: ${$direction === "horizontal" && $value}%;
-        height: ${$direction === "vertical" && $value}%;
+        width: ${$direction === "horizontal" && value}%;
+        height: ${$direction === "vertical" && value}%;
     }
 `
 
 const StyledProgressBar = styled.meter<{
-    $value: number
+    value: number
     $color?: AllColorsTypes
     $backgroundColor?: AllColorsTypes
     $animated?: boolean
-    $direction?: DirectionTypes
-    $width?: string | number | SpacersTypes
-    $height?: string | number | SpacersTypes
+    $direction?: ProgressDirectionType
+    $width?: string | SpacersTypes
+    $height?: string | SpacersTypes
+    $speed?: number
+    max: number
 }>`
     width: ${({ $width, $direction, $height }) =>
         $direction === "vertical"
@@ -57,33 +58,33 @@ const StyledProgressBar = styled.meter<{
     &:before {
         content: "";
         position: absolute;
-        border-radius: ${({ $value }) =>
-            $value < 3 ? Radiuses.Circle : Radiuses.Round};
+        border-radius: ${({ value }) =>
+            value < 3 ? Radiuses.Circle : Radiuses.Round};
         transition: ${Transitions.Short};
         background-color: ${({ theme }) => theme.AllColors};
         line-height: 100%;
 
-        ${({ $direction, $value }) =>
+        ${({ $direction, value, max }) =>
             $direction === "horizontal"
                 ? css`
-                      width: ${$value}%;
+                      width: ${getPercentage(value, max)}%;
                       height: 100%;
                       top: 0;
                   `
                 : css`
                       width: 100%;
-                      height: ${$value}%;
+                      height: ${getPercentage(value, max)}%;
                       bottom: 0;
                   `};
 
-        ${({ $animated, $value, $direction }) =>
+        ${({ $animated, value, $direction, $speed }) =>
             $animated === true &&
             css`
                 animation: ${Progress({
-                        $value: $value,
+                        value: value,
                         $direction: $direction,
                     })}
-                    calc(${$value} * 50ms) 1;
+                    ${$speed ? `${$speed}ms` : `calc(${value} * 50ms) 1`};
             `}
     }
 `

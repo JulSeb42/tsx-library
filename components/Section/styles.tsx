@@ -1,27 +1,18 @@
 /*=============================================== Section styles ===============================================*/
 
 import styled from "styled-components"
-import { stringifyPx } from "ts-utils-julseb"
 
-import Mixins from "../../Mixins"
+import { Mixins } from "../../"
+import { SpacersTypes } from "../../types"
+
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { SizesTypes } from "./types"
-
-const StyledSection = styled.section<{ $gap?: SizesTypes | number }>`
+const StyledSection = styled.section<{ $gap?: SpacersTypes }>`
     ${({ $gap }) =>
         Mixins.Grid({
-            $gap:
-                $gap === "large"
-                    ? "m"
-                    : $gap === "medium"
-                    ? "s"
-                    : $gap === "small"
-                    ? "xs"
-                    : stringifyPx($gap),
+            $gap,
+            $justifyItems: "start",
         })};
-    align-content: start;
-    justify-items: start;
 
     & > div,
     & > h1,

@@ -10,12 +10,11 @@ import {
     Transitions,
     ThemeDark,
     Radiuses,
-} from "../../Variables"
-import setDefaultTheme from "../../utils/setDefaultTheme"
-
-import { AllColorsTypes } from "../../utils/common-types"
-
+} from "../../"
+import { AllColorsTypes } from "../../types"
 import { TextStylesTypes } from "./types"
+
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledTooltip = styled.span<{
     $textStyle?: TextStylesTypes

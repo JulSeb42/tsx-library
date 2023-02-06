@@ -2,29 +2,28 @@
 
 import styled, { css } from "styled-components"
 import { Link } from "react-router-dom"
-import { stringifyPx } from "ts-utils-julseb"
 
 import {
+    stringifyPx,
     FontSizes,
     FontWeights,
     Breakpoints,
     Spacers,
     Transitions,
     Overlays,
-} from "../../Variables"
-import Mixins from "../../Mixins"
-import Image from "../Image"
-import Burger from "../Burger"
-import setDefaultTheme from "../../utils/setDefaultTheme"
-
+    Mixins,
+    Image,
+    Burger,
+} from "../../"
 import {
     ColorsHoverTypes,
     AllColorsTypes,
     ShadowsTypes,
     PositionsTypes,
-} from "../../utils/common-types"
+} from "../../types"
+import { NavMenuVariantsTypes, NavMobileVariantsTypes } from "./types"
 
-import { NavMobileVariantsTypes, NavDesktopVariantsTypes } from "./types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const LogoImg = styled(Image)`
     object-position: left center;
@@ -79,9 +78,8 @@ const StyledHeader = styled.header<{
     $backgroundColor?: AllColorsTypes
     $linkColor?: ColorsHoverTypes
     $navColor?: AllColorsTypes
-    $burgerPosition?: "left" | "right"
+    $burgerPosition?: NavMenuVariantsTypes
     $navVariant?: NavMobileVariantsTypes
-    ref?: any
     $shadow?: ShadowsTypes
     $isHidden?: boolean
     $headerHeight: number
@@ -141,7 +139,7 @@ const Nav = styled.nav<{
     $navColor?: AllColorsTypes
     $linkColor?: ColorsHoverTypes
     $variant?: NavMobileVariantsTypes
-    $desktopVariant?: NavDesktopVariantsTypes
+    $desktopVariant?: NavMenuVariantsTypes
     $shadow?: ShadowsTypes
 }>`
     ${Mixins.Flexbox({

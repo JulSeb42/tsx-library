@@ -2,14 +2,12 @@
 
 import styled from "styled-components"
 
-import Mixins from "../../Mixins"
+import { Mixins } from "../../"
+import { AllColorsTypes } from "../../types"
+
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { AllColorsTypes } from "../../utils/common-types"
-
-const StyledPageLoading = styled.div<{
-    $backgroundColor?: AllColorsTypes
-}>`
+const StyledPageLoading = styled.div<{ $backgroundColor?: AllColorsTypes }>`
     position: fixed;
     width: 100vw;
     height: 100vh;

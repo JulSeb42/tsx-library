@@ -3,17 +3,17 @@
 import styled, { css } from "styled-components"
 
 import {
-    Transitions,
-    Spacers,
-    FontSizes,
     Radiuses,
+    Spacers,
+    Transitions,
     Breakpoints,
+    Mixins,
+    FontSizes,
     FontWeights,
-} from "../../Variables"
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
+} from "../../"
+import { ValidationTypes, ColorsHoverTypes } from "../../types"
 
-import { ValidationTypes, ColorsHoverTypes } from "../../utils/common-types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledInputCheck = styled.div``
 

@@ -1,31 +1,29 @@
 /*=============================================== Main styles ===============================================*/
 
 import styled, { css } from "styled-components"
-import { stringifyPx } from "ts-utils-julseb"
 
-import { Layouts, Spacers, Breakpoints } from "../../Variables"
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
-
+import { MainPositionTypes, MainSizeTypes } from "./types"
+import { Mixins, Layouts, Breakpoints, stringifyPx } from "../../"
 import {
+    SpacersTypes,
     GridAlignContentTypes,
     GridAlignItemsTypes,
     GridJustifyContentTypes,
     GridJustifyItemsTypes,
-    SpacersTypes,
-} from "../../utils/common-types"
+} from "../../types"
 
-import { SizesTypes, PositionsTypes } from "./types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledMain = styled.main<{
-    $size?: SizesTypes | number
-    $position?: PositionsTypes
+    $size?: MainSizeTypes
+    $position?: MainPositionTypes
     $justifyContent?: GridJustifyContentTypes
     $justifyItems?: GridJustifyItemsTypes
     $alignContent?: GridAlignContentTypes
     $alignItems?: GridAlignItemsTypes
-    $gap?: SpacersTypes | number
+    $gap?: SpacersTypes
     $contentWidth?: "default" | "large" | "form"
+    $paddingTopBottom?: SpacersTypes
 }>`
     width: ${({ $size }) =>
         $size === "large"
@@ -37,17 +35,26 @@ const StyledMain = styled.main<{
             : typeof $size === "number"
             ? stringifyPx($size)
             : Layouts.Main.Default};
-    ${({ $justifyContent, $justifyItems, $alignContent, $alignItems, $gap }) =>
+    ${({
+        $justifyContent,
+        $justifyItems,
+        $alignContent,
+        $alignItems,
+        $gap,
+        $paddingTopBottom,
+    }) =>
         Mixins.Grid({
             $alignContent: $alignContent || "start",
             $justifyItems: $justifyItems || "start",
             $justifyContent: $justifyContent || "stretch",
             $alignItems: $alignItems || "start",
             $gap,
-            $padding: `${Spacers.XXL} 0`,
+            $padding: {
+                topBottom: $paddingTopBottom,
+            },
         })};
     min-height: 100vh;
-    grid-column: ${({ $position }) => ($position === 2 ? 3 : 2)};
+    grid-column: ${({ $position }) => ($position ? $position + 1 : 2)};
 
     @media ${Breakpoints.Tablet} {
         min-height: inherit;

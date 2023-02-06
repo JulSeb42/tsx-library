@@ -8,6 +8,7 @@ import {
     ColorsHoverTypes,
 } from "./utils/common-types"
 
+// eslint-disable-next-line
 import {
     // eslint-disable-next-line
     OverlayProps,
@@ -132,7 +133,7 @@ const ThemeLight = {
 
     /*==== Mixins ====*/
 
-    AllColors: ({ $color = "currentColor" }: AllColorProps) => css`
+    AllColors: ({ $color }: AllColorProps) => css`
         ${$color === "black"
             ? ThemeLight.Black
             : $color === "white"
@@ -275,7 +276,9 @@ const ThemeLight = {
             ? ThemeLight.Font
             : $color === "transparent"
             ? "transparent"
-            : "currentColor"}
+            : $color === "currentColor"
+            ? "currentColor"
+            : undefined};
     `,
 
     ColorsShort: ({ $color }: ColorsShortProps) => css`

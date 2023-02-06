@@ -4,45 +4,47 @@ import styled, { css } from "styled-components"
 
 import {
     Radiuses,
+    Mixins,
     Breakpoints,
     ThemeDark,
     Overlays,
-    FontSizes,
-    FontWeights,
     Transitions,
     Spacers,
-} from "../../Variables"
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
-
+    FontSizes,
+    FontWeights,
+} from "../../"
 import {
-    ColorsHoverTypes,
-    ShadowsTypes,
     SpacersTypes,
     PositionsTypes,
-} from "../../utils/common-types"
+    ColorsHoverTypes,
+    ShadowsTypes,
+    RadiusesTypes,
+} from "../../types"
+import { ButtonIconVariantTypes } from "./types"
 
-import { ButtonStylesProps } from "./types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledButtonIcon = styled.button<{
-    $variant?: ButtonStylesProps
+    $variant?: ButtonIconVariantTypes
     $color?: ColorsHoverTypes
     $size?: number
     $hoverBackground?: boolean
     $shadow?: ShadowsTypes
+    $shadowDefault?: ShadowsTypes
     $shadowHover?: ShadowsTypes
     $shadowActive?: ShadowsTypes
     $position?: PositionsTypes
-    $left?: string | number | SpacersTypes
-    $top?: string | number | SpacersTypes
-    $right?: string | number | SpacersTypes
-    $bottom?: string | number | SpacersTypes
+    $left?: SpacersTypes | string
+    $top?: SpacersTypes | string
+    $right?: SpacersTypes | string
+    $bottom?: SpacersTypes | string
     $zIndex?: number
     $showLabel?: boolean
+    $borderRadius?: RadiusesTypes
 }>`
     width: ${({ $size }) => $size}px;
     height: ${({ $size }) => $size}px;
-    border-radius: ${Radiuses.Circle};
+    ${Mixins.BorderRadius};
     ${Mixins.Flexbox({
         $inline: true,
         $alignItems: "center",
@@ -60,7 +62,14 @@ const StyledButtonIcon = styled.button<{
                 ? theme.Font
                 : theme.Background
             : theme.ColorsHoverDefault};
-    ${Mixins.Shadow};
+    ${({ $shadow, $shadowDefault, $shadowHover, $shadowActive }) =>
+        Mixins.Shadow({
+            $shadow: $shadow,
+            $isExtended: $shadowDefault && true,
+            $shadowDefault: $shadowDefault,
+            $shadowHover: $shadowHover,
+            $shadowActive: $shadowActive,
+        })};
 
     @media ${Breakpoints.Hover} {
         &:not(:disabled):hover {
@@ -72,7 +81,6 @@ const StyledButtonIcon = styled.button<{
                     : ""};
             color: ${({ $variant, theme }) =>
                 $variant === "transparent" && theme.ColorsHoverHover};
-            ${({ $shadowHover }) => Mixins.Shadow({ $shadow: $shadowHover })};
         }
 
         &:not(:disabled):active {
@@ -80,7 +88,6 @@ const StyledButtonIcon = styled.button<{
                 $variant === "plain" && theme.ColorsHoverActive};
             color: ${({ $variant, theme }) =>
                 $variant === "transparent" && theme.ColorsHoverActive};
-            ${({ $shadowActive }) => Mixins.Shadow({ $shadow: $shadowActive })};
         }
     }
 
@@ -90,76 +97,47 @@ const StyledButtonIcon = styled.button<{
         color: ${({ theme }) => theme.Gray500};
     }
 
-    position: ${({ $position, $showLabel }) =>
-        !$showLabel ? $position : "relative"};
-    z-index: ${({ $zIndex, $showLabel }) => (!$showLabel ? $zIndex : 0)};
-
-    ${({ $left, $showLabel }) =>
-        !$showLabel &&
-        $left &&
-        css`
-            left: ${Mixins.Spacers({ $spacer: $left })};
-        `}
-
-    ${({ $top, $showLabel }) =>
-        !$showLabel &&
-        $top &&
-        css`
-            top: ${Mixins.Spacers({ $spacer: $top })};
-        `}
-
-    ${({ $right, $showLabel }) =>
-        !$showLabel &&
-        $right &&
-        css`
-            right: ${Mixins.Spacers({ $spacer: $right })};
-        `}
-
-    ${({ $bottom, $showLabel }) =>
-        !$showLabel &&
-        $bottom &&
-        css`
-            bottom: ${Mixins.Spacers({ $spacer: $bottom })};
-        `}
+    ${({ $showLabel, $left, $top, $right, $bottom, $zIndex, $position }) =>
+        $showLabel
+            ? css`
+                  position: relative;
+              `
+            : css`
+                  ${($left || $top || $right || $bottom) &&
+                  Mixins.Position({
+                      $zIndex: $zIndex,
+                      $position,
+                      $left,
+                      $top,
+                      $right,
+                      $bottom,
+                  })}
+              `};
 `
 
 const TooltipContainer = styled.span<{
     $position?: PositionsTypes
-    $left?: string | number | SpacersTypes
-    $top?: string | number | SpacersTypes
-    $right?: string | number | SpacersTypes
-    $bottom?: string | number | SpacersTypes
+    $left?: SpacersTypes | string
+    $top?: SpacersTypes | string
+    $right?: SpacersTypes | string
+    $bottom?: SpacersTypes | string
     $zIndex?: number
     $size?: number
 }>`
-    position: ${({ $position }) => $position};
     z-index: ${({ $zIndex }) => $zIndex};
     width: ${({ $size }) => $size}px;
     height: ${({ $size }) => $size}px;
 
-    ${({ $left }) =>
-        $left &&
-        css`
-            left: ${Mixins.Spacers({ $spacer: $left })};
-        `}
-
-    ${({ $top }) =>
-        $top &&
-        css`
-            top: ${Mixins.Spacers({ $spacer: $top })};
-        `}
-
-    ${({ $right }) =>
-        $right &&
-        css`
-            right: ${Mixins.Spacers({ $spacer: $right })};
-        `}
-
-    ${({ $bottom }) =>
-        $bottom &&
-        css`
-            bottom: ${Mixins.Spacers({ $spacer: $bottom })};
-        `}
+    ${({ $left, $top, $right, $bottom, $zIndex, $position }) =>
+        ($left || $top || $right || $bottom) &&
+        Mixins.Position({
+            $zIndex: $zIndex,
+            $position,
+            $left,
+            $top,
+            $right,
+            $bottom,
+        })};
 `
 
 const Tip = styled.span<{ $isVisible: boolean; $width: number }>`

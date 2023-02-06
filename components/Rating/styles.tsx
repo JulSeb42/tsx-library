@@ -2,11 +2,10 @@
 
 import styled, { css } from "styled-components"
 
-import { Breakpoints } from "../../Variables"
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { Mixins, Breakpoints } from "../../"
+import { ColorsHoverTypes } from "../../types"
 
-import { ColorsHoverTypes } from "../../utils/common-types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const buttonSize = 32
 

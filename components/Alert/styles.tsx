@@ -2,14 +2,13 @@
 
 import styled from "styled-components"
 
-import { Spacers, Radiuses } from "../../Variables"
-import Mixins from "../../Mixins"
+import { Spacers, Radiuses, Mixins } from "../../"
+import { ColorsAlertsTypes } from "./types"
+
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { ColorsShortTypes } from "../../utils/common-types"
-
 const StyledAlert = styled.div<{
-    $color: ColorsShortTypes
+    $color: ColorsAlertsTypes
     $isModal?: boolean
 }>`
     ${Mixins.Grid({

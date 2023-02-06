@@ -2,23 +2,26 @@
 
 import styled from "styled-components"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
 import { InputBaseMixin } from "../InputComponents"
+import { ColorsHoverTypes, ValidationTypes } from "../../types"
+import {
+    InputBackgroundTypes,
+    InputVariantTypes,
+} from "../InputComponents/types"
 
-import { ColorsHoverTypes, ValidationTypes } from "../../utils/common-types"
-import { InputBackgroundTypes, InputsVariantsTypes } from "../Input/types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const InputContainer = styled.div`
     position: relative;
     z-index: 10;
 `
 
-const StyledInput = styled.input<{
+const StyledAutocomplete = styled.input<{
     $hasIcon?: boolean
     $validation?: ValidationTypes
     $accentColor?: ColorsHoverTypes
     $backgroundColor?: InputBackgroundTypes
-    $variant?: InputsVariantsTypes
+    $variant?: InputVariantTypes
 }>`
     ${({ $accentColor, $backgroundColor, $hasIcon, $validation, $variant }) =>
         InputBaseMixin({
@@ -30,6 +33,6 @@ const StyledInput = styled.input<{
         })};
 `
 
-setDefaultTheme([InputContainer, StyledInput])
+setDefaultTheme([InputContainer, StyledAutocomplete])
 
-export { InputContainer, StyledInput }
+export { InputContainer, StyledAutocomplete }

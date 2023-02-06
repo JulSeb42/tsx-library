@@ -2,28 +2,26 @@
 
 import styled, { css } from "styled-components"
 
+import { Mixins, Transitions, Icon } from "../../"
 import ChevronDownIcon from "../../icons/ChevronDownIcon"
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
-import { Transitions } from "../../Variables"
-import Icon from "../Icon"
 import { InputBaseMixin } from "../InputComponents"
+import { ConstantValues } from "../InputComponents/styles"
+import { ColorsHoverTypes } from "../../types"
+import {
+    InputBackgroundTypes,
+    InputVariantTypes,
+} from "../InputComponents/types"
 
-import { ColorsHoverTypes } from "../../utils/common-types"
-import { InputBackgroundTypes, InputsVariantsTypes } from "../Input/types"
-
-const inputHeight = 32
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledSelect = styled.div<{
     disabled?: boolean
     $isOpen: boolean
     $isEmpty?: boolean
-    ref?: any
-    onClick?: any
 }>`
     position: relative;
     width: 100%;
-    height: ${inputHeight}px;
+    height: ${ConstantValues.InputHeight}px;
     cursor: ${({ $isEmpty, disabled }) =>
         $isEmpty ? "default" : disabled ? "not-allowed" : "pointer"};
     z-index: ${({ $isOpen }) => ($isOpen ? 30 : 0)};
@@ -34,7 +32,7 @@ const Selected = styled.span<{
     $accentColor?: ColorsHoverTypes
     $disabled?: boolean
     $backgroundColor?: InputBackgroundTypes
-    $variant?: InputsVariantsTypes
+    $variant?: InputVariantTypes
 }>`
     ${({ $accentColor, $isOpen, $disabled, $backgroundColor, $variant }) =>
         InputBaseMixin({

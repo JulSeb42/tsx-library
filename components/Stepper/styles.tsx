@@ -4,21 +4,20 @@ import styled, { css } from "styled-components"
 
 import {
     Radiuses,
-    FontWeights,
     FontSizes,
+    FontWeights,
     Breakpoints,
     Transitions,
-} from "../../Variables"
-import Mixins from "../../Mixins"
-import TextComponent from "../Text"
+    Mixins,
+    Text,
+} from "../../"
+import { ColorsHoverTypes } from "../../types"
+import { StepperDirectionType } from "./types"
+
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { ColorsHoverTypes } from "../../utils/common-types"
-
-import { DirectionTypes } from "./types"
-
 const StyledStepper = styled.div<{
-    $direction?: DirectionTypes
+    $direction?: StepperDirectionType
     $accentColor?: ColorsHoverTypes
 }>`
     position: relative;
@@ -47,7 +46,7 @@ const StyledStepper = styled.div<{
 `
 
 const Item = styled.span<{
-    $direction?: DirectionTypes
+    $direction?: StepperDirectionType
 }>`
     position: relative;
     z-index: 1;
@@ -86,7 +85,7 @@ const Number = styled.span<{
     font-weight: ${FontWeights.Black};
 `
 
-const Text = styled(TextComponent).attrs({
+const StyledText = styled(Text).attrs({
     tag: "small",
 })<{
     to?: string
@@ -118,6 +117,6 @@ const Text = styled(TextComponent).attrs({
         `}
 `
 
-setDefaultTheme([StyledStepper, Item, Number, Text])
+setDefaultTheme([StyledStepper, Item, Number, StyledText])
 
-export { StyledStepper, Item, Number, Text }
+export { StyledStepper, Item, Number, StyledText }

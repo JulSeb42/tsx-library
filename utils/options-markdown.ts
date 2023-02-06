@@ -1,7 +1,7 @@
 /*=============================================== Options markdown container ===============================================*/
 
-import Text from "../components/Text"
-import Table from "../components/Table"
+import { Text } from "../components/Text"
+import { Table } from "../components/Table"
 
 const optionsMarkdown = {
     forceBlock: true,

@@ -2,20 +2,23 @@
 
 import styled from "styled-components"
 
-import { Layouts, Spacers } from "../../Variables"
 import setDefaultTheme from "../../utils/setDefaultTheme"
+import { Mixins, Layouts } from "../../"
+import { SpacersTypes } from "../../types"
+import { TemplateType } from "./types"
 
-import { TemplateTypes } from "./types"
-
-const StyledWrapper = styled.div<{ $template?: TemplateTypes }>`
+const StyledWrapper = styled.div<{
+    $gap?: SpacersTypes
+    $template?: TemplateType
+}>`
     display: grid;
     grid-template-columns: ${({ $template }) =>
-        $template === "2cols"
-            ? Layouts.Wrapper.TwoCols
-            : $template === "3cols"
+        $template === "3cols"
             ? Layouts.Wrapper.ThreeCols
+            : $template === "2cols"
+            ? Layouts.Wrapper.TwoCols
             : Layouts.Wrapper.OneCol};
-    gap: ${Spacers.L};
+    gap: ${({ $gap }) => Mixins.Spacers({ $spacer: $gap })};
     position: relative;
     z-index: 10;
     background-color: ${({ theme }) => theme.Background};

@@ -1,21 +1,19 @@
 /*=============================================== Placeholder styles ===============================================*/
 
 import styled from "styled-components"
-import { stringifyPx } from "ts-utils-julseb"
 
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
-import { FontSize, FontWeight } from "../Text/styles"
-
+import { Mixins, stringifyPx } from "../../"
 import {
     AllColorsTypes,
-    RadiusesTypes,
-    ShadowsTypes,
     OverlayTypes,
+    ShadowsTypes,
+    RadiusesTypes,
     FontSizeTypes,
-    CustomFontSizeTypes,
-} from "../../utils/common-types"
-import { WeightTypes } from "../Text/types"
+    FontWeightTypes,
+} from "../../types"
+import { FontSize, FontWeight } from "../Text/styles"
+
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledPlaceholder = styled.div<{
     $width?: string | number
@@ -23,18 +21,19 @@ const StyledPlaceholder = styled.div<{
     $aspectRatio?: string
     $background?: AllColorsTypes | OverlayTypes
     $shadow?: ShadowsTypes
-    $borderRadius?: RadiusesTypes | number
+    $borderRadius?: RadiusesTypes
     $fontSize?: FontSizeTypes
-    $customFontSize?: CustomFontSizeTypes
-    $fontWeight?: WeightTypes
+    $customFontSize?: string | number
+    $fontWeight?: FontWeightTypes
+    $textColor?: AllColorsTypes
 }>`
     ${Mixins.Flexbox({
         $alignItems: "center",
         $justifyContent: "center",
     })};
-    width: ${({ $width }) => stringifyPx($width)};
+    width: ${({ $width }) => $width && stringifyPx($width)};
     height: ${({ $height, $aspectRatio }) =>
-        !$aspectRatio && stringifyPx($height)};
+        !$aspectRatio && $height && stringifyPx($height)};
     aspect-ratio: ${({ $aspectRatio }) => $aspectRatio};
     background: ${({ $background, theme }) =>
         $background === "overlay-black-50" ||

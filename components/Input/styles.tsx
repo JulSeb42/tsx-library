@@ -2,40 +2,42 @@
 
 import styled, { css } from "styled-components"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
 import {
+    Spacers,
+    Radiuses,
+    Transitions,
     Breakpoints,
     FontSizes,
     LineHeights,
-    Radiuses,
-    Spacers,
-    Transitions,
-} from "../../Variables"
+} from "../../"
+import { ValidationTypes, ColorsHoverTypes } from "../../types"
+import { InputTypesType } from "./types"
+import {
+    InputBackgroundTypes,
+    InputVariantTypes,
+} from "../InputComponents/types"
 import { InputBaseMixin } from "../InputComponents"
+import { ConstantValues } from "../InputComponents/styles"
 
-import { ColorsHoverTypes, ValidationTypes } from "../../utils/common-types"
-import { InputBackgroundTypes, InputTypesTypes, InputsVariantsTypes } from "./types"
-
-const inputHeight = 32
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledInputContent = styled.div`
     width: 100%;
     position: relative;
     height: fit-content;
     display: inline-block;
-    height: ${inputHeight}px;
+    height: ${ConstantValues.InputHeight}px;
 `
 
 const StyledInput = styled.input<{
-    $type?: InputTypesTypes
+    $type?: InputTypesType
     $validation?: ValidationTypes
     $iconCalendar?: string
     $iconClock?: string
-    // $showHttp?: boolean
     $hasIcon?: boolean
     $accentColor?: ColorsHoverTypes
     $backgroundColor?: InputBackgroundTypes
-    $variant?: InputsVariantsTypes
+    $variant?: InputVariantTypes
 }>`
     ${({ $accentColor, $backgroundColor, $hasIcon, $validation, $variant }) =>
         InputBaseMixin({
@@ -136,13 +138,16 @@ const StyledInput = styled.input<{
         css`
             &::-webkit-inner-spin-button,
             &::-webkit-calendar-picker-indicator {
-                -webkit-appearance: none;
-                appearance: none;
+                -webkit-appearance: none !important;
+                appearance: none !important;
                 background: rgba(0, 0, 0, 0);
                 right: ${$validation === "not-passed" && "24px"};
                 position: relative;
 
-                ${$type !== "time" &&
+                ${($type === "date" ||
+                    $type === "datetime-local" ||
+                    $type === "month" ||
+                    $type === "week") &&
                 ($iconCalendar
                     ? theme.Icon({
                           $name: $iconCalendar,
@@ -213,6 +218,6 @@ const StyledInput = styled.input<{
         `}
 `
 
-setDefaultTheme([StyledInputContent, StyledInput])
+setDefaultTheme([StyledInput, StyledInputContent])
 
-export { StyledInputContent, StyledInput }
+export { StyledInput, StyledInputContent }

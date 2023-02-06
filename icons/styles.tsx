@@ -4,7 +4,7 @@ import styled from "styled-components"
 
 import setDefaultTheme from "../utils/setDefaultTheme"
 
-import { AllColorsTypes } from "../utils/common-types"
+import { AllColorsTypes } from "../types"
 
 const StyledIcon = styled.svg<{ $size?: number; $color?: AllColorsTypes }>`
     width: ${({ $size }) => $size}px;

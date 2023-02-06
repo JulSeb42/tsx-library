@@ -8,36 +8,23 @@ import { ColorInputProps } from "../types"
 const ColorInput = forwardRef(
     (
         {
-            id,
             type = "color",
-            value,
-            name,
-            disabled,
-            autoFocus,
-            accentColor,
+            accentColor = "primary",
             backgroundColor,
-            showColor,
             variant = "rounded",
-            ...props
+            ...rest
         }: ColorInputProps,
         ref?: React.ForwardedRef<HTMLInputElement>
     ) => (
-        <Styles.StyledInputContent>
-            <Styles.StyledInput
-                id={id}
-                type={type}
-                value={value}
-                name={name}
-                disabled={disabled}
-                ref={ref}
-                $type={type}
-                autoFocus={autoFocus}
-                $accentColor={accentColor}
-                $backgroundColor={backgroundColor}
-                $variant={variant}
-                {...props}
-            />
-        </Styles.StyledInputContent>
+        <Styles.StyledInput
+            ref={ref}
+            type={type}
+            $type={type}
+            $accentColor={accentColor}
+            $backgroundColor={backgroundColor}
+            $variant={variant}
+            {...rest}
+        />
     )
 )
 

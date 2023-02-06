@@ -2,13 +2,11 @@
 
 import styled, { css } from "styled-components"
 
-import { Radiuses, Spacers, Breakpoints, Transitions } from "../../Variables"
-import Mixins from "../../Mixins"
+import { Mixins, Radiuses, Spacers, Breakpoints, Transitions } from "../../"
+import { ColorsHoverTypes, AllColorsTypes } from "../../types"
+import { TabsJustifyTypes, TabsVariantsType } from "./types"
+
 import setDefaultTheme from "../../utils/setDefaultTheme"
-
-import { ColorsHoverTypes, AllColorsTypes } from "../../utils/common-types"
-
-import { TabsVariantTypes, JustifyTypes } from "./types"
 
 const StyledTabs = styled.div`
     ${Mixins.Grid({
@@ -17,8 +15,8 @@ const StyledTabs = styled.div`
 `
 
 const ButtonsContainer = styled.div<{
-    $variant?: TabsVariantTypes
-    $justify?: JustifyTypes
+    $variant?: TabsVariantsType
+    $justify?: TabsJustifyTypes
     $col: number
     $separatorColor?: AllColorsTypes
     $backgroundColor?: AllColorsTypes
@@ -78,8 +76,8 @@ const ButtonsContainer = styled.div<{
 
 const Button = styled.button<{
     $isActive: boolean
-    $variant?: TabsVariantTypes
-    $justify?: JustifyTypes
+    $variant?: TabsVariantsType
+    $justify?: TabsJustifyTypes
     $accentColor?: ColorsHoverTypes
     $buttonColor?: AllColorsTypes
 }>`

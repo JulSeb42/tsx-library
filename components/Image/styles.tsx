@@ -1,16 +1,13 @@
-/*=============================================== Image component ===============================================*/
+/*=============================================== Image styles ===============================================*/
 
 import styled from "styled-components"
-import { stringifyPx } from "ts-utils-julseb"
 
-import { Overlays, Spacers } from "../../Variables"
-import Mixins from "../../Mixins"
-import Text from "../Text"
+import { Text, Mixins, stringifyPx, Spacers, Overlays } from "../../"
+import { RadiusesTypes, ObjectFitTypes } from "../../types"
+
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
-import { ObjectFitTypes, RadiusesTypes } from "../../utils/common-types"
-
-// Import this component for lazyloading
+// Import for lazyloading
 
 const Img = styled.img<{
     $width?: number | string
@@ -21,41 +18,45 @@ const Img = styled.img<{
     display: block;
     position: relative;
     z-index: 0;
-    width: ${({ $width }) => ($width ? stringifyPx($width) : "100%")};
-    height: ${({ $height }) => ($height ? stringifyPx($height) : "auto")};
+    width: ${({ $width }) => $width && stringifyPx($width)};
+    height: ${({ $height }) => $height && stringifyPx($height)};
     object-fit: ${({ $fit }) => $fit};
     ${Mixins.BorderRadius};
 `
 
 export default Img
 
-const StyledImageContainer = styled.figure<{
+const ImgContainer = styled.figure<{
     $width?: number | string
     $height?: number | string
     $borderRadius?: RadiusesTypes
 }>`
-    width: ${({ $width }) => ($width ? stringifyPx($width) : "")};
-    height: ${({ $height }) => ($height ? stringifyPx($height) : "")};
+    display: block;
     position: relative;
-    ${Mixins.BorderRadius};
+    z-index: 0;
+    width: ${({ $width }) => $width && stringifyPx($width)};
+    height: ${({ $height }) => $height && stringifyPx($height)};
     overflow: hidden;
+    ${Mixins.BorderRadius};
 `
 
-const Caption = styled(Text)<{ $background?: "black" | "white" }>`
+const Caption = styled(Text).attrs({ as: "figcaption" })<{
+    $background?: "black" | "white"
+}>`
     position: absolute;
     z-index: 1;
     bottom: 0;
     left: 0;
     width: 100%;
+    padding: ${Spacers.M};
     background-color: ${({ $background }) =>
         $background === "white"
             ? Overlays.Plain.White80
             : Overlays.Plain.Black80};
-    padding: ${Spacers.M};
     color: ${({ $background, theme }) =>
         $background === "white" ? theme.Black : theme.White};
 `
 
-setDefaultTheme([StyledImageContainer, Caption])
+setDefaultTheme([ImgContainer, Caption])
 
-export { StyledImageContainer, Caption }
+export { ImgContainer, Caption }

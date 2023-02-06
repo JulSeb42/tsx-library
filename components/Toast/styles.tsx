@@ -1,22 +1,31 @@
 /*=============================================== Toast styles ===============================================*/
 
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
+import { Spacers, Mixins, Radiuses, Transitions, Breakpoints } from "../../"
 import {
-    Spacers,
-    Radiuses,
-    Breakpoints,
-    Transitions,
-} from "../../Variables"
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
+    PositionsTypes,
+    ShadowsTypes,
+    SpacersTypes,
+    RadiusesTypes,
+    AllColorsTypes,
+} from "../../types"
 
-import { ShadowsTypes } from "../../utils/common-types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledToast = styled.div<{
     $isClosed?: boolean
     $maxWidth?: number
     $shadow?: ShadowsTypes
+    $position?: PositionsTypes
+    $left?: SpacersTypes | string
+    $top?: SpacersTypes | string
+    $right?: SpacersTypes | string
+    $bottom?: SpacersTypes | string
+    $zIndex?: number
+    $borderRadius?: RadiusesTypes
+    $borderWidth?: number
+    $borderColor?: AllColorsTypes
 }>`
     width: 100%;
     max-width: ${({ $maxWidth }) => $maxWidth}px;
@@ -28,7 +37,26 @@ const StyledToast = styled.div<{
             $shadow: $shadow,
         })};
     padding: ${Spacers.M};
-    border-radius: ${Radiuses.M};
+    ${Mixins.BorderRadius};
+    ${"" /* border-radius: ${({ $borderRadius }) => ({ $borderRadius })}; */}
+
+    ${({ $position, $zIndex, $left, $top, $right, $bottom }) =>
+        ($left || $top || $right || $bottom) &&
+        Mixins.Position({
+            $position,
+            $zIndex,
+            $left,
+            $top,
+            $right,
+            $bottom,
+        })};
+
+    ${({ $borderWidth, $borderColor, theme }) =>
+        ($borderColor || $borderWidth) &&
+        css`
+            border: ${$borderWidth || 1}px solid
+                ${theme.AllColors({ $color: $borderColor || "gray-200" })};
+        `}
 `
 
 const TitleContainer = styled.div`

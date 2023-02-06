@@ -2,56 +2,34 @@
 
 import styled, { css } from "styled-components"
 
-import { Radiuses, Breakpoints, Spacers, Transitions } from "../../Variables"
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { Radiuses, Breakpoints, Spacers, Transitions, Mixins } from "../../"
 import PlusIcon from "../../icons/PlusIcon"
-
 import {
     ColorsHoverTypes,
     ShadowsTypes,
-    SpacersTypes,
-    PositionsTypes,
-} from "../../utils/common-types"
+    ObjectPositionTypes,
+} from "../../types"
+import { IconMenuDirectionTypes } from "./types"
+
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const buttonSize = 48
 
 const StyledIconMenu = styled.div<{
-    $position?: PositionsTypes
-    $zIndex?: number
-    $left?: string | number | SpacersTypes
-    $top?: string | number | SpacersTypes
-    $right?: string | number | SpacersTypes
-    $bottom?: string | number | SpacersTypes
-    ref?: any
+    $position?: ObjectPositionTypes
 }>`
-    position: ${({ $position }) => $position};
-    z-index: ${({ $zIndex }) => $zIndex};
+    ${({ $position }) =>
+        Mixins.Position({
+            $position: $position?.position || "relative",
+            $left: $position?.left,
+            $top: $position?.top,
+            $right: $position?.right,
+            $bottom: $position?.bottom,
+            $zIndex: $position?.zIndex,
+        })};
+
     width: ${buttonSize}px;
     height: ${buttonSize}px;
-    ${({ $left }) =>
-        $left &&
-        css`
-            left: ${Mixins.Spacers({ $spacer: $left })};
-        `}
-
-    ${({ $top }) =>
-        $top &&
-        css`
-            top: ${Mixins.Spacers({ $spacer: $top })};
-        `}
-
-    ${({ $right }) =>
-        $right &&
-        css`
-            right: ${Mixins.Spacers({ $spacer: $right })};
-        `}
-
-    ${({ $bottom }) =>
-        $bottom &&
-        css`
-            bottom: ${Mixins.Spacers({ $spacer: $bottom })};
-        `}
 `
 
 const StyledOpenButton = styled.button<{
@@ -96,7 +74,7 @@ const StyledButton = styled.button<{
     $color?: ColorsHoverTypes
     $isOpen?: boolean
     $index: number
-    $direction?: "left" | "up" | "right" | "down"
+    $direction?: IconMenuDirectionTypes
 }>`
     width: ${buttonSize}px;
     height: ${buttonSize}px;

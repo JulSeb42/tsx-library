@@ -2,13 +2,12 @@
 
 import styled from "styled-components"
 
-import Mixins from "../../Mixins"
-import Text from "../Text"
-import setDefaultTheme from "../../utils/setDefaultTheme"
-
+import { Mixins, Text } from "../../"
 import { SeparatorTypes } from "./types"
 
-const StyledBreacrumbs = styled(Text)<{ $separator?: SeparatorTypes }>`
+import setDefaultTheme from "../../utils/setDefaultTheme"
+
+const StyledBreadcrumbs = styled(Text)<{ $separator?: SeparatorTypes }>`
     ${({ $separator }) =>
         Mixins.Flexbox({
             $alignItems: "center",
@@ -30,6 +29,6 @@ const Separator = styled.span<{
 
 const Item = styled.span``
 
-setDefaultTheme([StyledBreacrumbs, Separator, Item])
+setDefaultTheme([StyledBreadcrumbs, Separator, Item])
 
-export { StyledBreacrumbs, Separator, Item }
+export { StyledBreadcrumbs, Separator, Item }

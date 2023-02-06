@@ -1,38 +1,45 @@
-/*=============================================== H5 ===============================================*/
+/*=============================================== H5 component ===============================================*/
 
-import React from "react"
+import React, { forwardRef } from "react"
 
-import { AllProps } from "../types"
-
+import { TextProps } from "../types"
 import { StyledH5 } from "../styles"
 
-const H5 = ({
-    textAlign,
-    color,
-    linkColor = "primary",
-    lineHeight,
-    fontSize,
-    customFontSize,
-    display,
-    children,
-    as,
-    fontWeight,
-    ...props
-}: AllProps & React.HTMLAttributes<HTMLHeadingElement>) => (
-    <StyledH5
-        $textAlign={textAlign}
-        $color={color}
-        $linkColor={linkColor}
-        $lineHeight={lineHeight}
-        $fontSize={fontSize}
-        $customFontSize={customFontSize}
-        $display={display}
-        as={as}
-        $fontWeight={fontWeight}
-        {...props}
-    >
-        {children}
-    </StyledH5>
+const H5 = forwardRef(
+    (
+        {
+            children,
+            textAlign,
+            color,
+            linkColor = "primary",
+            lineHeight,
+            fontSize,
+            customFontSize,
+            as,
+            display,
+            fontWeight,
+            maxLines,
+            ...rest
+        }: TextProps,
+        ref?: React.ForwardedRef<HTMLHeadingElement>
+    ) => (
+        <StyledH5
+            ref={ref}
+            as={as}
+            $color={color}
+            $customFontSize={customFontSize}
+            $display={display}
+            $textAlign={textAlign}
+            $linkColor={linkColor}
+            $lineHeight={lineHeight}
+            $fontSize={fontSize}
+            $fontWeight={fontWeight}
+            $maxLines={maxLines}
+            {...rest}
+        >
+            {children}
+        </StyledH5>
+    )
 )
 
 export default H5

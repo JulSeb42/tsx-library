@@ -2,19 +2,17 @@
 
 import styled, { css } from "styled-components"
 
-import { Breakpoints, Spacers } from "../../Variables"
-import Mixins from "../../Mixins"
-import Image from "../Image"
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { Breakpoints, Spacers, Mixins, Image } from "../../"
+import { AllColorsTypes, ColorsHoverTypes } from "../../types"
+import { FooterDirectionsTypes } from "./types"
 
-import { AllColorsTypes, ColorsHoverTypes } from "../../utils/common-types"
-import { DirectionTypes } from "./types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledFooter = styled.footer<{
     $separator?: boolean
     $separatorColor?: AllColorsTypes
     $accentColor?: ColorsHoverTypes
-    $direction?: DirectionTypes
+    $direction?: FooterDirectionsTypes
 }>`
     width: 100%;
     position: relative;

@@ -3,26 +3,22 @@
 import styled, { css } from "styled-components"
 
 import {
+    ThemeDark,
+    ThemeLight,
     Radiuses,
     Transitions,
-    ThemeLight,
-    ThemeDark,
-    Spacers,
+    Mixins,
     Breakpoints,
-} from "../../Variables"
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
-import ChevronDownIcon from "../../icons/ChevronDownIcon"
-import Icon from "../Icon"
-import { ConstantValues } from "../InputComponents/styles"
-
-import { InputBackgroundTypes } from "../Input/types"
+    Spacers,
+    Icon,
+} from "../../"
+import { ShadowsTypes, ColorsHoverTypes, ValidationTypes } from "../../types"
 import { VariantTypes, ListDirectionTypes } from "./types"
-import {
-    ColorsHoverTypes,
-    ShadowsTypes,
-    ValidationTypes,
-} from "../../utils/common-types"
+import { InputBackgroundTypes } from "../InputComponents/types"
+import { ConstantValues } from "../InputComponents/styles"
+import ChevronDownIcon from "../../icons/ChevronDownIcon"
+
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledListInputs = styled.div<{
     $isOpen: boolean
@@ -172,7 +168,6 @@ const IconAnim = ({
 
 const StyledChevronDown = styled(ChevronDownIcon)<{
     $isOpen?: boolean
-    ref?: any
 }>`
     ${({ $isOpen }) =>
         IconAnim({ $isOpen: $isOpen || false, $hasAnimation: true })}
@@ -181,7 +176,6 @@ const StyledChevronDown = styled(ChevronDownIcon)<{
 const StyledIcon = styled(Icon)<{
     $isOpen?: boolean
     $hasAnimation?: boolean
-    ref?: any
 }>`
     ${({ $isOpen, $hasAnimation }) =>
         IconAnim({ $isOpen: $isOpen || false, $hasAnimation: $hasAnimation })}

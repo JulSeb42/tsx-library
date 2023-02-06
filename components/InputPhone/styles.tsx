@@ -2,33 +2,36 @@
 
 import styled from "styled-components"
 
-import SearchIcon from "../../icons/SearchIcon"
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
 import {
+    Mixins,
     FontFamilies,
     FontSizes,
     Spacers,
     ThemeDark,
     ThemeLight,
     Transitions,
-} from "../../Variables"
+} from "../../"
+import { ColorsHoverTypes, ValidationTypes } from "../../types"
+import SearchIcon from "../../icons/SearchIcon"
 import { InputBaseMixin } from "../InputComponents"
+import {
+    InputBackgroundTypes,
+    InputVariantTypes,
+} from "../InputComponents/types"
+import { ConstantValues } from "../InputComponents/styles"
 
-import { ColorsHoverTypes, ValidationTypes } from "../../utils/common-types"
-import { InputBackgroundTypes, InputsVariantsTypes } from "../Input/types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
-const inputHeight = 32
-
-const StyledInputPhone = styled.div<{ $isOpen: boolean; ref?: any }>`
+const StyledInputPhone = styled.div<{ $isOpen: boolean }>`
     position: relative;
     width: 100%;
     z-index: ${({ $isOpen }) => ($isOpen ? 20 : 0)};
 `
 
-const Button = styled.button<{ $variant?: InputsVariantsTypes }>`
-    height: ${inputHeight}px;
-    padding: 0 ${({ $variant }) => $variant === "pill" ? Spacers.S : Spacers.XS};
+const Button = styled.button<{ $variant?: InputVariantTypes }>`
+    height: ${ConstantValues.InputHeight}px;
+    padding: 0
+        ${({ $variant }) => ($variant === "pill" ? Spacers.S : Spacers.XS)};
     border: none;
     background-color: transparent;
     position: absolute;
@@ -93,7 +96,7 @@ const InputSearch = styled.input<{
 const CountryCode = styled.span<{ $backgroundColor?: InputBackgroundTypes }>`
     position: absolute;
     left: 48px;
-    height: ${inputHeight}px;
+    height: ${ConstantValues.InputHeight}px;
     ${Mixins.Flexbox({
         $alignItems: "center",
     })};
@@ -112,7 +115,7 @@ const Input = styled.input<{
     $isListOpen?: boolean
     $accentColor?: ColorsHoverTypes
     $backgroundColor?: InputBackgroundTypes
-    $variant?: InputsVariantsTypes
+    $variant?: InputVariantTypes
 }>`
     ${({ $accentColor, $backgroundColor, $validation, $variant }) =>
         InputBaseMixin({
@@ -154,7 +157,6 @@ setDefaultTheme([
     StyledInputPhone,
     Button,
     Flag,
-
     StyledIconSearch,
     SearchContainer,
     InputSearch,

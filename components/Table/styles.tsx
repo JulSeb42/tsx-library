@@ -2,23 +2,17 @@
 
 import styled, { css } from "styled-components"
 
-import { Transitions, Breakpoints, Spacers, FontSizes } from "../../Variables"
-import Mixins from "../../Mixins"
+import { Transitions, Breakpoints, Spacers, FontSizes, Mixins } from "../../"
 import { FontCommon } from "../Text/styles"
+import { TextAlignTypes, ColorsHoverTypes, AllColorsTypes } from "../../types"
+import { TableStyleTypes, TableVerticalAlignTypes } from "./types"
+
 import setDefaultTheme from "../../utils/setDefaultTheme"
-
-import {
-    TextAlignTypes,
-    ColorsHoverTypes,
-    AllColorsTypes,
-} from "../../utils/common-types"
-
-import { TableStyleTypes, VAlignTypes } from "./types"
 
 const StyledTable = styled.table<{
     $tableStyle?: TableStyleTypes
     $textAlign?: TextAlignTypes
-    $vAlign?: VAlignTypes
+    $vAlign?: TableVerticalAlignTypes
     $headerBackground?: ColorsHoverTypes
     $headerTextColor?: AllColorsTypes
     $textColor?: AllColorsTypes

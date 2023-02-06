@@ -1,31 +1,30 @@
 /*=============================================== Text styles ===============================================*/
 
 import styled, { css } from "styled-components"
-import { stringifyPx } from "ts-utils-julseb"
 
+import setDefaultTheme from "../../utils/setDefaultTheme"
 import {
+    FontWeights,
+    stringifyPx,
     FontSizes,
     LineHeights,
     FontFamilies,
-    Radiuses,
     Spacers,
+    Radiuses,
     Transitions,
     Breakpoints,
-    FontWeights,
-} from "../../Variables"
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
-
+    Mixins,
+} from "../../"
 import {
-    TextAlignTypes,
-    ColorsHoverTypes,
     AllColorsTypes,
+    ColorsHoverTypes,
     FontSizeTypes,
     CustomFontSizeTypes,
-} from "../../utils/common-types"
-import { WeightTypes } from "./types"
+    TextAlignTypes,
+    FontWeightTypes,
+} from "../../types"
 
-const FontSize = ({
+export const FontSize = ({
     $fontSize,
     $defaultSize,
     $customFontSize,
@@ -153,12 +152,12 @@ const FontSize = ({
     }
 `
 
-const FontWeight = ({
+export const FontWeight = ({
     $fontWeight,
     $defaultWeight,
 }: {
-    $fontWeight?: WeightTypes | number
-    $defaultWeight: WeightTypes | number
+    $fontWeight?: FontWeightTypes
+    $defaultWeight: FontWeightTypes
 }) => css`
     font-weight: ${$fontWeight === "black"
         ? FontWeights.Black
@@ -181,12 +180,14 @@ const FontCommon = ({
     $defaultSize,
     $fontSize,
     $customFontSize,
+    $maxLines,
 }: {
     $fontSize?: FontSizeTypes
     $defaultSize?: FontSizeTypes
     $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
+    $maxLines?: number
 }) => css`
     text-align: ${$textAlign};
     ${FontSize({
@@ -195,6 +196,24 @@ const FontCommon = ({
         $customFontSize: $customFontSize,
     })};
     line-height: ${$lineHeight};
+
+    ${$maxLines &&
+    css`
+        ${$maxLines === 1
+            ? css`
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+              `
+            : css`
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  display: -webkit-box;
+                  -webkit-line-clamp: ${$maxLines};
+                  line-clamp: ${$maxLines};
+                  -webkit-box-orient: vertical;
+              `}
+    `}
 
     code {
         font-family: ${FontFamilies.Code};
@@ -215,15 +234,24 @@ const StyledH1 = styled.h1<{
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
     $display?: boolean
-    $fontWeight?: WeightTypes | number
+    $fontWeight?: FontWeightTypes
+    $maxLines?: number
 }>`
-    ${({ $display, $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
+    ${({
+        $display,
+        $textAlign,
+        $lineHeight,
+        $fontSize,
+        $customFontSize,
+        $maxLines,
+    }) =>
         FontCommon({
             $textAlign,
             $lineHeight,
             $defaultSize: $display ? "display-h1" : "title-h1",
             $fontSize,
             $customFontSize,
+            $maxLines,
         })};
     ${({ $fontWeight }) =>
         FontWeight({ $defaultWeight: "black", $fontWeight: $fontWeight })};
@@ -239,7 +267,8 @@ const StyledH1 = styled.h1<{
             })};
     }
 
-    a, button {
+    a,
+    button {
         color: ${({ theme, $linkColor }) =>
             theme.ColorsHoverDefault({ $color: $linkColor })};
         transition: ${Transitions.Short};
@@ -272,15 +301,24 @@ const StyledH2 = styled.h2<{
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
     $display?: boolean
-    $fontWeight?: WeightTypes | number
+    $fontWeight?: FontWeightTypes
+    $maxLines?: number
 }>`
-    ${({ $display, $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
+    ${({
+        $display,
+        $textAlign,
+        $lineHeight,
+        $fontSize,
+        $customFontSize,
+        $maxLines,
+    }) =>
         FontCommon({
             $textAlign,
             $lineHeight,
             $defaultSize: $display ? "display-h2" : "title-h2",
             $fontSize,
             $customFontSize,
+            $maxLines,
         })};
     ${({ $fontWeight }) =>
         FontWeight({ $defaultWeight: "black", $fontWeight: $fontWeight })};
@@ -330,15 +368,24 @@ const StyledH3 = styled.h3<{
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
     $display?: boolean
-    $fontWeight?: WeightTypes | number
+    $fontWeight?: FontWeightTypes
+    $maxLines?: number
 }>`
-    ${({ $display, $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
+    ${({
+        $display,
+        $textAlign,
+        $lineHeight,
+        $fontSize,
+        $customFontSize,
+        $maxLines,
+    }) =>
         FontCommon({
             $textAlign,
             $lineHeight,
             $defaultSize: $display ? "display-h3" : "title-h3",
             $fontSize,
             $customFontSize,
+            $maxLines,
         })};
     ${({ $fontWeight }) =>
         FontWeight({ $defaultWeight: "black", $fontWeight: $fontWeight })};
@@ -388,15 +435,24 @@ const StyledH4 = styled.h4<{
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
     $display?: boolean
-    $fontWeight?: WeightTypes | number
+    $fontWeight?: FontWeightTypes
+    $maxLines?: number
 }>`
-    ${({ $display, $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
+    ${({
+        $display,
+        $textAlign,
+        $lineHeight,
+        $fontSize,
+        $customFontSize,
+        $maxLines,
+    }) =>
         FontCommon({
             $textAlign,
             $lineHeight,
             $defaultSize: $display ? "display-h4" : "title-h4",
             $fontSize,
             $customFontSize,
+            $maxLines,
         })};
     ${({ $fontWeight }) =>
         FontWeight({ $defaultWeight: "black", $fontWeight: $fontWeight })};
@@ -446,15 +502,24 @@ const StyledH5 = styled.h5<{
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
     $display?: boolean
-    $fontWeight?: WeightTypes | number
+    $fontWeight?: FontWeightTypes
+    $maxLines?: number
 }>`
-    ${({ $display, $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
+    ${({
+        $display,
+        $textAlign,
+        $lineHeight,
+        $fontSize,
+        $customFontSize,
+        $maxLines,
+    }) =>
         FontCommon({
             $textAlign,
             $lineHeight,
             $defaultSize: $display ? "display-h5" : "title-h5",
             $fontSize,
             $customFontSize,
+            $maxLines,
         })};
     ${({ $fontWeight }) =>
         FontWeight({ $defaultWeight: "black", $fontWeight: $fontWeight })};
@@ -503,15 +568,17 @@ const StyledH6 = styled.h6<{
     $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
-    $fontWeight?: WeightTypes | number
+    $fontWeight?: FontWeightTypes
+    $maxLines?: number
 }>`
-    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
+    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize, $maxLines }) =>
         FontCommon({
             $textAlign,
             $lineHeight,
             $defaultSize: "title-h6",
             $fontSize,
             $customFontSize,
+            $maxLines,
         })};
     ${({ $fontWeight }) =>
         FontWeight({ $defaultWeight: "black", $fontWeight: $fontWeight })};
@@ -560,15 +627,17 @@ const StyledP = styled.p<{
     $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
-    $fontWeight?: WeightTypes | number
+    $fontWeight?: FontWeightTypes
+    $maxLines?: number
 }>`
-    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
+    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize, $maxLines }) =>
         FontCommon({
             $textAlign,
             $lineHeight,
             $defaultSize: "body",
             $fontSize,
             $customFontSize,
+            $maxLines,
         })};
     color: ${({ theme, $color }) =>
         theme.AllColors({
@@ -612,7 +681,8 @@ const StyledP = styled.p<{
 const StyledStrong = styled.strong<{
     $color?: AllColorsTypes
     $linkColor?: ColorsHoverTypes
-    $fontWeight?: WeightTypes | number
+    $fontWeight?: FontWeightTypes
+    $maxLines?: number
 }>`
     ${FontCommon({})};
     ${({ $fontWeight }) =>
@@ -657,7 +727,8 @@ const StyledStrong = styled.strong<{
 const StyledEm = styled.em<{
     $color?: AllColorsTypes
     $linkColor?: ColorsHoverTypes
-    $fontWeight?: WeightTypes | number
+    $fontWeight?: FontWeightTypes
+    $maxLines?: number
 }>`
     ${FontCommon({})};
     font-style: italic;
@@ -708,15 +779,17 @@ const StyledSmall = styled.small<{
     $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
-    $fontWeight?: WeightTypes | number
+    $fontWeight?: FontWeightTypes
+    $maxLines?: number
 }>`
-    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
+    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize, $maxLines }) =>
         FontCommon({
             $textAlign,
             $lineHeight,
             $defaultSize: "small",
             $fontSize,
             $customFontSize,
+            $maxLines,
         })};
     color: ${({ theme, $color }) =>
         theme.AllColors({
@@ -765,15 +838,17 @@ const StyledBlockquote = styled.blockquote<{
     $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
-    $fontWeight?: WeightTypes | number
+    $fontWeight?: FontWeightTypes
+    $maxLines?: number
 }>`
-    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
+    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize, $maxLines }) =>
         FontCommon({
             $textAlign,
             $lineHeight,
             $defaultSize: "title-h6",
             $fontSize,
             $customFontSize,
+            $maxLines,
         })};
     color: ${({ theme, $color }) =>
         theme.AllColors({
@@ -823,7 +898,8 @@ const StyledUl = styled.ul<{
     $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
-    $fontWeight?: WeightTypes | number
+    $fontWeight?: FontWeightTypes
+    $maxLines?: number
 }>`
     padding: 0;
     margin: 0;
@@ -831,13 +907,14 @@ const StyledUl = styled.ul<{
     ${Mixins.Grid({
         $gap: "xxs",
     })};
-    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
+    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize, $maxLines }) =>
         FontCommon({
             $textAlign,
             $lineHeight,
             $defaultSize: "body",
             $fontSize,
             $customFontSize,
+            $maxLines,
         })};
     ${({ $fontWeight }) =>
         FontWeight({ $defaultWeight: "regular", $fontWeight: $fontWeight })};
@@ -890,15 +967,17 @@ const StyledOl = styled.ol<{
     $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
-    $fontWeight?: WeightTypes | number
+    $fontWeight?: FontWeightTypes
+    $maxLines?: number
 }>`
-    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
+    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize, $maxLines }) =>
         FontCommon({
             $textAlign,
             $lineHeight,
             $defaultSize: "body",
             $fontSize,
             $customFontSize,
+            $maxLines,
         })};
     padding: 0;
     margin: 0;
@@ -957,16 +1036,18 @@ const StyledDl = styled.dl<{
     $customFontSize?: CustomFontSizeTypes
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
-    $fontWeightDt?: WeightTypes | number
-    $fontWeightDd?: WeightTypes | number
+    $fontWeightDt?: FontWeightTypes
+    $fontWeightDd?: FontWeightTypes
+    $maxLines?: number
 }>`
-    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize }) =>
+    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize, $maxLines }) =>
         FontCommon({
             $textAlign,
             $lineHeight,
             $defaultSize: "body",
             $fontSize,
             $customFontSize,
+            $maxLines,
         })};
 
     dt {
@@ -1076,12 +1157,10 @@ setDefaultTheme([
     StyledUl,
     StyledOl,
     StyledDl,
+    FontCommon,
 ])
 
 export {
-    FontSize,
-    FontCommon,
-    FontWeight,
     StyledH1,
     StyledH2,
     StyledH3,
@@ -1096,4 +1175,5 @@ export {
     StyledUl,
     StyledOl,
     StyledDl,
+    FontCommon,
 }

@@ -2,31 +2,29 @@
 
 import styled, { css } from "styled-components"
 
-import { Breakpoints } from "../../Variables"
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
-
+import { Mixins, Breakpoints } from "../../"
 import {
     SpacersTypes,
     GridAlignContentTypes,
     GridAlignItemsTypes,
     GridJustifyContentTypes,
     GridJustifyItemsTypes,
-} from "../../utils/common-types"
+    PaddingTypes,
+} from "../../types"
 
-import { ColType } from "./types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledGrid = styled.div<{
     $inline?: boolean
-    $col?: ColType | number | string
-    $gap?: SpacersTypes | number | string
-    $columnGap?: SpacersTypes | number | string
-    $rowGap?: SpacersTypes | number | string
+    $col?: number | string
+    $gap?: SpacersTypes
+    $columnGap?: SpacersTypes
+    $rowGap?: SpacersTypes
     $justifyItems?: GridJustifyItemsTypes
     $alignItems?: GridAlignItemsTypes
     $justifyContent?: GridJustifyContentTypes
     $alignContent?: GridAlignContentTypes
-    $padding?: SpacersTypes | number | string
+    $padding?: PaddingTypes
     $colTablet?: string
     $colMobile?: string
 }>`

@@ -9,16 +9,16 @@ import {
     FontFamilies,
     Spacers,
     Radiuses,
-} from "../../Variables"
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
-
+    Mixins,
+} from "../../"
 import {
     ValidationTypes,
     ColorsHoverTypes,
     ColorsInputTypes,
-} from "../../utils/common-types"
-import { InputBackgroundTypes, InputsVariantsTypes } from "../Input/types"
+} from "../../types"
+import { InputBackgroundTypes, InputVariantTypes } from "./types"
+
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 interface BaseInputProps {
     $validation?: ValidationTypes
@@ -27,7 +27,7 @@ interface BaseInputProps {
     $disabled?: boolean
     $isFocus?: boolean
     $hasIcon?: boolean
-    $variant?: InputsVariantsTypes
+    $variant?: InputVariantTypes
 }
 
 const ConstantValues = {
@@ -115,16 +115,16 @@ const InputBaseMixin = ({
     &::placeholder {
         color: ${({ theme }) =>
             $backgroundColor === "dark"
-                ? ThemeDark.Gray200
+                ? ThemeDark.Gray400
                 : $backgroundColor === "light"
-                ? ThemeLight.Gray200
-                : theme.Gray200};
+                ? ThemeLight.Gray400
+                : theme.Gray400};
     }
 `
 
 const RightContainer = styled.span<{
     $disabled?: boolean
-    $variant?: InputsVariantsTypes
+    $variant?: InputVariantTypes
 }>`
     position: absolute;
     top: 0;
@@ -149,7 +149,7 @@ const RightContainer = styled.span<{
 
 const IconContainer = styled.span<{
     $color?: ColorsInputTypes
-    $variant?: InputsVariantsTypes
+    $variant?: InputVariantTypes
 }>`
     position: absolute;
     left: 0;

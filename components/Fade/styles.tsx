@@ -2,14 +2,12 @@
 
 import styled from "styled-components"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { Spacers } from "../../"
 
-import { Spacers } from "../../Variables"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledFade = styled.div<{
     $isVisible: boolean
-    $stylesNotVisible?: React.CSSProperties
-    $transition?: string
 }>`
     opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
     transform: translateX(

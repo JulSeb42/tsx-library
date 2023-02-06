@@ -8,6 +8,12 @@ A small components library for React.
 npm i tsx-library-julseb
 ```
 
+or
+
+```
+yarn add tsx-library-julseb
+```
+
 ## Full documentation
 
 Find the full documentation here: [https://documentation-components-react.vercel.app/](https://documentation-components-react.vercel.app/).

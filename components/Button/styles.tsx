@@ -2,20 +2,21 @@
 
 import styled from "styled-components"
 
-import { Spacers, Breakpoints, Radiuses } from "../../Variables"
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { Mixins, Breakpoints } from "../../"
+import { ColorsHoverTypes, ShadowsTypes, RadiusesTypes } from "../../types"
+import { ButtonVariantTypes } from "./types"
 
-import { ColorsHoverTypes, ShadowsTypes } from "../../utils/common-types"
-import { ButtonStylesType } from "./types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledButton = styled.button<{
     $color?: ColorsHoverTypes
-    $variant?: ButtonStylesType
+    $variant?: ButtonVariantTypes
     $noPadding?: boolean
     $shadow?: ShadowsTypes
+    $shadowDefault?: ShadowsTypes
     $shadowHover?: ShadowsTypes
     $shadowActive?: ShadowsTypes
+    $borderRadius?: RadiusesTypes
 }>`
     border: 1px solid
         ${({ $variant, $color, theme }) =>
@@ -25,15 +26,19 @@ const StyledButton = styled.button<{
                   })
                 : "transparent"};
     text-decoration: none;
-    padding: ${({ $noPadding }) =>
-        $noPadding ? 0 : `${Spacers.XS} ${Spacers.S}`};
+    ${({ $noPadding }) =>
+        $noPadding
+            ? `padding: 0`
+            : Mixins.Padding({
+                  $padding: { topBottom: "xs", leftRight: "s" },
+              })};
     ${Mixins.Flexbox({
         $inline: true,
         $alignItems: "center",
         $justifyContent: "center",
         $gap: "xs",
     })};
-    border-radius: ${Radiuses.M};
+    ${Mixins.BorderRadius};
     background-color: ${({ $variant, theme }) =>
         $variant === "plain" ? theme.ColorsHoverDefault : "transparent"};
     color: ${({ $variant, $color, theme }) =>
@@ -44,7 +49,14 @@ const StyledButton = styled.button<{
                 ? theme.Font
                 : theme.Background
             : theme.ColorsHoverDefault};
-    ${({ $shadow }) => Mixins.Shadow({ $shadow: $shadow })};
+    ${({ $shadow, $shadowDefault, $shadowHover, $shadowActive }) =>
+        Mixins.Shadow({
+            $shadow: $shadow,
+            $isExtended: $shadowDefault && true,
+            $shadowDefault: $shadowDefault,
+            $shadowHover: $shadowHover,
+            $shadowActive: $shadowActive,
+        })};
 
     @media ${Breakpoints.Hover} {
         &:hover {
@@ -55,7 +67,6 @@ const StyledButton = styled.button<{
                 theme.ColorsHoverHover};
             border-color: ${({ $variant, theme }) =>
                 $variant === "outline" && theme.ColorsHoverHover};
-            ${({ $shadowHover }) => Mixins.Shadow({ $shadow: $shadowHover })};
         }
 
         &:active {
@@ -66,7 +77,6 @@ const StyledButton = styled.button<{
                 theme.ColorsHoverActive};
             border-color: ${({ $variant, theme }) =>
                 $variant === "outline" && theme.ColorsHoverActive};
-            ${({ $shadowActive }) => Mixins.Shadow({ $shadow: $shadowActive })};
         }
     }
 

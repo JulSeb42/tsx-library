@@ -2,31 +2,32 @@
 
 import styled from "styled-components"
 
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
-
+import { Mixins } from "../../"
 import {
     SpacersTypes,
-    FlexDirectionTypes,
     FlexAlignContentTypes,
     FlexAlignItemsTypes,
+    FlexDirectionTypes,
     FlexJustifyContentTypes,
     FlexJustifyItemsTypes,
     FlexWrapTypes,
-} from "../../utils/common-types"
+    PaddingTypes,
+} from "../../types"
+
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledFlexbox = styled.div<{
     $inline?: boolean
     $flexDirection?: FlexDirectionTypes
     $flexWrap?: FlexWrapTypes
-    $alignContent?: FlexAlignContentTypes
     $justifyContent?: FlexJustifyContentTypes
     $alignItems?: FlexAlignItemsTypes
     $justifyItems?: FlexJustifyItemsTypes
-    $gap?: SpacersTypes | number | string
-    $rowGap?: SpacersTypes | number | string
-    $columnGap?: SpacersTypes | number | string
-    $padding?: SpacersTypes | number | string
+    $alignContent?: FlexAlignContentTypes
+    $gap?: SpacersTypes
+    $columnGap?: SpacersTypes
+    $rowGap?: SpacersTypes
+    $padding?: PaddingTypes
 }>`
     ${Mixins.Flexbox};
 `

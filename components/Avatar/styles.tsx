@@ -2,11 +2,10 @@
 
 import styled, { css } from "styled-components"
 
-import { FontWeights, Radiuses, Spacers } from "../../Variables"
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { Mixins, FontWeights, Radiuses, Spacers } from "../../"
+import { AllColorsTypes, RadiusesTypes } from "../../types"
 
-import { AllColorsTypes, RadiusesTypes } from "../../utils/common-types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const AvatarContainer = styled.span<{ $size?: number }>`
     position: relative;
@@ -25,8 +24,7 @@ const StyledAvatar = styled.span<{
 }>`
     width: ${({ $size }) => $size}px;
     height: ${({ $size }) => $size}px;
-    ${({ $borderRadius }) =>
-        Mixins.BorderRadius({ $borderRadius: $borderRadius })};
+    ${Mixins.BorderRadius};
     background-color: ${({ theme }) => theme.AllColors};
     color: ${({ $color, $contentColor, theme }) =>
         $color === "white" && !$contentColor
@@ -63,8 +61,10 @@ const Badge = styled.span<{
     $textColor?: AllColorsTypes
     $length: number
     $position?: "top" | "bottom"
+    $width: number
 }>`
     min-width: ${badgeSize}px;
+    width: ${({ $length }) => $length <= 1 && `${badgeSize}px`};
     height: ${badgeSize}px;
     background-color: ${({ theme, $background }) =>
         theme.AllColors({ $color: $background })};
@@ -76,14 +76,14 @@ const Badge = styled.span<{
         $justifyContent: "center",
     })};
     border-radius: ${Radiuses.Round};
-    padding: 0 ${({ $length }) => $length > 2 && Spacers.XS};
+    padding: 0 ${({ $length }) => $length > 1 && Spacers.XXS};
     font-size: ${badgeSize * 0.7}px;
     position: absolute;
     top: ${({ $position }) => $position === "top" && 0};
     bottom: ${({ $position }) => $position === "bottom" && 0};
-    right: 0;
+    right: calc(${Spacers.XS} * -1);
 `
 
-setDefaultTheme([StyledAvatar, Badge, AvatarContainer])
+setDefaultTheme([StyledAvatar, AvatarContainer, Badge])
 
-export { StyledAvatar, Badge, AvatarContainer }
+export { StyledAvatar, AvatarContainer, Badge }

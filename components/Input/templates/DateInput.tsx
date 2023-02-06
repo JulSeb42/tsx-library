@@ -3,9 +3,9 @@
 import React, { forwardRef } from "react"
 
 import {
+    RightContainer,
     IconComponent,
     ValidationComponent,
-    RightContainer,
 } from "../../InputComponents"
 
 import * as Styles from "../styles"
@@ -14,40 +14,35 @@ import { DateInputProps } from "../types"
 const DateInput = forwardRef(
     (
         {
-            id,
             type,
-            value,
-            name,
-            disabled,
             icon,
             iconCalendar,
             validation,
-            autoFocus,
-            accentColor,
+            accentColor = "primary",
             backgroundColor,
             iconSize,
             variant = "rounded",
-            ...props
+            disabled,
+            ...rest
         }: DateInputProps,
         ref?: React.ForwardedRef<HTMLInputElement>
     ) => {
-        const inputFunction = () => (
+        const getValidationStatus =
+            typeof validation === "object" ? validation?.status : validation
+
+        const inputFn = () => (
             <Styles.StyledInput
-                id={id}
-                type={type}
-                value={value}
-                name={name}
-                disabled={disabled}
-                $iconCalendar={iconCalendar}
-                $type={type}
-                $validation={validation?.status}
                 ref={ref}
+                $iconCalendar={iconCalendar}
+                $validation={getValidationStatus}
                 $hasIcon={!!icon}
-                autoFocus={autoFocus}
                 $accentColor={accentColor}
                 $backgroundColor={backgroundColor}
                 $variant={variant}
-                {...props}
+                disabled={disabled}
+                type={type}
+                $type={type}
+                {...rest}
             />
         )
 
@@ -58,13 +53,13 @@ const DateInput = forwardRef(
                         icon={icon}
                         disabled={disabled}
                         accentColor={accentColor}
-                        validation={validation?.status}
+                        validation={getValidationStatus}
                         size={iconSize}
                         variant={variant}
                     />
                 )}
 
-                {inputFunction()}
+                {inputFn()}
 
                 {validation && (
                     <RightContainer disabled={disabled} variant={variant}>
@@ -73,7 +68,7 @@ const DateInput = forwardRef(
                 )}
             </Styles.StyledInputContent>
         ) : (
-            inputFunction()
+            inputFn()
         )
     }
 )

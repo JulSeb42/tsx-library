@@ -2,12 +2,12 @@
 
 import React, { forwardRef, useState } from "react"
 
+import { Button, ButtonIcon } from "../../../"
 import {
+    RightContainer,
     IconComponent,
     ValidationComponent,
-    RightContainer,
 } from "../../InputComponents"
-import Button from "../../Button"
 
 import * as Styles from "../styles"
 import { PasswordInputProps } from "../types"
@@ -15,29 +15,35 @@ import { PasswordInputProps } from "../types"
 const PasswordInput = forwardRef(
     (
         {
-            id,
-            value,
-            name,
-            disabled,
             validation,
             icon,
             button,
-            autoFocus,
-            accentColor,
+            accentColor = "primary",
             backgroundColor,
             iconSize,
             variant = "rounded",
-            ...props
+            disabled,
+            ...rest
         }: PasswordInputProps,
         ref?: React.ForwardedRef<HTMLInputElement>
     ) => {
         const [isVisible, setIsVisible] = useState(false)
 
+        const getValidationStatus =
+            typeof validation === "object" ? validation?.status : validation
+
         const buttonProps = {
             onClick: () => setIsVisible(!isVisible),
-            disabled: disabled,
+            disabled,
             color: accentColor,
             noPadding: true,
+        }
+
+        const buttonIconProps = {
+            onClick: () => setIsVisible(!isVisible),
+            disabled,
+            color: accentColor,
+            size: 32,
         }
 
         return (
@@ -47,58 +53,48 @@ const PasswordInput = forwardRef(
                         icon={icon}
                         disabled={disabled}
                         accentColor={accentColor}
-                        validation={validation?.status}
+                        validation={getValidationStatus}
                         size={iconSize}
                         variant={variant}
                     />
                 )}
 
                 <Styles.StyledInput
-                    id={id}
-                    value={value}
-                    name={name}
+                    ref={ref}
                     disabled={disabled}
                     type={isVisible ? "text" : "password"}
-                    ref={ref}
-                    $validation={validation?.status}
+                    $validation={getValidationStatus}
                     $hasIcon={!!icon}
-                    autoFocus={autoFocus}
                     $accentColor={accentColor}
                     $backgroundColor={backgroundColor}
                     $variant={variant}
-                    {...props}
+                    {...rest}
                 />
 
                 <RightContainer disabled={disabled} variant={variant}>
                     {isVisible ? (
                         button?.iconHide ? (
-                            <Button
-                                icons={{ only: button.iconHide }}
-                                variant="text"
-                                {...buttonProps}
+                            <ButtonIcon
+                                icon={button.iconHide}
+                                variant="transparent"
+                                borderRadius="none"
+                                {...buttonIconProps}
                             />
-                        ) : button?.textHide ? (
-                            <Button variant="text" {...buttonProps}>
-                                {button?.textHide}
-                            </Button>
                         ) : (
                             <Button variant="text" {...buttonProps}>
-                                Hide
+                                {button?.textHide || "Hide"}
                             </Button>
                         )
                     ) : button?.iconShow ? (
-                        <Button
-                            icons={{ only: button.iconShow }}
-                            variant="text"
-                            {...buttonProps}
+                        <ButtonIcon
+                            icon={button.iconShow}
+                            variant="transparent"
+                            borderRadius="none"
+                            {...buttonIconProps}
                         />
-                    ) : button?.textShow ? (
-                        <Button variant="text" {...buttonProps}>
-                            {button?.textShow}
-                        </Button>
                     ) : (
                         <Button variant="text" {...buttonProps}>
-                            Show
+                            {button?.textShow || "Show"}
                         </Button>
                     )}
 

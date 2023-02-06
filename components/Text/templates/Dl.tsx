@@ -1,38 +1,45 @@
-/*=============================================== Dl ===============================================*/
+/*=============================================== Dl component ===============================================*/
 
-import React from "react"
+import React, { forwardRef } from "react"
 
-import { AllProps } from "../types"
-
+import { TextProps } from "../types"
 import { StyledDl } from "../styles"
 
-const Dl = ({
-    textAlign,
-    color,
-    linkColor = "primary",
-    lineHeight,
-    fontSize,
-    customFontSize,
-    children,
-    as,
-    fontWeightDt,
-    fontWeightDd,
-    ...props
-}: AllProps & React.HTMLAttributes<HTMLDListElement>) => (
-    <StyledDl
-        $textAlign={textAlign}
-        $color={color}
-        $linkColor={linkColor}
-        $lineHeight={lineHeight}
-        $fontSize={fontSize}
-        $customFontSize={customFontSize}
-        as={as}
-        $fontWeightDt={fontWeightDt}
-        $fontWeightDd={fontWeightDd}
-        {...props}
-    >
-        {children}
-    </StyledDl>
+const Dl = forwardRef(
+    (
+        {
+            children,
+            textAlign,
+            color,
+            linkColor = "primary",
+            lineHeight,
+            fontSize,
+            customFontSize,
+            as,
+            fontWeightDt,
+            fontWeightDd,
+            maxLines,
+            ...rest
+        }: TextProps,
+        ref?: React.ForwardedRef<HTMLDListElement>
+    ) => (
+        <StyledDl
+            ref={ref}
+            as={as}
+            $color={color}
+            $customFontSize={customFontSize}
+            $textAlign={textAlign}
+            $linkColor={linkColor}
+            $lineHeight={lineHeight}
+            $fontSize={fontSize}
+            $fontWeightDt={fontWeightDt}
+            $fontWeightDd={fontWeightDd}
+            $maxLines={maxLines}
+            {...rest}
+        >
+            {children}
+        </StyledDl>
+    )
 )
 
 export default Dl

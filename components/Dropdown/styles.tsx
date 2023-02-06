@@ -8,17 +8,16 @@ import {
     Transitions,
     Spacers,
     Breakpoints,
-} from "../../Variables"
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
-
-import { ColorsHoverTypes } from "../../utils/common-types"
-import { JustifyTypes } from "./types"
+    Mixins,
+} from "../../"
+import { ColorsHoverTypes } from "../../types"
+import { DropdownJustifyTypes } from "./types"
 import { ListDirectionTypes } from "../ListInputs/types"
+
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledDropdown = styled.div<{
     $isOpen: boolean
-    ref?: any
     $accentColor?: ColorsHoverTypes
     $direction?: ListDirectionTypes
 }>`
@@ -72,10 +71,7 @@ const StyledDropdown = styled.div<{
     }
 `
 
-const StyledDropdownContainer = styled.div<{
-    $justify?: JustifyTypes
-    ref?: any
-}>`
+const DropdownContainer = styled.div<{ $justify?: DropdownJustifyTypes }>`
     position: relative;
     ${({ $justify }) =>
         Mixins.Flexbox({
@@ -88,6 +84,6 @@ const StyledDropdownContainer = styled.div<{
     }
 `
 
-setDefaultTheme([StyledDropdownContainer, StyledDropdown])
+setDefaultTheme([DropdownContainer, StyledDropdown])
 
-export { StyledDropdownContainer, StyledDropdown }
+export { DropdownContainer, StyledDropdown }

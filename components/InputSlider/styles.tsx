@@ -8,15 +8,11 @@ import {
     Transitions,
     ThemeDark,
     Overlays,
-} from "../../Variables"
-import Text from "../Text"
-import setDefaultTheme from "../../utils/setDefaultTheme"
+    Text,
+} from "../../"
+import { AllColorsTypes, ColorsHoverTypes, ValidationTypes } from "../../types"
 
-import {
-    AllColorsTypes,
-    ColorsHoverTypes,
-    ValidationTypes,
-} from "../../utils/common-types"
+import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const SliderContainer = styled.div`
     width: 100%;

@@ -2,7 +2,7 @@
 
 import React, { forwardRef } from "react"
 
-import { ValidationComponent, RightContainer } from "../../InputComponents"
+import { RightContainer, ValidationComponent } from "../../InputComponents"
 
 import * as Styles from "../styles"
 import { FileInputProps } from "../types"
@@ -10,48 +10,43 @@ import { FileInputProps } from "../types"
 const FileInput = forwardRef(
     (
         {
-            id,
-            value,
             type = "file",
-            validation,
-            name,
-            disabled,
-            autoFocus,
             backgroundColor,
-            accentColor,
+            accentColor = "primary",
             variant = "rounded",
-            ...props
+            validation,
+            disabled,
+            ...rest
         }: FileInputProps,
         ref?: React.ForwardedRef<HTMLInputElement>
     ) => {
-        const inputFunction = () => (
+        const getValidationStatus =
+            typeof validation === "object" ? validation?.status : validation
+
+        const inputFn = () => (
             <Styles.StyledInput
-                id={id}
-                value={value}
-                type={type}
-                $validation={validation?.status}
-                name={name}
-                disabled={disabled}
-                autoFocus={autoFocus}
                 ref={ref}
+                type={type}
+                $validation={getValidationStatus}
                 $type={type}
                 $accentColor={accentColor}
                 $backgroundColor={backgroundColor}
                 $variant={variant}
-                {...props}
+                disabled={disabled}
+                {...rest}
             />
         )
 
         return validation ? (
             <Styles.StyledInputContent>
-                {inputFunction()}
+                {inputFn()}
 
                 <RightContainer disabled={disabled} variant={variant}>
                     <ValidationComponent validation={validation} />
                 </RightContainer>
             </Styles.StyledInputContent>
         ) : (
-            inputFunction()
+            inputFn()
         )
     }
 )

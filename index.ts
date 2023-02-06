@@ -1,193 +1,82 @@
-/*=============================================== All components ===============================================*/
+/*=============================================== Export all components ===============================================*/
 
-import Accordion from "./components/Accordion"
-import Alert from "./components/Alert"
-import Aside from "./components/Aside"
-import Autocomplete from "./components/Autocomplete"
-import Avatar from "./components/Avatar"
-import Badge from "./components/Badge"
-import BackToTop from "./components/BackToTop"
-import Breadcrumbs from "./components/Breadcrumbs"
-import Burger from "./components/Burger"
-import Button from "./components/Button"
-import ButtonGroup from "./components/ButtonGroup"
-import ButtonIcon from "./components/ButtonIcon"
-import CodeContainer from "./components/CodeContainer"
-import * as CommonTypes from "./utils/common-types"
-import * as ComponentProps from "./utils/component-props"
-import countries from "./utils/countries"
-import Cover from "./components/Cover"
-import Datepicker from "./components/Datepicker"
-import { DropdownContainer, Dropdown } from "./components/Dropdown"
-import Fade from "./components/Fade"
-import Flexbox from "./components/Flexbox"
-import Footer from "./components/Footer"
-import Form from "./components/Form"
-import FullBleed from "./components/FullBleed"
-import Grid from "./components/Grid"
-import Header from "./components/Header"
-import Helmet from "./components/Helmet"
-import * as Hooks from "./hooks"
-import Hr from "./components/Hr"
-import Icon from "./components/Icon"
-import IconMenu from "./components/IconMenu"
-import Image from "./components/Image"
-import Input from "./components/Input"
-import InputCheck from "./components/InputCheck"
-import InputCounter from "./components/InputCounter"
-import InputImage from "./components/InputImage"
-import InputSlider from "./components/InputSlider"
-import InputPhone from "./components/InputPhone"
-import ListGroup from "./components/ListGroup"
-import Loader from "./components/Loader"
-import Main from "./components/Main"
-import * as MarkdownCommands from "./utils/markdown-commands"
-import MarkdownContainer from "./components/MarkdownContainer"
-import MarkdownEditor from "./components/MarkdownEditor"
-import Masonry from "./components/Masonry"
-import { Messaging, Message } from "./components/Messaging"
-import Mixins from "./Mixins"
-import Modal from "./components/Modal"
-import OptionsMarkdown from "./utils/options-markdown"
-import PageLoading from "./components/PageLoading"
-import { Pagination, PaginationButton } from "./components/Pagination"
-import Paginator from "./components/Paginator"
-import Placeholder from "./components/Placeholder"
-import ProgressBar from "./components/ProgressBar"
-import ProgressCircle from "./components/ProgressCircle"
-import Rating from "./components/Rating"
-import Section from "./components/Section"
-import Select from "./components/Select"
-import setDefaultTheme from "./utils/setDefaultTheme"
-import Skeleton from "./components/Skeleton"
-import Slideshow from "./components/Slideshow"
-import SrOnly from "./components/SrOnly"
-import Stepper from "./components/Stepper"
-import Sticky from "./components/Sticky"
-import Table from "./components/Table"
-import Tabs from "./components/Tabs"
-import Tag from "./components/Tag"
-import Text from "./components/Text"
-import TextIcon from "./components/TextIcon"
-import { ThemeContext, ThemeProviderWrapper } from "./context/ThemeContext"
-import { ThemeProvider } from "styled-components"
-import Timepicker from "./components/Timepicker"
-import Toast from "./components/Toast"
-import Tooltip from "./components/Tooltip"
-import * as Utils from "./utils/utils"
-import {
-    ThemeLight,
-    ThemeDark,
-    Overlays,
-    FontFamilies,
-    FontSizes,
-    FontWeights,
-    LineHeights,
-    Shadows,
-    Radiuses,
-    Layouts,
-    Spacers,
-    Transitions,
-    Breakpoints,
-} from "./Variables"
-import Video from "./components/Video"
-import Wrapper from "./components/Wrapper"
-import Youtube from "./components/Youtube"
+export * from "./Variables"
+export { default as Mixins } from "./Mixins"
 
-export {
-    Accordion,
-    Alert,
-    Aside,
-    Autocomplete,
-    Avatar,
-    Badge,
-    BackToTop,
-    Breadcrumbs,
-    Burger,
-    Button,
-    ButtonGroup,
-    ButtonIcon,
-    CodeContainer,
-    CommonTypes,
-    ComponentProps,
-    Cover,
-    countries,
-    Datepicker,
-    Dropdown,
-    DropdownContainer,
-    Fade,
-    Flexbox,
-    Footer,
-    Form,
-    FullBleed,
-    Grid,
-    Header,
-    Helmet,
-    Hr,
-    Hooks,
-    Icon,
-    IconMenu,
-    Image,
-    Input,
-    InputCheck,
-    InputCounter,
-    InputImage,
-    InputSlider,
-    InputPhone,
-    ListGroup,
-    Loader,
-    Main,
-    MarkdownCommands,
-    MarkdownContainer,
-    MarkdownEditor,
-    Masonry,
-    Message,
-    Messaging,
-    Mixins,
-    Modal,
-    OptionsMarkdown,
-    PageLoading,
-    Pagination,
-    PaginationButton,
-    Paginator,
-    Placeholder,
-    ProgressBar,
-    ProgressCircle,
-    Rating,
-    Section,
-    Select,
-    Slideshow,
-    SrOnly,
-    setDefaultTheme,
-    Skeleton,
-    Stepper,
-    Sticky,
-    Table,
-    Tabs,
-    Tag,
-    Text,
-    TextIcon,
-    ThemeContext,
-    ThemeProviderWrapper,
-    ThemeProvider,
-    Timepicker,
-    Toast,
-    Tooltip,
-    Utils,
-    ThemeLight,
-    ThemeDark,
-    Overlays,
-    FontFamilies,
-    FontSizes,
-    FontWeights,
-    LineHeights,
-    Shadows,
-    Radiuses,
-    Layouts,
-    Spacers,
-    Transitions,
-    Breakpoints,
-    Video,
-    Wrapper,
-    Youtube,
-}
+export * from "./context/ThemeContext"
+
+export * from "./hooks"
+
+export { default as MarkdownCommands } from "./utils/markdown-commands"
+export { default as OptionsMarkdown } from "./utils/options-markdown"
+export * from "./utils/utils"
+
+export * from "./components/Text"
+export * from "./components/Wrapper"
+export * from "./components/Main"
+export * from "./components/Aside"
+export * from "./components/FullBleed"
+export * from "./components/Section"
+export * from "./components/Grid"
+export * from "./components/Flexbox"
+export * from "./components/Masonry"
+export * from "./components/Placeholder"
+export * from "./components/Skeleton"
+export * from "./components/Icon"
+export * from "./components/TextIcon"
+export * from "./components/Hr"
+export * from "./components/Image"
+export * from "./components/Video"
+export * from "./components/Youtube"
+export * from "./components/Avatar"
+export * from "./components/Loader"
+export * from "./components/Button"
+export * from "./components/ButtonIcon"
+export * from "./components/Burger"
+export * from "./components/ButtonGroup"
+export * from "./components/Tag"
+export * from "./components/Truncate"
+export * from "./components/Card"
+export * from "./components/Badge"
+export * from "./components/Tooltip"
+export * from "./components/Input"
+export * from "./components/InputImage"
+export * from "./components/InputCheck"
+export * from "./components/InputPhone" // => Add keyboard navigation
+export * from "./components/InputCounter"
+export * from "./components/InputSlider"
+export * from "./components/Select" // => Add keyboard navigation
+export * from "./components/Autocomplete" // => Add keyboard navigation, fuzzy search
+export * from "./components/Rating"
+export * from "./components/Datepicker"
+export * from "./components/Timepicker"
+export * from "./components/Form"
+export * from "./components/ListGroup"
+export * from "./components/Breadcrumbs"
+export * from "./components/Accordion"
+export * from "./components/Dropdown"
+export * from "./components/Toast"
+export * from "./components/Alert"
+export * from "./components/Modal"
+export * from "./components/Pagination"
+export * from "./components/Paginator"
+export * from "./components/Stepper"
+export * from "./components/ProgressBar"
+export * from "./components/ProgressCircle"
+export * from "./components/Tabs"
+export * from "./components/Slideshow"
+export * from "./components/Cover"
+export * from "./components/Table"
+export * from "./components/PageLoading"
+export * from "./components/Sticky"
+export * from "./components/Messaging"
+export * from "./components/MarkdownEditor"
+export * from "./components/MarkdownContainer"
+export * from "./components/CodeContainer"
+export * from "./components/Fade"
+export * from "./components/BackToTop"
+export * from "./components/Header"
+export * from "./components/IconMenu"
+export * from "./components/Footer"
+export * from "./components/Helmet"
+export * from "./components/SrOnly"

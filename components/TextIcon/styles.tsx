@@ -2,17 +2,17 @@
 
 import styled from "styled-components"
 
-import Mixins from "../../Mixins"
-import setDefaultTheme from "../../utils/setDefaultTheme"
-
-import { SpacersTypes } from "../../utils/common-types"
+import { Mixins } from "../../"
+import { SpacersTypes } from "../../types"
 import { PossibleTextIconTags } from "./types"
 
-const StyledTextIcon = styled.div<{ $gap?: SpacersTypes | number }>`
+import setDefaultTheme from "../../utils/setDefaultTheme"
+
+const StyledTextIcon = styled.div<{ $gap?: SpacersTypes }>`
     ${({ $gap }) =>
         Mixins.Flexbox({
             $alignItems: "flex-start",
-            $gap: $gap,
+            $gap,
         })};
 `
 
@@ -53,7 +53,7 @@ const IconContainer = styled.span<{
     ${Mixins.Flexbox({
         $inline: true,
         $alignItems: "center",
-    })}
+    })};
 `
 
 setDefaultTheme([StyledTextIcon, IconContainer])

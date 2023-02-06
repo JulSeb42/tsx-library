@@ -3,9 +3,9 @@
 import React, { forwardRef } from "react"
 
 import {
+    RightContainer,
     IconComponent,
     ValidationComponent,
-    RightContainer,
 } from "../../InputComponents"
 
 import * as Styles from "../styles"
@@ -14,40 +14,35 @@ import { TextInputProps } from "../types"
 const TextInput = forwardRef(
     (
         {
-            id,
             type,
             maxLength,
             validation,
             icon,
-            value,
-            name,
-            disabled,
-            autoFocus,
             accentColor = "primary",
             backgroundColor,
             iconSize,
             variant = "rounded",
-            ...props
+            disabled,
+            ...rest
         }: TextInputProps,
         ref?: React.ForwardedRef<HTMLInputElement>
     ) => {
-        const inputFunction = () => (
+        const getValidationStatus =
+            typeof validation === "object" ? validation?.status : validation
+
+        const inputFn = () => (
             <Styles.StyledInput
-                id={id}
+                ref={ref}
                 type={type}
                 maxLength={maxLength}
-                value={value}
-                name={name}
-                disabled={disabled}
                 $type={type}
-                $validation={validation?.status}
-                ref={ref}
+                $validation={getValidationStatus}
                 $hasIcon={!!icon}
-                autoFocus={autoFocus}
                 $accentColor={accentColor}
                 $backgroundColor={backgroundColor}
                 $variant={variant}
-                {...props}
+                disabled={disabled}
+                {...rest}
             />
         )
 
@@ -58,13 +53,13 @@ const TextInput = forwardRef(
                         icon={icon}
                         disabled={disabled}
                         accentColor={accentColor}
-                        validation={validation?.status}
+                        validation={getValidationStatus}
                         size={iconSize}
                         variant={variant}
                     />
                 )}
 
-                {inputFunction()}
+                {inputFn()}
 
                 {validation && (
                     <RightContainer disabled={disabled} variant={variant}>
@@ -73,7 +68,7 @@ const TextInput = forwardRef(
                 )}
             </Styles.StyledInputContent>
         ) : (
-            inputFunction()
+            inputFn()
         )
     }
 )
