@@ -1,8 +1,13 @@
 /*=============================================== Autocomplete component ===============================================*/
 
 import React, { forwardRef, useState } from "react"
+import Fuse from "fuse.js"
 
-import { uuid, slugify } from "../../"
+import {
+    uuid,
+    slugify,
+    getHighlightedText,
+} from "../../"
 import { InputContainer } from "../InputContainer"
 import {
     IconComponent,
@@ -36,6 +41,10 @@ const Autocomplete = forwardRef(
             listDirection,
             iconSize,
             variant = "rounded",
+            fuzzy = {
+                options: {},
+            },
+            highlight = true,
             ...rest
         }: AutocompleteProps,
         ref?: React.ForwardedRef<HTMLInputElement>
@@ -59,20 +68,84 @@ const Autocomplete = forwardRef(
         const getValidationStatus =
             typeof validation === "object" ? validation?.status : validation
 
+        let fuzzyResults: any
+
+        if (fuzzy) {
+            const fuse = new Fuse(items, fuzzy.options)
+
+            fuzzyResults = fuse.search(value)
+        }
+
         const listItemsFn = () =>
-            results.length > 0 ? (
-                results.slice(0, 20).map((item, i) => (
+            fuzzy ? (
+                value && fuzzyResults.length > 0 ? (
+                    <>
+                        {fuzzyResults
+                            .slice(0, 20)
+                            .map((item: { item: string }) => {
+                                const getItem = item.item
+
+                                return (
+                                    <ListItem
+                                        accentColor={accentColor}
+                                        validation={getValidationStatus}
+                                        backgroundColor={backgroundColor}
+                                        onClick={handleClick}
+                                        isActive={value === getItem && true}
+                                        key={uuid()}
+                                    >
+                                        {highlight
+                                            ? getHighlightedText(getItem, value)
+                                            : getItem}
+                                    </ListItem>
+                                )
+                            })}
+
+                        <ListItem
+                            accentColor={accentColor}
+                            validation={getValidationStatus}
+                            backgroundColor={backgroundColor}
+                            onClick={handleClick}
+                        >
+                            {highlight
+                                ? getHighlightedText(value, value)
+                                : value}
+                        </ListItem>
+                    </>
+                ) : (
+                    <ListItem
+                        accentColor={accentColor}
+                        validation={getValidationStatus}
+                        backgroundColor={backgroundColor}
+                        readOnly
+                    >
+                        {emptyText}
+                    </ListItem>
+                )
+            ) : value && results.length > 0 ? (
+                <>
+                    {results.slice(0, 20).map((item, i) => (
+                        <ListItem
+                            accentColor={accentColor}
+                            validation={getValidationStatus}
+                            backgroundColor={backgroundColor}
+                            onClick={handleClick}
+                            isActive={value === item && true}
+                            key={uuid()}
+                        >
+                            {highlight ? getHighlightedText(item, value) : item}
+                        </ListItem>
+                    ))}
+
                     <ListItem
                         accentColor={accentColor}
                         validation={getValidationStatus}
                         backgroundColor={backgroundColor}
                         onClick={handleClick}
-                        isActive={value === item && true}
-                        key={uuid()}
                     >
-                        {item}
+                        {highlight ? getHighlightedText(value, value) : value}
                     </ListItem>
-                ))
+                </>
             ) : (
                 <ListItem
                     accentColor={accentColor}
@@ -85,7 +158,7 @@ const Autocomplete = forwardRef(
             )
 
         const listProps = {
-            isOpen: value.length > 0 ? isOpen : false,
+            isOpen: value && isOpen || false,
             accentColor,
             backgroundColor,
             validation: getValidationStatus,

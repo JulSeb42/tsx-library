@@ -4,7 +4,7 @@ import React from "react"
 
 import { ColorsHoverTypes } from "../../types"
 import { InputBackgroundTypes } from "../InputComponents/types"
-import { ButtonIconProps, ButtonIconVariantTypes } from "../ButtonIcon/types"
+import { ButtonIconVariantTypes } from "../ButtonIcon/types"
 
 enum justify {
     left,
@@ -40,25 +40,3 @@ export interface PaginatorProps extends React.HTMLAttributes<HTMLDivElement> {
         showLabel?: boolean
     }
 }
-
-// interface PaginatorPropsButton1 extends PaginatorPropsBase {
-//     buttons?: {
-//         variant?: "plain"
-//         hoverBackground?: never
-//         labelPrev?: string
-//         labelNext?: string
-//         showLabel?: boolean
-//     }
-// }
-
-// interface PaginatorPropsButton2 extends PaginatorPropsBase {
-//     buttons?: {
-//         variant?: "transparent"
-//         hoverBackground?: boolean
-//         labelPrev?: string
-//         labelNext?: string
-//         showLabel?: boolean
-//     }
-// }
-
-// export type PaginatorProps = PaginatorPropsButton1 | PaginatorPropsButton2

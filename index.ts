@@ -10,6 +10,7 @@ export * from "./hooks"
 export { default as MarkdownCommands } from "./utils/markdown-commands"
 export { default as OptionsMarkdown } from "./utils/options-markdown"
 export * from "./utils/utils"
+export * from "./utils/getHighlightedText"
 
 export * from "./components/Text"
 export * from "./components/Wrapper"
@@ -42,11 +43,11 @@ export * from "./components/Tooltip"
 export * from "./components/Input"
 export * from "./components/InputImage"
 export * from "./components/InputCheck"
-export * from "./components/InputPhone" // => Add keyboard navigation
+export * from "./components/InputPhone"
 export * from "./components/InputCounter"
 export * from "./components/InputSlider"
-export * from "./components/Select" // => Add keyboard navigation
-export * from "./components/Autocomplete" // => Add keyboard navigation, fuzzy search
+export * from "./components/Select"
+export * from "./components/Autocomplete"
 export * from "./components/Rating"
 export * from "./components/Datepicker"
 export * from "./components/Timepicker"

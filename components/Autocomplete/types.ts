@@ -24,6 +24,10 @@ interface AutocompletePropsBase
     backgroundColor?: InputBackgroundTypes
     listDirection?: ListDirectionTypes
     variant?: InputVariantTypes
+    fuzzy?: false | {
+        options?: any
+    }
+    highlight?: boolean
 }
 
 interface AutocompleteList1 extends AutocompletePropsBase {

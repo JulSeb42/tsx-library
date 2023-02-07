@@ -55,6 +55,4 @@ interface TableVariant2 extends TablePropsBase {
     headerBorderColor?: never
 }
 
-// Add either (data + headers) or children
-
 export type TableProps = TableVariant1 | TableVariant2
