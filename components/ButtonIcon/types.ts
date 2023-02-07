@@ -48,15 +48,30 @@ type ButtonIconBehaviour1 = ButtonIconLabel & {
     type?: "button" | "submit" | "reset" | undefined
     disabled?: boolean
     to?: never
+    href?: never
+    blank?: never
 }
 
 type ButtonIconBehaviour2 = ButtonIconLabel & {
     type?: never
     disabled?: never
     to?: string
+    href?: never
+    blank?: never
 }
 
-type ButtonIconBehaviour = ButtonIconBehaviour1 | ButtonIconBehaviour2
+type ButtonIconBehaviour3 = ButtonIconLabel & {
+    type?: never
+    disabled?: never
+    to?: never
+    href?: string
+    blank?: boolean
+}
+
+type ButtonIconBehaviour =
+    | ButtonIconBehaviour1
+    | ButtonIconBehaviour2
+    | ButtonIconBehaviour3
 
 type ButtonIconIcon1 = ButtonIconBehaviour & {
     icon?: never

@@ -114,18 +114,28 @@ type ButtonGroupPropsContent =
 type ButtonGroupPropsBehaviour1 = ButtonGroupPropsContent & {
     onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
     to?: never
+    href?: never
     blank?: never
 }
 
 type ButtonGroupPropsBehaviour2 = ButtonGroupPropsContent & {
     onClick?: never
     to: string
+    href?: never
+    blank?: never
+}
+
+type ButtonGroupPropsBehaviour3 = ButtonGroupPropsContent & {
+    onClick?: never
+    to?: never
+    href: string
     blank?: boolean
 }
 
 export type ButtonGroupProps =
     | ButtonGroupPropsBehaviour1
     | ButtonGroupPropsBehaviour2
+    | ButtonGroupPropsBehaviour3
 
 /*==================== ListGroup ====================*/
 

@@ -70,6 +70,7 @@ const StyledButtonIcon = styled.button<{
             $shadowHover: $shadowHover,
             $shadowActive: $shadowActive,
         })};
+    text-decoration: none;
 
     @media ${Breakpoints.Hover} {
         &:not(:disabled):hover {

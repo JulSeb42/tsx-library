@@ -38,30 +38,59 @@ const ButtonGroup = forwardRef(
                         iconOnly,
                         blank,
                         "aria-label": ariaLabel,
+                        href,
                     },
                     i
                 ) => (
                     <React.Fragment key={uuid()}>
                         {iconOnly ? (
-                            <Styles.StyledButtonIcon
-                                icon={iconOnly}
-                                to={to}
-                                onClick={onClick}
-                                variant={variant}
+                            href ? (
+                                <Styles.StyledButtonIcon
+                                    icon={iconOnly}
+                                    variant={variant}
+                                    color={color}
+                                    aria-label={ariaLabel}
+                                    iconSize={16}
+                                    href={href}
+                                    blank={blank}
+                                />
+                            ) : onClick ? (
+                                <Styles.StyledButtonIcon
+                                    onClick={onClick}
+                                    icon={iconOnly}
+                                    variant={variant}
+                                    color={color}
+                                    aria-label={ariaLabel}
+                                    iconSize={16}
+                                />
+                            ) : (
+                                <Styles.StyledButtonIcon
+                                    icon={iconOnly}
+                                    to={to}
+                                    variant={variant}
+                                    color={color}
+                                    aria-label={ariaLabel}
+                                    iconSize={16}
+                                />
+                            )
+                        ) : href ? (
+                            <Styles.StyledButton
+                                variant={
+                                    variant === "transparent" ? "text" : "plain"
+                                }
                                 color={color}
                                 aria-label={ariaLabel}
-                                iconSize={16}
-                                // @ts-expect-error
-                                target={to && blank ? "_blank" : undefined}
-                                rel={
-                                    to && blank
-                                        ? "noreferrer noopener"
-                                        : undefined
-                                }
-                            />
-                        ) : (
+                                icons={{
+                                    left: iconLeft,
+                                    right: iconRight,
+                                }}
+                                href={href}
+                                blank={blank}
+                            >
+                                {text}
+                            </Styles.StyledButton>
+                        ) : onClick ? (
                             <Styles.StyledButton
-                                to={to}
                                 onClick={onClick}
                                 variant={
                                     variant === "transparent" ? "text" : "plain"
@@ -72,13 +101,21 @@ const ButtonGroup = forwardRef(
                                     left: iconLeft,
                                     right: iconRight,
                                 }}
-                                // @ts-expect-error
-                                target={to && blank ? "_blank" : undefined}
-                                rel={
-                                    to && blank
-                                        ? "noreferrer noopener"
-                                        : undefined
+                            >
+                                {text}
+                            </Styles.StyledButton>
+                        ) : (
+                            <Styles.StyledButton
+                                to={to}
+                                variant={
+                                    variant === "transparent" ? "text" : "plain"
                                 }
+                                color={color}
+                                aria-label={ariaLabel}
+                                icons={{
+                                    left: iconLeft,
+                                    right: iconRight,
+                                }}
                             >
                                 {text}
                             </Styles.StyledButton>

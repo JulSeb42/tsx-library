@@ -25,14 +25,17 @@ const Button = forwardRef(
             isLoading,
             loaderVariant = 1,
             borderRadius = "m",
+            href,
+            blank,
             ...rest
         }: ButtonProps,
         ref?: React.ForwardedRef<HTMLButtonElement>
     ) => (
         <Styles.StyledButton
             ref={ref}
-            as={as ? as : to ? Link : "button"}
+            as={as ? as : to ? Link : href ? "a" : "button"}
             to={to ? to : undefined}
+            href={href}
             type={to ? undefined : type}
             disabled={!!isLoading || disabled}
             $variant={variant}
@@ -45,6 +48,8 @@ const Button = forwardRef(
             $shadowHover={typeof shadow === "object" ? shadow.hover : shadow}
             $shadowActive={typeof shadow === "object" ? shadow.active : shadow}
             $borderRadius={borderRadius}
+            target={href && blank ? "_blank" : undefined}
+            rel={href && blank ? "noreferrer noopener" : undefined}
             {...rest}
         >
             {isLoading &&

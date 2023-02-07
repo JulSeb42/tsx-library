@@ -28,15 +28,27 @@ interface ButtonBehaviour1 extends ButtonBaseProps {
     to?: string
     disabled?: never
     type?: never
+    href?: never
+    blank?: never
 }
 
 interface ButtonBehaviour2 extends ButtonBaseProps {
     to?: never
     disabled?: boolean
     type?: "button" | "submit" | "reset"
+    href?: never
+    blank?: never
 }
 
-type ButtonBehaviour = ButtonBehaviour1 | ButtonBehaviour2
+interface ButtonBehaviour3 extends ButtonBaseProps {
+    to?: never
+    disabled?: never
+    type?: never
+    href?: string
+    blank?: boolean
+}
+
+type ButtonBehaviour = ButtonBehaviour1 | ButtonBehaviour2 | ButtonBehaviour3
 
 type ButtonIcon1 = ButtonBehaviour & {
     libicon?: never

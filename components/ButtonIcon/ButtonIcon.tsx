@@ -62,15 +62,18 @@ const ButtonIcon = forwardRef(
             hoverBackground,
             borderRadius = "circle",
             iconSize = size * 0.7,
+            href,
+            blank,
             ...rest
         }: ButtonIconProps,
         ref?: React.ForwardedRef<HTMLButtonElement>
     ) => {
         const buttonFn = () => (
             <Styles.StyledButtonIcon
-                as={as ? as : to ? Link : "button"}
+                as={as ? as : to ? Link : href ? "a" : "button"}
                 aria-label={label}
                 to={to}
+                href={href}
                 disabled={!!isLoading || disabled}
                 ref={ref}
                 type={type}
@@ -92,6 +95,8 @@ const ButtonIcon = forwardRef(
                 $bottom={!showLabel ? position?.bottom : undefined}
                 $zIndex={!showLabel ? position?.zIndex : undefined}
                 $borderRadius={borderRadius}
+                target={href && blank ? "_blank" : undefined}
+                rel={href && blank ? "noreferrer noopener" : undefined}
                 {...rest}
             >
                 {isLoading ? (
