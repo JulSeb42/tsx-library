@@ -8,7 +8,7 @@ import { useTouchScreen, Icon, Loader, Burger } from "../../"
 import * as Styles from "./styles"
 import { ButtonIconProps, TipsProps } from "./types"
 
-const Tooltip = ({ label, children, position, size }: TipsProps) => {
+const Tooltip = ({ label, children, position, size, bottom = "125%" }: TipsProps) => {
     const ref = useRef<any>(null)
     const [width, setWidth] = useState(0)
 
@@ -22,7 +22,7 @@ const Tooltip = ({ label, children, position, size }: TipsProps) => {
         <Styles.TooltipContainer
             onMouseEnter={() => setIsVisible(true)}
             onMouseLeave={() => setIsVisible(false)}
-            $position={position?.position || "relative"}
+            $position={position?.position}
             $left={position?.left}
             $top={position?.top}
             $right={position?.right}
@@ -30,7 +30,12 @@ const Tooltip = ({ label, children, position, size }: TipsProps) => {
             $zIndex={position?.zIndex}
             $size={size}
         >
-            <Styles.Tip $isVisible={isVisible} $width={width} ref={ref}>
+            <Styles.Tip
+                $isVisible={isVisible}
+                $width={width}
+                $bottom={bottom}
+                ref={ref}
+            >
                 {label}
             </Styles.Tip>
 
@@ -51,6 +56,7 @@ const ButtonIcon = forwardRef(
             position,
             label,
             showLabel,
+            labelBottom,
             type,
             disabled,
             to,
@@ -125,7 +131,12 @@ const ButtonIcon = forwardRef(
         const isTouchScreen = useTouchScreen()
 
         return showLabel && !isTouchScreen ? (
-            <Tooltip label={label} position={position} size={size}>
+            <Tooltip
+                label={label}
+                position={position}
+                size={size}
+                bottom={labelBottom}
+            >
                 {buttonFn()}
             </Tooltip>
         ) : (

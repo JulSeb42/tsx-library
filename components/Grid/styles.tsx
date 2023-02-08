@@ -36,7 +36,7 @@ const StyledGrid = styled.div<{
                 ? "repeat(4, 1fr)"
                 : $col === 4 || $col === 5
                 ? "repeat(3, 1fr)"
-                : "repeat(2, 1fr)"};
+                : `repeat(${$col}, 1fr)`};
     }
 
     @media ${Breakpoints.Mobile} {

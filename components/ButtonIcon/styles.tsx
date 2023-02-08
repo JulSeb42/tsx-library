@@ -12,6 +12,7 @@ import {
     Spacers,
     FontSizes,
     FontWeights,
+    stringifyPx,
 } from "../../"
 import {
     SpacersTypes,
@@ -107,7 +108,7 @@ const StyledButtonIcon = styled.button<{
                   ${($left || $top || $right || $bottom) &&
                   Mixins.Position({
                       $zIndex: $zIndex,
-                      $position,
+                      $position: $position || "relative",
                       $left,
                       $top,
                       $right,
@@ -130,20 +131,29 @@ const TooltipContainer = styled.span<{
     height: ${({ $size }) => $size}px;
 
     ${({ $left, $top, $right, $bottom, $zIndex, $position }) =>
-        ($left || $top || $right || $bottom) &&
-        Mixins.Position({
-            $zIndex: $zIndex,
-            $position,
-            $left,
-            $top,
-            $right,
-            $bottom,
-        })};
+        !$position
+            ? css`
+                  position: relative;
+              `
+            : ($left || $top || $right || $bottom) &&
+              Mixins.Position({
+                  $zIndex: $zIndex,
+                  $position: $position || "relative",
+                  $left,
+                  $top,
+                  $right,
+                  $bottom,
+              })};
 `
 
-const Tip = styled.span<{ $isVisible: boolean; $width: number }>`
-    width: ${({ $width }) => $width}px;
+const Tip = styled.span<{
+    $isVisible: boolean
+    $width: number
+    $bottom?: string | number
+}>`
+    ${""/* width: ${({ $width }) => $width}px; */}
     min-width: 60px;
+    max-width: ${({ $width }) => `calc(${$width} + ${Spacers.XXS} * 2)`};
     background-color: ${({ theme }) =>
         theme === ThemeDark ? Overlays.Plain.White80 : Overlays.Plain.Black80};
     color: ${({ theme }) => theme.Background};
@@ -157,13 +167,13 @@ const Tip = styled.span<{ $isVisible: boolean; $width: number }>`
     z-index: 1;
     transition: ${Transitions.Short};
     position: absolute;
-    bottom: 125%;
+    bottom: ${({ $bottom }) => ($bottom && stringifyPx($bottom))};
     left: ${({ $width }) => `calc(50% - ${$width}px / 2 - 2px)`};
 
     &:after {
         content: "";
         bottom: calc(${Spacers.XS} * -1 - 2px);
-        left: ${({ $width }) => `calc(${$width}px / 2 - 5px)`};
+        left: ${({ $width }) => `calc((${$width}px + ${Spacers.XXS} * 2) / 2 - 10px)`};
         margin-left: 2px;
         border-width: 5px;
         border-style: solid;

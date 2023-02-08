@@ -35,11 +35,13 @@ interface ButtonIconBaseProps
 interface ButtonIconLabel1 extends ButtonIconBaseProps {
     label?: string
     showLabel?: boolean
+    labelBottom?: string | number
 }
 
 interface ButtonIconLabel2 extends ButtonIconBaseProps {
     label?: undefined
     showLabel?: never
+    labelBottom?: never
 }
 
 type ButtonIconLabel = ButtonIconLabel1 | ButtonIconLabel2
@@ -113,6 +115,7 @@ export type ButtonIconProps = ButtonIconVariant1 | ButtonIconVariant2
 
 export interface TipsProps {
     label?: string
+    bottom?: string | number
     children?: any
     position?: ObjectPositionTypes
     size?: number
