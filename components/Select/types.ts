@@ -21,7 +21,7 @@ interface SelectPropsBase
     icon?:
         | string
         | {
-              name: string
+              name?: string
               hasAnimation?: boolean
           }
     items?: string[]

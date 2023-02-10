@@ -20,6 +20,7 @@ const Placeholder = forwardRef(
             customFontSize,
             fontWeight = "regular",
             textColor = "font",
+            padding,
             ...rest
         }: PlaceholderProps,
         ref?: React.ForwardedRef<HTMLDivElement>
@@ -37,6 +38,7 @@ const Placeholder = forwardRef(
             $customFontSize={customFontSize}
             $fontWeight={fontWeight}
             $textColor={textColor}
+            $padding={padding}
             {...rest}
         >
             {children}

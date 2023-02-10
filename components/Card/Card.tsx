@@ -17,19 +17,22 @@ const Card = forwardRef(
             borderRadius = "m",
             padding = "s",
             cursor,
-            width,
+            width = "100%",
             height,
             shadow,
-            to,
             backgroundColor = "background",
-            textColor = "font",
+            textColor = "currentColor",
+            to,
+            href,
+            blank,
+            onClick,
             ...rest
         }: CardProps,
         ref?: React.ForwardedRef<HTMLDivElement>
     ) => (
         <Styles.StyledCard
             ref={ref}
-            as={as ? as : to ? Link : "div"}
+            as={as ? as : to ? Link : href ? "a" : "div"}
             $borderRadius={borderRadius}
             $padding={padding}
             $cursor={cursor}
@@ -45,6 +48,9 @@ const Card = forwardRef(
             $shadowActive={typeof shadow === "object" && shadow.active}
             $backgroundColor={backgroundColor}
             to={to}
+            target={(to || href) && blank && "_blank"}
+            rel={(to || href) && blank && "noreferrer noopener"}
+            onClick={onClick}
             {...rest}
         >
             {children}

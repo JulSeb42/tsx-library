@@ -8,25 +8,27 @@ import {
     InputVariantTypes,
     ValidationComponentProps,
     InputBackgroundTypes,
+    IconInputProps,
 } from "../InputComponents/types"
 import { ListDirectionTypes } from "../ListInputs/types"
 
 interface AutocompletePropsBase
     extends React.InputHTMLAttributes<HTMLInputElement>,
         InputBaseProps,
-        ValidationComponentProps {
+        ValidationComponentProps,
+        IconInputProps {
     items: string[]
     value: string
     setValue: (value: string) => void
-    icon?: string
-    iconSize?: number
     emptyText?: string
     backgroundColor?: InputBackgroundTypes
     listDirection?: ListDirectionTypes
     variant?: InputVariantTypes
-    fuzzy?: false | {
-        options?: any
-    }
+    fuzzy?:
+        | false
+        | {
+              options?: any
+          }
     highlight?: boolean
 }
 

@@ -2,22 +2,16 @@
 
 import React from "react"
 
-import { ShadowsTypes } from "../../types"
+import { ShadowsTypes, InputPhoneCountryType } from "../../types"
 import { InputBaseProps } from "../InputContainer/types"
 import {
     ValidationComponentProps,
     InputBackgroundTypes,
     InputVariantTypes,
+    
 } from "../InputComponents/types"
 import { CountryCodesTypes } from "../../utils/countries"
 import { ListDirectionTypes } from "../ListInputs/types"
-
-export type CountryType = {
-    name: string
-    dial_code: string
-    code: string
-    flag: string
-}
 
 interface InputPhonePropsBase
     extends React.InputHTMLAttributes<HTMLInputElement>,
@@ -25,8 +19,10 @@ interface InputPhonePropsBase
         ValidationComponentProps {
     backgroundColor?: InputBackgroundTypes
     defaultCountry?: CountryCodesTypes
-    selectedCountry: CountryType | undefined
-    setSelectedCountry: (country: CountryType | undefined | any) => void
+    selectedCountry: InputPhoneCountryType | undefined
+    setSelectedCountry: (
+        country: InputPhoneCountryType | undefined | any
+    ) => void
     hasSearch?: boolean
     searchIcon?: string
     iconButton?: string

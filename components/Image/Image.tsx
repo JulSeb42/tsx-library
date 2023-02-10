@@ -41,7 +41,14 @@ const Image = forwardRef(
         return (
             <Suspense fallback={<Fallback $width={width} $height={height} />}>
                 {caption ? (
-                    <Styles.ImgContainer $borderRadius={borderRadius}>
+                    <Styles.ImgContainer
+                        $borderRadius={borderRadius}
+                        as={
+                            typeof caption === "object"
+                                ? caption.asContainer
+                                : "div"
+                        }
+                    >
                         {img()}
 
                         <Styles.Caption

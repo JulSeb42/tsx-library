@@ -8,7 +8,14 @@ import { useTouchScreen, Icon, Loader, Burger } from "../../"
 import * as Styles from "./styles"
 import { ButtonIconProps, TipsProps } from "./types"
 
-const Tooltip = ({ label, children, position, size, bottom = "125%" }: TipsProps) => {
+const Tooltip = ({
+    label,
+    children,
+    position,
+    size,
+    bottom = "125%",
+    tipPosition = "up",
+}: TipsProps) => {
     const ref = useRef<any>(null)
     const [width, setWidth] = useState(0)
 
@@ -35,6 +42,7 @@ const Tooltip = ({ label, children, position, size, bottom = "125%" }: TipsProps
                 $width={width}
                 $bottom={bottom}
                 ref={ref}
+                $position={tipPosition}
             >
                 {label}
             </Styles.Tip>
@@ -56,7 +64,6 @@ const ButtonIcon = forwardRef(
             position,
             label,
             showLabel,
-            labelBottom,
             type,
             disabled,
             to,
@@ -77,11 +84,13 @@ const ButtonIcon = forwardRef(
         const buttonFn = () => (
             <Styles.StyledButtonIcon
                 as={as ? as : to ? Link : href ? "a" : "button"}
+                ref={ref}
                 aria-label={label}
                 to={to}
                 href={href}
+                target={(to || href) && blank && "_blank"}
+                rel={(to || href) && blank && "noreferrer noopener"}
                 disabled={!!isLoading || disabled}
-                ref={ref}
                 type={type}
                 $hoverBackground={hoverBackground}
                 $color={color}
@@ -101,8 +110,6 @@ const ButtonIcon = forwardRef(
                 $bottom={!showLabel ? position?.bottom : undefined}
                 $zIndex={!showLabel ? position?.zIndex : undefined}
                 $borderRadius={borderRadius}
-                target={href && blank ? "_blank" : undefined}
-                rel={href && blank ? "noreferrer noopener" : undefined}
                 {...rest}
             >
                 {isLoading ? (
@@ -135,7 +142,12 @@ const ButtonIcon = forwardRef(
                 label={label}
                 position={position}
                 size={size}
-                bottom={labelBottom}
+                tipPosition={
+                    typeof showLabel === "object" ? showLabel?.position : "up"
+                }
+                bottom={
+                    typeof showLabel === "object" ? showLabel?.bottom : "125%"
+                }
             >
                 {buttonFn()}
             </Tooltip>

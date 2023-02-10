@@ -10,6 +10,7 @@ import {
     RadiusesTypes,
     FontSizeTypes,
     FontWeightTypes,
+    PaddingTypes,
 } from "../../types"
 import { FontSize, FontWeight } from "../Text/styles"
 
@@ -26,6 +27,7 @@ const StyledPlaceholder = styled.div<{
     $customFontSize?: string | number
     $fontWeight?: FontWeightTypes
     $textColor?: AllColorsTypes
+    $padding?: PaddingTypes
 }>`
     ${Mixins.Flexbox({
         $alignItems: "center",
@@ -54,6 +56,7 @@ const StyledPlaceholder = styled.div<{
         })};
     ${({ $fontWeight }) =>
         FontWeight({ $defaultWeight: "regular", $fontWeight: $fontWeight })};
+    ${Mixins.Padding};
 `
 
 setDefaultTheme([StyledPlaceholder])

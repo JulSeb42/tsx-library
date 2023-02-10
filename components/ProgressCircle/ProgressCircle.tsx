@@ -36,7 +36,6 @@ const Circle = ({ value, color, strokeWidth, speed }: ProgressCircleProps) => {
 const ProgressCircle = forwardRef(
     (
         {
-            as,
             value,
             color = "primary",
             strokeColor = "gray-200",
@@ -50,7 +49,7 @@ const ProgressCircle = forwardRef(
             iconColor = "primary",
             ...rest
         }: ProgressCircleProps,
-        ref?: React.ForwardedRef<HTMLOrSVGElement>
+        ref?: React.ForwardedRef<any>
     ) => {
         const pct = cleanPercentage(value)
 
@@ -66,7 +65,6 @@ const ProgressCircle = forwardRef(
                 height={size}
                 viewBox="0 0 200 200"
                 ref={ref}
-                as={as}
                 {...rest}
             >
                 <g transform={`rotate(-90 ${"100 100"})`}>

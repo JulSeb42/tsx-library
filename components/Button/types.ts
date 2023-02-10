@@ -29,7 +29,7 @@ interface ButtonBehaviour1 extends ButtonBaseProps {
     disabled?: never
     type?: never
     href?: never
-    blank?: never
+    blank?: boolean
 }
 
 interface ButtonBehaviour2 extends ButtonBaseProps {

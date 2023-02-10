@@ -21,6 +21,7 @@ const TextIcon = forwardRef(
             children,
             color,
             fontWeight = "regular",
+            textAs,
             ...rest
         }: TextIconProps,
         ref?: React.ForwardedRef<HTMLDivElement>
@@ -76,6 +77,7 @@ const TextIcon = forwardRef(
                         lineHeight={lineHeight}
                         display={display}
                         fontWeight={fontWeight}
+                        as={textAs}
                         {...rest}
                     >
                         {children}
@@ -85,6 +87,7 @@ const TextIcon = forwardRef(
                         tag={tag}
                         lineHeight={lineHeight}
                         fontWeight={fontWeight}
+                        as={textAs}
                         {...rest}
                     >
                         {children}

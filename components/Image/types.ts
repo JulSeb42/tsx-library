@@ -17,5 +17,6 @@ export interface ImageProps extends React.HTMLAttributes<HTMLImageElement> {
         | {
               text: string
               background?: "black" | "white"
+              asContainer?: React.ElementType
           }
 }

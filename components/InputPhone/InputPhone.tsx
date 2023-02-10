@@ -3,6 +3,7 @@
 import React, { forwardRef, useEffect, useState, useRef } from "react"
 
 import { useClickOutside, uuid, Icon } from "../../"
+import { InputPhoneCountryType } from "../../types"
 import { countries } from "../../utils/countries"
 import { ListInputs, ListItem } from "../ListInputs"
 import { RightContainer, ValidationComponent } from "../InputComponents"
@@ -10,7 +11,7 @@ import CaretDownIcon from "../../icons/CaretDownIcon"
 import { InputContainer } from "../InputContainer"
 
 import * as Styles from "./styles"
-import { InputPhoneProps, CountryType } from "./types"
+import { InputPhoneProps } from "./types"
 
 const InputPhone = forwardRef(
     (
@@ -41,7 +42,11 @@ const InputPhone = forwardRef(
     ) => {
         useEffect(() => {
             setSelectedCountry(
-                countries.filter(country => country.code === defaultCountry)[0]
+                countries.filter(
+                    country =>
+                        country.code.toLowerCase() ===
+                        defaultCountry.toLowerCase()
+                )[0]
             )
         }, [defaultCountry, setSelectedCountry])
 
@@ -62,7 +67,7 @@ const InputPhone = forwardRef(
                 country.code.toLowerCase().includes(search.toLowerCase())
         )
 
-        const selectCountry = (value: CountryType) => {
+        const selectCountry = (value: InputPhoneCountryType) => {
             setSelectedCountry(value)
             setIsOpen(false)
             setSearch("")

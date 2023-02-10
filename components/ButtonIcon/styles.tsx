@@ -21,7 +21,7 @@ import {
     ShadowsTypes,
     RadiusesTypes,
 } from "../../types"
-import { ButtonIconVariantTypes } from "./types"
+import { ButtonIconVariantTypes, ButtonIconLabelDirectionsTypes } from "./types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
@@ -150,8 +150,8 @@ const Tip = styled.span<{
     $isVisible: boolean
     $width: number
     $bottom?: string | number
+    $position?: ButtonIconLabelDirectionsTypes
 }>`
-    ${""/* width: ${({ $width }) => $width}px; */}
     min-width: 60px;
     max-width: ${({ $width }) => `calc(${$width} + ${Spacers.XXS} * 2)`};
     background-color: ${({ theme }) =>
@@ -167,13 +167,10 @@ const Tip = styled.span<{
     z-index: 1;
     transition: ${Transitions.Short};
     position: absolute;
-    bottom: ${({ $bottom }) => ($bottom && stringifyPx($bottom))};
     left: ${({ $width }) => `calc(50% - ${$width}px / 2 - 2px)`};
 
     &:after {
         content: "";
-        bottom: calc(${Spacers.XS} * -1 - 2px);
-        left: ${({ $width }) => `calc((${$width}px + ${Spacers.XXS} * 2) / 2 - 10px)`};
         margin-left: 2px;
         border-width: 5px;
         border-style: solid;
@@ -187,7 +184,38 @@ const Tip = styled.span<{
         z-index: 1;
         transition: ${Transitions.Short};
         position: absolute;
+        left: ${({ $width }) =>
+            `calc((${$width}px + ${Spacers.XXS} * 2) / 2 - 10px)`};
+
+        ${
+            "" /* ${({ $position }) =>
+            $position === "down"
+                ? css`
+                      top: calc(${Spacers.XS} * -1 - 2px);
+                  `
+                : css`
+                      bottom: calc(${Spacers.XS} * -1 - 2px);
+                  `} */
+        }
     }
+
+    ${({ $position, $bottom }) =>
+        $position === "down"
+            ? css`
+                  top: ${$bottom && stringifyPx($bottom)};
+
+                  &:after {
+                      top: calc(${Spacers.XS} * -1 - 2px);
+                      transform: rotate(180deg);
+                  }
+              `
+            : css`
+                  bottom: ${$bottom && stringifyPx($bottom)};
+
+                  &:after {
+                      bottom: calc(${Spacers.XS} * -1 - 2px);
+                  }
+              `}
 `
 
 setDefaultTheme([StyledButtonIcon, TooltipContainer, Tip])

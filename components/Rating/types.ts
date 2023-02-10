@@ -9,7 +9,6 @@ interface RatingPropsBase
     extends React.HTMLAttributes<HTMLDivElement>,
         InputBaseProps {
     rating: number
-    accentColor?: ColorsHoverTypes
     icons?: {
         default: string
         checked: string

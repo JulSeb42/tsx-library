@@ -9,6 +9,7 @@ import {
     RadiusesTypes,
     FontSizeTypes,
     FontWeightTypes,
+    PaddingTypes,
 } from "../../types"
 
 interface PlaceholderBaseProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -19,6 +20,7 @@ interface PlaceholderBaseProps extends React.HTMLAttributes<HTMLDivElement> {
     background?: AllColorsTypes | OverlayTypes
     shadow?: ShadowsTypes
     borderRadius?: RadiusesTypes
+    padding?: PaddingTypes
 }
 
 interface PlaceholderContent1 extends PlaceholderBaseProps {

@@ -40,7 +40,7 @@ const Select = ({
     }
 
     const itemsFn = () =>
-        items?.map((item, i) => (
+        items?.map(item => (
             <ListItem
                 isActive={selected === item && true}
                 onClick={() => selectItem(item)}

@@ -34,8 +34,10 @@ const Button = forwardRef(
         <Styles.StyledButton
             ref={ref}
             as={as ? as : to ? Link : href ? "a" : "button"}
-            to={to ? to : undefined}
+            to={to}
             href={href}
+            target={(to || href) && blank && "_blank"}
+            rel={(to || href) && blank && "noreferrer noopener"}
             type={to ? undefined : type}
             disabled={!!isLoading || disabled}
             $variant={variant}
@@ -48,8 +50,6 @@ const Button = forwardRef(
             $shadowHover={typeof shadow === "object" ? shadow.hover : shadow}
             $shadowActive={typeof shadow === "object" ? shadow.active : shadow}
             $borderRadius={borderRadius}
-            target={href && blank ? "_blank" : undefined}
-            rel={href && blank ? "noreferrer noopener" : undefined}
             {...rest}
         >
             {isLoading &&

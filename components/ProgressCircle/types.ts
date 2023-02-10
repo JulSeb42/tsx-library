@@ -5,8 +5,7 @@ import React from "react"
 import { AllColorsTypes } from "../../types"
 
 export interface ProgressCirclePropsBase
-    extends React.HTMLAttributes<HTMLOrSVGElement> {
-    as?: React.ElementType
+    extends React.HTMLAttributes<SVGElement> {
     value: number
     color?: AllColorsTypes
     strokeColor?: AllColorsTypes

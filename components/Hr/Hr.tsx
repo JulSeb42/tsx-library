@@ -13,6 +13,7 @@ const Hr = forwardRef(
             height = 1,
             color = "gray-200",
             margin,
+            rounded,
             ...rest
         }: HrProps,
         ref?: React.ForwardedRef<HTMLHRElement>
@@ -30,6 +31,7 @@ const Hr = forwardRef(
             $marginBottom={
                 typeof margin === "object" ? margin.bottom : undefined
             }
+            $rounded={rounded}
             {...rest}
         />
     )

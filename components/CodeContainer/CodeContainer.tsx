@@ -14,7 +14,6 @@ import { CodeContainerProps } from "./types"
 const CodeContainer = forwardRef(
     (
         {
-            as,
             children,
             language = "javascript",
             style = atomOneDark,
@@ -38,7 +37,6 @@ const CodeContainer = forwardRef(
         return (
             <Styles.StyledCodeContainer
                 ref={ref}
-                as={as}
                 $backgroundColor={backgroundColor}
                 $textColor={textColor}
             >

@@ -17,6 +17,13 @@ enum buttonIconVariants {
 
 export type ButtonIconVariantTypes = keyof typeof buttonIconVariants
 
+enum labelDirections {
+    up,
+    down,
+}
+
+export type ButtonIconLabelDirectionsTypes = keyof typeof labelDirections
+
 interface ButtonIconBaseProps
     extends React.HTMLAttributes<HTMLButtonElement & HTMLHyperlinkElementUtils>,
         React.ButtonHTMLAttributes<
@@ -34,14 +41,17 @@ interface ButtonIconBaseProps
 
 interface ButtonIconLabel1 extends ButtonIconBaseProps {
     label?: string
-    showLabel?: boolean
-    labelBottom?: string | number
+    showLabel?:
+        | boolean
+        | {
+              position?: ButtonIconLabelDirectionsTypes
+              bottom?: string | number
+          }
 }
 
 interface ButtonIconLabel2 extends ButtonIconBaseProps {
     label?: undefined
     showLabel?: never
-    labelBottom?: never
 }
 
 type ButtonIconLabel = ButtonIconLabel1 | ButtonIconLabel2
@@ -59,7 +69,7 @@ type ButtonIconBehaviour2 = ButtonIconLabel & {
     disabled?: never
     to?: string
     href?: never
-    blank?: never
+    blank?: boolean
 }
 
 type ButtonIconBehaviour3 = ButtonIconLabel & {
@@ -119,4 +129,5 @@ export interface TipsProps {
     children?: any
     position?: ObjectPositionTypes
     size?: number
+    tipPosition?: ButtonIconLabelDirectionsTypes
 }

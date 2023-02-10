@@ -19,4 +19,5 @@ export interface HrProps extends React.HTMLAttributes<HTMLHRElement> {
               right?: SpacersTypes
               bottom?: SpacersTypes
           }
+    rounded?: boolean
 }

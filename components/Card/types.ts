@@ -12,7 +12,7 @@ import {
     BorderStylesTypes,
 } from "../../types"
 
-export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+interface CardPropsBase extends React.HTMLAttributes<HTMLDivElement> {
     as?: React.ElementType
     borderColor?: AllColorsTypes
     borderWidth?: number
@@ -30,7 +30,32 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
     width?: string | number
     height?: string | number
     shadow?: ShadowsTypes | BoxShadowProps
-    to?: string
     backgroundColor?: AllColorsTypes
     textColor?: AllColorsTypes
 }
+
+interface CardPropsBehaviour1 extends CardPropsBase {
+    to?: string
+    href?: never
+    blank?: boolean
+    onClick?: never
+}
+
+interface CardPropsBehaviour2 extends CardPropsBase {
+    to?: never
+    href?: string
+    blank?: boolean
+    onClick?: never
+}
+
+interface CardPropsBehaviour3 extends CardPropsBase {
+    to?: never
+    href?: never
+    blank?: never
+    onClick?: () => void
+}
+
+export type CardProps =
+    | CardPropsBehaviour1
+    | CardPropsBehaviour2
+    | CardPropsBehaviour3

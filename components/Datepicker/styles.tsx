@@ -31,7 +31,7 @@ const DatepickerContainer = styled.div<{
     position: relative;
     width: 100%;
     height: ${buttonSize}px;
-    cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+    cursor: ${({ disabled }) => (disabled ? "not-allowed" : "default")};
     z-index: ${({ $isOpen }) => ($isOpen ? 30 : 0)};
 `
 
@@ -66,6 +66,7 @@ const Selected = styled.span<{
         $alignItems: "center",
         $justifyContent: "space-between",
     })};
+    cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
 `
 
 const StyledDatepicker = styled.div<{

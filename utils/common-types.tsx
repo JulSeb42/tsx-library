@@ -254,10 +254,10 @@ export type PositionsTypes = keyof typeof positions
 
 export type ObjectPositionTypes = {
     position?: PositionsTypes
-    left?: number | string | SpacersTypes
-    top?: number | string | SpacersTypes
-    right?: number | string | SpacersTypes
-    bottom?: number | string | SpacersTypes
+    left?: SpacersTypes
+    top?: SpacersTypes
+    right?: SpacersTypes
+    bottom?: SpacersTypes
     zIndex?: number
 }
 

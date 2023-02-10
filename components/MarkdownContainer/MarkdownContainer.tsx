@@ -10,7 +10,6 @@ import { MarkdownContainerProps } from "./types"
 const MarkdownContainer = forwardRef(
     (
         {
-            as,
             gap = "s",
             content,
             options = OptionsMarkdown,
@@ -20,7 +19,6 @@ const MarkdownContainer = forwardRef(
     ) => (
         <Styles.StyledMarkdownContainer
             ref={ref}
-            as={as}
             options={options}
             $gap={gap}
             {...rest}

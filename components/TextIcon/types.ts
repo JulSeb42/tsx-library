@@ -21,6 +21,7 @@ export type PossibleTextIconTags = keyof typeof tags
 
 export type TextIconProps = TextProps & {
     as?: React.ElementType
+    textAs?: React.ElementType
     icon: string
     iconColor?: AllColorsTypes
     iconSize?: number

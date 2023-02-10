@@ -141,7 +141,7 @@ const Calendar = ({
                 <Styles.NavButton
                     onClick={handlePrevMonth}
                     disabled={
-                        minDate && minDate?.getTime() > getTimeFromState(1, 1)
+                        minDate && minDate?.getTime() > getTimeFromState(1, 0)
                     }
                     $accentColor={accentColor}
                     $validation={getValidationStatus}
@@ -160,7 +160,7 @@ const Calendar = ({
                 <Styles.NavButton
                     onClick={handleNextMonth}
                     disabled={
-                        maxDate && maxDate?.getTime() < getTimeFromState(1, 2)
+                        maxDate && maxDate?.getTime() < getTimeFromState(0, 1)
                     }
                     $accentColor={accentColor}
                     $validation={getValidationStatus}
@@ -221,10 +221,10 @@ const Calendar = ({
                             disabled={
                                 (minDate &&
                                     minDate?.getTime() >
-                                        getTimeFromState(day, 1)) ||
+                                        getTimeFromState(day + 1, 0)) ||
                                 (maxDate &&
                                     maxDate?.getTime() <
-                                        getTimeFromState(day, 1))
+                                        getTimeFromState(day, 0))
                             }
                             $backgroundColor={backgroundColor}
                             key={uuid()}

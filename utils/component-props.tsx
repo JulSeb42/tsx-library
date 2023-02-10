@@ -122,7 +122,7 @@ type ButtonGroupPropsBehaviour2 = ButtonGroupPropsContent & {
     onClick?: never
     to: string
     href?: never
-    blank?: never
+    blank?: boolean
 }
 
 type ButtonGroupPropsBehaviour3 = ButtonGroupPropsContent & {
@@ -209,3 +209,12 @@ type PossibleIconMenuBehaviour2 = IconMenuPropsBase & {
 export type IconMenuItemProps =
     | PossibleIconMenuBehaviour1
     | PossibleIconMenuBehaviour2
+
+/*==================== Country ====================*/
+
+export type InputPhoneCountryType = {
+    name: string
+    dial_code: string
+    code: string
+    flag: string
+}

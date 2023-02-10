@@ -2,7 +2,7 @@
 
 import React from "react"
 
-import { ValidationTypes, ColorsHoverTypes, RadiusesTypes } from "../../types"
+import { ValidationTypes, RadiusesTypes } from "../../types"
 import { InputBaseProps } from "../InputContainer/types"
 
 export interface InputImageProps
@@ -13,14 +13,10 @@ export interface InputImageProps
     height?: number | string
     iconSize?: number
     value?: never
-    accentColor?: ColorsHoverTypes
     borderRadius?: RadiusesTypes
     id: string
 
-    img: {
-        src: string
-        alt?: string
-    }
+    img: string
 
     icons?: {
         empty?: string

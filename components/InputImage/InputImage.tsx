@@ -70,12 +70,12 @@ const InputImage = forwardRef(
                     $height={height}
                     $radius={borderRadius}
                 >
-                    {img.src === "" ? (
+                    {img === "" ? (
                         emptyContainer()
                     ) : (
                         <Styles.Img
-                            src={img.src}
-                            alt={img.alt || "Image"}
+                            src={img}
+                            alt="Image input"
                             width="100%"
                             height="100%"
                             fit="cover"

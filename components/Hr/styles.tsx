@@ -2,7 +2,7 @@
 
 import styled from "styled-components"
 
-import { stringifyPx, Mixins } from "../../"
+import { stringifyPx, Mixins, Radiuses } from "../../"
 import { AllColorsTypes, SpacersTypes } from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
@@ -16,6 +16,7 @@ const StyledHr = styled.hr<{
     $marginTop?: SpacersTypes
     $marginRight?: SpacersTypes
     $marginBottom?: SpacersTypes
+    $rounded?: boolean
 }>`
     border: none;
     width: ${({ $width }) => stringifyPx($width)};
@@ -34,6 +35,7 @@ const StyledHr = styled.hr<{
         Mixins.Spacers({ $spacer: $marginRight })};
     margin-bottom: ${({ $marginBottom }) =>
         Mixins.Spacers({ $spacer: $marginBottom })};
+    border-radius: ${({ $rounded }) => $rounded && Radiuses.Round};
 `
 
 setDefaultTheme([StyledHr])

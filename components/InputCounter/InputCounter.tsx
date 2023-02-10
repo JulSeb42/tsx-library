@@ -72,13 +72,13 @@ const InputCounter = forwardRef(
                 ...optionsButton,
                 onClick: handleMinus,
                 disabled: !!(min && value <= min) || disabled,
-                label: labelButtons?.minus || "minus",
+                label: labelButtons?.minus || "Minus",
             },
             plus: {
                 ...optionsButton,
                 onClick: handlePlus,
                 disabled: !!(max && value >= max) || disabled,
-                label: labelButtons?.plus || "plus",
+                label: labelButtons?.plus || "Plus",
             },
         }
 

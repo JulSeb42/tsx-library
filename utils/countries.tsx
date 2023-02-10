@@ -1,6 +1,6 @@
 /*=============================================== Countries & flags ===============================================*/
 
-import { CountryType } from "../components/InputPhone/types"
+import { InputPhoneCountryType } from "./component-props"
 
 import AF from "./flags/af.svg"
 import AX from "./flags/ax.svg"
@@ -244,7 +244,7 @@ import YE from "./flags/ye.svg"
 import ZM from "./flags/zm.svg"
 import ZW from "./flags/zw.svg"
 
-export const countries: CountryType[] = [
+export const countries: InputPhoneCountryType[] = [
     { name: "Afghanistan", dial_code: "+93", code: "af", flag: AF },
     { name: "Aland Islands", dial_code: "+358", code: "ax", flag: AX },
     { name: "Albania", dial_code: "+355", code: "al", flag: AL },
