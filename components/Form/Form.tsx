@@ -10,7 +10,6 @@ import { FormProps } from "./types"
 const Form = forwardRef(
     (
         {
-            as,
             buttonPrimary,
             accentColor = "primary",
             isLoading,
@@ -22,7 +21,7 @@ const Form = forwardRef(
         }: FormProps,
         ref?: React.ForwardedRef<HTMLFormElement>
     ) => (
-        <Styles.StyledForm ref={ref} as={as} $gap={gap} {...rest}>
+        <Styles.StyledForm ref={ref} $gap={gap} {...rest}>
             {children}
 
             {(buttonPrimary || buttonSecondary) && (

@@ -156,20 +156,33 @@ type ListGroupPropsContent2 = ListGroupPropsBase & {
     badge?: never
     badgeColor?: never
     badgeContentColor?: never
-    date?: string
+    date?: string | Date
 }
 
 type ListGroupPropsContent = ListGroupPropsContent1 | ListGroupPropsContent2
 
-type ListGroupPropsBehaviour1 = ListGroupPropsContent & {
-    to?: never
-    onClick?: never
+type ListGroupPropsBehaviour0 = ListGroupPropsContent & {
+    to?: undefined
+    href?: undefined
+    blank?: undefined
+    onClick?: undefined
     disabled?: never
     color?: never
 }
 
-type ListGroupPropsBehaviour2 = ListGroupPropsContent & {
+type ListGroupPropsBehaviour1 = ListGroupPropsContent & {
     to?: string
+    href?: never
+    blank?: boolean
+    onClick?: never
+    disabled?: never
+    color?: ColorsHoverTypes
+}
+
+type ListGroupPropsBehaviour2 = ListGroupPropsContent & {
+    to?: never
+    href?: string
+    blank?: boolean
     onClick?: never
     disabled?: never
     color?: ColorsHoverTypes
@@ -177,12 +190,15 @@ type ListGroupPropsBehaviour2 = ListGroupPropsContent & {
 
 type ListGroupPropsBehaviour3 = ListGroupPropsContent & {
     to?: never
+    href?: never
+    blank?: never
     onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
     disabled?: boolean
     color?: ColorsHoverTypes
 }
 
 export type ListGroupItemProps =
+    | ListGroupPropsBehaviour0
     | ListGroupPropsBehaviour1
     | ListGroupPropsBehaviour2
     | ListGroupPropsBehaviour3

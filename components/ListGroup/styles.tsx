@@ -12,18 +12,19 @@ import {
     Text,
     stringifyPx,
 } from "../../"
-import { AllColorsTypes, ColorsHoverTypes } from "../../types"
+import { AllColorsTypes, ColorsHoverTypes, RadiusesTypes } from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledListGroup = styled.div<{
     $borderColor?: AllColorsTypes
     $maxHeight?: number
+    $borderRadius?: RadiusesTypes
 }>`
     border: 1px solid
         ${({ theme, $borderColor }) =>
             theme.AllColors({ $color: $borderColor })};
-    border-radius: ${Radiuses.M};
+    ${Mixins.BorderRadius};
     overflow: hidden;
     ${Mixins.HideScrollbar};
 

@@ -6,6 +6,7 @@ import {
     ListGroupItemProps as ItemProps,
     AllColorsTypes,
     ColorsHoverTypes,
+    RadiusesTypes
 } from "../../types"
 
 export interface ListGroupItemProps
@@ -24,4 +25,5 @@ export interface ListGroupProps extends React.HTMLAttributes<HTMLDivElement> {
     maxHeight?: number | string
     bordersColor?: AllColorsTypes
     accentColor?: ColorsHoverTypes
+    borderRadius?: RadiusesTypes
 }

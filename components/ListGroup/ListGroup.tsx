@@ -20,21 +20,26 @@ const ListItem = ({
         onClick,
         disabled,
         ref,
+        href,
+        blank,
+        color = "primary",
     },
     number,
     borderColor,
-    color,
     ...rest
 }: ListGroupItemProps) => (
     <Styles.Item
-        as={to ? Link : onClick ? "button" : "span"}
+        as={to ? Link : onClick ? "button" : href ? "a" : "span"}
         to={to}
+        href={href}
         onClick={onClick}
         disabled={disabled}
         $borderColor={borderColor}
         $isHover={!!to || !!onClick}
         $color={color}
         ref={ref}
+        target={(href || to) && blank && "_blank"}
+        rel={(href || to) && blank && "noreferrer noopener"}
         {...rest}
     >
         <Flexbox justifyContent="space-between" gap="xxs">
@@ -92,6 +97,7 @@ const ListGroup = forwardRef(
             maxHeight,
             bordersColor = "gray-200",
             accentColor = "primary",
+            borderRadius = "m",
             ...rest
         }: ListGroupProps,
         ref?: React.ForwardedRef<HTMLDivElement>
@@ -101,6 +107,7 @@ const ListGroup = forwardRef(
             as={as}
             $borderColor={bordersColor}
             $maxHeight={maxHeight}
+            $borderRadius={borderRadius}
             {...rest}
         >
             {items.map((item, i) => (

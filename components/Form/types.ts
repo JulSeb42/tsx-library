@@ -5,7 +5,6 @@ import React from "react"
 import { ColorsHoverTypes, SpacersTypes } from "../../types"
 
 interface BaseFormProps extends React.HTMLAttributes<HTMLFormElement> {
-    as?: React.ElementType
     buttonPrimary?:
         | string
         | {

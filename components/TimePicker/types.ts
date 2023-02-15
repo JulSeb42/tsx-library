@@ -2,7 +2,7 @@
 
 import React from "react"
 
-import { ShadowsTypes, ValidationTypes } from "../../types"
+import { ShadowsTypes } from "../../types"
 import {
     InputBackgroundTypes,
     InputVariantTypes,
@@ -12,21 +12,19 @@ import {
 import { InputBaseProps } from "../InputContainer/types"
 import { ListDirectionTypes } from "../ListInputs/types"
 
-type MinMaxType = {
-    minTime: number
-    maxTime: number
-}
-
 type TimepickerPropsBase = React.InputHTMLAttributes<HTMLInputElement> &
-    InputBaseProps & {
+    InputBaseProps &
+    IconInputProps &
+    ValidationComponentProps & {
         step?: 1 | 0.5
         chevronIcon?: string
         backgroundColor?: InputBackgroundTypes
         listDirection?: ListDirectionTypes
-        iconSize?: number
         inputVariant?: InputVariantTypes
         minTime?: number
         maxTime?: number
+        selectedTime: number
+        setSelectedTime: (selectedTime: number) => void
     }
 
 type TimepickerList1 = TimepickerPropsBase & {
@@ -39,34 +37,4 @@ type TimepickerList2 = TimepickerPropsBase & {
     listShadow?: ShadowsTypes
 }
 
-type TimepickerList = TimepickerList1 | TimepickerList2
-
-export type TimepickerSingleProps = TimepickerList &
-    IconInputProps &
-    ValidationComponentProps & {
-        variant?: "single"
-        selectedTime: number
-        setSelectedTime: (selectedTime: number) => void
-    }
-
-export type TimepickerMultiProps = TimepickerList & {
-    variant?: "multi"
-    selectedMinMax: MinMaxType
-    setSelectedMinMax: React.Dispatch<
-        React.SetStateAction<{ min: number; max: number }>
-    >
-    validationMin?: {
-        status: ValidationTypes
-        iconPassed?: string
-        iconNotPassed?: string
-    }
-    validationMax?: {
-        status: ValidationTypes
-        iconPassed?: string
-        iconNotPassed?: string
-    }
-    iconMin?: string
-    iconMax?: string
-}
-
-export type TimepickerProps = TimepickerSingleProps | TimepickerMultiProps
+export type TimepickerProps = TimepickerList1 | TimepickerList2
