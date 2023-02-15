@@ -2,16 +2,16 @@
 
 import React from "react"
 
-const ColorsAlerts = {
-    primary: "primary",
-    secondary: "secondary",
-    success: "success",
-    danger: "danger",
-    warning: "warning",
-    white: "white",
-    gray: "gray",
-    black: "black",
-} as const
+enum ColorsAlerts {
+    primary,
+    secondary,
+    success,
+    danger,
+    warning,
+    white,
+    gray,
+    black,
+}
 
 export type ColorsAlertsTypes = keyof typeof ColorsAlerts
 

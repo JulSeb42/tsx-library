@@ -14,6 +14,7 @@ export type ProgressDirectionType = keyof typeof directions
 export interface ProgressBarPropsBase
     extends React.MeterHTMLAttributes<HTMLMeterElement> {
     as?: React.ElementType
+    value: number
     color?: AllColorsTypes
     backgroundColor?: AllColorsTypes
     width?: string | SpacersTypes

@@ -1,7 +1,7 @@
 /*=============================================== Paginator component ===============================================*/
 
 import React, { forwardRef, useState } from "react"
-import { useNavigate, createSearchParams } from "react-router-dom"
+import { useNavigate, createSearchParams, useSearchParams } from "react-router-dom"
 
 import { Text, ButtonIcon } from "../../"
 import ChevronLeftIcon from "../../icons/ChevronLeftIcon"
@@ -17,7 +17,7 @@ const Paginator = forwardRef(
             as,
             justify = "left",
             accentColor = "primary",
-            backgroundColor,
+            inputBackgroundColor,
             texts = {
                 page: "Page",
                 of: "of",
@@ -28,7 +28,7 @@ const Paginator = forwardRef(
                 variant: "transparent",
                 hoverBackground: true,
             },
-            isInputEditable,
+            isInputEditable = true,
             queries,
             ...rest
         }: PaginatorProps,
@@ -36,7 +36,13 @@ const Paginator = forwardRef(
     ) => {
         const navigate = useNavigate()
 
-        const [currentPage, setCurrentPage] = useState(1)
+        const [q] = useSearchParams()
+
+        const getPage = q.get("page")
+
+        const [currentPage, setCurrentPage] = useState(
+            getPage ? parseInt(getPage) : 1
+        )
 
         const { handlePrev, handleNext } = usePaginationNav(
             currentPage,
@@ -115,7 +121,7 @@ const Paginator = forwardRef(
                             min={1}
                             max={totalPages}
                             $accentColor={accentColor}
-                            $background={backgroundColor}
+                            $background={inputBackgroundColor}
                         />
 
                         <span>{texts.of}</span>

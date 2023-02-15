@@ -43,7 +43,7 @@ const ProgressCircle = forwardRef(
             strokeWidth = 12,
             animated = true,
             speed = 500,
-            showValue,
+            showValue = true,
             textColor = "gray",
             icon,
             iconColor = "primary",

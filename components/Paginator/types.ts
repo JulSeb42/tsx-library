@@ -18,7 +18,7 @@ export interface PaginatorProps extends React.HTMLAttributes<HTMLDivElement> {
     totalPages: number
     justify?: PaginatorJustifyType
     accentColor?: ColorsHoverTypes
-    backgroundColor?: InputBackgroundTypes
+    inputBackgroundColor?: InputBackgroundTypes
     isInputEditable?: boolean
     queries?: string[][]
 

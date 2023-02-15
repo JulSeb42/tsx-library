@@ -12,11 +12,6 @@ enum justify {
 
 export type JustifyType = keyof typeof justify
 
-type QueryType = {
-    name: string
-    value: string
-}
-
 export interface PaginationProps extends React.HTMLAttributes<HTMLDivElement> {
     as?: React.ElementType
     justify?: JustifyType

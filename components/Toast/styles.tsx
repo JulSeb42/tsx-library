@@ -2,7 +2,7 @@
 
 import styled, { css } from "styled-components"
 
-import { Spacers, Mixins, Radiuses, Transitions, Breakpoints } from "../../"
+import { Spacers, Mixins, Radiuses, Transitions, Breakpoints, stringifyPx } from "../../"
 import {
     PositionsTypes,
     ShadowsTypes,
@@ -28,7 +28,7 @@ const StyledToast = styled.div<{
     $borderColor?: AllColorsTypes
 }>`
     width: 100%;
-    max-width: ${({ $maxWidth }) => $maxWidth}px;
+    max-width: ${({ $maxWidth }) => $maxWidth && stringifyPx($maxWidth)};
     background-color: ${({ theme }) => theme.Background};
     display: ${({ $isClosed }) => ($isClosed ? "none" : "grid")};
     gap: ${Spacers.XXS};

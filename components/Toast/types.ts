@@ -12,7 +12,7 @@ import {
 export interface ToastProps extends React.HTMLAttributes<HTMLDivElement> {
     as?: React.ElementType
     title: string
-    maxWidth?: number
+    maxWidth?: number | string
     shadow?: ShadowsTypes
     icon?:
         | string

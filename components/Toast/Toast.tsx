@@ -17,7 +17,7 @@ const Toast = forwardRef(
             shadow,
             icon,
             close,
-            labelClose,
+            labelClose = "Close",
             position,
             children,
             borderRadius = "m",

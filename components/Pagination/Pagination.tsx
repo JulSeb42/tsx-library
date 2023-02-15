@@ -1,7 +1,7 @@
 /*=============================================== Pagination component ===============================================*/
 
 import React, { forwardRef, useState } from "react"
-import { useNavigate, createSearchParams } from "react-router-dom"
+import { useNavigate, createSearchParams, useSearchParams } from "react-router-dom"
 
 import { Icon } from "../../"
 import ChevronLeftIcon from "../../icons/ChevronLeftIcon"
@@ -55,8 +55,13 @@ const Pagination = forwardRef(
         ref?: React.ForwardedRef<HTMLDivElement>
     ) => {
         const navigate = useNavigate()
+        const [q] = useSearchParams()
 
-        const [currentPage, setCurrentPage] = useState(1)
+        const getPage = q.get("page")
+
+        const [currentPage, setCurrentPage] = useState(
+            getPage ? parseInt(getPage) : 1
+        )
 
         const { handlePrev, handleNext } = usePaginationNav(
             currentPage,

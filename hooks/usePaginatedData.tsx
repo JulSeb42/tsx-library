@@ -2,13 +2,11 @@
 
 import { useSearchParams } from "react-router-dom"
 
-export const usePaginatedData = (data: any[]) => {
+export const usePaginatedData = (data: any[], defaultLimit = 20) => {
     const [query] = useSearchParams()
     const page = query.get("page") || 1
     const currentPage: number =
         typeof page === "string" ? parseInt(page) : page || 1
-
-    const defaultLimit = 20
 
     const getPaginatedData = (dataLimit = defaultLimit) => {
         const startIndex = currentPage * dataLimit - dataLimit

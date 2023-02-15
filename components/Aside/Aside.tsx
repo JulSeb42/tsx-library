@@ -13,7 +13,7 @@ const Aside = forwardRef(
             position = 1,
             alignContent = "start",
             alignItems = "start",
-            justifyContent = "start",
+            justifyContent = "stretch",
             justifyItems = "start",
             size = "default",
             children,
