@@ -28,14 +28,14 @@ type ProgressCircleAnimation =
     | ProgressCircleAnimation2
 
 type ProgressCircleValue1 = ProgressCircleAnimation & {
-    showValue?: boolean
+    showValue?: true
     textColor?: AllColorsTypes
     icon?: never
     iconColor?: never
 }
 
 type ProgressCircleValue2 = ProgressCircleAnimation & {
-    showValue?: never
+    showValue?: false
     textColor?: never
     icon?: string
     iconColor?: AllColorsTypes

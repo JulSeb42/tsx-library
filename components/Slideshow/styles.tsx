@@ -32,10 +32,11 @@ const Wrapper = styled(Flexbox)<{
     $aspectRatio?: string
 }>`
     width: 100%;
-    height: ${({ $height, $aspectRatio }) =>
-        $height && !$aspectRatio && stringifyPx($height)};
-    aspect-ratio: ${({ $aspectRatio }) => $aspectRatio || "16/9"};
+    height: ${({ $height }) =>
+        $height && stringifyPx($height)};
+    aspect-ratio: ${({ $aspectRatio, $height }) => !$height && $aspectRatio};
     position: relative;
+    overflow: hidden;
 `
 
 const ContentWrapper = styled(Flexbox)<{ $borderRadius?: RadiusesTypes }>`

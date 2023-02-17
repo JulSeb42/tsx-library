@@ -2,7 +2,7 @@
 
 import React, { forwardRef, useState, useEffect, useCallback } from "react"
 
-import { Icon, uuid, Flexbox} from "../../"
+import { Icon, uuid, Flexbox } from "../../"
 import ChevronLeftIcon from "../../icons/ChevronLeftIcon"
 import ChevronRightIcon from "../../icons/ChevronRightIcon"
 
@@ -40,6 +40,8 @@ const SlideshowButton = ({
             ) : (
                 <ChevronRightIcon size={24} />
             ))}
+
+        {hideTouch && "Hidden"}
     </Styles.Button>
 )
 
@@ -51,7 +53,7 @@ const Slideshow = forwardRef(
             imgFit = "cover",
             controls,
             height,
-            aspectRatio,
+            aspectRatio = "16/9",
             pagination,
             thumbnails,
             options,
@@ -123,6 +125,18 @@ const Slideshow = forwardRef(
             setTouchPosition(null)
         }
 
+        const [controlsHidden, setControlsHidden] = useState(true)
+
+        useEffect(() => {
+            if (controls && typeof controls === "object" && controls.hideTouchScreens === false) {
+                setControlsHidden(false)
+            } else {
+                setControlsHidden(true)
+            }
+        }, [])
+
+        
+
         return (
             <Styles.StyledSlideshow ref={ref} as={as} {...rest}>
                 <Styles.Wrapper
@@ -135,12 +149,7 @@ const Slideshow = forwardRef(
                             position="left"
                             onClick={handlePrev}
                             prev
-                            hideTouch={
-                                typeof controls === "object" &&
-                                controls.hideTouchScreens
-                                    ? controls.hideTouchScreens
-                                    : true
-                            }
+                            hideTouch={controlsHidden}
                             iconNext={
                                 typeof controls === "object" &&
                                 controls.iconNext
@@ -186,12 +195,7 @@ const Slideshow = forwardRef(
                             position="right"
                             onClick={handleNext}
                             next
-                            hideTouch={
-                                typeof controls === "object" &&
-                                controls.hideTouchScreens
-                                    ? controls.hideTouchScreens
-                                    : true
-                            }
+                            hideTouch={controlsHidden}
                             iconNext={
                                 typeof controls === "object" &&
                                 controls.iconNext
