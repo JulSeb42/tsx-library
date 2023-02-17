@@ -2,6 +2,8 @@
 
 import React, { forwardRef } from "react"
 
+import { uuid } from "../../"
+
 import * as Styles from "./styles"
 import { TableProps } from "./types"
 
@@ -24,6 +26,7 @@ const Table = forwardRef(
             textColorEven = "font",
             textColorOdd = "font",
             linkColorHeader = "background",
+            headers,
             ...rest
         }: TableProps,
         ref?: React.ForwardedRef<HTMLTableElement>
@@ -47,7 +50,17 @@ const Table = forwardRef(
             $linkColorHeader={linkColorHeader}
             {...rest}
         >
-            {children}
+            {headers && (
+                <thead>
+                    <tr>
+                        {headers.map(header => (
+                            <th key={uuid()}>{header}</th>
+                        ))}
+                    </tr>
+                </thead>
+            )}
+
+            {headers ? <tbody>{children}</tbody> : children}
         </Styles.StyledTable>
     )
 )

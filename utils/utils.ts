@@ -3,6 +3,7 @@
 export {
     calculateAverage,
     calculateTotalSum,
+    camelToCapitalize,
     capitalize,
     convertDate,
     convertDateShort,

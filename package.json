@@ -1,7 +1,7 @@
 {
     "name": "tsx-library-julseb",
     "private": false,
-    "version": "6.0.28",
+    "version": "6.0.30",
     "license": "MIT",
     "main": "./index.js",
     "exports": {
@@ -45,7 +45,7 @@
         "react-scroll-to-bottom": "^4.2.0",
         "react-syntax-highlighter": "^15.5.0",
         "styled-components": "^5.3.6",
-        "ts-utils-julseb": "^2.2.5"
+        "ts-utils-julseb": "^2.2.7"
     },
     "devDependencies": {
         "@babel/core": "^7.20.12",

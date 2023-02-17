@@ -126,14 +126,16 @@ const Slideshow = forwardRef(
         const [controlsHidden, setControlsHidden] = useState(true)
 
         useEffect(() => {
-            if (controls && typeof controls === "object" && controls.hideTouchScreens === false) {
+            if (
+                controls &&
+                typeof controls === "object" &&
+                controls.hideTouchScreens === false
+            ) {
                 setControlsHidden(false)
             } else {
                 setControlsHidden(true)
             }
         }, [])
-
-        
 
         return (
             <Styles.StyledSlideshow ref={ref} as={as} {...rest}>

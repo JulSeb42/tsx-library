@@ -31,6 +31,7 @@ interface TablePropsBase extends React.HTMLAttributes<HTMLTableElement> {
     headerTextColor?: AllColorsTypes
     linkColor?: ColorsHoverTypes
     linkColorHeader?: ColorsHoverTypes
+    headers?: string[]
 }
 
 interface TableVariant1 extends TablePropsBase {
