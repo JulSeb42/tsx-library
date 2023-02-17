@@ -40,8 +40,6 @@ const SlideshowButton = ({
             ) : (
                 <ChevronRightIcon size={24} />
             ))}
-
-        {hideTouch && "Hidden"}
     </Styles.Button>
 )
 
