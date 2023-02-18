@@ -33,9 +33,8 @@ interface HeaderPropsBase extends React.HTMLAttributes<HTMLDivElement> {
     navDesktopVariant?: NavMenuVariantsTypes
     navMobileVariant?: NavMobileVariantsTypes
     search?: {
-        search: string
-        setSearch: (search: string) => void
-        handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+        pathname: string
+        search?: any
         icon?: string
         iconClear?: string
         placeholder?: string

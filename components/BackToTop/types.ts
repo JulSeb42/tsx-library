@@ -7,6 +7,7 @@ import {
     ShadowsTypes,
     ObjectPositionTypes,
     AllColorsTypes,
+    BoxShadowProps,
 } from "../../types"
 
 interface BackToTopPropsBase
@@ -15,26 +16,19 @@ interface BackToTopPropsBase
     icon?: string
     color?: ColorsHoverTypes
     size?: number
-    shadow?:
-        | ShadowsTypes
-        | {
-              default: ShadowsTypes
-              hover: ShadowsTypes
-              active: ShadowsTypes
-          }
+    shadow?: ShadowsTypes | BoxShadowProps
     variant?: "plain" | "transparent"
     position?: ObjectPositionTypes
+    text?: string
 }
 
 interface BackToTopContent1 extends BackToTopPropsBase {
-    text?: string
-    showText?: "always" | "hover"
+    showText?: "always" | "hover" | true
     textColor?: AllColorsTypes
 }
 
 interface BackToTopContent2 extends BackToTopPropsBase {
-    text?: never
-    showText?: never
+    showText?: false
     textColor?: never
 }
 

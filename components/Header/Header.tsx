@@ -1,6 +1,7 @@
 /*=============================================== Header component ===============================================*/
 
 import React, { forwardRef, useState, useRef, useEffect } from "react"
+import { useNavigate, createSearchParams } from "react-router-dom"
 
 import { Input, useKeyPress, useClickOutside, useMaxWidth } from "../../"
 
@@ -56,9 +57,27 @@ const Header = forwardRef(
 
         const isMobile = useMaxWidth(600)
 
-        const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
-            search?.setSearch(e.target.value)
-        const clearSearch = () => search?.setSearch("")
+        const navigate = useNavigate()
+
+        const [searchValue, setSearchValue] = useState("")
+        const handleSearchValue = (e: React.ChangeEvent<HTMLInputElement>) =>
+            setSearchValue(e.target.value)
+
+        const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+            e.preventDefault()
+
+            navigate({
+                pathname: search?.pathname,
+                search: createSearchParams({
+                    query: searchValue,
+                    ...search?.search
+                }).toString(),
+            })
+
+            setSearchValue("")
+        }
+
+        const clearSearch = () => setSearchValue("")
 
         const inputRef = useRef<any>(null)
         const handleFocus = () => inputRef.current.focus()
@@ -69,15 +88,15 @@ const Header = forwardRef(
         const searchInputFunc = () =>
             search && (
                 <Styles.SearchForm
-                    onSubmit={search.handleSubmit}
+                    onSubmit={handleSubmit}
                     $maxWidth={search?.maxWidth || 300}
                 >
                     <Input
                         type="search"
                         clearSearch={clearSearch}
                         iconClear={search.iconClear}
-                        onChange={handleSearch}
-                        value={search.search}
+                        onChange={handleSearchValue}
+                        value={searchValue}
                         placeholder={search.placeholder}
                         icon={search.icon}
                         ref={inputRef}
