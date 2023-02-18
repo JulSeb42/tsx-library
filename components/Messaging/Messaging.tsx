@@ -9,7 +9,7 @@ import SendIcon from "../../icons/SendIcon"
 import * as Styles from "./styles"
 import { MessagingProps, MessageProps } from "./types"
 
-const Message = forwardRef(
+export const Message = forwardRef(
     (
         {
             as,
@@ -47,13 +47,13 @@ const Message = forwardRef(
                         ? textColor
                         : type === "sent"
                         ? "background"
-                        : "currentColor"
+                        : "font"
                 }
                 $linkColor={
                     linkColor
                         ? linkColor
                         : type === "sent"
-                        ? "white"
+                        ? "background"
                         : "primary"
                 }
             >
@@ -71,7 +71,7 @@ const Message = forwardRef(
     )
 )
 
-const Messaging = forwardRef(
+export const Messaging = forwardRef(
     (
         {
             as,
@@ -177,5 +177,3 @@ const Messaging = forwardRef(
         )
     }
 )
-
-export default Messaging

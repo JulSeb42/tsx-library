@@ -38,9 +38,10 @@ interface TableVariant1 extends TablePropsBase {
     variant?: "bordered" | "border-bottom"
     borderColor?: AllColorsTypes
     headerBorderColor?: AllColorsTypes
+    textColor?: AllColorsTypes
+
     backgroundEven?: never
     backgroundOdd?: never
-    textColor?: AllColorsTypes
     textColorEven?: never
     textColorOdd?: never
 }
@@ -48,12 +49,13 @@ interface TableVariant1 extends TablePropsBase {
 interface TableVariant2 extends TablePropsBase {
     variant?: "stripped"
     borderColor?: never
+    headerBorderColor?: never
+    textColor?: never
+
     backgroundEven?: AllColorsTypes
     backgroundOdd?: AllColorsTypes
-    textColor?: never
     textColorEven?: AllColorsTypes
     textColorOdd?: AllColorsTypes
-    headerBorderColor?: never
 }
 
 export type TableProps = TableVariant1 | TableVariant2

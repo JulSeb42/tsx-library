@@ -32,7 +32,7 @@ const PageLoading = forwardRef(
                     ? "primary"
                     : loaderColor
                     ? loaderColor
-                    : "white",
+                    : "background",
         }
 
         return (
