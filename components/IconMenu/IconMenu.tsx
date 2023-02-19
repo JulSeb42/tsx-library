@@ -11,7 +11,7 @@ import { IconMenuProps } from "./types"
 const IconMenu = ({
     as,
     items,
-    icon,
+    icon = "burger",
     direction = "up",
     shadow,
     position = {
@@ -70,20 +70,25 @@ const IconMenu = ({
                 )}
             </Styles.StyledOpenButton>
 
-            {items.map(({ to, onClick, blank, ariaLabel, icon }, i) => {
+            {items.map(({ to, onClick, blank, label, icon, href }, i) => {
                 return (
                     <Styles.StyledButton
-                        as={to ? Link : "button"}
+                        as={to ? Link : href ? "a" : "button"}
                         to={to}
                         onClick={onClick}
-                        target={blank ? "_blank" : undefined}
-                        rel={blank ? "noreferrer noopener" : undefined}
-                        aria-label={ariaLabel}
+                        href={href}
+                        target={(to || href) && blank ? "_blank" : undefined}
+                        rel={
+                            (to || href) && blank
+                                ? "noreferrer noopener"
+                                : undefined
+                        }
+                        aria-label={label}
                         $color={color}
                         $index={i}
                         $isOpen={isOpen}
                         $direction={direction}
-                        key={`button-${icon}-${ariaLabel}`}
+                        key={`button-${icon}-${label}`}
                     >
                         <Icon src={icon} size={32} />
                     </Styles.StyledButton>

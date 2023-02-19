@@ -23,6 +23,7 @@ export interface IconMenuProps extends React.HTMLAttributes<HTMLDivElement> {
     items: IconMenuItemProps[]
     icon?:
         | "plus"
+        | "burger"
         | {
               open: string
               close: string

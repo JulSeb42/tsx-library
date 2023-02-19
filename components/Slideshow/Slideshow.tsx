@@ -135,7 +135,7 @@ const Slideshow = forwardRef(
             } else {
                 setControlsHidden(true)
             }
-        }, [])
+        }, [controls])
 
         return (
             <Styles.StyledSlideshow ref={ref} as={as} {...rest}>

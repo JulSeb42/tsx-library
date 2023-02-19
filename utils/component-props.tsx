@@ -207,24 +207,34 @@ export type ListGroupItemProps =
 
 type IconMenuPropsBase = {
     icon: string
-    ariaLabel: string
+    label: string
 }
 
 type PossibleIconMenuBehaviour1 = IconMenuPropsBase & {
     onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
     to?: never
+    href?: never
     blank?: never
 }
 
 type PossibleIconMenuBehaviour2 = IconMenuPropsBase & {
     onClick?: never
     to: string
+    href?: never
+    blank?: boolean
+}
+
+type PossibleIconMenuBehaviour3 = IconMenuPropsBase & {
+    onClick?: never
+    to?: never
+    href: string
     blank?: boolean
 }
 
 export type IconMenuItemProps =
     | PossibleIconMenuBehaviour1
     | PossibleIconMenuBehaviour2
+    | PossibleIconMenuBehaviour3
 
 /*==================== Country ====================*/
 

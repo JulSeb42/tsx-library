@@ -1,6 +1,6 @@
 /*=============================================== Timepicker component ===============================================*/
 
-import React, { forwardRef, useState, useRef } from "react"
+import React, { useState, useRef } from "react"
 
 import { generateNumbers, useClickOutside, formatHour, uuid } from "../../"
 import { InputContainer } from "../InputContainer"
