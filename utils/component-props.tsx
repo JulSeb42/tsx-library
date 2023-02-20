@@ -57,22 +57,30 @@ type FooterLinksBase = {
 }
 
 type PossibleFooterBehaviour1 = FooterLinksBase & {
-    to: string
-    blank?: boolean
     onClick?: never
-    as?: "a" | "link"
+    to: string
+    href?: never
+    blank?: boolean
 }
 
 type PossibleFooterBehaviour2 = FooterLinksBase & {
-    to?: never
-    blank?: never
     onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
-    as?: never
+    to?: never
+    href?: never
+    blank?: never
+}
+
+type PossibleFooterBehaviour3 = FooterLinksBase & {
+    onClick?: never
+    to?: never
+    href: string
+    blank?: boolean
 }
 
 export type FooterItemProps =
     | PossibleFooterBehaviour1
     | PossibleFooterBehaviour2
+    | PossibleFooterBehaviour3
 
 /*==================== Theme ====================*/
 
