@@ -56,7 +56,7 @@ const TextIcon = forwardRef(
                 : 16
 
         return (
-            <Styles.StyledTextIcon ref={ref} as={as}>
+            <Styles.StyledTextIcon $gap={gap} ref={ref} as={as}>
                 <Styles.IconContainer
                     $lineHeight={
                         typeof lineHeight === "number" ? lineHeight : 1.5
