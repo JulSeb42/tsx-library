@@ -85,10 +85,15 @@ const InputCounter = forwardRef(
         const inputFn = () => (
             <Styles.StyledInputCounter>
                 {icons?.minus ? (
-                    <ButtonIcon icon={icons?.minus} {...propsButtons.minus} />
+                    <ButtonIcon
+                        icon={icons?.minus}
+                        type="button"
+                        {...propsButtons.minus}
+                    />
                 ) : (
                     <ButtonIcon
                         libicon={<MinusIcon size={optionsButton.size * 0.7} />}
+                        type="button"
                         {...propsButtons.minus}
                     />
                 )}

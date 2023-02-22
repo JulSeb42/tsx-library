@@ -78,10 +78,15 @@ const PasswordInput = forwardRef(
                                 icon={button.iconHide}
                                 variant="transparent"
                                 borderRadius="none"
+                                type="button"
                                 {...buttonIconProps}
                             />
                         ) : (
-                            <Button variant="text" {...buttonProps}>
+                            <Button
+                                variant="text"
+                                type="button"
+                                {...buttonProps}
+                            >
                                 {button?.textHide || "Hide"}
                             </Button>
                         )
@@ -90,10 +95,11 @@ const PasswordInput = forwardRef(
                             icon={button.iconShow}
                             variant="transparent"
                             borderRadius="none"
+                            type="button"
                             {...buttonIconProps}
                         />
                     ) : (
-                        <Button variant="text" {...buttonProps}>
+                        <Button variant="text" type="button" {...buttonProps}>
                             {button?.textShow || "Show"}
                         </Button>
                     )}

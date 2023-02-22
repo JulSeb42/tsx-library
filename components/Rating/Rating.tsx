@@ -34,6 +34,7 @@ const Rating = forwardRef(
                         onClick={!readOnly ? () => setRating(i + 1) : undefined}
                         $color={accentColor}
                         $isButton={!readOnly}
+                        type="button"
                         key={uuid()}
                     >
                         {icons ? (

@@ -145,6 +145,7 @@ const Calendar = ({
                     }
                     $accentColor={accentColor}
                     $validation={getValidationStatus}
+                    type="button"
                 >
                     {icons?.prev ? (
                         <Icon src={icons.prev} size={24} />
@@ -164,6 +165,7 @@ const Calendar = ({
                     }
                     $accentColor={accentColor}
                     $validation={getValidationStatus}
+                    type="button"
                 >
                     {icons?.next ? (
                         <Icon src={icons.next} size={24} />
@@ -227,6 +229,7 @@ const Calendar = ({
                                         getTimeFromState(day, 0))
                             }
                             $backgroundColor={backgroundColor}
+                            type="button"
                             key={uuid()}
                         >
                             {day}
