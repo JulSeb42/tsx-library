@@ -33,6 +33,10 @@ const Card = forwardRef(
         <Styles.StyledCard
             ref={ref}
             as={as ? as : to ? Link : href ? "a" : "div"}
+            to={to}
+            target={(to || href) && blank && "_blank"}
+            rel={(to || href) && blank && "noreferrer noopener"}
+            onClick={onClick}
             $borderRadius={borderRadius}
             $padding={padding}
             $cursor={cursor}
@@ -47,10 +51,6 @@ const Card = forwardRef(
             $shadowHover={typeof shadow === "object" && shadow.hover}
             $shadowActive={typeof shadow === "object" && shadow.active}
             $backgroundColor={backgroundColor}
-            to={to}
-            target={(to || href) && blank && "_blank"}
-            rel={(to || href) && blank && "noreferrer noopener"}
-            onClick={onClick}
             {...rest}
         >
             {children}

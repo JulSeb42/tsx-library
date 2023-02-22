@@ -25,7 +25,7 @@ interface ButtonBaseProps
 }
 
 interface ButtonBehaviour1 extends ButtonBaseProps {
-    to?: string
+    to?: string | "prev"
     disabled?: never
     type?: never
     href?: never

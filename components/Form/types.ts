@@ -20,7 +20,7 @@ interface BaseFormProps extends React.HTMLAttributes<HTMLFormElement> {
 
 interface ButtonSecondary1 extends BaseFormProps {
     buttonSecondary?: {
-        text?: string | undefined
+        text?: "prev" | string | undefined
         iconLeft?: string
         iconRight?: string
         to: string | undefined

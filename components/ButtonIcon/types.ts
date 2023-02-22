@@ -67,7 +67,7 @@ type ButtonIconBehaviour1 = ButtonIconLabel & {
 type ButtonIconBehaviour2 = ButtonIconLabel & {
     type?: never
     disabled?: never
-    to?: string
+    to?: string | "prev"
     href?: never
     blank?: boolean
 }

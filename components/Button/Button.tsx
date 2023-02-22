@@ -34,7 +34,7 @@ const Button = forwardRef(
         <Styles.StyledButton
             ref={ref}
             as={as ? as : to ? Link : href ? "a" : "button"}
-            to={to}
+            to={to === "prev" ? -1 : to}
             href={href}
             target={(to || href) && blank && "_blank"}
             rel={(to || href) && blank && "noreferrer noopener"}

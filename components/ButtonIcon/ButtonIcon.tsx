@@ -86,7 +86,7 @@ const ButtonIcon = forwardRef(
                 as={as ? as : to ? Link : href ? "a" : "button"}
                 ref={ref}
                 aria-label={label}
-                to={to}
+                to={to === "prev" ? -1 : to}
                 href={href}
                 target={(to || href) && blank && "_blank"}
                 rel={(to || href) && blank && "noreferrer noopener"}
