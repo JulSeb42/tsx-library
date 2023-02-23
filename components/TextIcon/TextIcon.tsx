@@ -78,6 +78,7 @@ const TextIcon = forwardRef(
                         display={display}
                         fontWeight={fontWeight}
                         as={textAs}
+                        color={color}
                         {...rest}
                     >
                         {children}
@@ -88,6 +89,7 @@ const TextIcon = forwardRef(
                         lineHeight={lineHeight}
                         fontWeight={fontWeight}
                         as={textAs}
+                        color={color}
                         {...rest}
                     >
                         {children}
