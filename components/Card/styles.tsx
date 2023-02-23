@@ -10,6 +10,13 @@ import {
     PaddingTypes,
     CursorTypes,
     ShadowsTypes,
+    FlexDirectionTypes,
+    FlexWrapTypes,
+    FlexJustifyContentTypes,
+    FlexJustifyItemsTypes,
+    FlexAlignContentTypes,
+    FlexAlignItemsTypes,
+    SpacersTypes,
 } from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
@@ -36,6 +43,17 @@ const StyledCard = styled.div<{
     $shadowHover?: ShadowsTypes
     $shadowActive?: ShadowsTypes
     $backgroundColor?: AllColorsTypes
+
+    $inline?: boolean
+    $flexDirection?: FlexDirectionTypes
+    $flexWrap?: FlexWrapTypes
+    $justifyContent?: FlexJustifyContentTypes
+    $alignItems?: FlexAlignItemsTypes
+    $justifyItems?: FlexJustifyItemsTypes
+    $alignContent?: FlexAlignContentTypes
+    $gap?: SpacersTypes
+    $columnGap?: SpacersTypes
+    $rowGap?: SpacersTypes
 }>`
     text-decoration: none;
     color: ${({ theme, $textColor }) =>
@@ -46,6 +64,7 @@ const StyledCard = styled.div<{
     width: ${({ $width }) => $width && stringifyPx($width)};
     height: ${({ $height }) => $height && stringifyPx($height)};
     overflow: hidden;
+    position: relative;
     ${Mixins.BorderRadius};
     ${Mixins.Padding};
     ${({ $shadow, $shadowDefault, $shadowHover, $shadowActive }) =>
@@ -56,6 +75,7 @@ const StyledCard = styled.div<{
             $shadowHover,
             $shadowActive,
         })};
+
     ${({ $borderWidth, $borderColor, $borderStyle, theme }) =>
         ($borderWidth || $borderStyle || $borderColor) &&
         css`
@@ -65,6 +85,30 @@ const StyledCard = styled.div<{
                 $color: $borderColor || "gray-200",
             })};
         `}
+
+    ${({
+        $inline,
+        $flexDirection,
+        $flexWrap,
+        $justifyContent,
+        $alignItems,
+        $justifyItems,
+        $alignContent,
+        $gap,
+        $columnGap,
+        $rowGap,
+    }) =>
+        ($inline ||
+            $flexDirection ||
+            $flexWrap ||
+            $justifyContent ||
+            $alignItems ||
+            $justifyItems ||
+            $alignContent ||
+            $gap ||
+            $columnGap ||
+            $rowGap) &&
+        Mixins.Flexbox};
 `
 
 setDefaultTheme([StyledCard])

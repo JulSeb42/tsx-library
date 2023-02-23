@@ -26,6 +26,16 @@ const Card = forwardRef(
             href,
             blank,
             onClick,
+            inline,
+            flexDirection,
+            flexWrap,
+            justifyContent,
+            alignItems,
+            justifyItems,
+            alignContent,
+            gap,
+            columnGap,
+            rowGap,
             ...rest
         }: CardProps,
         ref?: React.ForwardedRef<HTMLDivElement>
@@ -51,6 +61,16 @@ const Card = forwardRef(
             $shadowHover={typeof shadow === "object" && shadow.hover}
             $shadowActive={typeof shadow === "object" && shadow.active}
             $backgroundColor={backgroundColor}
+            $inline={inline}
+            $flexDirection={flexDirection}
+            $flexWrap={flexWrap}
+            $justifyContent={justifyContent}
+            $alignItems={alignItems}
+            $justifyItems={justifyItems}
+            $alignContent={alignContent}
+            $gap={gap}
+            $columnGap={columnGap}
+            $rowGap={rowGap}
             {...rest}
         >
             {children}

@@ -11,8 +11,9 @@ import {
     CursorTypes,
     BorderStylesTypes,
 } from "../../types"
+import { FlexboxProps } from "../Flexbox/types"
 
-interface CardPropsBase extends React.HTMLAttributes<HTMLDivElement> {
+interface CardPropsBase extends React.HTMLAttributes<HTMLDivElement>, FlexboxProps {
     as?: React.ElementType
     borderColor?: AllColorsTypes
     borderWidth?: number
