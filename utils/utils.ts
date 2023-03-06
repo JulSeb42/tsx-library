@@ -11,6 +11,7 @@ export {
     convertToEmail,
     convertToPascal,
     convertYoutube,
+    deleteDuplicates,
     detectLanguage,
     formatHour,
     generateNumbers,

@@ -1,5 +1,7 @@
 /*=============================================== Export all components ===============================================*/
 
+export { ThemeProvider } from "styled-components"
+
 export * from "./Variables"
 export { default as Mixins } from "./Mixins"
 
