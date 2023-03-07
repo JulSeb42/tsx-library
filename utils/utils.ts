@@ -26,6 +26,7 @@ export {
     getRandomTime,
     getTimeNow,
     getToday,
+    getTomorrow,
     emailRegex,
     passwordRegex,
     scrollToTop,
