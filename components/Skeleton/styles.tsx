@@ -4,6 +4,7 @@ import styled, { keyframes, css } from "styled-components"
 
 import { Mixins, stringifyPx } from "../../"
 import { AllColorsTypes, RadiusesTypes } from "../../types"
+import { SkeletonAnimationTypes } from "./types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
@@ -17,23 +18,13 @@ const Pulse = keyframes`
     }
 `
 
-const Load = keyframes`
-    from {
-        left: -150px;
-    }
-
-    to {
-        left: 106%;
-    }
-`
-
 const StyledSkeleton = styled.div<{
     $width?: string | number
     $height?: string | number
     $aspectRatio?: string
     $backgroundColor?: AllColorsTypes
     $borderRadius?: RadiusesTypes
-    $animation?: boolean
+    $animation?: SkeletonAnimationTypes
 }>`
     background-color: ${({ theme, $backgroundColor }) =>
         theme.AllColors({ $color: $backgroundColor })};
@@ -43,24 +34,42 @@ const StyledSkeleton = styled.div<{
     background-color: ${({ theme, $backgroundColor }) =>
         theme.AllColors({ $color: $backgroundColor })};
     ${Mixins.BorderRadius};
+    position: relative;
+    overflow: hidden;
 
     ${({ $animation }) =>
-        $animation &&
+        $animation === "pulse" &&
         css`
             animation: ${Pulse} 500ms infinite alternate;
         `}
 `
 
-const Shine = styled.span<{ $speed?: number }>`
+const ShineLoad = keyframes`
+    from {
+        left: -150px;
+    }
+
+    to {
+        left: 106%;
+    }
+`
+
+const Shine = styled.span<{
+    $speed?: number
+    $opacity?: number
+    $color?: AllColorsTypes
+    $width?: number | string
+}>`
     position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100px;
+    top: -200px;
+    bottom: -200px;
+    width: ${({ $width }) => $width && stringifyPx($width)};
     filter: blur(20px);
     transform: skew(-15deg);
-    background-color: ${({ theme }) => theme.Background};
-    animation: ${Load} ${({ $speed }) => $speed}ms infinite;
-    opacity: 0.7;
+    background-color: ${({ theme, $color }) =>
+        theme.AllColors({ $color: $color })};
+    animation: ${ShineLoad} ${({ $speed }) => $speed}ms infinite;
+    opacity: ${({ $opacity }) => $opacity};
 `
 
 setDefaultTheme([StyledSkeleton, Shine])
