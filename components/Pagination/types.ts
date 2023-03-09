@@ -12,9 +12,13 @@ enum justify {
 
 export type JustifyType = keyof typeof justify
 
-export interface PaginationProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface PaginationContainerProps
+    extends React.HTMLAttributes<HTMLDivElement> {
     as?: React.ElementType
     justify?: JustifyType
+}
+
+export interface PaginationProps extends PaginationContainerProps {
     totalPages: number
     pageLimit?: number
     color?: ColorsHoverTypes
@@ -26,7 +30,9 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 interface PaginationButtonPropsBase
-    extends React.HTMLAttributes<HTMLButtonElement>, React.ButtonHTMLAttributes<HTMLButtonElement> {
+    extends React.HTMLAttributes<HTMLButtonElement>,
+        React.ButtonHTMLAttributes<HTMLButtonElement> {
+    as?: React.ElementType
     color?: ColorsHoverTypes
 }
 

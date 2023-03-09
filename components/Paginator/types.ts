@@ -13,7 +13,8 @@ enum justify {
 
 export type PaginatorJustifyType = keyof typeof justify
 
-export interface PaginatorProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface PaginatorPropsBase
+    extends React.HTMLAttributes<HTMLDivElement> {
     as?: React.ElementType
     totalPages: number
     justify?: PaginatorJustifyType
@@ -40,3 +41,19 @@ export interface PaginatorProps extends React.HTMLAttributes<HTMLDivElement> {
         showLabel?: boolean
     }
 }
+
+interface PaginatorBehaviour1 extends PaginatorPropsBase {
+    handlePrevPage: () => void
+    handleNextPage: () => void
+    handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void
+    page: number
+}
+
+interface PaginatorBehaviour2 extends PaginatorPropsBase {
+    handlePrevPage?: never
+    handleNextPage?: never
+    handleInput?: never
+    page?: never
+}
+
+export type PaginatorProps = PaginatorBehaviour1 | PaginatorBehaviour2

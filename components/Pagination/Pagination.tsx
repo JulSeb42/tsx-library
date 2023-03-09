@@ -1,7 +1,11 @@
 /*=============================================== Pagination component ===============================================*/
 
 import React, { forwardRef, useState } from "react"
-import { useNavigate, createSearchParams, useSearchParams } from "react-router-dom"
+import {
+    useNavigate,
+    createSearchParams,
+    useSearchParams,
+} from "react-router-dom"
 
 import { Icon } from "../../"
 import ChevronLeftIcon from "../../icons/ChevronLeftIcon"
@@ -9,42 +13,72 @@ import ChevronRightIcon from "../../icons/ChevronRightIcon"
 import usePaginationNav from "../../utils/pagination-nav"
 
 import * as Styles from "./styles"
-import { PaginationProps, PaginationButtonProps } from "./types"
+import {
+    PaginationContainerProps,
+    PaginationProps,
+    PaginationButtonProps,
+} from "./types"
 
-const PaginationButton = ({
-    color,
-    isActive,
-    content,
-    icon,
-    disabled,
-    ...rest
-}: PaginationButtonProps) => (
-    <Styles.Button
-        $isActive={isActive}
-        $more={content === "more"}
-        disabled={disabled}
-        $color={color}
-        {...rest}
-    >
-        {content === "more" ? (
-            "..."
-        ) : (content === "prev" && icon) || (content === "next" && icon) ? (
-            <Icon src={icon} size={16} />
-        ) : content === "prev" ? (
-            <ChevronLeftIcon size={20} />
-        ) : content === "next" ? (
-            <ChevronRightIcon size={20} />
-        ) : (
-            content
-        )}
-    </Styles.Button>
-)
-
-const Pagination = forwardRef(
+export const PaginationButton = forwardRef(
     (
         {
             as,
-            justify = "center",
+            color = "primary",
+            isActive,
+            content,
+            icon,
+            disabled,
+            ...rest
+        }: PaginationButtonProps,
+        ref?: React.ForwardedRef<HTMLButtonElement>
+    ) => (
+        <Styles.Button
+            as={as}
+            ref={ref}
+            $isActive={isActive}
+            $more={content === "more"}
+            disabled={disabled}
+            $color={color}
+            {...rest}
+        >
+            {content === "more" ? (
+                "..."
+            ) : (content === "prev" && icon) || (content === "next" && icon) ? (
+                <Icon src={icon} size={16} />
+            ) : content === "prev" ? (
+                <ChevronLeftIcon size={20} />
+            ) : content === "next" ? (
+                <ChevronRightIcon size={20} />
+            ) : (
+                content
+            )}
+        </Styles.Button>
+    )
+)
+
+export const PaginationContainer = forwardRef(
+    (
+        { as, justify = "center", children, ...rest }: PaginationContainerProps,
+        ref?: React.ForwardedRef<HTMLDivElement>
+    ) => {
+        return (
+            <Styles.StyledPagination
+                ref={ref}
+                as={as}
+                $justify={justify}
+                {...rest}
+            >
+                {children}
+            </Styles.StyledPagination>
+        )
+    }
+)
+
+export const Pagination = forwardRef(
+    (
+        {
+            as,
+            justify,
             totalPages,
             pageLimit = 5,
             icons,
@@ -101,12 +135,7 @@ const Pagination = forwardRef(
         }
 
         return (
-            <Styles.StyledPagination
-                ref={ref}
-                as={as}
-                $justify={justify}
-                {...rest}
-            >
+            <PaginationContainer ref={ref} as={as} justify={justify} {...rest}>
                 <PaginationButton
                     onClick={handlePrev}
                     content="prev"
@@ -156,9 +185,7 @@ const Pagination = forwardRef(
                     color={color}
                     icon={icons?.next}
                 />
-            </Styles.StyledPagination>
+            </PaginationContainer>
         )
     }
 )
-
-export default Pagination

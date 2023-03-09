@@ -1,7 +1,11 @@
 /*=============================================== Paginator component ===============================================*/
 
 import React, { forwardRef, useState } from "react"
-import { useNavigate, createSearchParams, useSearchParams } from "react-router-dom"
+import {
+    useNavigate,
+    createSearchParams,
+    useSearchParams,
+} from "react-router-dom"
 
 import { Text, ButtonIcon } from "../../"
 import ChevronLeftIcon from "../../icons/ChevronLeftIcon"
@@ -30,6 +34,10 @@ const Paginator = forwardRef(
             },
             isInputEditable = true,
             queries,
+            handlePrevPage,
+            handleNextPage,
+            handleInput,
+            page,
             ...rest
         }: PaginatorProps,
         ref?: React.ForwardedRef<HTMLDivElement>
@@ -86,15 +94,15 @@ const Paginator = forwardRef(
 
         const buttonPrev = {
             ...baseButtonProps,
-            onClick: handlePrev,
-            disabled: currentPage === 1,
+            onClick: handlePrevPage || handlePrev,
+            disabled: page ? page === 1 : currentPage === 1,
             label: buttons?.labelPrev || "Previous",
         }
 
         const buttonNext = {
             ...baseButtonProps,
-            onClick: handleNext,
-            disabled: currentPage === totalPages,
+            onClick: handleNextPage || handleNext,
+            disabled: page ? page === totalPages : currentPage === totalPages,
             label: buttons?.labelNext || "Next",
         }
 
@@ -114,8 +122,8 @@ const Paginator = forwardRef(
                         <span>{texts.page}</span>
 
                         <Styles.StyledInput
-                            value={currentPage}
-                            onChange={handlePage}
+                            value={page || currentPage}
+                            onChange={handleInput || handlePage}
                             type="number"
                             step={1}
                             min={1}
