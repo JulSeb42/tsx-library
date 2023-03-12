@@ -3,15 +3,16 @@
 import styled, { css } from "styled-components"
 
 import { Mixins, Radiuses, Spacers, Breakpoints, Transitions } from "../../"
-import { ColorsHoverTypes, AllColorsTypes } from "../../types"
+import { ColorsHoverTypes, AllColorsTypes, SpacersTypes } from "../../types"
 import { TabsJustifyTypes, TabsVariantsType } from "./types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
-const StyledTabs = styled.div`
-    ${Mixins.Grid({
-        $gap: "xs",
-    })};
+const StyledTabs = styled.div<{ $gap?: SpacersTypes }>`
+    ${({ $gap }) =>
+        Mixins.Grid({
+            $gap,
+        })};
 `
 
 const ButtonsContainer = styled.div<{

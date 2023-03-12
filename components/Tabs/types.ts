@@ -2,7 +2,12 @@
 
 import React from "react"
 
-import { ColorsHoverTypes, AllColorsTypes, TabsItemProps } from "../../types"
+import {
+    ColorsHoverTypes,
+    AllColorsTypes,
+    TabsItemProps,
+    SpacersTypes,
+} from "../../types"
 
 enum tabsVariants {
     basic,
@@ -26,6 +31,7 @@ interface TabsPropsBase extends React.HTMLAttributes<HTMLDivElement> {
     active?: number
     accentColor?: ColorsHoverTypes
     buttonColor?: AllColorsTypes
+    gap?: SpacersTypes
 }
 
 interface TabsVariants1 extends TabsPropsBase {

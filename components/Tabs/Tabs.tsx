@@ -20,6 +20,7 @@ const Tabs = forwardRef(
             variant = "basic",
             separatorColor = "gray-200",
             backgroundColor = "gray-50",
+            gap = "xs",
             ...rest
         }: TabsProps,
         ref?: React.ForwardedRef<HTMLDivElement>
@@ -27,7 +28,7 @@ const Tabs = forwardRef(
         const [isActive, setIsActive] = useState(active)
 
         return (
-            <Styles.StyledTabs ref={ref} as={as} {...rest}>
+            <Styles.StyledTabs ref={ref} as={as} $gap={gap} {...rest}>
                 <Styles.ButtonsContainer
                     $variant={variant}
                     $justify={justify}
