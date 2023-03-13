@@ -56,12 +56,13 @@ const Slideshow = forwardRef(
             thumbnails,
             options,
             children,
+            activeSlide = 0,
             ...rest
         }: SlideshowProps,
         ref?: React.ForwardedRef<HTMLDivElement>
     ) => {
         // Slideshow with buttons
-        const [active, setActive] = useState(0)
+        const [active, setActive] = useState(activeSlide)
         const length = children ? children.length : 0
 
         const handleNext = () => {

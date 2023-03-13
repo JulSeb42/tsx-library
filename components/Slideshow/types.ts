@@ -28,6 +28,7 @@ interface SlideshowPropsBase extends React.HTMLAttributes<HTMLDivElement> {
     children?: React.ReactNode[]
     borderRadius?: RadiusesTypes
     imgFit?: ObjectFitTypes
+    activeSlide?: number
     controls?:
         | boolean
         | {
