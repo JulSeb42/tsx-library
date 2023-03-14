@@ -15,6 +15,7 @@ const ButtonGroup = forwardRef(
             color = "primary",
             buttons,
             borderRadius = "m",
+            buttonsSize = "default",
             ...rest
         }: ButtonGroupProps,
         ref?: React.ForwardedRef<HTMLDivElement>
@@ -25,6 +26,7 @@ const ButtonGroup = forwardRef(
             $hasBorders={variant === "transparent" && true}
             $borders={color}
             $borderRadius={borderRadius}
+            $buttonsSize={buttonsSize}
             {...rest}
         >
             {buttons.map(
@@ -86,6 +88,7 @@ const ButtonGroup = forwardRef(
                                 }}
                                 href={href}
                                 blank={blank}
+                                size={buttonsSize}
                             >
                                 {text}
                             </Styles.StyledButton>
@@ -101,6 +104,7 @@ const ButtonGroup = forwardRef(
                                     left: iconLeft,
                                     right: iconRight,
                                 }}
+                                size={buttonsSize}
                             >
                                 {text}
                             </Styles.StyledButton>
@@ -116,6 +120,7 @@ const ButtonGroup = forwardRef(
                                     left: iconLeft,
                                     right: iconRight,
                                 }}
+                                size={buttonsSize}
                             >
                                 {text}
                             </Styles.StyledButton>

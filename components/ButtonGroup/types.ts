@@ -2,7 +2,12 @@
 
 import React from "react"
 
-import { ColorsHoverTypes, ButtonGroupProps as ButtonProps, RadiusesTypes } from "../../types"
+import type {
+    ColorsHoverTypes,
+    ButtonGroupProps as ButtonProps,
+    RadiusesTypes,
+} from "../../types"
+import type { ButtonSizesTypes } from "../Button/types"
 
 enum buttonGroupVariants {
     plain,
@@ -17,4 +22,5 @@ export interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {
     color?: ColorsHoverTypes
     buttons: ButtonProps[]
     borderRadius?: RadiusesTypes
+    buttonsSize?: ButtonSizesTypes
 }

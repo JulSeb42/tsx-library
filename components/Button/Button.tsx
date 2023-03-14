@@ -27,6 +27,7 @@ const Button = forwardRef(
             borderRadius = "m",
             href,
             blank,
+            size = "default",
             ...rest
         }: ButtonProps,
         ref?: React.ForwardedRef<HTMLButtonElement>
@@ -50,6 +51,7 @@ const Button = forwardRef(
             $shadowHover={typeof shadow === "object" ? shadow.hover : shadow}
             $shadowActive={typeof shadow === "object" ? shadow.active : shadow}
             $borderRadius={borderRadius}
+            $size={size}
             {...rest}
         >
             {isLoading &&

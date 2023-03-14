@@ -3,7 +3,8 @@
 import styled, { css } from "styled-components"
 
 import { Button, Mixins, ButtonIcon } from "../../"
-import { AllColorsTypes, ColorsHoverTypes, RadiusesTypes } from "../../types"
+import type { AllColorsTypes, ColorsHoverTypes, RadiusesTypes } from "../../types"
+import type { ButtonSizesTypes } from "../Button/types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
@@ -11,8 +12,9 @@ const StyledButtonGroup = styled.div<{
     $borders?: ColorsHoverTypes
     $borderRadius?: RadiusesTypes
     $hasBorders?: boolean
+    $buttonsSize?: ButtonSizesTypes
 }>`
-   ${Mixins.BorderRadius};
+    ${Mixins.BorderRadius};
     overflow: hidden;
     width: fit-content;
     ${Mixins.Flexbox({
@@ -20,7 +22,7 @@ const StyledButtonGroup = styled.div<{
         $gap: 0,
         $alignItems: "flex-start",
     })};
-    height: 42px;
+    height: ${({ $buttonsSize }) => ($buttonsSize === "small" ? 31 : 42)}px;
 
     ${({ $hasBorders, $borders, theme }) =>
         $hasBorders &&

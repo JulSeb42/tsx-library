@@ -225,6 +225,7 @@ enum spacers {
     s,
     xs,
     xxs,
+    none,
 }
 
 export type SpacersTypes = keyof typeof spacers | number

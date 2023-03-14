@@ -321,6 +321,8 @@ const Mixins = {
                 ? Spacers.XS
                 : $spacer === "xxs"
                 ? Spacers.XXS
+                : $spacer === "none"
+                ? 0
                 : $spacer
                 ? stringifyPx($spacer)
                 : ""};

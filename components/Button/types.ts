@@ -13,6 +13,13 @@ enum buttonVariants {
 
 export type ButtonVariantTypes = keyof typeof buttonVariants
 
+enum buttonSizes {
+    default,
+    small,
+}
+
+export type ButtonSizesTypes = keyof typeof buttonSizes
+
 interface ButtonBaseProps
     extends React.HTMLAttributes<HTMLButtonElement & HTMLHyperlinkElementUtils>,
         React.ButtonHTMLAttributes<
@@ -22,6 +29,7 @@ interface ButtonBaseProps
     color?: ColorsHoverTypes
     shadow?: ShadowsTypes | BoxShadowProps
     borderRadius?: RadiusesTypes
+    size?: ButtonSizesTypes
 }
 
 interface ButtonBehaviour1 extends ButtonBaseProps {
