@@ -235,6 +235,7 @@ const Slideshow = forwardRef(
                                 alt={`Image ${i}`}
                                 $isActive={active === i && true}
                                 onClick={() => setActive(i)}
+                                key={uuid()}
                             />
                         ))}
                     </Flexbox>
