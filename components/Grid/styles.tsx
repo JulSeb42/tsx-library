@@ -32,7 +32,7 @@ const StyledGrid = styled.div<{
 
     @media ${Breakpoints.Tablet} {
         grid-template-columns: ${({ $col }) =>
-            $col && $col >= 6
+            $col && typeof $col === "number" && $col >= 6
                 ? "repeat(4, 1fr)"
                 : $col === 4 || $col === 5
                 ? "repeat(3, 1fr)"
@@ -41,7 +41,9 @@ const StyledGrid = styled.div<{
 
     @media ${Breakpoints.Mobile} {
         grid-template-columns: ${({ $col }) =>
-            $col && $col >= 6 ? "repeat(2, 1fr)" : "repeat(1, 1fr)"};
+            $col && typeof $col === "number" && $col >= 6
+                ? "repeat(2, 1fr)"
+                : "repeat(1, 1fr)"};
     }
 
     ${({ $col, $colTablet, $colMobile }) =>

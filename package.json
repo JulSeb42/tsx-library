@@ -1,7 +1,7 @@
 {
     "name": "tsx-library-julseb",
     "private": false,
-    "version": "6.2.3",
+    "version": "6.2.4",
     "license": "MIT",
     "main": "./index.js",
     "exports": {
@@ -45,7 +45,7 @@
         "react-scroll-to-bottom": "^4.2.0",
         "react-syntax-highlighter": "^15.5.0",
         "styled-components": "^5.3.9",
-        "ts-utils-julseb": "^2.2.9"
+        "ts-utils-julseb": "^2.2.10"
     },
     "devDependencies": {
         "@babel/core": "^7.21.3",
@@ -59,7 +59,7 @@
         "@types/styled-components": "^5.1.26",
         "@vitejs/plugin-react": "^3.1.0",
         "babel-loader": "^9.1.2",
-        "typescript": "^4.9.5",
+        "typescript": "^5.0.2",
         "vite": "^4.2.0"
     }
 }
