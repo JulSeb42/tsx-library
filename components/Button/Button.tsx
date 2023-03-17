@@ -28,6 +28,7 @@ const Button = forwardRef(
             href,
             blank,
             size = "default",
+            gap = "xs",
             ...rest
         }: ButtonProps,
         ref?: React.ForwardedRef<HTMLButtonElement>
@@ -52,6 +53,7 @@ const Button = forwardRef(
             $shadowActive={typeof shadow === "object" ? shadow.active : shadow}
             $borderRadius={borderRadius}
             $size={size}
+            $gap={gap}
             {...rest}
         >
             {isLoading &&

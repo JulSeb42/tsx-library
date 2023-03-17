@@ -3,7 +3,12 @@
 import styled from "styled-components"
 
 import { Mixins, Breakpoints, FontSizes } from "../../"
-import { ColorsHoverTypes, ShadowsTypes, RadiusesTypes } from "../../types"
+import {
+    ColorsHoverTypes,
+    ShadowsTypes,
+    RadiusesTypes,
+    SpacersTypes,
+} from "../../types"
 import { ButtonVariantTypes, ButtonSizesTypes } from "./types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
@@ -18,6 +23,7 @@ const StyledButton = styled.button<{
     $shadowActive?: ShadowsTypes
     $borderRadius?: RadiusesTypes
     $size?: ButtonSizesTypes
+    $gap?: SpacersTypes
 }>`
     border: 1px solid
         ${({ $variant, $color, theme }) =>
@@ -39,12 +45,13 @@ const StyledButton = styled.button<{
             : Mixins.Padding({
                   $padding: { topBottom: "xs", leftRight: "s" },
               })};
-    ${Mixins.Flexbox({
-        $inline: true,
-        $alignItems: "center",
-        $justifyContent: "center",
-        $gap: "xs",
-    })};
+    ${({ $gap }) =>
+        Mixins.Flexbox({
+            $inline: true,
+            $alignItems: "center",
+            $justifyContent: "center",
+            $gap,
+        })};
     ${Mixins.BorderRadius};
     background-color: ${({ $variant, theme }) =>
         $variant === "plain" ? theme.ColorsHoverDefault : "transparent"};

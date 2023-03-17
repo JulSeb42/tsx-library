@@ -2,7 +2,7 @@
 
 import React from "react"
 
-import { ColorsHoverTypes, ShadowsTypes, BoxShadowProps, RadiusesTypes } from "../../types"
+import { ColorsHoverTypes, ShadowsTypes, BoxShadowProps, RadiusesTypes, SpacersTypes } from "../../types"
 import { LoaderVariantTypes } from "../Loader/types"
 
 enum buttonVariants {
@@ -30,6 +30,7 @@ interface ButtonBaseProps
     shadow?: ShadowsTypes | BoxShadowProps
     borderRadius?: RadiusesTypes
     size?: ButtonSizesTypes
+    gap?: SpacersTypes
 }
 
 interface ButtonBehaviour1 extends ButtonBaseProps {
