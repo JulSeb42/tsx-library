@@ -30,6 +30,7 @@ export const Dropdown = ({
     accentColor = "primary",
     direction = "down",
     children,
+    maxHeightOpen = 40 * 3 + 24,
     ...rest
 }: DropdownProps) => {
     const el = useRef<HTMLButtonElement>(null)
@@ -43,6 +44,7 @@ export const Dropdown = ({
             $isOpen={isOpen}
             $accentColor={accentColor}
             $direction={direction}
+            $maxHeightOpen={maxHeightOpen}
             {...rest}
         >
             {children}

@@ -9,6 +9,7 @@ import {
     Spacers,
     Breakpoints,
     Mixins,
+    stringifyPx,
 } from "../../"
 import { ColorsHoverTypes } from "../../types"
 import { DropdownJustifyTypes } from "./types"
@@ -20,6 +21,7 @@ const StyledDropdown = styled.div<{
     $isOpen: boolean
     $accentColor?: ColorsHoverTypes
     $direction?: ListDirectionTypes
+    $maxHeightOpen: number
 }>`
     position: absolute;
     ${Mixins.Grid({})};
@@ -31,7 +33,8 @@ const StyledDropdown = styled.div<{
     transition: ${Transitions.Short};
     z-index: 50;
     ${Mixins.HideScrollbar};
-    max-height: ${({ $isOpen }) => ($isOpen ? `${40 * 4}px` : 0)};
+    max-height: ${({ $isOpen, $maxHeightOpen }) =>
+        $isOpen ? stringifyPx($maxHeightOpen) : 0};
 
     ${({ $direction }) =>
         $direction === "up"

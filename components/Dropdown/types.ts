@@ -24,4 +24,5 @@ export interface DropdownProps extends React.HTMLAttributes<HTMLDivElement> {
     setIsOpen: (isOpen: boolean) => void
     accentColor?: ColorsHoverTypes
     direction?: ListDirectionTypes
+    maxHeightOpen?: number
 }
