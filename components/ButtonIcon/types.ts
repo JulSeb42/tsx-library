@@ -85,38 +85,54 @@ type ButtonIconBehaviour =
     | ButtonIconBehaviour2
     | ButtonIconBehaviour3
 
-type ButtonIconIcon1 = ButtonIconBehaviour & {
+type ButtonIconContent1 = ButtonIconBehaviour & {
     icon?: never
     iconSize?: never
     libicon: JSX.Element
     burger?: never
     isBurgerOpen?: never
+    avatar?: never
 }
 
-type ButtonIconIcon2 = ButtonIconBehaviour & {
+type ButtonIconContent2 = ButtonIconBehaviour & {
     icon: string
     iconSize?: number
     libicon?: never
     burger?: never
     isBurgerOpen?: never
+    avatar?: never
 }
 
-type ButtonIconIcon3 = ButtonIconBehaviour & {
+type ButtonIconContent3 = ButtonIconBehaviour & {
     icon?: never
     iconSize?: never
     libicon?: never
     burger: boolean
     isBurgerOpen: boolean
+    avatar?: never
 }
 
-type ButtonIconIcon = ButtonIconIcon1 | ButtonIconIcon2 | ButtonIconIcon3
+type ButtonIconContent4 = ButtonIconBehaviour & {
+    icon?: never
+    iconSize?: never
+    libicon?: never
+    burger?: never
+    isBurgerOpen?: never
+    avatar: string
+}
 
-type ButtonIconVariant1 = ButtonIconIcon & {
+type ButtonIconContent =
+    | ButtonIconContent1
+    | ButtonIconContent2
+    | ButtonIconContent3
+    | ButtonIconContent4
+
+type ButtonIconVariant1 = ButtonIconContent & {
     variant?: "plain"
     hoverBackground?: never
 }
 
-type ButtonIconVariant2 = ButtonIconIcon & {
+type ButtonIconVariant2 = ButtonIconContent & {
     variant?: "transparent"
     hoverBackground?: boolean
 }

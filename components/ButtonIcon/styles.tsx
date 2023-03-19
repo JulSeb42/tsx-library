@@ -42,6 +42,7 @@ const StyledButtonIcon = styled.button<{
     $zIndex?: number
     $showLabel?: boolean
     $borderRadius?: RadiusesTypes
+    $isAvatar?: boolean
 }>`
     width: ${({ $size }) => $size}px;
     height: ${({ $size }) => $size}px;
@@ -91,6 +92,18 @@ const StyledButtonIcon = styled.button<{
             color: ${({ $variant, theme }) =>
                 $variant === "transparent" && theme.ColorsHoverActive};
         }
+
+        ${({ $isAvatar }) =>
+            $isAvatar &&
+            css`
+                &:not(:disabled):hover {
+                    opacity: 0.8;
+                }
+
+                &:not(:disabled):active {
+                    opacity: 0.6;
+                }
+            `}
     }
 
     &:disabled {

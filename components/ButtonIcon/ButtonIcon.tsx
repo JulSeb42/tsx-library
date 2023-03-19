@@ -3,7 +3,7 @@
 import React, { forwardRef, useRef, useState, useLayoutEffect } from "react"
 import { Link } from "react-router-dom"
 
-import { useTouchScreen, Icon, Loader, Burger } from "../../"
+import { useTouchScreen, Icon, Loader, Burger, Avatar } from "../../"
 
 import * as Styles from "./styles"
 import { ButtonIconProps, TipsProps } from "./types"
@@ -77,6 +77,7 @@ const ButtonIcon = forwardRef(
             iconSize = size * 0.7,
             href,
             blank,
+            avatar,
             ...rest
         }: ButtonIconProps,
         ref?: React.ForwardedRef<HTMLButtonElement>
@@ -110,6 +111,7 @@ const ButtonIcon = forwardRef(
                 $bottom={!showLabel ? position?.bottom : undefined}
                 $zIndex={!showLabel ? position?.zIndex : undefined}
                 $borderRadius={borderRadius}
+                $isAvatar={!!avatar}
                 {...rest}
             >
                 {isLoading ? (
@@ -129,6 +131,8 @@ const ButtonIcon = forwardRef(
                         noHover
                         as="span"
                     />
+                ) : avatar ? (
+                    <Avatar img={avatar} size={size} alt={label} />
                 ) : (
                     libicon
                 )}
