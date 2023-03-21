@@ -1,6 +1,6 @@
 /*=============================================== Text component ===============================================*/
 
-import React, { forwardRef } from "react"
+import React from "react"
 
 import H1 from "./templates/H1"
 import H2 from "./templates/H2"
@@ -125,8 +125,6 @@ const renderComponent = (
     }
 }
 
-const Text = forwardRef(({ tag, ...props }: TextProps) =>
-    renderComponent(props, tag)
-)
+const Text = ({ tag, ...props }: TextProps) => renderComponent(props, tag)
 
 export default Text
