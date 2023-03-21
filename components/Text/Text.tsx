@@ -1,6 +1,6 @@
 /*=============================================== Text component ===============================================*/
 
-import React from "react"
+import React, { forwardRef } from "react"
 
 import H1 from "./templates/H1"
 import H2 from "./templates/H2"
@@ -19,41 +19,114 @@ import Dl from "./templates/Dl"
 
 import { TagTypes, TextProps } from "./types"
 
-const renderComponent = (props: TextProps, tag?: TagTypes) => {
+const renderComponent = (
+    props: TextProps,
+    tag?: TagTypes,
+    ref?: React.ForwardedRef<
+        HTMLElement &
+            HTMLParagraphElement &
+            HTMLHeadingElement &
+            HTMLQuoteElement &
+            HTMLUListElement &
+            HTMLOListElement
+    >
+) => {
     switch (tag) {
         case "h1":
-            return <H1 {...props}>{props.children}</H1>
+            return (
+                <H1 ref={ref} {...props}>
+                    {props.children}
+                </H1>
+            )
         case "h2":
-            return <H2 {...props}>{props.children}</H2>
+            return (
+                <H2 ref={ref} {...props}>
+                    {props.children}
+                </H2>
+            )
         case "h3":
-            return <H3 {...props}>{props.children}</H3>
+            return (
+                <H3 ref={ref} {...props}>
+                    {props.children}
+                </H3>
+            )
         case "h4":
-            return <H4 {...props}>{props.children}</H4>
+            return (
+                <H4 ref={ref} {...props}>
+                    {props.children}
+                </H4>
+            )
         case "h5":
-            return <H5 {...props}>{props.children}</H5>
+            return (
+                <H5 ref={ref} {...props}>
+                    {props.children}
+                </H5>
+            )
         case "h6":
-            return <H6 {...props}>{props.children}</H6>
+            return (
+                <H6 ref={ref} {...props}>
+                    {props.children}
+                </H6>
+            )
         case "p":
-            return <P {...props}>{props.children}</P>
+            return (
+                <P ref={ref} {...props}>
+                    {props.children}
+                </P>
+            )
         case "strong":
-            return <Strong {...props}>{props.children}</Strong>
+            return (
+                <Strong ref={ref} {...props}>
+                    {props.children}
+                </Strong>
+            )
         case "em":
-            return <Em {...props}>{props.children}</Em>
+            return (
+                <Em ref={ref} {...props}>
+                    {props.children}
+                </Em>
+            )
         case "small":
-            return <Small {...props}>{props.children}</Small>
+            return (
+                <Small ref={ref} {...props}>
+                    {props.children}
+                </Small>
+            )
         case "blockquote":
-            return <Blockquote {...props}>{props.children}</Blockquote>
+            return (
+                <Blockquote ref={ref} {...props}>
+                    {props.children}
+                </Blockquote>
+            )
         case "ul":
-            return <Ul {...props}>{props.children}</Ul>
+            return (
+                <Ul ref={ref} {...props}>
+                    {props.children}
+                </Ul>
+            )
         case "ol":
-            return <Ol {...props}>{props.children}</Ol>
+            return (
+                <Ol ref={ref} {...props}>
+                    {props.children}
+                </Ol>
+            )
         case "dl":
-            return <Dl {...props}>{props.children}</Dl>
+            return (
+                <Dl ref={ref} {...props}>
+                    {props.children}
+                </Dl>
+            )
         default:
-            return <P {...props}>{props.children}</P>
+            return (
+                <P ref={ref} {...props}>
+                    {props.children}
+                </P>
+            )
     }
 }
 
-const Text = ({ tag, ...props }: TextProps) => renderComponent(props, tag)
+const Text = forwardRef(({ tag, ...props }: TextProps) =>
+    renderComponent(props, tag)
+)
 
 export default Text
