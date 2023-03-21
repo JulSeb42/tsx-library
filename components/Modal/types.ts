@@ -10,6 +10,7 @@ interface ModalPropsBase extends React.HTMLAttributes<HTMLDivElement> {
     isOpen: boolean
     setIsOpen: (isOpen: boolean) => void
     disableEsc?: boolean
+    stopScroll?: boolean
 }
 
 interface ModalPropsBehaviour1 extends ModalPropsBase {

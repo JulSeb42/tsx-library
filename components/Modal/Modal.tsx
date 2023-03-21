@@ -21,15 +21,18 @@ const Modal = forwardRef(
             labelClose = "Close",
             colorClose = "white",
             variantClose = "transparent",
+            stopScroll,
             ...rest
         }: ModalProps,
         ref?: React.ForwardedRef<HTMLDivElement>
     ) => {
         useEffect(() => {
-            isOpen
-                ? document.body.classList.add("stop-scrolling")
-                : document.body.classList.remove("stop-scrolling")
-        })
+            if (stopScroll) {
+                isOpen
+                    ? document.body.classList.add("stop-scrolling")
+                    : document.body.classList.remove("stop-scrolling")
+            }
+        }, [isOpen, stopScroll])
 
         useKeyPress(() => {
             if (!disableEsc) {
