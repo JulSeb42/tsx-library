@@ -36,4 +36,4 @@ export {
     uuid,
 } from "ts-utils-julseb"
 
-export * from "./utils"
+export * from "./utils/index"
