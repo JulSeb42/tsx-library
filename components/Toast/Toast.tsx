@@ -14,6 +14,9 @@ const Toast = forwardRef(
             as,
             title,
             titleSize,
+            titleTag = "h5",
+            titleAs,
+            titleWeight,
             maxWidth,
             shadow,
             icon,
@@ -31,7 +34,13 @@ const Toast = forwardRef(
         const [isClosed, setIsClosed] = useState(false)
 
         const titleFn = () => (
-            <Text tag="h5" fontSize={titleSize}>
+            // @ts-expect-error
+            <Text
+                tag={titleTag}
+                as={titleAs}
+                fontWeight={titleWeight}
+                fontSize={titleSize}
+            >
                 {title}
             </Text>
         )
