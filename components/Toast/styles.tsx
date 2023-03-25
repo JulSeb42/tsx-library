@@ -9,6 +9,7 @@ import {
     SpacersTypes,
     RadiusesTypes,
     AllColorsTypes,
+    PaddingTypes
 } from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
@@ -26,6 +27,7 @@ const StyledToast = styled.div<{
     $borderRadius?: RadiusesTypes
     $borderWidth?: number
     $borderColor?: AllColorsTypes
+    $padding?: PaddingTypes
 }>`
     width: 100%;
     max-width: ${({ $maxWidth }) => $maxWidth && stringifyPx($maxWidth)};
@@ -36,9 +38,8 @@ const StyledToast = styled.div<{
         Mixins.Shadow({
             $shadow: $shadow,
         })};
-    padding: ${Spacers.M};
     ${Mixins.BorderRadius};
-    ${"" /* border-radius: ${({ $borderRadius }) => ({ $borderRadius })}; */}
+    ${Mixins.Padding};
 
     ${({ $position, $zIndex, $left, $top, $right, $bottom }) =>
         ($left || $top || $right || $bottom) &&

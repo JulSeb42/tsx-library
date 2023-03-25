@@ -7,18 +7,22 @@ import {
     AllColorsTypes,
     ObjectPositionTypes,
     RadiusesTypes,
+    FontSizeTypes,
+    PaddingTypes,
 } from "../../types"
 
 export interface ToastProps extends React.HTMLAttributes<HTMLDivElement> {
     as?: React.ElementType
     title: string
-    maxWidth?: number | string
+    titleSize?: FontSizeTypes
+    maxWidth?: number | string
     shadow?: ShadowsTypes
     icon?:
         | string
         | {
               name: string
               color?: AllColorsTypes
+              size?: number
           }
     close?: boolean | string
     labelClose?: string
@@ -28,4 +32,5 @@ export interface ToastProps extends React.HTMLAttributes<HTMLDivElement> {
         width?: number
         color?: AllColorsTypes
     }
+    padding?: PaddingTypes
 }

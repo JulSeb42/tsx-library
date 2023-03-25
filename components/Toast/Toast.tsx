@@ -13,6 +13,7 @@ const Toast = forwardRef(
         {
             as,
             title,
+            titleSize,
             maxWidth,
             shadow,
             icon,
@@ -22,13 +23,18 @@ const Toast = forwardRef(
             children,
             borderRadius = "m",
             border,
+            padding = "m",
             ...rest
         }: ToastProps,
         ref?: React.ForwardedRef<HTMLDivElement>
     ) => {
         const [isClosed, setIsClosed] = useState(false)
 
-        const titleFn = () => <Text tag="h5">{title}</Text>
+        const titleFn = () => (
+            <Text tag="h5" fontSize={titleSize}>
+                {title}
+            </Text>
+        )
 
         const closeProps = {
             onClick: () => setIsClosed(true),
@@ -52,6 +58,7 @@ const Toast = forwardRef(
                 $borderRadius={borderRadius}
                 $borderWidth={border?.width}
                 $borderColor={border?.color}
+                $padding={padding}
                 {...rest}
             >
                 {icon || close ? (
@@ -61,7 +68,11 @@ const Toast = forwardRef(
                                 src={
                                     typeof icon === "object" ? icon.name : icon
                                 }
-                                size={24}
+                                size={
+                                    typeof icon === "object" && icon.size
+                                        ? icon.size
+                                        : 24
+                                }
                                 color={
                                     typeof icon === "object" && icon.color
                                         ? icon.color
