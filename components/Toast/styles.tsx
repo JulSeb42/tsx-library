@@ -2,14 +2,22 @@
 
 import styled, { css } from "styled-components"
 
-import { Spacers, Mixins, Radiuses, Transitions, Breakpoints, stringifyPx } from "../../"
+import {
+    Spacers,
+    Mixins,
+    Radiuses,
+    Transitions,
+    Breakpoints,
+    stringifyPx,
+    Text,
+} from "../../"
 import {
     PositionsTypes,
     ShadowsTypes,
     SpacersTypes,
     RadiusesTypes,
     AllColorsTypes,
-    PaddingTypes
+    PaddingTypes,
 } from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
@@ -60,22 +68,25 @@ const StyledToast = styled.div<{
         `}
 `
 
-const TitleContainer = styled.div`
-    ${Mixins.Flexbox({
-        $alignItems: "center",
-        $justifyContent: "flex-start",
-        $gap: "xs",
-    })};
+export const Title = styled(Text)``
 
-    h5 {
+const TitleContainer = styled.div<{ $gap?: SpacersTypes }>`
+    ${({ $gap }) =>
+        Mixins.Flexbox({
+            $alignItems: "center",
+            $justifyContent: "flex-start",
+            $gap,
+        })};
+
+    ${Title} {
         flex-grow: 1;
     }
 `
 
 const Content = styled.div`
     ${Mixins.Grid({
-        $gap: "xxs",
-    })}
+        $gap: "xs",
+    })};
 `
 
 const buttonSize = 32

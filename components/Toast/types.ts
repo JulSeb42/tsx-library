@@ -10,6 +10,7 @@ import {
     FontSizeTypes,
     PaddingTypes,
     FontWeightTypes,
+    SpacersTypes,
 } from "../../types"
 
 enum tags {
@@ -40,6 +41,7 @@ export interface ToastProps extends React.HTMLAttributes<HTMLDivElement> {
               name: string
               color?: AllColorsTypes
               size?: number
+              gap?: SpacersTypes
           }
     close?: boolean | string
     labelClose?: string

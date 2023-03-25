@@ -34,15 +34,14 @@ const Toast = forwardRef(
         const [isClosed, setIsClosed] = useState(false)
 
         const titleFn = () => (
-            // @ts-expect-error
-            <Text
+            <Styles.Title
                 tag={titleTag}
                 as={titleAs}
                 fontWeight={titleWeight}
                 fontSize={titleSize}
             >
                 {title}
-            </Text>
+            </Styles.Title>
         )
 
         const closeProps = {
@@ -71,7 +70,13 @@ const Toast = forwardRef(
                 {...rest}
             >
                 {icon || close ? (
-                    <Styles.TitleContainer>
+                    <Styles.TitleContainer
+                        $gap={
+                            icon && typeof icon === "object" && icon.gap
+                                ? icon.gap
+                                : "xs"
+                        }
+                    >
                         {icon && (
                             <Icon
                                 src={
