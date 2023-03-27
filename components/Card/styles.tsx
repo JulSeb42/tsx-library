@@ -53,7 +53,6 @@ const StyledCard = styled.div<{
     $gap?: SpacersTypes
     $columnGap?: SpacersTypes
     $rowGap?: SpacersTypes
-    $flexGrow?: number | string
 }>`
     text-decoration: none;
     color: ${({ theme, $textColor }) =>
@@ -65,7 +64,6 @@ const StyledCard = styled.div<{
     height: ${({ $height }) => $height && stringifyPx($height)};
     overflow: hidden;
     position: relative;
-    flex-grow: ${({ $flexGrow }) => $flexGrow};
     ${Mixins.BorderRadius};
     ${Mixins.Padding};
     ${({ $shadow, $shadowDefault, $shadowHover, $shadowActive }) =>

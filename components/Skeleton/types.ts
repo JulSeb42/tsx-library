@@ -19,6 +19,8 @@ export interface SkeletonPropsBase
     aspectRatio?: string
     backgroundColor?: AllColorsTypes
     borderRadius?: RadiusesTypes
+    flex?: string | number
+    flexGrow?: string | number
 }
 
 interface SkeletonAnimation1 extends SkeletonPropsBase {

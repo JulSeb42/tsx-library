@@ -33,7 +33,6 @@ interface CardPropsBase extends React.HTMLAttributes<HTMLDivElement>, FlexboxPro
     shadow?: ShadowsTypes | BoxShadowProps
     backgroundColor?: AllColorsTypes
     textColor?: AllColorsTypes
-    flexGrow?: number | string
 }
 
 interface CardPropsBehaviour1 extends CardPropsBase {

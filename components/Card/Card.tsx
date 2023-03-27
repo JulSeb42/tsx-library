@@ -36,7 +36,6 @@ const Card = forwardRef(
             gap,
             columnGap,
             rowGap,
-            flexGrow,
             ...rest
         }: CardProps,
         ref?: React.ForwardedRef<HTMLDivElement>
@@ -72,7 +71,6 @@ const Card = forwardRef(
             $gap={gap}
             $columnGap={columnGap}
             $rowGap={rowGap}
-            $flexGrow={flexGrow}
             {...rest}
         >
             {children}

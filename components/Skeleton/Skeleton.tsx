@@ -42,6 +42,8 @@ export const Skeleton = forwardRef(
             shineOpacity,
             shineSpeed,
             shineWidth,
+            flexGrow,
+            flex,
             ...rest
         }: SkeletonProps,
         ref?: React.ForwardedRef<HTMLSpanElement>
@@ -55,6 +57,8 @@ export const Skeleton = forwardRef(
             $backgroundColor={backgroundColor}
             $borderRadius={borderRadius}
             $animation={animation}
+            $flexGrow={flexGrow}
+            $flex={flex}
             {...rest}
         >
             {animation === "shine" && (

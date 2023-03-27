@@ -25,6 +25,8 @@ const StyledSkeleton = styled.div<{
     $backgroundColor?: AllColorsTypes
     $borderRadius?: RadiusesTypes
     $animation?: SkeletonAnimationTypes
+    $flex?: string | number
+    $flexGrow?: string | number
 }>`
     background-color: ${({ theme, $backgroundColor }) =>
         theme.AllColors({ $color: $backgroundColor })};
@@ -36,6 +38,8 @@ const StyledSkeleton = styled.div<{
     ${Mixins.BorderRadius};
     position: relative;
     overflow: hidden;
+    flex: ${({ $flex }) => $flex};
+    flex-grow: ${({ $flexGrow }) => $flexGrow};
 
     ${({ $animation }) =>
         $animation === "pulse" &&
