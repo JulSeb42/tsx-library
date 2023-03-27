@@ -34,6 +34,6 @@ export {
     stringifyPx,
     unslugify,
     uuid,
+    disableScroll,
+    enableScroll,
 } from "ts-utils-julseb"
-
-export * from "./utils/index"
