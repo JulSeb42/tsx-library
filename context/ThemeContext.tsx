@@ -20,18 +20,16 @@ const ThemeProviderWrapper = ({ children }: Props) => {
     const body = document.body
 
     const toggleTheme = () => {
-        if (typeof window !== "undefined") {
-            if (selectedTheme === "light") {
-                setSelectedTheme("dark")
-                localStorage.setItem("theme", "dark")
-                setTheme(ThemeDark)
-                body.classList.add("dark")
-            } else {
-                setSelectedTheme("light")
-                localStorage.setItem("theme", "light")
-                setTheme(ThemeLight)
-                body.classList.remove("dark")
-            }
+        if (selectedTheme === "light") {
+            setSelectedTheme("dark")
+            localStorage.setItem("theme", "dark")
+            setTheme(ThemeDark)
+            body.classList.add("dark")
+        } else {
+            setSelectedTheme("light")
+            localStorage.setItem("theme", "light")
+            setTheme(ThemeLight)
+            body.classList.remove("dark")
         }
     }
 
@@ -44,6 +42,12 @@ const ThemeProviderWrapper = ({ children }: Props) => {
             ) {
                 setSelectedTheme("dark")
                 setTheme(ThemeDark)
+            } else if (localStorage.getItem("theme") === "dark") {
+                setSelectedTheme("dark")
+                setTheme(ThemeDark)
+            } else if (localStorage.getItem("theme") === "light") {
+                setSelectedTheme("light")
+                setTheme(ThemeLight)
             }
 
             selectedTheme === "dark"
