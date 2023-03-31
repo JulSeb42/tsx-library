@@ -15,7 +15,8 @@
         "target": "es5",
         "module": "ESNext",
         "moduleResolution": "node",
-        "downlevelIteration": true
+        "downlevelIteration": true,
+        "rootDir": "./",
     },
     "exclude": [
         "node_modules"
