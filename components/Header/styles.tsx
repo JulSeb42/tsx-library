@@ -1,7 +1,6 @@
 /*=============================================== Header styles ===============================================*/
 
 import styled, { css } from "styled-components"
-import { Link } from "react-router-dom"
 
 import {
     stringifyPx,
@@ -15,13 +14,13 @@ import {
     Image,
     Burger,
 } from "../../"
-import {
+import type {
     ColorsHoverTypes,
     AllColorsTypes,
     ShadowsTypes,
     PositionsTypes,
 } from "../../types"
-import { NavMenuVariantsTypes, NavMobileVariantsTypes } from "./types"
+import type { NavMenuVariantsTypes, NavMobileVariantsTypes } from "./types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
@@ -40,7 +39,7 @@ const HeaderBurger = styled(Burger)`
     }
 `
 
-const Logo = styled(Link)`
+const Logo = styled.a`
     position: relative;
     z-index: 999;
 `

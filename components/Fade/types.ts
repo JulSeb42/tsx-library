@@ -1,7 +1,7 @@
 /*=============================================== Fade types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-export interface FadeProps extends React.HTMLAttributes<HTMLDivElement> {
-    as?: React.ElementType
+export interface FadeProps extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
 }

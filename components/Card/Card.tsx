@@ -1,10 +1,10 @@
 /*=============================================== Card component ===============================================*/
 
-import React, { forwardRef } from "react"
-import { Link } from "react-router-dom"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { CardProps } from "./types"
+import type { CardProps } from "./types"
 
 const Card = forwardRef(
     (
@@ -22,7 +22,6 @@ const Card = forwardRef(
             shadow,
             backgroundColor = "background",
             textColor = "currentColor",
-            to,
             href,
             blank,
             onClick,
@@ -38,14 +37,14 @@ const Card = forwardRef(
             rowGap,
             ...rest
         }: CardProps,
-        ref?: React.ForwardedRef<HTMLDivElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => (
         <Styles.StyledCard
             ref={ref}
-            as={as ? as : to ? Link : href ? "a" : "div"}
-            to={to}
-            target={(to || href) && blank && "_blank"}
-            rel={(to || href) && blank && "noreferrer noopener"}
+            as={as ? as : href ? "a" : "div"}
+            href={href}
+            target={href && blank && "_blank"}
+            rel={href && blank && "noreferrer noopener"}
             onClick={onClick}
             $borderRadius={borderRadius}
             $padding={padding}

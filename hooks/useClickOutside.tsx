@@ -1,6 +1,7 @@
 /*=============================================== useClickOutside ===============================================*/
 
-import { useEffect, RefObject } from "react"
+import { useEffect } from "react"
+import type { RefObject } from "react"
 
 type Event = MouseEvent | TouchEvent
 
@@ -11,7 +12,7 @@ export const useClickOutside = <T extends HTMLElement = HTMLElement>(
     useEffect(() => {
         const listener = (e: Event) => {
             const target = e.target as any
-            
+
             if (target.getAttribute("href")) return false
 
             const el = ref?.current
@@ -31,4 +32,3 @@ export const useClickOutside = <T extends HTMLElement = HTMLElement>(
         }
     }, [ref, handler])
 }
-

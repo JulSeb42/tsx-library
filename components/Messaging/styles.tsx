@@ -1,7 +1,7 @@
 /*=============================================== Messaging styles ===============================================*/
 
 import styled from "styled-components"
-import ScrollToBottom from "react-scroll-to-bottom"
+// import ScrollToBottom from "react-scroll-to-bottom"
 
 import {
     Radiuses,
@@ -12,10 +12,15 @@ import {
     Breakpoints,
     Transitions,
     Mixins,
-    Text,
+    Linkify,
+    ButtonIcon,
 } from "../../"
-import { AllColorsTypes, ColorsHoverTypes, SpacersTypes } from "../../types"
-import { MessageTypeTypes } from "./types"
+import type {
+    AllColorsTypes,
+    ColorsHoverTypes,
+    SpacersTypes,
+} from "../../types"
+import type { MessageTypeTypes } from "./types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
@@ -31,6 +36,7 @@ const StyledMessaging = styled.div<{ $borderColor?: AllColorsTypes }>`
         $flexDirection: "column",
         $gap: "xs",
     })};
+    position: relative;
 `
 
 const EmptyContainer = styled.div`
@@ -43,12 +49,14 @@ const EmptyContainer = styled.div`
     })};
 `
 
-const MessagesContainer = styled(ScrollToBottom)<{
+const MessagesContainer = styled.div<{
     $gap?: SpacersTypes
 }>`
     overflow-y: scroll;
+    scroll-behavior: smooth;
     flex-grow: 1;
     ${Mixins.HideScrollbar};
+    position: relative;
 
     & > div {
         ${Mixins.HideScrollbar};
@@ -67,22 +75,26 @@ const InputContainer = styled.form`
     })};
 `
 
-const minHeight = `${FontSizes.Body} * ${LineHeights.Regular} * 3`
-
-const Input = styled.textarea`
+const Input = styled.textarea<{ $height?: number }>`
     flex-grow: 1;
-    padding: 0;
     font-size: ${FontSizes.Body};
     font-family: ${FontFamilies.Body};
     line-height: ${LineHeights.Regular};
     resize: none;
     border: none;
     color: ${({ theme }) => theme.Font};
-    min-height: calc(${minHeight});
     background-color: transparent;
+    height: ${({ $height }) => $height}px;
+    max-height: calc(24px * 3);
+    padding: ${Spacers.XXS} ${Spacers.XS};
+    outline: none;
 
     &::placeholder {
         color: ${({ theme }) => theme.Gray200};
+    }
+
+    &:focus {
+        background-color: ${({ theme }) => theme.Primary50};
     }
 `
 
@@ -123,7 +135,7 @@ const SendButton = styled.button<{
     }
 `
 
-const StyledMessage = styled(Text)<{
+const StyledMessage = styled(Linkify)<{
     $type?: MessageTypeTypes
     $backgroundColor?: AllColorsTypes
     $textColor?: AllColorsTypes
@@ -163,6 +175,25 @@ const StyledMessage = styled(Text)<{
             }
         }
     }
+`
+
+export const Bottom = styled.div`
+    width: 100%;
+    height: 0;
+`
+
+export const ScrollButton = styled(ButtonIcon)<{
+    $inputHeight: number
+    $isVisible?: boolean
+}>`
+    position: absolute;
+    bottom: calc(
+        ${({ $inputHeight }) => $inputHeight}px + ${Spacers.XXS} + ${Spacers.S} +
+            (${Spacers.XS} * 2)
+    );
+    right: ${Spacers.XXS};
+    opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
+    visibility: ${({ $isVisible }) => ($isVisible ? "visible" : "hidden")};
 `
 
 setDefaultTheme([

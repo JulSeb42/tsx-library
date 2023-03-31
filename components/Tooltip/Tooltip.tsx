@@ -1,9 +1,10 @@
 /*=============================================== Tooltip component ===============================================*/
 
-import React, { forwardRef, useRef, useState, useLayoutEffect } from "react"
+import { forwardRef, useRef, useState, useLayoutEffect } from "react"
+import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { TooltipProps } from "./types"
+import type { TooltipProps } from "./types"
 
 const Tooltip = forwardRef(
     (
@@ -15,7 +16,7 @@ const Tooltip = forwardRef(
             tooltip,
             ...rest
         }: TooltipProps,
-        ref?: React.ForwardedRef<HTMLSpanElement>
+        ref?: ForwardedRef<HTMLSpanElement>
     ) => {
         const [isVisible, setIsVisible] = useState(false)
 

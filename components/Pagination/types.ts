@@ -1,8 +1,8 @@
 /*=============================================== Pagination types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType, ButtonHTMLAttributes } from "react"
 
-import { ColorsHoverTypes } from "../../types"
+import type { ColorsHoverTypes } from "../../types"
 
 enum justify {
     left,
@@ -13,8 +13,8 @@ enum justify {
 export type JustifyType = keyof typeof justify
 
 export interface PaginationContainerProps
-    extends React.HTMLAttributes<HTMLDivElement> {
-    as?: React.ElementType
+    extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
     justify?: JustifyType
 }
 
@@ -23,16 +23,16 @@ export interface PaginationProps extends PaginationContainerProps {
     pageLimit?: number
     color?: ColorsHoverTypes
     icons?: {
-        prev?: string
-        next?: string
+        prev?: string | JSX.Element
+        next?: string | JSX.Element
     }
     queries?: string[][]
 }
 
 interface PaginationButtonPropsBase
-    extends React.HTMLAttributes<HTMLButtonElement>,
-        React.ButtonHTMLAttributes<HTMLButtonElement> {
-    as?: React.ElementType
+    extends HTMLAttributes<HTMLButtonElement>,
+        ButtonHTMLAttributes<HTMLButtonElement> {
+    as?: ElementType
     color?: ColorsHoverTypes
 }
 
@@ -51,7 +51,7 @@ interface PaginationButtonBehaviour2 extends PaginationButtonPropsBase {
 interface PaginationButtonBehaviour3 extends PaginationButtonPropsBase {
     isActive?: never
     content: "prev" | "next"
-    icon?: string
+    icon?: string | JSX.Element
 }
 
 export type PaginationButtonProps =

@@ -1,13 +1,14 @@
 /*=============================================== SearchInput ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import { ButtonIcon } from "../../../"
+import { CloseIcon } from "../../../icons"
 import { RightContainer, IconComponent } from "../../InputComponents"
-import CloseIcon from "../../../icons/CloseIcon"
 
 import * as Styles from "../styles"
-import { SearchInputProps } from "../types"
+import type { SearchInputProps } from "../types"
 
 const SearchInput = forwardRef(
     (
@@ -24,7 +25,7 @@ const SearchInput = forwardRef(
             value,
             ...rest
         }: SearchInputProps,
-        ref?: React.ForwardedRef<HTMLInputElement>
+        ref?: ForwardedRef<HTMLInputElement>
     ) => {
         const buttonProps = {
             noPadding: true,
@@ -59,25 +60,15 @@ const SearchInput = forwardRef(
                 />
 
                 <RightContainer disabled={disabled} variant={variant}>
-                    {typeof value === "string" &&
-                        value.length > 0 &&
-                        (iconClear ? (
-                            <ButtonIcon
-                                icon={iconClear}
-                                variant="transparent"
-                                type="button"
-                                size={24}
-                                {...buttonProps}
-                            />
-                        ) : (
-                            <ButtonIcon
-                                libicon={<CloseIcon size={20} />}
-                                variant="transparent"
-                                type="button"
-                                size={24}
-                                {...buttonProps}
-                            />
-                        ))}
+                    {typeof value === "string" && value.length > 0 && (
+                        <ButtonIcon
+                            icon={iconClear || <CloseIcon size={20} />}
+                            variant="transparent"
+                            type="button"
+                            size={24}
+                            {...buttonProps}
+                        />
+                    )}
                 </RightContainer>
             </Styles.StyledInputContent>
         )

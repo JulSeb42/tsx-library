@@ -1,6 +1,6 @@
 /*=============================================== Countries & flags ===============================================*/
 
-import { InputPhoneCountryType } from "./component-props"
+import type { InputPhoneCountryType } from "../types"
 
 import AF from "./flags/af.svg"
 import AX from "./flags/ax.svg"

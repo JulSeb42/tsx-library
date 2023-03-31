@@ -1,12 +1,12 @@
 /*=============================================== Button component ===============================================*/
 
-import React, { forwardRef } from "react"
-import { Link } from "react-router-dom"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import { Loader, Icon } from "../../"
 
 import * as Styles from "./styles"
-import { ButtonProps } from "./types"
+import type { ButtonProps } from "./types"
 
 const Button = forwardRef(
     (
@@ -14,11 +14,9 @@ const Button = forwardRef(
             as,
             color = "primary",
             shadow,
-            to,
             disabled,
             type = "button",
             children,
-            libicon,
             icons,
             variant = "plain",
             noPadding,
@@ -31,16 +29,15 @@ const Button = forwardRef(
             gap = "xs",
             ...rest
         }: ButtonProps,
-        ref?: React.ForwardedRef<HTMLButtonElement>
+        ref?: ForwardedRef<HTMLButtonElement>
     ) => (
         <Styles.StyledButton
             ref={ref}
-            as={as ? as : to ? Link : href ? "a" : "button"}
-            to={to === "prev" ? -1 : to}
+            as={as ? as : href ? "a" : "button"}
             href={href}
-            target={(to || href) && blank && "_blank"}
-            rel={(to || href) && blank && "noreferrer noopener"}
-            type={to ? undefined : type}
+            target={href && blank && "_blank"}
+            rel={href && blank && "noreferrer noopener"}
+            type={href ? undefined : type}
             disabled={!!isLoading || disabled}
             $variant={variant}
             $color={color}
@@ -69,12 +66,10 @@ const Button = forwardRef(
                     <Loader variant={4} size={16} color="gray" />
                 ))}
 
-            {!isLoading && libicon?.left && libicon.left}
-
             {!isLoading &&
                 icons?.left &&
                 (typeof icons.left === "string" ? (
-                    <Icon src={icons.left} size={16} />
+                    <Icon src={icons.left} size={icons?.size || 16} />
                 ) : (
                     icons.left
                 ))}
@@ -83,12 +78,10 @@ const Button = forwardRef(
 
             {icons?.right &&
                 (typeof icons.right === "string" ? (
-                    <Icon src={icons.right} size={16} />
+                    <Icon src={icons.right} size={icons?.size || 16} />
                 ) : (
                     icons.right
                 ))}
-
-            {libicon?.right && libicon.right}
         </Styles.StyledButton>
     )
 )

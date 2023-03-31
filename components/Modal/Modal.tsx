@@ -1,12 +1,13 @@
 /*=============================================== Modal component ===============================================*/
 
-import React, { forwardRef, useEffect } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
-import CloseIcon from "../../icons/CloseIcon"
 import { useKeyPress } from "../../"
+import { CloseIcon } from "../../icons"
 
 import * as Styles from "./styles"
-import { ModalProps } from "./types"
+import type { ModalProps } from "./types"
 
 const Modal = forwardRef(
     (
@@ -21,19 +22,10 @@ const Modal = forwardRef(
             labelClose = "Close",
             colorClose = "white",
             variantClose = "transparent",
-            stopScroll,
             ...rest
         }: ModalProps,
-        ref?: React.ForwardedRef<HTMLDivElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => {
-        useEffect(() => {
-            if (stopScroll) {
-                isOpen
-                    ? document.body.classList.add("stop-scrolling")
-                    : document.body.classList.remove("stop-scrolling")
-            }
-        }, [isOpen, stopScroll])
-
         useKeyPress(() => {
             if (!disableEsc) {
                 setIsOpen(false)
@@ -51,30 +43,16 @@ const Modal = forwardRef(
             <Styles.StyledModal ref={ref} as={as} $isOpen={isOpen} {...rest}>
                 {close &&
                     (variantClose === "transparent" ? (
-                        iconClose ? (
-                            <Styles.CloseButton
-                                icon={iconClose}
-                                variant="transparent"
-                                hoverBackground
-                                {...buttonProps}
-                            />
-                        ) : (
-                            <Styles.CloseButton
-                                libicon={<CloseIcon size={48 * 0.7} />}
-                                variant="transparent"
-                                hoverBackground
-                                {...buttonProps}
-                            />
-                        )
-                    ) : iconClose ? (
                         <Styles.CloseButton
-                            icon={iconClose}
-                            variant="plain"
+                            icon={iconClose || <CloseIcon size={48 * 0.7} />}
+                            variant="transparent"
+                            hoverBackground
                             {...buttonProps}
                         />
                     ) : (
                         <Styles.CloseButton
-                            libicon={<CloseIcon size={48 * 0.7} />}
+                            icon={iconClose || <CloseIcon size={48 * 0.7} />}
+                            variant="plain"
                             {...buttonProps}
                         />
                     ))}

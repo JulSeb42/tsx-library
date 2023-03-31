@@ -1,11 +1,12 @@
 /*=============================================== Form component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import { Flexbox, Button } from "../../"
 
 import * as Styles from "./styles"
-import { FormProps } from "./types"
+import type { FormProps } from "./types"
 
 const Form = forwardRef(
     (
@@ -17,11 +18,12 @@ const Form = forwardRef(
             gap = "m",
             buttonSecondary,
             children,
+            maxWidth,
             ...rest
         }: FormProps,
-        ref?: React.ForwardedRef<HTMLFormElement>
+        ref?: ForwardedRef<HTMLFormElement>
     ) => (
-        <Styles.StyledForm ref={ref} $gap={gap} {...rest}>
+        <Styles.StyledForm ref={ref} $gap={gap} $maxWidth={maxWidth} {...rest}>
             {children}
 
             {(buttonPrimary || buttonSecondary) && (
@@ -51,9 +53,9 @@ const Form = forwardRef(
                     )}
 
                     {buttonSecondary &&
-                        (buttonSecondary.to ? (
+                        (buttonSecondary.href ? (
                             <Button
-                                to={buttonSecondary.to}
+                                href={buttonSecondary.href}
                                 variant="text"
                                 color={accentColor}
                                 icons={{

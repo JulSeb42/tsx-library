@@ -1,11 +1,11 @@
 /*=============================================== Image types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import { RadiusesTypes, ObjectFitTypes } from "../../types"
+import type { RadiusesTypes, ObjectFitTypes } from "../../types"
 
-export interface ImageProps extends React.HTMLAttributes<HTMLImageElement> {
-    as?: React.ElementType
+export interface ImageProps extends HTMLAttributes<HTMLImageElement> {
+    as?: ElementType
     src: string
     alt: string
     width?: number | string
@@ -17,6 +17,6 @@ export interface ImageProps extends React.HTMLAttributes<HTMLImageElement> {
         | {
               text: string
               background?: "black" | "white"
-              asContainer?: React.ElementType
+              asContainer?: ElementType
           }
 }

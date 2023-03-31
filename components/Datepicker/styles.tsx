@@ -12,12 +12,16 @@ import {
     Mixins,
 } from "../../"
 import { InputBaseMixin } from "../InputComponents"
-import { ColorsHoverTypes, ShadowsTypes, ValidationTypes } from "../../types"
-import {
+import type {
+    ColorsHoverTypes,
+    ShadowsTypes,
+    ValidationTypes,
+} from "../../types"
+import type {
     InputBackgroundTypes,
     InputVariantTypes,
 } from "../InputComponents/types"
-import { ListDirectionTypes } from "../ListInputs/types"
+import type { ListDirectionTypes } from "../ListInputs/types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 

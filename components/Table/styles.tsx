@@ -4,8 +4,12 @@ import styled, { css } from "styled-components"
 
 import { Transitions, Breakpoints, Spacers, FontSizes, Mixins } from "../../"
 import { FontCommon } from "../Text/styles"
-import { TextAlignTypes, ColorsHoverTypes, AllColorsTypes } from "../../types"
-import { TableStyleTypes, TableVerticalAlignTypes } from "./types"
+import type {
+    TextAlignTypes,
+    ColorsHoverTypes,
+    AllColorsTypes,
+} from "../../types"
+import type { TableStyleTypes, TableVerticalAlignTypes } from "./types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 

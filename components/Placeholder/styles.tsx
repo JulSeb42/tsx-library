@@ -3,7 +3,7 @@
 import styled from "styled-components"
 
 import { Mixins, stringifyPx } from "../../"
-import {
+import type {
     AllColorsTypes,
     OverlayTypes,
     ShadowsTypes,

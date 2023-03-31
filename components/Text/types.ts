@@ -1,8 +1,8 @@
 /*=============================================== Text types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import {
+import type {
     TextAlignTypes,
     ColorsHoverTypes,
     AllColorsTypes,
@@ -34,8 +34,8 @@ export type TagTypes = keyof typeof tags
 
 /*==================== Component Types ====================*/
 
-interface BaseTextProps extends React.HTMLAttributes<HTMLElement> {
-    as?: React.ElementType
+interface BaseTextProps extends HTMLAttributes<HTMLElement> {
+    as?: ElementType
     textAlign?: TextAlignTypes
     color?: AllColorsTypes
     linkColor?: ColorsHoverTypes

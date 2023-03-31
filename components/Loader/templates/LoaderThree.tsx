@@ -1,9 +1,10 @@
 /*=============================================== LoaderThree ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import * as Styles from "../styles"
-import { LoaderProps } from "../types"
+import type { LoaderProps } from "../types"
 
 const LoaderThree = forwardRef(
     (
@@ -15,7 +16,7 @@ const LoaderThree = forwardRef(
             speed = 1200,
             ...rest
         }: LoaderProps,
-        ref?: React.ForwardedRef<HTMLSpanElement>
+        ref?: ForwardedRef<HTMLSpanElement>
     ) => (
         <Styles.StyledLoaderThree
             ref={ref}

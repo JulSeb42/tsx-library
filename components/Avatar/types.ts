@@ -1,11 +1,11 @@
 /*=============================================== Avatar types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import { AllColorsTypes, RadiusesTypes } from "../../types"
+import type { AllColorsTypes, RadiusesTypes } from "../../types"
 
-interface AvatarPropsBase extends React.HTMLAttributes<HTMLSpanElement> {
-    as?: React.ElementType
+interface AvatarPropsBase extends HTMLAttributes<HTMLSpanElement> {
+    as?: ElementType
     size?: number
     border?:
         | boolean

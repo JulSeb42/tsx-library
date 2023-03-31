@@ -1,11 +1,9 @@
 /*=============================================== InputContainer ===============================================*/
 
-import React from "react"
-
 import { Text, Icon } from "../../"
 
 import * as Styles from "./styles"
-import { InputContainerProps } from "./types"
+import type { InputContainerProps } from "./types"
 
 const InputContainer = ({
     id,
@@ -53,11 +51,15 @@ const InputContainer = ({
                 (typeof helperBottom === "object" && helperBottom.icon ? (
                     <Styles.HelperBottomContainer>
                         <Styles.IconContainer>
-                            <Icon
-                                src={helperBottom.icon}
-                                size={14}
-                                color={helperBottom.iconColor || "primary"}
-                            />
+                            {typeof helperBottom.icon === "string" ? (
+                                <Icon
+                                    src={helperBottom.icon}
+                                    size={helperBottom.iconSize || 14}
+                                    color={helperBottom.iconColor || "primary"}
+                                />
+                            ) : (
+                                helperBottom.icon
+                            )}
                         </Styles.IconContainer>
 
                         {helperBottomFn()}

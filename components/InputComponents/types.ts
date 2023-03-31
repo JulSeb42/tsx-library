@@ -1,8 +1,8 @@
 /*=============================================== Input components types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes } from "react"
 
-import { ColorsHoverTypes, ValidationTypes } from "../../types"
+import type { ColorsHoverTypes, ValidationTypes } from "../../types"
 
 enum inputVariants {
     rounded,
@@ -18,16 +18,14 @@ enum inputBackgrounds {
 
 export type InputBackgroundTypes = keyof typeof inputBackgrounds
 
-export interface RightContainerProps
-    extends React.HTMLAttributes<HTMLSpanElement> {
+export interface RightContainerProps extends HTMLAttributes<HTMLSpanElement> {
     disabled?: boolean
     variant?: InputVariantTypes
 }
 
-export interface IconComponentProps
-    extends React.HTMLAttributes<HTMLSpanElement> {
+export interface IconComponentProps extends HTMLAttributes<HTMLSpanElement> {
     disabled?: boolean
-    icon: string
+    icon: string | JSX.Element
     accentColor?: ColorsHoverTypes
     validation?: "passed" | "not-passed"
     size?: number

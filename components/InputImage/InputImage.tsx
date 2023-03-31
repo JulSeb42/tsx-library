@@ -1,14 +1,14 @@
 /*=============================================== InputImage component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import { Icon } from "../../"
+import { ImageIcon, EditIcon } from "../../icons"
 import { InputContainer } from "../InputContainer"
-import ImageIcon from "../../icons/ImageIcon"
-import EditIcon from "../../icons/EditIcon"
 
 import * as Styles from "./styles"
-import { InputImageProps } from "./types"
+import type { InputImageProps } from "./types"
 
 const InputImage = forwardRef(
     (
@@ -28,7 +28,7 @@ const InputImage = forwardRef(
             id,
             ...rest
         }: InputImageProps,
-        ref?: React.ForwardedRef<HTMLInputElement>
+        ref?: ForwardedRef<HTMLInputElement>
     ) => {
         const iconColor =
             validation === "not-passed"
@@ -40,7 +40,15 @@ const InputImage = forwardRef(
         const emptyContainer = () => (
             <Styles.StyledEmptyContainer $validation={validation}>
                 {icons?.empty ? (
-                    <Icon src={icons.empty} color={iconColor} size={iconSize} />
+                    typeof icons?.empty === "string" ? (
+                        <Icon
+                            src={icons.empty}
+                            color={iconColor}
+                            size={iconSize}
+                        />
+                    ) : (
+                        icons?.empty
+                    )
                 ) : (
                     <ImageIcon size={iconSize} color={iconColor} />
                 )}
@@ -50,11 +58,15 @@ const InputImage = forwardRef(
         const hoverContainer = () => (
             <Styles.StyledHoverContainer>
                 {icons?.hover ? (
-                    <Icon
-                        src={icons.hover}
-                        size={iconSize - 8}
-                        color={iconColor}
-                    />
+                    typeof icons?.hover === "string" ? (
+                        <Icon
+                            src={icons.hover}
+                            size={iconSize - 8}
+                            color={iconColor}
+                        />
+                    ) : (
+                        icons?.hover
+                    )
                 ) : (
                     <EditIcon size={iconSize - 8} color={iconColor} />
                 )}

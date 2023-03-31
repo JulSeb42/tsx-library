@@ -1,14 +1,14 @@
 /*=============================================== ListInputs types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes } from "react"
 
-import {
+import type {
     ColorsHoverTypes,
     ValidationTypes,
     ShadowsTypes,
     AllColorsTypes,
 } from "../../types"
-import { InputBackgroundTypes } from "../InputComponents/types"
+import type { InputBackgroundTypes } from "../InputComponents/types"
 
 export type VariantTypes = "bordered" | "shadow"
 export type ListDirectionTypes = "up" | "down"
@@ -20,7 +20,7 @@ interface InputListCommon {
 }
 
 interface ListInputsPropsBase
-    extends React.HTMLAttributes<HTMLDivElement>,
+    extends HTMLAttributes<HTMLDivElement>,
         InputListCommon {
     isOpen: boolean
     direction?: ListDirectionTypes
@@ -41,16 +41,16 @@ export type ListInputsProps =
     | ListInputsPropsVariants2
 
 export interface ListInputsItemProps
-    extends React.HTMLAttributes<HTMLSpanElement>,
+    extends HTMLAttributes<HTMLSpanElement>,
         InputListCommon {
     isActive?: boolean
     readOnly?: boolean
 }
 
 export interface ListInputsChevronProps
-    extends React.HTMLAttributes<HTMLOrSVGElement> {
+    extends HTMLAttributes<HTMLOrSVGElement> {
     isOpen?: boolean
     color?: AllColorsTypes
-    icon?: string
+    icon?: string | JSX.Element
     hasAnimation?: boolean
 }

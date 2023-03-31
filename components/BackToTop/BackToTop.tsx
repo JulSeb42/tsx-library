@@ -1,12 +1,13 @@
 /*=============================================== BackToTop component ===============================================*/
 
 import React, { forwardRef, useState, useEffect } from "react"
+import type { ForwardedRef } from "react"
 
 import { ButtonIcon } from "../../"
-import ArrowUpIcon from "../../icons/ArrowUpIcon"
+import { ArrowUpIcon } from "../../icons"
 
 import * as Styles from "./styles"
-import { BackToTopProps } from "./types"
+import type { BackToTopProps } from "./types"
 
 const BackToTop = forwardRef(
     (
@@ -23,7 +24,7 @@ const BackToTop = forwardRef(
             position,
             ...rest
         }: BackToTopProps,
-        ref?: React.ForwardedRef<HTMLButtonElement>
+        ref?: ForwardedRef<HTMLButtonElement>
     ) => {
         const [isVisible, setIsVisible] = useState(false)
         const [isTextVisible, setIsTextVisible] = useState(false)
@@ -75,14 +76,10 @@ const BackToTop = forwardRef(
                 $zIndex={position?.zIndex || 999}
                 {...rest}
             >
-                {icon ? (
-                    <ButtonIcon icon={icon} {...propsButton} />
-                ) : (
-                    <ButtonIcon
-                        libicon={<ArrowUpIcon size={size * 0.7} {...rest} />}
-                        {...propsButton}
-                    />
-                )}
+                <ButtonIcon
+                    icon={icon || <ArrowUpIcon size={size * 0.7} {...rest} />}
+                    {...propsButton}
+                />
 
                 {text && (
                     <Styles.ButtonText

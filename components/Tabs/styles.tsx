@@ -3,15 +3,20 @@
 import styled, { css } from "styled-components"
 
 import { Mixins, Radiuses, Spacers, Breakpoints, Transitions } from "../../"
-import { ColorsHoverTypes, AllColorsTypes, SpacersTypes } from "../../types"
-import { TabsJustifyTypes, TabsVariantsType } from "./types"
+import type {
+    ColorsHoverTypes,
+    AllColorsTypes,
+    SpacersTypes,
+} from "../../types"
+import type { TabsJustifyTypes, TabsVariantsType } from "./types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledTabs = styled.div<{ $gap?: SpacersTypes }>`
     ${({ $gap }) =>
-        Mixins.Grid({
+        Mixins.Flexbox({
             $gap,
+            $flexDirection: "column",
         })};
 `
 
@@ -21,6 +26,7 @@ const ButtonsContainer = styled.div<{
     $col: number
     $separatorColor?: AllColorsTypes
     $backgroundColor?: AllColorsTypes
+    $gap?: SpacersTypes
 }>`
     position: relative;
 
@@ -48,12 +54,12 @@ const ButtonsContainer = styled.div<{
                   padding: ${Spacers.XS};
               `}
 
-    ${({ $justify, $col, $variant }) =>
+    ${({ $justify, $col, $variant, $gap }) =>
         $justify === "start"
             ? css`
                   ${Mixins.Flexbox({
                       $alignItems: "center",
-                      $gap: "xs",
+                      $gap,
                       $flexWrap: "wrap",
                       $inline: true,
                   })};
@@ -66,7 +72,7 @@ const ButtonsContainer = styled.div<{
             : css`
                   ${Mixins.Grid({
                       $col: $col,
-                      $gap: "xs",
+                      $gap,
                   })};
 
                   @media ${Breakpoints.Mobile} {

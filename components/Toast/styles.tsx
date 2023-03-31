@@ -11,7 +11,7 @@ import {
     stringifyPx,
     Text,
 } from "../../"
-import {
+import type {
     PositionsTypes,
     ShadowsTypes,
     SpacersTypes,
@@ -40,8 +40,10 @@ const StyledToast = styled.div<{
     width: 100%;
     max-width: ${({ $maxWidth }) => $maxWidth && stringifyPx($maxWidth)};
     background-color: ${({ theme }) => theme.Background};
-    display: ${({ $isClosed }) => ($isClosed ? "none" : "grid")};
+    display: ${({ $isClosed }) => ($isClosed ? "none" : "flex")};
     gap: ${Spacers.XXS};
+    flex-direction: column;
+    align-items: stretch;
     ${({ $shadow }) =>
         Mixins.Shadow({
             $shadow: $shadow,
@@ -73,7 +75,7 @@ export const Title = styled(Text)``
 const TitleContainer = styled.div<{ $gap?: SpacersTypes }>`
     ${({ $gap }) =>
         Mixins.Flexbox({
-            $alignItems: "center",
+            $alignItems: "flex-start",
             $justifyContent: "flex-start",
             $gap,
         })};
@@ -83,9 +85,20 @@ const TitleContainer = styled.div<{ $gap?: SpacersTypes }>`
     }
 `
 
+export const IconContainer = styled.span<{ $height: number }>`
+    height: ${({ $height }) => $height}px;
+    ${Mixins.Flexbox({
+        $alignItems: "center",
+        $justifyContent: "center",
+        $inline: true,
+    })};
+`
+
 const Content = styled.div`
-    ${Mixins.Grid({
+    ${Mixins.Flexbox({
         $gap: "xs",
+        $flexDirection: "column",
+        $alignItems: "stretch",
     })};
 `
 

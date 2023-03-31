@@ -3,21 +3,19 @@
 import styled from "styled-components"
 
 import { Mixins, Tag, FontWeights } from "../../"
-import { SpacersTypes } from "../../types"
+import type { SpacersTypes } from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledTruncate = styled.div<{
     $gap?: SpacersTypes
-    $showFullList?: boolean
 }>`
-    ${({ $gap, $showFullList }) =>
+    ${({ $gap }) =>
         Mixins.Flexbox({
             $flexDirection: "row",
             $alignItems: "center",
             $justifyContent: "flex-start",
             $gap: $gap,
-            $flexWrap: $showFullList ? "wrap" : "nowrap",
         })};
     overflow: hidden;
 `

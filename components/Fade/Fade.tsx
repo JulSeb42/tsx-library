@@ -1,9 +1,9 @@
 /*=============================================== Fade component ===============================================*/
 
-import React, { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef } from "react"
 
 import * as Styles from "./styles"
-import { FadeProps } from "./types"
+import type { FadeProps } from "./types"
 
 const Fade = ({ as, children, ...rest }: FadeProps) => {
     const [isVisible, setVisible] = useState(true)
@@ -13,7 +13,7 @@ const Fade = ({ as, children, ...rest }: FadeProps) => {
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => setVisible(entry.isIntersecting))
         })
-        
+
         observer.observe(ref.current)
     }, [])
 

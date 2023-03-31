@@ -1,8 +1,8 @@
 /*=============================================== IconMenu types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import {
+import type {
     ShadowsTypes,
     ColorsHoverTypes,
     ObjectPositionTypes,
@@ -18,8 +18,8 @@ enum directions {
 
 export type IconMenuDirectionTypes = keyof typeof directions
 
-export interface IconMenuProps extends React.HTMLAttributes<HTMLDivElement> {
-    as?: React.ElementType
+export interface IconMenuProps extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
     items: IconMenuItemProps[]
     icon?:
         | "plus"

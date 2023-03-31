@@ -14,14 +14,17 @@ import {
     FontWeights,
     stringifyPx,
 } from "../../"
-import {
+import type {
     SpacersTypes,
     PositionsTypes,
     ColorsHoverTypes,
     ShadowsTypes,
     RadiusesTypes,
 } from "../../types"
-import { ButtonIconVariantTypes, ButtonIconLabelDirectionsTypes } from "./types"
+import type {
+    ButtonIconVariantTypes,
+    ButtonIconLabelDirectionsTypes,
+} from "./types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
@@ -55,7 +58,11 @@ const StyledButtonIcon = styled.button<{
     padding: 0;
     border: none;
     background-color: ${({ $variant, theme }) =>
-        $variant === "plain" ? theme.ColorsHoverDefault : "transparent"};
+        $variant === "plain"
+            ? theme.ColorsHoverDefault
+            : $variant === "ghost"
+            ? theme.ColorsGhostDefault
+            : "transparent"};
     color: ${({ $variant, $color, theme }) =>
         $variant === "plain"
             ? $color === "white"
@@ -63,6 +70,12 @@ const StyledButtonIcon = styled.button<{
                 : $color === "background"
                 ? theme.Font
                 : theme.Background
+            : $variant === "ghost"
+            ? $color === "white" || $color === "background"
+                ? theme.Primary500
+                : $color === "font"
+                ? theme.Background
+                : theme.ColorsHoverDefault
             : theme.ColorsHoverDefault};
     ${({ $shadow, $shadowDefault, $shadowHover, $shadowActive }) =>
         Mixins.Shadow({
@@ -76,19 +89,23 @@ const StyledButtonIcon = styled.button<{
 
     @media ${Breakpoints.Hover} {
         &:not(:disabled):hover {
-            background-color: ${({ $variant, $hoverBackground, theme }) =>
+            background-color: ${({ $variant, theme, $hoverBackground }) =>
                 $variant === "plain"
                     ? theme.ColorsHoverHover
-                    : $variant === "transparent" && $hoverBackground
-                    ? theme.Gray50
-                    : ""};
+                    : $variant === "ghost"
+                    ? theme.ColorsGhostHover
+                    : $variant === "transparent" &&
+                      $hoverBackground &&
+                      theme.Gray50};
             color: ${({ $variant, theme }) =>
                 $variant === "transparent" && theme.ColorsHoverHover};
         }
 
         &:not(:disabled):active {
             background-color: ${({ $variant, theme }) =>
-                $variant === "plain" && theme.ColorsHoverActive};
+                $variant === "plain"
+                    ? theme.ColorsHoverActive
+                    : $variant === "ghost" && theme.ColorsGhostActive};
             color: ${({ $variant, theme }) =>
                 $variant === "transparent" && theme.ColorsHoverActive};
         }
@@ -108,7 +125,11 @@ const StyledButtonIcon = styled.button<{
 
     &:disabled {
         background-color: ${({ $variant, theme }) =>
-            $variant === "plain" && theme.Gray100};
+            $variant === "plain"
+                ? theme.Gray100
+                : $variant === "ghost"
+                ? theme.Gray50
+                : ""};
         color: ${({ theme }) => theme.Gray500};
     }
 

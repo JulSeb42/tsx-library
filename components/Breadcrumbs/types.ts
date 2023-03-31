@@ -1,8 +1,8 @@
 /*=============================================== Breadcrumbs types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import {
+import type {
     BreadcrumbsItemProps,
     AllColorsTypes,
     ColorsHoverTypes,
@@ -15,9 +15,8 @@ enum separators {
 
 export type SeparatorTypes = keyof typeof separators
 
-interface BreadcrumbsPropsBase
-    extends React.HTMLAttributes<HTMLParagraphElement> {
-    as?: React.ElementType
+interface BreadcrumbsPropsBase extends HTMLAttributes<HTMLParagraphElement> {
+    as?: ElementType
     items: BreadcrumbsItemProps[]
     color?: AllColorsTypes
     linkColor?: ColorsHoverTypes

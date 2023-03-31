@@ -1,11 +1,11 @@
 /*=============================================== InputCheck types ===============================================*/
 
-import React from "react"
+import type { InputHTMLAttributes } from "react"
 
-import { ValidationTypes, ColorsHoverTypes } from "../../types"
+import type { ValidationTypes, ColorsHoverTypes } from "../../types"
 
 export interface InputCheckBaseProps
-    extends React.InputHTMLAttributes<HTMLInputElement> {
+    extends InputHTMLAttributes<HTMLInputElement> {
     id: string
     label: string | JSX.Element
     validation?: ValidationTypes

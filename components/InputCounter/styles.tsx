@@ -11,8 +11,8 @@ import {
     ThemeLight,
     Radiuses,
 } from "../../"
-import { ColorsHoverTypes } from "../../types"
-import {
+import type { ColorsHoverTypes } from "../../types"
+import type {
     InputBackgroundTypes,
     InputVariantTypes,
 } from "../InputComponents/types"

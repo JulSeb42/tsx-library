@@ -2,6 +2,8 @@
 
 export { ThemeProvider } from "styled-components"
 
+export * from "./utils/ts-utils"
+export * from "./utils/options-markdown"
 export * from "./Variables"
 export { default as Mixins } from "./Mixins"
 
@@ -9,9 +11,6 @@ export * from "./context/ThemeContext"
 
 export * from "./hooks"
 
-export { default as MarkdownCommands } from "./utils/markdown-commands"
-export { default as OptionsMarkdown } from "./utils/options-markdown"
-export * from "./utils/utils"
 export * from "./utils/getHighlightedText"
 
 export * from "./components/Text"
@@ -27,6 +26,7 @@ export * from "./components/Placeholder"
 export * from "./components/Skeleton"
 export * from "./components/Icon"
 export * from "./components/TextIcon"
+export * from "./components/Linkify"
 export * from "./components/Hr"
 export * from "./components/Image"
 export * from "./components/Video"
@@ -83,3 +83,4 @@ export * from "./components/IconMenu"
 export * from "./components/Footer"
 export * from "./components/Helmet"
 export * from "./components/SrOnly"
+export * from "./components/Key"

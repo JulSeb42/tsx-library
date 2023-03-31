@@ -1,9 +1,10 @@
 /*=============================================== Burger component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { BurgerProps } from "./types"
+import type { BurgerProps } from "./types"
 
 const Burger = forwardRef(
     (
@@ -18,7 +19,7 @@ const Burger = forwardRef(
             borderWidth = 2,
             ...rest
         }: BurgerProps,
-        ref?: React.ForwardedRef<HTMLButtonElement>
+        ref?: ForwardedRef<HTMLButtonElement>
     ) => (
         <Styles.StyledBurger
             ref={ref}

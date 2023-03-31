@@ -2,17 +2,15 @@
 
 /*==================== Imports ====================*/
 
-import React from "react"
-
 import { StyledIcon } from "./styles"
-import { IconProps } from "./type"
+import type { IconProps } from "./types"
 
 /*==================== Component ====================*/
 
-const CalendarIcon = ({
+export const CalendarIcon = ({
     size = 64,
     color = "currentColor",
-    ...props
+    ...rest
 }: IconProps) => (
     <StyledIcon
         width={size}
@@ -22,7 +20,7 @@ const CalendarIcon = ({
         xmlns="http://www.w3.org/2000/svg"
         $size={size}
         $color={color}
-        {...props}
+        {...rest}
     >
         <path d="M9 11H7V13H9V11Z" fill="currentColor" />
         <path d="M9 15H7V17H9V15Z" fill="currentColor" />
@@ -38,5 +36,3 @@ const CalendarIcon = ({
         />
     </StyledIcon>
 )
-
-export default CalendarIcon

@@ -3,8 +3,19 @@
 import styled, { keyframes, css } from "styled-components"
 
 import { Mixins, stringifyPx } from "../../"
-import { AllColorsTypes, RadiusesTypes } from "../../types"
-import { SkeletonAnimationTypes } from "./types"
+import type {
+    AllColorsTypes,
+    RadiusesTypes,
+    BorderStylesTypes,
+    FlexAlignContentTypes,
+    FlexAlignItemsTypes,
+    FlexDirectionTypes,
+    FlexJustifyContentTypes,
+    FlexJustifyItemsTypes,
+    FlexWrapTypes,
+    SpacersTypes,
+} from "../../types"
+import type { SkeletonAnimationTypes } from "./types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
@@ -74,6 +85,74 @@ const Shine = styled.span<{
         theme.AllColors({ $color: $color })};
     animation: ${ShineLoad} ${({ $speed }) => $speed}ms infinite;
     opacity: ${({ $opacity }) => $opacity};
+`
+
+export const Card = styled.div<{
+    $borderColor?: AllColorsTypes
+    $borderWidth?: number
+    $borderStyle?:
+        | BorderStylesTypes
+        | {
+              left?: BorderStylesTypes
+              top?: BorderStylesTypes
+              right?: BorderStylesTypes
+              bottom?: BorderStylesTypes
+          }
+    $borderRadius?: RadiusesTypes
+    $width?: string | number
+    $height?: string | number
+    $backgroundColor?: AllColorsTypes
+    $inline?: boolean
+    $flexDirection?: FlexDirectionTypes
+    $flexWrap?: FlexWrapTypes
+    $justifyContent?: FlexJustifyContentTypes
+    $alignItems?: FlexAlignItemsTypes
+    $justifyItems?: FlexJustifyItemsTypes
+    $alignContent?: FlexAlignContentTypes
+    $gap?: SpacersTypes
+    $columnGap?: SpacersTypes
+    $rowGap?: SpacersTypes
+}>`
+    background-color: ${({ theme, $backgroundColor }) =>
+        theme.AllColors({ $color: $backgroundColor })};
+    width: ${({ $width }) => $width && stringifyPx($width)};
+    height: ${({ $height }) => $height && stringifyPx($height)};
+    overflow: hidden;
+    position: relative;
+    ${Mixins.BorderRadius};
+    ${Mixins.Padding({})};
+    ${({ $borderWidth, $borderColor, $borderStyle, theme }) =>
+        ($borderWidth || $borderStyle || $borderColor) &&
+        css`
+            border-width: ${$borderWidth ? stringifyPx($borderWidth) : "1px"};
+            border-style: ${$borderStyle || "solid"};
+            border-color: ${theme.AllColors({
+                $color: $borderColor || "gray-200",
+            })};
+        `};
+    ${({
+        $inline,
+        $flexDirection,
+        $flexWrap,
+        $justifyContent,
+        $alignItems,
+        $justifyItems,
+        $alignContent,
+        $gap,
+        $columnGap,
+        $rowGap,
+    }) =>
+        ($inline ||
+            $flexDirection ||
+            $flexWrap ||
+            $justifyContent ||
+            $alignItems ||
+            $justifyItems ||
+            $alignContent ||
+            $gap ||
+            $columnGap ||
+            $rowGap) &&
+        Mixins.Flexbox};
 `
 
 setDefaultTheme([StyledSkeleton, Shine])

@@ -10,7 +10,7 @@ import {
     stringifyPx,
     Breakpoints,
 } from "../../"
-import { ValidationTypes, RadiusesTypes } from "../../types"
+import type { ValidationTypes, RadiusesTypes } from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 

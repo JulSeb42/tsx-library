@@ -3,7 +3,7 @@
 import styled from "styled-components"
 import SVG from "react-inlinesvg"
 
-import { AllColorsTypes } from "../../types"
+import type { AllColorsTypes } from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 

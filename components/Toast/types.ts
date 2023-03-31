@@ -1,8 +1,8 @@
 /*=============================================== Toast types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import {
+import type {
     ShadowsTypes,
     AllColorsTypes,
     ObjectPositionTypes,
@@ -26,13 +26,13 @@ enum tags {
 
 type PossibleToastTags = keyof typeof tags
 
-export interface ToastProps extends React.HTMLAttributes<HTMLDivElement> {
-    as?: React.ElementType
+export interface ToastProps extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
     title: string
     titleSize?: FontSizeTypes
     titleTag?: PossibleToastTags
     titleWeight?: FontWeightTypes
-    titleAs?: React.ElementType
+    titleAs?: ElementType
     maxWidth?: number | string
     shadow?: ShadowsTypes
     icon?:

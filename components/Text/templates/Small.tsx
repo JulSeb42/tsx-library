@@ -1,9 +1,10 @@
 /*=============================================== Small component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
-import { TextProps } from "../types"
 import { StyledSmall } from "../styles"
+import type { TextProps } from "../types"
 
 const Small = forwardRef(
     (
@@ -20,7 +21,7 @@ const Small = forwardRef(
             maxLines,
             ...rest
         }: TextProps,
-        ref?: React.ForwardedRef<HTMLParagraphElement>
+        ref?: ForwardedRef<HTMLParagraphElement>
     ) => (
         <StyledSmall
             ref={ref}

@@ -1,6 +1,7 @@
 /*=============================================== PasswordInput ===============================================*/
 
-import React, { forwardRef, useState } from "react"
+import { forwardRef, useState } from "react"
+import type { ForwardedRef } from "react"
 
 import { Button, ButtonIcon } from "../../../"
 import {
@@ -10,7 +11,7 @@ import {
 } from "../../InputComponents"
 
 import * as Styles from "../styles"
-import { PasswordInputProps } from "../types"
+import type { PasswordInputProps } from "../types"
 
 const PasswordInput = forwardRef(
     (
@@ -25,7 +26,7 @@ const PasswordInput = forwardRef(
             disabled,
             ...rest
         }: PasswordInputProps,
-        ref?: React.ForwardedRef<HTMLInputElement>
+        ref?: ForwardedRef<HTMLInputElement>
     ) => {
         const [isVisible, setIsVisible] = useState(false)
 

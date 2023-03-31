@@ -3,8 +3,8 @@
 import styled from "styled-components"
 
 import { InputBaseMixin } from "../InputComponents"
-import { ColorsHoverTypes, ValidationTypes } from "../../types"
-import {
+import type { ColorsHoverTypes, ValidationTypes } from "../../types"
+import type {
     InputBackgroundTypes,
     InputVariantTypes,
 } from "../InputComponents/types"

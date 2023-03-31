@@ -1,13 +1,10 @@
 /*=============================================== Autocomplete component ===============================================*/
 
-import React, { forwardRef, useState } from "react"
+import { forwardRef, useState } from "react"
+import type { ForwardedRef, ChangeEvent } from "react"
 import Fuse from "fuse.js"
 
-import {
-    uuid,
-    slugify,
-    getHighlightedText,
-} from "../../"
+import { uuid, slugify, getHighlightedText } from "../../"
 import { InputContainer } from "../InputContainer"
 import {
     IconComponent,
@@ -17,7 +14,7 @@ import {
 import { ListInputs, ListItem } from "../ListInputs"
 
 import * as Styles from "./styles"
-import { AutocompleteProps } from "./types"
+import type { AutocompleteProps } from "./types"
 
 const Autocomplete = forwardRef(
     (
@@ -47,7 +44,7 @@ const Autocomplete = forwardRef(
             highlight = true,
             ...rest
         }: AutocompleteProps,
-        ref?: React.ForwardedRef<HTMLInputElement>
+        ref?: ForwardedRef<HTMLInputElement>
     ) => {
         const [isOpen, setIsOpen] = useState(false)
         const handleOpen = () => setIsOpen(true)
@@ -55,7 +52,7 @@ const Autocomplete = forwardRef(
 
         const [filteredValues, setFilteredValues] = useState("")
 
-        const handleFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const handleFilter = (e: ChangeEvent<HTMLInputElement>) => {
             setValue(e.target.value)
             setFilteredValues(e.target.value)
         }

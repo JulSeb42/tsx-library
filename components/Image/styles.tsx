@@ -3,11 +3,9 @@
 import styled from "styled-components"
 
 import { Text, Mixins, stringifyPx, Spacers, Overlays } from "../../"
-import { RadiusesTypes, ObjectFitTypes } from "../../types"
+import type { RadiusesTypes, ObjectFitTypes } from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
-
-// Import for lazyloading
 
 const Img = styled.img<{
     $width?: number | string

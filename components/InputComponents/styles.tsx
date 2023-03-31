@@ -11,12 +11,12 @@ import {
     Radiuses,
     Mixins,
 } from "../../"
-import {
+import type {
     ValidationTypes,
     ColorsHoverTypes,
     ColorsInputTypes,
 } from "../../types"
-import { InputBackgroundTypes, InputVariantTypes } from "./types"
+import type { InputBackgroundTypes, InputVariantTypes } from "./types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 

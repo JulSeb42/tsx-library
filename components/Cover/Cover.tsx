@@ -1,9 +1,10 @@
 /*=============================================== Cover component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { CoverProps } from "./types"
+import type { CoverProps } from "./types"
 
 const Cover = forwardRef(
     (
@@ -13,13 +14,25 @@ const Cover = forwardRef(
             alt,
             children,
             overlay,
-            align = "center",
             height = "100vh",
             gap = "s",
-            textColor,
+            textColor = "white",
+            flexDirection = "column",
+            flexWrap,
+            justifyContent = "center",
+            justifyItems,
+            alignContent,
+            alignItems = "center",
+            textAlign = "center",
+            columnGap,
+            rowGap,
+            padding = {
+                topBottom: "xxl",
+                leftRight: "5vw",
+            },
             ...rest
         }: CoverProps,
-        ref?: React.ForwardedRef<HTMLDivElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => (
         <Styles.StyledCover
             ref={ref}
@@ -38,8 +51,18 @@ const Cover = forwardRef(
                         ? "black"
                         : "white"
                 }
-                $align={align}
                 $gap={gap}
+                $alignContent={alignContent}
+                $alignItems={alignItems}
+                $columnGap={columnGap}
+                $flexDirection={flexDirection}
+                $flexWrap={flexWrap}
+                $height={height}
+                $justifyContent={justifyContent}
+                $justifyItems={justifyItems}
+                $padding={padding}
+                $rowGap={rowGap}
+                $textAlign={textAlign}
             >
                 {children}
             </Styles.Content>

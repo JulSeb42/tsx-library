@@ -1,6 +1,7 @@
 /*=============================================== Pagination component ===============================================*/
 
-import React, { forwardRef, useState } from "react"
+import { forwardRef, useState } from "react"
+import type { ForwardedRef } from "react"
 import {
     useNavigate,
     createSearchParams,
@@ -8,12 +9,11 @@ import {
 } from "react-router-dom"
 
 import { Icon } from "../../"
-import ChevronLeftIcon from "../../icons/ChevronLeftIcon"
-import ChevronRightIcon from "../../icons/ChevronRightIcon"
+import { ChevronLeftIcon, ChevronRightIcon } from "../../icons"
 import usePaginationNav from "../../utils/pagination-nav"
 
 import * as Styles from "./styles"
-import {
+import type {
     PaginationContainerProps,
     PaginationProps,
     PaginationButtonProps,
@@ -30,7 +30,7 @@ export const PaginationButton = forwardRef(
             disabled,
             ...rest
         }: PaginationButtonProps,
-        ref?: React.ForwardedRef<HTMLButtonElement>
+        ref?: ForwardedRef<HTMLButtonElement>
     ) => (
         <Styles.Button
             as={as}
@@ -44,7 +44,11 @@ export const PaginationButton = forwardRef(
             {content === "more" ? (
                 "..."
             ) : (content === "prev" && icon) || (content === "next" && icon) ? (
-                <Icon src={icon} size={16} />
+                typeof icon === "string" ? (
+                    <Icon src={icon} size={16} />
+                ) : (
+                    icon
+                )
             ) : content === "prev" ? (
                 <ChevronLeftIcon size={20} />
             ) : content === "next" ? (
@@ -59,7 +63,7 @@ export const PaginationButton = forwardRef(
 export const PaginationContainer = forwardRef(
     (
         { as, justify = "center", children, ...rest }: PaginationContainerProps,
-        ref?: React.ForwardedRef<HTMLDivElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => {
         return (
             <Styles.StyledPagination
@@ -86,7 +90,7 @@ export const Pagination = forwardRef(
             queries,
             ...rest
         }: PaginationProps,
-        ref?: React.ForwardedRef<HTMLDivElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => {
         const navigate = useNavigate()
         const [q] = useSearchParams()

@@ -1,9 +1,10 @@
 /*=============================================== Hr component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { HrProps } from "./types"
+import type { HrProps } from "./types"
 
 const Hr = forwardRef(
     (
@@ -16,7 +17,7 @@ const Hr = forwardRef(
             rounded,
             ...rest
         }: HrProps,
-        ref?: React.ForwardedRef<HTMLHRElement>
+        ref?: ForwardedRef<HTMLHRElement>
     ) => (
         <Styles.StyledHr
             ref={ref}

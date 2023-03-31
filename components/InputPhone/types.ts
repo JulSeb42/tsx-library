@@ -1,20 +1,19 @@
 /*=============================================== InputPhone types ===============================================*/
 
-import React from "react"
+import type { InputHTMLAttributes } from "react"
 
-import { ShadowsTypes, InputPhoneCountryType } from "../../types"
-import { InputBaseProps } from "../InputContainer/types"
-import {
+import type { ShadowsTypes, InputPhoneCountryType } from "../../types"
+import type { InputBaseProps } from "../InputContainer/types"
+import type {
     ValidationComponentProps,
     InputBackgroundTypes,
     InputVariantTypes,
-    
 } from "../InputComponents/types"
-import { CountryCodesTypes } from "../../utils/countries"
-import { ListDirectionTypes } from "../ListInputs/types"
+import type { CountryCodesTypes } from "../../utils/countries"
+import type { ListDirectionTypes } from "../ListInputs/types"
 
 interface InputPhonePropsBase
-    extends React.InputHTMLAttributes<HTMLInputElement>,
+    extends InputHTMLAttributes<HTMLInputElement>,
         InputBaseProps,
         ValidationComponentProps {
     backgroundColor?: InputBackgroundTypes

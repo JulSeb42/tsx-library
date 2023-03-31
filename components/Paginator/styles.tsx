@@ -11,9 +11,9 @@ import {
     Spacers,
     Mixins,
 } from "../../"
-import { ColorsHoverTypes } from "../../types"
-import { InputBackgroundTypes } from "../InputComponents/types"
-import { PaginatorJustifyType } from "./types"
+import type { ColorsHoverTypes } from "../../types"
+import type { InputBackgroundTypes } from "../InputComponents/types"
+import type { PaginatorJustifyType } from "./types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 

@@ -1,9 +1,10 @@
 /*=============================================== Textarea ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import * as Styles from "../styles"
-import { TextareaProps } from "../types"
+import type { TextareaProps } from "../types"
 
 const Textarea = forwardRef(
     (
@@ -14,7 +15,7 @@ const Textarea = forwardRef(
             backgroundColor,
             ...rest
         }: TextareaProps,
-        ref?: React.ForwardedRef<HTMLInputElement>
+        ref?: ForwardedRef<HTMLInputElement>
     ) => {
         const getValidationStatus =
             typeof validation === "object" ? validation?.status : validation

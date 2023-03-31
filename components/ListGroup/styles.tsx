@@ -12,7 +12,11 @@ import {
     Text,
     stringifyPx,
 } from "../../"
-import { AllColorsTypes, ColorsHoverTypes, RadiusesTypes } from "../../types"
+import type {
+    AllColorsTypes,
+    ColorsHoverTypes,
+    RadiusesTypes,
+} from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 

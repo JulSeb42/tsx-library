@@ -1,10 +1,10 @@
 /*=============================================== Section types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import { SpacersTypes } from "../../types"
+import type { SpacersTypes } from "../../types"
 
-export interface SectionProps extends React.HTMLAttributes<HTMLDivElement> {
-    as?: React.ElementType
+export interface SectionProps extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
     gap?: SpacersTypes
 }

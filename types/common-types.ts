@@ -141,7 +141,7 @@ enum fontSizes {
     small,
 }
 
-export type FontSizeTypes = keyof typeof fontSizes
+export type FontSizeTypes = keyof typeof fontSizes | number
 
 export type CustomFontSizeTypes = string | number
 
@@ -239,8 +239,8 @@ export type PaddingTypes =
           top?: SpacersTypes
           right?: SpacersTypes
           bottom?: SpacersTypes
-          leftRight?: SpacersTypes
-          topBottom?: SpacersTypes
+          leftRight?: SpacersTypes | string
+          topBottom?: SpacersTypes | string
       }
 
 /*==================== Custom position ====================*/

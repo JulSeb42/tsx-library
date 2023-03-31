@@ -1,12 +1,12 @@
 /*=============================================== ListGroup component ===============================================*/
 
-import React, { forwardRef } from "react"
-import { Link } from "react-router-dom"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import { Icon, Text, convertDateShort, Flexbox, uuid } from "../../"
 
 import * as Styles from "./styles"
-import { ListGroupProps, ListGroupItemProps } from "./types"
+import type { ListGroupProps, ListGroupItemProps } from "./types"
 
 const ListItem = ({
     item: {
@@ -16,7 +16,6 @@ const ListItem = ({
         badgeColor = "primary",
         badgeContentColor = "background",
         date,
-        to,
         onClick,
         disabled,
         ref,
@@ -29,17 +28,16 @@ const ListItem = ({
     ...rest
 }: ListGroupItemProps) => (
     <Styles.Item
-        as={to ? Link : onClick ? "button" : href ? "a" : "span"}
-        to={to}
+        as={onClick ? "button" : href ? "a" : "span"}
         href={href}
         onClick={onClick}
         disabled={disabled}
         $borderColor={borderColor}
-        $isHover={!!to || !!onClick}
+        $isHover={!!onClick || !!href}
         $color={color}
         ref={ref}
-        target={(href || to) && blank && "_blank"}
-        rel={(href || to) && blank && "noreferrer noopener"}
+        target={href && blank && "_blank"}
+        rel={href && blank && "noreferrer noopener"}
         {...rest}
     >
         <Flexbox justifyContent="space-between" gap="xxs">
@@ -62,6 +60,8 @@ const ListItem = ({
                     >
                         {typeof badge === "string" ? (
                             <Icon src={badge} size={16 * 0.7} />
+                        ) : typeof badge === "object" ? (
+                            badge
                         ) : typeof badge === "number" ? (
                             badge
                         ) : (
@@ -100,7 +100,7 @@ const ListGroup = forwardRef(
             borderRadius = "m",
             ...rest
         }: ListGroupProps,
-        ref?: React.ForwardedRef<HTMLDivElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => (
         <Styles.StyledListGroup
             ref={ref}

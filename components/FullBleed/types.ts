@@ -1,11 +1,11 @@
 /*=============================================== FullBleed types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import { PaddingTypes } from "../../types"
+import type { PaddingTypes } from "../../types"
 
-export interface FullBleedProps extends React.HTMLAttributes<HTMLDivElement> {
-    as?: React.ElementType
+export interface FullBleedProps extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
     height?: number | string
     aspectRatio?: string
     padding?: PaddingTypes

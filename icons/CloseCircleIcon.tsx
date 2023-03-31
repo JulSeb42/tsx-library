@@ -2,17 +2,15 @@
 
 /*==================== Imports ====================*/
 
-import React from "react"
-
 import { StyledIcon } from "./styles"
-import { IconProps } from "./type"
+import type { IconProps } from "./types"
 
 /*==================== Component ====================*/
 
-const CloseCircleIcon = ({
+export const CloseCircleIcon = ({
     size = 64,
     color = "currentColor",
-    ...props
+    ...rest
 }: IconProps) => (
     <StyledIcon
         width={size}
@@ -22,7 +20,7 @@ const CloseCircleIcon = ({
         xmlns="http://www.w3.org/2000/svg"
         $size={size}
         $color={color}
-        {...props}
+        {...rest}
     >
         <path
             d="M14.828 16.242L12 13.414L9.172 16.242L7.758 14.828L10.586 12L7.758 9.172L9.172 7.758L12 10.586L14.828 7.758L16.242 9.172L13.414 12L16.242 14.828L14.828 16.242Z"
@@ -36,5 +34,3 @@ const CloseCircleIcon = ({
         />
     </StyledIcon>
 )
-
-export default CloseCircleIcon

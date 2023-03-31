@@ -1,9 +1,8 @@
 /*=============================================== Icon types ===============================================*/
 
-import React from "react"
-import { Props as SVGProps } from "react-inlinesvg"
+import type { Props as SVGProps } from "react-inlinesvg"
 
-import { AllColorsTypes } from "../../types"
+import type { AllColorsTypes } from "../../types"
 
 export interface IconProps extends SVGProps {
     src: string

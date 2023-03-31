@@ -2,14 +2,14 @@
 
 import styled from "styled-components"
 
-import { AsidePositionTypes, AsideSizeTypes } from "./types"
+import type { AsidePositionTypes, AsideSizeTypes } from "./types"
 import { Mixins, Layouts, Breakpoints, stringifyPx } from "../../"
-import {
+import type {
     SpacersTypes,
-    GridAlignContentTypes,
-    GridAlignItemsTypes,
-    GridJustifyContentTypes,
-    GridJustifyItemsTypes,
+    FlexAlignContentTypes,
+    FlexAlignItemsTypes,
+    FlexJustifyContentTypes,
+    FlexJustifyItemsTypes,
 } from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
@@ -17,10 +17,10 @@ import setDefaultTheme from "../../utils/setDefaultTheme"
 const StyledAside = styled.aside<{
     $size?: AsideSizeTypes
     $position?: AsidePositionTypes
-    $justifyContent?: GridJustifyContentTypes
-    $justifyItems?: GridJustifyItemsTypes
-    $alignContent?: GridAlignContentTypes
-    $alignItems?: GridAlignItemsTypes
+    $justifyContent?: FlexJustifyContentTypes
+    $justifyItems?: FlexJustifyItemsTypes
+    $alignContent?: FlexAlignContentTypes
+    $alignItems?: FlexAlignItemsTypes
     $gap?: SpacersTypes
     $paddingTopBottom?: SpacersTypes
 }>`
@@ -38,11 +38,12 @@ const StyledAside = styled.aside<{
         $gap,
         $paddingTopBottom,
     }) =>
-        Mixins.Grid({
-            $alignContent: $alignContent || "start",
-            $justifyItems: $justifyItems || "start",
-            $justifyContent: $justifyContent || "stretch",
-            $alignItems: $alignItems || "start",
+        Mixins.Flexbox({
+            $flexDirection: "column",
+            $alignContent: $alignContent || "stretch",
+            $justifyItems: $justifyItems || "stretch",
+            $justifyContent: $justifyContent || "flex-start",
+            $alignItems: $alignItems || "stretch",
             $gap,
             $padding: {
                 topBottom: $paddingTopBottom,
@@ -83,7 +84,7 @@ const StyledAside = styled.aside<{
     & > select,
     & > textarea,
     & > form {
-        justify-self: stretch;
+        align-self: stretch;
     }
 `
 

@@ -1,11 +1,11 @@
 /*=============================================== Burger types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import { ColorsHoverTypes } from "../../types"
+import type { ColorsHoverTypes } from "../../types"
 
-export interface BurgerProps extends React.HTMLAttributes<HTMLButtonElement> {
-    as?: React.ElementType
+export interface BurgerProps extends HTMLAttributes<HTMLButtonElement> {
+    as?: ElementType
     isOpen: boolean
     color?: ColorsHoverTypes
     width?: number

@@ -1,10 +1,10 @@
 /*=============================================== Paginator types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType, ChangeEvent } from "react"
 
-import { ColorsHoverTypes } from "../../types"
-import { InputBackgroundTypes } from "../InputComponents/types"
-import { ButtonIconVariantTypes } from "../ButtonIcon/types"
+import type { ColorsHoverTypes } from "../../types"
+import type { InputBackgroundTypes } from "../InputComponents/types"
+import type { ButtonIconVariantTypes } from "../ButtonIcon/types"
 
 enum justify {
     left,
@@ -13,9 +13,8 @@ enum justify {
 
 export type PaginatorJustifyType = keyof typeof justify
 
-export interface PaginatorPropsBase
-    extends React.HTMLAttributes<HTMLDivElement> {
-    as?: React.ElementType
+export interface PaginatorPropsBase extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
     totalPages: number
     justify?: PaginatorJustifyType
     accentColor?: ColorsHoverTypes
@@ -45,7 +44,7 @@ export interface PaginatorPropsBase
 interface PaginatorBehaviour1 extends PaginatorPropsBase {
     handlePrevPage: () => void
     handleNextPage: () => void
-    handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void
+    handleInput: (e: ChangeEvent<HTMLInputElement>) => void
     page: number
 }
 

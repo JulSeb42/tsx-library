@@ -3,7 +3,7 @@
 import styled from "styled-components"
 
 import { Mixins } from "../../"
-import {
+import type {
     SpacersTypes,
     FlexAlignContentTypes,
     FlexAlignItemsTypes,

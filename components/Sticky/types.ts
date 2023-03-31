@@ -1,10 +1,10 @@
 /*=============================================== Sticky types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import { SpacersTypes } from "../../types"
+import type { SpacersTypes } from "../../types"
 
-export interface StickyProps extends React.HTMLAttributes<HTMLDivElement> {
-    as?: React.ElementType
+export interface StickyProps extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
     top?: SpacersTypes
 }

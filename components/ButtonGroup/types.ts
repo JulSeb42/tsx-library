@@ -1,6 +1,6 @@
 /*=============================================== ButtonGroup types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
 import type {
     ColorsHoverTypes,
@@ -12,12 +12,13 @@ import type { ButtonSizesTypes } from "../Button/types"
 enum buttonGroupVariants {
     plain,
     transparent,
+    ghost,
 }
 
 export type ButtonGroupVariantsTypes = keyof typeof buttonGroupVariants
 
-export interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {
-    as?: React.ElementType
+export interface ButtonGroupProps extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
     variant?: ButtonGroupVariantsTypes
     color?: ColorsHoverTypes
     buttons: ButtonProps[]

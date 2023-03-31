@@ -2,28 +2,27 @@
 
 import styled from "styled-components"
 
-import { FontSizes, Radiuses, Mixins } from "../../"
-import { AllColorsTypes } from "../../types"
-import { TagVariantsTypes } from "./types"
+import { FontSizes, Mixins } from "../../"
+import type {
+    AllColorsTypes,
+    SpacersTypes,
+    PaddingTypes,
+    RadiusesTypes,
+} from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledTag = styled.span<{
-    $variant?: TagVariantsTypes
     $color?: AllColorsTypes
     $textColor?: AllColorsTypes
     $hasIcon?: boolean
+    $gap?: SpacersTypes
+    $padding?: PaddingTypes
+    $borderRadius?: RadiusesTypes
 }>`
     font-size: ${FontSizes.Small};
-    ${({ $variant }) =>
-        Mixins.Padding({
-            $padding: {
-                topBottom: "xxs",
-                leftRight: $variant === "pill" ? "m" : "s",
-            },
-        })}
-    border-radius: ${({ $variant }) =>
-        $variant === "pill" ? Radiuses.Round : Radiuses.S};
+    ${Mixins.Padding};
+    ${Mixins.BorderRadius};
     background-color: ${({ theme }) => theme.AllColors};
     color: ${({ $color, $textColor, theme }) =>
         $textColor
@@ -34,12 +33,12 @@ const StyledTag = styled.span<{
             ? theme.White
             : theme.Background};
 
-    ${({ $hasIcon }) =>
+    ${({ $hasIcon, $gap }) =>
         $hasIcon &&
         Mixins.Flexbox({
             $alignItems: "center",
             $justifyContent: "center",
-            $gap: "xxs",
+            $gap,
             $inline: true,
         })};
 `

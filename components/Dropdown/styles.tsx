@@ -11,9 +11,9 @@ import {
     Mixins,
     stringifyPx,
 } from "../../"
-import { ColorsHoverTypes } from "../../types"
-import { DropdownJustifyTypes } from "./types"
-import { ListDirectionTypes } from "../ListInputs/types"
+import type { ColorsHoverTypes } from "../../types"
+import type { DropdownJustifyTypes } from "./types"
+import type { ListDirectionTypes } from "../ListInputs/types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
@@ -24,7 +24,10 @@ const StyledDropdown = styled.div<{
     $maxHeightOpen: number
 }>`
     position: absolute;
-    ${Mixins.Grid({})};
+    ${Mixins.Flexbox({
+        $flexDirection: "column",
+        $alignItems: "stretch",
+    })};
     min-width: 200px;
     background-color: ${({ theme }) => theme.Background};
     border-radius: ${Radiuses.M};

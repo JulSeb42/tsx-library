@@ -1,8 +1,8 @@
 /*=============================================== Grid types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import {
+import type {
     SpacersTypes,
     GridAlignContentTypes,
     GridAlignItemsTypes,
@@ -11,8 +11,8 @@ import {
     PaddingTypes,
 } from "../../types"
 
-export interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
-    as?: React.ElementType
+export interface GridProps extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
     inline?: boolean
     col?: number | string
     gap?: SpacersTypes

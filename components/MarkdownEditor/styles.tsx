@@ -1,96 +1,188 @@
 /*=============================================== MarkdownEditor styles ===============================================*/
 
 import styled from "styled-components"
-import MDEditor from "@uiw/react-md-editor"
+import Markdown from "markdown-to-jsx"
 
-import { Transitions, Radiuses, Spacers, FontFamilies } from "../../"
-import { ValidationTypes, ColorsHoverTypes } from "../../types"
+import {
+    FontFamilies,
+    FontSizes,
+    Flexbox,
+    Mixins,
+    Radiuses,
+    Spacers,
+    ThemeDark,
+    ThemeLight,
+    LineHeights,
+    Transitions,
+    Breakpoints,
+    ButtonIcon,
+} from "../../"
+import type { ColorsHoverTypes } from "../../types"
+import type { InputBackgroundTypes } from "../InputComponents/types"
+
+import { getFontSizeButton } from "./buttons"
+import type { titleNames } from "./buttons"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
-const StyledContainer = styled.div<{ $accentColor?: ColorsHoverTypes }>`
-    .wmde-markdown-var {
-        --color-accent-fg: ${({ $accentColor, theme }) =>
-            theme.AllColors({ $color: $accentColor })};
-    }
+const StyledMarkdownEditor = styled.div<{
+    $isFocused: boolean
+    $accentColor?: ColorsHoverTypes
+    $backgroundColor?: InputBackgroundTypes
+}>`
+    ${Mixins.Flexbox({
+        $flexDirection: "column",
+        $alignItems: "stretch",
+    })};
+    border: 1px solid
+        ${({ theme, $isFocused, $accentColor }) =>
+            $isFocused
+                ? theme.AllColors({ $color: $accentColor })
+                : theme.Gray200};
+    border-radius: ${Radiuses.M};
+    height: fit-content;
+    background-color: ${({ theme, $backgroundColor }) =>
+        $backgroundColor === "dark"
+            ? ThemeDark.Background
+            : $backgroundColor === "light"
+            ? ThemeLight.Background
+            : theme.Background};
+    color: ${({ theme, $backgroundColor }) =>
+        $backgroundColor === "dark"
+            ? ThemeDark.Font
+            : $backgroundColor === "light"
+            ? ThemeLight.Font
+            : theme.Font};
 `
 
-const Editor = styled(MDEditor)<{
-    $validation?: ValidationTypes
-    $isFocus?: boolean
-    $accentColor?: ColorsHoverTypes
-    $backgroundColor?: "light" | "dark"
+const ButtonsContainer = styled(Flexbox)`
+    background-color: ${({ theme }) => theme.Gray50};
+    border-radius: ${Radiuses.M} ${Radiuses.M} 0 0;
+`
+
+const TitlesDropdownContainer = styled.div`
+    position: relative;
+`
+
+export const TitlesDropdown = styled.div<{
+    $isOpen: boolean
+    $backgroundColor?: InputBackgroundTypes
 }>`
-    box-shadow: none;
-    border: 1px solid
-        ${({ $isFocus, $accentColor, $validation, theme }) =>
-            $isFocus
-                ? $validation === "not-passed"
-                    ? theme.Danger500
-                    : theme.AllColors({ $color: $accentColor })
-                : theme.Gray200};
-    transition: ${Transitions.Short};
-    border-radius: ${Radiuses.S};
+    position: absolute;
+    width: fit-content;
+    ${Mixins.Flexbox({
+        $flexDirection: "column",
+        $alignItems: "stretch",
+    })};
+    background-color: ${({ theme }) => theme.Gray50};
+    border-radius: 0 0 ${Radiuses.M} ${Radiuses.M};
     overflow: hidden;
-    background-color: ${({ theme }) => theme.Background};
+    top: calc(24px + ${Spacers.XS});
+    max-height: ${({ $isOpen }) => ($isOpen ? "180px" : 0)};
+    transition: ${Transitions.Bezier};
+`
 
-    .w-md-editor-toolbar {
-        background-color: ${({ theme }) => theme.Gray50};
-        border-bottom-color: ${({ theme }) => theme.Gray200};
-    }
+const TitleButton = styled.button<{
+    $tag: keyof typeof titleNames
+    $accentColor?: ColorsHoverTypes
+}>`
+    padding: 0;
+    border: none;
+    text-align: left;
+    min-width: 100px;
+    font-size: ${({ $tag }) => getFontSizeButton($tag)}px;
+    line-height: ${LineHeights.Regular};
+    background-color: transparent;
+    color: ${({ theme, $accentColor }) =>
+        theme.ColorsHoverDefault({ $color: $accentColor })};
+    padding: ${Spacers.XXS};
+    transition: ${Transitions.Short};
 
-    & * {
-        border-radius: 0;
-    }
+    @media ${Breakpoints.Hover} {
+        &:hover {
+            background-color: ${({ theme, $accentColor }) =>
+                theme.ColorsHoverHover({ $color: $accentColor })};
+            color: ${({ theme }) => theme.Background};
+        }
 
-    .w-md-editor-toolbar {
-        border-radius: 0;
-
-        li > button {
-            color: ${({ $accentColor, theme }) =>
-                theme.ColorsHoverDefault({ $color: $accentColor })};
-
-            &:hover {
-                color: ${({ $accentColor, theme }) =>
-                    theme.ColorsHoverHover({ $color: $accentColor })};
-            }
-
-            &:active {
-                color: ${({ $accentColor, theme }) =>
-                    theme.ColorsHoverActive({ $color: $accentColor })};
-            }
+        &:active {
+            background-color: ${({ theme, $accentColor }) =>
+                theme.ColorsHoverActive({ $color: $accentColor })};
         }
     }
-
-    .w-md-editor-content,
-    .w-md-editor-aree {
-        border-radius: 0 !important;
-        overflow-y: scroll;
-    }
-
-    .wmde-markdown-color pre {
-        display: none;
-    }
-
-    textarea {
-        background-color: ${({ $validation, theme }) =>
-            $validation === "not-passed" && theme.Danger50};
-        padding: ${Spacers.XS};
-        font-family: ${FontFamilies.Body} !important;
-        color: ${({ $backgroundColor, theme }) =>
-            $backgroundColor === "dark" ? theme.White : theme.Black};
-        -webkit-text-fill-color: ${({ $backgroundColor, theme }) =>
-            $backgroundColor === "dark" ? theme.White : theme.Black};
-        overflow-y: scroll;
-    }
-
-    .w-md-editor-bar {
-        margin-top: 0;
-        bottom: ${Spacers.XS};
-        right: ${Spacers.XS};
-    }
 `
 
-setDefaultTheme([StyledContainer, Editor])
+const IconButton = styled(ButtonIcon)<{ $isVisible?: boolean }>`
+    display: ${({ $isVisible }) => ($isVisible ? "flex" : "none")};
+`
 
-export { StyledContainer, Editor }
+const ContainerGrid = styled.div<{ $col?: 1 | 3 }>`
+    display: grid;
+    grid-template-columns: ${({ $col }) =>
+        $col === 3 ? "1fr 2px 1fr" : "1fr"};
+    gap: ${Spacers.XS};
+    flex-grow: 1;
+`
+
+const Separator = styled.span`
+    width: 2px;
+    height: 100%;
+    background-color: ${({ theme }) => theme.Gray200};
+`
+
+const Input = styled.textarea<{ $isVisible?: boolean; $height: number }>`
+    font-family: ${FontFamilies.Body};
+    font-size: ${FontSizes.Body};
+    width: 100%;
+    border: none;
+    resize: none;
+    border-radius: 0 0 0 ${Radiuses.M};
+    background-color: transparent;
+    outline: none;
+    height: 100%;
+    display: ${({ $isVisible }) => ($isVisible ? "block" : "none")};
+    padding: ${Spacers.XS};
+    height: ${({ $height }) => $height}px;
+    min-height: 250px;
+    color: currentColor;
+`
+
+const MarkdownContainer = styled(Markdown)<{
+    $isVisible?: boolean
+    $height: number
+}>`
+    height: ${({ $height }) => $height}px;
+    min-height: 250px;
+    border-radius: 0 0 ${Radiuses.M} 0;
+    display: ${({ $isVisible }) => ($isVisible ? "flex" : "none")};
+    flex-direction: column;
+    gap: ${Spacers.S};
+    align-items: stretch;
+    padding: ${Spacers.XS};
+    overflow-y: scroll;
+    color: currentColor;
+`
+
+setDefaultTheme([
+    StyledMarkdownEditor,
+    ButtonsContainer,
+    TitlesDropdownContainer,
+    TitleButton,
+    ContainerGrid,
+    Separator,
+    Input,
+    MarkdownContainer,
+    IconButton,
+])
+
+export {
+    StyledMarkdownEditor,
+    ButtonsContainer,
+    TitlesDropdownContainer,
+    TitleButton,
+    ContainerGrid,
+    Separator,
+    Input,
+    MarkdownContainer,
+    IconButton,
+}

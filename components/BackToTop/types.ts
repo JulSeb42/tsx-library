@@ -1,8 +1,8 @@
 /*=============================================== BackToTop types ===============================================*/
 
-import React from "react"
+import type { ElementType, ButtonHTMLAttributes } from "react"
 
-import {
+import type {
     ColorsHoverTypes,
     ShadowsTypes,
     ObjectPositionTypes,
@@ -10,9 +10,8 @@ import {
     BoxShadowProps,
 } from "../../types"
 
-interface BackToTopPropsBase
-    extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    as?: React.ElementType
+interface BackToTopPropsBase extends ButtonHTMLAttributes<HTMLButtonElement> {
+    as?: ElementType
     icon?: string
     color?: ColorsHoverTypes
     size?: number

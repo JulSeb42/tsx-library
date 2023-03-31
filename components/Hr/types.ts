@@ -1,11 +1,11 @@
 /*=============================================== Hr types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import { SpacersTypes, AllColorsTypes } from "../../types"
+import type { SpacersTypes, AllColorsTypes } from "../../types"
 
-export interface HrProps extends React.HTMLAttributes<HTMLHRElement> {
-    as?: React.ElementType
+export interface HrProps extends HTMLAttributes<HTMLHRElement> {
+    as?: ElementType
     width?: string | number
     height?: number
     color?: AllColorsTypes

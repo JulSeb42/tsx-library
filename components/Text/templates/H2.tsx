@@ -1,9 +1,10 @@
 /*=============================================== H2 component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
-import { TextProps } from "../types"
 import { StyledH2 } from "../styles"
+import type { TextProps } from "../types"
 
 const H2 = forwardRef(
     (
@@ -21,7 +22,7 @@ const H2 = forwardRef(
             maxLines,
             ...rest
         }: TextProps,
-        ref?: React.ForwardedRef<HTMLHeadingElement>
+        ref?: ForwardedRef<HTMLHeadingElement>
     ) => (
         <StyledH2
             ref={ref}

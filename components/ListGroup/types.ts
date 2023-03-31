@@ -1,25 +1,24 @@
 /*=============================================== ListGroup types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import {
+import type {
     ListGroupItemProps as ItemProps,
     AllColorsTypes,
     ColorsHoverTypes,
-    RadiusesTypes
+    RadiusesTypes,
 } from "../../types"
 
-export interface ListGroupItemProps
-    extends React.HTMLAttributes<HTMLSpanElement> {
-    as?: React.ElementType
+export interface ListGroupItemProps extends HTMLAttributes<HTMLSpanElement> {
+    as?: ElementType
     item: ItemProps
     number?: number
     borderColor?: AllColorsTypes
     color?: ColorsHoverTypes
 }
 
-export interface ListGroupProps extends React.HTMLAttributes<HTMLDivElement> {
-    as?: React.ElementType
+export interface ListGroupProps extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
     items: ItemProps[]
     showNumbers?: boolean
     maxHeight?: number | string

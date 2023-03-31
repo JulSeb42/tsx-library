@@ -3,7 +3,7 @@
 import styled, { css } from "styled-components"
 
 import { Mixins, FontWeights, Radiuses, Spacers } from "../../"
-import { AllColorsTypes, RadiusesTypes } from "../../types"
+import type { AllColorsTypes, RadiusesTypes } from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 

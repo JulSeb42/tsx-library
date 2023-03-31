@@ -1,11 +1,11 @@
 /*=============================================== InputContainer types ===============================================*/
 
-import React from "react"
+import type { ElementType } from "react"
 
-import { AllColorsTypes, ColorsHoverTypes } from "../../types"
+import type { AllColorsTypes, ColorsHoverTypes } from "../../types"
 
 export interface InputBaseProps {
-    as?: React.ElementType
+    as?: ElementType
     id?: string
     label?: string
     helper?: string
@@ -14,8 +14,9 @@ export interface InputBaseProps {
         | string
         | {
               text?: string | undefined
-              icon?: string
+              icon?: string | JSX.Element
               iconColor?: AllColorsTypes
+              iconSize?: number
               color?: AllColorsTypes
               style?: "default" | "italic"
           }

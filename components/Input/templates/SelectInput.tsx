@@ -1,13 +1,14 @@
 /*=============================================== SelectInput ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import { Icon } from "../../../"
+import { ChevronDownIcon } from "../../../icons"
 import { RightContainer } from "../../InputComponents"
-import ChevronDownIcon from "../../../icons/ChevronDownIcon"
 
 import * as Styles from "../styles"
-import { SelectInputProps } from "../types"
+import type { SelectInputProps } from "../types"
 
 const SelectInput = forwardRef(
     (
@@ -21,7 +22,7 @@ const SelectInput = forwardRef(
             disabled,
             ...rest
         }: SelectInputProps,
-        ref?: React.ForwardedRef<HTMLInputElement>
+        ref?: ForwardedRef<HTMLInputElement>
     ) => {
         const iconColor = disabled ? "gray" : accentColor
 
@@ -42,7 +43,15 @@ const SelectInput = forwardRef(
 
                 <RightContainer disabled={disabled} variant={variant}>
                     {iconSelect ? (
-                        <Icon src={iconSelect} size={16} color={iconColor} />
+                        typeof iconSelect === "string" ? (
+                            <Icon
+                                src={iconSelect}
+                                size={16}
+                                color={iconColor}
+                            />
+                        ) : (
+                            iconSelect
+                        )
                     ) : (
                         <ChevronDownIcon size={16} color={iconColor} />
                     )}

@@ -2,17 +2,15 @@
 
 /*==================== Imports ====================*/
 
-import React from "react"
-
 import { StyledIcon } from "./styles"
-import { IconProps } from "./type"
+import type { IconProps } from "./types"
 
 /*==================== Component ====================*/
 
-const ChevronRightIcon = ({
+export const ChevronRightIcon = ({
     size = 64,
     color = "currentColor",
-    ...props
+    ...rest
 }: IconProps) => (
     <StyledIcon
         width={size}
@@ -22,7 +20,7 @@ const ChevronRightIcon = ({
         xmlns="http://www.w3.org/2000/svg"
         $size={size}
         $color={color}
-        {...props}
+        {...rest}
     >
         <path
             d="M9.8535 17.707L15.5605 12L9.8535 6.293L8.4395 7.707L12.7325 12L8.4395 16.293L9.8535 17.707Z"
@@ -30,5 +28,3 @@ const ChevronRightIcon = ({
         />
     </StyledIcon>
 )
-
-export default ChevronRightIcon

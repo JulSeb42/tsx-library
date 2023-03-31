@@ -1,8 +1,13 @@
 /*=============================================== Skeleton types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import { AllColorsTypes, RadiusesTypes } from "../../types"
+import type {
+    AllColorsTypes,
+    RadiusesTypes,
+    BorderStylesTypes,
+} from "../../types"
+import type { FlexboxProps } from "../Flexbox/types"
 
 enum animations {
     pulse,
@@ -11,9 +16,8 @@ enum animations {
 
 export type SkeletonAnimationTypes = keyof typeof animations
 
-export interface SkeletonPropsBase
-    extends React.HTMLAttributes<HTMLSpanElement> {
-    as?: React.ElementType
+export interface SkeletonPropsBase extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
     width?: string | number
     height?: string | number
     aspectRatio?: string
@@ -41,10 +45,29 @@ interface SkeletonAnimation2 extends SkeletonPropsBase {
 
 export type SkeletonProps = SkeletonAnimation1 | SkeletonAnimation2
 
-export interface ShineProps extends React.HTMLAttributes<HTMLSpanElement> {
-    as?: React.ElementType
+export interface ShineProps extends HTMLAttributes<HTMLSpanElement> {
+    as?: ElementType
     speed?: number
     opacity?: number
     color?: AllColorsTypes
-    width?: string | number
+    width?: string | number
+}
+
+export interface SkeletonCardProps
+    extends HTMLAttributes<HTMLDivElement>,
+        FlexboxProps {
+    borderColor?: AllColorsTypes
+    borderWidth?: number
+    borderStyle?:
+        | BorderStylesTypes
+        | {
+              left?: BorderStylesTypes
+              top?: BorderStylesTypes
+              right?: BorderStylesTypes
+              bottom?: BorderStylesTypes
+          }
+    borderRadius?: RadiusesTypes
+    width?: string | number
+    height?: string | number
+    backgroundColor?: AllColorsTypes
 }

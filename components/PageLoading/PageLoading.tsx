@@ -1,11 +1,12 @@
 /*=============================================== PageLoading component ===============================================*/
 
-import React, { forwardRef, useEffect } from "react"
+import { forwardRef, useEffect } from "react"
+import type { ForwardedRef } from "react"
 
-import { Loader } from "../../"
+import { Loader, disableScroll } from "../../"
 
 import * as Styles from "./styles"
-import { PageLoadingProps } from "./types"
+import type { PageLoadingProps } from "./types"
 
 const PageLoading = forwardRef(
     (
@@ -15,24 +16,23 @@ const PageLoading = forwardRef(
             loaderColor,
             loaderVariant = 1,
             stopScrolling,
+            loaderSize = 64,
+            loaderWidth = 12,
             ...rest
         }: PageLoadingProps,
-        ref?: React.ForwardedRef<HTMLDivElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => {
         useEffect(() => {
-            if (stopScrolling) {
-                document.body.classList.add("stop-scrolling")
-            }
+            if (stopScrolling) disableScroll()
         }, [stopScrolling])
 
         const loaderProps = {
-            size: 64,
-            color:
-                backgroundColor === "white" && !loaderColor
-                    ? "primary"
-                    : loaderColor
-                    ? loaderColor
-                    : "background",
+            size: loaderSize,
+            color: loaderColor
+                ? loaderColor
+                : backgroundColor === "white"
+                ? "primary"
+                : "background",
         }
 
         return (
@@ -46,7 +46,7 @@ const PageLoading = forwardRef(
                     <Loader variant={loaderVariant} {...loaderProps} />
                 ) : (
                     <Loader
-                        borderWidth={12}
+                        borderWidth={loaderWidth}
                         variant={loaderVariant}
                         {...loaderProps}
                     />

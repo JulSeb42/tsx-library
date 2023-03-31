@@ -1,11 +1,11 @@
 /*=============================================== Masonry component ===============================================*/
 
-import React, { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { uuid } from "../../"
 
 import * as Styles from "./styles"
-import { MasonryProps } from "./types"
+import type { MasonryProps } from "./types"
 
 const useEventListener = (
     eventNames: any,

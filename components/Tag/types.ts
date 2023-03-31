@@ -1,23 +1,33 @@
 /*=============================================== Tag types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import { AllColorsTypes } from "../../types"
+import type {
+    AllColorsTypes,
+    SpacersTypes,
+    PaddingTypes,
+    RadiusesTypes,
+} from "../../types"
 
-enum tagVariants {
-    pill,
-    rounded,
-}
-
-export type TagVariantsTypes = keyof typeof tagVariants
-
-export interface TagProps extends React.HTMLAttributes<HTMLSpanElement> {
-    as?: React.ElementType
-    variant?: TagVariantsTypes
+interface TagPropsBase extends HTMLAttributes<HTMLSpanElement> {
+    as?: ElementType
     color?: AllColorsTypes
     textColor?: AllColorsTypes
-    icons?: {
-        left?: string
-        right?: string
-    }
+    padding?: PaddingTypes
+    borderRadius?: RadiusesTypes
 }
+
+interface TagPropsNoIcon extends TagPropsBase {
+    icons?: undefined
+    gap?: never
+}
+
+interface TagPropsWithIcon extends TagPropsBase {
+    icons?: {
+        left?: string | JSX.Element
+        right?: string | JSX.Element
+    }
+    gap?: SpacersTypes
+}
+
+export type TagProps = TagPropsNoIcon | TagPropsWithIcon

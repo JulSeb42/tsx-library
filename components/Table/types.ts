@@ -1,8 +1,12 @@
 /*=============================================== Table types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import { TextAlignTypes, ColorsHoverTypes, AllColorsTypes } from "../../types"
+import type {
+    TextAlignTypes,
+    ColorsHoverTypes,
+    AllColorsTypes,
+} from "../../types"
 
 enum tableStyle {
     bordered,
@@ -23,8 +27,8 @@ enum vAlign {
 
 export type TableVerticalAlignTypes = keyof typeof vAlign
 
-interface TablePropsBase extends React.HTMLAttributes<HTMLTableElement> {
-    as?: React.ElementType
+interface TablePropsBase extends HTMLAttributes<HTMLTableElement> {
+    as?: ElementType
     textAlign?: TextAlignTypes
     vAlign?: TableVerticalAlignTypes
     headerBackground?: ColorsHoverTypes

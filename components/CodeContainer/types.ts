@@ -1,11 +1,10 @@
 /*=============================================== CodeContainer types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes } from "react"
 
-import { AllColorsTypes, ColorsHoverTypes } from "../../types"
+import type { AllColorsTypes, ColorsHoverTypes } from "../../types"
 
-export interface CodeContainerProps
-    extends React.HTMLAttributes<HTMLDivElement> {
+export interface CodeContainerProps extends HTMLAttributes<HTMLDivElement> {
     language?:
         | "oneC (1c)"
         | "abnf"

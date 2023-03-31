@@ -1,11 +1,12 @@
 /*=============================================== ButtonGroup component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef, Fragment } from "react"
+import type { ForwardedRef } from "react"
 
 import { uuid } from "../../"
 
 import * as Styles from "./styles"
-import { ButtonGroupProps } from "./types"
+import type { ButtonGroupProps } from "./types"
 
 const ButtonGroup = forwardRef(
     (
@@ -18,7 +19,7 @@ const ButtonGroup = forwardRef(
             buttonsSize = "default",
             ...rest
         }: ButtonGroupProps,
-        ref?: React.ForwardedRef<HTMLDivElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => (
         <Styles.StyledButtonGroup
             ref={ref}
@@ -36,7 +37,6 @@ const ButtonGroup = forwardRef(
                         iconLeft,
                         iconRight,
                         onClick,
-                        to,
                         iconOnly,
                         blank,
                         "aria-label": ariaLabel,
@@ -44,7 +44,7 @@ const ButtonGroup = forwardRef(
                     },
                     i
                 ) => (
-                    <React.Fragment key={uuid()}>
+                    <Fragment key={uuid()}>
                         {iconOnly ? (
                             href ? (
                                 <Styles.StyledButtonIcon
@@ -56,19 +56,10 @@ const ButtonGroup = forwardRef(
                                     href={href}
                                     blank={blank}
                                 />
-                            ) : onClick ? (
+                            ) : (
                                 <Styles.StyledButtonIcon
                                     onClick={onClick}
                                     icon={iconOnly}
-                                    variant={variant}
-                                    color={color}
-                                    aria-label={ariaLabel}
-                                    iconSize={16}
-                                />
-                            ) : (
-                                <Styles.StyledButtonIcon
-                                    icon={iconOnly}
-                                    to={to}
                                     variant={variant}
                                     color={color}
                                     aria-label={ariaLabel}
@@ -78,7 +69,7 @@ const ButtonGroup = forwardRef(
                         ) : href ? (
                             <Styles.StyledButton
                                 variant={
-                                    variant === "transparent" ? "text" : "plain"
+                                    variant === "transparent" ? "text" : variant
                                 }
                                 color={color}
                                 aria-label={ariaLabel}
@@ -92,27 +83,11 @@ const ButtonGroup = forwardRef(
                             >
                                 {text}
                             </Styles.StyledButton>
-                        ) : onClick ? (
+                        ) : (
                             <Styles.StyledButton
                                 onClick={onClick}
                                 variant={
-                                    variant === "transparent" ? "text" : "plain"
-                                }
-                                color={color}
-                                aria-label={ariaLabel}
-                                icons={{
-                                    left: iconLeft,
-                                    right: iconRight,
-                                }}
-                                size={buttonsSize}
-                            >
-                                {text}
-                            </Styles.StyledButton>
-                        ) : (
-                            <Styles.StyledButton
-                                to={to}
-                                variant={
-                                    variant === "transparent" ? "text" : "plain"
+                                    variant === "transparent" ? "text" : variant
                                 }
                                 color={color}
                                 aria-label={ariaLabel}
@@ -130,7 +105,7 @@ const ButtonGroup = forwardRef(
                             i !== buttons.length - 1 && (
                                 <Styles.Separator $color={color} />
                             )}
-                    </React.Fragment>
+                    </Fragment>
                 )
             )}
         </Styles.StyledButtonGroup>

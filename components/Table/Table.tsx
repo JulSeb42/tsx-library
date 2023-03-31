@@ -1,11 +1,12 @@
 /*=============================================== Table component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import { uuid } from "../../"
 
 import * as Styles from "./styles"
-import { TableProps } from "./types"
+import type { TableProps } from "./types"
 
 const Table = forwardRef(
     (
@@ -29,7 +30,7 @@ const Table = forwardRef(
             headers,
             ...rest
         }: TableProps,
-        ref?: React.ForwardedRef<HTMLTableElement>
+        ref?: ForwardedRef<HTMLTableElement>
     ) => (
         <Styles.StyledTable
             ref={ref}

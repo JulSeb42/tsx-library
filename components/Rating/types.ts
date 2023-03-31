@@ -1,17 +1,16 @@
 /*=============================================== Rating types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes } from "react"
 
-import { ColorsHoverTypes } from "../../types"
-import { InputBaseProps } from "../InputContainer/types"
+import type { InputBaseProps } from "../InputContainer/types"
 
 interface RatingPropsBase
-    extends React.HTMLAttributes<HTMLDivElement>,
+    extends HTMLAttributes<HTMLDivElement>,
         InputBaseProps {
     rating: number
     icons?: {
-        default: string
-        checked: string
+        default: string | JSX.Element
+        checked: string | JSX.Element
     }
 }
 

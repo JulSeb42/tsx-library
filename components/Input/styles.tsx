@@ -10,9 +10,9 @@ import {
     FontSizes,
     LineHeights,
 } from "../../"
-import { ValidationTypes, ColorsHoverTypes } from "../../types"
-import { InputTypesType } from "./types"
-import {
+import type { ValidationTypes, ColorsHoverTypes } from "../../types"
+import type { InputTypesType } from "./types"
+import type {
     InputBackgroundTypes,
     InputVariantTypes,
 } from "../InputComponents/types"

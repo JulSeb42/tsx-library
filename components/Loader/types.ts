@@ -1,8 +1,8 @@
 /*=============================================== Loader types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import { AllColorsTypes } from "../../types"
+import type { AllColorsTypes } from "../../types"
 
 const variants = {
     1: 1,
@@ -13,8 +13,8 @@ const variants = {
 
 export type LoaderVariantTypes = keyof typeof variants
 
-interface LoaderBaseProps extends React.HTMLAttributes<HTMLSpanElement> {
-    as?: React.ElementType
+interface LoaderBaseProps extends HTMLAttributes<HTMLSpanElement> {
+    as?: ElementType
     size?: number
     color?: AllColorsTypes
     children?: never

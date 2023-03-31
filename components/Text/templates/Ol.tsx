@@ -1,9 +1,10 @@
 /*=============================================== Ol component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
-import { TextProps } from "../types"
 import { StyledOl } from "../styles"
+import type { TextProps } from "../types"
 
 const Ol = forwardRef(
     (
@@ -20,7 +21,7 @@ const Ol = forwardRef(
             maxLines,
             ...rest
         }: TextProps,
-        ref?: React.ForwardedRef<HTMLOListElement>
+        ref?: ForwardedRef<HTMLOListElement>
     ) => (
         <StyledOl
             ref={ref}

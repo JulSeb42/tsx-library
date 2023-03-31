@@ -1,12 +1,12 @@
 /*=============================================== InputImage types ===============================================*/
 
-import React from "react"
+import type { InputHTMLAttributes } from "react"
 
-import { ValidationTypes, RadiusesTypes } from "../../types"
-import { InputBaseProps } from "../InputContainer/types"
+import type { ValidationTypes, RadiusesTypes } from "../../types"
+import type { InputBaseProps } from "../InputContainer/types"
 
 export interface InputImageProps
-    extends React.InputHTMLAttributes<HTMLInputElement>,
+    extends InputHTMLAttributes<HTMLInputElement>,
         InputBaseProps {
     validation?: ValidationTypes
     width?: number | string
@@ -19,7 +19,7 @@ export interface InputImageProps
     img: string
 
     icons?: {
-        empty?: string
-        hover?: string
+        empty?: string | JSX.Element
+        hover?: string | JSX.Element
     }
 }

@@ -1,8 +1,8 @@
 /*=============================================== Messaging types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType, ReactNode } from "react"
 
-import {
+import type {
     MessageProps as MessageType,
     AllColorsTypes,
     ColorsHoverTypes,
@@ -16,8 +16,10 @@ enum messageType {
 
 export type MessageTypeTypes = keyof typeof messageType
 
-export interface MessageProps extends React.HTMLAttributes<HTMLDivElement>, MessageType {
-    as?: React.ElementType
+export interface MessageProps
+    extends HTMLAttributes<HTMLDivElement>,
+        MessageType {
+    as?: ElementType
     textDateTime?: string
     backgroundColor?: AllColorsTypes
     textColor?: AllColorsTypes
@@ -25,8 +27,8 @@ export interface MessageProps extends React.HTMLAttributes<HTMLDivElement>, Mess
     dateTimeColor?: AllColorsTypes
 }
 
-interface MessagingPropsBase extends React.HTMLAttributes<HTMLFormElement> {
-    as?: React.ElementType
+interface MessagingPropsBase extends HTMLAttributes<HTMLFormElement> {
+    as?: ElementType
     borderColor?: AllColorsTypes
     emptyText?:
         | string
@@ -34,13 +36,15 @@ interface MessagingPropsBase extends React.HTMLAttributes<HTMLFormElement> {
               text?: string
               color?: AllColorsTypes
           }
-    onSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void
+    submit: () => void
     input: {
         message: string
         setMessage: (message: string) => void
         placeholder?: string
+        autoFocus?: boolean
     }
     messagesGap?: SpacersTypes
+    iconScroll?: string | JSX.Element
 }
 
 interface MessagingPropsButton1 extends MessagingPropsBase {
@@ -62,7 +66,7 @@ interface MessagingPropsButton2 extends MessagingPropsBase {
 type MessagingPropsButton = MessagingPropsButton1 | MessagingPropsButton2
 
 type MessagingPropsData1 = MessagingPropsButton & {
-    children?: React.ReactNode[]
+    children?: ReactNode[]
     data?: never
     textDateTime?: never
     backgroundColorSent?: never

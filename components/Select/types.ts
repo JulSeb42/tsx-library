@@ -1,19 +1,19 @@
 /*=============================================== Select types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import { ShadowsTypes, ColorsHoverTypes } from "../../types"
-import { InputBaseProps } from "../InputContainer/types"
-import {
+import type { ShadowsTypes } from "../../types"
+import type { InputBaseProps } from "../InputContainer/types"
+import type {
     InputBackgroundTypes,
     InputVariantTypes,
 } from "../InputComponents/types"
-import { ListDirectionTypes } from "../ListInputs/types"
+import type { ListDirectionTypes } from "../ListInputs/types"
 
 interface SelectPropsBase
-    extends React.HTMLAttributes<HTMLDivElement>,
+    extends HTMLAttributes<HTMLDivElement>,
         InputBaseProps {
-    as?: React.ElementType
+    as?: ElementType
     disabled?: boolean
     id?: string
     selected: string
@@ -21,7 +21,7 @@ interface SelectPropsBase
     icon?:
         | string
         | {
-              name?: string
+              name?: string | JSX.Element
               hasAnimation?: boolean
           }
     items?: string[]

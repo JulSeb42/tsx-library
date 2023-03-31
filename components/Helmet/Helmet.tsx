@@ -1,9 +1,8 @@
 /*=============================================== Helmet component ===============================================*/
 
-import React from "react"
 import { Helmet as Meta } from "react-helmet"
 
-import { HelmetProps } from "./types"
+import type { HelmetProps } from "./types"
 
 const Helmet = ({
     title,

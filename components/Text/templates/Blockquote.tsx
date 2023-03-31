@@ -1,9 +1,10 @@
 /*=============================================== Blockquote component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
-import { TextProps } from "../types"
 import { StyledBlockquote } from "../styles"
+import type { TextProps } from "../types"
 
 const Blockquote = forwardRef(
     (
@@ -20,7 +21,7 @@ const Blockquote = forwardRef(
             maxLines,
             ...rest
         }: TextProps,
-        ref?: React.ForwardedRef<HTMLQuoteElement>
+        ref?: ForwardedRef<HTMLQuoteElement>
     ) => (
         <StyledBlockquote
             ref={ref}

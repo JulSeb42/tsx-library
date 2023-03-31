@@ -1,11 +1,11 @@
 /*=============================================== Video types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import { ObjectFitTypes } from "../../types"
+import type { ObjectFitTypes } from "../../types"
 
-export interface VideoProps extends React.HTMLAttributes<HTMLVideoElement> {
-    as?: React.ElementType
+export interface VideoProps extends HTMLAttributes<HTMLVideoElement> {
+    as?: ElementType
     src: string
     width?: string | number
     height?: string | number

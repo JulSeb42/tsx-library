@@ -1,8 +1,8 @@
 /*=============================================== Tooltip types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import { AllColorsTypes } from "../../types"
+import type { AllColorsTypes } from "../../types"
 
 enum textStyles {
     dotted,
@@ -12,8 +12,8 @@ enum textStyles {
 
 export type TextStylesTypes = keyof typeof textStyles
 
-export interface TooltipProps extends React.HTMLAttributes<HTMLSpanElement> {
-    as?: React.ElementType
+export interface TooltipProps extends HTMLAttributes<HTMLSpanElement> {
+    as?: ElementType
     tooltip: string
     textStyle?: TextStylesTypes
     color?: AllColorsTypes

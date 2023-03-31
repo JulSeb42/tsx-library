@@ -1,9 +1,10 @@
 /*=============================================== Em component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
-import { TextProps } from "../types"
 import { StyledEm } from "../styles"
+import type { TextProps } from "../types"
 
 const Em = forwardRef(
     (
@@ -20,7 +21,7 @@ const Em = forwardRef(
             maxLines,
             ...rest
         }: TextProps,
-        ref?: React.ForwardedRef<HTMLParagraphElement>
+        ref?: ForwardedRef<HTMLParagraphElement>
     ) => (
         <StyledEm
             ref={ref}

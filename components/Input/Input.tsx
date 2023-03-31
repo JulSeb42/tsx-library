@@ -1,6 +1,7 @@
 /*=============================================== Input component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import { InputContainer } from "../InputContainer"
 
@@ -14,12 +15,12 @@ import Textarea from "./templates/Textarea"
 import TextInput from "./templates/TextInput"
 import TimeInput from "./templates/TimeInput"
 
-import { InputTypesType, InputProps } from "./types"
+import type { InputTypesType, InputProps } from "./types"
 
 const renderComponent = (
     props: any,
     type?: InputTypesType,
-    ref?: React.ForwardedRef<
+    ref?: ForwardedRef<
         HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
 ) => {
@@ -29,7 +30,7 @@ const renderComponent = (
 
     switch (type) {
         case "color":
-            return <ColorInput ref={ref} {...props} />
+            return <ColorInput type={type} ref={ref} {...props} />
         case "date":
         case "datetime-local":
         case "month":
@@ -57,7 +58,7 @@ const renderComponent = (
 const InputFunction = forwardRef(
     (
         { type, ...props }: InputProps,
-        ref?: React.ForwardedRef<
+        ref?: ForwardedRef<
             HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
         >
     ) => renderComponent(props, type, ref)
@@ -76,7 +77,7 @@ const Input = forwardRef(
             value,
             ...rest
         }: InputProps,
-        ref?: React.ForwardedRef<
+        ref?: ForwardedRef<
             HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
         >
     ) => {

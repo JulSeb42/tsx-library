@@ -1,9 +1,10 @@
 /*=============================================== Aside component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { AsideProps } from "./types"
+import type { AsideProps } from "./types"
 
 const Aside = forwardRef(
     (
@@ -11,16 +12,16 @@ const Aside = forwardRef(
             as,
             gap = "l",
             position = 1,
-            alignContent = "start",
-            alignItems = "start",
-            justifyContent = "stretch",
-            justifyItems = "start",
+            alignContent = "stretch",
+            alignItems = "stretch",
+            justifyContent = "flex-start",
+            justifyItems = "flex-start",
             size = "default",
             children,
             paddingTopBottom = "xxl",
             ...rest
         }: AsideProps,
-        ref?: React.ForwardedRef<HTMLDivElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => (
         <Styles.StyledAside
             ref={ref}

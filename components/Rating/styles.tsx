@@ -3,7 +3,7 @@
 import styled, { css } from "styled-components"
 
 import { Mixins, Breakpoints } from "../../"
-import { ColorsHoverTypes } from "../../types"
+import type { ColorsHoverTypes } from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 

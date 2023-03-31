@@ -3,7 +3,7 @@
 import styled, { css } from "styled-components"
 
 import { stringifyPx, Mixins } from "../../"
-import {
+import type {
     AllColorsTypes,
     BorderStylesTypes,
     RadiusesTypes,

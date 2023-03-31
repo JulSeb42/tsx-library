@@ -3,13 +3,13 @@
 import styled, { css } from "styled-components"
 
 import { Radiuses, Breakpoints, Spacers, Transitions, Mixins } from "../../"
-import PlusIcon from "../../icons/PlusIcon"
-import {
+import { PlusIcon } from "../../icons"
+import type {
     ColorsHoverTypes,
     ShadowsTypes,
     ObjectPositionTypes,
 } from "../../types"
-import { IconMenuDirectionTypes } from "./types"
+import type { IconMenuDirectionTypes } from "./types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 

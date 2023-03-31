@@ -1,15 +1,15 @@
 /*=============================================== CodeContainer component ===============================================*/
 
-import React, { forwardRef, useState } from "react"
+import { forwardRef, useState } from "react"
+import type { ForwardedRef } from "react"
 import SyntaxHighlighter from "react-syntax-highlighter"
 import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs"
 
 import { ButtonIcon } from "../../"
-import ClipboardIcon from "../../icons/ClipboardIcon"
-import CheckIcon from "../../icons/CheckIcon"
+import { ClipboardIcon, CheckIcon } from "../../icons"
 
 import * as Styles from "./styles"
-import { CodeContainerProps } from "./types"
+import type { CodeContainerProps } from "./types"
 
 const CodeContainer = forwardRef(
     (
@@ -22,7 +22,7 @@ const CodeContainer = forwardRef(
             textColor,
             ...rest
         }: CodeContainerProps,
-        ref?: React.ForwardedRef<HTMLDivElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => {
         const [hasCopied, setHasCopied] = useState(false)
 
@@ -39,6 +39,7 @@ const CodeContainer = forwardRef(
                 ref={ref}
                 $backgroundColor={backgroundColor}
                 $textColor={textColor}
+                as={backgroundColor || textColor ? "pre" : "div"}
             >
                 <Styles.Code
                     language={language}
@@ -54,88 +55,46 @@ const CodeContainer = forwardRef(
                     {children}
                 </Styles.Code>
 
-                {copyButton &&
-                    (hasCopied ? (
-                        typeof copyButton === "object" &&
-                        copyButton.iconCopied ? (
-                            <ButtonIcon
-                                icon={copyButton.iconCopied}
-                                color={copyButton?.colorCopied || "success"}
-                                onClick={copyToClipboard}
-                                size={32}
-                                position={{
-                                    position: "absolute",
-                                    top: "s",
-                                    right: "m",
-                                }}
-                                label={
-                                    (typeof copyButton === "object"
-                                        ? copyButton?.label
-                                        : "Copy") || "Copy"
-                                }
-                            />
-                        ) : (
-                            <ButtonIcon
-                                libicon={<CheckIcon size={32 * 0.7} />}
-                                color={
-                                    typeof copyButton === "object"
-                                        ? copyButton?.colorCopied
-                                        : "success"
-                                }
-                                onClick={copyToClipboard}
-                                size={32}
-                                position={{
-                                    position: "absolute",
-                                    top: "s",
-                                    right: "m",
-                                }}
-                                label={
-                                    (typeof copyButton === "object"
-                                        ? copyButton?.label
-                                        : "Copy") || "Copy"
-                                }
-                            />
-                        )
-                    ) : typeof copyButton === "object" &&
-                      copyButton.iconCopy ? (
-                        <ButtonIcon
-                            icon={copyButton.iconCopy}
-                            color={copyButton?.colorCopy || "white"}
-                            onClick={copyToClipboard}
-                            size={32}
-                            position={{
-                                position: "absolute",
-                                top: "s",
-                                right: "m",
-                            }}
-                            label={
-                                (typeof copyButton === "object"
-                                    ? copyButton?.label
-                                    : "Copy") || "Copy"
-                            }
-                        />
-                    ) : (
-                        <ButtonIcon
-                            libicon={<ClipboardIcon size={32 * 0.7} />}
-                            color={
-                                typeof copyButton === "object"
-                                    ? copyButton?.colorCopy
-                                    : "white"
-                            }
-                            onClick={copyToClipboard}
-                            size={32}
-                            position={{
-                                position: "absolute",
-                                top: "s",
-                                right: "m",
-                            }}
-                            label={
-                                (typeof copyButton === "object"
-                                    ? copyButton?.label
-                                    : "Copy") || "Copy"
-                            }
-                        />
-                    ))}
+                {copyButton && (
+                    <ButtonIcon
+                        icon={
+                            hasCopied ? (
+                                typeof copyButton === "object" &&
+                                copyButton?.iconCopied ? (
+                                    copyButton?.iconCopied
+                                ) : (
+                                    <CheckIcon size={32 * 0.7} />
+                                )
+                            ) : typeof copyButton === "object" &&
+                              copyButton?.iconCopy ? (
+                                copyButton?.iconCopy
+                            ) : (
+                                <ClipboardIcon size={32 * 0.7} />
+                            )
+                        }
+                        color={
+                            hasCopied
+                                ? typeof copyButton === "object"
+                                    ? copyButton.colorCopied
+                                    : "success"
+                                : typeof copyButton === "object"
+                                ? copyButton.colorCopy
+                                : "white"
+                        }
+                        onClick={copyToClipboard}
+                        size={32}
+                        position={{
+                            position: "absolute",
+                            top: "s",
+                            right: "m",
+                        }}
+                        label={
+                            typeof copyButton === "object"
+                                ? copyButton.label
+                                : "Copy"
+                        }
+                    />
+                )}
             </Styles.StyledCodeContainer>
         )
     }

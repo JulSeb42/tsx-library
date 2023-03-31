@@ -1,3 +1,3 @@
 /*=============================================== Fallback exports ===============================================*/
 
-export { default } from "./component"
+export { default as Fallback } from "./Fallback"

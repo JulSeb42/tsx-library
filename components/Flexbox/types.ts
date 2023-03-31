@@ -1,8 +1,8 @@
 /*=============================================== Flexbox types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import {
+import type {
     SpacersTypes,
     FlexAlignContentTypes,
     FlexAlignItemsTypes,
@@ -10,11 +10,11 @@ import {
     FlexJustifyContentTypes,
     FlexJustifyItemsTypes,
     FlexWrapTypes,
-    PaddingTypes
+    PaddingTypes,
 } from "../../types"
 
-export interface FlexboxProps extends React.HTMLAttributes<HTMLDivElement> {
-    as?: React.ElementType
+export interface FlexboxProps extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
     inline?: boolean
     flexDirection?: FlexDirectionTypes
     flexWrap?: FlexWrapTypes

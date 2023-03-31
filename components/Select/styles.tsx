@@ -3,11 +3,11 @@
 import styled, { css } from "styled-components"
 
 import { Mixins, Transitions, Icon } from "../../"
-import ChevronDownIcon from "../../icons/ChevronDownIcon"
+import { ChevronDownIcon } from "../../icons"
 import { InputBaseMixin } from "../InputComponents"
 import { ConstantValues } from "../InputComponents/styles"
-import { ColorsHoverTypes } from "../../types"
-import {
+import type { ColorsHoverTypes } from "../../types"
+import type {
     InputBackgroundTypes,
     InputVariantTypes,
 } from "../InputComponents/types"

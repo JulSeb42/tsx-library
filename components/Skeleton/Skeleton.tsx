@@ -1,9 +1,10 @@
 /*=============================================== Skeleton component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { SkeletonProps, ShineProps } from "./types"
+import type { SkeletonProps, ShineProps, SkeletonCardProps } from "./types"
 
 export const SkeletonShine = forwardRef(
     (
@@ -15,10 +16,11 @@ export const SkeletonShine = forwardRef(
             width = 100,
             ...rest
         }: ShineProps,
-        ref?: React.ForwardedRef<HTMLSpanElement>
+        ref?: ForwardedRef<HTMLSpanElement>
     ) => (
         <Styles.Shine
             ref={ref}
+            as={as}
             $speed={speed}
             $color={color}
             $opacity={opacity}
@@ -46,7 +48,7 @@ export const Skeleton = forwardRef(
             flex,
             ...rest
         }: SkeletonProps,
-        ref?: React.ForwardedRef<HTMLSpanElement>
+        ref?: ForwardedRef<HTMLSpanElement>
     ) => (
         <Styles.StyledSkeleton
             ref={ref}
@@ -71,4 +73,61 @@ export const Skeleton = forwardRef(
             )}
         </Styles.StyledSkeleton>
     )
+)
+
+export const SkeletonCard = forwardRef(
+    (
+        {
+            as,
+            borderColor,
+            borderWidth,
+            borderStyle,
+            borderRadius,
+            width = "100%",
+            height,
+            backgroundColor = "background",
+            inline,
+            flexDirection,
+            flexWrap,
+            justifyContent,
+            alignItems,
+            justifyItems,
+            alignContent,
+            gap,
+            columnGap,
+            rowGap,
+            padding,
+            children,
+            ...rest
+        }: SkeletonCardProps,
+        ref?: ForwardedRef<HTMLDivElement>
+    ) => {
+        return (
+            <Styles.Card
+                ref={ref}
+                as={as}
+                $inline={inline}
+                $flexDirection={flexDirection}
+                $flexWrap={flexWrap}
+                $justifyContent={justifyContent}
+                $alignItems={alignItems}
+                $justifyItems={justifyItems}
+                $alignContent={alignContent}
+                $gap={gap}
+                $columnGap={columnGap}
+                $rowGap={rowGap}
+                $padding={padding}
+                $borderColor={borderColor}
+                $borderWidth={borderWidth}
+                $borderStyle={borderStyle}
+                $borderRadius={borderRadius}
+                $width={width}
+                $height={height}
+                $backgroundColor={backgroundColor}
+                {...rest}
+            >
+                {children}
+            </Styles.Card>
+        )
+    }
 )

@@ -1,14 +1,19 @@
 /*=============================================== Input types ===============================================*/
 
-import React from "react"
+import type {
+    InputHTMLAttributes,
+    MouseEvent,
+    SelectHTMLAttributes,
+    TextareaHTMLAttributes,
+} from "react"
 
-import {
+import type {
     InputBackgroundTypes,
     InputVariantTypes,
     ValidationComponentProps,
     IconInputProps,
 } from "../InputComponents/types"
-import { ExtendedInputContainerProps } from "../InputContainer/types"
+import type { ExtendedInputContainerProps } from "../InputContainer/types"
 
 enum inputTypes {
     color,
@@ -40,13 +45,13 @@ export interface TextInputProps
     extends InputPropsBase,
         ValidationComponentProps,
         IconInputProps,
-        React.InputHTMLAttributes<HTMLInputElement> {
+        InputHTMLAttributes<HTMLInputElement> {
     type?: "email" | "number" | "password" | "tel" | "text" | "url" | undefined
 }
 
 export interface ColorInputProps
     extends InputPropsBase,
-        React.InputHTMLAttributes<HTMLInputElement> {
+        InputHTMLAttributes<HTMLInputElement> {
     type?: "color"
 }
 
@@ -54,15 +59,15 @@ export interface DateInputProps
     extends InputPropsBase,
         IconInputProps,
         ValidationComponentProps,
-        React.InputHTMLAttributes<HTMLInputElement> {
+        InputHTMLAttributes<HTMLInputElement> {
     type?: "date" | "datetime-local" | "month" | "week"
-    iconCalendar?: string
+    iconCalendar?: string | JSX.Element
 }
 
 export interface FileInputProps
     extends InputPropsBase,
         ValidationComponentProps,
-        React.InputHTMLAttributes<HTMLInputElement> {
+        InputHTMLAttributes<HTMLInputElement> {
     type?: "file"
 }
 
@@ -70,7 +75,7 @@ interface BasePasswordProps
     extends InputPropsBase,
         ValidationComponentProps,
         IconInputProps,
-        React.InputHTMLAttributes<HTMLInputElement> {
+        InputHTMLAttributes<HTMLInputElement> {
     type?: never
     password?: boolean
 }
@@ -88,8 +93,8 @@ interface InputPasswordButtonProps2 extends BasePasswordProps {
     button?: {
         textShow?: never
         textHide?: never
-        iconShow?: string
-        iconHide?: string
+        iconShow?: string | JSX.Element
+        iconHide?: string | JSX.Element
     }
 }
 
@@ -100,23 +105,23 @@ export type PasswordInputProps =
 export interface SearchInputProps
     extends InputPropsBase,
         IconInputProps,
-        React.InputHTMLAttributes<HTMLInputElement> {
+        InputHTMLAttributes<HTMLInputElement> {
     type?: "search"
-    clearSearch: (e: React.MouseEvent<HTMLButtonElement>) => void
-    iconClear?: string
+    clearSearch: (e: MouseEvent<HTMLButtonElement>) => void
+    iconClear?: string | JSX.Element
 }
 
 export interface SelectInputProps
     extends InputPropsBase,
-        React.SelectHTMLAttributes<HTMLSelectElement> {
+        SelectHTMLAttributes<HTMLSelectElement> {
     type?: "select"
-    iconSelect?: string
+    iconSelect?: string | JSX.Element
 }
 
 export interface TextareaProps
     extends InputPropsBase,
         ValidationComponentProps,
-        React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+        TextareaHTMLAttributes<HTMLTextAreaElement> {
     type?: "textarea"
 }
 
@@ -124,16 +129,16 @@ export interface TimeInputProps
     extends InputPropsBase,
         ValidationComponentProps,
         IconInputProps,
-        React.InputHTMLAttributes<HTMLInputElement> {
+        InputHTMLAttributes<HTMLInputElement> {
     type?: "time"
-    iconClock?: string
+    iconClock?: string | JSX.Element
 }
 
 export interface UrlInputProps
     extends InputPropsBase,
         ValidationComponentProps,
         IconInputProps,
-        React.InputHTMLAttributes<HTMLInputElement> {
+        InputHTMLAttributes<HTMLInputElement> {
     type?: "url"
     showHttp?: boolean
 }

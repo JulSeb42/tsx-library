@@ -1,8 +1,8 @@
 /*=============================================== ButtonIcon types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType, ButtonHTMLAttributes } from "react"
 
-import {
+import type {
     ColorsHoverTypes,
     ShadowsTypes,
     ObjectPositionTypes,
@@ -13,6 +13,7 @@ import {
 enum buttonIconVariants {
     plain,
     transparent,
+    ghost,
 }
 
 export type ButtonIconVariantTypes = keyof typeof buttonIconVariants
@@ -25,11 +26,9 @@ enum labelDirections {
 export type ButtonIconLabelDirectionsTypes = keyof typeof labelDirections
 
 interface ButtonIconBaseProps
-    extends React.HTMLAttributes<HTMLButtonElement & HTMLHyperlinkElementUtils>,
-        React.ButtonHTMLAttributes<
-            HTMLButtonElement & HTMLHyperlinkElementUtils
-        > {
-    as?: React.ElementType
+    extends HTMLAttributes<HTMLButtonElement & HTMLHyperlinkElementUtils>,
+        ButtonHTMLAttributes<HTMLButtonElement & HTMLHyperlinkElementUtils> {
+    as?: ElementType
     isLoading?: boolean
     color?: ColorsHoverTypes
     size?: number
@@ -37,6 +36,7 @@ interface ButtonIconBaseProps
     shadow?: ShadowsTypes | BoxShadowProps
     position?: ObjectPositionTypes
     borderRadius?: RadiusesTypes
+    className?: string
 }
 
 interface ButtonIconLabel1 extends ButtonIconBaseProps {
@@ -59,7 +59,6 @@ type ButtonIconLabel = ButtonIconLabel1 | ButtonIconLabel2
 type ButtonIconBehaviour1 = ButtonIconLabel & {
     type?: "button" | "submit" | "reset" | undefined
     disabled?: boolean
-    to?: never
     href?: never
     blank?: never
 }
@@ -67,52 +66,29 @@ type ButtonIconBehaviour1 = ButtonIconLabel & {
 type ButtonIconBehaviour2 = ButtonIconLabel & {
     type?: never
     disabled?: never
-    to?: string | "prev"
-    href?: never
-    blank?: boolean
-}
-
-type ButtonIconBehaviour3 = ButtonIconLabel & {
-    type?: never
-    disabled?: never
-    to?: never
     href?: string
     blank?: boolean
 }
 
-type ButtonIconBehaviour =
-    | ButtonIconBehaviour1
-    | ButtonIconBehaviour2
-    | ButtonIconBehaviour3
+type ButtonIconBehaviour = ButtonIconBehaviour1 | ButtonIconBehaviour2
 
 type ButtonIconContent1 = ButtonIconBehaviour & {
-    icon?: never
-    iconSize?: never
-    libicon: JSX.Element
+    icon: string | JSX.Element
+    iconSize?: number
     burger?: never
     isBurgerOpen?: never
     avatar?: never
 }
 
 type ButtonIconContent2 = ButtonIconBehaviour & {
-    icon: string
-    iconSize?: number
-    libicon?: never
-    burger?: never
-    isBurgerOpen?: never
-    avatar?: never
-}
-
-type ButtonIconContent3 = ButtonIconBehaviour & {
     icon?: never
     iconSize?: never
-    libicon?: never
     burger: boolean
     isBurgerOpen: boolean
     avatar?: never
 }
 
-type ButtonIconContent4 = ButtonIconBehaviour & {
+type ButtonIconContent3 = ButtonIconBehaviour & {
     icon?: never
     iconSize?: never
     libicon?: never
@@ -125,10 +101,9 @@ type ButtonIconContent =
     | ButtonIconContent1
     | ButtonIconContent2
     | ButtonIconContent3
-    | ButtonIconContent4
 
 type ButtonIconVariant1 = ButtonIconContent & {
-    variant?: "plain"
+    variant?: "plain" | "ghost"
     hoverBackground?: never
 }
 
@@ -146,4 +121,5 @@ export interface TipsProps {
     position?: ObjectPositionTypes
     size?: number
     tipPosition?: ButtonIconLabelDirectionsTypes
+    className?: string
 }

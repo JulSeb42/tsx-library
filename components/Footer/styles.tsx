@@ -3,8 +3,8 @@
 import styled, { css } from "styled-components"
 
 import { Breakpoints, Spacers, Mixins, Image } from "../../"
-import { AllColorsTypes, ColorsHoverTypes } from "../../types"
-import { FooterDirectionsTypes } from "./types"
+import type { AllColorsTypes, ColorsHoverTypes } from "../../types"
+import type { FooterDirectionsTypes } from "./types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 

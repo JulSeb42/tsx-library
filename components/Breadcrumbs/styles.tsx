@@ -3,7 +3,7 @@
 import styled from "styled-components"
 
 import { Mixins, Text } from "../../"
-import { SeparatorTypes } from "./types"
+import type { SeparatorTypes } from "./types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 

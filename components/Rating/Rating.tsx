@@ -1,14 +1,14 @@
 /*=============================================== Rating component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import { generateNumbers, uuid, Flexbox, Icon } from "../../"
+import { StarIcon, StarFullIcon } from "../../icons"
 import { InputContainer } from "../InputContainer"
-import StarIcon from "../../icons/StarIcon"
-import StarFullIcon from "../../icons/StarFullIcon"
 
 import * as Styles from "./styles"
-import { RatingProps } from "./types"
+import type { RatingProps } from "./types"
 
 const Rating = forwardRef(
     (
@@ -24,7 +24,7 @@ const Rating = forwardRef(
             readOnly,
             ...rest
         }: RatingProps,
-        ref?: React.ForwardedRef<HTMLDivElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => {
         const ratingFn = () => (
             <Flexbox alignItems="center" gap="xs" ref={ref} {...rest}>
@@ -38,12 +38,17 @@ const Rating = forwardRef(
                         key={uuid()}
                     >
                         {icons ? (
-                            <Icon
-                                src={
-                                    i >= rating ? icons.default : icons.checked
-                                }
-                                size={24}
-                            />
+                            i >= rating ? (
+                                typeof icons?.default === "string" ? (
+                                    <Icon src={icons?.default} size={24} />
+                                ) : (
+                                    icons?.default
+                                )
+                            ) : typeof icons?.checked === "string" ? (
+                                <Icon src={icons?.checked} size={24} />
+                            ) : (
+                                icons?.checked
+                            )
                         ) : i >= rating ? (
                             <StarIcon size={24} />
                         ) : (

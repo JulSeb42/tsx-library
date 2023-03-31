@@ -1,9 +1,10 @@
 /*=============================================== P component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
-import { TextProps } from "../types"
 import { StyledP } from "../styles"
+import type { TextProps } from "../types"
 
 const P = forwardRef(
     (
@@ -20,7 +21,7 @@ const P = forwardRef(
             maxLines,
             ...rest
         }: TextProps,
-        ref?: React.ForwardedRef<HTMLParagraphElement>
+        ref?: ForwardedRef<HTMLParagraphElement>
     ) => (
         <StyledP
             ref={ref}

@@ -2,14 +2,14 @@
 
 import styled, { css } from "styled-components"
 
-import { MainPositionTypes, MainSizeTypes } from "./types"
+import type { MainPositionTypes, MainSizeTypes } from "./types"
 import { Mixins, Layouts, Breakpoints, stringifyPx } from "../../"
-import {
+import type {
     SpacersTypes,
-    GridAlignContentTypes,
-    GridAlignItemsTypes,
-    GridJustifyContentTypes,
-    GridJustifyItemsTypes,
+    FlexAlignContentTypes,
+    FlexAlignItemsTypes,
+    FlexJustifyContentTypes,
+    FlexJustifyItemsTypes,
 } from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
@@ -17,10 +17,10 @@ import setDefaultTheme from "../../utils/setDefaultTheme"
 const StyledMain = styled.main<{
     $size?: MainSizeTypes
     $position?: MainPositionTypes
-    $justifyContent?: GridJustifyContentTypes
-    $justifyItems?: GridJustifyItemsTypes
-    $alignContent?: GridAlignContentTypes
-    $alignItems?: GridAlignItemsTypes
+    $justifyContent?: FlexJustifyContentTypes
+    $justifyItems?: FlexJustifyItemsTypes
+    $alignContent?: FlexAlignContentTypes
+    $alignItems?: FlexAlignItemsTypes
     $gap?: SpacersTypes
     $contentWidth?: "default" | "large" | "form"
     $paddingTopBottom?: SpacersTypes
@@ -43,11 +43,12 @@ const StyledMain = styled.main<{
         $gap,
         $paddingTopBottom,
     }) =>
-        Mixins.Grid({
-            $alignContent: $alignContent || "start",
-            $justifyItems: $justifyItems || "start",
-            $justifyContent: $justifyContent || "stretch",
-            $alignItems: $alignItems || "start",
+        Mixins.Flexbox({
+            $flexDirection: "column",
+            $alignContent: $alignContent || "stretch",
+            $justifyItems: $justifyItems || "stretch",
+            $justifyContent: $justifyContent || "flex-start",
+            $alignItems: $alignItems || "stretch",
             $gap,
             $padding: {
                 topBottom: $paddingTopBottom,
@@ -64,6 +65,7 @@ const StyledMain = styled.main<{
     ${({ $size, $contentWidth }) =>
         $size === "full" &&
         css`
+            display: grid;
             grid-template-columns: 1fr ${$contentWidth === "large"
                     ? Layouts.Main.Large
                     : $contentWidth === "form"
@@ -72,6 +74,35 @@ const StyledMain = styled.main<{
 
             & > * {
                 grid-column: 2;
+            }
+
+            & > div,
+            & > h1,
+            & > h2,
+            & > h3,
+            & > h4,
+            & > h5,
+            & > h6,
+            & > p,
+            & > ul,
+            & > ol,
+            & > dl,
+            & > section,
+            & > input,
+            & > article,
+            & > hr,
+            & > pre,
+            & > table,
+            & > header,
+            & > footer,
+            & > iframe,
+            & > nav,
+            & > noscript,
+            & > picture,
+            & > select,
+            & > textarea,
+            & > form {
+                justify-self: stretch;
             }
         `}
 
@@ -101,7 +132,7 @@ const StyledMain = styled.main<{
     & > select,
     & > textarea,
     & > form {
-        justify-self: stretch;
+        align-self: stretch;
     }
 `
 

@@ -1,9 +1,10 @@
 /*=============================================== Placeholder component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { PlaceholderProps } from "./types"
+import type { PlaceholderProps } from "./types"
 
 const Placeholder = forwardRef(
     (
@@ -23,7 +24,7 @@ const Placeholder = forwardRef(
             padding,
             ...rest
         }: PlaceholderProps,
-        ref?: React.ForwardedRef<HTMLDivElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => (
         <Styles.StyledPlaceholder
             ref={ref}

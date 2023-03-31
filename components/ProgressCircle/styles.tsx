@@ -3,7 +3,7 @@
 import styled from "styled-components"
 
 import { Mixins } from "../../"
-import { AllColorsTypes } from "../../types"
+import type { AllColorsTypes } from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 

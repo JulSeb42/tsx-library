@@ -1,8 +1,8 @@
 /*=============================================== ProgressBar types ===============================================*/
 
-import React from "react"
+import type { MeterHTMLAttributes, ElementType } from "react"
 
-import { AllColorsTypes, SpacersTypes } from "../../types"
+import type { AllColorsTypes, SpacersTypes } from "../../types"
 
 enum directions {
     horizontal,
@@ -12,8 +12,8 @@ enum directions {
 export type ProgressDirectionType = keyof typeof directions
 
 export interface ProgressBarPropsBase
-    extends React.MeterHTMLAttributes<HTMLMeterElement> {
-    as?: React.ElementType
+    extends MeterHTMLAttributes<HTMLMeterElement> {
+    as?: ElementType
     value: number
     color?: AllColorsTypes
     backgroundColor?: AllColorsTypes

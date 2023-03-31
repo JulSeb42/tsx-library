@@ -1,16 +1,17 @@
 /*=============================================== Dropdown component ===============================================*/
 
-import React, { forwardRef, useRef } from "react"
+import { forwardRef, useRef } from "react"
+import type { ForwardedRef } from "react"
 
 import { useClickOutside } from "../../"
 
 import * as Styles from "./styles"
-import { DropdownProps, DropdownContainerProps } from "./types"
+import type { DropdownProps, DropdownContainerProps } from "./types"
 
 export const DropdownContainer = forwardRef(
     (
         { as, children, justify = "left", ...rest }: DropdownContainerProps,
-        ref?: React.ForwardedRef<HTMLDivElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => (
         <Styles.DropdownContainer
             ref={ref}

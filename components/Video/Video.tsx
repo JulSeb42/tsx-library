@@ -1,12 +1,13 @@
 /*=============================================== Video component ===============================================*/
 
-import React, { forwardRef, Suspense } from "react"
+import { forwardRef, Suspense, lazy } from "react"
+import type { ForwardedRef } from "react"
 
-import Fallback from "../Fallback"
+import { Fallback } from "../Fallback"
 
-import { VideoProps } from "./types"
+import type { VideoProps } from "./types"
 
-const StyledVideo = React.lazy(() => import("./styles"))
+const StyledVideo = lazy(() => import("./styles"))
 
 const Video = forwardRef(
     (
@@ -24,7 +25,7 @@ const Video = forwardRef(
             type = "video/mp4",
             ...rest
         }: VideoProps,
-        ref?: React.ForwardedRef<HTMLVideoElement>
+        ref?: ForwardedRef<HTMLVideoElement>
     ) => (
         <Suspense fallback={<Fallback $width={width} $height={height} />}>
             <StyledVideo

@@ -3,7 +3,7 @@
 import styled from "styled-components"
 
 import { Spacers, Radiuses, Mixins } from "../../"
-import { ColorsAlertsTypes } from "./types"
+import type { ColorsAlertsTypes } from "./types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
@@ -11,8 +11,10 @@ const StyledAlert = styled.div<{
     $color: ColorsAlertsTypes
     $isModal?: boolean
 }>`
-    ${Mixins.Grid({
+    ${Mixins.Flexbox({
+        $flexDirection: "column",
         $gap: "s",
+        $alignItems: "stretch",
     })};
     padding: ${Spacers.M};
     width: ${({ $isModal }) => $isModal && "100%"};

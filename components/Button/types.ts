@@ -1,14 +1,21 @@
 /*=============================================== Button types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType, ButtonHTMLAttributes } from "react"
 
-import { ColorsHoverTypes, ShadowsTypes, BoxShadowProps, RadiusesTypes, SpacersTypes } from "../../types"
-import { LoaderVariantTypes } from "../Loader/types"
+import type {
+    ColorsHoverTypes,
+    ShadowsTypes,
+    BoxShadowProps,
+    RadiusesTypes,
+    SpacersTypes,
+} from "../../types"
+import type { LoaderVariantTypes } from "../Loader/types"
 
 enum buttonVariants {
     plain,
     outline,
     text,
+    ghost,
 }
 
 export type ButtonVariantTypes = keyof typeof buttonVariants
@@ -21,64 +28,49 @@ enum buttonSizes {
 export type ButtonSizesTypes = keyof typeof buttonSizes
 
 interface ButtonBaseProps
-    extends React.HTMLAttributes<HTMLButtonElement & HTMLHyperlinkElementUtils>,
-        React.ButtonHTMLAttributes<
-            HTMLButtonElement & HTMLHyperlinkElementUtils
-        > {
-    as?: React.ElementType
+    extends HTMLAttributes<HTMLButtonElement & HTMLHyperlinkElementUtils>,
+        ButtonHTMLAttributes<HTMLButtonElement & HTMLHyperlinkElementUtils> {
+    as?: ElementType
     color?: ColorsHoverTypes
     shadow?: ShadowsTypes | BoxShadowProps
     borderRadius?: RadiusesTypes
     size?: ButtonSizesTypes
-    gap?: SpacersTypes
 }
 
 interface ButtonBehaviour1 extends ButtonBaseProps {
-    to?: string | "prev"
-    disabled?: never
-    type?: never
-    href?: never
-    blank?: boolean
-}
-
-interface ButtonBehaviour2 extends ButtonBaseProps {
-    to?: never
     disabled?: boolean
     type?: "button" | "submit" | "reset"
     href?: never
     blank?: never
 }
 
-interface ButtonBehaviour3 extends ButtonBaseProps {
-    to?: never
+interface ButtonBehaviour2 extends ButtonBaseProps {
     disabled?: never
     type?: never
     href?: string
     blank?: boolean
 }
 
-type ButtonBehaviour = ButtonBehaviour1 | ButtonBehaviour2 | ButtonBehaviour3
+type ButtonBehaviour = ButtonBehaviour1 | ButtonBehaviour2
+
+type ButtonIcon0 = ButtonBehaviour & {
+    icons?: undefined
+    gap?: never
+}
 
 type ButtonIcon1 = ButtonBehaviour & {
-    libicon?: never
+    gap?: SpacersTypes
     icons?: {
         left?: string | JSX.Element
         right?: string | JSX.Element
+        size?: number
     }
 }
 
-type ButtonIcon2 = ButtonBehaviour & {
-    libicon?: {
-        left?: JSX.Element
-        right?: JSX.Element
-    }
-    icons?: never
-}
-
-type ButtonIcon = ButtonIcon1 | ButtonIcon2
+type ButtonIcon = ButtonIcon0 | ButtonIcon1
 
 type ButtonVariant1 = ButtonIcon & {
-    variant?: "plain" | "outline"
+    variant?: "plain" | "outline" | "ghost"
     noPadding?: never
 }
 

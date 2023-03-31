@@ -1,11 +1,12 @@
 /*=============================================== Avatar component ===============================================*/
 
-import React, { forwardRef, useRef, useEffect, useState } from "react"
+import { forwardRef, useRef, useEffect, useState } from "react"
+import type { ForwardedRef } from "react"
 
 import { Image, Icon } from "../../"
 
 import * as Styles from "./styles"
-import { AvatarProps } from "./types"
+import type { AvatarProps } from "./types"
 
 const Avatar = forwardRef(
     (
@@ -23,7 +24,7 @@ const Avatar = forwardRef(
             contentColor = "background",
             ...rest
         }: AvatarProps,
-        ref?: React.ForwardedRef<HTMLSpanElement>
+        ref?: ForwardedRef<HTMLSpanElement>
     ) => {
         const avatarFn = () => (
             <Styles.StyledAvatar

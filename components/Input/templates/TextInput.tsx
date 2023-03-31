@@ -1,6 +1,7 @@
 /*=============================================== TextInput ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import {
     RightContainer,
@@ -9,7 +10,7 @@ import {
 } from "../../InputComponents"
 
 import * as Styles from "../styles"
-import { TextInputProps } from "../types"
+import type { TextInputProps } from "../types"
 
 const TextInput = forwardRef(
     (
@@ -25,7 +26,7 @@ const TextInput = forwardRef(
             disabled,
             ...rest
         }: TextInputProps,
-        ref?: React.ForwardedRef<HTMLInputElement>
+        ref?: ForwardedRef<HTMLInputElement>
     ) => {
         const getValidationStatus =
             typeof validation === "object" ? validation?.status : validation

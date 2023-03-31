@@ -3,7 +3,7 @@
 import { Text } from "../components/Text"
 import { Table } from "../components/Table"
 
-const optionsMarkdown = {
+export const OptionsMarkdown = {
     forceBlock: true,
     wrapper: "div",
     overrides: {
@@ -110,5 +110,3 @@ const optionsMarkdown = {
         },
     },
 }
-
-export default optionsMarkdown

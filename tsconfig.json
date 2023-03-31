@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "lib": [
+            "DOM",
+            "DOM.Iterable",
+            "ESNext",
+            "ES2021.String"
+        ],
+        "skipLibCheck": true,
+        "strict": true,
+        "jsx": "react-jsx",
+        "declaration": true,
+        "esModuleInterop": true,
+        "outDir": "build",
+        "target": "es5",
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "downlevelIteration": true
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}

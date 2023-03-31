@@ -1,13 +1,13 @@
 /*=============================================== Main types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import {
+import type {
     SpacersTypes,
-    GridAlignContentTypes,
-    GridAlignItemsTypes,
-    GridJustifyContentTypes,
-    GridJustifyItemsTypes,
+    FlexAlignContentTypes,
+    FlexAlignItemsTypes,
+    FlexJustifyContentTypes,
+    FlexJustifyItemsTypes,
 } from "../../types"
 
 enum mainSizes {
@@ -26,14 +26,14 @@ const mainPositions = {
 
 export type MainPositionTypes = keyof typeof mainPositions
 
-interface BaseMainProps extends React.HTMLAttributes<HTMLDivElement> {
-    as?: React.ElementType
+interface BaseMainProps extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
     gap?: SpacersTypes
     position?: MainPositionTypes
-    alignContent?: GridAlignContentTypes
-    alignItems?: GridAlignItemsTypes
-    justifyContent?: GridJustifyContentTypes
-    justifyItems?: GridJustifyItemsTypes
+    alignContent?: FlexAlignContentTypes
+    alignItems?: FlexAlignItemsTypes
+    justifyContent?: FlexJustifyContentTypes
+    justifyItems?: FlexJustifyItemsTypes
     paddingTopBottom?: SpacersTypes
 }
 

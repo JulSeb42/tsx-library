@@ -1,11 +1,12 @@
 /*=============================================== ProgressCircle component ===============================================*/
 
-import React, { forwardRef, useEffect, useState } from "react"
+import { forwardRef, useEffect, useState } from "react"
+import type { ForwardedRef } from "react"
 
 import { Icon, Text } from "../../"
 
 import * as Styles from "./styles"
-import { ProgressCircleProps } from "./types"
+import type { ProgressCircleProps } from "./types"
 
 const cleanPercentage = (value: number) => {
     const isNegativeOrNaN = !Number.isFinite(+value)
@@ -49,7 +50,7 @@ const ProgressCircle = forwardRef(
             iconColor = "primary",
             ...rest
         }: ProgressCircleProps,
-        ref?: React.ForwardedRef<any>
+        ref?: ForwardedRef<any>
     ) => {
         const pct = cleanPercentage(value)
 

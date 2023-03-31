@@ -11,7 +11,7 @@ import {
     ThemeLight,
     Mixins,
 } from "../../"
-import { AllColorsTypes } from "../../types"
+import type { AllColorsTypes } from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
@@ -19,11 +19,19 @@ const StyledCodeContainer = styled.div<{
     $backgroundColor?: AllColorsTypes
     $textColor?: AllColorsTypes
 }>`
-    background-color: ${ThemeLight.Gray800};
+    background-color: ${({ theme, $backgroundColor }) =>
+        $backgroundColor
+            ? theme.AllColors({ $color: $backgroundColor })
+            : ThemeLight.Gray800};
     position: relative;
     overflow-x: scroll;
     padding: ${Spacers.M};
     ${Mixins.HideScrollbar};
+
+    & > code {
+        color: ${({ $textColor, theme }) =>
+            theme.AllColors({ $color: $textColor })};
+    }
 `
 
 const Code = styled(SyntaxHighlighter)<{

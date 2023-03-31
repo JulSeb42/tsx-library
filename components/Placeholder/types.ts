@@ -1,8 +1,8 @@
 /*=============================================== Placeholder types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import {
+import type {
     AllColorsTypes,
     OverlayTypes,
     ShadowsTypes,
@@ -12,8 +12,8 @@ import {
     PaddingTypes,
 } from "../../types"
 
-interface PlaceholderBaseProps extends React.HTMLAttributes<HTMLDivElement> {
-    as?: React.ElementType
+interface PlaceholderBaseProps extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
     width?: string | number
     height?: string | number
     aspectRatio?: string

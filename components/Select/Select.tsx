@@ -1,13 +1,13 @@
 /*=============================================== Select component ===============================================*/
 
-import React, { useRef, useState } from "react"
+import { useRef, useState } from "react"
 
 import { uuid, useClickOutside } from "../../"
 import { ListInputs, ListItem, Chevron } from "../ListInputs"
 import { InputContainer } from "../InputContainer"
 
 import * as Styles from "./styles"
-import { SelectProps } from "./types"
+import type { SelectProps } from "./types"
 
 const Select = ({
     as,
@@ -97,7 +97,7 @@ const Select = ({
                 {items && (
                     <Chevron
                         icon={
-                            icon && typeof icon === "object" ? icon.name : icon
+                            icon && typeof icon === "object" ? icon?.name : icon
                         }
                         isOpen={isOpen}
                         color={accentColor}

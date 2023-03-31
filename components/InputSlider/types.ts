@@ -1,12 +1,12 @@
 /*=============================================== InputSlider types ===============================================*/
 
-import React from "react"
+import type { InputHTMLAttributes } from "react"
 
-import { AllColorsTypes, ValidationTypes } from "../../types"
-import { InputBaseProps } from "../InputContainer/types"
+import type { AllColorsTypes, ValidationTypes } from "../../types"
+import type { InputBaseProps } from "../InputContainer/types"
 
 interface InputSliderPropsBase
-    extends React.InputHTMLAttributes<HTMLInputElement>,
+    extends InputHTMLAttributes<HTMLInputElement>,
         InputBaseProps {
     backgroundColor?: AllColorsTypes
     validation?: ValidationTypes

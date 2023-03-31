@@ -1,10 +1,10 @@
 /*=============================================== Truncate types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import { SpacersTypes } from "../../types"
+import type { SpacersTypes } from "../../types"
 
-export interface TruncateProps extends React.HTMLAttributes<HTMLDivElement> {
-    as?: React.ElementType
+export interface TruncateProps extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
     gap?: SpacersTypes
 }

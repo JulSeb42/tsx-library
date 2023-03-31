@@ -1,14 +1,16 @@
 /*=============================================== PageLoading types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import { AllColorsTypes } from "../../types"
-import { LoaderVariantTypes } from "../Loader/types"
+import type { AllColorsTypes } from "../../types"
+import type { LoaderVariantTypes } from "../Loader/types"
 
-export interface PageLoadingProps extends React.HTMLAttributes<HTMLDivElement> {
-    as?: React.ElementType
+export interface PageLoadingProps extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
     backgroundColor?: AllColorsTypes
     loaderColor?: AllColorsTypes
     loaderVariant?: LoaderVariantTypes
+    loaderWidth?: number
+    loaderSize?: number
     stopScrolling?: boolean
 }

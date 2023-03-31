@@ -1,6 +1,6 @@
 /*=============================================== Timepicker component ===============================================*/
 
-import React, { useState, useRef } from "react"
+import { useState, useRef } from "react"
 
 import { generateNumbers, useClickOutside, formatHour, uuid } from "../../"
 import { InputContainer } from "../InputContainer"
@@ -8,7 +8,7 @@ import { ListItem, ListInputs, Chevron } from "../ListInputs"
 import { IconComponent } from "../InputComponents"
 
 import * as Styles from "./styles"
-import { TimepickerProps } from "./types"
+import type { TimepickerProps } from "./types"
 
 const TimepickerFunction = ({
     selectedTime,

@@ -11,10 +11,10 @@ import {
     ThemeLight,
     Transitions,
 } from "../../"
-import { ColorsHoverTypes, ValidationTypes } from "../../types"
-import SearchIcon from "../../icons/SearchIcon"
+import { SearchIcon } from "../../icons"
+import type { ColorsHoverTypes, ValidationTypes } from "../../types"
 import { InputBaseMixin } from "../InputComponents"
-import {
+import type {
     InputBackgroundTypes,
     InputVariantTypes,
 } from "../InputComponents/types"

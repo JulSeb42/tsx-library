@@ -3,10 +3,9 @@
 import styled, { css } from "styled-components"
 
 import { Transitions, Spacers, Radiuses, Mixins } from "../../"
-import PlusIcon from "../../icons/PlusIcon"
-import ChevronDownIcon from "../../icons/ChevronDownIcon"
-import { ColorsHoverTypes, AllColorsTypes } from "../../types"
-import { AccordionStyleTypes, IconTypes } from "./types"
+import { PlusIcon, ChevronDownIcon } from "../../icons"
+import type { ColorsHoverTypes, AllColorsTypes } from "../../types"
+import type { AccordionStyleTypes, IconTypes } from "./types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
@@ -21,7 +20,9 @@ const StyledAccordion = styled.div<{
 }>`
     position: relative;
     ${({ $variant }) =>
-        Mixins.Grid({
+        Mixins.Flexbox({
+            $flexDirection: "column",
+            $alignItems: "stretch",
             $gap: $variant === "rounded" ? 0 : "xxs",
         })};
 
@@ -59,14 +60,24 @@ const Content = styled.div<{
               `}
 `
 
-const IconContainer = styled.span``
+const IconContainer = styled.span<{
+    $isOpen: boolean
+    $icon?: IconTypes
+    $hasIconCustom?: boolean
+}>`
+    transition: ${Transitions.Short};
+
+    ${({ $isOpen, $icon, $hasIconCustom }) =>
+        !$hasIconCustom &&
+        $isOpen &&
+        css`
+            transform: rotate(${$icon === "chevron" ? 180 : 45}deg);
+        `}
+`
 
 const Button = styled.button<{
     $variant?: AccordionStyleTypes
-    $isOpen?: boolean
-    $icon?: IconTypes
     $noBorder?: boolean
-    $hasIconCustom?: boolean
     $accentColor?: ColorsHoverTypes
     $separatorColor?: AllColorsTypes
 }>`
@@ -102,17 +113,6 @@ const Button = styled.button<{
         css`
             border-bottom: none;
         `}
-
-    ${IconContainer} {
-        transition: ${Transitions.Short};
-
-        ${({ $isOpen, $icon, $hasIconCustom }) =>
-            !$hasIconCustom &&
-            $isOpen &&
-            css`
-                transform: rotate(${$icon === "chevron" ? 180 : 45}deg);
-            `}
-    }
 `
 
 setDefaultTheme([

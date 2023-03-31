@@ -1,12 +1,12 @@
 /*=============================================== ButtonIcon component ===============================================*/
 
-import React, { forwardRef, useRef, useState, useLayoutEffect } from "react"
-import { Link } from "react-router-dom"
+import { forwardRef, useRef, useState, useLayoutEffect } from "react"
+import type { ForwardedRef } from "react"
 
 import { useTouchScreen, Icon, Loader, Burger, Avatar } from "../../"
 
 import * as Styles from "./styles"
-import { ButtonIconProps, TipsProps } from "./types"
+import type { ButtonIconProps, TipsProps } from "./types"
 
 const Tooltip = ({
     label,
@@ -15,6 +15,7 @@ const Tooltip = ({
     size,
     bottom = "125%",
     tipPosition = "up",
+    className,
 }: TipsProps) => {
     const ref = useRef<any>(null)
     const [width, setWidth] = useState(0)
@@ -36,6 +37,7 @@ const Tooltip = ({
             $bottom={position?.bottom}
             $zIndex={position?.zIndex}
             $size={size}
+            className={className}
         >
             <Styles.Tip
                 $isVisible={isVisible}
@@ -66,9 +68,7 @@ const ButtonIcon = forwardRef(
             showLabel,
             type,
             disabled,
-            to,
             icon,
-            libicon,
             burger,
             isBurgerOpen,
             variant = "plain",
@@ -78,19 +78,19 @@ const ButtonIcon = forwardRef(
             href,
             blank,
             avatar,
+            className,
             ...rest
         }: ButtonIconProps,
-        ref?: React.ForwardedRef<HTMLButtonElement>
+        ref?: ForwardedRef<HTMLButtonElement>
     ) => {
         const buttonFn = () => (
             <Styles.StyledButtonIcon
-                as={as ? as : to ? Link : href ? "a" : "button"}
+                as={as ? as : href ? "a" : "button"}
                 ref={ref}
                 aria-label={label}
-                to={to === "prev" ? -1 : to}
                 href={href}
-                target={(to || href) && blank && "_blank"}
-                rel={(to || href) && blank && "noreferrer noopener"}
+                target={href && blank && "_blank"}
+                rel={href && blank && "noreferrer noopener"}
                 disabled={!!isLoading || disabled}
                 type={type}
                 $hoverBackground={hoverBackground}
@@ -112,6 +112,7 @@ const ButtonIcon = forwardRef(
                 $zIndex={!showLabel ? position?.zIndex : undefined}
                 $borderRadius={borderRadius}
                 $isAvatar={!!avatar}
+                className={className}
                 {...rest}
             >
                 {isLoading ? (
@@ -120,8 +121,10 @@ const ButtonIcon = forwardRef(
                         color="gray"
                         borderWidth={loaderBorder}
                     />
-                ) : icon ? (
+                ) : icon && typeof icon === "string" ? (
                     <Icon src={icon} size={iconSize || size * 0.7} />
+                ) : icon ? (
+                    icon
                 ) : burger ? (
                     <Burger
                         isOpen={isBurgerOpen}
@@ -131,10 +134,8 @@ const ButtonIcon = forwardRef(
                         noHover
                         as="span"
                     />
-                ) : avatar ? (
-                    <Avatar img={avatar} size={size} alt={label} />
                 ) : (
-                    libicon
+                    avatar && <Avatar img={avatar} size={size} alt={label} />
                 )}
             </Styles.StyledButtonIcon>
         )
@@ -152,6 +153,7 @@ const ButtonIcon = forwardRef(
                 bottom={
                     typeof showLabel === "object" ? showLabel?.bottom : "125%"
                 }
+                className={className}
             >
                 {buttonFn()}
             </Tooltip>

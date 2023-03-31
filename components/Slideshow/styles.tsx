@@ -12,16 +12,21 @@ import {
     Flexbox,
     Image,
 } from "../../"
-import { ColorsHoverTypes, RadiusesTypes, ObjectFitTypes } from "../../types"
-import { ButtonPositionsTypes } from "./types"
+import type {
+    ColorsHoverTypes,
+    RadiusesTypes,
+    ObjectFitTypes,
+} from "../../types"
+import type { ButtonPositionsTypes } from "./types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledSlideshow = styled.div`
     width: 100%;
-    ${Mixins.Grid({
+    ${Mixins.Flexbox({
         $gap: "xs",
-        $alignItems: "start",
+        $flexDirection: "column",
+        $alignItems: "center",
         $justifyItems: "center",
     })};
     position: relative;
@@ -32,8 +37,7 @@ const Wrapper = styled(Flexbox)<{
     $aspectRatio?: string
 }>`
     width: 100%;
-    height: ${({ $height }) =>
-        $height && stringifyPx($height)};
+    height: ${({ $height }) => $height && stringifyPx($height)};
     aspect-ratio: ${({ $aspectRatio, $height }) => !$height && $aspectRatio};
     position: relative;
     overflow: hidden;

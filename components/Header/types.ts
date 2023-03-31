@@ -1,9 +1,13 @@
 /*=============================================== Header types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import { ColorsHoverTypes, ShadowsTypes, AllColorsTypes } from "../../types"
-import {
+import type {
+    ColorsHoverTypes,
+    ShadowsTypes,
+    AllColorsTypes,
+} from "../../types"
+import type {
     InputBackgroundTypes,
     InputVariantTypes,
 } from "../InputComponents/types"
@@ -23,8 +27,8 @@ enum navMobileVariants {
 
 export type NavMobileVariantsTypes = keyof typeof navMobileVariants
 
-interface HeaderPropsBase extends React.HTMLAttributes<HTMLDivElement> {
-    as?: React.ElementType
+interface HeaderPropsBase extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
     backgroundColor?: AllColorsTypes
     linkColor?: ColorsHoverTypes
     burgerColor?: ColorsHoverTypes
@@ -57,7 +61,7 @@ interface HeaderLogo1 extends HeaderPropsBase {
         width?: never
         height?: never
 
-        to?: string
+        href?: string
     }
 }
 
@@ -70,7 +74,7 @@ interface HeaderLogo2 extends HeaderPropsBase {
         width?: number
         height?: number
 
-        to?: string
+        href?: string
     }
 }
 

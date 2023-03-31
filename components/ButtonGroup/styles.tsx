@@ -3,7 +3,11 @@
 import styled, { css } from "styled-components"
 
 import { Button, Mixins, ButtonIcon } from "../../"
-import type { AllColorsTypes, ColorsHoverTypes, RadiusesTypes } from "../../types"
+import type {
+    AllColorsTypes,
+    ColorsHoverTypes,
+    RadiusesTypes,
+} from "../../types"
 import type { ButtonSizesTypes } from "../Button/types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"

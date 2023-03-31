@@ -3,7 +3,7 @@
 import styled from "styled-components"
 
 import { Transitions, Mixins, Text } from "../../"
-import { SpacersTypes, PositionsTypes } from "../../types"
+import type { SpacersTypes, PositionsTypes } from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 

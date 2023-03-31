@@ -1,12 +1,11 @@
 /*=============================================== IconMenu component ===============================================*/
 
-import React, { useRef, useState } from "react"
-import { Link } from "react-router-dom"
+import { useRef, useState } from "react"
 
 import { useClickOutside, Icon, Burger } from "../../"
 
 import * as Styles from "./styles"
-import { IconMenuProps } from "./types"
+import type { IconMenuProps } from "./types"
 
 const IconMenu = ({
     as,
@@ -27,12 +26,7 @@ const IconMenu = ({
     const [isOpen, setIsOpen] = useState(false)
 
     return (
-        <Styles.StyledIconMenu
-            ref={el}
-            as={as}
-            $position={position}
-            {...rest}
-        >
+        <Styles.StyledIconMenu ref={el} as={as} $position={position} {...rest}>
             <Styles.StyledOpenButton
                 onClick={() => setIsOpen(!isOpen)}
                 $color={color}
@@ -70,30 +64,23 @@ const IconMenu = ({
                 )}
             </Styles.StyledOpenButton>
 
-            {items.map(({ to, onClick, blank, label, icon, href }, i) => {
-                return (
-                    <Styles.StyledButton
-                        as={to ? Link : href ? "a" : "button"}
-                        to={to}
-                        onClick={onClick}
-                        href={href}
-                        target={(to || href) && blank ? "_blank" : undefined}
-                        rel={
-                            (to || href) && blank
-                                ? "noreferrer noopener"
-                                : undefined
-                        }
-                        aria-label={label}
-                        $color={color}
-                        $index={i}
-                        $isOpen={isOpen}
-                        $direction={direction}
-                        key={`button-${icon}-${label}`}
-                    >
-                        <Icon src={icon} size={32} />
-                    </Styles.StyledButton>
-                )
-            })}
+            {items.map(({ onClick, blank, label, icon, href }, i) => (
+                <Styles.StyledButton
+                    as={href ? "a" : "button"}
+                    onClick={onClick}
+                    href={href}
+                    target={href && blank ? "_blank" : undefined}
+                    rel={href && blank ? "noreferrer noopener" : undefined}
+                    aria-label={label}
+                    $color={color}
+                    $index={i}
+                    $isOpen={isOpen}
+                    $direction={direction}
+                    key={`button-${icon}-${label}`}
+                >
+                    <Icon src={icon} size={32} />
+                </Styles.StyledButton>
+            ))}
         </Styles.StyledIconMenu>
     )
 }

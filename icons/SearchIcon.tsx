@@ -2,17 +2,15 @@
 
 /*==================== Imports ====================*/
 
-import React from "react"
-
 import { StyledIcon } from "./styles"
-import { IconProps } from "./type"
+import type { IconProps } from "./types"
 
 /*==================== Component ====================*/
 
-const SearchIcon = ({
+export const SearchIcon = ({
     size = 64,
     color = "currentColor",
-    ...props
+    ...rest
 }: IconProps) => (
     <StyledIcon
         width={size}
@@ -22,7 +20,7 @@ const SearchIcon = ({
         xmlns="http://www.w3.org/2000/svg"
         $size={size}
         $color={color}
-        {...props}
+        {...rest}
     >
         <path
             d="M12 10C12 9.468 11.791 8.966 11.412 8.586C10.656 7.832 9.346 7.83 8.586 8.588L7.174 7.172C8.687 5.66 11.312 5.66 12.826 7.172C13.1988 7.54243 13.4946 7.98308 13.6961 8.46849C13.8976 8.95389 14.0009 9.47443 14 10H12Z"
@@ -36,5 +34,3 @@ const SearchIcon = ({
         />
     </StyledIcon>
 )
-
-export default SearchIcon

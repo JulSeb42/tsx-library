@@ -2,9 +2,19 @@
 
 import styled, { css } from "styled-components"
 
-import { stringifyPx, Spacers, Overlays, Mixins, Image } from "../../"
-import { SpacersTypes, AllColorsTypes } from "../../types"
-import { CoverAlignTypes } from "./types"
+import { stringifyPx, Overlays, Mixins, Image } from "../../"
+import type {
+    SpacersTypes,
+    AllColorsTypes,
+    PaddingTypes,
+    FlexAlignContentTypes,
+    FlexAlignItemsTypes,
+    FlexJustifyContentTypes,
+    FlexJustifyItemsTypes,
+    TextAlignTypes,
+    FlexDirectionTypes,
+    FlexWrapTypes,
+} from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
@@ -15,10 +25,19 @@ const CoverImage = styled(Image).attrs({ width: "100%", fit: "cover" })`
 `
 
 const Content = styled.div<{
-    $align?: CoverAlignTypes
     $height?: number | string
     $gap?: SpacersTypes
     $color?: AllColorsTypes
+    $flexDirection?: FlexDirectionTypes
+    $justifyContent?: FlexJustifyContentTypes
+    $justifyItems?: FlexJustifyItemsTypes
+    $alignContent?: FlexAlignContentTypes
+    $alignItems?: FlexAlignItemsTypes
+    $padding?: PaddingTypes
+    $textAlign?: TextAlignTypes
+    $flexWrap?: FlexWrapTypes
+    $columnGap?: SpacersTypes
+    $rowGap?: SpacersTypes
 }>`
     position: relative;
     top: 0;
@@ -26,15 +45,31 @@ const Content = styled.div<{
     z-index: 2;
     width: 100%;
     height: 100%;
-    ${({ $align, $gap }) =>
+    ${({
+        $justifyContent,
+        $justifyItems,
+        $alignContent,
+        $alignItems,
+        $gap,
+        $padding,
+        $flexWrap,
+        $flexDirection,
+        $columnGap,
+        $rowGap,
+    }) =>
         Mixins.Flexbox({
-            $alignItems: $align === "bottom" ? "flex-start" : "center",
-            $justifyContent: $align === "bottom" ? "flex-end" : "center",
-            $flexDirection: "column",
-            $gap: $gap,
+            $flexDirection,
+            $alignContent: $alignContent,
+            $justifyItems: $justifyItems,
+            $justifyContent: $justifyContent,
+            $alignItems: $alignItems,
+            $gap,
+            $padding,
+            $flexWrap,
+            $columnGap,
+            $rowGap,
         })};
-    padding: ${Spacers.XXL} 5%;
-    text-align: ${({ $align }) => $align === "center" && "center"};
+    text-align: ${({ $textAlign }) => $textAlign};
     color: ${({ theme }) => theme.AllColors};
 
     & > * {
@@ -44,7 +79,7 @@ const Content = styled.div<{
 `
 
 const StyledCover = styled.div<{
-    $overlay?: "black" | "white" | "gradient-black" | "gradient-white"
+    $overlay?: "black" | "white" | "gradient-black" | "gradient-white" | "none"
     $height?: number | string
 }>`
     position: relative;
@@ -53,6 +88,7 @@ const StyledCover = styled.div<{
 
     ${({ $overlay }) =>
         $overlay &&
+        $overlay !== "none" &&
         css`
             &:before {
                 content: "";

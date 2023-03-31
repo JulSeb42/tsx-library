@@ -2,17 +2,15 @@
 
 /*==================== Imports ====================*/
 
-import React from "react"
-
 import { StyledIcon } from "./styles"
-import { IconProps } from "./type"
+import type { IconProps } from "./types"
 
 /*==================== Component ====================*/
 
-const PlusIcon = ({
+export const PlusIcon = ({
     size = 64,
     color = "currentColor",
-    ...props
+    ...rest
 }: IconProps) => (
     <StyledIcon
         width={size}
@@ -22,7 +20,7 @@ const PlusIcon = ({
         xmlns="http://www.w3.org/2000/svg"
         $size={size}
         $color={color}
-        {...props}
+        {...rest}
     >
         <path
             d="M19 11H13V5H11V11H5V13H11V19H13V13H19V11Z"
@@ -30,5 +28,3 @@ const PlusIcon = ({
         />
     </StyledIcon>
 )
-
-export default PlusIcon

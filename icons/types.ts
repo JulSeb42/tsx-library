@@ -1,8 +1,9 @@
 /*=============================================== Lib icons types ===============================================*/
 
-import { AllColorsTypes } from "../types"
+import type { HTMLAttributes } from "react"
+import type { AllColorsTypes } from "../types"
 
-export interface IconProps extends React.HTMLAttributes<HTMLOrSVGElement> {
+export interface IconProps extends HTMLAttributes<HTMLOrSVGElement> {
     size?: number
     color?: AllColorsTypes
 }

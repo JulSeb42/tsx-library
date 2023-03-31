@@ -1,14 +1,15 @@
 /*=============================================== Wrapper component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { WrapperProps } from "./types"
+import type { WrapperProps } from "./types"
 
 const Wrapper = forwardRef(
     (
         { as, template = "1col", gap = "l", children, ...rest }: WrapperProps,
-        ref?: React.ForwardedRef<HTMLDivElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => (
         <Styles.StyledWrapper
             ref={ref}

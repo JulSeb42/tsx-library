@@ -15,7 +15,7 @@ import {
     Breakpoints,
     Mixins,
 } from "../../"
-import {
+import type {
     AllColorsTypes,
     ColorsHoverTypes,
     FontSizeTypes,

@@ -3,15 +3,17 @@
 import styled from "styled-components"
 
 import { Mixins } from "../../"
-import { SpacersTypes } from "../../types"
+import type { SpacersTypes } from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledSection = styled.section<{ $gap?: SpacersTypes }>`
     ${({ $gap }) =>
-        Mixins.Grid({
+        Mixins.Flexbox({
+            $flexDirection: "column",
+            $alignItems: "flex-start",
             $gap,
-            $justifyItems: "start",
+            // $justifyItems: "start",
         })};
 
     & > div,
@@ -40,7 +42,7 @@ const StyledSection = styled.section<{ $gap?: SpacersTypes }>`
     & > select,
     & > textarea,
     & > form {
-        justify-self: stretch;
+        align-self: stretch;
     }
 `
 

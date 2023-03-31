@@ -1,13 +1,13 @@
 /*=============================================== Slideshow component ===============================================*/
 
-import React, { forwardRef, useState, useEffect, useCallback } from "react"
+import { forwardRef, useState, useEffect, useCallback } from "react"
+import type { ForwardedRef } from "react"
 
 import { Icon, uuid, Flexbox } from "../../"
-import ChevronLeftIcon from "../../icons/ChevronLeftIcon"
-import ChevronRightIcon from "../../icons/ChevronRightIcon"
+import { ChevronLeftIcon, ChevronRightIcon } from "../../icons"
 
 import * as Styles from "./styles"
-import { SlideshowProps, SlideshowButtonProps } from "./types"
+import type { SlideshowProps, SlideshowButtonProps } from "./types"
 
 const SlideshowButton = ({
     onClick,
@@ -59,7 +59,7 @@ const Slideshow = forwardRef(
             activeSlide = 0,
             ...rest
         }: SlideshowProps,
-        ref?: React.ForwardedRef<HTMLDivElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => {
         // Slideshow with buttons
         const [active, setActive] = useState(activeSlide)

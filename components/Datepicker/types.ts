@@ -1,18 +1,18 @@
 /*=============================================== Datepicker types ===============================================*/
 
-import React from "react"
+import type { InputHTMLAttributes } from "react"
 
-import { ShadowsTypes } from "../../types"
-import {
+import type { ShadowsTypes } from "../../types"
+import type {
     InputBackgroundTypes,
     ValidationComponentProps,
     InputVariantTypes,
 } from "../InputComponents/types"
-import { InputBaseProps } from "../InputContainer/types"
-import { ListDirectionTypes } from "../ListInputs/types"
+import type { InputBaseProps } from "../InputContainer/types"
+import type { ListDirectionTypes } from "../ListInputs/types"
 
 interface DatepickerPropsBase
-    extends React.InputHTMLAttributes<HTMLInputElement>,
+    extends InputHTMLAttributes<HTMLInputElement>,
         InputBaseProps,
         ValidationComponentProps {
     minDate?: Date
@@ -45,10 +45,10 @@ interface DatepickerPropsBase
     selectedDate: Date
     setSelectedDate: (selectedDate: Date) => void
     icons?: {
-        prev?: string
-        next?: string
-        calendar?: string
-        icon?: string
+        prev?: string | JSX.Element
+        next?: string | JSX.Element
+        calendar?: string | JSX.Element
+        icon?: string | JSX.Element
     }
     backgroundColor?: InputBackgroundTypes
     calendarDirection?: ListDirectionTypes

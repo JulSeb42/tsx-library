@@ -1,9 +1,10 @@
 /*=============================================== Flexbox component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { FlexboxProps } from "./types"
+import type { FlexboxProps } from "./types"
 
 const Flexbox = forwardRef(
     (
@@ -23,7 +24,7 @@ const Flexbox = forwardRef(
             children,
             ...rest
         }: FlexboxProps,
-        ref?: React.ForwardedRef<HTMLDivElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => (
         <Styles.StyledFlexbox
             ref={ref}

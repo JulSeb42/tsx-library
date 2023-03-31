@@ -1,13 +1,13 @@
 /*=============================================== Aside types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import {
+import type {
     SpacersTypes,
-    GridAlignContentTypes,
-    GridAlignItemsTypes,
-    GridJustifyContentTypes,
-    GridJustifyItemsTypes,
+    FlexAlignContentTypes,
+    FlexAlignItemsTypes,
+    FlexJustifyContentTypes,
+    FlexJustifyItemsTypes,
 } from "../../types"
 
 enum asideSizes {
@@ -25,14 +25,14 @@ const asidePositions = {
 
 export type AsidePositionTypes = keyof typeof asidePositions
 
-export interface AsideProps extends React.HTMLAttributes<HTMLDivElement> {
-    as?: React.ElementType
+export interface AsideProps extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
     gap?: SpacersTypes
     position?: AsidePositionTypes
-    alignContent?: GridAlignContentTypes
-    alignItems?: GridAlignItemsTypes
-    justifyContent?: GridJustifyContentTypes
-    justifyItems?: GridJustifyItemsTypes
+    alignContent?: FlexAlignContentTypes
+    alignItems?: FlexAlignItemsTypes
+    justifyContent?: FlexJustifyContentTypes
+    justifyItems?: FlexJustifyItemsTypes
     size?: AsideSizeTypes
     paddingTopBottom?: SpacersTypes
 }

@@ -1,11 +1,12 @@
 /*=============================================== FileInput ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import { RightContainer, ValidationComponent } from "../../InputComponents"
 
 import * as Styles from "../styles"
-import { FileInputProps } from "../types"
+import type { FileInputProps } from "../types"
 
 const FileInput = forwardRef(
     (
@@ -18,7 +19,7 @@ const FileInput = forwardRef(
             disabled,
             ...rest
         }: FileInputProps,
-        ref?: React.ForwardedRef<HTMLInputElement>
+        ref?: ForwardedRef<HTMLInputElement>
     ) => {
         const getValidationStatus =
             typeof validation === "object" ? validation?.status : validation

@@ -3,8 +3,8 @@
 import styled, { css } from "styled-components"
 
 import { Radiuses, Transitions, Breakpoints, Mixins } from "../../"
-import { ColorsHoverTypes } from "../../types"
-import { JustifyType } from "./types"
+import type { ColorsHoverTypes } from "../../types"
+import type { JustifyType } from "./types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 

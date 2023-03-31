@@ -1,9 +1,10 @@
 /*=============================================== Ul component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
-import { TextProps } from "../types"
 import { StyledUl } from "../styles"
+import type { TextProps } from "../types"
 
 const Ul = forwardRef(
     (
@@ -20,7 +21,7 @@ const Ul = forwardRef(
             maxLines,
             ...rest
         }: TextProps,
-        ref?: React.ForwardedRef<HTMLUListElement>
+        ref?: ForwardedRef<HTMLUListElement>
     ) => (
         <StyledUl
             ref={ref}

@@ -1,9 +1,10 @@
 /*=============================================== Grid component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { GridProps } from "./types"
+import type { GridProps } from "./types"
 
 const Grid = forwardRef(
     (
@@ -24,7 +25,7 @@ const Grid = forwardRef(
             children,
             ...rest
         }: GridProps,
-        ref?: React.ForwardedRef<HTMLDivElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => (
         <Styles.StyledGrid
             ref={ref}

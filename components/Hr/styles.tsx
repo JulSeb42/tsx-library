@@ -3,7 +3,7 @@
 import styled from "styled-components"
 
 import { stringifyPx, Mixins, Radiuses } from "../../"
-import { AllColorsTypes, SpacersTypes } from "../../types"
+import type { AllColorsTypes, SpacersTypes } from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 

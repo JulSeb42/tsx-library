@@ -11,8 +11,8 @@ import {
     Mixins,
     Text,
 } from "../../"
-import { ColorsHoverTypes } from "../../types"
-import { StepperDirectionType } from "./types"
+import type { ColorsHoverTypes } from "../../types"
+import type { StepperDirectionType } from "./types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
@@ -88,15 +88,15 @@ const Number = styled.span<{
 const StyledText = styled(Text).attrs({
     tag: "small",
 })<{
-    to?: string
+    $isLink?: boolean
     $accentColor?: ColorsHoverTypes
 }>`
     font-size: ${FontSizes.Small};
     text-decoration: none;
     color: ${({ theme }) => theme.Font};
 
-    ${({ to, $accentColor, theme }) =>
-        to &&
+    ${({ $isLink, $accentColor, theme }) =>
+        $isLink &&
         css`
             transition: ${Transitions.Short};
             color: ${theme.ColorsHoverDefault({ $color: $accentColor })};

@@ -1,15 +1,12 @@
 /*=============================================== Input components ===============================================*/
 
-import React from "react"
-
 import { Icon } from "../../"
-import CheckCircleIcon from "../../icons/CheckCircleIcon"
-import CloseCircleIcon from "../../icons/CloseCircleIcon"
+import { CheckCircleIcon, CloseCircleIcon } from "../../icons"
 
 import * as Styles from "./styles"
 import { InputBaseMixin } from "./styles"
 
-import {
+import type {
     RightContainerProps,
     IconComponentProps,
     ValidationComponentProps,
@@ -43,7 +40,7 @@ const IconComponent = ({
         }
         $variant={variant}
     >
-        <Icon src={icon} size={size} />
+        {typeof icon === "string" ? <Icon src={icon} size={size} /> : icon}
     </Styles.IconContainer>
 )
 

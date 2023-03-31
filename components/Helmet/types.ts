@@ -1,7 +1,6 @@
 /*=============================================== Helmet types ===============================================*/
 
-import React from "react"
-import { HelmetProps as HelmetTypes } from "react-helmet"
+import type { HelmetProps as HelmetTypes } from "react-helmet"
 
 export interface HelmetProps extends HelmetTypes {
     title: string

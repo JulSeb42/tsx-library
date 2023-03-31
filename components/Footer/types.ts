@@ -1,10 +1,13 @@
 /*=============================================== Footer types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import { AllColorsTypes, ColorsHoverTypes } from "../../types"
-import { FooterItemProps } from "../../types"
-import { RequireAtLeastOne } from "../../utils/RequireAtLeastOne"
+import type {
+    AllColorsTypes,
+    ColorsHoverTypes,
+    FooterItemProps,
+} from "../../types"
+import type { RequireAtLeastOne } from "../../utils/RequireAtLeastOne"
 
 enum directions {
     horizontal,
@@ -33,8 +36,8 @@ type FooterLogo2 = {
 
 type FooterLogo = FooterLogo1 | FooterLogo2
 
-interface FooterPropsBase extends React.HTMLAttributes<HTMLDivElement> {
-    as?: React.ElementType
+interface FooterPropsBase extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
     separator?: boolean | AllColorsTypes
     accentColor?: ColorsHoverTypes
 }

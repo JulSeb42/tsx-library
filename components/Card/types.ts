@@ -1,8 +1,8 @@
 /*=============================================== Card types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import {
+import type {
     RadiusesTypes,
     AllColorsTypes,
     ShadowsTypes,
@@ -11,10 +11,10 @@ import {
     CursorTypes,
     BorderStylesTypes,
 } from "../../types"
-import { FlexboxProps } from "../Flexbox/types"
+import type { FlexboxProps } from "../Flexbox/types"
 
-interface CardPropsBase extends React.HTMLAttributes<HTMLDivElement>, FlexboxProps {
-    as?: React.ElementType
+interface CardPropsBase extends HTMLAttributes<HTMLDivElement>, FlexboxProps {
+    as?: ElementType
     borderColor?: AllColorsTypes
     borderWidth?: number
     borderStyle?:
@@ -33,30 +33,19 @@ interface CardPropsBase extends React.HTMLAttributes<HTMLDivElement>, FlexboxPro
     shadow?: ShadowsTypes | BoxShadowProps
     backgroundColor?: AllColorsTypes
     textColor?: AllColorsTypes
+    to?: string
 }
 
 interface CardPropsBehaviour1 extends CardPropsBase {
-    to?: string
-    href?: never
-    blank?: boolean
-    onClick?: never
-}
-
-interface CardPropsBehaviour2 extends CardPropsBase {
-    to?: never
     href?: string
     blank?: boolean
     onClick?: never
 }
 
-interface CardPropsBehaviour3 extends CardPropsBase {
-    to?: never
+interface CardPropsBehaviour2 extends CardPropsBase {
     href?: never
     blank?: never
     onClick?: () => void
 }
 
-export type CardProps =
-    | CardPropsBehaviour1
-    | CardPropsBehaviour2
-    | CardPropsBehaviour3
+export type CardProps = CardPropsBehaviour1 | CardPropsBehaviour2

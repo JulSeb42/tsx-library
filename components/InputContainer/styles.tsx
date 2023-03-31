@@ -3,13 +3,16 @@
 import styled from "styled-components"
 
 import { FontWeights, Mixins, Text } from "../../"
-import { ColorsHoverTypes } from "../../types"
+import type { ColorsHoverTypes } from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
 const StyledInputContainer = styled.div`
-    ${Mixins.Grid({
+    ${Mixins.Flexbox({
+        $flexDirection: "column",
         $gap: "xxs",
+        $alignItems: "stretch",
+        $justifyItems: "stretch",
     })};
 `
 

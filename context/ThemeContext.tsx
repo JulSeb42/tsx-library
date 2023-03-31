@@ -1,9 +1,9 @@
 /*=============================================== useDarkMode ===============================================*/
 
-import React, { useState, createContext, useEffect } from "react"
+import { useState, createContext, useEffect } from "react"
 
 import { ThemeLight, ThemeDark } from "../Variables"
-import { ThemeContextProps } from "../utils/component-props"
+import type { ThemeContextProps } from "../types"
 
 const ThemeContext = createContext<ThemeContextProps | null>(null)
 
@@ -12,24 +12,30 @@ interface Props {
 }
 
 const ThemeProviderWrapper = ({ children }: Props) => {
-    const [selectedTheme, setSelectedTheme] = useState<any>(undefined)
+    const [selectedTheme, setSelectedTheme] = useState<"light" | "dark">(
+        "light"
+    )
     const [theme, setTheme] = useState(
         selectedTheme === "dark" ? ThemeDark : ThemeLight
     )
 
-    const body = document.body
-
     const toggleTheme = () => {
         if (selectedTheme === "light") {
             setSelectedTheme("dark")
-            localStorage.setItem("theme", "dark")
             setTheme(ThemeDark)
-            body.classList.add("dark")
+
+            if (typeof window !== "undefined") {
+                localStorage.setItem("theme", "dark")
+                document.body.classList.add("dark")
+            }
         } else {
             setSelectedTheme("light")
-            localStorage.setItem("theme", "light")
             setTheme(ThemeLight)
-            body.classList.remove("dark")
+
+            if (typeof window !== "undefined") {
+                localStorage.setItem("theme", "light")
+                document.body.classList.remove("dark")
+            }
         }
     }
 
@@ -42,19 +48,18 @@ const ThemeProviderWrapper = ({ children }: Props) => {
             ) {
                 setSelectedTheme("dark")
                 setTheme(ThemeDark)
+                document.body.classList.add("dark")
             } else if (localStorage.getItem("theme") === "dark") {
                 setSelectedTheme("dark")
                 setTheme(ThemeDark)
+                document.body.classList.add("dark")
             } else if (localStorage.getItem("theme") === "light") {
                 setSelectedTheme("light")
                 setTheme(ThemeLight)
+                document.body.classList.remove("dark")
             }
-
-            selectedTheme === "dark"
-                ? body.classList.add("dark")
-                : body.classList.remove("dark")
         }
-    }, [body.classList, selectedTheme])
+    }, [selectedTheme])
 
     return (
         <ThemeContext.Provider

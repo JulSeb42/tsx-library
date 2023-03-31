@@ -1,9 +1,10 @@
 /*=============================================== ListInputs component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import {
+import type {
     ListInputsProps,
     ListInputsItemProps,
     ListInputsChevronProps,
@@ -22,7 +23,7 @@ export const ListInputs = forwardRef(
             direction = "down",
             ...rest
         }: ListInputsProps,
-        ref?: React.ForwardedRef<HTMLDivElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => (
         <Styles.StyledListInputs
             ref={ref}
@@ -51,7 +52,7 @@ export const ListItem = forwardRef(
             readOnly,
             ...rest
         }: ListInputsItemProps,
-        ref?: React.ForwardedRef<HTMLSpanElement>
+        ref?: ForwardedRef<HTMLSpanElement>
     ) => (
         <Styles.Item
             ref={ref}
@@ -70,7 +71,7 @@ export const ListItem = forwardRef(
 export const Chevron = forwardRef(
     (
         { isOpen, color, icon, hasAnimation, ...rest }: ListInputsChevronProps,
-        ref?: React.ForwardedRef<HTMLOrSVGElement>
+        ref?: ForwardedRef<HTMLOrSVGElement>
     ) => {
         const props = {
             size: 16,
@@ -80,11 +81,15 @@ export const Chevron = forwardRef(
         }
 
         return icon ? (
-            <Styles.StyledIcon
-                src={icon}
-                $hasAnimation={hasAnimation}
-                {...props}
-            />
+            typeof icon === "string" ? (
+                <Styles.StyledIcon
+                    src={icon}
+                    $hasAnimation={hasAnimation}
+                    {...props}
+                />
+            ) : (
+                icon
+            )
         ) : (
             <Styles.StyledChevronDown {...props} {...rest} />
         )

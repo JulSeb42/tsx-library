@@ -1,11 +1,12 @@
 /*=============================================== ProgressBar component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import { SrOnly } from "../../"
 
 import * as Styles from "./styles"
-import { ProgressBarProps } from "./types"
+import type { ProgressBarProps } from "./types"
 
 const ProgressBar = forwardRef(
     (
@@ -23,7 +24,7 @@ const ProgressBar = forwardRef(
             speed,
             ...rest
         }: ProgressBarProps,
-        ref?: React.ForwardedRef<HTMLMeterElement>
+        ref?: ForwardedRef<HTMLMeterElement>
     ) => (
         <Styles.StyledProgressBar
             ref={ref}

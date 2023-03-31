@@ -1,12 +1,13 @@
 /*=============================================== Header component ===============================================*/
 
-import React, { forwardRef, useState, useRef, useEffect } from "react"
+import { forwardRef, useState, useRef, useEffect } from "react"
+import type { ForwardedRef, ChangeEvent, FormEvent } from "react"
 import { useNavigate, createSearchParams } from "react-router-dom"
 
 import { Input, useKeyPress, useClickOutside, useMaxWidth } from "../../"
 
 import * as Styles from "./styles"
-import { HeaderProps } from "./types"
+import type { HeaderProps } from "./types"
 
 const Header = forwardRef(
     (
@@ -27,7 +28,7 @@ const Header = forwardRef(
             hideOnScroll,
             ...rest
         }: HeaderProps,
-        ref?: React.ForwardedRef<HTMLDivElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => {
         const [isOpen, setIsOpen] = useState(false)
 
@@ -60,17 +61,17 @@ const Header = forwardRef(
         const navigate = useNavigate()
 
         const [searchValue, setSearchValue] = useState("")
-        const handleSearchValue = (e: React.ChangeEvent<HTMLInputElement>) =>
+        const handleSearchValue = (e: ChangeEvent<HTMLInputElement>) =>
             setSearchValue(e.target.value)
 
-        const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault()
 
             navigate({
                 pathname: search?.pathname,
                 search: createSearchParams({
                     query: searchValue,
-                    ...search?.search
+                    ...search?.search,
                 }).toString(),
             })
 
@@ -89,6 +90,7 @@ const Header = forwardRef(
             search && (
                 <Styles.SearchForm
                     onSubmit={handleSubmit}
+                    role="search"
                     $maxWidth={search?.maxWidth || 300}
                 >
                     <Input
@@ -166,7 +168,7 @@ const Header = forwardRef(
             >
                 {burgerPosition === "left" && burgerFunction()}
 
-                <Styles.Logo to={logo.to || "/"}>
+                <Styles.Logo href={logo.href || "/"}>
                     {logo.img ? (
                         <Styles.LogoImg
                             src={logo.img}

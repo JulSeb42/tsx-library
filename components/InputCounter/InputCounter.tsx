@@ -1,14 +1,14 @@
 /*=============================================== InputCounter component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef, ChangeEvent } from "react"
 
 import { ButtonIcon } from "../../"
+import { MinusIcon, PlusIcon } from "../../icons"
 import { InputContainer } from "../InputContainer"
-import MinusIcon from "../../icons/MinusIcon"
-import PlusIcon from "../../icons/PlusIcon"
 
 import * as Styles from "./styles"
-import { InputCounterProps } from "./types"
+import type { InputCounterProps } from "./types"
 
 const InputCounter = forwardRef(
     (
@@ -33,7 +33,7 @@ const InputCounter = forwardRef(
             showButtonsLabels,
             ...rest
         }: InputCounterProps,
-        ref?: React.ForwardedRef<HTMLInputElement>
+        ref?: ForwardedRef<HTMLInputElement>
     ) => {
         const handleMinus = () =>
             setValue(
@@ -53,7 +53,7 @@ const InputCounter = forwardRef(
                     : value + step
             )
 
-        const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
             const active = parseFloat(e.target.value)
             setValue(
                 min && active < min ? min : max && active > max ? max : active
@@ -84,19 +84,15 @@ const InputCounter = forwardRef(
 
         const inputFn = () => (
             <Styles.StyledInputCounter>
-                {icons?.minus ? (
-                    <ButtonIcon
-                        icon={icons?.minus}
-                        type="button"
-                        {...propsButtons.minus}
-                    />
-                ) : (
-                    <ButtonIcon
-                        libicon={<MinusIcon size={optionsButton.size * 0.7} />}
-                        type="button"
-                        {...propsButtons.minus}
-                    />
-                )}
+                <ButtonIcon
+                    icon={
+                        icons?.minus || (
+                            <MinusIcon size={optionsButton.size * 0.7} />
+                        )
+                    }
+                    type="button"
+                    {...propsButtons.minus}
+                />
 
                 {isInputEditable ? (
                     <Styles.Input
@@ -125,19 +121,15 @@ const InputCounter = forwardRef(
                     </Styles.Input>
                 )}
 
-                {icons?.plus ? (
-                    <ButtonIcon
-                        icon={icons?.plus}
-                        type="button"
-                        {...propsButtons.plus}
-                    />
-                ) : (
-                    <ButtonIcon
-                        libicon={<PlusIcon size={optionsButton.size * 0.7} />}
-                        type="button"
-                        {...propsButtons.plus}
-                    />
-                )}
+                <ButtonIcon
+                    icon={
+                        icons?.plus || (
+                            <PlusIcon size={optionsButton.size * 0.7} />
+                        )
+                    }
+                    type="button"
+                    {...propsButtons.plus}
+                />
             </Styles.StyledInputCounter>
         )
 

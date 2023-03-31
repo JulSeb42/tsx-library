@@ -1,9 +1,10 @@
 /*=============================================== Main component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { MainProps } from "./types"
+import type { MainProps } from "./types"
 
 const Main = forwardRef(
     (
@@ -11,17 +12,17 @@ const Main = forwardRef(
             as,
             gap = "l",
             position = 1,
-            alignContent = "start",
-            alignItems = "start",
-            justifyContent = "stretch",
-            justifyItems = "start",
+            alignContent = "stretch",
+            alignItems = "stretch",
+            justifyContent = "flex-start",
+            justifyItems = "flex-start",
             size = "default",
             contentSize = "default",
             children,
             paddingTopBottom = "xxl",
             ...rest
         }: MainProps,
-        ref?: React.ForwardedRef<HTMLDivElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => (
         <Styles.StyledMain
             ref={ref}

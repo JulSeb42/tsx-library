@@ -1,9 +1,10 @@
 /*=============================================== InputCheck component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { InputCheckProps } from "./types"
+import type { InputCheckProps } from "./types"
 
 const InputCheck = forwardRef(
     (
@@ -18,7 +19,7 @@ const InputCheck = forwardRef(
             disabled,
             ...rest
         }: InputCheckProps,
-        ref?: React.ForwardedRef<HTMLInputElement>
+        ref?: ForwardedRef<HTMLInputElement>
     ) => (
         <Styles.StyledInputCheck>
             <Styles.Input

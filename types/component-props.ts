@@ -1,21 +1,28 @@
 /*=============================================== Component types ===============================================*/
 
-import React from "react"
+import type {
+    ReactNode,
+    ChangeEvent,
+    MouseEvent,
+    HTMLAttributes,
+    ButtonHTMLAttributes,
+    ForwardedRef,
+} from "react"
 
-import { AllColorsTypes, ColorsHoverTypes } from "./common-types"
+import type { AllColorsTypes, ColorsHoverTypes } from "./common-types"
 
 /*==================== Accordion item ====================*/
 
 export type AccordionItemProps = {
     title: string
     isOpen?: boolean
-    content: string | React.ReactNode
+    content: string | ReactNode
 }
 
 /*==================== Breadcrumbs item ====================*/
 
 export type BreadcrumbsItemProps = {
-    to?: string
+    href?: string
     text: string
 }
 
@@ -32,22 +39,22 @@ export type MessageProps = {
 
 export type TabsItemProps = {
     title: string
-    content: string | React.ReactNode
+    content: string | ReactNode
 }
 
 /*==================== Stepper step ====================*/
 
 export type StepProps = {
     text: string
-    to?: string
+    href?: string
 }
 
 /*==================== useForm ====================*/
 
 export type BaseUseFormType = {
-    handleInputs: (e: React.ChangeEvent<HTMLInputElement>) => void
+    handleInputs: (e: ChangeEvent<HTMLInputElement>) => void
     resetForm: () => void
-    handleSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void
+    handleSubmit: (e: ChangeEvent<HTMLFormElement>) => void
 }
 
 /*==================== Footer links ====================*/
@@ -57,22 +64,13 @@ type FooterLinksBase = {
 }
 
 type PossibleFooterBehaviour1 = FooterLinksBase & {
-    onClick?: never
-    to: string
-    href?: never
-    blank?: boolean
-}
-
-type PossibleFooterBehaviour2 = FooterLinksBase & {
-    onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
-    to?: never
+    onClick: (e: MouseEvent<HTMLButtonElement>) => void
     href?: never
     blank?: never
 }
 
-type PossibleFooterBehaviour3 = FooterLinksBase & {
+type PossibleFooterBehaviour2 = FooterLinksBase & {
     onClick?: never
-    to?: never
     href: string
     blank?: boolean
 }
@@ -80,7 +78,6 @@ type PossibleFooterBehaviour3 = FooterLinksBase & {
 export type FooterItemProps =
     | PossibleFooterBehaviour1
     | PossibleFooterBehaviour2
-    | PossibleFooterBehaviour3
 
 /*==================== Theme ====================*/
 
@@ -92,19 +89,17 @@ export type ThemeContextProps = {
 
 /*==================== ButtonGroup ====================*/
 
-type ButtonGroupPropsBase = React.HTMLAttributes<
+type ButtonGroupPropsBase = HTMLAttributes<
     HTMLButtonElement & HTMLHyperlinkElementUtils
 > &
-    React.ButtonHTMLAttributes<
-        HTMLButtonElement & HTMLHyperlinkElementUtils
-    > & {
+    ButtonHTMLAttributes<HTMLButtonElement & HTMLHyperlinkElementUtils> & {
         "aria-label"?: string
     }
 
 type ButtonGroupPropsContent1 = ButtonGroupPropsBase & {
     text: string
-    iconLeft?: string
-    iconRight?: string
+    iconLeft?: string | JSX.Element
+    iconRight?: string | JSX.Element
     iconOnly?: never
 }
 
@@ -112,7 +107,7 @@ type ButtonGroupPropsContent2 = ButtonGroupPropsBase & {
     text?: never
     iconLeft?: never
     iconRight?: never
-    iconOnly: string
+    iconOnly: string | JSX.Element
 }
 
 type ButtonGroupPropsContent =
@@ -120,22 +115,13 @@ type ButtonGroupPropsContent =
     | ButtonGroupPropsContent2
 
 type ButtonGroupPropsBehaviour1 = ButtonGroupPropsContent & {
-    onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
-    to?: never
+    onClick: (e: MouseEvent<HTMLButtonElement>) => void
     href?: never
     blank?: never
 }
 
 type ButtonGroupPropsBehaviour2 = ButtonGroupPropsContent & {
     onClick?: never
-    to: string
-    href?: never
-    blank?: boolean
-}
-
-type ButtonGroupPropsBehaviour3 = ButtonGroupPropsContent & {
-    onClick?: never
-    to?: never
     href: string
     blank?: boolean
 }
@@ -143,18 +129,17 @@ type ButtonGroupPropsBehaviour3 = ButtonGroupPropsContent & {
 export type ButtonGroupProps =
     | ButtonGroupPropsBehaviour1
     | ButtonGroupPropsBehaviour2
-    | ButtonGroupPropsBehaviour3
 
 /*==================== ListGroup ====================*/
 
 type ListGroupPropsBase = {
     text: string
     subtext?: string
-    ref?: React.ForwardedRef<HTMLSpanElement>
+    ref?: ForwardedRef<HTMLSpanElement>
 }
 
 type ListGroupPropsContent1 = ListGroupPropsBase & {
-    badge?: true | string | number
+    badge?: true | string | JSX.Element | number
     badgeColor?: AllColorsTypes
     badgeContentColor?: AllColorsTypes
     date?: never
@@ -170,7 +155,6 @@ type ListGroupPropsContent2 = ListGroupPropsBase & {
 type ListGroupPropsContent = ListGroupPropsContent1 | ListGroupPropsContent2
 
 type ListGroupPropsBehaviour0 = ListGroupPropsContent & {
-    to?: undefined
     href?: undefined
     blank?: undefined
     onClick?: undefined
@@ -179,16 +163,6 @@ type ListGroupPropsBehaviour0 = ListGroupPropsContent & {
 }
 
 type ListGroupPropsBehaviour1 = ListGroupPropsContent & {
-    to?: string
-    href?: never
-    blank?: boolean
-    onClick?: never
-    disabled?: never
-    color?: ColorsHoverTypes
-}
-
-type ListGroupPropsBehaviour2 = ListGroupPropsContent & {
-    to?: never
     href?: string
     blank?: boolean
     onClick?: never
@@ -196,11 +170,10 @@ type ListGroupPropsBehaviour2 = ListGroupPropsContent & {
     color?: ColorsHoverTypes
 }
 
-type ListGroupPropsBehaviour3 = ListGroupPropsContent & {
-    to?: never
+type ListGroupPropsBehaviour2 = ListGroupPropsContent & {
     href?: never
     blank?: never
-    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
+    onClick?: (e: MouseEvent<HTMLButtonElement>) => void
     disabled?: boolean
     color?: ColorsHoverTypes
 }
@@ -209,7 +182,6 @@ export type ListGroupItemProps =
     | ListGroupPropsBehaviour0
     | ListGroupPropsBehaviour1
     | ListGroupPropsBehaviour2
-    | ListGroupPropsBehaviour3
 
 /*==================== Icon menu ====================*/
 
@@ -219,22 +191,13 @@ type IconMenuPropsBase = {
 }
 
 type PossibleIconMenuBehaviour1 = IconMenuPropsBase & {
-    onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
-    to?: never
+    onClick: (e: MouseEvent<HTMLButtonElement>) => void
     href?: never
     blank?: never
 }
 
 type PossibleIconMenuBehaviour2 = IconMenuPropsBase & {
     onClick?: never
-    to: string
-    href?: never
-    blank?: boolean
-}
-
-type PossibleIconMenuBehaviour3 = IconMenuPropsBase & {
-    onClick?: never
-    to?: never
     href: string
     blank?: boolean
 }
@@ -242,7 +205,6 @@ type PossibleIconMenuBehaviour3 = IconMenuPropsBase & {
 export type IconMenuItemProps =
     | PossibleIconMenuBehaviour1
     | PossibleIconMenuBehaviour2
-    | PossibleIconMenuBehaviour3
 
 /*==================== Country ====================*/
 

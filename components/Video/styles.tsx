@@ -3,7 +3,7 @@
 import styled from "styled-components"
 
 import { stringifyPx } from "../../"
-import { ObjectFitTypes } from "../../types"
+import type { ObjectFitTypes } from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 

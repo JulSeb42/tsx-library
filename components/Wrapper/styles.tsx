@@ -4,12 +4,12 @@ import styled from "styled-components"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 import { Mixins, Layouts } from "../../"
-import { SpacersTypes } from "../../types"
-import { TemplateType } from "./types"
+import type { SpacersTypes } from "../../types"
+import type { WrapperTemplateType } from "./types"
 
 const StyledWrapper = styled.div<{
     $gap?: SpacersTypes
-    $template?: TemplateType
+    $template?: WrapperTemplateType
 }>`
     display: grid;
     grid-template-columns: ${({ $template }) =>

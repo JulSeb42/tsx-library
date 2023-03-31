@@ -1,9 +1,10 @@
 /*=============================================== Dl component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
-import { TextProps } from "../types"
 import { StyledDl } from "../styles"
+import type { TextProps } from "../types"
 
 const Dl = forwardRef(
     (
@@ -21,7 +22,7 @@ const Dl = forwardRef(
             maxLines,
             ...rest
         }: TextProps,
-        ref?: React.ForwardedRef<HTMLDListElement>
+        ref?: ForwardedRef<HTMLDListElement>
     ) => (
         <StyledDl
             ref={ref}

@@ -1,6 +1,7 @@
 /*=============================================== TimeInput ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import {
     RightContainer,
@@ -9,7 +10,7 @@ import {
 } from "../../InputComponents"
 
 import * as Styles from "../styles"
-import { TimeInputProps } from "../types"
+import type { TimeInputProps } from "../types"
 
 const TimeInput = forwardRef(
     (
@@ -25,7 +26,7 @@ const TimeInput = forwardRef(
             disabled,
             ...rest
         }: TimeInputProps,
-        ref?: React.ForwardedRef<HTMLInputElement>
+        ref?: ForwardedRef<HTMLInputElement>
     ) => {
         const getValidationStatus =
             typeof validation === "object" ? validation?.status : validation

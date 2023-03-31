@@ -1,13 +1,13 @@
 /*=============================================== Breadcrumbs component ===============================================*/
 
-import React, { forwardRef } from "react"
-import { Link } from "react-router-dom"
+import { forwardRef, Fragment } from "react"
+import type { ForwardedRef } from "react"
 
 import { Icon, uuid } from "../../"
-import ChevronRightIcon from "../../icons/ChevronRightIcon"
+import { ChevronRightIcon } from "../../icons"
 
 import * as Styles from "./styles"
-import { BreadcrumbsProps } from "./types"
+import type { BreadcrumbsProps } from "./types"
 
 const Breadcrumbs = forwardRef(
     (
@@ -20,7 +20,7 @@ const Breadcrumbs = forwardRef(
             customIcon,
             ...rest
         }: BreadcrumbsProps,
-        ref?: React.ForwardedRef<HTMLParagraphElement>
+        ref?: ForwardedRef<HTMLParagraphElement>
     ) => (
         <Styles.StyledBreadcrumbs
             ref={ref}
@@ -30,16 +30,16 @@ const Breadcrumbs = forwardRef(
             $separator={separator}
             {...rest}
         >
-            {items.map(({ text, to }) => (
-                <React.Fragment key={uuid()}>
+            {items.map(({ text, href }) => (
+                <Fragment key={uuid()}>
                     <Styles.Item
-                        as={to ? Link : "span"}
-                        to={to ? to : undefined}
+                        as={href ? "a" : "span"}
+                        href={href ? href : undefined}
                     >
                         {text}
                     </Styles.Item>
 
-                    {to && (
+                    {href && (
                         <Styles.Separator
                             $separator={separator || "slash"}
                             $customIcon={!!customIcon}
@@ -57,7 +57,7 @@ const Breadcrumbs = forwardRef(
                             )}
                         </Styles.Separator>
                     )}
-                </React.Fragment>
+                </Fragment>
             ))}
         </Styles.StyledBreadcrumbs>
     )

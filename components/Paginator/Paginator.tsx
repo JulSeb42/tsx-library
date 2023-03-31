@@ -1,6 +1,7 @@
 /*=============================================== Paginator component ===============================================*/
 
-import React, { forwardRef, useState } from "react"
+import { forwardRef, useState } from "react"
+import type { ForwardedRef, ChangeEvent } from "react"
 import {
     useNavigate,
     createSearchParams,
@@ -8,12 +9,11 @@ import {
 } from "react-router-dom"
 
 import { Text, ButtonIcon } from "../../"
-import ChevronLeftIcon from "../../icons/ChevronLeftIcon"
-import ChevronRightIcon from "../../icons/ChevronRightIcon"
+import { ChevronLeftIcon, ChevronRightIcon } from "../../icons"
 import usePaginationNav from "../../utils/pagination-nav"
 
 import * as Styles from "./styles"
-import { PaginatorProps } from "./types"
+import type { PaginatorProps } from "./types"
 
 const Paginator = forwardRef(
     (
@@ -40,7 +40,7 @@ const Paginator = forwardRef(
             page,
             ...rest
         }: PaginatorProps,
-        ref?: React.ForwardedRef<HTMLDivElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => {
         const navigate = useNavigate()
 
@@ -58,7 +58,7 @@ const Paginator = forwardRef(
             queries
         )
 
-        const handlePage = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const handlePage = (e: ChangeEvent<HTMLInputElement>) => {
             const page =
                 parseInt(e.target.value) > totalPages
                     ? totalPages
@@ -140,61 +140,39 @@ const Paginator = forwardRef(
                     text()
                 )}
 
-                {icons?.prev ? (
-                    buttons?.variant === "transparent" ? (
-                        <ButtonIcon
-                            icon={icons.prev}
-                            variant={buttons?.variant}
-                            hoverBackground={buttons?.hoverBackground}
-                            {...buttonPrev}
-                        />
-                    ) : (
-                        <ButtonIcon
-                            icon={icons.prev}
-                            variant={buttons?.variant}
-                            {...buttonPrev}
-                        />
-                    )
-                ) : buttons?.variant === "transparent" ? (
+                {buttons?.variant === "transparent" ? (
                     <ButtonIcon
-                        libicon={<ChevronLeftIcon size={24 * 0.7} />}
+                        icon={
+                            icons?.prev || <ChevronLeftIcon size={24 * 0.7} />
+                        }
                         variant={buttons?.variant}
                         hoverBackground={buttons?.hoverBackground}
                         {...buttonPrev}
                     />
                 ) : (
                     <ButtonIcon
-                        libicon={<ChevronLeftIcon size={24 * 0.7} />}
+                        icon={
+                            icons?.prev || <ChevronLeftIcon size={24 * 0.7} />
+                        }
                         variant={buttons?.variant}
                         {...buttonPrev}
                     />
                 )}
 
-                {icons?.next ? (
-                    buttons?.variant === "transparent" ? (
-                        <ButtonIcon
-                            icon={icons.next}
-                            variant={buttons?.variant}
-                            hoverBackground={buttons?.hoverBackground}
-                            {...buttonNext}
-                        />
-                    ) : (
-                        <ButtonIcon
-                            icon={icons.next}
-                            variant={buttons?.variant}
-                            {...buttonNext}
-                        />
-                    )
-                ) : buttons?.variant === "transparent" ? (
+                {buttons?.variant === "transparent" ? (
                     <ButtonIcon
-                        libicon={<ChevronRightIcon size={24 * 0.7} />}
+                        icon={
+                            icons?.next || <ChevronRightIcon size={24 * 0.7} />
+                        }
                         variant={buttons?.variant}
                         hoverBackground={buttons?.hoverBackground}
                         {...buttonNext}
                     />
                 ) : (
                     <ButtonIcon
-                        libicon={<ChevronRightIcon size={24 * 0.7} />}
+                        icon={
+                            icons?.next || <ChevronRightIcon size={24 * 0.7} />
+                        }
                         variant={buttons?.variant}
                         {...buttonNext}
                     />

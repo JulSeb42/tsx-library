@@ -1,7 +1,7 @@
 /*=============================================== Wrapper types ===============================================*/
 
-import React from "react"
-import { SpacersTypes } from "../../types"
+import type { HTMLAttributes, ElementType } from "react"
+import type { SpacersTypes } from "../../types"
 
 enum templates {
     "1col",
@@ -9,10 +9,10 @@ enum templates {
     "3cols",
 }
 
-export type TemplateType = keyof typeof templates
+export type WrapperTemplateType = keyof typeof templates
 
-export interface WrapperProps extends React.HTMLAttributes<HTMLDivElement> {
-    as?: React.ElementType
-    template?: TemplateType
+export interface WrapperProps extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
+    template?: WrapperTemplateType
     gap?: SpacersTypes
 }

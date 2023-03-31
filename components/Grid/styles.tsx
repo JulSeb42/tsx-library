@@ -3,7 +3,7 @@
 import styled, { css } from "styled-components"
 
 import { Mixins, Breakpoints } from "../../"
-import {
+import type {
     SpacersTypes,
     GridAlignContentTypes,
     GridAlignItemsTypes,

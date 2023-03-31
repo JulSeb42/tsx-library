@@ -1,23 +1,36 @@
 /*=============================================== Cover types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import { SpacersTypes, AllColorsTypes } from "../../types"
+import type {
+    SpacersTypes,
+    AllColorsTypes,
+    FlexAlignContentTypes,
+    FlexAlignItemsTypes,
+    FlexDirectionTypes,
+    FlexJustifyContentTypes,
+    FlexJustifyItemsTypes,
+    FlexWrapTypes,
+    TextAlignTypes,
+    PaddingTypes,
+} from "../../types"
 
-enum align {
-    center,
-    bottom,
-}
-
-export type CoverAlignTypes = keyof typeof align
-
-export interface CoverProps extends React.HTMLAttributes<HTMLDivElement> {
-    as?: React.ElementType
+export interface CoverProps extends HTMLAttributes<HTMLElement> {
+    as?: ElementType
     src: string
     alt: string
-    overlay?: "black" | "white" | "gradient-black" | "gradient-white"
-    align?: CoverAlignTypes
+    overlay?: "black" | "white" | "gradient-black" | "gradient-white" | "none"
     height?: number | string
-    gap?: SpacersTypes
     textColor?: AllColorsTypes
+    textAlign?: TextAlignTypes
+    flexDirection?: FlexDirectionTypes
+    flexWrap?: FlexWrapTypes
+    justifyContent?: FlexJustifyContentTypes
+    alignItems?: FlexAlignItemsTypes
+    justifyItems?: FlexJustifyItemsTypes
+    alignContent?: FlexAlignContentTypes
+    gap?: SpacersTypes
+    columnGap?: SpacersTypes
+    rowGap?: SpacersTypes
+    padding?: PaddingTypes
 }

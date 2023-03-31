@@ -1,21 +1,22 @@
 /*=============================================== Form types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, MouseEvent } from "react"
 
-import { ColorsHoverTypes, SpacersTypes } from "../../types"
+import type { ColorsHoverTypes, SpacersTypes } from "../../types"
 
-interface BaseFormProps extends React.HTMLAttributes<HTMLFormElement> {
+interface BaseFormProps extends HTMLAttributes<HTMLFormElement> {
     buttonPrimary?:
         | string
         | {
               text: string
-              iconLeft?: string
-              iconRight?: string
+              iconLeft?: string | JSX.Element
+              iconRight?: string | JSX.Element
           }
     accentColor?: ColorsHoverTypes
     isLoading?: boolean
     disabled?: boolean
     gap?: SpacersTypes
+    maxWidth?: string | number
 }
 
 interface ButtonSecondary1 extends BaseFormProps {
@@ -23,7 +24,7 @@ interface ButtonSecondary1 extends BaseFormProps {
         text?: "prev" | string | undefined
         iconLeft?: string
         iconRight?: string
-        to: string | undefined
+        href: string | undefined
         onClick?: never
     }
 }
@@ -33,8 +34,8 @@ interface ButtonSecondary2 extends BaseFormProps {
         text?: string | undefined
         iconLeft?: string
         iconRight?: string
-        to?: never
-        onClick: (e: React.MouseEvent<HTMLButtonElement>) => void | undefined
+        href?: never
+        onClick: (e: MouseEvent<HTMLButtonElement>) => void | undefined
     }
 }
 

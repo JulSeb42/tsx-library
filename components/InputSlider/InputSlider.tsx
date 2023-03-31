@@ -1,12 +1,13 @@
 /*=============================================== InputSlider component ===============================================*/
 
-import React, { forwardRef, useState } from "react"
+import { forwardRef, useState } from "react"
+import type { ForwardedRef } from "react"
 
 import { Flexbox, Text, getPercentage } from "../../"
 import { InputContainer } from "../InputContainer"
 
 import * as Styles from "./styles"
-import { InputSliderProps } from "./types"
+import type { InputSliderProps } from "./types"
 
 const InputSlider = forwardRef(
     (
@@ -25,7 +26,7 @@ const InputSlider = forwardRef(
             accentColor = "primary",
             ...rest
         }: InputSliderProps,
-        ref?: React.ForwardedRef<HTMLInputElement>
+        ref?: ForwardedRef<HTMLInputElement>
     ) => {
         const [isVisible, setIsVisible] = useState(
             typeof showValue === "object" && showValue.onlyHover ? false : true

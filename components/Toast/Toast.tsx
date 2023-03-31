@@ -1,12 +1,14 @@
 /*=============================================== Toast component ===============================================*/
 
-import React, { forwardRef, useState } from "react"
+import { forwardRef, useState } from "react"
+import type { ForwardedRef } from "react"
 
 import { Text, ButtonIcon, Icon } from "../../"
-import CloseIcon from "../../icons/CloseIcon"
+import { CloseIcon } from "../../icons"
+import { getLineHeight } from "../../utils/get-line-height"
 
 import * as Styles from "./styles"
-import { ToastProps } from "./types"
+import type { ToastProps } from "./types"
 
 const Toast = forwardRef(
     (
@@ -29,7 +31,7 @@ const Toast = forwardRef(
             padding = "m",
             ...rest
         }: ToastProps,
-        ref?: React.ForwardedRef<HTMLDivElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => {
         const [isClosed, setIsClosed] = useState(false)
 
@@ -78,45 +80,50 @@ const Toast = forwardRef(
                         }
                     >
                         {icon && (
-                            <Icon
-                                src={
-                                    typeof icon === "object" ? icon.name : icon
-                                }
-                                size={
-                                    typeof icon === "object" && icon.size
-                                        ? icon.size
-                                        : 24
-                                }
-                                color={
-                                    typeof icon === "object" && icon.color
-                                        ? icon.color
-                                        : "primary"
-                                }
-                            />
+                            <Styles.IconContainer
+                                $height={getLineHeight(titleTag)}
+                            >
+                                <Icon
+                                    src={
+                                        typeof icon === "object"
+                                            ? icon.name
+                                            : icon
+                                    }
+                                    size={
+                                        typeof icon === "object" && icon.size
+                                            ? icon.size
+                                            : 24
+                                    }
+                                    color={
+                                        typeof icon === "object" && icon.color
+                                            ? icon.color
+                                            : "primary"
+                                    }
+                                />
+                            </Styles.IconContainer>
                         )}
 
                         {titleFn()}
 
-                        {close &&
-                            (typeof close === "string" ? (
-                                <ButtonIcon
-                                    icon={close}
-                                    variant="transparent"
-                                    label={labelClose}
-                                    {...closeProps}
-                                />
-                            ) : (
-                                <ButtonIcon
-                                    libicon={<CloseIcon size={32 * 0.7} />}
-                                    variant="transparent"
-                                    label={labelClose}
-                                    {...closeProps}
-                                />
-                            ))}
+                        {close && (
+                            <ButtonIcon
+                                icon={
+                                    typeof close === "string" ? (
+                                        close
+                                    ) : (
+                                        <CloseIcon size={32 * 0.7} />
+                                    )
+                                }
+                                variant="transparent"
+                                label={labelClose}
+                                {...closeProps}
+                            />
+                        )}
                     </Styles.TitleContainer>
                 ) : (
                     titleFn()
                 )}
+
                 {children && (
                     <Styles.Content
                         as={typeof children === "string" ? Text : "div"}

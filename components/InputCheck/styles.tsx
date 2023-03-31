@@ -11,7 +11,7 @@ import {
     FontSizes,
     FontWeights,
 } from "../../"
-import { ValidationTypes, ColorsHoverTypes } from "../../types"
+import type { ValidationTypes, ColorsHoverTypes } from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 

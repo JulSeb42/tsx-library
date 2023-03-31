@@ -2,27 +2,11 @@
 
 import { css } from "styled-components"
 import Mixins from "./Mixins"
-import {
+import type {
     AllColorsTypes,
     ColorsShortTypes,
     ColorsHoverTypes,
-} from "./utils/common-types"
-
-// eslint-disable-next-line
-import {
-    // eslint-disable-next-line
-    OverlayProps,
-    // eslint-disable-next-line
-    SpacersProps,
-    // eslint-disable-next-line
-    RadiusesProps,
-    // eslint-disable-next-line
-    ShadowsProps,
-    // eslint-disable-next-line
-    GridProps,
-    // eslint-disable-next-line
-    FlexProps,
-} from "./Mixins"
+} from "./types"
 
 /*==================== Types ====================*/
 
@@ -124,12 +108,21 @@ const ThemeLight = {
     Warning900: "var(--color-light-warning-900)",
     Background: "var(--color-light-background)",
     Font: "var(--color-light-font)",
+
     LinkFontDefault: "var(--color-light-link-font-default)",
     LinkFontHover: "var(--color-light-link-font-hover)",
     LinkFontActive: "var(--color-light-link-font-active)",
     LinkBackgroundDefault: "var(--color-light-link-background-default)",
     LinkBackgroundHover: "var(--color-light-link-background-hover)",
     LinkBackgroundActive: "var(--color-light-link-background-active)",
+
+    GhostFontDefault: "var(--color-light-font-ghost-default)",
+    GhostFontHover: "var(--color-light-font-ghost-hover)",
+    GhostFontActive: "var(--color-light-font-ghost-active)",
+
+    GhostBackgroundDefault: "var(--color-light-background-ghost-default)",
+    GhostBackgroundHover: "var(--color-light-background-ghost-hover)",
+    GhostBackgroundActive: "var(--color-light-background-ghost-active)",
 
     /*==== Mixins ====*/
 
@@ -363,6 +356,69 @@ const ThemeLight = {
                 : ""}
         `,
 
+    ColorsGhostDefault: ({ $color }: ColorsHoverProps) =>
+        css`
+            ${$color === "primary"
+                ? ThemeLight.Primary50
+                : $color === "secondary"
+                ? ThemeLight.Secondary50
+                : $color === "success"
+                ? ThemeLight.Success50
+                : $color === "danger"
+                ? ThemeLight.Danger50
+                : $color === "warning"
+                ? ThemeLight.Warning50
+                : $color === "white"
+                ? ThemeLight.Gray50
+                : $color === "background"
+                ? ThemeLight.GhostBackgroundDefault
+                : $color === "font"
+                ? ThemeLight.GhostFontDefault
+                : ""}
+        `,
+
+    ColorsGhostHover: ({ $color }: ColorsHoverProps) =>
+        css`
+            ${$color === "primary"
+                ? ThemeLight.Primary200
+                : $color === "secondary"
+                ? ThemeLight.Secondary200
+                : $color === "success"
+                ? ThemeLight.Success200
+                : $color === "danger"
+                ? ThemeLight.Danger200
+                : $color === "warning"
+                ? ThemeLight.Warning200
+                : $color === "white"
+                ? ThemeLight.Gray200
+                : $color === "background"
+                ? ThemeLight.GhostBackgroundHover
+                : $color === "font"
+                ? ThemeLight.GhostFontHover
+                : ""}
+        `,
+
+    ColorsGhostActive: ({ $color }: ColorsHoverProps) =>
+        css`
+            ${$color === "primary"
+                ? ThemeLight.Primary100
+                : $color === "secondary"
+                ? ThemeLight.Secondary100
+                : $color === "success"
+                ? ThemeLight.Success100
+                : $color === "danger"
+                ? ThemeLight.Danger100
+                : $color === "warning"
+                ? ThemeLight.Warning100
+                : $color === "white"
+                ? ThemeLight.Gray100
+                : $color === "background"
+                ? ThemeLight.GhostBackgroundActive
+                : $color === "font"
+                ? ThemeLight.GhostFontActive
+                : ""}
+        `,
+
     Icon: ({ $name, $color = "currentColor", $size }: IconProps) => css`
         content: "";
         mask: url("/icons/${$name}.svg") no-repeat 50% 50%;
@@ -452,12 +508,21 @@ const ThemeDark = {
     Warning900: "var(--color-dark-warning-900)",
     Background: "var(--color-dark-background)",
     Font: "var(--color-dark-font)",
+
     LinkFontDefault: "var(--color-dark-link-font-default)",
     LinkFontHover: "var(--color-dark-link-font-hover)",
     LinkFontActive: "var(--color-dark-link-font-active)",
     LinkBackgroundDefault: "var(--color-dark-link-background-default)",
     LinkBackgroundHover: "var(--color-dark-link-background-hover)",
     LinkBackgroundActive: "var(--color-dark-link-background-active)",
+
+    GhostFontDefault: "var(--color-dark-font-ghost-default)",
+    GhostFontHover: "var(--color-dark-font-ghost-hover)",
+    GhostFontActive: "var(--color-dark-font-ghost-active)",
+
+    GhostBackgroundDefault: "var(--color-dark-background-ghost-default)",
+    GhostBackgroundHover: "var(--color-dark-background-ghost-hover)",
+    GhostBackgroundActive: "var(--color-dark-background-ghost-active)",
 
     /*==== Mixins ====*/
 
@@ -686,6 +751,69 @@ const ThemeDark = {
                 ? ThemeDark.LinkBackgroundActive
                 : $color === "font"
                 ? ThemeDark.LinkFontActive
+                : ""}
+        `,
+
+    ColorsGhostDefault: ({ $color }: ColorsHoverProps) =>
+        css`
+            ${$color === "primary"
+                ? ThemeDark.Primary50
+                : $color === "secondary"
+                ? ThemeDark.Secondary50
+                : $color === "success"
+                ? ThemeDark.Success50
+                : $color === "danger"
+                ? ThemeDark.Danger50
+                : $color === "warning"
+                ? ThemeDark.Warning50
+                : $color === "white"
+                ? ThemeDark.Gray50
+                : $color === "background"
+                ? ThemeDark.GhostBackgroundDefault
+                : $color === "font"
+                ? ThemeDark.GhostFontDefault
+                : ""}
+        `,
+
+    ColorsGhostHover: ({ $color }: ColorsHoverProps) =>
+        css`
+            ${$color === "primary"
+                ? ThemeDark.Primary200
+                : $color === "secondary"
+                ? ThemeDark.Secondary200
+                : $color === "success"
+                ? ThemeDark.Success200
+                : $color === "danger"
+                ? ThemeDark.Danger200
+                : $color === "warning"
+                ? ThemeDark.Warning200
+                : $color === "white"
+                ? ThemeDark.Gray200
+                : $color === "background"
+                ? ThemeDark.GhostBackgroundHover
+                : $color === "font"
+                ? ThemeDark.GhostFontHover
+                : ""}
+        `,
+
+    ColorsGhostActive: ({ $color }: ColorsHoverProps) =>
+        css`
+            ${$color === "primary"
+                ? ThemeDark.Primary100
+                : $color === "secondary"
+                ? ThemeDark.Secondary100
+                : $color === "success"
+                ? ThemeDark.Success100
+                : $color === "danger"
+                ? ThemeDark.Danger100
+                : $color === "warning"
+                ? ThemeDark.Warning100
+                : $color === "white"
+                ? ThemeDark.Gray100
+                : $color === "background"
+                ? ThemeDark.GhostBackgroundActive
+                : $color === "font"
+                ? ThemeDark.GhostFontActive
                 : ""}
         `,
 

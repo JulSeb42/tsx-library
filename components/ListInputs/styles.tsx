@@ -12,11 +12,15 @@ import {
     Spacers,
     Icon,
 } from "../../"
-import { ShadowsTypes, ColorsHoverTypes, ValidationTypes } from "../../types"
-import { VariantTypes, ListDirectionTypes } from "./types"
-import { InputBackgroundTypes } from "../InputComponents/types"
+import { ChevronDownIcon } from "../../icons"
+import type {
+    ShadowsTypes,
+    ColorsHoverTypes,
+    ValidationTypes,
+} from "../../types"
+import type { VariantTypes, ListDirectionTypes } from "./types"
+import type { InputBackgroundTypes } from "../InputComponents/types"
 import { ConstantValues } from "../InputComponents/styles"
-import ChevronDownIcon from "../../icons/ChevronDownIcon"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 

@@ -1,11 +1,12 @@
 /*=============================================== Badge component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import { Icon } from "../../"
 
 import * as Styles from "./styles"
-import { BadgeProps } from "./types"
+import type { BadgeProps } from "./types"
 
 const Badge = forwardRef(
     (
@@ -19,7 +20,7 @@ const Badge = forwardRef(
             content,
             ...rest
         }: BadgeProps,
-        ref?: React.ForwardedRef<HTMLSpanElement>
+        ref?: ForwardedRef<HTMLSpanElement>
     ) => (
         <Styles.StyledBadge
             ref={ref}

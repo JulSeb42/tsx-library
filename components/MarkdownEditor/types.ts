@@ -1,18 +1,78 @@
 /*=============================================== MarkdownEditor types ===============================================*/
 
-import React from "react"
-import { MDEditorProps, PreviewType } from "@uiw/react-md-editor"
+import type { HTMLAttributes, ElementType, TextareaHTMLAttributes } from "react"
 
-import { ValidationTypes } from "../../types"
-import { InputBaseProps } from "../InputContainer/types"
-import { InputBackgroundTypes } from "../InputComponents/types"
+import type { ExtendedInputContainerProps } from "../InputContainer/types"
+import type { InputBackgroundTypes } from "../InputComponents/types"
+import type { titleNames, buttonNames } from "./buttons"
 
-export interface MarkdownEditorProps extends MDEditorProps, InputBaseProps {
+export type ShowTypes = "editorCode" | "editorLive" | "editorPreview"
+export type ButtonNamesTypes =
+    | "titles"
+    | keyof typeof buttonNames
+    | "editorCode"
+    | "editorLive"
+    | "editorPreview"
+
+type IconType = string | JSX.Element
+
+export type EditorButtonType = {
+    name: string
+    defaultIcon: JSX.Element
+}
+
+export type ButtonType = EditorButtonType & {
+    code: string
+}
+
+export type TitleType = {
+    text: keyof typeof titleNames
+    code: string
+}
+
+export interface MarkdownEditorProps
+    extends TextareaHTMLAttributes<HTMLTextAreaElement>,
+        HTMLAttributes<HTMLTextAreaElement>,
+        ExtendedInputContainerProps {
+    as?: ElementType
     value: string
-    setValue: any
-    commands?: any
-    extraCommands?: any
+    setValue: (value: string) => void
+    onChange?: never
     backgroundColor?: InputBackgroundTypes
-    preview?: PreviewType
-    validation?: ValidationTypes
+    defaultEditor?: ShowTypes
+    showButtons?: {
+        titles?: boolean
+        bold?: boolean
+        italic?: boolean
+        strikethrough?: boolean
+        ul?: boolean
+        ol?: boolean
+        link?: boolean
+        quote?: boolean
+        hr?: boolean
+        code?: boolean
+        codeBlock?: boolean
+        comment?: boolean
+        image?: boolean
+        editorCode?: boolean
+        editorLive?: boolean
+        editorPreview?: boolean
+    }
+    icons?: {
+        bold?: IconType
+        italic?: IconType
+        strikethrough?: IconType
+        ul?: IconType
+        ol?: IconType
+        link?: IconType
+        quote?: IconType
+        hr?: IconType
+        code?: IconType
+        codeBlock?: IconType
+        comment?: IconType
+        image?: IconType
+        editorCode?: IconType
+        editorLive?: IconType
+        editorPreview?: IconType
+    }
 }

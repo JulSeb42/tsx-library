@@ -3,13 +3,13 @@
 import styled from "styled-components"
 
 import { Mixins, Breakpoints, FontSizes } from "../../"
-import {
+import type {
     ColorsHoverTypes,
     ShadowsTypes,
     RadiusesTypes,
     SpacersTypes,
 } from "../../types"
-import { ButtonVariantTypes, ButtonSizesTypes } from "./types"
+import type { ButtonVariantTypes, ButtonSizesTypes } from "./types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
@@ -54,7 +54,11 @@ const StyledButton = styled.button<{
         })};
     ${Mixins.BorderRadius};
     background-color: ${({ $variant, theme }) =>
-        $variant === "plain" ? theme.ColorsHoverDefault : "transparent"};
+        $variant === "plain"
+            ? theme.ColorsHoverDefault
+            : $variant === "ghost"
+            ? theme.ColorsGhostDefault
+            : "transparent"};
     color: ${({ $variant, $color, theme }) =>
         $variant === "plain"
             ? $color === "white"
@@ -62,6 +66,12 @@ const StyledButton = styled.button<{
                 : $color === "background"
                 ? theme.Font
                 : theme.Background
+            : $variant === "ghost"
+            ? $color === "white" || $color === "background"
+                ? theme.Primary500
+                : $color === "font"
+                ? theme.Background
+                : theme.ColorsHoverDefault
             : theme.ColorsHoverDefault};
     ${({ $shadow, $shadowDefault, $shadowHover, $shadowActive }) =>
         Mixins.Shadow({
@@ -73,9 +83,11 @@ const StyledButton = styled.button<{
         })};
 
     @media ${Breakpoints.Hover} {
-        &:hover {
+        &:not(:disabled):hover {
             background-color: ${({ $variant, theme }) =>
-                $variant === "plain" && theme.ColorsHoverHover};
+                $variant === "plain"
+                    ? theme.ColorsHoverHover
+                    : $variant === "ghost" && theme.ColorsGhostHover};
             color: ${({ $variant, theme }) =>
                 ($variant === "text" || $variant === "outline") &&
                 theme.ColorsHoverHover};
@@ -83,9 +95,11 @@ const StyledButton = styled.button<{
                 $variant === "outline" && theme.ColorsHoverHover};
         }
 
-        &:active {
+        &:not(:disabled):active {
             background-color: ${({ $variant, theme }) =>
-                $variant === "plain" && theme.ColorsHoverActive};
+                $variant === "plain"
+                    ? theme.ColorsHoverActive
+                    : $variant === "ghost" && theme.ColorsGhostActive};
             color: ${({ $variant, theme }) =>
                 ($variant === "text" || $variant === "outline") &&
                 theme.ColorsHoverActive};
@@ -96,7 +110,11 @@ const StyledButton = styled.button<{
 
     &:disabled {
         background-color: ${({ $variant, theme }) =>
-            $variant === "plain" ? theme.Gray100 : ""};
+            $variant === "plain"
+                ? theme.Gray100
+                : $variant === "ghost"
+                ? theme.Gray50
+                : ""};
         color: ${({ theme }) => theme.Gray500};
         border-color: ${({ $variant, theme }) =>
             $variant === "outline" && theme.Gray500};

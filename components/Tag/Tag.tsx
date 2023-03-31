@@ -1,24 +1,30 @@
 /*=============================================== Tag component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import { Icon } from "../../"
 
 import * as Styles from "./styles"
-import { TagProps } from "./types"
+import type { TagProps } from "./types"
 
 const Tag = forwardRef(
     (
         {
             as,
             children,
-            variant = "rounded",
             color = "primary",
             textColor,
             icons,
+            gap = "xxs",
+            padding = {
+                topBottom: "xxs",
+                leftRight: "xs",
+            },
+            borderRadius = "s",
             ...rest
         }: TagProps,
-        ref?: React.ForwardedRef<HTMLSpanElement>
+        ref?: ForwardedRef<HTMLSpanElement>
     ) => {
         const iconProps = {
             size: 16,
@@ -28,17 +34,27 @@ const Tag = forwardRef(
             <Styles.StyledTag
                 ref={ref}
                 as={as}
-                $variant={variant}
                 $color={color}
                 $textColor={textColor}
                 $hasIcon={icons}
+                $gap={gap}
+                $padding={padding}
+                $borderRadius={borderRadius}
                 {...rest}
             >
-                {icons?.left && <Icon src={icons.left} {...iconProps} />}
+                {icons?.left && typeof icons?.left === "string" ? (
+                    <Icon src={icons.left} {...iconProps} />
+                ) : (
+                    icons?.left
+                )}
 
                 {children}
 
-                {icons?.right && <Icon src={icons.right} {...iconProps} />}
+                {icons?.right && typeof icons?.right === "string" ? (
+                    <Icon src={icons.right} {...iconProps} />
+                ) : (
+                    icons?.right
+                )}
             </Styles.StyledTag>
         )
     }

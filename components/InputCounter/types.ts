@@ -1,15 +1,15 @@
 /*=============================================== InputCounter types ===============================================*/
 
-import React from "react"
+import type { InputHTMLAttributes } from "react"
 
-import { InputBaseProps } from "../InputContainer/types"
-import {
+import type { InputBaseProps } from "../InputContainer/types"
+import type {
     InputBackgroundTypes,
     InputVariantTypes,
 } from "../InputComponents/types"
 
 interface InputCounterBase
-    extends React.InputHTMLAttributes<HTMLInputElement>,
+    extends InputHTMLAttributes<HTMLInputElement>,
         InputBaseProps {
     value: number
     setValue: (value: number) => void

@@ -1,8 +1,8 @@
 /*=============================================== Accordion types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType, ReactNode } from "react"
 
-import {
+import type {
     AccordionItemProps,
     ColorsHoverTypes,
     AllColorsTypes,
@@ -22,34 +22,52 @@ enum icons {
 
 export type IconTypes = keyof typeof icons
 
-interface AccordionPropsBase extends React.HTMLAttributes<HTMLDivElement> {
-    as?: React.ElementType
-    items: AccordionItemProps[]
+interface AccordionPropsBase extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
     variant?: AccordionStyleTypes
     accentColor?: ColorsHoverTypes
     separatorColor?: AllColorsTypes
 }
 
-interface AccordionIcon1 extends AccordionPropsBase {
+interface AccordionPropsContent1 extends AccordionPropsBase {
+    items: AccordionItemProps[]
+    children?: never
+}
+
+interface AccordionPropsContent2 extends AccordionPropsBase {
+    items?: never
+    children: ReactNode | ReactNode[]
+}
+
+type AccordionPropsContent = AccordionPropsContent1 | AccordionPropsContent2
+
+type AccordionIcon1 = AccordionPropsContent & {
     icon?: IconTypes
     customIcon?: never
 }
 
-interface AccordionIcon2 extends AccordionPropsBase {
+type AccordionIcon2 = AccordionPropsContent & {
     icon?: never
     customIcon?: string
 }
 
 export type AccordionProps = AccordionIcon1 | AccordionIcon2
 
-export interface ItemProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface AccordionContainerProps
+    extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
+    variant?: AccordionStyleTypes
+    separatorColor?: AllColorsTypes
+}
+
+export interface ItemProps extends HTMLAttributes<HTMLDivElement> {
     icon?: IconTypes
     title: string
     isOpen?: boolean
-    content?: string | React.ReactNode
+    content?: string | ReactNode
     variant?: AccordionStyleTypes
     noBorder?: boolean
-    customIcon?: string
+    customIcon?: string | JSX.Element
     accentColor?: ColorsHoverTypes
     separatorColor?: AllColorsTypes
 }

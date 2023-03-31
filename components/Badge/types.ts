@@ -1,11 +1,11 @@
 /*=============================================== Badge types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
-import { AllColorsTypes, PaddingTypes } from "../../types"
+import type { AllColorsTypes, PaddingTypes } from "../../types"
 
-interface BadgeBaseProps extends React.HTMLAttributes<HTMLSpanElement> {
-    as?: React.ElementType
+interface BadgeBaseProps extends HTMLAttributes<HTMLSpanElement> {
+    as?: ElementType
     color?: AllColorsTypes
     size?: number
 }

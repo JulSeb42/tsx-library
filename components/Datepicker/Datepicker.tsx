@@ -1,15 +1,15 @@
 /*=============================================== Datepicker component ===============================================*/
 
-import React, { useState, useRef } from "react"
+import { useState, useRef } from "react"
 
 import { convertDateShort, useClickOutside, Icon, Flexbox } from "../../"
+import { CalendarIcon } from "../../icons"
 import Calendar from "./Calendar"
-import CalendarIcon from "../../icons/CalendarIcon"
 import { ValidationComponent, IconComponent } from "../InputComponents"
 import { InputContainer } from "../InputContainer"
 
 import * as Styles from "./styles"
-import { DatepickerProps } from "./types"
+import type { DatepickerProps } from "./types"
 
 const Datepicker = ({
     minDate,
@@ -103,11 +103,15 @@ const Datepicker = ({
 
                 <Flexbox as="span" gap="xs" alignItems="center">
                     {icons?.calendar ? (
-                        <Icon
-                            src={icons.calendar}
-                            size={16}
-                            color={disabled ? "gray" : accentColor}
-                        />
+                        typeof icons?.calendar === "string" ? (
+                            <Icon
+                                src={icons.calendar}
+                                size={16}
+                                color={disabled ? "gray" : accentColor}
+                            />
+                        ) : (
+                            icons?.calendar
+                        )
                     ) : (
                         <CalendarIcon
                             size={16}

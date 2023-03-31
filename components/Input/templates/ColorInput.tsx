@@ -1,9 +1,10 @@
 /*=============================================== ColorInput ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import * as Styles from "../styles"
-import { ColorInputProps } from "../types"
+import type { ColorInputProps } from "../types"
 
 const ColorInput = forwardRef(
     (
@@ -14,7 +15,7 @@ const ColorInput = forwardRef(
             variant = "rounded",
             ...rest
         }: ColorInputProps,
-        ref?: React.ForwardedRef<HTMLInputElement>
+        ref?: ForwardedRef<HTMLInputElement>
     ) => (
         <Styles.StyledInput
             ref={ref}

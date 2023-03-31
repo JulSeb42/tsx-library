@@ -1,11 +1,12 @@
 /*=============================================== Youtube component ===============================================*/
 
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
+import type { ForwardedRef } from "react"
 
 import { convertYoutube } from "../../"
 
 import * as Styles from "./styles"
-import { YoutubeProps } from "./types"
+import type { YoutubeProps } from "./types"
 
 const Youtube = forwardRef(
     (
@@ -17,7 +18,7 @@ const Youtube = forwardRef(
             aspectRatio = "16/9",
             ...rest
         }: YoutubeProps,
-        ref?: React.ForwardedRef<HTMLIFrameElement>
+        ref?: ForwardedRef<HTMLIFrameElement>
     ) => (
         <Styles.StyledYoutube
             ref={ref}

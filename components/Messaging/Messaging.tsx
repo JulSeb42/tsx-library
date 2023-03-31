@@ -1,13 +1,13 @@
 /*=============================================== Messaging component ===============================================*/
 
-import React, { forwardRef } from "react"
-import ReactLinkify from "react-linkify"
+import { forwardRef, useRef, useEffect, useState } from "react"
+import type { ForwardedRef, ChangeEvent, FormEvent } from "react"
 
-import { Flexbox, Text, uuid, Hr, Icon } from "../../"
-import SendIcon from "../../icons/SendIcon"
+import { Flexbox, Text, uuid, Hr, Icon, useKeyPress } from "../../"
+import { SendIcon, ChevronDownIcon } from "../../icons"
 
 import * as Styles from "./styles"
-import { MessagingProps, MessageProps } from "./types"
+import type { MessagingProps, MessageProps } from "./types"
 
 export const Message = forwardRef(
     (
@@ -24,7 +24,7 @@ export const Message = forwardRef(
             linkColor,
             ...rest
         }: MessageProps,
-        ref?: React.ForwardedRef<HTMLDivElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => (
         <Flexbox
             as={as}
@@ -57,7 +57,7 @@ export const Message = forwardRef(
                         : "primary"
                 }
             >
-                <ReactLinkify>{content}</ReactLinkify>
+                {content ? content : ""}
             </Styles.StyledMessage>
 
             {(date || time) && (
@@ -80,7 +80,7 @@ export const Messaging = forwardRef(
             emptyText = "No message yet.",
             button,
             input,
-            onSubmit,
+            submit,
             borderColor = "gray-200",
             messagesGap = "xs",
             textDateTime,
@@ -91,12 +91,67 @@ export const Messaging = forwardRef(
             linkColorSent,
             linkColorReceived,
             dateTimeColor,
+            iconScroll = <ChevronDownIcon size={32 * 0.6} />,
             ...rest
         }: MessagingProps,
-        ref?: React.ForwardedRef<HTMLFormElement>
+        ref?: ForwardedRef<HTMLFormElement>
     ) => {
-        const handleMessage = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
+        const containerRef = useRef<HTMLDivElement>(null)
+        const bottomRef = useRef<HTMLDivElement>(null)
+
+        const [isButtonVisible, setIsButtonVisible] = useState(false)
+
+        const scrollToBottom = () => {
+            if (containerRef && containerRef.current) {
+                const scrollHeight = containerRef?.current?.scrollHeight
+                const height = containerRef?.current?.clientHeight
+                const maxScrollTop = scrollHeight - height
+
+                containerRef.current.scrollTop =
+                    maxScrollTop > 0 ? maxScrollTop : 0
+
+                setIsButtonVisible(false)
+            }
+        }
+
+        useEffect(() => {
+            scrollToBottom()
+
+            containerRef?.current?.addEventListener("scroll", () => {
+                const scroll = containerRef.current?.scrollTop
+                const height = containerRef?.current?.clientHeight
+
+                if (scroll && height) {
+                    if (scroll < height) {
+                        setIsButtonVisible(true)
+                    } else {
+                        setIsButtonVisible(false)
+                    }
+                }
+            })
+        }, [data])
+
+        const [inputHeight, setInputHeight] = useState(32)
+
+        const handleMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
             input.setMessage(e.target.value)
+            setInputHeight(e.target.scrollHeight)
+
+            if (!e.target.value.length) setInputHeight(32)
+        }
+
+        const [isFocused, setIsFocused] = useState(false)
+
+        useKeyPress(() => {
+            if (isFocused && input.message.length) {
+                submit()
+            }
+        }, ["Enter"])
+
+        const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+            e.preventDefault()
+            submit()
+        }
 
         const emptyMessage = () => (
             <Styles.EmptyContainer>
@@ -114,7 +169,7 @@ export const Messaging = forwardRef(
 
         return (
             <Styles.StyledMessaging as={as} $borderColor={borderColor}>
-                <Styles.MessagesContainer $gap={messagesGap}>
+                <Styles.MessagesContainer $gap={messagesGap} ref={containerRef}>
                     {data && data.length
                         ? data.map(message => (
                               <Message
@@ -145,17 +200,43 @@ export const Messaging = forwardRef(
                         : children
                         ? children
                         : emptyMessage()}
+
+                    <Styles.Bottom ref={bottomRef} />
                 </Styles.MessagesContainer>
+
+                <Styles.ScrollButton
+                    icon={iconScroll}
+                    size={32}
+                    variant="ghost"
+                    onClick={() => scrollToBottom()}
+                    $inputHeight={inputHeight}
+                    $isVisible={isButtonVisible}
+                />
 
                 <Hr color={borderColor} />
 
-                <Styles.InputContainer onSubmit={onSubmit} ref={ref} {...rest}>
+                <Styles.InputContainer
+                    onSubmit={handleSubmit}
+                    ref={ref}
+                    {...rest}
+                >
                     <Styles.Input
                         value={input.message}
                         onChange={handleMessage}
                         placeholder={
                             input.placeholder || "Type your message..."
                         }
+                        $height={inputHeight}
+                        autoFocus={input.autoFocus}
+                        onKeyPress={e => {
+                            if (e.key === "Enter") e.preventDefault()
+                            if (e.key === "Enter" && e.shiftKey) {
+                                input.setMessage(`${input.message}\n`)
+                                setInputHeight(inputHeight + 24)
+                            }
+                        }}
+                        onFocus={() => setIsFocused(true)}
+                        onBlur={() => setIsFocused(false)}
                     />
 
                     <Styles.SendButton

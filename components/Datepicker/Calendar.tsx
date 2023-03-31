@@ -1,14 +1,14 @@
 /*=============================================== Calendar component ===============================================*/
 
-import React, { useState } from "react"
+import { useState } from "react"
+import type { MouseEvent } from "react"
 
 import { Icon, Text, uuid } from "../../"
+import { ChevronLeftIcon, ChevronRightIcon } from "../../icons"
 import { monthsEn, weekDaysEn } from "./data"
-import ChevronLeftIcon from "../../icons/ChevronLeftIcon"
-import ChevronRightIcon from "../../icons/ChevronRightIcon"
 
 import * as Styles from "./styles"
-import { CalendarProps } from "./types"
+import type { CalendarProps } from "./types"
 
 const Calendar = ({
     minDate,
@@ -90,7 +90,7 @@ const Calendar = ({
         return allDays[0]
     }
 
-    const handleSelect = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleSelect = (e: MouseEvent<HTMLButtonElement>) => {
         const target = e.target as HTMLButtonElement
 
         if (target.id.includes("day-")) {
@@ -148,7 +148,11 @@ const Calendar = ({
                     type="button"
                 >
                     {icons?.prev ? (
-                        <Icon src={icons.prev} size={24} />
+                        typeof icons?.prev === "string" ? (
+                            <Icon src={icons.prev} size={24} />
+                        ) : (
+                            icons?.prev
+                        )
                     ) : (
                         <ChevronLeftIcon size={24} />
                     )}
@@ -168,7 +172,11 @@ const Calendar = ({
                     type="button"
                 >
                     {icons?.next ? (
-                        <Icon src={icons.next} size={24} />
+                        typeof icons?.next === "string" ? (
+                            <Icon src={icons.next} size={24} />
+                        ) : (
+                            icons?.next
+                        )
                     ) : (
                         <ChevronRightIcon size={24} />
                     )}

@@ -1,8 +1,12 @@
 /*=============================================== Slideshow types ===============================================*/
 
-import React from "react"
+import type { HTMLAttributes, ElementType, ReactNode } from "react"
 
-import { ColorsHoverTypes, RadiusesTypes, ObjectFitTypes } from "../../types"
+import type {
+    ColorsHoverTypes,
+    RadiusesTypes,
+    ObjectFitTypes,
+} from "../../types"
 
 enum buttonPositions {
     left,
@@ -12,7 +16,7 @@ enum buttonPositions {
 export type ButtonPositionsTypes = keyof typeof buttonPositions
 
 export interface SlideshowButtonProps
-    extends React.HTMLAttributes<HTMLButtonElement> {
+    extends HTMLAttributes<HTMLButtonElement> {
     iconPrev?: string
     iconNext?: string
     prev?: boolean
@@ -23,9 +27,9 @@ export interface SlideshowButtonProps
     color?: ColorsHoverTypes
 }
 
-interface SlideshowPropsBase extends React.HTMLAttributes<HTMLDivElement> {
-    as?: React.ElementType
-    children?: React.ReactNode[]
+interface SlideshowPropsBase extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
+    children?: ReactNode[]
     borderRadius?: RadiusesTypes
     imgFit?: ObjectFitTypes
     activeSlide?: number

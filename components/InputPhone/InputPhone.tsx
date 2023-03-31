@@ -1,17 +1,18 @@
 /*=============================================== InputPhone component ===============================================*/
 
-import React, { forwardRef, useEffect, useState, useRef } from "react"
+import { forwardRef, useEffect, useState, useRef } from "react"
+import type { ForwardedRef, ChangeEvent } from "react"
 
 import { useClickOutside, uuid, Icon } from "../../"
-import { InputPhoneCountryType } from "../../types"
+import { CaretDownIcon } from "../../icons"
+import type { InputPhoneCountryType } from "../../types"
 import { countries } from "../../utils/countries"
 import { ListInputs, ListItem } from "../ListInputs"
 import { RightContainer, ValidationComponent } from "../InputComponents"
-import CaretDownIcon from "../../icons/CaretDownIcon"
 import { InputContainer } from "../InputContainer"
 
 import * as Styles from "./styles"
-import { InputPhoneProps } from "./types"
+import type { InputPhoneProps } from "./types"
 
 const InputPhone = forwardRef(
     (
@@ -38,7 +39,7 @@ const InputPhone = forwardRef(
             searchIcon,
             ...rest
         }: InputPhoneProps,
-        ref?: React.ForwardedRef<HTMLInputElement>
+        ref?: ForwardedRef<HTMLInputElement>
     ) => {
         useEffect(() => {
             setSelectedCountry(
@@ -57,7 +58,7 @@ const InputPhone = forwardRef(
         useClickOutside(listRef, onClickOutside)
 
         const [search, setSearch] = useState("")
-        const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
+        const handleSearch = (e: ChangeEvent<HTMLInputElement>) =>
             setSearch(e.target.value)
 
         const results = countries.filter(

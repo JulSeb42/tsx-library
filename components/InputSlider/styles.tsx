@@ -10,7 +10,11 @@ import {
     Overlays,
     Text,
 } from "../../"
-import { AllColorsTypes, ColorsHoverTypes, ValidationTypes } from "../../types"
+import type {
+    AllColorsTypes,
+    ColorsHoverTypes,
+    ValidationTypes,
+} from "../../types"
 
 import setDefaultTheme from "../../utils/setDefaultTheme"
 
