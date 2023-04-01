@@ -9,7 +9,7 @@ import type {
     ForwardedRef,
 } from "react"
 
-import type { AllColorsTypes, ColorsHoverTypes } from "./common-types"
+import type { AllColorsTypes, ColorsHoverTypes } from "./"
 
 /*==================== Accordion item ====================*/
 

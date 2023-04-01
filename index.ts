@@ -9,7 +9,6 @@ export * from "./context/ThemeContext"
 
 export * from "./hooks"
 
-export { default as MarkdownCommands } from "./utils/markdown-commands"
 export { default as OptionsMarkdown } from "./utils/options-markdown"
 export * from "./utils/utils"
 export * from "./utils/getHighlightedText"

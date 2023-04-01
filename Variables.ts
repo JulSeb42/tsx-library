@@ -6,7 +6,7 @@ import {
     AllColorsTypes,
     ColorsShortTypes,
     ColorsHoverTypes,
-} from "./utils/common-types"
+} from "./types/common-types"
 
 // eslint-disable-next-line
 import {

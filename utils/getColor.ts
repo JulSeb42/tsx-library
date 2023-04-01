@@ -4,7 +4,7 @@
 
 import { ThemeLight, ThemeDark } from "../Variables"
 
-import { AllColorsTypes } from "./common-types"
+import { AllColorsTypes } from "../types/common-types"
 
 /*==================== Function ====================*/
 
