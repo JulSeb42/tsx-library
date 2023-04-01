@@ -2,15 +2,15 @@
 
 import type { InputHTMLAttributes } from "react"
 
-import { ShadowsTypes } from "../../types"
-import { InputBaseProps } from "../InputContainer/types"
-import {
+import type { ShadowsTypes } from "../../types"
+import type { InputBaseProps } from "../InputContainer/types"
+import type {
     InputVariantTypes,
     ValidationComponentProps,
     InputBackgroundTypes,
     IconInputProps,
 } from "../InputComponents/types"
-import { ListDirectionTypes } from "../ListInputs/types"
+import type { ListDirectionTypes } from "../ListInputs/types"
 
 interface AutocompletePropsBase
     extends InputHTMLAttributes<HTMLInputElement>,

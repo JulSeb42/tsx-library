@@ -8,11 +8,6 @@ import type {
 } from "react"
 
 import type {
-    // ColorsHoverTypes,
-    // AllColorsTypes,
-    // TabsItemProps,
-    // SpacersTypes,
-    // PaddingTypes,
     ColorsHoverTypes,
     AllColorsTypes,
     TabsItemProps,

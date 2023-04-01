@@ -2,10 +2,7 @@
 
 import type { HTMLAttributes, ElementType } from "react"
 
-import type {
-    // AllColorsTypes
-    AllColorsTypes,
-} from "../../types"
+import type { AllColorsTypes } from "../../types"
 import type { LoaderVariantTypes } from "../Loader/types"
 
 export interface PageLoadingProps extends HTMLAttributes<HTMLDivElement> {

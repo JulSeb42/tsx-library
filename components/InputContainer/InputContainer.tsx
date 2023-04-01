@@ -5,7 +5,7 @@ import React from "react"
 import { Text, Icon } from "../../"
 
 import * as Styles from "./styles"
-import { InputContainerProps } from "./types"
+import type { InputContainerProps } from "./types"
 
 const InputContainer = ({
     id,

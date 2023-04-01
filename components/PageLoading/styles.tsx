@@ -5,7 +5,7 @@ import styled from "styled-components"
 import { Mixins } from "../../"
 import type { AllColorsTypes } from "../../types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledPageLoading = styled.div<{ $backgroundColor?: AllColorsTypes }>`
     position: fixed;

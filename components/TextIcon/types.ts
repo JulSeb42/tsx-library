@@ -2,12 +2,8 @@
 
 import type { ElementType } from "react"
 
-import {
-    // AllColorsTypes, SpacersTypes
-    AllColorsTypes,
-    SpacersTypes,
-} from "../../types"
-import { TextProps } from "../Text/types"
+import type { AllColorsTypes, SpacersTypes } from "../../types"
+import type { TextProps } from "../Text/types"
 
 enum tags {
     h1,

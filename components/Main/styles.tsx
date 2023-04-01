@@ -2,9 +2,9 @@
 
 import styled, { css } from "styled-components"
 
-import { MainPositionTypes, MainSizeTypes } from "./types"
+import type { MainPositionTypes, MainSizeTypes } from "./types"
 import { Mixins, Layouts, Breakpoints, stringifyPx } from "../../"
-import {
+import type {
     SpacersTypes,
     GridAlignContentTypes,
     GridAlignItemsTypes,
@@ -12,7 +12,7 @@ import {
     GridJustifyItemsTypes,
 } from "../../types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledMain = styled.main<{
     $size?: MainSizeTypes

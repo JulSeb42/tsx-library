@@ -4,11 +4,11 @@
 
 import { ThemeLight, ThemeDark } from "../Variables"
 
-import { AllColorsTypes } from "../types/common-types"
+import type { AllColorsTypes } from "../types"
 
 /*==================== Function ====================*/
 
-const getColor = (color: AllColorsTypes, theme?: "light" | "dark") => {
+export const getColor = (color: AllColorsTypes, theme?: "light" | "dark") => {
     return theme === "dark"
         ? color === "black"
             ? ThemeDark.Black
@@ -289,5 +289,3 @@ const getColor = (color: AllColorsTypes, theme?: "light" | "dark") => {
         ? "transparent"
         : "currentColor"
 }
-
-export default getColor

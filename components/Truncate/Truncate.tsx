@@ -3,14 +3,9 @@
 import React, { useLayoutEffect, useRef, useState } from "react"
 
 import * as Styles from "./styles"
-import { TruncateProps } from "./types"
+import type { TruncateProps } from "./types"
 
-const Truncate = ({
-    as,
-    children,
-    gap = "xs",
-    ...rest
-}: TruncateProps) => {
+const Truncate = ({ as, children, gap = "xs", ...rest }: TruncateProps) => {
     const containerRef = useRef<HTMLElement>(null)
     const [invisibleNumber, setInvisibleNumber] = useState<number>(0)
 

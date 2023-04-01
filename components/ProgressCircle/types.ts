@@ -2,13 +2,9 @@
 
 import type { HTMLAttributes } from "react"
 
-import {
-    // AllColorsTypes
-    AllColorsTypes,
-} from "../../types"
+import type { AllColorsTypes } from "../../types"
 
-export interface ProgressCirclePropsBase
-    extends HTMLAttributes<SVGElement> {
+export interface ProgressCirclePropsBase extends HTMLAttributes<SVGElement> {
     value: number
     color?: AllColorsTypes
     strokeColor?: AllColorsTypes

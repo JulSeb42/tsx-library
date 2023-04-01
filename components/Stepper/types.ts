@@ -2,11 +2,7 @@
 
 import type { HTMLAttributes, ElementType, ReactNode } from "react"
 
-import type {
-    // StepProps as StepItemProps, ColorsHoverTypes
-    StepProps as StepItemProps,
-    ColorsHoverTypes,
-} from "../../types"
+import type { StepProps as StepItemProps, ColorsHoverTypes } from "../../types"
 
 enum direction {
     column,

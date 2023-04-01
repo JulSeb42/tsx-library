@@ -18,7 +18,7 @@ import type {
     RadiusesTypes,
 } from "../../types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledListGroup = styled.div<{
     $borderColor?: AllColorsTypes

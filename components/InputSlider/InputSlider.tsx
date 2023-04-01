@@ -7,7 +7,7 @@ import { Flexbox, Text, getPercentage } from "../../"
 import { InputContainer } from "../InputContainer"
 
 import * as Styles from "./styles"
-import { InputSliderProps } from "./types"
+import type { InputSliderProps } from "./types"
 
 const InputSlider = forwardRef(
     (

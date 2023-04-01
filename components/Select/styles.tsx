@@ -12,7 +12,7 @@ import type {
     InputVariantTypes,
 } from "../InputComponents/types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledSelect = styled.div<{
     disabled?: boolean

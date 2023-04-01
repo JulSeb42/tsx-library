@@ -2,10 +2,7 @@
 
 import type { HTMLAttributes, ElementType, ChangeEvent } from "react"
 
-import type {
-    // ColorsHoverTypes
-    ColorsHoverTypes,
-} from "../../types"
+import type { ColorsHoverTypes } from "../../types"
 import type { InputBackgroundTypes } from "../InputComponents/types"
 import type { ButtonIconVariantTypes } from "../ButtonIcon/types"
 

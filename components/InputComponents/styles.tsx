@@ -18,7 +18,7 @@ import type {
 } from "../../types"
 import type { InputBackgroundTypes, InputVariantTypes } from "./types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 interface BaseInputProps {
     $validation?: ValidationTypes

@@ -3,9 +3,6 @@
 import type { HTMLAttributes, ElementType } from "react"
 
 import type {
-    // AllColorsTypes,
-    // RadiusesTypes,
-    // BorderStylesTypes,
     AllColorsTypes,
     RadiusesTypes,
     BorderStylesTypes,

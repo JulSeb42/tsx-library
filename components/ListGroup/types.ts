@@ -3,10 +3,6 @@
 import type { HTMLAttributes, ElementType } from "react"
 
 import type {
-    // ListGroupItemProps as ItemProps,
-    // AllColorsTypes,
-    // ColorsHoverTypes,
-    // RadiusesTypes,
     ListGroupItemProps as ItemProps,
     AllColorsTypes,
     ColorsHoverTypes,

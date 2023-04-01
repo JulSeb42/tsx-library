@@ -1,10 +1,10 @@
 /*=============================================== Section component ===============================================*/
 
-import { forwardRef } from "react"
+import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { SectionProps } from "./types"
+import type { SectionProps } from "./types"
 
 const Section = forwardRef(
     (

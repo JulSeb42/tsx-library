@@ -1,10 +1,10 @@
 /*=============================================== Sticky component ===============================================*/
 
-import { forwardRef } from "react"
+import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { StickyProps } from "./types"
+import type { StickyProps } from "./types"
 
 const Sticky = forwardRef(
     (

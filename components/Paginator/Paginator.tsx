@@ -10,7 +10,7 @@ import {
 
 import { Text, ButtonIcon } from "../../"
 import { ChevronLeftIcon, ChevronRightIcon } from "../../icons"
-import usePaginationNav from "../../utils/pagination-nav"
+import { usePaginationNav } from "../../utils"
 
 import * as Styles from "./styles"
 import type { PaginatorProps } from "./types"

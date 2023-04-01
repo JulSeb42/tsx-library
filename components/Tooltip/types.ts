@@ -2,10 +2,7 @@
 
 import type { HTMLAttributes, ElementType } from "react"
 
-import {
-    // AllColorsTypes
-    AllColorsTypes,
-} from "../../types"
+import type { AllColorsTypes } from "../../types"
 
 enum textStyles {
     dotted,

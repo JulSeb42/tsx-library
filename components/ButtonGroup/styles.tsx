@@ -10,7 +10,7 @@ import type {
 } from "../../types"
 import type { ButtonSizesTypes } from "../Button/types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledButtonGroup = styled.div<{
     $borders?: ColorsHoverTypes

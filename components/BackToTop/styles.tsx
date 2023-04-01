@@ -5,7 +5,7 @@ import styled from "styled-components"
 import { Transitions, Mixins, Text } from "../../"
 import type { SpacersTypes, PositionsTypes } from "../../types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledBackToTop = styled.div<{
     $isVisible?: boolean

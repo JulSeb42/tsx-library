@@ -2,11 +2,7 @@
 
 import type { HTMLAttributes, MouseEvent } from "react"
 
-import type {
-    // ColorsHoverTypes, SpacersTypes
-    ColorsHoverTypes,
-    SpacersTypes,
-} from "../../types"
+import type { ColorsHoverTypes, SpacersTypes } from "../../types"
 
 interface BaseFormProps extends HTMLAttributes<HTMLFormElement> {
     buttonPrimary?:

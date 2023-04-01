@@ -22,7 +22,7 @@ import type {
 } from "../../types"
 import type { NavMenuVariantsTypes, NavMobileVariantsTypes } from "./types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const LogoImg = styled(Image)`
     object-position: left center;

@@ -3,7 +3,7 @@
 import styled from "styled-components"
 import { stringifyPx } from "ts-utils-julseb"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const Fallback = styled.div<{
     $width?: number | string

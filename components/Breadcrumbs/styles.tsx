@@ -5,7 +5,7 @@ import styled from "styled-components"
 import { Mixins, Text } from "../../"
 import type { SeparatorTypes } from "./types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledBreadcrumbs = styled(Text)<{ $separator?: SeparatorTypes }>`
     ${({ $separator }) =>

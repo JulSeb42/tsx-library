@@ -11,7 +11,7 @@ import type {
 } from "../../types"
 import type { ButtonVariantTypes, ButtonSizesTypes } from "./types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledButton = styled.button<{
     $color?: ColorsHoverTypes

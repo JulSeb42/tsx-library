@@ -6,7 +6,7 @@ import { Radiuses, Transitions, Breakpoints, Mixins } from "../../"
 import type { ColorsHoverTypes } from "../../types"
 import type { JustifyType } from "./types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledPagination = styled.div<{ $justify?: JustifyType }>`
     ${({ $justify }) =>

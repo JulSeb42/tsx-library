@@ -4,9 +4,9 @@ import styled from "styled-components"
 import Markdown from "markdown-to-jsx"
 
 import { Mixins } from "../../"
-import { SpacersTypes } from "../../types"
+import type { SpacersTypes } from "../../types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledMarkdownContainer = styled(Markdown)<{
     $gap?: SpacersTypes

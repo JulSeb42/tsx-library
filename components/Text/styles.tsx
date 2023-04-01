@@ -2,7 +2,7 @@
 
 import styled, { css } from "styled-components"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 import {
     FontWeights,
     stringifyPx,
@@ -15,7 +15,7 @@ import {
     Breakpoints,
     Mixins,
 } from "../../"
-import {
+import type {
     AllColorsTypes,
     ColorsHoverTypes,
     FontSizeTypes,

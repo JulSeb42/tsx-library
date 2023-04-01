@@ -1,10 +1,10 @@
 /*=============================================== Wrapper component ===============================================*/
 
-import { forwardRef } from "react"
+import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { WrapperProps } from "./types"
+import type { WrapperProps } from "./types"
 
 const Wrapper = forwardRef(
     (

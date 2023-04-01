@@ -3,10 +3,6 @@
 import type { HTMLAttributes } from "react"
 
 import type {
-    // ColorsHoverTypes,
-    // ValidationTypes,
-    // ShadowsTypes,
-    // AllColorsTypes,
     ColorsHoverTypes,
     ValidationTypes,
     ShadowsTypes,

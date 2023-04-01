@@ -2,14 +2,7 @@
 
 import type { HTMLAttributes, ElementType } from "react"
 
-import {
-    // AllColorsTypes,
-    // OverlayTypes,
-    // ShadowsTypes,
-    // RadiusesTypes,
-    // FontSizeTypes,
-    // FontWeightTypes,
-    // PaddingTypes,
+import type {
     AllColorsTypes,
     OverlayTypes,
     ShadowsTypes,

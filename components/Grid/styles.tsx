@@ -3,7 +3,7 @@
 import styled, { css } from "styled-components"
 
 import { Mixins, Breakpoints } from "../../"
-import {
+import type {
     SpacersTypes,
     GridAlignContentTypes,
     GridAlignItemsTypes,
@@ -12,7 +12,7 @@ import {
     PaddingTypes,
 } from "../../types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledGrid = styled.div<{
     $inline?: boolean

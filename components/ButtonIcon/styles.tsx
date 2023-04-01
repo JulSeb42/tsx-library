@@ -26,7 +26,7 @@ import type {
     ButtonIconLabelDirectionsTypes,
 } from "./types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledButtonIcon = styled.button<{
     $variant?: ButtonIconVariantTypes

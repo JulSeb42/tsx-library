@@ -1,10 +1,10 @@
 /*=============================================== Flexbox component ===============================================*/
 
-import { forwardRef } from "react"
+import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { FlexboxProps } from "./types"
+import type { FlexboxProps } from "./types"
 
 const Flexbox = forwardRef(
     (

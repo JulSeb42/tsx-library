@@ -1,10 +1,10 @@
 /*=============================================== FullBleed component ===============================================*/
 
-import { forwardRef } from "react"
+import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { FullBleedProps } from "./types"
+import type { FullBleedProps } from "./types"
 
 const FullBleed = forwardRef(
     (

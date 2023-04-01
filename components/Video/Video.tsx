@@ -1,13 +1,13 @@
 /*=============================================== Video component ===============================================*/
 
-import React, { forwardRef, Suspense } from "react"
+import React, { forwardRef, Suspense, lazy } from "react"
 import type { ForwardedRef } from "react"
 
 import Fallback from "../Fallback"
 
-import { VideoProps } from "./types"
+import type { VideoProps } from "./types"
 
-const StyledVideo = React.lazy(() => import("./styles"))
+const StyledVideo = lazy(() => import("./styles"))
 
 const Video = forwardRef(
     (

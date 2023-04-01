@@ -7,7 +7,7 @@ import { PlusIcon, ChevronDownIcon } from "../../icons"
 import type { ColorsHoverTypes, AllColorsTypes } from "../../types"
 import type { AccordionStyleTypes, IconTypes } from "./types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledIconPlus = styled(PlusIcon)``
 

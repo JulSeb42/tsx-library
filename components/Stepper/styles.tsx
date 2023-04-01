@@ -14,7 +14,7 @@ import {
 import type { ColorsHoverTypes } from "../../types"
 import type { StepperDirectionType } from "./types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledStepper = styled.div<{
     $direction?: StepperDirectionType

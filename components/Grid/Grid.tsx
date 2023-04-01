@@ -1,10 +1,10 @@
 /*=============================================== Grid component ===============================================*/
 
-import { forwardRef } from "react"
+import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { GridProps } from "./types"
+import type { GridProps } from "./types"
 
 const Grid = forwardRef(
     (

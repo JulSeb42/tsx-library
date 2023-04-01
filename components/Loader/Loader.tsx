@@ -7,7 +7,7 @@ import LoaderTwo from "./templates/LoaderTwo"
 import LoaderThree from "./templates/LoaderThree"
 import LoaderFour from "./templates/LoaderFour"
 
-import { LoaderProps, LoaderVariantTypes } from "./types"
+import type { LoaderProps, LoaderVariantTypes } from "./types"
 
 const renderComponent = (props: any, variant?: LoaderVariantTypes) => {
     switch (variant) {

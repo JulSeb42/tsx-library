@@ -2,11 +2,7 @@
 
 import type { InputHTMLAttributes } from "react"
 
-import type {
-    //  ShadowsTypes, InputPhoneCountryType
-    ShadowsTypes,
-    InputPhoneCountryType,
-} from "../../types"
+import type { ShadowsTypes, InputPhoneCountryType } from "../../types"
 import type { InputBaseProps } from "../InputContainer/types"
 import type {
     ValidationComponentProps,

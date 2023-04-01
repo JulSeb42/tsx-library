@@ -13,7 +13,7 @@ import {
 } from "../../"
 import type { AllColorsTypes } from "../../types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledCodeContainer = styled.div<{
     $backgroundColor?: AllColorsTypes

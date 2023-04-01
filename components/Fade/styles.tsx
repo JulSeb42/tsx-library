@@ -4,7 +4,7 @@ import styled from "styled-components"
 
 import { Spacers } from "../../"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledFade = styled.div<{
     $isVisible: boolean

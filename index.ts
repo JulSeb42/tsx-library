@@ -9,9 +9,9 @@ export * from "./context/ThemeContext"
 
 export * from "./hooks"
 
-export { default as OptionsMarkdown } from "./utils/options-markdown"
-export * from "./utils/utils"
-export * from "./utils/getHighlightedText"
+export * from "./utils/options-markdown"
+export * from "./utils/ts-utils"
+export * from "./utils/get-highlighted-text"
 
 export * from "./components/Text"
 export * from "./components/Wrapper"

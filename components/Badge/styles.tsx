@@ -3,9 +3,9 @@
 import styled from "styled-components"
 
 import { Mixins, FontWeights, Radiuses } from "../../"
-import { AllColorsTypes, PaddingTypes } from "../../types"
+import type { AllColorsTypes, PaddingTypes } from "../../types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledBadge = styled.span<{
     $color?: AllColorsTypes

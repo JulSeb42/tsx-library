@@ -3,9 +3,9 @@
 import styled from "styled-components"
 
 import { FontWeights, Mixins, Text } from "../../"
-import { ColorsHoverTypes } from "../../types"
+import type { ColorsHoverTypes } from "../../types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledInputContainer = styled.div`
     ${Mixins.Grid({

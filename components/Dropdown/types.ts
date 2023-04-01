@@ -2,11 +2,8 @@
 
 import type { HTMLAttributes, ElementType } from "react"
 
-import {
-    // ColorsHoverTypes
-    ColorsHoverTypes,
-} from "../../types"
-import { ListDirectionTypes } from "../ListInputs/types"
+import type { ColorsHoverTypes } from "../../types"
+import type { ListDirectionTypes } from "../ListInputs/types"
 
 enum justify {
     left,
@@ -15,8 +12,7 @@ enum justify {
 
 export type DropdownJustifyTypes = keyof typeof justify
 
-export interface DropdownContainerProps
-    extends HTMLAttributes<HTMLDivElement> {
+export interface DropdownContainerProps extends HTMLAttributes<HTMLDivElement> {
     as?: ElementType
     justify?: DropdownJustifyTypes
 }

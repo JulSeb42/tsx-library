@@ -6,7 +6,7 @@ import { Breakpoints, Spacers, Mixins, Image } from "../../"
 import type { AllColorsTypes, ColorsHoverTypes } from "../../types"
 import type { FooterDirectionsTypes } from "./types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledFooter = styled.footer<{
     $separator?: boolean

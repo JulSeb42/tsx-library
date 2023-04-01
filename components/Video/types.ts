@@ -2,10 +2,7 @@
 
 import type { HTMLAttributes, ElementType } from "react"
 
-import {
-    // ObjectFitTypes
-    ObjectFitTypes,
-} from "../../types"
+import type { ObjectFitTypes } from "../../types"
 
 export interface VideoProps extends HTMLAttributes<HTMLVideoElement> {
     as?: ElementType

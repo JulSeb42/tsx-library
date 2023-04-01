@@ -4,7 +4,7 @@ import styled from "styled-components"
 
 import { stringifyPx } from "../../"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledYoutube = styled.iframe<{
     $width?: string | number

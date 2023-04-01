@@ -19,7 +19,7 @@ import type {
 } from "../../types"
 import type { ButtonPositionsTypes } from "./types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledSlideshow = styled.div`
     width: 100%;

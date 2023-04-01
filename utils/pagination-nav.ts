@@ -2,7 +2,7 @@
 
 import { useNavigate, createSearchParams } from "react-router-dom"
 
-const usePaginationNav = (
+export const usePaginationNav = (
     currentPage: number,
     setCurrentPage: (currentPage: number) => void,
     queries?: string[][]
@@ -57,5 +57,3 @@ const usePaginationNav = (
         handleNext,
     }
 }
-
-export default usePaginationNav

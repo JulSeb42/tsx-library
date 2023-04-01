@@ -4,7 +4,7 @@ import styled from "styled-components"
 
 import { Overlays, Mixins, ButtonIcon, Spacers } from "../../"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledModal = styled.div<{ $isOpen: boolean }>`
     position: fixed;

@@ -2,13 +2,7 @@
 
 import type { HTMLAttributes, ElementType } from "react"
 
-import {
-    // SpacersTypes,
-    // GridAlignContentTypes,
-    // GridAlignItemsTypes,
-    // GridJustifyContentTypes,
-    // GridJustifyItemsTypes,
-    // PaddingTypes,
+import type {
     SpacersTypes,
     GridAlignContentTypes,
     GridAlignItemsTypes,

@@ -2,11 +2,7 @@
 
 import type { HTMLAttributes, ElementType } from "react"
 
-import {
-    // SpacersTypes, AllColorsTypes
-    SpacersTypes,
-    AllColorsTypes,
-} from "../../types"
+import type { SpacersTypes, AllColorsTypes } from "../../types"
 
 export interface HrProps extends HTMLAttributes<HTMLHRElement> {
     as?: ElementType

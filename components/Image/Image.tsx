@@ -1,14 +1,14 @@
 /*=============================================== Image component ===============================================*/
 
-import React, { forwardRef, Suspense } from "react"
+import React, { forwardRef, Suspense, lazy } from "react"
 import type { ForwardedRef } from "react"
 
 import Fallback from "../Fallback"
 
 import * as Styles from "./styles"
-import { ImageProps } from "./types"
+import type { ImageProps } from "./types"
 
-const Img = React.lazy(() => import("./styles"))
+const Img = lazy(() => import("./styles"))
 
 const Image = forwardRef(
     (

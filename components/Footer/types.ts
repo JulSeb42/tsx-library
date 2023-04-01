@@ -3,9 +3,6 @@
 import type { HTMLAttributes, ElementType } from "react"
 
 import type {
-    // AllColorsTypes,
-    // ColorsHoverTypes,
-    // FooterItemProps,
     AllColorsTypes,
     ColorsHoverTypes,
     FooterItemProps,

@@ -1,10 +1,10 @@
 /*=============================================== LoaderFour ===============================================*/
 
-import { forwardRef } from "react"
+import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
 import * as Styles from "../styles"
-import { LoaderProps } from "../types"
+import type { LoaderProps } from "../types"
 
 const LoaderFour = forwardRef(
     (

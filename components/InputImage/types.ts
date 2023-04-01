@@ -2,11 +2,7 @@
 
 import type { InputHTMLAttributes } from "react"
 
-import type {
-    // ValidationTypes, RadiusesTypes
-    ValidationTypes,
-    RadiusesTypes,
-} from "../../types"
+import type { ValidationTypes, RadiusesTypes } from "../../types"
 import type { InputBaseProps } from "../InputContainer/types"
 
 export interface InputImageProps

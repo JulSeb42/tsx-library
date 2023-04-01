@@ -2,10 +2,7 @@
 
 import type { HTMLAttributes, ElementType } from "react"
 
-import type {
-    //ShadowsTypes
-    ShadowsTypes,
-} from "../../types"
+import type { ShadowsTypes } from "../../types"
 import type { InputBaseProps } from "../InputContainer/types"
 import type {
     InputBackgroundTypes,

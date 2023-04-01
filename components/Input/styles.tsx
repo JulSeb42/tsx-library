@@ -19,7 +19,7 @@ import type {
 import { InputBaseMixin } from "../InputComponents"
 import { ConstantValues } from "../InputComponents/styles"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledInputContent = styled.div`
     width: 100%;

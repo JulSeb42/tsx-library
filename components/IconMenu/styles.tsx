@@ -11,7 +11,7 @@ import type {
 } from "../../types"
 import type { IconMenuDirectionTypes } from "./types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const buttonSize = 48
 

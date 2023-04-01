@@ -3,9 +3,9 @@
 import styled from "styled-components"
 
 import { Spacers, Radiuses, Mixins } from "../../"
-import { ColorsAlertsTypes } from "./types"
+import type { ColorsAlertsTypes } from "./types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledAlert = styled.div<{
     $color: ColorsAlertsTypes

@@ -13,10 +13,10 @@
         "esModuleInterop": true,
         "outDir": "build",
         "target": "es5",
-        "module": "es2020",
+        "module": "ESNext",
         "moduleResolution": "node",
         "downlevelIteration": true,
-        "rootDir": "./"
+        "rootDir": "./",
     },
     "exclude": [
         "node_modules"

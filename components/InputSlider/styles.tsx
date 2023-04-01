@@ -10,9 +10,13 @@ import {
     Overlays,
     Text,
 } from "../../"
-import { AllColorsTypes, ColorsHoverTypes, ValidationTypes } from "../../types"
+import type {
+    AllColorsTypes,
+    ColorsHoverTypes,
+    ValidationTypes,
+} from "../../types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const SliderContainer = styled.div`
     width: 100%;

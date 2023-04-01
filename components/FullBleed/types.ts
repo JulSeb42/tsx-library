@@ -2,10 +2,7 @@
 
 import type { HTMLAttributes, ElementType } from "react"
 
-import {
-    // PaddingTypes
-    PaddingTypes,
-} from "../../types"
+import type { PaddingTypes } from "../../types"
 
 export interface FullBleedProps extends HTMLAttributes<HTMLDivElement> {
     as?: ElementType

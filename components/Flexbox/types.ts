@@ -2,15 +2,7 @@
 
 import type { HTMLAttributes, ElementType } from "react"
 
-import {
-    // SpacersTypes,
-    // FlexAlignContentTypes,
-    // FlexAlignItemsTypes,
-    // FlexDirectionTypes,
-    // FlexJustifyContentTypes,
-    // FlexJustifyItemsTypes,
-    // FlexWrapTypes,
-    // PaddingTypes
+import type {
     SpacersTypes,
     FlexAlignContentTypes,
     FlexAlignItemsTypes,

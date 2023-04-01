@@ -2,10 +2,10 @@
 
 import styled from "styled-components"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 import { Mixins, Layouts } from "../../"
-import { SpacersTypes } from "../../types"
-import { TemplateType } from "./types"
+import type { SpacersTypes } from "../../types"
+import type { TemplateType } from "./types"
 
 const StyledWrapper = styled.div<{
     $gap?: SpacersTypes

@@ -3,10 +3,6 @@
 import type { HTMLAttributes, ElementType, ReactNode } from "react"
 
 import type {
-    // MessageProps as MessageType,
-    // AllColorsTypes,
-    // ColorsHoverTypes,
-    // SpacersTypes,
     MessageProps as MessageType,
     AllColorsTypes,
     ColorsHoverTypes,

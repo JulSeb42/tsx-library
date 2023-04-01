@@ -6,7 +6,7 @@ import type { ForwardedRef } from "react"
 import { useClickOutside } from "../../"
 
 import * as Styles from "./styles"
-import { DropdownProps, DropdownContainerProps } from "./types"
+import type { DropdownProps, DropdownContainerProps } from "./types"
 
 export const DropdownContainer = forwardRef(
     (

@@ -4,16 +4,11 @@
 
 import { css } from "styled-components"
 
-import {
-    Overlays,
-    Radiuses,
-    Spacers,
-    Shadows,
-    Breakpoints,
-    stringifyPx,
-} from "./"
+import { Overlays, Radiuses, Spacers, Shadows, Breakpoints } from "./Variables"
 
-import {
+import { stringifyPx } from "./utils/ts-utils"
+
+import type {
     SpacersTypes,
     GridJustifyItemsTypes,
     GridAlignItemsTypes,

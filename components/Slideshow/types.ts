@@ -3,9 +3,6 @@
 import type { HTMLAttributes, ElementType, ReactNode } from "react"
 
 import type {
-    // ColorsHoverTypes,
-    // RadiusesTypes,
-    // ObjectFitTypes,
     ColorsHoverTypes,
     RadiusesTypes,
     ObjectFitTypes,

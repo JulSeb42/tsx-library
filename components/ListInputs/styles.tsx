@@ -22,7 +22,7 @@ import type { VariantTypes, ListDirectionTypes } from "./types"
 import type { InputBackgroundTypes } from "../InputComponents/types"
 import { ConstantValues } from "../InputComponents/styles"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledListInputs = styled.div<{
     $isOpen: boolean

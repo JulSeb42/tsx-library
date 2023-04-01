@@ -1,10 +1,7 @@
 /*=============================================== Wrapper types ===============================================*/
 
 import type { HTMLAttributes, ElementType } from "react"
-import {
-    // SpacersTypes
-    SpacersTypes,
-} from "../../types"
+import type { SpacersTypes } from "../../types"
 
 enum templates {
     "1col",

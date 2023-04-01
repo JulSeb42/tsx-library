@@ -16,7 +16,7 @@ import type {
     FlexWrapTypes,
 } from "../../types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const CoverImage = styled(Image).attrs({ width: "100%", fit: "cover" })`
     position: fixed;

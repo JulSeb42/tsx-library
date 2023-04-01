@@ -2,11 +2,7 @@
 
 import type { HTMLAttributes } from "react"
 
-import type {
-    // ColorsHoverTypes, ValidationTypes
-    ColorsHoverTypes,
-    ValidationTypes,
-} from "../../types"
+import type { ColorsHoverTypes, ValidationTypes } from "../../types"
 
 enum inputVariants {
     rounded,

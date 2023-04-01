@@ -3,7 +3,7 @@
 import React, { useState, createContext, useEffect } from "react"
 
 import { ThemeLight, ThemeDark } from "../Variables"
-import { ThemeContextProps } from "../types/component-props"
+import type { ThemeContextProps } from "../types"
 
 const ThemeContext = createContext<ThemeContextProps | null>(null)
 

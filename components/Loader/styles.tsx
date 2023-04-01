@@ -3,9 +3,9 @@
 import styled, { keyframes } from "styled-components"
 
 import { Radiuses, Mixins } from "../../"
-import { AllColorsTypes } from "../../types"
+import type { AllColorsTypes } from "../../types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const SpinLoaderOne = keyframes`
     0% {

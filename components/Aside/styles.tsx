@@ -2,9 +2,9 @@
 
 import styled from "styled-components"
 
-import { AsidePositionTypes, AsideSizeTypes } from "./types"
 import { Mixins, Layouts, Breakpoints, stringifyPx } from "../../"
-import {
+import type { AsidePositionTypes, AsideSizeTypes } from "./types"
+import type {
     SpacersTypes,
     GridAlignContentTypes,
     GridAlignItemsTypes,
@@ -12,7 +12,7 @@ import {
     GridJustifyItemsTypes,
 } from "../../types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledAside = styled.aside<{
     $size?: AsideSizeTypes

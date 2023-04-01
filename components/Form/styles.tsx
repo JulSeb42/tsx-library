@@ -5,7 +5,7 @@ import styled from "styled-components"
 import { Mixins, stringifyPx } from "../../"
 import type { SpacersTypes } from "../../types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledForm = styled.form<{
     $gap?: SpacersTypes

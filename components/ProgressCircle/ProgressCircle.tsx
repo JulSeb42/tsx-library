@@ -6,7 +6,7 @@ import type { ForwardedRef } from "react"
 import { Icon, Text } from "../../"
 
 import * as Styles from "./styles"
-import { ProgressCircleProps } from "./types"
+import type { ProgressCircleProps } from "./types"
 
 const cleanPercentage = (value: number) => {
     const isNegativeOrNaN = !Number.isFinite(+value)

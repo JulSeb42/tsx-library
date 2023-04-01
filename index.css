@@ -85,6 +85,14 @@
     --color-light-link-background-hover: var(--color-light-gray-300);
     --color-light-link-background-active: var(--color-light-gray-100);
 
+    --color-light-font-ghost-default: var(--color-light-gray-900);
+    --color-light-font-ghost-hover: var(--color-light-gray-700);
+    --color-light-font-ghost-active: var(--color-light-gray-800);
+
+    --color-light-background-ghost-default: var(--color-light-gray-50);
+    --color-light-background-ghost-hover: var(--color-light-gray-200);
+    --color-light-background-ghost-active: var(--color-light-gray-100);
+
     --color-dark-gray-50: rgba(24, 24, 24, 1);
     --color-dark-gray-100: rgba(47, 47, 47, 1);
     --color-dark-gray-200: rgba(71, 71, 71, 1);
@@ -154,6 +162,14 @@
     --color-dark-link-background-default: var(--color-dark-background);
     --color-dark-link-background-hover: var(--color-dark-gray-700);
     --color-dark-link-background-active: var(--color-dark-gray-900);
+
+    --color-dark-font-ghost-default: var(--color-dark-gray-900);
+    --color-dark-font-ghost-hover: var(--color-dark-gray-700);
+    --color-dark-font-ghost-active: var(--color-dark-gray-800);
+
+    --color-dark-background-ghost-default: var(--color-dark-gray-50);
+    --color-dark-background-ghost-hover: var(--color-dark-gray-200);
+    --color-dark-background-ghost-active: var(--color-dark-gray-100);
 
     /*===== Overlays =====*/
 

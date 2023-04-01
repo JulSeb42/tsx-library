@@ -1,10 +1,10 @@
 /*=============================================== Icon component ===============================================*/
 
-import { forwardRef } from "react"
+import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { IconProps } from "./types"
+import type { IconProps } from "./types"
 
 const Icon = forwardRef(
     (

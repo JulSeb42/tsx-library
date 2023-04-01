@@ -3,10 +3,10 @@
 import styled, { keyframes, css } from "styled-components"
 
 import { Mixins, Radiuses, Transitions, getPercentage } from "../../"
-import { AllColorsTypes, SpacersTypes } from "../../types"
-import { ProgressDirectionType } from "./types"
+import type { AllColorsTypes, SpacersTypes } from "../../types"
+import type { ProgressDirectionType } from "./types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const Progress = ({
     value,

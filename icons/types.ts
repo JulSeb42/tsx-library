@@ -3,7 +3,7 @@
 import type { HTMLAttributes } from "react"
 import type {
     // AllColorsTypes
-    AllColorsTypes
+    AllColorsTypes,
 } from "../types"
 
 export interface IconProps extends HTMLAttributes<HTMLOrSVGElement> {

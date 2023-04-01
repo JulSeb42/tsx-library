@@ -10,7 +10,7 @@ import type {
 } from "../../types"
 import type { TabsJustifyTypes, TabsVariantsType } from "./types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledTabs = styled.div<{ $gap?: SpacersTypes }>`
     ${({ $gap }) =>

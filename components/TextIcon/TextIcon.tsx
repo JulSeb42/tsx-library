@@ -1,12 +1,12 @@
 /*=============================================== TextIcon component ===============================================*/
 
-import { forwardRef } from "react"
+import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
 import { Icon, Text } from "../../"
 
 import * as Styles from "./styles"
-import { TextIconProps } from "./types"
+import type { TextIconProps } from "./types"
 
 const TextIcon = forwardRef(
     (

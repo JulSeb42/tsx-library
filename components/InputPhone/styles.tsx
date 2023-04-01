@@ -20,7 +20,7 @@ import type {
 } from "../InputComponents/types"
 import { ConstantValues } from "../InputComponents/styles"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledInputPhone = styled.div<{ $isOpen: boolean }>`
     position: relative;

@@ -1,12 +1,12 @@
 /*=============================================== Badge component ===============================================*/
 
-import { forwardRef } from "react"
+import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
 import { Icon } from "../../"
 
 import * as Styles from "./styles"
-import { BadgeProps } from "./types"
+import type { BadgeProps } from "./types"
 
 const Badge = forwardRef(
     (

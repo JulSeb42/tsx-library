@@ -4,7 +4,7 @@ import React, { forwardRef, useRef, useState, useLayoutEffect } from "react"
 import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { TooltipProps } from "./types"
+import type { TooltipProps } from "./types"
 
 const Tooltip = forwardRef(
     (

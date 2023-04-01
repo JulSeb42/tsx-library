@@ -12,7 +12,7 @@ import {
 } from "../../"
 import type { ValidationTypes, RadiusesTypes } from "../../types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledInputImage = styled.div`
     position: relative;

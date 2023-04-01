@@ -6,7 +6,7 @@ import type { ForwardedRef } from "react"
 import { Image, Icon } from "../../"
 
 import * as Styles from "./styles"
-import { AvatarProps } from "./types"
+import type { AvatarProps } from "./types"
 
 const Avatar = forwardRef(
     (

@@ -2,18 +2,15 @@
 
 import type { InputHTMLAttributes } from "react"
 
-import {
-    // ShadowsTypes
-    ShadowsTypes,
-} from "../../types"
-import {
+import type { ShadowsTypes } from "../../types"
+import type {
     InputBackgroundTypes,
     InputVariantTypes,
     ValidationComponentProps,
     IconInputProps,
 } from "../InputComponents/types"
-import { InputBaseProps } from "../InputContainer/types"
-import { ListDirectionTypes } from "../ListInputs/types"
+import type { InputBaseProps } from "../InputContainer/types"
+import type { ListDirectionTypes } from "../ListInputs/types"
 
 type TimepickerPropsBase = InputHTMLAttributes<HTMLInputElement> &
     InputBaseProps &

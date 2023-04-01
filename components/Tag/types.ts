@@ -3,10 +3,6 @@
 import type { HTMLAttributes, ElementType } from "react"
 
 import type {
-    // AllColorsTypes,
-    // SpacersTypes,
-    // PaddingTypes,
-    // RadiusesTypes,
     AllColorsTypes,
     SpacersTypes,
     PaddingTypes,

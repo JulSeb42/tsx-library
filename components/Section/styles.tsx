@@ -3,9 +3,9 @@
 import styled from "styled-components"
 
 import { Mixins } from "../../"
-import { SpacersTypes } from "../../types"
+import type { SpacersTypes } from "../../types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledSection = styled.section<{ $gap?: SpacersTypes }>`
     ${({ $gap }) =>

@@ -19,7 +19,7 @@ import type {
     SpacersTypes,
 } from "../../types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledCard = styled.div<{
     $borderRadius?: RadiusesTypes

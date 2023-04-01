@@ -18,7 +18,7 @@ import Ul from "./templates/Ul"
 import Ol from "./templates/Ol"
 import Dl from "./templates/Dl"
 
-import { TagTypes, TextProps } from "./types"
+import type { TagTypes, TextProps } from "./types"
 
 const renderComponent = (
     props: TextProps,

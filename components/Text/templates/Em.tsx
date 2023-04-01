@@ -1,9 +1,9 @@
 /*=============================================== Em component ===============================================*/
 
-import { forwardRef } from "react"
+import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
-import { TextProps } from "../types"
+import type { TextProps } from "../types"
 import { StyledEm } from "../styles"
 
 const Em = forwardRef(

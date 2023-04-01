@@ -1,12 +1,12 @@
 /*=============================================== ProgressBar component ===============================================*/
 
-import { forwardRef } from "react"
+import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
 import { SrOnly } from "../../"
 
 import * as Styles from "./styles"
-import { ProgressBarProps } from "./types"
+import type { ProgressBarProps } from "./types"
 
 const ProgressBar = forwardRef(
     (

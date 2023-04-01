@@ -3,10 +3,6 @@
 import type { HTMLAttributes, ElementType } from "react"
 
 import type {
-    // ShadowsTypes,
-    // ColorsHoverTypes,
-    // ObjectPositionTypes,
-    // IconMenuItemProps,
     ShadowsTypes,
     ColorsHoverTypes,
     ObjectPositionTypes,

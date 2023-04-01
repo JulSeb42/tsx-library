@@ -2,11 +2,7 @@
 
 import type { ElementType } from "react"
 
-import {
-    // AllColorsTypes, ColorsHoverTypes
-    AllColorsTypes,
-    ColorsHoverTypes,
-} from "../../types"
+import type { AllColorsTypes, ColorsHoverTypes } from "../../types"
 
 export interface InputBaseProps {
     as?: ElementType

@@ -17,7 +17,7 @@ import type {
 } from "../../types"
 import type { SkeletonAnimationTypes } from "./types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const Pulse = keyframes`
     0% {

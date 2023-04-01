@@ -2,10 +2,7 @@
 
 import type { HTMLAttributes, ElementType, ButtonHTMLAttributes } from "react"
 
-import type {
-    // ColorsHoverTypes
-    ColorsHoverTypes,
-} from "../../types"
+import type { ColorsHoverTypes } from "../../types"
 
 enum justify {
     left,

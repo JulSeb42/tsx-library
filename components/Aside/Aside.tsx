@@ -1,10 +1,10 @@
 /*=============================================== Aside component ===============================================*/
 
-import { forwardRef } from "react"
+import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { AsideProps } from "./types"
+import type { AsideProps } from "./types"
 
 const Aside = forwardRef(
     (

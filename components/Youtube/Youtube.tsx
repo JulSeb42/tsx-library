@@ -1,12 +1,12 @@
 /*=============================================== Youtube component ===============================================*/
 
-import { forwardRef } from "react"
+import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
 import { convertYoutube } from "../../"
 
 import * as Styles from "./styles"
-import { YoutubeProps } from "./types"
+import type { YoutubeProps } from "./types"
 
 const Youtube = forwardRef(
     (

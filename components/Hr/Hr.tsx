@@ -1,10 +1,10 @@
 /*=============================================== Hr component ===============================================*/
 
-import { forwardRef } from "react"
+import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { HrProps } from "./types"
+import type { HrProps } from "./types"
 
 const Hr = forwardRef(
     (

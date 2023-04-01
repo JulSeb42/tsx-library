@@ -23,7 +23,7 @@ import type {
 } from "../InputComponents/types"
 import type { ListDirectionTypes } from "../ListInputs/types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const buttonSize = 32
 const buttonMobile = 24

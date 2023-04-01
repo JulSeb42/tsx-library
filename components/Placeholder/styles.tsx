@@ -3,7 +3,7 @@
 import styled from "styled-components"
 
 import { Mixins, stringifyPx } from "../../"
-import {
+import type {
     AllColorsTypes,
     OverlayTypes,
     ShadowsTypes,
@@ -14,7 +14,7 @@ import {
 } from "../../types"
 import { FontSize, FontWeight } from "../Text/styles"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledPlaceholder = styled.div<{
     $width?: string | number

@@ -3,9 +3,9 @@
 import styled, { css } from "styled-components"
 
 import { Mixins, stringifyPx } from "../../"
-import { PaddingTypes } from "../../types"
+import type { PaddingTypes } from "../../types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledFullBleed = styled.div<{
     $height?: number | string

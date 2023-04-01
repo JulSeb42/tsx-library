@@ -1,12 +1,12 @@
 /*=============================================== MarkdownContainer component ===============================================*/
 
-import { forwardRef } from "react"
+import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
 import { OptionsMarkdown } from "../../"
 
 import * as Styles from "./styles"
-import { MarkdownContainerProps } from "./types"
+import type { MarkdownContainerProps } from "./types"
 
 const MarkdownContainer = forwardRef(
     (

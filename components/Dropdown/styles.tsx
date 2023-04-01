@@ -11,11 +11,11 @@ import {
     Mixins,
     stringifyPx,
 } from "../../"
-import { ColorsHoverTypes } from "../../types"
-import { DropdownJustifyTypes } from "./types"
-import { ListDirectionTypes } from "../ListInputs/types"
+import type { ColorsHoverTypes } from "../../types"
+import type { DropdownJustifyTypes } from "./types"
+import type { ListDirectionTypes } from "../ListInputs/types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledDropdown = styled.div<{
     $isOpen: boolean

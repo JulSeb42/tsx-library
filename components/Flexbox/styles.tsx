@@ -3,7 +3,7 @@
 import styled from "styled-components"
 
 import { Mixins } from "../../"
-import {
+import type {
     SpacersTypes,
     FlexAlignContentTypes,
     FlexAlignItemsTypes,
@@ -14,7 +14,7 @@ import {
     PaddingTypes,
 } from "../../types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledFlexbox = styled.div<{
     $inline?: boolean

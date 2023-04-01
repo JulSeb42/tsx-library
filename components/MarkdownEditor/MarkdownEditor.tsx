@@ -21,7 +21,7 @@ import type {
     ButtonType,
     EditorButtonType,
     TitleType,
-    PossibleTitlesTypes
+    PossibleTitlesTypes,
 } from "./types"
 
 import {

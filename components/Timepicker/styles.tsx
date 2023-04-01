@@ -4,13 +4,13 @@ import styled from "styled-components"
 
 import { Mixins } from "../../"
 import { InputBaseMixin } from "../InputComponents"
-import { ValidationTypes, ColorsHoverTypes } from "../../types"
-import {
+import type { ValidationTypes, ColorsHoverTypes } from "../../types"
+import type {
     InputBackgroundTypes,
     InputVariantTypes,
 } from "../InputComponents/types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledTimepicker = styled.div<{
     $isOpen?: boolean

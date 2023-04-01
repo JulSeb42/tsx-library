@@ -1,10 +1,10 @@
 /*=============================================== Main component ===============================================*/
 
-import { forwardRef } from "react"
+import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
 import * as Styles from "./styles"
-import { MainProps } from "./types"
+import type { MainProps } from "./types"
 
 const Main = forwardRef(
     (

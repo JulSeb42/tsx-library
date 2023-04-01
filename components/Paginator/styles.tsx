@@ -15,7 +15,7 @@ import type { ColorsHoverTypes } from "../../types"
 import type { InputBackgroundTypes } from "../InputComponents/types"
 import type { PaginatorJustifyType } from "./types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledPaginator = styled.div<{ $justify?: PaginatorJustifyType }>`
     ${({ $justify }) =>

@@ -21,7 +21,7 @@ import type {
 } from "../../types"
 import type { MessageTypeTypes } from "./types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledMessaging = styled.div<{ $borderColor?: AllColorsTypes }>`
     border: 1px solid

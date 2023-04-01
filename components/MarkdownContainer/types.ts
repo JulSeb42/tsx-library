@@ -2,10 +2,7 @@
 
 import type { HTMLAttributes, ReactNode } from "react"
 
-import {
-    // SpacersTypes
-    SpacersTypes,
-} from "../../types"
+import type { SpacersTypes } from "../../types"
 
 export interface MarkdownContainerProps extends HTMLAttributes<HTMLDivElement> {
     gap?: SpacersTypes

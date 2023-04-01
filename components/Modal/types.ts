@@ -2,10 +2,7 @@
 
 import type { HTMLAttributes, ElementType, MouseEvent } from "react"
 
-import type {
-    // ColorsHoverTypes
-    ColorsHoverTypes,
-} from "../../types"
+import type { ColorsHoverTypes } from "../../types"
 import type { ButtonIconVariantTypes } from "../ButtonIcon/types"
 
 interface ModalPropsBase extends HTMLAttributes<HTMLDivElement> {

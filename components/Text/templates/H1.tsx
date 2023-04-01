@@ -1,9 +1,9 @@
 /*=============================================== H1 component ===============================================*/
 
-import { forwardRef } from "react"
+import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
-import { TextProps } from "../types"
+import type { TextProps } from "../types"
 import { StyledH1 } from "../styles"
 
 const H1 = forwardRef(

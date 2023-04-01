@@ -2,7 +2,7 @@
 
 import styled from "styled-components"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledSrOnly = styled.div`
     border: 0 !important;

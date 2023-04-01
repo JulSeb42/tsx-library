@@ -21,9 +21,9 @@ import type { ColorsHoverTypes } from "../../types"
 import type { InputBackgroundTypes } from "../InputComponents/types"
 
 import { getFontSizeButton } from "./buttons"
-import { PossibleTitlesTypes } from "./types"
+import type { PossibleTitlesTypes } from "./types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledMarkdownEditor = styled.div<{
     $isFocused: boolean

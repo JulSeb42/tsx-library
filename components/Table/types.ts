@@ -2,8 +2,7 @@
 
 import type { HTMLAttributes, ElementType } from "react"
 
-import {
-    // TextAlignTypes, ColorsHoverTypes, AllColorsTypes
+import type {
     TextAlignTypes,
     ColorsHoverTypes,
     AllColorsTypes,

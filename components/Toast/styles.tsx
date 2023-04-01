@@ -20,7 +20,7 @@ import type {
     PaddingTypes,
 } from "../../types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const StyledToast = styled.div<{
     $isClosed?: boolean

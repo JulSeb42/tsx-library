@@ -2,11 +2,7 @@
 
 import type { MeterHTMLAttributes, ElementType } from "react"
 
-import {
-    // AllColorsTypes, SpacersTypes
-    AllColorsTypes,
-    SpacersTypes,
-} from "../../types"
+import type { AllColorsTypes, SpacersTypes } from "../../types"
 
 enum directions {
     horizontal,
