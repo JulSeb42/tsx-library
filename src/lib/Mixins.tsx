@@ -456,7 +456,7 @@ const Mixins = {
                 : stringifyPx($top)};
         `}
 
-    ${$right &&
+${$right &&
         css`
             right: ${$right === "xxl" ||
             $right === "xl" ||
@@ -469,7 +469,7 @@ const Mixins = {
                 : stringifyPx($right)};
         `}
 
-    ${$bottom &&
+${$bottom &&
         css`
             bottom: ${$bottom === "xxl" ||
             $bottom === "xl" ||
