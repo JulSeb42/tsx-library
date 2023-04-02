@@ -1,13 +1,15 @@
 {
     "name": "tsx-library-julseb",
     "private": false,
-    "version": "7.0.10",
+    "version": "7.0.11",
     "type": "module",
     "scripts": {
         "dev": "vite",
         "copy": "cp ./src/lib/index.css ./dist",
-        "copy-types": "rm -rf ./types && cp -a ./src/lib/types ./types",
-        "build": "tsc && vite build && yarn copy && yarn copy-types",
+        "clean": "rm -rf ./dist/icons ./dist/images ./dist/vite.svg ./dist/favicon.svg",
+        "build-types": "tsc ./src/lib/types/index.ts",
+        "copy-types": "rm -rf ./dist/types && cp -a ./src/lib/types ./dist/types",
+        "build": "tsc && vite build && yarn copy && yarn copy-types && yarn clean && yarn build-types && yarn copy-types",
         "preview": "vite preview",
         "lint": "npx eslint src/lib/**",
         "lint:fix": "npx eslint src/lib/** --fix"
@@ -47,7 +49,7 @@
         "vite-plugin-dts": "^2.1.0",
         "vite-plugin-eslint": "^1.8.1"
     },
-    "license": "UNLICENSED",
+    "license": "MIT",
     "peerDependencies": {
         "react": "^16.8.0 || 17.x || 18.x",
         "react-dom": "^16.8.0 || 17.x || 18.x",
@@ -59,20 +61,22 @@
     "main": "./dist/tsx-library-julseb.umd.js",
     "module": "./dist/tsx-library-julseb.es.js",
     "types": "./dist/index.d.ts",
-    "exports": {
-        ".": {
-            "import": "./dist/tsx-library-julseb.es.js",
-            "require": "./dist/tsx-library-julseb.umd.js",
-            "types": "./dist/index.d.ts"
-        },
-        "./index.css": {
-            "import": "./dist/index.css",
-            "require": "./dist/index.css"
-        },
-        "./types": {
-            "import": "./dist/lib/types/index.d.ts",
-            "require": "./dist/lib/types/index.d.ts",
-            "types": "./dist/lib/types/index.d.ts"
-        }
+"exports": {
+    ".": {
+        "import": "./dist/tsx-library-julseb.es.js",
+        "require": "./dist/tsx-library-julseb.umd.js",
+        "types": "./dist/index.d.ts"
+    },
+    "./index.css": {
+        "import": "./dist/index.css",
+        "require": "./dist/index.css"
     }
+},
+"typesVersions": {
+    "*": {
+        "types": [
+            "./dist/lib/types/index.d.ts"
+        ]
+    }
+}
 }
