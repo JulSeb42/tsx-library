@@ -61,6 +61,7 @@ type ButtonIconBehaviour1 = ButtonIconLabel & {
     disabled?: boolean
     href?: never
     blank?: never
+    isRouterLink?: never
 }
 
 type ButtonIconBehaviour2 = ButtonIconLabel & {
@@ -68,6 +69,7 @@ type ButtonIconBehaviour2 = ButtonIconLabel & {
     disabled?: never
     href?: string
     blank?: boolean
+    isRouterLink?: boolean
 }
 
 type ButtonIconBehaviour = ButtonIconBehaviour1 | ButtonIconBehaviour2

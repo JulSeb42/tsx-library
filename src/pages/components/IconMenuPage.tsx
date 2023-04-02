@@ -1,5 +1,6 @@
 /*=============================================== IconMenuPage ===============================================*/
 
+import React from "react"
 import { Page } from "../../components"
 import { IconMenu } from "../../lib"
 import type { IconMenuItemProps } from "../../lib/types"
@@ -8,12 +9,12 @@ const IconMenuPage = () => {
     const items: IconMenuItemProps[] = [
         {
             icon: "edit",
-            href: "#",
+            href: "/",
             label: "Button",
         },
         {
             icon: "check",
-            href: "#",
+            to: "/",
             label: "Button",
         },
         {

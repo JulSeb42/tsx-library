@@ -1,5 +1,6 @@
 /*=============================================== ButtonPage ===============================================*/
 
+import React from "react"
 import { Page } from "../../components"
 import { Button, Flexbox } from "../../lib"
 
@@ -60,7 +61,12 @@ const ButtonPage = () => {
                     >
                         Button
                     </Button>
-                    <Button variant="plain" color="secondary" href="/">
+                    <Button
+                        variant="plain"
+                        color="secondary"
+                        isRouterLink
+                        href="/"
+                    >
                         Button
                     </Button>
                     <Button variant="plain" color="success" href="#">

@@ -2,6 +2,7 @@
 
 import React, { forwardRef, Fragment } from "react"
 import type { ForwardedRef } from "react"
+import { Link } from "react-router-dom"
 
 import { Icon, uuid } from "../../"
 import { ChevronRightIcon } from "../../icons"
@@ -18,6 +19,7 @@ const Breadcrumbs = forwardRef(
             linkColor = "primary",
             separator = "slash",
             customIcon,
+            isRouterLink,
             ...rest
         }: BreadcrumbsProps,
         ref?: ForwardedRef<HTMLParagraphElement>
@@ -33,8 +35,9 @@ const Breadcrumbs = forwardRef(
             {items.map(({ text, href }) => (
                 <Fragment key={uuid()}>
                     <Styles.Item
-                        as={href ? "a" : "span"}
+                        as={isRouterLink && href ? Link : href ? "a" : "span"}
                         href={href ? href : undefined}
+                        to={href ? href : undefined}
                     >
                         {text}
                     </Styles.Item>

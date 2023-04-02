@@ -2,6 +2,7 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
+import { Link } from "react-router-dom"
 
 import { Icon, uuid } from "../../"
 import { CheckIcon } from "../../icons"
@@ -20,6 +21,7 @@ export const Step = forwardRef(
             number,
             href,
             text,
+            to,
             ...rest
         }: StepProps,
         ref?: ForwardedRef<HTMLSpanElement>
@@ -43,8 +45,8 @@ export const Step = forwardRef(
                 </Styles.Number>
 
                 <Styles.StyledText
-                    as={href ? "a" : "small"}
-                    $isLink={!!href}
+                    as={href ? "a" : to ? Link : "small"}
+                    $isLink={!!href || !!to}
                     href={href}
                     $accentColor={accentColor}
                 >

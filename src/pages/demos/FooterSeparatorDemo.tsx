@@ -13,8 +13,8 @@ const FooterSeparatorDemo = () => {
             href: "#",
         },
         {
-            content: "Link",
-            href: "#",
+            content: "Router Link",
+            to: "/",
         },
         {
             content: "Button",

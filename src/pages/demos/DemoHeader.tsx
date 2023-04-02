@@ -31,6 +31,7 @@ const DemoHeader = () => {
             <Header
                 logo={{
                     text: "Logo",
+                    isRouterLink: true,
                 }}
                 position="fixed"
                 hideOnScroll={400}

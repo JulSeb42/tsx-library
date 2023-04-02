@@ -1,6 +1,7 @@
 /*=============================================== IconMenu component ===============================================*/
 
 import React, { useRef, useState } from "react"
+import { Link } from "react-router-dom"
 
 import { useClickOutside, Icon, Burger } from "../../"
 
@@ -64,13 +65,18 @@ const IconMenu = ({
                 )}
             </Styles.StyledOpenButton>
 
-            {items.map(({ onClick, blank, label, icon, href }, i) => (
+            {items.map(({ onClick, blank, label, icon, href, to }, i) => (
                 <Styles.StyledButton
-                    as={href ? "a" : "button"}
+                    as={to ? Link : href ? "a" : "button"}
                     onClick={onClick}
                     href={href}
-                    target={href && blank ? "_blank" : undefined}
-                    rel={href && blank ? "noreferrer noopener" : undefined}
+                    to={to}
+                    target={(href || to) && blank ? "_blank" : undefined}
+                    rel={
+                        (href || to) && blank
+                            ? "noreferrer noopener"
+                            : undefined
+                    }
                     aria-label={label}
                     $color={color}
                     $index={i}

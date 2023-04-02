@@ -42,6 +42,7 @@ interface ButtonBehaviour1 extends ButtonBaseProps {
     type?: "button" | "submit" | "reset"
     href?: never
     blank?: never
+    isRouterLink?: never
 }
 
 interface ButtonBehaviour2 extends ButtonBaseProps {
@@ -49,6 +50,7 @@ interface ButtonBehaviour2 extends ButtonBaseProps {
     type?: never
     href?: string
     blank?: boolean
+    isRouterLink?: boolean
 }
 
 type ButtonBehaviour = ButtonBehaviour1 | ButtonBehaviour2

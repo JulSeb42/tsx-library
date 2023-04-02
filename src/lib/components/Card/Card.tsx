@@ -2,6 +2,7 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
+import { Link } from "react-router-dom"
 
 import * as Styles from "./styles"
 import type { CardProps } from "./types"
@@ -24,6 +25,7 @@ const Card = forwardRef(
             textColor = "currentColor",
             href,
             blank,
+            isRouterLink,
             onClick,
             inline,
             flexDirection,
@@ -41,8 +43,9 @@ const Card = forwardRef(
     ) => (
         <Styles.StyledCard
             ref={ref}
-            as={as ? as : href ? "a" : "div"}
+            as={as ? as : isRouterLink ? Link : href ? "a" : "div"}
             href={href}
+            to={href}
             target={href && blank && "_blank"}
             rel={href && blank && "noreferrer noopener"}
             onClick={onClick}

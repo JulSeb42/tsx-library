@@ -2,6 +2,7 @@
 
 import React, { forwardRef, useRef, useState, useLayoutEffect } from "react"
 import type { ForwardedRef } from "react"
+import { Link } from "react-router-dom"
 
 import { useTouchScreen, Icon, Loader, Burger, Avatar } from "../../"
 
@@ -79,16 +80,18 @@ const ButtonIcon = forwardRef(
             blank,
             avatar,
             className,
+            isRouterLink,
             ...rest
         }: ButtonIconProps,
         ref?: ForwardedRef<HTMLButtonElement>
     ) => {
         const buttonFn = () => (
             <Styles.StyledButtonIcon
-                as={as ? as : href ? "a" : "button"}
+                as={as ? as : isRouterLink ? Link : href ? "a" : "button"}
                 ref={ref}
                 aria-label={label}
                 href={href}
+                to={href}
                 target={href && blank && "_blank"}
                 rel={href && blank && "noreferrer noopener"}
                 disabled={!!isLoading || disabled}

@@ -62,6 +62,7 @@ const Form = forwardRef(
                                     left: buttonSecondary.iconLeft,
                                     right: buttonSecondary.iconRight,
                                 }}
+                                isRouterLink={buttonSecondary.isRouterLink}
                             >
                                 {buttonSecondary.text || "Cancel"}
                             </Button>

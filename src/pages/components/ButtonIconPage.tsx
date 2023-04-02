@@ -1,6 +1,6 @@
 /*=============================================== ButtonIconPage ===============================================*/
 
-import { useState } from "react"
+import React, { useState } from "react"
 
 import { Page } from "../../components"
 import { ButtonIcon, Flexbox } from "../../lib"
@@ -95,6 +95,7 @@ const ButtonIconPage = () => {
                     color="primary"
                     href="/"
                     label="email"
+                    isRouterLink
                 />
                 <ButtonIcon
                     icon="mail"

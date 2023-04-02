@@ -13,8 +13,8 @@ const FooterDemo = () => {
             href: "#",
         },
         {
-            content: "Link",
-            href: "#",
+            content: "Router Link",
+            to: "/",
         },
         {
             content: "Button",

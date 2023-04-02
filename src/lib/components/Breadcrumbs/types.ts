@@ -20,6 +20,7 @@ interface BreadcrumbsPropsBase extends HTMLAttributes<HTMLParagraphElement> {
     items: BreadcrumbsItemProps[]
     color?: AllColorsTypes
     linkColor?: ColorsHoverTypes
+    isRouterLink?: boolean
 }
 
 interface BreadcrumbsSeparator1 extends BreadcrumbsPropsBase {

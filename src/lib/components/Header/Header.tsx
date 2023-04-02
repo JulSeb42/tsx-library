@@ -2,7 +2,7 @@
 
 import React, { forwardRef, useState, useRef, useEffect } from "react"
 import type { ForwardedRef, ChangeEvent, FormEvent } from "react"
-import { useNavigate, createSearchParams } from "react-router-dom"
+import { useNavigate, createSearchParams, Link } from "react-router-dom"
 
 import { Input, useKeyPress, useClickOutside, useMaxWidth } from "../../"
 
@@ -168,7 +168,11 @@ const Header = forwardRef(
             >
                 {burgerPosition === "left" && burgerFunction()}
 
-                <Styles.Logo href={logo.href || "/"}>
+                <Styles.Logo
+                    as={logo.isRouterLink ? Link : "a"}
+                    href={logo.href || "/"}
+                    to={logo.href || "/"}
+                >
                     {logo.img ? (
                         <Styles.LogoImg
                             src={logo.img}

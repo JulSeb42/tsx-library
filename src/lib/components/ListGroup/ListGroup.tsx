@@ -2,6 +2,7 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
+import { Link } from "react-router-dom"
 
 import { Icon, Text, convertDateShort, Flexbox, uuid } from "../../"
 
@@ -22,22 +23,24 @@ const ListItem = ({
         href,
         blank,
         color = "primary",
+        to,
     },
     number,
     borderColor,
     ...rest
 }: ListGroupItemProps) => (
     <Styles.Item
-        as={onClick ? "button" : href ? "a" : "span"}
+        as={onClick ? "button" : to ? Link : href ? "a" : "span"}
         href={href}
+        to={to}
         onClick={onClick}
         disabled={disabled}
         $borderColor={borderColor}
-        $isHover={!!onClick || !!href}
+        $isHover={!!onClick || !!href || !!to}
         $color={color}
         ref={ref}
-        target={href && blank && "_blank"}
-        rel={href && blank && "noreferrer noopener"}
+        target={(href || to) && blank && "_blank"}
+        rel={(href || to) && blank && "noreferrer noopener"}
         {...rest}
     >
         <Flexbox justifyContent="space-between" gap="xxs">

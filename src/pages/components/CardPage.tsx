@@ -1,5 +1,6 @@
 /*=============================================== CardPage ===============================================*/
 
+import React from "react"
 import { Page } from "../../components"
 import { Card, Text, Image, Grid, Flexbox, Button } from "../../lib"
 
@@ -23,6 +24,7 @@ const CardPage = () => {
 
             <Card
                 href="/"
+                isRouterLink
                 borderRadius="xxl"
                 padding={{
                     topBottom: "xxl",

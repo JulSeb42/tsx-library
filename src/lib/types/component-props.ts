@@ -44,10 +44,21 @@ export type TabsItemProps = {
 
 /*==================== Stepper step ====================*/
 
-export type StepProps = {
+type StepPropsBase = {
     text: string
-    href?: string
 }
+
+type StepPropsLink1 = StepPropsBase & {
+    href?: string
+    to?: never
+}
+
+type StepPropsLink2 = StepPropsBase & {
+    href?: never
+    to?: string
+}
+
+export type StepProps = StepPropsLink1 | StepPropsLink2
 
 /*==================== useForm ====================*/
 
@@ -67,17 +78,27 @@ type PossibleFooterBehaviour1 = FooterLinksBase & {
     onClick: (e: MouseEvent<HTMLButtonElement>) => void
     href?: never
     blank?: never
+    to?: never
 }
 
 type PossibleFooterBehaviour2 = FooterLinksBase & {
     onClick?: never
     href: string
     blank?: boolean
+    to?: never
+}
+
+type PossibleFooterBehaviour3 = FooterLinksBase & {
+    onClick?: never
+    href?: never
+    blank?: boolean
+    to: string
 }
 
 export type FooterItemProps =
     | PossibleFooterBehaviour1
     | PossibleFooterBehaviour2
+    | PossibleFooterBehaviour3
 
 /*==================== Theme ====================*/
 
@@ -118,17 +139,27 @@ type ButtonGroupPropsBehaviour1 = ButtonGroupPropsContent & {
     onClick: (e: MouseEvent<HTMLButtonElement>) => void
     href?: never
     blank?: never
+    to?: never
 }
 
 type ButtonGroupPropsBehaviour2 = ButtonGroupPropsContent & {
     onClick?: never
     href: string
     blank?: boolean
+    to?: never
+}
+
+type ButtonGroupPropsBehaviour3 = ButtonGroupPropsContent & {
+    onClick?: never
+    href?: never
+    blank?: boolean
+    to: string
 }
 
 export type ButtonGroupProps =
     | ButtonGroupPropsBehaviour1
     | ButtonGroupPropsBehaviour2
+    | ButtonGroupPropsBehaviour3
 
 /*==================== ListGroup ====================*/
 
@@ -160,6 +191,7 @@ type ListGroupPropsBehaviour0 = ListGroupPropsContent & {
     onClick?: undefined
     disabled?: never
     color?: never
+    to?: never
 }
 
 type ListGroupPropsBehaviour1 = ListGroupPropsContent & {
@@ -168,6 +200,7 @@ type ListGroupPropsBehaviour1 = ListGroupPropsContent & {
     onClick?: never
     disabled?: never
     color?: ColorsHoverTypes
+    to?: never
 }
 
 type ListGroupPropsBehaviour2 = ListGroupPropsContent & {
@@ -176,12 +209,23 @@ type ListGroupPropsBehaviour2 = ListGroupPropsContent & {
     onClick?: (e: MouseEvent<HTMLButtonElement>) => void
     disabled?: boolean
     color?: ColorsHoverTypes
+    to?: never
+}
+
+type ListGroupPropsBehaviour3 = ListGroupPropsContent & {
+    href?: never
+    blank?: boolean
+    onClick?: never
+    disabled?: never
+    color?: ColorsHoverTypes
+    to?: string
 }
 
 export type ListGroupItemProps =
     | ListGroupPropsBehaviour0
     | ListGroupPropsBehaviour1
     | ListGroupPropsBehaviour2
+    | ListGroupPropsBehaviour3
 
 /*==================== Icon menu ====================*/
 
@@ -194,17 +238,27 @@ type PossibleIconMenuBehaviour1 = IconMenuPropsBase & {
     onClick: (e: MouseEvent<HTMLButtonElement>) => void
     href?: never
     blank?: never
+    to?: never
 }
 
 type PossibleIconMenuBehaviour2 = IconMenuPropsBase & {
     onClick?: never
     href: string
     blank?: boolean
+    to?: never
+}
+
+type PossibleIconMenuBehaviour3 = IconMenuPropsBase & {
+    onClick?: never
+    href?: never
+    blank?: boolean
+    to: string
 }
 
 export type IconMenuItemProps =
     | PossibleIconMenuBehaviour1
     | PossibleIconMenuBehaviour2
+    | PossibleIconMenuBehaviour3
 
 /*==================== Country ====================*/
 

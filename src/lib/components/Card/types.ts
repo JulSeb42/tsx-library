@@ -39,12 +39,14 @@ interface CardPropsBase extends HTMLAttributes<HTMLDivElement>, FlexboxProps {
 interface CardPropsBehaviour1 extends CardPropsBase {
     href?: string
     blank?: boolean
+    isRouterLink?: boolean
     onClick?: never
 }
 
 interface CardPropsBehaviour2 extends CardPropsBase {
     href?: never
     blank?: never
+    isRouterLink?: never
     onClick?: () => void
 }
 

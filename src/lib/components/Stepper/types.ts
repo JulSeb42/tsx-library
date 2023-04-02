@@ -31,7 +31,7 @@ interface StepperPropsContent2 extends StepperPropsBase {
 
 export type StepperProps = StepperPropsContent1 | StepperPropsContent2
 
-export interface StepProps extends HTMLAttributes<HTMLSpanElement> {
+export interface StepPropsBase extends HTMLAttributes<HTMLSpanElement> {
     as?: ElementType
     text: string
     direction?: StepperDirectionType
@@ -39,5 +39,16 @@ export interface StepProps extends HTMLAttributes<HTMLSpanElement> {
     isActive?: boolean
     iconActive?: string | JSX.Element
     number?: number
-    href?: string
 }
+
+interface StepPropsLink1 extends StepPropsBase {
+    href?: string
+    to?: never
+}
+
+interface StepPropsLink2 extends StepPropsBase {
+    href?: never
+    to?: string
+}
+
+export type StepProps = StepPropsLink1 | StepPropsLink2

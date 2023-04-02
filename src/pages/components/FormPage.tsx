@@ -1,6 +1,6 @@
 /*=============================================== FormPage ===============================================*/
 
-import { useState } from "react"
+import React, { useState } from "react"
 import type { ChangeEvent, FormEvent } from "react"
 
 import { Page } from "../../components"
@@ -36,7 +36,7 @@ const FormPage = () => {
             <Form
                 buttonPrimary={{ text: "Submit", iconLeft: "send" }}
                 buttonSecondary={{ onClick: resetForm }}
-                // buttonSecondary={{ to: "prev" }}
+                // buttonSecondary={{ href: "/", isRouterLink: true }}
                 onSubmit={handleSubmit}
             >
                 <Input

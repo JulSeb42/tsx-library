@@ -1,5 +1,6 @@
 /*=============================================== BreadcrumbsPage ===============================================*/
 
+import React from "react"
 import { Page } from "../../components"
 import { Breadcrumbs } from "../../lib"
 import type { BreadcrumbsItemProps } from "../../lib/types"
@@ -8,7 +9,7 @@ const BreadcrumbsPage = () => {
     const items: BreadcrumbsItemProps[] = [
         {
             text: "Link",
-            href: "#",
+            href: "/",
         },
         {
             text: "Link",
@@ -30,6 +31,7 @@ const BreadcrumbsPage = () => {
                 separator="slash"
                 linkColor="secondary"
                 color="secondary"
+                isRouterLink
             />
             <Breadcrumbs items={items} separator="icon" />
         </Page>

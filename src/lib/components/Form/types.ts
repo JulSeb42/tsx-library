@@ -25,6 +25,7 @@ interface ButtonSecondary1 extends BaseFormProps {
         iconLeft?: string
         iconRight?: string
         href: string | undefined
+        isRouterLink?: boolean
         onClick?: never
     }
 }
@@ -35,6 +36,7 @@ interface ButtonSecondary2 extends BaseFormProps {
         iconLeft?: string
         iconRight?: string
         href?: never
+        isRouterLink?: never
         onClick: (e: MouseEvent<HTMLButtonElement>) => void | undefined
     }
 }

@@ -1,5 +1,6 @@
 /*=============================================== ButtonGroupPage ===============================================*/
 
+import React from "react"
 import { Page } from "../../components"
 import { ButtonGroup } from "../../lib"
 import type { ButtonGroupProps } from "../../lib/types"
@@ -23,6 +24,14 @@ const ButtonGroupPage = () => {
             text: "Link",
             href: "http://google.com",
             blank: true,
+        },
+        {
+            text: "Router Link",
+            to: "/",
+        },
+        {
+            iconOnly: "arrow-right",
+            to: "/",
         },
     ]
 

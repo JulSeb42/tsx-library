@@ -1,5 +1,6 @@
 /*=============================================== ListGroupPage ===============================================*/
 
+import React from "react"
 import { Page } from "../../components"
 import { ListGroup } from "../../lib"
 import type { ListGroupItemProps } from "../../lib/types"
@@ -29,9 +30,11 @@ const ListGroupPage = () => {
             badgeColor: "warning",
         },
         {
-            text: "Item",
+            text: "Router link",
             date: "2022-09-07",
             subtext: "Subtext",
+            to: "/",
+            blank: true,
         },
         {
             text: "Item",

@@ -2,6 +2,7 @@
 
 import React, { forwardRef, Fragment } from "react"
 import type { ForwardedRef } from "react"
+import { Link } from "react-router-dom"
 
 import { Icon, Text, uuid } from "../../"
 
@@ -66,44 +67,66 @@ const Footer = forwardRef(
                                 : undefined
                         }
                     >
-                        {items.map(({ content, onClick, blank, href }, i) => (
-                            <Fragment key={uuid()}>
-                                {href ? (
-                                    <a
-                                        href={href}
-                                        target={blank ? "_blank" : undefined}
-                                        rel={
-                                            blank
-                                                ? "noreferrer noopener"
-                                                : undefined
-                                        }
-                                    >
-                                        {content}
-                                    </a>
-                                ) : (
-                                    <button onClick={onClick}>{content}</button>
-                                )}
-
-                                {linksSeparator &&
-                                    linksSeparator !== "empty" &&
-                                    i !== items.length - 1 && (
-                                        <Styles.SeparatorContainer
-                                            $color={linksSeparator?.color}
+                        {items.map(
+                            ({ content, onClick, blank, href, to }, i) => (
+                                <Fragment key={uuid()}>
+                                    {href ? (
+                                        <a
+                                            href={href}
+                                            target={
+                                                blank ? "_blank" : undefined
+                                            }
+                                            rel={
+                                                blank
+                                                    ? "noreferrer noopener"
+                                                    : undefined
+                                            }
                                         >
-                                            {linksSeparator?.icon ? (
-                                                <Icon
-                                                    src={linksSeparator.icon}
-                                                    size={12}
-                                                />
-                                            ) : linksSeparator?.symbol ? (
-                                                linksSeparator?.symbol
-                                            ) : (
-                                                "•"
-                                            )}
-                                        </Styles.SeparatorContainer>
+                                            {content}
+                                        </a>
+                                    ) : to ? (
+                                        <Link
+                                            to={to}
+                                            target={
+                                                blank ? "_blank" : undefined
+                                            }
+                                            rel={
+                                                blank
+                                                    ? "noreferrer noopener"
+                                                    : undefined
+                                            }
+                                        >
+                                            {content}
+                                        </Link>
+                                    ) : (
+                                        <button onClick={onClick}>
+                                            {content}
+                                        </button>
                                     )}
-                            </Fragment>
-                        ))}
+
+                                    {linksSeparator &&
+                                        linksSeparator !== "empty" &&
+                                        i !== items.length - 1 && (
+                                            <Styles.SeparatorContainer
+                                                $color={linksSeparator?.color}
+                                            >
+                                                {linksSeparator?.icon ? (
+                                                    <Icon
+                                                        src={
+                                                            linksSeparator.icon
+                                                        }
+                                                        size={12}
+                                                    />
+                                                ) : linksSeparator?.symbol ? (
+                                                    linksSeparator?.symbol
+                                                ) : (
+                                                    "•"
+                                                )}
+                                            </Styles.SeparatorContainer>
+                                        )}
+                                </Fragment>
+                            )
+                        )}
                     </Styles.FooterLinks>
                 )}
             </Styles.StyledFooter>

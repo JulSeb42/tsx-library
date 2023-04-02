@@ -16,7 +16,7 @@ export default defineConfig({
         lib: {
             entry: path.resolve(__dirname, "src/lib/index.ts"),
             name: "tsx-library-julseb",
-            formats: ["es", "umd"],
+            formats: ["es", "umd", "cjs"],
             fileName: format => `tsx-library-julseb.${format}.js`,
         },
 

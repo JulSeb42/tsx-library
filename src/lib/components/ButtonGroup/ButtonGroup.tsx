@@ -17,6 +17,7 @@ const ButtonGroup = forwardRef(
             buttons,
             borderRadius = "m",
             buttonsSize = "default",
+
             ...rest
         }: ButtonGroupProps,
         ref?: ForwardedRef<HTMLDivElement>
@@ -41,20 +42,23 @@ const ButtonGroup = forwardRef(
                         blank,
                         "aria-label": ariaLabel,
                         href,
+                        to,
                     },
                     i
                 ) => (
                     <Fragment key={uuid()}>
                         {iconOnly ? (
-                            href ? (
+                            href || to ? (
+                                // @ts-expect-error
                                 <Styles.StyledButtonIcon
                                     icon={iconOnly}
                                     variant={variant}
                                     color={color}
                                     aria-label={ariaLabel}
                                     iconSize={16}
-                                    href={href}
+                                    href={href || to}
                                     blank={blank}
+                                    isRouterLink={!!to}
                                 />
                             ) : (
                                 <Styles.StyledButtonIcon
@@ -66,7 +70,8 @@ const ButtonGroup = forwardRef(
                                     iconSize={16}
                                 />
                             )
-                        ) : href ? (
+                        ) : href || to ? (
+                            // @ts-expect-error
                             <Styles.StyledButton
                                 variant={
                                     variant === "transparent" ? "text" : variant
@@ -77,9 +82,10 @@ const ButtonGroup = forwardRef(
                                     left: iconLeft,
                                     right: iconRight,
                                 }}
-                                href={href}
+                                href={href || to}
                                 blank={blank}
                                 size={buttonsSize}
+                                isRouterLink={!!to}
                             >
                                 {text}
                             </Styles.StyledButton>

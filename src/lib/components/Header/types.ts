@@ -62,6 +62,7 @@ interface HeaderLogo1 extends HeaderPropsBase {
         height?: never
 
         href?: string
+        isRouterLink?: boolean
     }
 }
 
@@ -75,6 +76,7 @@ interface HeaderLogo2 extends HeaderPropsBase {
         height?: number
 
         href?: string
+        isRouterLink?: boolean
     }
 }
 

@@ -2,6 +2,7 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
+import { Link } from "react-router-dom"
 
 import { Loader, Icon } from "../../"
 
@@ -24,6 +25,7 @@ const Button = forwardRef(
             loaderVariant = 1,
             borderRadius = "m",
             href,
+            isRouterLink,
             blank,
             size = "default",
             gap = "xs",
@@ -33,7 +35,8 @@ const Button = forwardRef(
     ) => (
         <Styles.StyledButton
             ref={ref}
-            as={as ? as : href ? "a" : "button"}
+            as={as ? as : isRouterLink ? Link : href ? "a" : "button"}
+            to={href}
             href={href}
             target={href && blank && "_blank"}
             rel={href && blank && "noreferrer noopener"}

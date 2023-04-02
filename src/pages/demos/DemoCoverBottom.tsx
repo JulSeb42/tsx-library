@@ -1,5 +1,6 @@
 /*=============================================== DemoCoverBottom ===============================================*/
 
+import React from "react"
 import { CoverLayout } from "../../components"
 import { Cover, Text } from "../../lib"
 
