@@ -2,7 +2,6 @@
 
 import type {
     InputHTMLAttributes,
-    MouseEvent,
     SelectHTMLAttributes,
     TextareaHTMLAttributes,
 } from "react"
@@ -107,7 +106,7 @@ export interface SearchInputProps
         IconInputProps,
         InputHTMLAttributes<HTMLInputElement> {
     type?: "search"
-    clearSearch: (e: MouseEvent<HTMLButtonElement>) => void
+    clearSearch: () => void
     iconClear?: string | JSX.Element
 }
 

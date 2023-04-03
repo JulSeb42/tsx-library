@@ -23,8 +23,7 @@ const CardPage = () => {
             </Card>
 
             <Card
-                href="/"
-                isRouterLink
+                to="/"
                 borderRadius="xxl"
                 padding={{
                     topBottom: "xxl",

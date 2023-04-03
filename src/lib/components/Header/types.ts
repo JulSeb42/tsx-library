@@ -27,6 +27,36 @@ enum navMobileVariants {
 
 export type NavMobileVariantsTypes = keyof typeof navMobileVariants
 
+type LogoContent1 = {
+    text: string
+    img?: never
+    alt?: never
+    width?: never
+    height?: never
+}
+
+type LogoContent2 = {
+    text?: never
+    img: string
+    alt?: string
+    width?: number
+    height?: number
+}
+
+type LogoContent = LogoContent1 | LogoContent2
+
+type LogoLink1 = LogoContent & {
+    to?: string
+    href?: never
+}
+
+type LogoLink2 = LogoContent & {
+    to?: never
+    href?: string
+}
+
+type LogoLink = LogoLink1 | LogoLink2
+
 interface HeaderPropsBase extends HTMLAttributes<HTMLDivElement> {
     as?: ElementType
     backgroundColor?: AllColorsTypes
@@ -50,44 +80,15 @@ interface HeaderPropsBase extends HTMLAttributes<HTMLDivElement> {
         variant?: InputVariantTypes
     }
     shadow?: ShadowsTypes
+    logo: LogoLink
 }
 
-interface HeaderLogo1 extends HeaderPropsBase {
-    logo: {
-        text: string
-
-        img?: never
-        alt?: never
-        width?: never
-        height?: never
-
-        href?: string
-        isRouterLink?: boolean
-    }
-}
-
-interface HeaderLogo2 extends HeaderPropsBase {
-    logo: {
-        text?: never
-
-        img: string
-        alt?: string
-        width?: number
-        height?: number
-
-        href?: string
-        isRouterLink?: boolean
-    }
-}
-
-type HeaderLogo = HeaderLogo1 | HeaderLogo2
-
-type HeaderPosition1 = HeaderLogo & {
+type HeaderPosition1 = HeaderPropsBase & {
     position?: "relative" | "absolute"
     hideOnScroll?: never
 }
 
-type HeaderPosition2 = HeaderLogo & {
+type HeaderPosition2 = HeaderPropsBase & {
     position?: "fixed"
     hideOnScroll?: number | boolean
 }

@@ -8,6 +8,7 @@ import type {
     ObjectPositionTypes,
     BoxShadowProps,
     RadiusesTypes,
+    ButtonLinkType,
 } from "../../types"
 
 enum buttonIconVariants {
@@ -25,21 +26,23 @@ enum labelDirections {
 
 export type ButtonIconLabelDirectionsTypes = keyof typeof labelDirections
 
-interface ButtonIconBaseProps
-    extends HTMLAttributes<HTMLButtonElement & HTMLHyperlinkElementUtils>,
-        ButtonHTMLAttributes<HTMLButtonElement & HTMLHyperlinkElementUtils> {
-    as?: ElementType
-    isLoading?: boolean
-    color?: ColorsHoverTypes
-    size?: number
-    loaderBorder?: number
-    shadow?: ShadowsTypes | BoxShadowProps
-    position?: ObjectPositionTypes
-    borderRadius?: RadiusesTypes
-    className?: string
-}
+type ButtonIconBaseProps = HTMLAttributes<
+    HTMLButtonElement & HTMLHyperlinkElementUtils
+> &
+    ButtonHTMLAttributes<HTMLButtonElement & HTMLHyperlinkElementUtils> &
+    ButtonLinkType & {
+        as?: ElementType
+        isLoading?: boolean
+        color?: ColorsHoverTypes
+        size?: number
+        loaderBorder?: number
+        shadow?: ShadowsTypes | BoxShadowProps
+        position?: ObjectPositionTypes
+        borderRadius?: RadiusesTypes
+        className?: string
+    }
 
-interface ButtonIconLabel1 extends ButtonIconBaseProps {
+type ButtonIconLabel1 = ButtonIconBaseProps & {
     label?: string
     showLabel?:
         | boolean
@@ -49,7 +52,7 @@ interface ButtonIconLabel1 extends ButtonIconBaseProps {
           }
 }
 
-interface ButtonIconLabel2 extends ButtonIconBaseProps {
+type ButtonIconLabel2 = ButtonIconBaseProps & {
     label?: undefined
     showLabel?: never
 }
@@ -59,17 +62,11 @@ type ButtonIconLabel = ButtonIconLabel1 | ButtonIconLabel2
 type ButtonIconBehaviour1 = ButtonIconLabel & {
     type?: "button" | "submit" | "reset" | undefined
     disabled?: boolean
-    href?: never
-    blank?: never
-    isRouterLink?: never
 }
 
 type ButtonIconBehaviour2 = ButtonIconLabel & {
     type?: never
     disabled?: never
-    href?: string
-    blank?: boolean
-    isRouterLink?: boolean
 }
 
 type ButtonIconBehaviour = ButtonIconBehaviour1 | ButtonIconBehaviour2

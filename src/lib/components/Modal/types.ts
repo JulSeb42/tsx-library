@@ -1,6 +1,6 @@
 /*=============================================== Modal types ===============================================*/
 
-import type { HTMLAttributes, ElementType, MouseEvent } from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
 import type { ColorsHoverTypes } from "../../types"
 import type { ButtonIconVariantTypes } from "../ButtonIcon/types"
@@ -21,7 +21,7 @@ interface ModalPropsBehaviour1 extends ModalPropsBase {
 }
 
 interface ModalPropsBehaviour2 extends ModalPropsBase {
-    close?: (e: MouseEvent<HTMLButtonElement>) => void
+    close?: () => void
     iconClose?: string
     labelClose?: string
     colorClose?: ColorsHoverTypes

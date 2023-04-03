@@ -1,6 +1,7 @@
 /*=============================================== Header styles ===============================================*/
 
 import styled, { css } from "styled-components"
+import { Link } from "react-router-dom"
 
 import {
     stringifyPx,
@@ -39,7 +40,7 @@ const HeaderBurger = styled(Burger)`
     }
 `
 
-const Logo = styled.a`
+const Logo = styled(Link)`
     position: relative;
     z-index: 999;
 `

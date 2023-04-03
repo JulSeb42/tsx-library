@@ -1,5 +1,7 @@
 /*=============================================== Common types ===============================================*/
 
+import type { RequireAtLeastOne } from "./"
+
 /*==================== Colors ====================*/
 
 /* Library colors */
@@ -486,3 +488,53 @@ enum borderStyles {
 }
 
 export type BorderStylesTypes = keyof typeof borderStyles
+
+/*==================== Links ====================*/
+
+type LinkType1 = {
+    href?: never
+    to?: string
+}
+
+type LinkType2 = {
+    href?: string
+    to?: never
+}
+
+export type LinkType = LinkType1 | LinkType2
+
+export type LinkTypeRequire = RequireAtLeastOne<LinkType, "href" | "to">
+
+export type LinkTypeBlank = LinkType & { blank?: boolean }
+
+export type LinkTypeBlankRequire = LinkTypeRequire & { blank?: boolean }
+
+/*==================== ButtonLinks ====================*/
+
+type ButtonLinkType1 = {
+    onClick?: () => void
+    href?: never
+    to?: never
+    blank?: never
+}
+
+type ButtonLinkType2 = {
+    onClick?: never
+    href?: string
+    to?: never
+    blank?: boolean
+}
+
+type ButtonLinkType3 = {
+    onClick?: never
+    href?: never
+    to?: string
+    blank?: boolean
+}
+
+export type ButtonLinkType = ButtonLinkType1 | ButtonLinkType2 | ButtonLinkType3
+
+export type ButtonLinkTypeRequire = RequireAtLeastOne<
+    ButtonLinkType,
+    "href" | "to" | "onClick"
+>

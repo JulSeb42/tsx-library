@@ -93,9 +93,8 @@ const ButtonIconPage = () => {
                     icon="mail"
                     variant="plain"
                     color="primary"
-                    href="/"
+                    to="/"
                     label="email"
-                    isRouterLink
                 />
                 <ButtonIcon
                     icon="mail"

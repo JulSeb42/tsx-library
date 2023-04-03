@@ -6,8 +6,8 @@ import type {
     AllColorsTypes,
     ColorsHoverTypes,
     FooterItemProps,
+    RequireAtLeastOne,
 } from "../../types"
-import type { RequireAtLeastOne } from "../../utils/RequireAtLeastOne"
 
 enum directions {
     horizontal,

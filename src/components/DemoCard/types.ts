@@ -1,6 +1,6 @@
 /*=============================================== DemoCard types ===============================================*/
 
-import type { ShadowType, SpacerType, RadiusType } from "data"
+import type { ShadowType, SpacerType, RadiusType } from "../../data"
 
 interface Content1 {
     shadow: ShadowType

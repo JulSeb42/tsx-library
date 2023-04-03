@@ -168,11 +168,7 @@ const Header = forwardRef(
             >
                 {burgerPosition === "left" && burgerFunction()}
 
-                <Styles.Logo
-                    as={logo.isRouterLink ? Link : "a"}
-                    href={logo.href || "/"}
-                    to={logo.href || "/"}
-                >
+                <Styles.Logo as={logo.to ? Link : "a"} to={logo.to || "/"}>
                     {logo.img ? (
                         <Styles.LogoImg
                             src={logo.img}

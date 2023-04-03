@@ -9,7 +9,14 @@ import type {
     ForwardedRef,
 } from "react"
 
-import type { AllColorsTypes, ColorsHoverTypes } from "./"
+import type {
+    AllColorsTypes,
+    ColorsHoverTypes,
+    LinkType,
+    LinkTypeRequire,
+    ButtonLinkType,
+    ButtonLinkTypeRequire,
+} from "./"
 
 /*==================== Accordion item ====================*/
 
@@ -21,8 +28,7 @@ export type AccordionItemProps = {
 
 /*==================== Breadcrumbs item ====================*/
 
-export type BreadcrumbsItemProps = {
-    href?: string
+export type BreadcrumbsItemProps = LinkType & {
     text: string
 }
 
@@ -44,21 +50,21 @@ export type TabsItemProps = {
 
 /*==================== Stepper step ====================*/
 
-type StepPropsBase = {
+export type StepProps = LinkType & {
     text: string
 }
 
-type StepPropsLink1 = StepPropsBase & {
-    href?: string
-    to?: never
-}
+// type StepPropsLink1 = StepPropsBase & {
+//     href?: string
+//     to?: never
+// }
 
-type StepPropsLink2 = StepPropsBase & {
-    href?: never
-    to?: string
-}
+// type StepPropsLink2 = StepPropsBase & {
+//     href?: never
+//     to?: string
+// }
 
-export type StepProps = StepPropsLink1 | StepPropsLink2
+// export type StepProps = StepPropsLink1 | StepPropsLink2
 
 /*==================== useForm ====================*/
 
@@ -70,35 +76,35 @@ export type BaseUseFormType = {
 
 /*==================== Footer links ====================*/
 
-type FooterLinksBase = {
+export type FooterItemProps = ButtonLinkTypeRequire & {
     content: string | JSX.Element
 }
 
-type PossibleFooterBehaviour1 = FooterLinksBase & {
-    onClick: (e: MouseEvent<HTMLButtonElement>) => void
-    href?: never
-    blank?: never
-    to?: never
-}
+// type PossibleFooterBehaviour1 = FooterLinksBase & {
+//     onClick: (e: MouseEvent<HTMLButtonElement>) => void
+//     href?: never
+//     blank?: never
+//     to?: never
+// }
 
-type PossibleFooterBehaviour2 = FooterLinksBase & {
-    onClick?: never
-    href: string
-    blank?: boolean
-    to?: never
-}
+// type PossibleFooterBehaviour2 = FooterLinksBase & {
+//     onClick?: never
+//     href: string
+//     blank?: boolean
+//     to?: never
+// }
 
-type PossibleFooterBehaviour3 = FooterLinksBase & {
-    onClick?: never
-    href?: never
-    blank?: boolean
-    to: string
-}
+// type PossibleFooterBehaviour3 = FooterLinksBase & {
+//     onClick?: never
+//     href?: never
+//     blank?: boolean
+//     to: string
+// }
 
-export type FooterItemProps =
-    | PossibleFooterBehaviour1
-    | PossibleFooterBehaviour2
-    | PossibleFooterBehaviour3
+// export type FooterItemProps =
+//     | PossibleFooterBehaviour1
+//     | PossibleFooterBehaviour2
+//     | PossibleFooterBehaviour3
 
 /*==================== Theme ====================*/
 
@@ -113,7 +119,8 @@ export type ThemeContextProps = {
 type ButtonGroupPropsBase = HTMLAttributes<
     HTMLButtonElement & HTMLHyperlinkElementUtils
 > &
-    ButtonHTMLAttributes<HTMLButtonElement & HTMLHyperlinkElementUtils> & {
+    ButtonHTMLAttributes<HTMLButtonElement & HTMLHyperlinkElementUtils> &
+    ButtonLinkTypeRequire & {
         "aria-label"?: string
     }
 
@@ -131,35 +138,35 @@ type ButtonGroupPropsContent2 = ButtonGroupPropsBase & {
     iconOnly: string | JSX.Element
 }
 
-type ButtonGroupPropsContent =
+export type ButtonGroupProps =
     | ButtonGroupPropsContent1
     | ButtonGroupPropsContent2
 
-type ButtonGroupPropsBehaviour1 = ButtonGroupPropsContent & {
-    onClick: (e: MouseEvent<HTMLButtonElement>) => void
-    href?: never
-    blank?: never
-    to?: never
-}
+// type ButtonGroupPropsBehaviour1 = ButtonGroupPropsContent & {
+//     onClick: (e: MouseEvent<HTMLButtonElement>) => void
+//     href?: never
+//     blank?: never
+//     to?: never
+// }
 
-type ButtonGroupPropsBehaviour2 = ButtonGroupPropsContent & {
-    onClick?: never
-    href: string
-    blank?: boolean
-    to?: never
-}
+// type ButtonGroupPropsBehaviour2 = ButtonGroupPropsContent & {
+//     onClick?: never
+//     href: string
+//     blank?: boolean
+//     to?: never
+// }
 
-type ButtonGroupPropsBehaviour3 = ButtonGroupPropsContent & {
-    onClick?: never
-    href?: never
-    blank?: boolean
-    to: string
-}
+// type ButtonGroupPropsBehaviour3 = ButtonGroupPropsContent & {
+//     onClick?: never
+//     href?: never
+//     blank?: boolean
+//     to: string
+// }
 
-export type ButtonGroupProps =
-    | ButtonGroupPropsBehaviour1
-    | ButtonGroupPropsBehaviour2
-    | ButtonGroupPropsBehaviour3
+// export type ButtonGroupProps =
+//     | ButtonGroupPropsBehaviour1
+//     | ButtonGroupPropsBehaviour2
+//     | ButtonGroupPropsBehaviour3
 
 /*==================== ListGroup ====================*/
 
@@ -229,36 +236,36 @@ export type ListGroupItemProps =
 
 /*==================== Icon menu ====================*/
 
-type IconMenuPropsBase = {
+export type IconMenuItemProps = ButtonLinkTypeRequire & {
     icon: string
     label: string
 }
 
-type PossibleIconMenuBehaviour1 = IconMenuPropsBase & {
-    onClick: (e: MouseEvent<HTMLButtonElement>) => void
-    href?: never
-    blank?: never
-    to?: never
-}
+// type PossibleIconMenuBehaviour1 = IconMenuPropsBase & {
+//     onClick: (e: MouseEvent<HTMLButtonElement>) => void
+//     href?: never
+//     blank?: never
+//     to?: never
+// }
 
-type PossibleIconMenuBehaviour2 = IconMenuPropsBase & {
-    onClick?: never
-    href: string
-    blank?: boolean
-    to?: never
-}
+// type PossibleIconMenuBehaviour2 = IconMenuPropsBase & {
+//     onClick?: never
+//     href: string
+//     blank?: boolean
+//     to?: never
+// }
 
-type PossibleIconMenuBehaviour3 = IconMenuPropsBase & {
-    onClick?: never
-    href?: never
-    blank?: boolean
-    to: string
-}
+// type PossibleIconMenuBehaviour3 = IconMenuPropsBase & {
+//     onClick?: never
+//     href?: never
+//     blank?: boolean
+//     to: string
+// }
 
-export type IconMenuItemProps =
-    | PossibleIconMenuBehaviour1
-    | PossibleIconMenuBehaviour2
-    | PossibleIconMenuBehaviour3
+// export type IconMenuItemProps =
+//     | PossibleIconMenuBehaviour1
+//     | PossibleIconMenuBehaviour2
+//     | PossibleIconMenuBehaviour3
 
 /*==================== Country ====================*/
 

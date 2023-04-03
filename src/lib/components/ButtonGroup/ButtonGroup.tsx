@@ -17,7 +17,6 @@ const ButtonGroup = forwardRef(
             buttons,
             borderRadius = "m",
             buttonsSize = "default",
-
             ...rest
         }: ButtonGroupProps,
         ref?: ForwardedRef<HTMLDivElement>
@@ -48,17 +47,25 @@ const ButtonGroup = forwardRef(
                 ) => (
                     <Fragment key={uuid()}>
                         {iconOnly ? (
-                            href || to ? (
-                                // @ts-expect-error
+                            href ? (
                                 <Styles.StyledButtonIcon
                                     icon={iconOnly}
                                     variant={variant}
                                     color={color}
                                     aria-label={ariaLabel}
                                     iconSize={16}
-                                    href={href || to}
+                                    href={href}
                                     blank={blank}
-                                    isRouterLink={!!to}
+                                />
+                            ) : to ? (
+                                <Styles.StyledButtonIcon
+                                    icon={iconOnly}
+                                    variant={variant}
+                                    color={color}
+                                    aria-label={ariaLabel}
+                                    iconSize={16}
+                                    to={to}
+                                    blank={blank}
                                 />
                             ) : (
                                 <Styles.StyledButtonIcon
@@ -70,8 +77,7 @@ const ButtonGroup = forwardRef(
                                     iconSize={16}
                                 />
                             )
-                        ) : href || to ? (
-                            // @ts-expect-error
+                        ) : href ? (
                             <Styles.StyledButton
                                 variant={
                                     variant === "transparent" ? "text" : variant
@@ -82,10 +88,26 @@ const ButtonGroup = forwardRef(
                                     left: iconLeft,
                                     right: iconRight,
                                 }}
-                                href={href || to}
+                                href={href}
                                 blank={blank}
                                 size={buttonsSize}
-                                isRouterLink={!!to}
+                            >
+                                {text}
+                            </Styles.StyledButton>
+                        ) : to ? (
+                            <Styles.StyledButton
+                                variant={
+                                    variant === "transparent" ? "text" : variant
+                                }
+                                color={color}
+                                aria-label={ariaLabel}
+                                icons={{
+                                    left: iconLeft,
+                                    right: iconRight,
+                                }}
+                                to={to}
+                                blank={blank}
+                                size={buttonsSize}
                             >
                                 {text}
                             </Styles.StyledButton>

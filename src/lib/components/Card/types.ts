@@ -10,44 +10,31 @@ import type {
     PaddingTypes,
     CursorTypes,
     BorderStylesTypes,
+    ButtonLinkType,
 } from "../../types"
 import type { FlexboxProps } from "../Flexbox/types"
 
-interface CardPropsBase extends HTMLAttributes<HTMLDivElement>, FlexboxProps {
-    as?: ElementType
-    borderColor?: AllColorsTypes
-    borderWidth?: number
-    borderStyle?:
-        | BorderStylesTypes
-        | {
-              left?: BorderStylesTypes
-              top?: BorderStylesTypes
-              right?: BorderStylesTypes
-              bottom?: BorderStylesTypes
-          }
-    borderRadius?: RadiusesTypes
-    padding?: PaddingTypes
-    cursor?: CursorTypes
-    width?: string | number
-    height?: string | number
-    shadow?: ShadowsTypes | BoxShadowProps
-    backgroundColor?: AllColorsTypes
-    textColor?: AllColorsTypes
-    to?: string
-}
-
-interface CardPropsBehaviour1 extends CardPropsBase {
-    href?: string
-    blank?: boolean
-    isRouterLink?: boolean
-    onClick?: never
-}
-
-interface CardPropsBehaviour2 extends CardPropsBase {
-    href?: never
-    blank?: never
-    isRouterLink?: never
-    onClick?: () => void
-}
-
-export type CardProps = CardPropsBehaviour1 | CardPropsBehaviour2
+export type CardProps = HTMLAttributes<HTMLDivElement> &
+    FlexboxProps &
+    ButtonLinkType & {
+        as?: ElementType
+        borderColor?: AllColorsTypes
+        borderWidth?: number
+        borderStyle?:
+            | BorderStylesTypes
+            | {
+                  left?: BorderStylesTypes
+                  top?: BorderStylesTypes
+                  right?: BorderStylesTypes
+                  bottom?: BorderStylesTypes
+              }
+        borderRadius?: RadiusesTypes
+        padding?: PaddingTypes
+        cursor?: CursorTypes
+        width?: string | number
+        height?: string | number
+        shadow?: ShadowsTypes | BoxShadowProps
+        backgroundColor?: AllColorsTypes
+        textColor?: AllColorsTypes
+        to?: string
+    }

@@ -18,17 +18,16 @@
         "moduleResolution": "Node",
         "resolveJsonModule": true,
         "isolatedModules": true,
-        "noEmit": true,
+        "noEmit": false,
         "jsx": "react-jsx",
-        "outDir": "dist",
         "downlevelIteration": true,
+        "declaration": true,
+        "declarationDir": "./types",
+        "outDir": "./types"
     },
-    "include": [
-        "src"
+    "files": [
+        "./types/common-types.ts",
+        "./types/component-props.ts",
+        "./types/index.ts",
     ],
-    "references": [
-        {
-            "path": "./tsconfig.node.json"
-        }
-    ]
 }

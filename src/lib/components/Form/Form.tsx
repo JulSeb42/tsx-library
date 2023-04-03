@@ -53,31 +53,32 @@ const Form = forwardRef(
                     )}
 
                     {buttonSecondary &&
-                        (buttonSecondary.href ? (
+                        (buttonSecondary.to ? (
                             <Button
-                                href={buttonSecondary.href}
+                                to={buttonSecondary.to}
                                 variant="text"
                                 color={accentColor}
                                 icons={{
                                     left: buttonSecondary.iconLeft,
                                     right: buttonSecondary.iconRight,
                                 }}
-                                isRouterLink={buttonSecondary.isRouterLink}
                             >
                                 {buttonSecondary.text || "Cancel"}
                             </Button>
                         ) : (
-                            <Button
-                                onClick={buttonSecondary.onClick}
-                                variant="text"
-                                color={accentColor}
-                                icons={{
-                                    left: buttonSecondary.iconLeft,
-                                    right: buttonSecondary.iconRight,
-                                }}
-                            >
-                                {buttonSecondary.text || "Reset"}
-                            </Button>
+                            buttonSecondary.onClick && (
+                                <Button
+                                    onClick={buttonSecondary.onClick}
+                                    variant="text"
+                                    color={accentColor}
+                                    icons={{
+                                        left: buttonSecondary.iconLeft,
+                                        right: buttonSecondary.iconRight,
+                                    }}
+                                >
+                                    {buttonSecondary.text || "Reset"}
+                                </Button>
+                            )
                         ))}
                 </Flexbox>
             )}

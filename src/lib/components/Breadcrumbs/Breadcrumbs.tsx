@@ -19,7 +19,6 @@ const Breadcrumbs = forwardRef(
             linkColor = "primary",
             separator = "slash",
             customIcon,
-            isRouterLink,
             ...rest
         }: BreadcrumbsProps,
         ref?: ForwardedRef<HTMLParagraphElement>
@@ -32,10 +31,10 @@ const Breadcrumbs = forwardRef(
             $separator={separator}
             {...rest}
         >
-            {items.map(({ text, href }) => (
+            {items.map(({ text, href, to }) => (
                 <Fragment key={uuid()}>
                     <Styles.Item
-                        as={isRouterLink && href ? Link : href ? "a" : "span"}
+                        as={to ? Link : href ? "a" : "span"}
                         href={href ? href : undefined}
                         to={href ? href : undefined}
                     >

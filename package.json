@@ -7,9 +7,10 @@
         "dev": "vite",
         "copy": "cp ./src/lib/index.css ./dist",
         "clean": "rm -rf ./dist/icons ./dist/images ./dist/vite.svg ./dist/favicon.svg",
-        "build-types": "tsc ./src/lib/types/index.ts",
-        "copy-types": "rm -rf ./dist/types && cp -a ./src/lib/types ./dist/types",
-        "build": "tsc && vite build && yarn copy && yarn copy-types && yarn clean && yarn build-types && yarn copy-types",
+        "copy-types": "cp -a ./src/lib/types ./types",
+        "build-types": "yarn copy-types && tsc --p tsconfig-types.json",
+        "move-types": "mv ./types ./dist",
+        "build": "tsc && vite build && yarn copy && yarn clean && yarn build-types && yarn move-types",
         "preview": "vite preview",
         "lint": "npx eslint src/lib/**",
         "lint:fix": "npx eslint src/lib/** --fix"

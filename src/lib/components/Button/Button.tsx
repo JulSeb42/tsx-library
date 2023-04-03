@@ -25,22 +25,22 @@ const Button = forwardRef(
             loaderVariant = 1,
             borderRadius = "m",
             href,
-            isRouterLink,
             blank,
             size = "default",
             gap = "xs",
+            to,
             ...rest
         }: ButtonProps,
         ref?: ForwardedRef<HTMLButtonElement>
     ) => (
         <Styles.StyledButton
             ref={ref}
-            as={as ? as : isRouterLink ? Link : href ? "a" : "button"}
-            to={href}
+            as={as ? as : to ? Link : href ? "a" : "button"}
+            to={to === "prev" ? -1 : to}
             href={href}
-            target={href && blank && "_blank"}
-            rel={href && blank && "noreferrer noopener"}
-            type={href ? undefined : type}
+            target={(href || to) && blank && "_blank"}
+            rel={(href || to) && blank && "noreferrer noopener"}
+            type={href || to ? undefined : type}
             disabled={!!isLoading || disabled}
             $variant={variant}
             $color={color}

@@ -61,12 +61,7 @@ const ButtonPage = () => {
                     >
                         Button
                     </Button>
-                    <Button
-                        variant="plain"
-                        color="secondary"
-                        isRouterLink
-                        href="/"
-                    >
+                    <Button variant="plain" color="secondary" to="/">
                         Button
                     </Button>
                     <Button variant="plain" color="success" href="#">

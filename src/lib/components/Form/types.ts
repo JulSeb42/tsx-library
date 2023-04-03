@@ -1,6 +1,6 @@
 /*=============================================== Form types ===============================================*/
 
-import type { HTMLAttributes, MouseEvent } from "react"
+import type { HTMLAttributes } from "react"
 
 import type { ColorsHoverTypes, SpacersTypes } from "../../types"
 
@@ -24,8 +24,7 @@ interface ButtonSecondary1 extends BaseFormProps {
         text?: "prev" | string | undefined
         iconLeft?: string
         iconRight?: string
-        href: string | undefined
-        isRouterLink?: boolean
+        to: string | undefined
         onClick?: never
     }
 }
@@ -35,9 +34,8 @@ interface ButtonSecondary2 extends BaseFormProps {
         text?: string | undefined
         iconLeft?: string
         iconRight?: string
-        href?: never
-        isRouterLink?: never
-        onClick: (e: MouseEvent<HTMLButtonElement>) => void | undefined
+        to?: never
+        onClick: () => void | undefined
     }
 }
 

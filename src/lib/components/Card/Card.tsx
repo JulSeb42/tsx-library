@@ -25,7 +25,7 @@ const Card = forwardRef(
             textColor = "currentColor",
             href,
             blank,
-            isRouterLink,
+            to,
             onClick,
             inline,
             flexDirection,
@@ -43,7 +43,7 @@ const Card = forwardRef(
     ) => (
         <Styles.StyledCard
             ref={ref}
-            as={as ? as : isRouterLink ? Link : href ? "a" : "div"}
+            as={as ? as : to ? Link : href ? "a" : "div"}
             href={href}
             to={href}
             target={href && blank && "_blank"}

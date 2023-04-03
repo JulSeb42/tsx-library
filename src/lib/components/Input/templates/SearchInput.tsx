@@ -27,13 +27,6 @@ const SearchInput = forwardRef(
         }: SearchInputProps,
         ref?: ForwardedRef<HTMLInputElement>
     ) => {
-        const buttonProps = {
-            noPadding: true,
-            onClick: clearSearch,
-            disabled,
-            color: accentColor,
-        }
-
         return (
             <Styles.StyledInputContent>
                 {icon && (
@@ -66,7 +59,10 @@ const SearchInput = forwardRef(
                             variant="transparent"
                             type="button"
                             size={24}
-                            {...buttonProps}
+                            onClick={clearSearch}
+                            disabled={disabled}
+                            color={accentColor}
+                            borderRadius="xs"
                         />
                     )}
                 </RightContainer>

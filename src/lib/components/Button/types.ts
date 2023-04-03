@@ -8,6 +8,7 @@ import type {
     BoxShadowProps,
     RadiusesTypes,
     SpacersTypes,
+    ButtonLinkType,
 } from "../../types"
 import type { LoaderVariantTypes } from "../Loader/types"
 
@@ -27,30 +28,26 @@ enum buttonSizes {
 
 export type ButtonSizesTypes = keyof typeof buttonSizes
 
-interface ButtonBaseProps
-    extends HTMLAttributes<HTMLButtonElement & HTMLHyperlinkElementUtils>,
-        ButtonHTMLAttributes<HTMLButtonElement & HTMLHyperlinkElementUtils> {
-    as?: ElementType
-    color?: ColorsHoverTypes
-    shadow?: ShadowsTypes | BoxShadowProps
-    borderRadius?: RadiusesTypes
-    size?: ButtonSizesTypes
-}
+type ButtonBaseProps = HTMLAttributes<
+    HTMLButtonElement & HTMLHyperlinkElementUtils
+> &
+    ButtonHTMLAttributes<HTMLButtonElement & HTMLHyperlinkElementUtils> &
+    ButtonLinkType & {
+        as?: ElementType
+        color?: ColorsHoverTypes
+        shadow?: ShadowsTypes | BoxShadowProps
+        borderRadius?: RadiusesTypes
+        size?: ButtonSizesTypes
+    }
 
-interface ButtonBehaviour1 extends ButtonBaseProps {
+type ButtonBehaviour1 = ButtonBaseProps & {
     disabled?: boolean
     type?: "button" | "submit" | "reset"
-    href?: never
-    blank?: never
-    isRouterLink?: never
 }
 
-interface ButtonBehaviour2 extends ButtonBaseProps {
+type ButtonBehaviour2 = ButtonBaseProps & {
     disabled?: never
     type?: never
-    href?: string
-    blank?: boolean
-    isRouterLink?: boolean
 }
 
 type ButtonBehaviour = ButtonBehaviour1 | ButtonBehaviour2

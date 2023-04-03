@@ -9,15 +9,15 @@ const BreadcrumbsPage = () => {
     const items: BreadcrumbsItemProps[] = [
         {
             text: "Link",
-            href: "/",
+            to: "/",
         },
         {
             text: "Link",
-            href: "#",
+            to: "#",
         },
         {
             text: "Link",
-            href: "#",
+            to: "#",
         },
         {
             text: "Active",
@@ -31,7 +31,6 @@ const BreadcrumbsPage = () => {
                 separator="slash"
                 linkColor="secondary"
                 color="secondary"
-                isRouterLink
             />
             <Breadcrumbs items={items} separator="icon" />
         </Page>

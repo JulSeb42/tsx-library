@@ -80,20 +80,20 @@ const ButtonIcon = forwardRef(
             blank,
             avatar,
             className,
-            isRouterLink,
+            to,
             ...rest
         }: ButtonIconProps,
         ref?: ForwardedRef<HTMLButtonElement>
     ) => {
         const buttonFn = () => (
             <Styles.StyledButtonIcon
-                as={as ? as : isRouterLink ? Link : href ? "a" : "button"}
+                as={as ? as : to ? Link : href ? "a" : "button"}
                 ref={ref}
                 aria-label={label}
                 href={href}
-                to={href}
-                target={href && blank && "_blank"}
-                rel={href && blank && "noreferrer noopener"}
+                to={to === "prev" ? -1 : to}
+                target={(href || to) && blank && "_blank"}
+                rel={(href || to) && blank && "noreferrer noopener"}
                 disabled={!!isLoading || disabled}
                 type={type}
                 $hoverBackground={hoverBackground}
