@@ -13,8 +13,6 @@ import type {
     AllColorsTypes,
     ColorsHoverTypes,
     LinkType,
-    LinkTypeRequire,
-    ButtonLinkType,
     ButtonLinkTypeRequire,
 } from "./"
 
