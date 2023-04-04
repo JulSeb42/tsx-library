@@ -1,5 +1,6 @@
 /*=============================================== FlexboxPage ===============================================*/
 
+import React from "react"
 import { Page, GridItem } from "../../components"
 import { Flexbox } from "../../lib"
 

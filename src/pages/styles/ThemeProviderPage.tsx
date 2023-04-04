@@ -1,6 +1,6 @@
 /*=============================================== ThemeProviderPage ===============================================*/
 
-import { useContext } from "react"
+import React, { useContext } from "react"
 
 import { Page } from "../../components"
 import { ThemeContext, Text, uuid } from "../../lib"

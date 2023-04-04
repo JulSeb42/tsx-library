@@ -1,5 +1,6 @@
 /*=============================================== GridPage ===============================================*/
 
+import React from "react"
 import { Page, GridItem } from "../../components"
 import { Grid } from "../../lib"
 

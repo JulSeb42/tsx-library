@@ -1,5 +1,6 @@
 /*=============================================== SpacersPage ===============================================*/
 
+import React from "react"
 import { uuid, Grid } from "../../lib"
 
 import { Page, DemoCard } from "../../components"

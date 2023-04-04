@@ -1,5 +1,6 @@
 /*=============================================== MasonryPage ===============================================*/
 
+import React from "react"
 import { Page } from "../../components"
 import { Masonry, Image, uuid } from "../../lib"
 

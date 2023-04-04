@@ -1,5 +1,6 @@
 /*=============================================== SectionPage ===============================================*/
 
+import React from "react"
 import { Page } from "../../components"
 import { Section, Text, uuid } from "../../lib"
 import type { SpacersTypes } from "../../lib/types"

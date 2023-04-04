@@ -1,5 +1,6 @@
 /*=============================================== TextPage ===============================================*/
 
+import React from "react"
 import { Link } from "react-router-dom"
 
 import { Page } from "../../components"

@@ -1,5 +1,6 @@
 /*=============================================== ColorsPage ===============================================*/
 
+import React from "react"
 import { uuid, Grid } from "../../lib"
 
 import { Page, ColorCard } from "../../components"

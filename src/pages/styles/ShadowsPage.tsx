@@ -1,5 +1,7 @@
 /*=============================================== ShadowsPage ===============================================*/
 
+import React from "react"
+
 import { Page, DemoCard } from "../../components"
 import { uuid, Grid } from "../../lib"
 
