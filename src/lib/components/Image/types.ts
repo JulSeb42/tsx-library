@@ -2,11 +2,7 @@
 
 import type { HTMLAttributes, ElementType } from "react"
 
-import type {
-    // RadiusesTypes, ObjectFitTypes
-    RadiusesTypes,
-    ObjectFitTypes,
-} from "../../types"
+import type { RadiusesTypes, ObjectFitTypes } from "../../types"
 
 export interface ImageProps extends HTMLAttributes<HTMLImageElement> {
     as?: ElementType

@@ -52,18 +52,6 @@ export type StepProps = LinkType & {
     text: string
 }
 
-// type StepPropsLink1 = StepPropsBase & {
-//     href?: string
-//     to?: never
-// }
-
-// type StepPropsLink2 = StepPropsBase & {
-//     href?: never
-//     to?: string
-// }
-
-// export type StepProps = StepPropsLink1 | StepPropsLink2
-
 /*==================== useForm ====================*/
 
 export type BaseUseFormType = {
@@ -77,32 +65,6 @@ export type BaseUseFormType = {
 export type FooterItemProps = ButtonLinkTypeRequire & {
     content: string | JSX.Element
 }
-
-// type PossibleFooterBehaviour1 = FooterLinksBase & {
-//     onClick: (e: MouseEvent<HTMLButtonElement>) => void
-//     href?: never
-//     blank?: never
-//     to?: never
-// }
-
-// type PossibleFooterBehaviour2 = FooterLinksBase & {
-//     onClick?: never
-//     href: string
-//     blank?: boolean
-//     to?: never
-// }
-
-// type PossibleFooterBehaviour3 = FooterLinksBase & {
-//     onClick?: never
-//     href?: never
-//     blank?: boolean
-//     to: string
-// }
-
-// export type FooterItemProps =
-//     | PossibleFooterBehaviour1
-//     | PossibleFooterBehaviour2
-//     | PossibleFooterBehaviour3
 
 /*==================== Theme ====================*/
 
@@ -139,32 +101,6 @@ type ButtonGroupPropsContent2 = ButtonGroupPropsBase & {
 export type ButtonGroupProps =
     | ButtonGroupPropsContent1
     | ButtonGroupPropsContent2
-
-// type ButtonGroupPropsBehaviour1 = ButtonGroupPropsContent & {
-//     onClick: (e: MouseEvent<HTMLButtonElement>) => void
-//     href?: never
-//     blank?: never
-//     to?: never
-// }
-
-// type ButtonGroupPropsBehaviour2 = ButtonGroupPropsContent & {
-//     onClick?: never
-//     href: string
-//     blank?: boolean
-//     to?: never
-// }
-
-// type ButtonGroupPropsBehaviour3 = ButtonGroupPropsContent & {
-//     onClick?: never
-//     href?: never
-//     blank?: boolean
-//     to: string
-// }
-
-// export type ButtonGroupProps =
-//     | ButtonGroupPropsBehaviour1
-//     | ButtonGroupPropsBehaviour2
-//     | ButtonGroupPropsBehaviour3
 
 /*==================== ListGroup ====================*/
 
@@ -238,32 +174,6 @@ export type IconMenuItemProps = ButtonLinkTypeRequire & {
     icon: string
     label: string
 }
-
-// type PossibleIconMenuBehaviour1 = IconMenuPropsBase & {
-//     onClick: (e: MouseEvent<HTMLButtonElement>) => void
-//     href?: never
-//     blank?: never
-//     to?: never
-// }
-
-// type PossibleIconMenuBehaviour2 = IconMenuPropsBase & {
-//     onClick?: never
-//     href: string
-//     blank?: boolean
-//     to?: never
-// }
-
-// type PossibleIconMenuBehaviour3 = IconMenuPropsBase & {
-//     onClick?: never
-//     href?: never
-//     blank?: boolean
-//     to: string
-// }
-
-// export type IconMenuItemProps =
-//     | PossibleIconMenuBehaviour1
-//     | PossibleIconMenuBehaviour2
-//     | PossibleIconMenuBehaviour3
 
 /*==================== Country ====================*/
 
