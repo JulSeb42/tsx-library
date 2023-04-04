@@ -30,9 +30,6 @@ const BackToTop = forwardRef(
         const [isTextVisible, setIsTextVisible] = useState(false)
 
         useEffect(() => {
-            document.body.classList.add("smooth")
-            document.documentElement.classList.add("smooth")
-
             if (window.scrollY >= 200) {
                 setIsVisible(true)
             } else {
@@ -49,7 +46,15 @@ const BackToTop = forwardRef(
         }, [])
 
         const scrollToTop = () => {
-            window.scrollTo(0, 0)
+            document.body.classList.add("smooth")
+            document.documentElement.classList.add("smooth")
+
+            setTimeout(() => window.scrollTo(0, 0), 100)
+
+            setTimeout(() => {
+                document.body.classList.remove("smooth")
+                document.documentElement.classList.remove("smooth")
+            }, 1000)
         }
 
         const propsButton = {
