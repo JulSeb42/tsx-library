@@ -1,18 +1,12 @@
 /*=============================================== Tabs types ===============================================*/
 
-import type {
-    HTMLAttributes,
-    ElementType,
-    ReactNode,
-    ButtonHTMLAttributes,
-} from "react"
+import type { HTMLAttributes, ElementType, ButtonHTMLAttributes } from "react"
 
 import type {
     ColorsHoverTypes,
     AllColorsTypes,
     TabsItemProps,
     SpacersTypes,
-    PaddingTypes,
 } from "../../types"
 
 enum tabsVariants {
@@ -40,21 +34,19 @@ export interface TabsContainerProps extends HTMLAttributes<HTMLDivElement> {
 
 interface TabsButtonsContainerPropsBase extends HTMLAttributes<HTMLDivElement> {
     as?: ElementType
-    children?: ReactNode[]
+    children?: any
     justify?: TabsJustifyTypes
     gap?: SpacersTypes
 }
 
 interface TabsButtonsContainerVariant1 extends TabsButtonsContainerPropsBase {
     variant?: "basic"
-    padding?: never
     separatorColor?: AllColorsTypes
     backgroundColor?: never
 }
 
 interface TabsButtonsContainerVariant2 extends TabsButtonsContainerPropsBase {
     variant?: "rounded"
-    padding?: PaddingTypes
     separatorColor?: never
     backgroundColor?: AllColorsTypes
 }

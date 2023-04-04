@@ -1,6 +1,6 @@
 /*=============================================== Breadcrumbs types ===============================================*/
 
-import type { HTMLAttributes, ElementType } from "react"
+import type { HTMLAttributes, ElementType, ReactNode } from "react"
 
 import type {
     BreadcrumbsItemProps,
@@ -17,7 +17,7 @@ export type SeparatorTypes = keyof typeof separators
 
 interface BreadcrumbsPropsBase extends HTMLAttributes<HTMLParagraphElement> {
     as?: ElementType
-    items: BreadcrumbsItemProps[]
+
     color?: AllColorsTypes
     linkColor?: ColorsHoverTypes
 }
@@ -32,4 +32,16 @@ interface BreadcrumbsSeparator2 extends BreadcrumbsPropsBase {
     customIcon?: string | JSX.Element
 }
 
-export type BreadcrumbsProps = BreadcrumbsSeparator1 | BreadcrumbsSeparator2
+type BreadcrumbsSeparator = BreadcrumbsSeparator1 | BreadcrumbsSeparator2
+
+type BreadcrumbsContent1 = BreadcrumbsSeparator & {
+    items: BreadcrumbsItemProps[]
+    children?: never
+}
+
+type BreadcrumbsContent2 = BreadcrumbsSeparator & {
+    items?: never
+    children: ReactNode | ReactNode[]
+}
+
+export type BreadcrumbsProps = BreadcrumbsContent1 | BreadcrumbsContent2

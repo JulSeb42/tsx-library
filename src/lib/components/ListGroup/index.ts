@@ -1,3 +1,3 @@
 /*=============================================== Export component ===============================================*/
 
-export { default as ListGroup } from "./ListGroup"
+export * from "./ListGroup"

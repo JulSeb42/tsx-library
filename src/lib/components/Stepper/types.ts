@@ -2,7 +2,11 @@
 
 import type { HTMLAttributes, ElementType, ReactNode } from "react"
 
-import type { StepProps as StepItemProps, ColorsHoverTypes } from "../../types"
+import type {
+    StepProps as StepItemProps,
+    ColorsHoverTypes,
+    LinkTypeBlank,
+} from "../../types"
 
 enum direction {
     column,
@@ -31,24 +35,13 @@ interface StepperPropsContent2 extends StepperPropsBase {
 
 export type StepperProps = StepperPropsContent1 | StepperPropsContent2
 
-export interface StepPropsBase extends HTMLAttributes<HTMLSpanElement> {
-    as?: ElementType
-    text: string
-    direction?: StepperDirectionType
-    accentColor?: ColorsHoverTypes
-    isActive?: boolean
-    iconActive?: string | JSX.Element
-    number?: number
-}
-
-interface StepPropsLink1 extends StepPropsBase {
-    href?: string
-    to?: never
-}
-
-interface StepPropsLink2 extends StepPropsBase {
-    href?: never
-    to?: string
-}
-
-export type StepProps = StepPropsLink1 | StepPropsLink2
+export type StepProps = HTMLAttributes<HTMLSpanElement> &
+    LinkTypeBlank & {
+        as?: ElementType
+        children: string | ReactNode
+        direction?: StepperDirectionType
+        accentColor?: ColorsHoverTypes
+        isActive?: boolean
+        iconActive?: string | JSX.Element
+        number?: number
+    }

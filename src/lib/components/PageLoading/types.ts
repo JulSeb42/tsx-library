@@ -10,7 +10,7 @@ export interface PageLoadingProps extends HTMLAttributes<HTMLDivElement> {
     backgroundColor?: AllColorsTypes
     loaderColor?: AllColorsTypes
     loaderVariant?: LoaderVariantTypes
-    loaderWidth?: number
+    loaderBorder?: number
     loaderSize?: number
     stopScrolling?: boolean
 }

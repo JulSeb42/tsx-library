@@ -17,7 +17,7 @@ const PageLoading = forwardRef(
             loaderVariant = 1,
             stopScrolling,
             loaderSize = 64,
-            loaderWidth = 12,
+            loaderBorder = 12,
             ...rest
         }: PageLoadingProps,
         ref?: ForwardedRef<HTMLDivElement>
@@ -46,7 +46,7 @@ const PageLoading = forwardRef(
                     <Loader variant={loaderVariant} {...loaderProps} />
                 ) : (
                     <Loader
-                        borderWidth={loaderWidth}
+                        borderWidth={loaderBorder}
                         variant={loaderVariant}
                         {...loaderProps}
                     />

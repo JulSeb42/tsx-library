@@ -103,7 +103,12 @@ export const TabItem = forwardRef(
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         return (
-            <Styles.TabItem as={as} ref={ref} $isActive={isActive} {...rest}>
+            <Styles.TabItem
+                as={as ? as : typeof children === "string" ? Text : "div"}
+                ref={ref}
+                $isActive={isActive}
+                {...rest}
+            >
                 {children}
             </Styles.TabItem>
         )

@@ -7,6 +7,7 @@ import type {
     ColorsHoverTypes,
     AllColorsTypes,
     SpacersTypes,
+    PaddingTypes,
 } from "../../types"
 import type { TabsJustifyTypes, TabsVariantsType } from "./types"
 
@@ -27,32 +28,9 @@ const ButtonsContainer = styled.div<{
     $separatorColor?: AllColorsTypes
     $backgroundColor?: AllColorsTypes
     $gap?: SpacersTypes
+    $padding?: PaddingTypes
 }>`
     position: relative;
-
-    ${({ $variant, $separatorColor, $backgroundColor, theme }) =>
-        $variant === "basic"
-            ? css`
-                  &:after {
-                      content: "";
-                      position: absolute;
-                      bottom: 0;
-                      left: 0;
-                      width: 100%;
-                      height: 1px;
-                      background-color: ${theme.AllColors({
-                          $color: $separatorColor,
-                      })};
-                      z-index: 0;
-                  }
-              `
-            : css`
-                  background-color: ${theme.AllColors({
-                      $color: $backgroundColor,
-                  })};
-                  border-radius: ${Radiuses.M};
-                  padding: ${Spacers.XS};
-              `}
 
     ${({ $justify, $col, $variant, $gap }) =>
         $justify === "start"
@@ -78,6 +56,30 @@ const ButtonsContainer = styled.div<{
                   @media ${Breakpoints.Mobile} {
                       grid-template-columns: repeat(1, 1fr);
                   }
+              `}
+
+    ${({ $variant, $separatorColor, $backgroundColor, theme }) =>
+        $variant === "basic"
+            ? css`
+                  &:after {
+                      content: "";
+                      position: absolute;
+                      bottom: 0;
+                      left: 0;
+                      width: 100%;
+                      height: 1px;
+                      background-color: ${theme.AllColors({
+                          $color: $separatorColor,
+                      })};
+                      z-index: 0;
+                  }
+              `
+            : css`
+                  background-color: ${theme.AllColors({
+                      $color: $backgroundColor,
+                  })};
+                  border-radius: ${Radiuses.M};
+                  padding: ${Spacers.XS};
               `}
 `
 

@@ -14,6 +14,7 @@ import type {
     ColorsHoverTypes,
     LinkType,
     ButtonLinkTypeRequire,
+    LinkTypeBlank,
 } from "./"
 
 /*==================== Accordion item ====================*/
@@ -48,7 +49,7 @@ export type TabsItemProps = {
 
 /*==================== Stepper step ====================*/
 
-export type StepProps = LinkType & {
+export type StepProps = LinkTypeBlank & {
     text: string
 }
 

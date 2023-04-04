@@ -60,14 +60,25 @@ export interface AccordionContainerProps
     separatorColor?: AllColorsTypes
 }
 
-export interface ItemProps extends HTMLAttributes<HTMLDivElement> {
-    icon?: IconTypes
+interface ItemPropsBase extends HTMLAttributes<HTMLDivElement> {
+    as?: ElementType
     title: string
     isOpen?: boolean
-    content?: string | ReactNode
+    children?: string | ReactNode | ReactNode[]
     variant?: AccordionStyleTypes
     noBorder?: boolean
-    customIcon?: string | JSX.Element
     accentColor?: ColorsHoverTypes
     separatorColor?: AllColorsTypes
 }
+
+interface ItemIcon1 extends ItemPropsBase {
+    icon?: IconTypes
+    customIcon?: never
+}
+
+interface ItemIcon2 extends ItemPropsBase {
+    icon?: never
+    customIcon?: string | JSX.Element
+}
+
+export type ItemProps = ItemIcon1 | ItemIcon2

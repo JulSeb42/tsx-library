@@ -40,22 +40,24 @@ export const AccordionContainer = forwardRef(
 export const AccordionItem = forwardRef(
     (
         {
+            as,
             isOpen = false,
             icon = "plus",
             title,
-            content,
+            children,
             variant = "basic",
             noBorder,
             customIcon,
             accentColor = "primary",
             separatorColor,
+            ...rest
         }: ItemProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         const [open, setOpen] = useState(isOpen)
 
         return (
-            <Styles.Item ref={ref}>
+            <Styles.Item as={as} ref={ref} {...rest}>
                 <Styles.Button
                     onClick={() => setOpen(!open)}
                     $variant={variant}
@@ -87,11 +89,11 @@ export const AccordionItem = forwardRef(
                 </Styles.Button>
 
                 <Styles.Content
-                    as={typeof content === "string" ? Text : "div"}
+                    as={typeof children === "string" ? Text : "div"}
                     $isOpen={open}
                     $variant={variant}
                 >
-                    {content}
+                    {children}
                 </Styles.Content>
             </Styles.Item>
         )
@@ -122,24 +124,43 @@ export const Accordion = forwardRef(
                 {...rest}
             >
                 {items
-                    ? items.map((item, i) => (
-                          <AccordionItem
-                              icon={icon}
-                              isOpen={item.isOpen}
-                              title={item.title}
-                              content={item.content}
-                              variant={variant}
-                              customIcon={customIcon}
-                              noBorder={
-                                  variant === "rounded" &&
-                                  i === items.length - 1 &&
-                                  true
-                              }
-                              separatorColor={separatorColor}
-                              accentColor={accentColor}
-                              key={uuid()}
-                          />
-                      ))
+                    ? items.map((item, i) =>
+                          customIcon ? (
+                              <AccordionItem
+                                  isOpen={item.isOpen}
+                                  title={item.title}
+                                  variant={variant}
+                                  customIcon={customIcon}
+                                  noBorder={
+                                      variant === "rounded" &&
+                                      i === items.length - 1 &&
+                                      true
+                                  }
+                                  separatorColor={separatorColor}
+                                  accentColor={accentColor}
+                                  key={uuid()}
+                              >
+                                  {item.content}
+                              </AccordionItem>
+                          ) : (
+                              <AccordionItem
+                                  icon={icon}
+                                  isOpen={item.isOpen}
+                                  title={item.title}
+                                  variant={variant}
+                                  noBorder={
+                                      variant === "rounded" &&
+                                      i === items.length - 1 &&
+                                      true
+                                  }
+                                  separatorColor={separatorColor}
+                                  accentColor={accentColor}
+                                  key={uuid()}
+                              >
+                                  {item.content}
+                              </AccordionItem>
+                          )
+                      )
                     : children}
             </AccordionContainer>
         )

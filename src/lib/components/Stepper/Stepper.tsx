@@ -20,7 +20,7 @@ export const Step = forwardRef(
             iconActive,
             number,
             href,
-            text,
+            children,
             to,
             ...rest
         }: StepProps,
@@ -48,9 +48,10 @@ export const Step = forwardRef(
                     as={href ? "a" : to ? Link : "small"}
                     $isLink={!!href || !!to}
                     href={href}
+                    to={to}
                     $accentColor={accentColor}
                 >
-                    {text}
+                    {children}
                 </Styles.StyledText>
             </Styles.Item>
         )
@@ -79,18 +80,44 @@ export const Stepper = forwardRef(
             {...rest}
         >
             {steps
-                ? steps.map((step, i) => (
-                      <Step
-                          direction={direction}
-                          accentColor={accentColor}
-                          isActive={active >= i + 1}
-                          iconActive={iconActive}
-                          number={i + 1}
-                          href={step.href}
-                          text={step.text}
-                          key={uuid()}
-                      />
-                  ))
+                ? steps.map((step, i) =>
+                      step.to ? (
+                          <Step
+                              direction={direction}
+                              accentColor={accentColor}
+                              isActive={active >= i + 1}
+                              iconActive={iconActive}
+                              number={i + 1}
+                              to={step.to}
+                              key={uuid()}
+                          >
+                              {step.text}
+                          </Step>
+                      ) : step.href ? (
+                          <Step
+                              direction={direction}
+                              accentColor={accentColor}
+                              isActive={active >= i + 1}
+                              iconActive={iconActive}
+                              number={i + 1}
+                              href={step.href}
+                              key={uuid()}
+                          >
+                              {step.text}
+                          </Step>
+                      ) : (
+                          <Step
+                              direction={direction}
+                              accentColor={accentColor}
+                              isActive={active >= i + 1}
+                              iconActive={iconActive}
+                              number={i + 1}
+                              key={uuid()}
+                          >
+                              {step.text}
+                          </Step>
+                      )
+                  )
                 : children}
         </Styles.StyledStepper>
     )

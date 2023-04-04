@@ -15,6 +15,7 @@ const Breadcrumbs = forwardRef(
         {
             as,
             items,
+            children,
             color = "currentColor",
             linkColor = "primary",
             separator = "slash",
@@ -31,36 +32,38 @@ const Breadcrumbs = forwardRef(
             $separator={separator}
             {...rest}
         >
-            {items.map(({ text, href, to }) => (
-                <Fragment key={uuid()}>
-                    <Styles.Item
-                        as={to ? Link : href ? "a" : "span"}
-                        href={href ? href : undefined}
-                        to={href ? href : undefined}
-                    >
-                        {text}
-                    </Styles.Item>
+            {items
+                ? items.map(({ text, href, to }) => (
+                      <Fragment key={uuid()}>
+                          <Styles.Item
+                              as={to ? Link : href ? "a" : "span"}
+                              href={href ? href : undefined}
+                              to={href ? href : undefined}
+                          >
+                              {text}
+                          </Styles.Item>
 
-                    {href && (
-                        <Styles.Separator
-                            $separator={separator || "slash"}
-                            $customIcon={!!customIcon}
-                        >
-                            {customIcon ? (
-                                typeof customIcon === "string" ? (
-                                    <Icon src={customIcon} size={20} />
-                                ) : (
-                                    customIcon
-                                )
-                            ) : separator === "icon" ? (
-                                <ChevronRightIcon size={20} />
-                            ) : (
-                                "/"
-                            )}
-                        </Styles.Separator>
-                    )}
-                </Fragment>
-            ))}
+                          {href && (
+                              <Styles.Separator
+                                  $separator={separator || "slash"}
+                                  $customIcon={!!customIcon}
+                              >
+                                  {customIcon ? (
+                                      typeof customIcon === "string" ? (
+                                          <Icon src={customIcon} size={20} />
+                                      ) : (
+                                          customIcon
+                                      )
+                                  ) : separator === "icon" ? (
+                                      <ChevronRightIcon size={20} />
+                                  ) : (
+                                      "/"
+                                  )}
+                              </Styles.Separator>
+                          )}
+                      </Fragment>
+                  ))
+                : children}
         </Styles.StyledBreadcrumbs>
     )
 )

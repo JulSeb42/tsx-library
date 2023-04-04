@@ -9,7 +9,8 @@ import { Icon, Text, convertDateShort, Flexbox, uuid } from "../../"
 import * as Styles from "./styles"
 import type { ListGroupProps, ListGroupItemProps } from "./types"
 
-const ListItem = ({
+export const ListItem = ({
+    as,
     item: {
         text,
         subtext,
@@ -30,7 +31,7 @@ const ListItem = ({
     ...rest
 }: ListGroupItemProps) => (
     <Styles.Item
-        as={onClick ? "button" : to ? Link : href ? "a" : "span"}
+        as={as ? as : onClick ? "button" : to ? Link : href ? "a" : "span"}
         href={href}
         to={to}
         onClick={onClick}
@@ -91,7 +92,7 @@ const ListItem = ({
     </Styles.Item>
 )
 
-const ListGroup = forwardRef(
+export const ListGroup = forwardRef(
     (
         {
             as,
@@ -125,5 +126,3 @@ const ListGroup = forwardRef(
         </Styles.StyledListGroup>
     )
 )
-
-export default ListGroup
