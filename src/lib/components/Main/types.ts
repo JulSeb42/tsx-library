@@ -35,6 +35,7 @@ interface BaseMainProps extends HTMLAttributes<HTMLDivElement> {
     justifyContent?: GridJustifyContentTypes
     justifyItems?: GridJustifyItemsTypes
     paddingTopBottom?: SpacersTypes
+    minHeight?: string | number
 }
 
 interface MainSize1 extends BaseMainProps {

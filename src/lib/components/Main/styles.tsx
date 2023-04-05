@@ -24,6 +24,7 @@ const StyledMain = styled.main<{
     $gap?: SpacersTypes
     $contentWidth?: "default" | "large" | "form"
     $paddingTopBottom?: SpacersTypes
+    $minHeight?: string | number
 }>`
     width: ${({ $size }) =>
         $size === "large"
@@ -53,7 +54,7 @@ const StyledMain = styled.main<{
                 topBottom: $paddingTopBottom,
             },
         })};
-    min-height: 100vh;
+    min-height: ${({ $minHeight }) => $minHeight && stringifyPx($minHeight)};
     grid-column: ${({ $position }) => ($position ? $position + 1 : 2)};
 
     @media ${Breakpoints.Tablet} {

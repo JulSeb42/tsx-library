@@ -35,4 +35,5 @@ export interface AsideProps extends HTMLAttributes<HTMLDivElement> {
     justifyItems?: GridJustifyItemsTypes
     size?: AsideSizeTypes
     paddingTopBottom?: SpacersTypes
+    minHeight?: string | number
 }

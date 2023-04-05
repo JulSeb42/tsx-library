@@ -23,6 +23,7 @@ const StyledAside = styled.aside<{
     $alignItems?: GridAlignItemsTypes
     $gap?: SpacersTypes
     $paddingTopBottom?: SpacersTypes
+    $minHeight?: string | number
 }>`
     width: ${({ $size }) =>
         $size === "small"
@@ -48,7 +49,7 @@ const StyledAside = styled.aside<{
                 topBottom: $paddingTopBottom,
             },
         })};
-    min-height: 100vh;
+    min-height: ${({ $minHeight }) => $minHeight && stringifyPx($minHeight)};
     grid-column: ${({ $position }) =>
         $position === 2 ? 3 : $position === 3 ? 4 : 2};
 

@@ -19,6 +19,7 @@ const Aside = forwardRef(
             size = "default",
             children,
             paddingTopBottom = "xxl",
+            minHeight = "100vh",
             ...rest
         }: AsideProps,
         ref?: ForwardedRef<HTMLDivElement>
@@ -34,6 +35,7 @@ const Aside = forwardRef(
             $justifyItems={justifyItems}
             $size={size}
             $paddingTopBottom={paddingTopBottom}
+            $minHeight={minHeight}
             {...rest}
         >
             {children}

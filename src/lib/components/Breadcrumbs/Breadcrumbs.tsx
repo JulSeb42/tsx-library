@@ -38,7 +38,7 @@ const Breadcrumbs = forwardRef(
                           <Styles.Item
                               as={to ? Link : href ? "a" : "span"}
                               href={href ? href : undefined}
-                              to={href ? href : undefined}
+                              to={to ? to : undefined}
                           >
                               {text}
                           </Styles.Item>

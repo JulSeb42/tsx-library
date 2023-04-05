@@ -20,6 +20,7 @@ const Main = forwardRef(
             contentSize = "default",
             children,
             paddingTopBottom = "xxl",
+            minHeight = "100vh",
             ...rest
         }: MainProps,
         ref?: ForwardedRef<HTMLDivElement>
@@ -36,6 +37,7 @@ const Main = forwardRef(
             $size={size}
             $contentSize={contentSize}
             $paddingTopBottom={paddingTopBottom}
+            $minHeight={minHeight}
             {...rest}
         >
             {children}
