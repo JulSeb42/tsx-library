@@ -10,10 +10,13 @@ const TagPage = () => {
                 <Tag
                     color="primary"
                     icons={{ left: "chevron-right", right: "close" }}
+                    variant="outline"
                 >
                     Tag
                 </Tag>
-                <Tag color="secondary">Tag</Tag>
+                <Tag color="secondary" variant="outline">
+                    Tag
+                </Tag>
                 <Tag color="success">Tag</Tag>
                 <Tag color="danger">Tag</Tag>
                 <Tag color="warning">Tag</Tag>
@@ -27,6 +30,7 @@ const TagPage = () => {
                     color="primary"
                     borderRadius="round"
                     padding={{ leftRight: "m", topBottom: "xxs" }}
+                    variant="outline"
                 >
                     Tag
                 </Tag>

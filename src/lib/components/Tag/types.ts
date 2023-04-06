@@ -9,12 +9,20 @@ import type {
     RadiusesTypes,
 } from "../../types"
 
+enum tagVariants {
+    plain,
+    outline,
+}
+
+export type TagVariantTypes = keyof typeof tagVariants
+
 interface TagPropsBase extends HTMLAttributes<HTMLSpanElement> {
     as?: ElementType
     color?: AllColorsTypes
     textColor?: AllColorsTypes
     padding?: PaddingTypes
     borderRadius?: RadiusesTypes
+    variant?: TagVariantTypes
 }
 
 interface TagPropsNoIcon extends TagPropsBase {

@@ -22,6 +22,7 @@ const Tag = forwardRef(
                 leftRight: "xs",
             },
             borderRadius = "s",
+            variant = "plain",
             ...rest
         }: TagProps,
         ref?: ForwardedRef<HTMLSpanElement>
@@ -40,6 +41,7 @@ const Tag = forwardRef(
                 $gap={gap}
                 $padding={padding}
                 $borderRadius={borderRadius}
+                $variant={variant}
                 {...rest}
             >
                 {icons?.left && typeof icons?.left === "string" ? (
