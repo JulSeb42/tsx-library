@@ -8,6 +8,7 @@ import type {
     SpacersTypes,
     PaddingTypes,
     RadiusesTypes,
+    ColorsHoverTypes,
 } from "../../types"
 
 interface KeyPropsBase extends HTMLAttributes<HTMLSpanElement> {
@@ -15,8 +16,6 @@ interface KeyPropsBase extends HTMLAttributes<HTMLSpanElement> {
     keys: string[]
     fontSize?: FontSizeTypes
     fontColor?: AllColorsTypes
-    backgroundColor?: AllColorsTypes
-    borderColor?: AllColorsTypes
     padding?: PaddingTypes
     borderRadius?: RadiusesTypes
     borderWidth?: number
@@ -32,4 +31,18 @@ interface KeyPropsSeparator2 extends KeyPropsBase {
     gap?: never
 }
 
-export type KeyProps = KeyPropsSeparator1 | KeyPropsSeparator2
+type KeyPropsSeparator = KeyPropsSeparator1 | KeyPropsSeparator2
+
+type KeyColor1 = KeyPropsSeparator & {
+    backgroundColor?: ColorsHoverTypes
+    borderColor?: ColorsHoverTypes
+    accentColor?: never
+}
+
+type KeyColor2 = KeyPropsSeparator & {
+    backgroundColor?: never
+    borderColor?: never
+    accentColor?: ColorsHoverTypes
+}
+
+export type KeyProps = KeyColor1 | KeyColor2

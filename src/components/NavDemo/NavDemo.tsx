@@ -30,6 +30,8 @@ const NavDemo = () => {
                 type="search"
                 clearSearch={() => setSearch("")}
                 backgroundColor="light"
+                focusKeys={["Command", "KeyK"]}
+                showKeys
             />
 
             <Button onClick={toggleTheme} variant="text" color="white">

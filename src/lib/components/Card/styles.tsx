@@ -18,6 +18,7 @@ import type {
     FlexAlignItemsTypes,
     SpacersTypes,
 } from "../../types"
+import type { BackgroundImgType } from "./types"
 
 import { setDefaultTheme } from "../../utils"
 
@@ -53,6 +54,7 @@ const StyledCard = styled.div<{
     $gap?: SpacersTypes
     $columnGap?: SpacersTypes
     $rowGap?: SpacersTypes
+    $backgroundImg?: string | BackgroundImgType
 }>`
     text-decoration: none;
     color: ${({ theme, $textColor }) =>
@@ -108,6 +110,43 @@ const StyledCard = styled.div<{
             $columnGap ||
             $rowGap) &&
         Mixins.Flexbox};
+
+    ${({ $backgroundImg }) =>
+        $backgroundImg &&
+        css`
+            background-image: url(${typeof $backgroundImg === "object"
+                ? $backgroundImg.img
+                : $backgroundImg});
+            background-origin: ${typeof $backgroundImg === "object" &&
+            $backgroundImg.origin
+                ? $backgroundImg.origin
+                : "center" || "center"};
+            background-position: ${typeof $backgroundImg === "object" &&
+            $backgroundImg.position
+                ? $backgroundImg.position
+                : "center" || "center"};
+            background-repeat: ${typeof $backgroundImg === "object" &&
+            $backgroundImg.repeat
+                ? $backgroundImg.repeat
+                : "no-repeat" || "no-repeat"};
+            background-size: ${typeof $backgroundImg === "object" &&
+            $backgroundImg.size
+                ? $backgroundImg.size
+                : "cover" || "cover"};
+            background-clip: ${typeof $backgroundImg === "object" &&
+            $backgroundImg.clip
+                ? $backgroundImg.clip
+                : "border-box" || "border-box"};
+
+            ${typeof $backgroundImg === "object" &&
+            $backgroundImg.clip &&
+            $backgroundImg.clip === "text" &&
+            css`
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+            `}
+        `}
 `
 
 setDefaultTheme([StyledCard])

@@ -77,7 +77,7 @@ export const ListItem = ({
 
             {date && (
                 <Styles.NumberContainer>
-                    <Text tag="small" color="gray-500">
+                    <Text tag="small" color="gray">
                         {convertDateShort(new Date(date))}
                     </Text>
                 </Styles.NumberContainer>
@@ -85,7 +85,7 @@ export const ListItem = ({
         </Flexbox>
 
         {subtext && (
-            <Text tag="small" color="gray-500">
+            <Text tag="small" color="gray">
                 {subtext}
             </Text>
         )}

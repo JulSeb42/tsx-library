@@ -11,8 +11,6 @@ const AlertPage = () => {
             <Alert color="success">Alert</Alert>
             <Alert color="danger">Alert</Alert>
             <Alert color="warning">Alert</Alert>
-            <Alert color="gray">Alert</Alert>
-            <Alert color="black">Alert</Alert>
             <Alert color="white">Alert</Alert>
 
             <Alert color="danger">

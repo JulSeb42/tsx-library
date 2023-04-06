@@ -2,12 +2,13 @@
 
 import styled from "styled-components"
 
-import { Mixins, FontSizes, stringifyPx } from "../../"
+import { Mixins, FontSizes, stringifyPx, ThemeLight } from "../../"
 import type {
     FontSizeTypes,
     AllColorsTypes,
     PaddingTypes,
     RadiusesTypes,
+    ColorsHoverTypes,
 } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
@@ -15,24 +16,28 @@ import { setDefaultTheme } from "../../utils"
 const StyledKey = styled.span<{
     $fontSize?: FontSizeTypes
     $fontColor?: AllColorsTypes
-    $backgroundColor?: AllColorsTypes
-    $borderColor?: AllColorsTypes
+    $backgroundColor?: ColorsHoverTypes
+    $borderColor?: ColorsHoverTypes
     $padding?: PaddingTypes
     $borderRadius?: RadiusesTypes
     $borderWidth: number
 }>`
     border: ${({ $borderWidth }) => $borderWidth}px solid
         ${({ theme, $borderColor }) =>
-            theme.AllColors({ $color: $borderColor })};
+            theme.ColorsHoverDefault({ $color: $borderColor })};
     border-bottom-width: ${({ $borderWidth }) => $borderWidth + 1}px;
     background-color: ${({ $backgroundColor, theme }) =>
-        theme.AllColors({ $color: $backgroundColor })};
+        theme.Colors50({ $color: $backgroundColor })};
     width: fit-content;
     justify-self: start;
     ${Mixins.Padding};
     ${Mixins.BorderRadius};
-    color: ${({ $fontColor, theme }) =>
-        theme.AllColors({ $color: $fontColor })};
+    color: ${({ $fontColor, $backgroundColor, theme }) =>
+        $fontColor
+            ? theme.AllColors({ $color: $fontColor })
+            : $backgroundColor === "white"
+            ? ThemeLight.Black
+            : theme.Font};
     font-size: ${({ $fontSize }) =>
         $fontSize === "display-h1"
             ? FontSizes.Display.H1

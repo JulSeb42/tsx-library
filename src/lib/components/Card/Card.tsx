@@ -37,6 +37,7 @@ const Card = forwardRef(
             gap,
             columnGap,
             rowGap,
+            backgroundImg,
             ...rest
         }: CardProps,
         ref?: ForwardedRef<HTMLDivElement>
@@ -73,6 +74,7 @@ const Card = forwardRef(
             $gap={gap}
             $columnGap={columnGap}
             $rowGap={rowGap}
+            $backgroundImg={backgroundImg}
             {...rest}
         >
             {children}

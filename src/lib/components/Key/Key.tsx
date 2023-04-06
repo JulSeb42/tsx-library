@@ -4,7 +4,6 @@ import React, { forwardRef, Fragment } from "react"
 import type { ForwardedRef } from "react"
 
 import { Flexbox, uuid } from "../../"
-import type {} from "../../types"
 
 import * as Styles from "./styles"
 import type { KeyProps } from "./types"
@@ -14,18 +13,19 @@ const Key = forwardRef(
         {
             as,
             keys,
-            fontColor = "font",
+            fontColor,
             fontSize = "small",
-            backgroundColor = "primary-50",
+            backgroundColor,
             separator,
             gap = "xxs",
-            borderColor = "primary",
+            borderColor,
             padding = {
                 topBottom: "none",
                 leftRight: "xxs",
             },
             borderWidth = 1,
             borderRadius = "xs",
+            accentColor = "primary",
             ...rest
         }: KeyProps,
         ref?: ForwardedRef<HTMLSpanElement>
@@ -34,10 +34,10 @@ const Key = forwardRef(
             as,
             $fontColor: fontColor,
             $fontSize: fontSize,
-            $backgroundColor: backgroundColor,
+            $backgroundColor: backgroundColor || accentColor,
             $gap: gap,
             ref: ref,
-            $borderColor: borderColor,
+            $borderColor: borderColor || accentColor,
             $padding: padding,
             $borderRadius: borderRadius,
             $borderWidth: borderWidth,

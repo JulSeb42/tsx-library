@@ -69,9 +69,16 @@ export type FooterItemProps = ButtonLinkTypeRequire & {
 
 /*==================== Theme ====================*/
 
+enum themeNames {
+    light,
+    dark,
+}
+
+export type ThemeNameTypes = keyof typeof themeNames
+
 export type ThemeContextProps = {
     theme: any
-    selectedTheme: "light" | "dark"
+    selectedTheme: ThemeNameTypes
     toggleTheme: () => void
 }
 

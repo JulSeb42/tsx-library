@@ -43,6 +43,7 @@ const DemoHeader = () => {
                     maxWidth: 300,
                     backgroundColor: "light",
                     accentColor: "secondary",
+                    showKeys: true,
                 }}
                 navDesktopVariant="left"
                 shadow="m"

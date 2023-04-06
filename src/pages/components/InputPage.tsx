@@ -113,6 +113,10 @@ const InputPage = () => {
                 value={search}
                 onChange={handleSearch}
                 clearSearch={clearSearch}
+                focusKeys={["Command", "KeyJ"]}
+                showKeys
+                accentColor="secondary"
+                label="Search"
             />
             <Input
                 id="input-search-disabled"

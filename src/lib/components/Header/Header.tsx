@@ -4,7 +4,7 @@ import React, { forwardRef, useState, useRef, useEffect } from "react"
 import type { ForwardedRef, ChangeEvent, FormEvent } from "react"
 import { useNavigate, createSearchParams, Link } from "react-router-dom"
 
-import { Input, useKeyPress, useClickOutside, useMaxWidth } from "../../"
+import { Input, useClickOutside, useMaxWidth } from "../../"
 
 import * as Styles from "./styles"
 import type { HeaderProps } from "./types"
@@ -80,12 +80,6 @@ const Header = forwardRef(
 
         const clearSearch = () => setSearchValue("")
 
-        const inputRef = useRef<any>(null)
-        const handleFocus = () => inputRef.current.focus()
-
-        const keys = search?.keyboardShortcut ? search?.keyboardShortcut : [""]
-        useKeyPress(() => handleFocus(), keys)
-
         const searchInputFunc = () =>
             search && (
                 <Styles.SearchForm
@@ -101,11 +95,12 @@ const Header = forwardRef(
                         value={searchValue}
                         placeholder={search.placeholder}
                         icon={search.icon}
-                        ref={inputRef}
                         backgroundColor={search.backgroundColor}
                         accentColor={search.accentColor}
                         iconSize={search.iconSize}
                         variant={search.variant}
+                        focusKeys={search.keyboardShortcut}
+                        showKeys={search.showKeys}
                     />
                 </Styles.SearchForm>
             )

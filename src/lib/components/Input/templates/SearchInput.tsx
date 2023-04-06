@@ -1,9 +1,9 @@
 /*=============================================== SearchInput ===============================================*/
 
-import React, { forwardRef } from "react"
+import React, { forwardRef, useRef } from "react"
 import type { ForwardedRef } from "react"
 
-import { ButtonIcon } from "../../../"
+import { ButtonIcon, Key, useKeyPress } from "../../../"
 import { CloseIcon } from "../../../icons"
 import { RightContainer, IconComponent } from "../../InputComponents"
 
@@ -23,10 +23,31 @@ const SearchInput = forwardRef(
             variant = "rounded",
             disabled,
             value,
+            focusKeys,
+            showKeys,
             ...rest
         }: SearchInputProps,
         ref?: ForwardedRef<HTMLInputElement>
     ) => {
+        const focusRef = useRef<HTMLInputElement>(null)
+
+        const handleFocus = () => focusRef?.current?.focus()
+
+        const keys = focusKeys ? focusKeys : [""]
+        useKeyPress(() => handleFocus(), keys)
+
+        const keyArr = focusKeys?.map(key =>
+            key.includes("Key")
+                ? key.replace("Key", "")
+                : key === "Command"
+                ? "⌘"
+                : key === "Enter"
+                ? "↵"
+                : key === "Control"
+                ? "Ctrl"
+                : key
+        )
+
         return (
             <Styles.StyledInputContent>
                 {icon && (
@@ -41,7 +62,7 @@ const SearchInput = forwardRef(
 
                 <Styles.StyledInput
                     type={type}
-                    ref={ref}
+                    ref={ref || focusRef}
                     $type={type}
                     $hasIcon={!!icon}
                     disabled={disabled}
@@ -63,6 +84,14 @@ const SearchInput = forwardRef(
                             disabled={disabled}
                             color={accentColor}
                             borderRadius="xs"
+                        />
+                    )}
+
+                    {focusKeys && showKeys && keyArr && (
+                        <Key
+                            keys={keyArr}
+                            borderColor={accentColor}
+                            backgroundColor={accentColor}
                         />
                     )}
                 </RightContainer>

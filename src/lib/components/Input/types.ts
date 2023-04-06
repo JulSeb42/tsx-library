@@ -101,7 +101,7 @@ export type PasswordInputProps =
     | InputPasswordButtonProps1
     | InputPasswordButtonProps2
 
-export interface SearchInputProps
+interface SearchInputPropsBase
     extends InputPropsBase,
         IconInputProps,
         InputHTMLAttributes<HTMLInputElement> {
@@ -109,6 +109,18 @@ export interface SearchInputProps
     clearSearch: () => void
     iconClear?: string | JSX.Element
 }
+
+interface SearchInputPropsKeys1 extends SearchInputPropsBase {
+    focusKeys?: string[]
+    showKeys?: boolean
+}
+
+interface SearchInputPropsKeys2 extends SearchInputPropsBase {
+    focusKeys?: undefined | null
+    showKeys?: never
+}
+
+export type SearchInputProps = SearchInputPropsKeys1 | SearchInputPropsKeys2
 
 export interface SelectInputProps
     extends InputPropsBase,

@@ -419,6 +419,26 @@ const ThemeLight = {
                 : ""}
         `,
 
+    Colors50: ({ $color }: ColorsHoverProps) => css`
+        ${$color === "primary"
+            ? ThemeLight.Primary50
+            : $color === "secondary"
+            ? ThemeLight.Secondary50
+            : $color === "success"
+            ? ThemeLight.Success50
+            : $color === "danger"
+            ? ThemeLight.Danger50
+            : $color === "warning"
+            ? ThemeLight.Warning50
+            : $color === "font"
+            ? ThemeLight.Gray900
+            : $color === "background"
+            ? ThemeLight.Gray50
+            : $color === "white"
+            ? ThemeLight.Gray50
+            : ""};
+    `,
+
     Icon: ({ $name, $color = "currentColor", $size }: IconProps) => css`
         content: "";
         mask: url("/icons/${$name}.svg") no-repeat 50% 50%;
@@ -816,6 +836,26 @@ const ThemeDark = {
                 ? ThemeDark.GhostFontActive
                 : ""}
         `,
+
+    Colors50: ({ $color }: ColorsHoverProps) => css`
+        ${$color === "primary"
+            ? ThemeDark.Primary50
+            : $color === "secondary"
+            ? ThemeDark.Secondary50
+            : $color === "success"
+            ? ThemeDark.Success50
+            : $color === "danger"
+            ? ThemeDark.Danger50
+            : $color === "warning"
+            ? ThemeDark.Warning50
+            : $color === "font"
+            ? ThemeDark.Gray900
+            : $color === "background"
+            ? ThemeDark.Gray50
+            : $color === "white"
+            ? ThemeDark.Gray900
+            : ""};
+    `,
 
     Icon: ({ $name, $color = "currentColor", $size }: IconProps) => css`
         content: "";

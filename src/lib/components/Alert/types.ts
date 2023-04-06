@@ -1,22 +1,10 @@
 /*=============================================== Alert types ===============================================*/
 
 import type { HTMLAttributes, ElementType } from "react"
-
-enum ColorsAlerts {
-    primary,
-    secondary,
-    success,
-    danger,
-    warning,
-    white,
-    gray,
-    black,
-}
-
-export type ColorsAlertsTypes = keyof typeof ColorsAlerts
+import type { ColorsHoverTypes } from "../../types"
 
 export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
     as?: ElementType
-    color?: ColorsAlertsTypes
+    color?: ColorsHoverTypes
     isModal?: boolean
 }

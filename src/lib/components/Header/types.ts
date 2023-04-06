@@ -73,6 +73,7 @@ interface HeaderPropsBase extends HTMLAttributes<HTMLDivElement> {
         iconClear?: string
         placeholder?: string
         keyboardShortcut?: string[]
+        showKeys?: boolean
         backgroundColor?: InputBackgroundTypes
         maxWidth?: string | number
         accentColor?: ColorsHoverTypes
