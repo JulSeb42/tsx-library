@@ -2,7 +2,7 @@
 
 import styled, { css } from "styled-components"
 
-import { Transitions, Breakpoints, Spacers, FontSizes, Mixins } from "../../"
+import { Breakpoints, Spacers, FontSizes, Mixins } from "../../"
 import { FontCommon } from "../Text/styles"
 import type {
     TextAlignTypes,
@@ -10,6 +10,7 @@ import type {
     AllColorsTypes,
 } from "../../types"
 import type { TableStyleTypes, TableVerticalAlignTypes } from "./types"
+import type { LinkStyleTypes } from "../Text/types"
 
 import { setDefaultTheme } from "../../utils"
 
@@ -20,14 +21,14 @@ const StyledTable = styled.table<{
     $headerBackground?: ColorsHoverTypes
     $headerTextColor?: AllColorsTypes
     $textColor?: AllColorsTypes
-    $linkColor?: ColorsHoverTypes
     $borderColor?: AllColorsTypes
     $headerBorderColor?: AllColorsTypes
     $backgroundEven?: AllColorsTypes
     $backgroundOdd?: AllColorsTypes
     $textColorEven?: AllColorsTypes
     $textColorOdd?: AllColorsTypes
-    $linkColorHeader?: ColorsHoverTypes
+    $linkStylesHead?: LinkStyleTypes
+    $linkStylesBody?: LinkStyleTypes
 }>`
     ${FontCommon({
         $defaultSize: "small",
@@ -47,25 +48,6 @@ const StyledTable = styled.table<{
             theme.AllColors({
                 $color: $textColor,
             })};
-    }
-
-    a {
-        color: ${({ theme, $linkColor }) =>
-            theme.ColorsHoverDefault({ $color: $linkColor })};
-        transition: ${Transitions.Short};
-        text-decoration: none;
-
-        @media ${Breakpoints.Hover} {
-            &:hover {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverHover({ $color: $linkColor })};
-            }
-
-            &:active {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverActive({ $color: $linkColor })};
-            }
-        }
     }
 
     td,
@@ -92,27 +74,13 @@ const StyledTable = styled.table<{
             theme.AllColors({ $color: $headerBackground })};
         color: ${({ $headerTextColor, theme }) =>
             theme.AllColors({ $color: $headerTextColor })};
+        ${({ $linkStylesHead }) =>
+            FontCommon({ $linkStyles: $linkStylesHead })};
+    }
 
-        a {
-            color: ${({ $linkColorHeader, theme }) =>
-                theme.ColorsHoverDefault({ $color: $linkColorHeader })};
-
-            @media ${Breakpoints.Hover} {
-                &:hover {
-                    color: ${({ $linkColorHeader, theme }) =>
-                        theme.ColorsHoverHover({
-                            $color: $linkColorHeader,
-                        })};
-                }
-
-                &:active {
-                    color: ${({ $linkColorHeader, theme }) =>
-                        theme.ColorsHoverActive({
-                            $color: $linkColorHeader,
-                        })};
-                }
-            }
-        }
+    tbody {
+        ${({ $linkStylesBody }) =>
+            FontCommon({ $linkStyles: $linkStylesBody })};
     }
 
     ${({

@@ -19,15 +19,15 @@ const Table = forwardRef(
             headerBackground = "primary",
             headerTextColor = "background",
             textColor = "currentColor",
-            linkColor = "primary",
             borderColor = "gray-200",
             headerBorderColor = "background",
             backgroundEven = "gray-50",
             backgroundOdd = "background",
             textColorEven = "currentColor",
             textColorOdd = "currentColor",
-            linkColorHeader = "background",
             headers,
+            linkStylesHead,
+            linkStylesBody,
             ...rest
         }: TableProps,
         ref?: ForwardedRef<HTMLTableElement>
@@ -43,12 +43,12 @@ const Table = forwardRef(
             $borderColor={borderColor}
             $headerBackground={headerBackground}
             $headerTextColor={headerTextColor}
-            $linkColor={linkColor}
             $textColor={textColor}
             $textColorEven={textColorEven}
             $textColorOdd={textColorOdd}
             $headerBorderColor={headerBorderColor}
-            $linkColorHeader={linkColorHeader}
+            $linkStylesHead={linkStylesHead}
+            $linkStylesBody={linkStylesBody}
             {...rest}
         >
             {headers && (
