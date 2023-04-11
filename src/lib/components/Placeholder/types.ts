@@ -9,6 +9,7 @@ import type {
     RadiusesTypes,
     FontSizeTypes,
     FontWeightTypes,
+    CustomFontSizeTypes,
     PaddingTypes,
 } from "../../types"
 
@@ -25,7 +26,7 @@ interface PlaceholderBaseProps extends HTMLAttributes<HTMLDivElement> {
 
 interface PlaceholderContent1 extends PlaceholderBaseProps {
     fontSize?: FontSizeTypes
-    customFontSize?: string | number
+    customFontSize?: CustomFontSizeTypes
     fontWeight?: FontWeightTypes
     textColor?: AllColorsTypes
 }

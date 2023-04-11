@@ -11,8 +11,8 @@ import type {
     FontSizeTypes,
     FontWeightTypes,
     PaddingTypes,
+    CustomFontSizeTypes,
 } from "../../types"
-// import { FontSize, FontWeight } from "../Text/styles"
 
 import { setDefaultTheme } from "../../utils"
 
@@ -24,7 +24,7 @@ const StyledPlaceholder = styled.div<{
     $shadow?: ShadowsTypes
     $borderRadius?: RadiusesTypes
     $fontSize?: FontSizeTypes
-    $customFontSize?: string | number
+    $customFontSize?: CustomFontSizeTypes
     $fontWeight?: FontWeightTypes
     $textColor?: AllColorsTypes
     $padding?: PaddingTypes
@@ -48,16 +48,8 @@ const StyledPlaceholder = styled.div<{
             : theme.AllColors({ $color: $background })};
     ${Mixins.Shadow};
     ${Mixins.BorderRadius};
-    ${
-        "" /* ${({ $fontSize, $customFontSize }) =>
-        FontSize({
-            $fontSize: $fontSize,
-            $customFontSize: $customFontSize,
-            $defaultSize: "body",
-        })};
-    ${({ $fontWeight }) =>
-        FontWeight({ $defaultWeight: "regular", $fontWeight: $fontWeight })}; */
-    }
+    ${Mixins.FontSize};
+    ${Mixins.FontWeight};
     ${Mixins.Padding};
 `
 
