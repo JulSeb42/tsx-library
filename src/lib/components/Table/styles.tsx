@@ -10,7 +10,7 @@ import type {
     AllColorsTypes,
 } from "../../types"
 import type { TableStyleTypes, TableVerticalAlignTypes } from "./types"
-import type { LinkStyleTypes } from "../Text/types"
+import type { LinkStyleTypes, CodeStyleTypes } from "../Text/types"
 
 import { setDefaultTheme } from "../../utils"
 
@@ -27,28 +27,22 @@ const StyledTable = styled.table<{
     $backgroundOdd?: AllColorsTypes
     $textColorEven?: AllColorsTypes
     $textColorOdd?: AllColorsTypes
+
     $linkStylesHead?: LinkStyleTypes
     $linkStylesBody?: LinkStyleTypes
+    $codeStylesHead?: CodeStyleTypes
+    $codeStylesBody?: CodeStyleTypes
 }>`
-    ${FontCommon({
-        $defaultSize: "small",
-    })};
+    ${({ $textColor }) =>
+        FontCommon({
+            $fontSize: "small",
+            $color: $textColor,
+        })};
     display: table;
     border-collapse: collapse;
     border-spacing: 0;
     table-layout: fixed;
     width: 100%;
-    color: ${({ theme, $textColor }) =>
-        theme.AllColors({
-            $color: $textColor,
-        })};
-
-    & > * {
-        color: ${({ theme, $textColor }) =>
-            theme.AllColors({
-                $color: $textColor,
-            })};
-    }
 
     td,
     th {
@@ -72,15 +66,20 @@ const StyledTable = styled.table<{
         text-align: ${({ $textAlign }) => $textAlign};
         background-color: ${({ $headerBackground, theme }) =>
             theme.AllColors({ $color: $headerBackground })};
-        color: ${({ $headerTextColor, theme }) =>
-            theme.AllColors({ $color: $headerTextColor })};
-        ${({ $linkStylesHead }) =>
-            FontCommon({ $linkStyles: $linkStylesHead })};
+        ${({ $linkStylesHead, $headerTextColor, $codeStylesHead }) =>
+            FontCommon({
+                $linkStyles: $linkStylesHead,
+                $color: $headerTextColor,
+                $codeStyles: $codeStylesHead,
+            })};
     }
 
     tbody {
-        ${({ $linkStylesBody }) =>
-            FontCommon({ $linkStyles: $linkStylesBody })};
+        ${({ $linkStylesBody, $codeStylesBody }) =>
+            FontCommon({
+                $linkStyles: $linkStylesBody,
+                $codeStyles: $codeStylesBody,
+            })};
     }
 
     ${({
@@ -115,16 +114,14 @@ const StyledTable = styled.table<{
                       background-color: ${theme.AllColors({
                           $color: $backgroundOdd,
                       })};
-                      color: ${theme.AllColors({
-                          $color: $textColorOdd,
-                      })};
+                      ${FontCommon({ $color: $textColorOdd })};
                   }
 
                   tbody tr:nth-child(even) {
                       background-color: ${theme.AllColors({
                           $color: $backgroundEven,
                       })};
-                      color: ${theme.AllColors({ $color: $textColorEven })};
+                      ${FontCommon({ $color: $textColorEven })};
                   }
               `
             : $tableStyle === "border-bottom" &&

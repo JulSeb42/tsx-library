@@ -12,6 +12,7 @@ import {
     Breakpoints,
     Transitions,
     FontWeights,
+    FontSizes,
 } from "./Variables"
 
 import { stringifyPx } from "./utils/ts-utils"
@@ -36,6 +37,8 @@ import type {
     TransitionTypes,
     TextDecorationTypes,
     FontWeightTypes,
+    FontSizeTypes,
+    CustomFontSizeTypes,
 } from "./types"
 
 /*==================== Types ====================*/
@@ -131,7 +134,14 @@ export interface TextDecorationProps {
 /*==== Font weights ====*/
 
 export interface FontWeightsProps {
-    $fontWeight: FontWeightTypes
+    $fontWeight?: FontWeightTypes | number
+}
+
+/*==== Font sizes ====*/
+
+export interface FontSizesProps {
+    $fontSize?: FontSizeTypes
+    $customFontSize?: CustomFontSizeTypes
 }
 
 /*==================== Mixins ====================*/
@@ -533,8 +543,43 @@ ${$bottom &&
             ? FontWeights.Bold
             : $fontWeight === "regular"
             ? FontWeights.Regular
+            : $fontWeight
+            ? $fontWeight
             : ""};
     `,
+
+    FontSize: ({ $fontSize, $customFontSize }: FontSizesProps) =>
+        css`
+            font-size: ${$customFontSize
+                ? stringifyPx($customFontSize)
+                : $fontSize === "display-h1"
+                ? FontSizes.Display.H1
+                : $fontSize === "display-h2"
+                ? FontSizes.Display.H2
+                : $fontSize === "display-h3"
+                ? FontSizes.Display.H3
+                : $fontSize === "display-h4"
+                ? FontSizes.Display.H4
+                : $fontSize === "display-h5"
+                ? FontSizes.Display.H5
+                : $fontSize === "title-h1"
+                ? FontSizes.Titles.H1
+                : $fontSize === "title-h2"
+                ? FontSizes.Titles.H2
+                : $fontSize === "title-h3"
+                ? FontSizes.Titles.H3
+                : $fontSize === "title-h4"
+                ? FontSizes.Titles.H4
+                : $fontSize === "title-h5"
+                ? FontSizes.Titles.H5
+                : $fontSize === "title-h6"
+                ? FontSizes.Titles.H6
+                : $fontSize === "body"
+                ? FontSizes.Body
+                : $fontSize === "small"
+                ? FontSizes.Small
+                : ""};
+        `,
 }
 
 export default Mixins

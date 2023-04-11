@@ -28,6 +28,8 @@ const Table = forwardRef(
             headers,
             linkStylesHead,
             linkStylesBody,
+            codeStylesHead,
+            codeStylesBody,
             ...rest
         }: TableProps,
         ref?: ForwardedRef<HTMLTableElement>
@@ -49,6 +51,8 @@ const Table = forwardRef(
             $headerBorderColor={headerBorderColor}
             $linkStylesHead={linkStylesHead}
             $linkStylesBody={linkStylesBody}
+            $codeStylesHead={codeStylesHead}
+            $codeStylesBody={codeStylesBody}
             {...rest}
         >
             {headers && (

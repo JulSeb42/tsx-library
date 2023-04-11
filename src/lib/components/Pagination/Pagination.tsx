@@ -28,6 +28,7 @@ export const PaginationButton = forwardRef(
             content,
             icon,
             disabled,
+            buttonSize = 32,
             ...rest
         }: PaginationButtonProps,
         ref?: ForwardedRef<HTMLButtonElement>
@@ -39,6 +40,7 @@ export const PaginationButton = forwardRef(
             $more={content === "more"}
             disabled={disabled}
             $color={color}
+            $buttonSize={buttonSize}
             {...rest}
         >
             {content === "more" ? (
@@ -62,7 +64,13 @@ export const PaginationButton = forwardRef(
 
 export const PaginationContainer = forwardRef(
     (
-        { as, justify = "center", children, ...rest }: PaginationContainerProps,
+        {
+            as,
+            justify = "center",
+            children,
+            gap = "xs",
+            ...rest
+        }: PaginationContainerProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         return (
@@ -70,6 +78,7 @@ export const PaginationContainer = forwardRef(
                 ref={ref}
                 as={as}
                 $justify={justify}
+                $gap={gap}
                 {...rest}
             >
                 {children}
@@ -88,6 +97,8 @@ export const Pagination = forwardRef(
             icons,
             color = "primary",
             queries,
+            gap,
+            buttonSize,
             ...rest
         }: PaginationProps,
         ref?: ForwardedRef<HTMLDivElement>
@@ -139,13 +150,20 @@ export const Pagination = forwardRef(
         }
 
         return (
-            <PaginationContainer ref={ref} as={as} justify={justify} {...rest}>
+            <PaginationContainer
+                ref={ref}
+                as={as}
+                justify={justify}
+                gap={gap}
+                {...rest}
+            >
                 <PaginationButton
                     onClick={handlePrev}
                     content="prev"
                     disabled={currentPage === 1}
                     color={color}
                     icon={icons?.prev}
+                    buttonSize={buttonSize}
                 />
 
                 {getPaginationGroup()[0] !== 1 && (
@@ -154,8 +172,13 @@ export const Pagination = forwardRef(
                             content={1}
                             onClick={() => goToPage(1)}
                             color={color}
+                            buttonSize={buttonSize}
                         />
-                        <PaginationButton content="more" color={color} />
+                        <PaginationButton
+                            content="more"
+                            color={color}
+                            buttonSize={buttonSize}
+                        />
                     </>
                 )}
 
@@ -166,18 +189,24 @@ export const Pagination = forwardRef(
                         color={color}
                         onClick={() => goToPage(item)}
                         isActive={currentPage === item}
+                        buttonSize={buttonSize}
                     />
                 ))}
 
                 {getPaginationGroup()[getPaginationGroup().length - 1] !==
                     totalPages && (
                     <>
-                        <PaginationButton content="more" color={color} />
+                        <PaginationButton
+                            content="more"
+                            color={color}
+                            buttonSize={buttonSize}
+                        />
 
                         <PaginationButton
                             content={totalPages}
                             onClick={() => goToPage(totalPages)}
                             color={color}
+                            buttonSize={buttonSize}
                         />
                     </>
                 )}
@@ -188,6 +217,7 @@ export const Pagination = forwardRef(
                     disabled={currentPage === totalPages}
                     color={color}
                     icon={icons?.next}
+                    buttonSize={buttonSize}
                 />
             </PaginationContainer>
         )

@@ -10,6 +10,8 @@ import type {
     FontSizeTypes,
     FontWeightTypes,
     TransitionTypes,
+    PaddingTypes,
+    RadiusesTypes,
 } from "../../types"
 
 /*==================== List possibilities ====================*/
@@ -60,17 +62,25 @@ export type LinkStyleTypes = CSSProperties & {
     color?: ColorsHoverTypes
 }
 
+export type CodeStyleTypes = {
+    color?: AllColorsTypes
+    backgroundColor?: AllColorsTypes
+    padding?: PaddingTypes
+    borderRadius?: RadiusesTypes
+}
+
 /*==================== Component Types ====================*/
 
 interface BaseTextProps extends HTMLAttributes<HTMLElement> {
     as?: ElementType
     textAlign?: TextAlignTypes
     color?: AllColorsTypes
-    linkStyles?: LinkStyleTypes
     lineHeight?: string | number
+    maxLines?: number
     fontSize?: FontSizeTypes
     customFontSize?: CustomFontSizeTypes
-    maxLines?: number
+    linkStyles?: LinkStyleTypes
+    codeStyles?: CodeStyleTypes
 }
 
 interface TextBehaviour1 extends BaseTextProps {

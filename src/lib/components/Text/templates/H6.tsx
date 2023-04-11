@@ -9,16 +9,17 @@ import { StyledH6 } from "../styles"
 const H6 = forwardRef(
     (
         {
+            as,
             children,
-            textAlign,
             color,
             linkStyles,
-            lineHeight,
             fontSize,
             customFontSize,
-            as,
+            textAlign,
+            lineHeight,
             fontWeight,
             maxLines,
+            codeStyles,
             ...rest
         }: TextProps,
         ref?: ForwardedRef<HTMLHeadingElement>
@@ -27,13 +28,14 @@ const H6 = forwardRef(
             ref={ref}
             as={as}
             $color={color}
+            $linkStyles={linkStyles}
+            $fontSize={fontSize}
             $customFontSize={customFontSize}
             $textAlign={textAlign}
-            $linkStyles={linkStyles}
             $lineHeight={lineHeight}
-            $fontSize={fontSize}
             $fontWeight={fontWeight}
             $maxLines={maxLines}
+            $codeStyles={codeStyles}
             {...rest}
         >
             {children}

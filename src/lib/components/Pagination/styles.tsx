@@ -3,13 +3,16 @@
 import styled, { css } from "styled-components"
 
 import { Radiuses, Transitions, Breakpoints, Mixins } from "../../"
-import type { ColorsHoverTypes } from "../../types"
+import type { ColorsHoverTypes, SpacersTypes, FontSizeTypes } from "../../types"
 import type { JustifyType } from "./types"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledPagination = styled.div<{ $justify?: JustifyType }>`
-    ${({ $justify }) =>
+const StyledPagination = styled.div<{
+    $justify?: JustifyType
+    $gap?: SpacersTypes
+}>`
+    ${({ $justify, $gap }) =>
         Mixins.Flexbox({
             $alignItems: "center",
             $justifyContent:
@@ -18,7 +21,7 @@ const StyledPagination = styled.div<{ $justify?: JustifyType }>`
                     : $justify === "right"
                     ? "flex-end"
                     : "flex-start",
-            $gap: "xs",
+            $gap,
         })};
 `
 
@@ -26,10 +29,11 @@ const Button = styled.button<{
     $isActive?: boolean
     $more?: boolean
     $color?: ColorsHoverTypes
+    $fontSize?: FontSizeTypes
+    $buttonSize?: number
 }>`
-    --button-size: 32px;
-    width: var(--button-size);
-    height: var(--button-size);
+    width: ${({ $buttonSize }) => $buttonSize}px;
+    height: ${({ $buttonSize }) => $buttonSize}px;
     border-radius: ${Radiuses.Circle};
     border: none;
     ${Mixins.Flexbox({
@@ -44,7 +48,7 @@ const Button = styled.button<{
             ? theme.Background
             : theme.ColorsHoverDefault};
     background-color: ${({ $isActive, $color, theme }) =>
-        $isActive ? theme.ColorsHoverDefault : "transparent"};
+        $isActive ? theme.ColorsHoverDefault({ $color }) : "transparent"};
     text-decoration: none;
     cursor: ${({ $more }) => $more && "default"};
 
@@ -56,14 +60,14 @@ const Button = styled.button<{
 
             @media ${Breakpoints.Hover} {
                 &:hover {
-                    background-color: ${theme.ColorsHoverHover};
+                    background-color: ${theme.ColorsHoverHover({ $color })};
                     color: ${$color === "white"
                         ? theme.Primary500
                         : theme.Background};
                 }
 
                 &:active {
-                    background-color: ${theme.ColorsHoverActive};
+                    background-color: ${theme.ColorsHoverActive({ $color })};
                 }
             }
         `}

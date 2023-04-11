@@ -9,14 +9,10 @@ import { StyledEm } from "../styles"
 const Em = forwardRef(
     (
         {
+            as,
             children,
-            textAlign,
             color,
             linkStyles,
-            lineHeight,
-            fontSize,
-            customFontSize,
-            as,
             fontWeight,
             maxLines,
             ...rest
@@ -27,11 +23,7 @@ const Em = forwardRef(
             ref={ref}
             as={as}
             $color={color}
-            $customFontSize={customFontSize}
-            $textAlign={textAlign}
             $linkStyles={linkStyles}
-            $lineHeight={lineHeight}
-            $fontSize={fontSize}
             $fontWeight={fontWeight}
             $maxLines={maxLines}
             {...rest}

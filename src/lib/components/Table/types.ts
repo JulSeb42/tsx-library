@@ -7,7 +7,7 @@ import type {
     ColorsHoverTypes,
     AllColorsTypes,
 } from "../../types"
-import type { LinkStyleTypes } from "../Text/types"
+import type { LinkStyleTypes, CodeStyleTypes } from "../Text/types"
 
 enum tableStyle {
     bordered,
@@ -35,8 +35,11 @@ interface TablePropsBase extends HTMLAttributes<HTMLTableElement> {
     headerBackground?: ColorsHoverTypes
     headerTextColor?: AllColorsTypes
     headers?: string[]
+
     linkStylesHead?: LinkStyleTypes
     linkStylesBody?: LinkStyleTypes
+    codeStylesHead?: CodeStyleTypes
+    codeStylesBody?: CodeStyleTypes
 }
 
 interface TableVariant1 extends TablePropsBase {

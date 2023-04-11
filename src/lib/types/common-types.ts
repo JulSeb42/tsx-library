@@ -143,7 +143,7 @@ enum fontSizes {
     small,
 }
 
-export type FontSizeTypes = keyof typeof fontSizes | number
+export type FontSizeTypes = keyof typeof fontSizes
 
 export type CustomFontSizeTypes = string | number
 

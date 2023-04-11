@@ -9,17 +9,18 @@ import { StyledH4 } from "../styles"
 const H4 = forwardRef(
     (
         {
+            as,
             children,
-            textAlign,
             color,
             linkStyles,
-            lineHeight,
             fontSize,
             customFontSize,
-            as,
+            textAlign,
+            lineHeight,
             display,
             fontWeight,
             maxLines,
+            codeStyles,
             ...rest
         }: TextProps,
         ref?: ForwardedRef<HTMLHeadingElement>
@@ -28,14 +29,15 @@ const H4 = forwardRef(
             ref={ref}
             as={as}
             $color={color}
-            $customFontSize={customFontSize}
-            $display={display}
-            $textAlign={textAlign}
             $linkStyles={linkStyles}
-            $lineHeight={lineHeight}
             $fontSize={fontSize}
+            $customFontSize={customFontSize}
+            $textAlign={textAlign}
+            $lineHeight={lineHeight}
+            $display={display}
             $fontWeight={fontWeight}
             $maxLines={maxLines}
+            $codeStyles={codeStyles}
             {...rest}
         >
             {children}

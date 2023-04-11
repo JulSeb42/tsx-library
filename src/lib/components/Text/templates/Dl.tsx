@@ -9,17 +9,18 @@ import { StyledDl } from "../styles"
 const Dl = forwardRef(
     (
         {
+            as,
             children,
-            textAlign,
             color,
             linkStyles,
-            lineHeight,
             fontSize,
             customFontSize,
-            as,
+            textAlign,
+            lineHeight,
             fontWeightDt,
             fontWeightDd,
             maxLines,
+            codeStyles,
             ...rest
         }: TextProps,
         ref?: ForwardedRef<HTMLDListElement>
@@ -28,14 +29,15 @@ const Dl = forwardRef(
             ref={ref}
             as={as}
             $color={color}
+            $linkStyles={linkStyles}
+            $fontSize={fontSize}
             $customFontSize={customFontSize}
             $textAlign={textAlign}
-            $linkStyles={linkStyles}
             $lineHeight={lineHeight}
-            $fontSize={fontSize}
             $fontWeightDt={fontWeightDt}
             $fontWeightDd={fontWeightDd}
             $maxLines={maxLines}
+            $codeStyles={codeStyles}
             {...rest}
         >
             {children}

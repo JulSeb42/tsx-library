@@ -2,7 +2,7 @@
 
 import type { HTMLAttributes, ElementType, ButtonHTMLAttributes } from "react"
 
-import type { ColorsHoverTypes } from "../../types"
+import type { ColorsHoverTypes, SpacersTypes, FontSizeTypes } from "../../types"
 
 enum justify {
     left,
@@ -16,6 +16,7 @@ export interface PaginationContainerProps
     extends HTMLAttributes<HTMLDivElement> {
     as?: ElementType
     justify?: JustifyType
+    gap?: SpacersTypes
 }
 
 export interface PaginationProps extends PaginationContainerProps {
@@ -27,6 +28,7 @@ export interface PaginationProps extends PaginationContainerProps {
         next?: string | JSX.Element
     }
     queries?: string[][]
+    buttonSize?: number
 }
 
 interface PaginationButtonPropsBase
@@ -34,6 +36,7 @@ interface PaginationButtonPropsBase
         ButtonHTMLAttributes<HTMLButtonElement> {
     as?: ElementType
     color?: ColorsHoverTypes
+    buttonSize?: number
 }
 
 interface PaginationButtonBehaviour1 extends PaginationButtonPropsBase {
