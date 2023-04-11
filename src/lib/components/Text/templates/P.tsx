@@ -12,7 +12,7 @@ const P = forwardRef(
             children,
             textAlign,
             color,
-            linkColor = "primary",
+            linkStyles,
             lineHeight,
             fontSize,
             customFontSize,
@@ -29,7 +29,7 @@ const P = forwardRef(
             $color={color}
             $customFontSize={customFontSize}
             $textAlign={textAlign}
-            $linkColor={linkColor}
+            $linkStyles={linkStyles}
             $lineHeight={lineHeight}
             $fontSize={fontSize}
             $fontWeight={fontWeight}

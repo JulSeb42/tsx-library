@@ -245,6 +245,29 @@ export type PaddingTypes =
           topBottom?: SpacersTypes | string
       }
 
+/*==================== Transitions ====================*/
+
+enum transitions {
+    short,
+    long,
+    bezier,
+}
+
+export type TransitionTypes = keyof typeof transitions
+
+/*==================== Text decoration ====================*/
+
+enum textDecorations {
+    underline,
+    overline,
+    "line-through",
+    initial,
+    inherit,
+    none,
+}
+
+export type TextDecorationTypes = keyof typeof textDecorations
+
 /*==================== Custom position ====================*/
 
 enum positions {

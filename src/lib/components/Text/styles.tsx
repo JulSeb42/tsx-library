@@ -11,18 +11,17 @@ import {
     FontFamilies,
     Spacers,
     Radiuses,
-    Transitions,
     Breakpoints,
     Mixins,
 } from "../../"
 import type {
     AllColorsTypes,
-    ColorsHoverTypes,
     FontSizeTypes,
     CustomFontSizeTypes,
     TextAlignTypes,
     FontWeightTypes,
 } from "../../types"
+import type { LinkStyleTypes } from "./types"
 
 export const FontSize = ({
     $fontSize,
@@ -181,6 +180,7 @@ const FontCommon = ({
     $fontSize,
     $customFontSize,
     $maxLines,
+    $linkStyles,
 }: {
     $fontSize?: FontSizeTypes
     $defaultSize?: FontSizeTypes
@@ -188,6 +188,7 @@ const FontCommon = ({
     $textAlign?: TextAlignTypes
     $lineHeight?: string | number
     $maxLines?: number
+    $linkStyles?: LinkStyleTypes
 }) => css`
     text-align: ${$textAlign};
     ${FontSize({
@@ -215,6 +216,47 @@ const FontCommon = ({
               `}
     `}
 
+    a, button {
+        color: ${({ theme }) =>
+            theme.ColorsHoverDefault({
+                $color: $linkStyles?.color || "primary",
+            })};
+        ${Mixins.Transition({ $transition: $linkStyles?.transition })};
+        ${Mixins.TextDecoration({
+            $textDecoration: $linkStyles?.textDecorationDefault || "none",
+        })};
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        font-family: ${FontFamilies.Body};
+        ${Mixins.FontWeight({
+            $fontWeight: $linkStyles?.fontWeight || "black",
+        })};
+
+        @media ${Breakpoints.Hover} {
+            &:hover {
+                color: ${({ theme }) =>
+                    theme.ColorsHoverHover({
+                        $color: $linkStyles?.color || "primary",
+                    })};
+                ${Mixins.TextDecoration({
+                    $textDecoration: $linkStyles?.textDecorationHover || "none",
+                })};
+            }
+
+            &:active {
+                color: ${({ theme }) =>
+                    theme.ColorsHoverActive({
+                        $color: $linkStyles?.color || "primary",
+                    })};
+                ${Mixins.TextDecoration({
+                    $textDecoration:
+                        $linkStyles?.textDecorationActive || "none",
+                })};
+            }
+        }
+    }
+
     code {
         font-family: ${FontFamilies.Code};
         line-height: ${LineHeights.Code};
@@ -227,7 +269,7 @@ const FontCommon = ({
 
 const StyledH1 = styled.h1<{
     $color?: AllColorsTypes
-    $linkColor?: ColorsHoverTypes
+    $linkStyles?: LinkStyleTypes
     $fontSize?: FontSizeTypes
     $defaultSize?: FontSizeTypes
     $customFontSize?: CustomFontSizeTypes
@@ -244,6 +286,7 @@ const StyledH1 = styled.h1<{
         $fontSize,
         $customFontSize,
         $maxLines,
+        $linkStyles,
     }) =>
         FontCommon({
             $textAlign,
@@ -252,6 +295,7 @@ const StyledH1 = styled.h1<{
             $fontSize,
             $customFontSize,
             $maxLines,
+            $linkStyles,
         })};
     ${({ $fontWeight }) =>
         FontWeight({ $defaultWeight: "black", $fontWeight: $fontWeight })};
@@ -266,35 +310,11 @@ const StyledH1 = styled.h1<{
                 $color: $color,
             })};
     }
-
-    a,
-    button {
-        color: ${({ theme, $linkColor }) =>
-            theme.ColorsHoverDefault({ $color: $linkColor })};
-        transition: ${Transitions.Short};
-        text-decoration: none;
-        padding: 0;
-        border: none;
-        background-color: transparent;
-        font-family: ${FontFamilies.Body};
-
-        @media ${Breakpoints.Hover} {
-            &:hover {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverHover({ $color: $linkColor })};
-            }
-
-            &:active {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverActive({ $color: $linkColor })};
-            }
-        }
-    }
 `
 
 const StyledH2 = styled.h2<{
     $color?: AllColorsTypes
-    $linkColor?: ColorsHoverTypes
+    $linkStyles?: LinkStyleTypes
     $fontSize?: FontSizeTypes
     $defaultSize?: FontSizeTypes
     $customFontSize?: CustomFontSizeTypes
@@ -311,6 +331,7 @@ const StyledH2 = styled.h2<{
         $fontSize,
         $customFontSize,
         $maxLines,
+        $linkStyles,
     }) =>
         FontCommon({
             $textAlign,
@@ -319,6 +340,7 @@ const StyledH2 = styled.h2<{
             $fontSize,
             $customFontSize,
             $maxLines,
+            $linkStyles,
         })};
     ${({ $fontWeight }) =>
         FontWeight({ $defaultWeight: "black", $fontWeight: $fontWeight })};
@@ -333,35 +355,11 @@ const StyledH2 = styled.h2<{
                 $color: $color,
             })};
     }
-
-    a,
-    button {
-        color: ${({ theme, $linkColor }) =>
-            theme.ColorsHoverDefault({ $color: $linkColor })};
-        transition: ${Transitions.Short};
-        text-decoration: none;
-        padding: 0;
-        border: none;
-        background-color: transparent;
-        font-family: ${FontFamilies.Body};
-
-        @media ${Breakpoints.Hover} {
-            &:hover {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverHover({ $color: $linkColor })};
-            }
-
-            &:active {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverActive({ $color: $linkColor })};
-            }
-        }
-    }
 `
 
 const StyledH3 = styled.h3<{
     $color?: AllColorsTypes
-    $linkColor?: ColorsHoverTypes
+    $linkStyles?: LinkStyleTypes
     $fontSize?: FontSizeTypes
     $defaultSize?: FontSizeTypes
     $customFontSize?: CustomFontSizeTypes
@@ -378,6 +376,7 @@ const StyledH3 = styled.h3<{
         $fontSize,
         $customFontSize,
         $maxLines,
+        $linkStyles,
     }) =>
         FontCommon({
             $textAlign,
@@ -386,6 +385,7 @@ const StyledH3 = styled.h3<{
             $fontSize,
             $customFontSize,
             $maxLines,
+            $linkStyles,
         })};
     ${({ $fontWeight }) =>
         FontWeight({ $defaultWeight: "black", $fontWeight: $fontWeight })};
@@ -400,35 +400,11 @@ const StyledH3 = styled.h3<{
                 $color: $color,
             })};
     }
-
-    a,
-    button {
-        color: ${({ theme, $linkColor }) =>
-            theme.ColorsHoverDefault({ $color: $linkColor })};
-        transition: ${Transitions.Short};
-        text-decoration: none;
-        padding: 0;
-        border: none;
-        background-color: transparent;
-        font-family: ${FontFamilies.Body};
-
-        @media ${Breakpoints.Hover} {
-            &:hover {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverHover({ $color: $linkColor })};
-            }
-
-            &:active {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverActive({ $color: $linkColor })};
-            }
-        }
-    }
 `
 
 const StyledH4 = styled.h4<{
     $color?: AllColorsTypes
-    $linkColor?: ColorsHoverTypes
+    $linkStyles?: LinkStyleTypes
     $fontSize?: FontSizeTypes
     $defaultSize?: FontSizeTypes
     $customFontSize?: CustomFontSizeTypes
@@ -445,6 +421,7 @@ const StyledH4 = styled.h4<{
         $fontSize,
         $customFontSize,
         $maxLines,
+        $linkStyles,
     }) =>
         FontCommon({
             $textAlign,
@@ -453,6 +430,7 @@ const StyledH4 = styled.h4<{
             $fontSize,
             $customFontSize,
             $maxLines,
+            $linkStyles,
         })};
     ${({ $fontWeight }) =>
         FontWeight({ $defaultWeight: "black", $fontWeight: $fontWeight })};
@@ -467,35 +445,11 @@ const StyledH4 = styled.h4<{
                 $color: $color,
             })};
     }
-
-    a,
-    button {
-        color: ${({ theme, $linkColor }) =>
-            theme.ColorsHoverDefault({ $color: $linkColor })};
-        transition: ${Transitions.Short};
-        text-decoration: none;
-        padding: 0;
-        border: none;
-        background-color: transparent;
-        font-family: ${FontFamilies.Body};
-
-        @media ${Breakpoints.Hover} {
-            &:hover {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverHover({ $color: $linkColor })};
-            }
-
-            &:active {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverActive({ $color: $linkColor })};
-            }
-        }
-    }
 `
 
 const StyledH5 = styled.h5<{
     $color?: AllColorsTypes
-    $linkColor?: ColorsHoverTypes
+    $linkStyles?: LinkStyleTypes
     $fontSize?: FontSizeTypes
     $defaultSize?: FontSizeTypes
     $customFontSize?: CustomFontSizeTypes
@@ -512,6 +466,7 @@ const StyledH5 = styled.h5<{
         $fontSize,
         $customFontSize,
         $maxLines,
+        $linkStyles,
     }) =>
         FontCommon({
             $textAlign,
@@ -520,6 +475,7 @@ const StyledH5 = styled.h5<{
             $fontSize,
             $customFontSize,
             $maxLines,
+            $linkStyles,
         })};
     ${({ $fontWeight }) =>
         FontWeight({ $defaultWeight: "black", $fontWeight: $fontWeight })};
@@ -534,35 +490,11 @@ const StyledH5 = styled.h5<{
                 $color: $color,
             })};
     }
-
-    a,
-    button {
-        color: ${({ theme, $linkColor }) =>
-            theme.ColorsHoverDefault({ $color: $linkColor })};
-        transition: ${Transitions.Short};
-        text-decoration: none;
-        padding: 0;
-        border: none;
-        background-color: transparent;
-        font-family: ${FontFamilies.Body};
-
-        @media ${Breakpoints.Hover} {
-            &:hover {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverHover({ $color: $linkColor })};
-            }
-
-            &:active {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverActive({ $color: $linkColor })};
-            }
-        }
-    }
 `
 
 const StyledH6 = styled.h6<{
     $color?: AllColorsTypes
-    $linkColor?: ColorsHoverTypes
+    $linkStyles?: LinkStyleTypes
     $fontSize?: FontSizeTypes
     $defaultSize?: FontSizeTypes
     $customFontSize?: CustomFontSizeTypes
@@ -571,7 +503,14 @@ const StyledH6 = styled.h6<{
     $fontWeight?: FontWeightTypes
     $maxLines?: number
 }>`
-    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize, $maxLines }) =>
+    ${({
+        $textAlign,
+        $lineHeight,
+        $fontSize,
+        $customFontSize,
+        $maxLines,
+        $linkStyles,
+    }) =>
         FontCommon({
             $textAlign,
             $lineHeight,
@@ -579,6 +518,7 @@ const StyledH6 = styled.h6<{
             $fontSize,
             $customFontSize,
             $maxLines,
+            $linkStyles,
         })};
     ${({ $fontWeight }) =>
         FontWeight({ $defaultWeight: "black", $fontWeight: $fontWeight })};
@@ -593,35 +533,11 @@ const StyledH6 = styled.h6<{
                 $color: $color,
             })};
     }
-
-    a,
-    button {
-        color: ${({ theme, $linkColor }) =>
-            theme.ColorsHoverDefault({ $color: $linkColor })};
-        transition: ${Transitions.Short};
-        text-decoration: none;
-        padding: 0;
-        border: none;
-        background-color: transparent;
-        font-family: ${FontFamilies.Body};
-
-        @media ${Breakpoints.Hover} {
-            &:hover {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverHover({ $color: $linkColor })};
-            }
-
-            &:active {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverActive({ $color: $linkColor })};
-            }
-        }
-    }
 `
 
 const StyledP = styled.p<{
     $color?: AllColorsTypes
-    $linkColor?: ColorsHoverTypes
+    $linkStyles?: LinkStyleTypes
     $fontSize?: FontSizeTypes
     $defaultSize?: FontSizeTypes
     $customFontSize?: CustomFontSizeTypes
@@ -630,7 +546,14 @@ const StyledP = styled.p<{
     $fontWeight?: FontWeightTypes
     $maxLines?: number
 }>`
-    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize, $maxLines }) =>
+    ${({
+        $textAlign,
+        $lineHeight,
+        $fontSize,
+        $customFontSize,
+        $maxLines,
+        $linkStyles,
+    }) =>
         FontCommon({
             $textAlign,
             $lineHeight,
@@ -638,6 +561,7 @@ const StyledP = styled.p<{
             $fontSize,
             $customFontSize,
             $maxLines,
+            $linkStyles,
         })};
     color: ${({ theme, $color }) =>
         theme.AllColors({
@@ -652,39 +576,15 @@ const StyledP = styled.p<{
                 $color: $color,
             })};
     }
-
-    a,
-    button {
-        color: ${({ theme, $linkColor }) =>
-            theme.ColorsHoverDefault({ $color: $linkColor })};
-        transition: ${Transitions.Short};
-        text-decoration: none;
-        padding: 0;
-        border: none;
-        background-color: transparent;
-        font-family: ${FontFamilies.Body};
-
-        @media ${Breakpoints.Hover} {
-            &:hover {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverHover({ $color: $linkColor })};
-            }
-
-            &:active {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverActive({ $color: $linkColor })};
-            }
-        }
-    }
 `
 
 const StyledStrong = styled.strong<{
     $color?: AllColorsTypes
-    $linkColor?: ColorsHoverTypes
+    $linkStyles?: LinkStyleTypes
     $fontWeight?: FontWeightTypes
     $maxLines?: number
 }>`
-    ${FontCommon({})};
+    ${({ $linkStyles }) => FontCommon({ $linkStyles })};
     ${({ $fontWeight }) =>
         FontWeight({ $defaultWeight: "black", $fontWeight: $fontWeight })};
     color: ${({ theme, $color }) =>
@@ -698,39 +598,15 @@ const StyledStrong = styled.strong<{
                 $color: $color,
             })};
     }
-
-    a,
-    button {
-        color: ${({ theme, $linkColor }) =>
-            theme.ColorsHoverDefault({ $color: $linkColor })};
-        transition: ${Transitions.Short};
-        text-decoration: none;
-        padding: 0;
-        border: none;
-        background-color: transparent;
-        font-family: ${FontFamilies.Body};
-
-        @media ${Breakpoints.Hover} {
-            &:hover {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverHover({ $color: $linkColor })};
-            }
-
-            &:active {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverActive({ $color: $linkColor })};
-            }
-        }
-    }
 `
 
 const StyledEm = styled.em<{
     $color?: AllColorsTypes
-    $linkColor?: ColorsHoverTypes
+    $linkStyles?: LinkStyleTypes
     $fontWeight?: FontWeightTypes
     $maxLines?: number
 }>`
-    ${FontCommon({})};
+    ${({ $linkStyles }) => FontCommon({ $linkStyles })};
     font-style: italic;
     color: ${({ theme, $color }) =>
         theme.AllColors({
@@ -745,35 +621,11 @@ const StyledEm = styled.em<{
                 $color: $color,
             })};
     }
-
-    a,
-    button {
-        color: ${({ theme, $linkColor }) =>
-            theme.ColorsHoverDefault({ $color: $linkColor })};
-        transition: ${Transitions.Short};
-        text-decoration: none;
-        padding: 0;
-        border: none;
-        background-color: transparent;
-        font-family: ${FontFamilies.Body};
-
-        @media ${Breakpoints.Hover} {
-            &:hover {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverHover({ $color: $linkColor })};
-            }
-
-            &:active {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverActive({ $color: $linkColor })};
-            }
-        }
-    }
 `
 
 const StyledSmall = styled.small<{
     $color?: AllColorsTypes
-    $linkColor?: ColorsHoverTypes
+    $linkStyles?: LinkStyleTypes
     $fontSize?: FontSizeTypes
     $defaultSize?: FontSizeTypes
     $customFontSize?: CustomFontSizeTypes
@@ -782,7 +634,14 @@ const StyledSmall = styled.small<{
     $fontWeight?: FontWeightTypes
     $maxLines?: number
 }>`
-    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize, $maxLines }) =>
+    ${({
+        $textAlign,
+        $lineHeight,
+        $fontSize,
+        $customFontSize,
+        $maxLines,
+        $linkStyles,
+    }) =>
         FontCommon({
             $textAlign,
             $lineHeight,
@@ -790,6 +649,7 @@ const StyledSmall = styled.small<{
             $fontSize,
             $customFontSize,
             $maxLines,
+            $linkStyles,
         })};
     color: ${({ theme, $color }) =>
         theme.AllColors({
@@ -804,35 +664,11 @@ const StyledSmall = styled.small<{
                 $color: $color,
             })};
     }
-
-    a,
-    button {
-        color: ${({ theme, $linkColor }) =>
-            theme.ColorsHoverDefault({ $color: $linkColor })};
-        transition: ${Transitions.Short};
-        text-decoration: none;
-        padding: 0;
-        border: none;
-        background-color: transparent;
-        font-family: ${FontFamilies.Body};
-
-        @media ${Breakpoints.Hover} {
-            &:hover {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverHover({ $color: $linkColor })};
-            }
-
-            &:active {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverActive({ $color: $linkColor })};
-            }
-        }
-    }
 `
 
 const StyledBlockquote = styled.blockquote<{
     $color?: AllColorsTypes
-    $linkColor?: ColorsHoverTypes
+    $linkStyles?: LinkStyleTypes
     $fontSize?: FontSizeTypes
     $defaultSize?: FontSizeTypes
     $customFontSize?: CustomFontSizeTypes
@@ -841,7 +677,14 @@ const StyledBlockquote = styled.blockquote<{
     $fontWeight?: FontWeightTypes
     $maxLines?: number
 }>`
-    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize, $maxLines }) =>
+    ${({
+        $textAlign,
+        $lineHeight,
+        $fontSize,
+        $customFontSize,
+        $maxLines,
+        $linkStyles,
+    }) =>
         FontCommon({
             $textAlign,
             $lineHeight,
@@ -849,6 +692,7 @@ const StyledBlockquote = styled.blockquote<{
             $fontSize,
             $customFontSize,
             $maxLines,
+            $linkStyles,
         })};
     color: ${({ theme, $color }) =>
         theme.AllColors({
@@ -864,35 +708,11 @@ const StyledBlockquote = styled.blockquote<{
                 $color: $color,
             })};
     }
-
-    a,
-    button {
-        color: ${({ theme, $linkColor }) =>
-            theme.ColorsHoverDefault({ $color: $linkColor })};
-        transition: ${Transitions.Short};
-        text-decoration: none;
-        padding: 0;
-        border: none;
-        background-color: transparent;
-        font-family: ${FontFamilies.Body};
-
-        @media ${Breakpoints.Hover} {
-            &:hover {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverHover({ $color: $linkColor })};
-            }
-
-            &:active {
-                color: ${({ theme, $linkColor }) =>
-                    theme.ColorsHoverActive({ $color: $linkColor })};
-            }
-        }
-    }
 `
 
 const StyledUl = styled.ul<{
     $color?: AllColorsTypes
-    $linkColor?: ColorsHoverTypes
+    $linkStyles?: LinkStyleTypes
     $fontSize?: FontSizeTypes
     $defaultSize?: FontSizeTypes
     $customFontSize?: CustomFontSizeTypes
@@ -907,7 +727,14 @@ const StyledUl = styled.ul<{
     ${Mixins.Grid({
         $gap: "xxs",
     })};
-    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize, $maxLines }) =>
+    ${({
+        $textAlign,
+        $lineHeight,
+        $fontSize,
+        $customFontSize,
+        $maxLines,
+        $linkStyles,
+    }) =>
         FontCommon({
             $textAlign,
             $lineHeight,
@@ -915,6 +742,7 @@ const StyledUl = styled.ul<{
             $fontSize,
             $customFontSize,
             $maxLines,
+            $linkStyles,
         })};
     ${({ $fontWeight }) =>
         FontWeight({ $defaultWeight: "regular", $fontWeight: $fontWeight })};
@@ -931,37 +759,13 @@ const StyledUl = styled.ul<{
                 theme.AllColors({
                     $color: $color,
                 })};
-        }
-
-        a,
-        button {
-            color: ${({ theme, $linkColor }) =>
-                theme.ColorsHoverDefault({ $color: $linkColor })};
-            transition: ${Transitions.Short};
-            text-decoration: none;
-            padding: 0;
-            border: none;
-            background-color: transparent;
-            font-family: ${FontFamilies.Body};
-
-            @media ${Breakpoints.Hover} {
-                &:hover {
-                    color: ${({ theme, $linkColor }) =>
-                        theme.ColorsHoverHover({ $color: $linkColor })};
-                }
-
-                &:active {
-                    color: ${({ theme, $linkColor }) =>
-                        theme.ColorsHoverActive({ $color: $linkColor })};
-                }
-            }
         }
     }
 `
 
 const StyledOl = styled.ol<{
     $color?: AllColorsTypes
-    $linkColor?: ColorsHoverTypes
+    $linkStyles?: LinkStyleTypes
     $fontSize?: FontSizeTypes
     $defaultSize?: FontSizeTypes
     $customFontSize?: CustomFontSizeTypes
@@ -970,7 +774,14 @@ const StyledOl = styled.ol<{
     $fontWeight?: FontWeightTypes
     $maxLines?: number
 }>`
-    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize, $maxLines }) =>
+    ${({
+        $textAlign,
+        $lineHeight,
+        $fontSize,
+        $customFontSize,
+        $maxLines,
+        $linkStyles,
+    }) =>
         FontCommon({
             $textAlign,
             $lineHeight,
@@ -978,6 +789,7 @@ const StyledOl = styled.ol<{
             $fontSize,
             $customFontSize,
             $maxLines,
+            $linkStyles,
         })};
     padding: 0;
     margin: 0;
@@ -1001,36 +813,12 @@ const StyledOl = styled.ol<{
                     $color: $color,
                 })};
         }
-
-        a,
-        button {
-            color: ${({ theme, $linkColor }) =>
-                theme.ColorsHoverDefault({ $color: $linkColor })};
-            transition: ${Transitions.Short};
-            text-decoration: none;
-            padding: 0;
-            border: none;
-            background-color: transparent;
-            font-family: ${FontFamilies.Body};
-
-            @media ${Breakpoints.Hover} {
-                &:hover {
-                    color: ${({ theme, $linkColor }) =>
-                        theme.ColorsHoverHover({ $color: $linkColor })};
-                }
-
-                &:active {
-                    color: ${({ theme, $linkColor }) =>
-                        theme.ColorsHoverActive({ $color: $linkColor })};
-                }
-            }
-        }
     }
 `
 
 const StyledDl = styled.dl<{
     $color?: AllColorsTypes
-    $linkColor?: ColorsHoverTypes
+    $linkStyles?: LinkStyleTypes
     $fontSize?: FontSizeTypes
     $defaultSize?: FontSizeTypes
     $customFontSize?: CustomFontSizeTypes
@@ -1040,7 +828,14 @@ const StyledDl = styled.dl<{
     $fontWeightDd?: FontWeightTypes
     $maxLines?: number
 }>`
-    ${({ $textAlign, $lineHeight, $fontSize, $customFontSize, $maxLines }) =>
+    ${({
+        $textAlign,
+        $lineHeight,
+        $fontSize,
+        $customFontSize,
+        $maxLines,
+        $linkStyles,
+    }) =>
         FontCommon({
             $textAlign,
             $lineHeight,
@@ -1048,6 +843,7 @@ const StyledDl = styled.dl<{
             $fontSize,
             $customFontSize,
             $maxLines,
+            $linkStyles,
         })};
 
     dt {
@@ -1066,30 +862,6 @@ const StyledDl = styled.dl<{
                 theme.AllColors({
                     $color: $color,
                 })};
-        }
-
-        a,
-        button {
-            color: ${({ theme, $linkColor }) =>
-                theme.ColorsHoverDefault({ $color: $linkColor })};
-            transition: ${Transitions.Short};
-            text-decoration: none;
-            padding: 0;
-            border: none;
-            background-color: transparent;
-            font-family: ${FontFamilies.Body};
-
-            @media ${Breakpoints.Hover} {
-                &:hover {
-                    color: ${({ theme, $linkColor }) =>
-                        theme.ColorsHoverHover({ $color: $linkColor })};
-                }
-
-                &:active {
-                    color: ${({ theme, $linkColor }) =>
-                        theme.ColorsHoverActive({ $color: $linkColor })};
-                }
-            }
         }
     }
 
@@ -1110,30 +882,6 @@ const StyledDl = styled.dl<{
                 theme.AllColors({
                     $color: $color,
                 })};
-        }
-
-        a,
-        button {
-            color: ${({ theme, $linkColor }) =>
-                theme.ColorsHoverDefault({ $color: $linkColor })};
-            transition: ${Transitions.Short};
-            text-decoration: none;
-            padding: 0;
-            border: none;
-            background-color: transparent;
-            font-family: ${FontFamilies.Body};
-
-            @media ${Breakpoints.Hover} {
-                &:hover {
-                    color: ${({ theme, $linkColor }) =>
-                        theme.ColorsHoverHover({ $color: $linkColor })};
-                }
-
-                &:active {
-                    color: ${({ theme, $linkColor }) =>
-                        theme.ColorsHoverActive({ $color: $linkColor })};
-                }
-            }
         }
 
         &:not(:last-of-type) {

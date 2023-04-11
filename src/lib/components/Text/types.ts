@@ -1,6 +1,6 @@
 /*=============================================== Text types ===============================================*/
 
-import type { HTMLAttributes, ElementType } from "react"
+import type { HTMLAttributes, ElementType, CSSProperties } from "react"
 
 import type {
     TextAlignTypes,
@@ -9,6 +9,7 @@ import type {
     CustomFontSizeTypes,
     FontSizeTypes,
     FontWeightTypes,
+    TransitionTypes,
 } from "../../types"
 
 /*==================== List possibilities ====================*/
@@ -32,13 +33,40 @@ enum tags {
 
 export type TagTypes = keyof typeof tags
 
+export type LinkStyleTypes = CSSProperties & {
+    fontWeight?: FontWeightTypes
+    transition?: TransitionTypes
+    textDecorationDefault?:
+        | "underline"
+        | "overline"
+        | "line-through"
+        | "initial"
+        | "inherit"
+        | "none"
+    textDecorationHover?:
+        | "underline"
+        | "overline"
+        | "line-through"
+        | "initial"
+        | "inherit"
+        | "none"
+    textDecorationActive?:
+        | "underline"
+        | "overline"
+        | "line-through"
+        | "initial"
+        | "inherit"
+        | "none"
+    color?: ColorsHoverTypes
+}
+
 /*==================== Component Types ====================*/
 
 interface BaseTextProps extends HTMLAttributes<HTMLElement> {
     as?: ElementType
     textAlign?: TextAlignTypes
     color?: AllColorsTypes
-    linkColor?: ColorsHoverTypes
+    linkStyles?: LinkStyleTypes
     lineHeight?: string | number
     fontSize?: FontSizeTypes
     customFontSize?: CustomFontSizeTypes

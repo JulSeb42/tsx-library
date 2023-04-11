@@ -12,7 +12,7 @@ const H3 = forwardRef(
             children,
             textAlign,
             color,
-            linkColor = "primary",
+            linkStyles,
             lineHeight,
             fontSize,
             customFontSize,
@@ -31,7 +31,7 @@ const H3 = forwardRef(
             $customFontSize={customFontSize}
             $display={display}
             $textAlign={textAlign}
-            $linkColor={linkColor}
+            $linkStyles={linkStyles}
             $lineHeight={lineHeight}
             $fontSize={fontSize}
             $fontWeight={fontWeight}

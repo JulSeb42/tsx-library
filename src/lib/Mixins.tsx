@@ -4,7 +4,15 @@
 
 import { css } from "styled-components"
 
-import { Overlays, Radiuses, Spacers, Shadows, Breakpoints } from "./Variables"
+import {
+    Overlays,
+    Radiuses,
+    Spacers,
+    Shadows,
+    Breakpoints,
+    Transitions,
+    FontWeights,
+} from "./Variables"
 
 import { stringifyPx } from "./utils/ts-utils"
 
@@ -25,6 +33,9 @@ import type {
     ShadowsTypes,
     PaddingTypes,
     PositionsTypes,
+    TransitionTypes,
+    TextDecorationTypes,
+    FontWeightTypes,
 } from "./types"
 
 /*==================== Types ====================*/
@@ -103,6 +114,24 @@ export interface PositionProps {
     $bottom?: SpacersTypes | string
     $position?: PositionsTypes
     $zIndex?: number
+}
+
+/*==== Transition ====*/
+
+export interface TransitionProps {
+    $transition?: TransitionTypes
+}
+
+/*==== Text decoration ====*/
+
+export interface TextDecorationProps {
+    $textDecoration: TextDecorationTypes
+}
+
+/*==== Font weights ====*/
+
+export interface FontWeightsProps {
+    $fontWeight: FontWeightTypes
 }
 
 /*==================== Mixins ====================*/
@@ -481,6 +510,30 @@ ${$bottom &&
                 ? Mixins.Spacers({ $spacer: $bottom })
                 : stringifyPx($bottom)};
         `}
+    `,
+
+    Transition: ({ $transition }: TransitionProps) => css`
+        transition: ${$transition === "short"
+            ? Transitions.Short
+            : $transition === "long"
+            ? Transitions.Long
+            : $transition === "bezier"
+            ? Transitions.Bezier
+            : ""};
+    `,
+
+    TextDecoration: ({ $textDecoration }: TextDecorationProps) => css`
+        text-decoration: ${$textDecoration};
+    `,
+
+    FontWeight: ({ $fontWeight }: FontWeightsProps) => css`
+        font-weight: ${$fontWeight === "black"
+            ? FontWeights.Black
+            : $fontWeight === "bold"
+            ? FontWeights.Bold
+            : $fontWeight === "regular"
+            ? FontWeights.Regular
+            : ""};
     `,
 }
 
