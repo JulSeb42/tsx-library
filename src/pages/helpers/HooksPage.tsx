@@ -1,6 +1,8 @@
 /*=============================================== HooksPage ===============================================*/
 
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
+import type { ChangeEvent } from "react"
+import axios from "axios"
 
 import { Page } from "../../components"
 import {
@@ -18,6 +20,10 @@ import {
     Text,
     Flexbox,
     Button,
+    useDebounce,
+    Input,
+    Image,
+    uuid,
 } from "../../lib"
 
 const translations = {
@@ -52,6 +58,41 @@ const HooksPage = () => {
     useKeyPress(() => setIsVisible(!isVisible), ["Command", "KeyK"])
 
     const touch = useTouchScreen()
+
+    // useDebounce
+    const [search, setSearch] = useState<string>("")
+    const [result, setResult] = useState<any[] | string | undefined>(undefined)
+
+    const debouncedSearch = useDebounce<string>(search, 500)
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
+        setSearch(e.target.value)
+
+    useEffect(() => {
+        if (search?.length) {
+            axios
+                .get(
+                    `https://rickandmortyapi.com/api/character/?name=${search}`
+                )
+                .then(res => {
+                    if (res) {
+                        setResult(res.data.results)
+                    } else {
+                        setResult("No result")
+                    }
+                })
+                .catch(err => {
+                    if (err.code === "ERR_BAD_REQUEST") {
+                        setResult("No result")
+                    } else {
+                        console.log(err)
+                    }
+                })
+        } else {
+            setResult("No result")
+        }
+        // eslint-disable-next-line
+    }, [debouncedSearch])
 
     return (
         <Page title="Hooks">
@@ -94,6 +135,26 @@ const HooksPage = () => {
             </Flexbox>
 
             {/* Add useExportData */}
+
+            <Flexbox flexDirection="column" gap="xs" alignItems="stretch">
+                <Input
+                    id="name"
+                    label="Name"
+                    value={search}
+                    onChange={handleChange}
+                />
+
+                <Text>Value: {search}</Text>
+                <Text>Debounced: {debouncedSearch}</Text>
+
+                {typeof result === "string" ? (
+                    <Text>{result}</Text>
+                ) : (
+                    result?.map(item => (
+                        <Image src={item.image} alt={item.name} key={uuid()} />
+                    ))
+                )}
+            </Flexbox>
         </Page>
     )
 }

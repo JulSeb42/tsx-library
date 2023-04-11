@@ -11,8 +11,10 @@ const StyledAlert = styled.div<{
     $color: ColorsHoverTypes
     $isModal?: boolean
 }>`
-    ${Mixins.Grid({
+    ${Mixins.Flexbox({
         $gap: "s",
+        $flexDirection: "column",
+        $alignItems: "stretch",
     })};
     padding: ${Spacers.M};
     width: ${({ $isModal }) => $isModal && "100%"};
