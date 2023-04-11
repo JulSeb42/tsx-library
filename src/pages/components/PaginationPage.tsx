@@ -233,7 +233,10 @@ const PaginationPage = () => {
                 <Pagination
                     totalPages={numberOfPages}
                     queries={searchParams}
-                    icons={{ prev: "arrow-left", next: "arrow-right" }}
+                    icons={{
+                        prev: "arrow-left",
+                        next: "arrow-right",
+                    }}
                     color="secondary"
                 />
             )}

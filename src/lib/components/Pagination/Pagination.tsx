@@ -163,6 +163,7 @@ export const Pagination = forwardRef(
         const buttonsProps = {
             color,
             buttonSize,
+            fontSize: buttonFontSize,
         }
 
         return (
