@@ -1,17 +1,18 @@
-/*=============================================== Autocomplete component ===============================================*/
+/*=============================================== AutocompleteNew component ===============================================*/
 
 import React, { forwardRef, useState } from "react"
 import type { ForwardedRef, ChangeEvent } from "react"
 import Fuse from "fuse.js"
 
-import { uuid, slugify, getHighlightedText } from "../../"
+import { uuid, getHighlightedText } from "../.."
+import type {} from "../../types"
 import { InputContainer } from "../InputContainer"
+import { ListInputs, ListItem } from "../ListInputs"
 import {
     IconComponent,
     ValidationComponent,
     RightContainer,
 } from "../InputComponents"
-import { ListInputs, ListItem } from "../ListInputs"
 
 import * as Styles from "./styles"
 import type { AutocompleteProps } from "./types"
@@ -46,26 +47,23 @@ const Autocomplete = forwardRef(
         }: AutocompleteProps,
         ref?: ForwardedRef<HTMLInputElement>
     ) => {
-        const [isOpen, setIsOpen] = useState(false)
-        const handleOpen = () => setIsOpen(true)
-        const handleClose = () => setTimeout(() => setIsOpen(false), 100)
-
-        const [filteredValues, setFilteredValues] = useState("")
-
-        const handleFilter = (e: ChangeEvent<HTMLInputElement>) => {
-            setValue(e.target.value)
-            setFilteredValues(e.target.value)
-        }
-
-        const results = items
-            .sort()
-            .filter(item => slugify(item).includes(slugify(filteredValues)))
-        const handleClick = (e: any) => setValue(e.target.innerText)
-
+        // Value + results
         const getValidationStatus =
             typeof validation === "object" ? validation?.status : validation
 
-        let fuzzyResults: any
+        const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
+            setValue(e.target.value)
+
+        const handleClick = (text: string) => setValue(text)
+
+        const results = items
+            .filter(item =>
+                item.toLowerCase().includes((value || "").toLowerCase())
+            )
+            ?.sort()
+
+        // Fuse results
+        let fuzzyResults: { item: string }[]
 
         if (fuzzy) {
             const fuse = new Fuse(items, fuzzy.options)
@@ -73,76 +71,74 @@ const Autocomplete = forwardRef(
             fuzzyResults = fuse.search(value)
         }
 
-        const listItemsFn = () =>
-            fuzzy ? (
-                value && fuzzyResults.length > 0 ? (
-                    <>
-                        {fuzzyResults
-                            .slice(0, 20)
-                            .map((item: { item: string }) => {
-                                const getItem = item.item
+        // Keyboard navigation
+        const [isOpen, setIsOpen] = useState(false)
 
-                                return (
-                                    <ListItem
-                                        accentColor={accentColor}
-                                        validation={getValidationStatus}
-                                        backgroundColor={backgroundColor}
-                                        onClick={handleClick}
-                                        isActive={value === getItem && true}
-                                        key={uuid()}
-                                    >
-                                        {highlight
-                                            ? getHighlightedText(getItem, value)
-                                            : getItem}
-                                    </ListItem>
-                                )
-                            })}
+        const handleOpen = () => setIsOpen(true)
+        const handleClose = () => setTimeout(() => setIsOpen(false), 100)
 
-                        <ListItem
-                            accentColor={accentColor}
-                            validation={getValidationStatus}
-                            backgroundColor={backgroundColor}
-                            onClick={handleClick}
-                        >
-                            {highlight
-                                ? getHighlightedText(value, value)
-                                : value}
-                        </ListItem>
-                    </>
-                ) : (
-                    <ListItem
-                        accentColor={accentColor}
-                        validation={getValidationStatus}
-                        backgroundColor={backgroundColor}
-                        readOnly
-                    >
-                        {emptyText}
-                    </ListItem>
+        const [cursor, setCursor] = useState<number>(0)
+
+        const handleKeyNavigation = (e: KeyboardEvent) => {
+            if (e.key === "ArrowDown" && isOpen && results?.length) {
+                setCursor(prevState =>
+                    prevState < results?.length - 1 ? prevState + 1 : prevState
                 )
-            ) : value && results.length > 0 ? (
-                <>
-                    {results.slice(0, 20).map((item, i) => (
+            }
+
+            if (e.key === "ArrowUp" && isOpen && results?.length) {
+                setCursor(prevState =>
+                    prevState > 0 ? prevState - 1 : prevState
+                )
+            }
+
+            if (
+                e.key === "Tab" &&
+                isOpen &&
+                (fuzzy ? fuzzyResults?.length : results?.length)
+            ) {
+                e.preventDefault()
+                setValue(fuzzy ? fuzzyResults[cursor].item : results[cursor])
+                handleClose()
+            }
+        }
+
+        // Components
+        const listItemsFn = () =>
+            fuzzy && value && fuzzyResults?.length ? (
+                fuzzyResults?.slice(0, 20)?.map((result, i) => {
+                    const getItem = result.item
+
+                    return (
                         <ListItem
+                            onClick={() => handleClick(getItem)}
+                            onMouseEnter={() => setCursor(i)}
+                            onMouseLeave={() => setCursor(0)}
                             accentColor={accentColor}
                             validation={getValidationStatus}
-                            backgroundColor={backgroundColor}
-                            onClick={handleClick}
-                            isActive={value === item && true}
+                            isActive={cursor === i}
                             key={uuid()}
                         >
-                            {highlight ? getHighlightedText(item, value) : item}
+                            {highlight
+                                ? getHighlightedText(getItem, value)
+                                : getItem}
                         </ListItem>
-                    ))}
-
+                    )
+                })
+            ) : value?.length && results?.length ? (
+                results?.slice(0, 20)?.map((result, i) => (
                     <ListItem
+                        onClick={() => handleClick(result)}
+                        onMouseEnter={() => setCursor(i)}
+                        onMouseLeave={() => setCursor(0)}
                         accentColor={accentColor}
                         validation={getValidationStatus}
-                        backgroundColor={backgroundColor}
-                        onClick={handleClick}
+                        isActive={cursor === i}
+                        key={uuid()}
                     >
-                        {highlight ? getHighlightedText(value, value) : value}
+                        {highlight ? getHighlightedText(result, value) : result}
                     </ListItem>
-                </>
+                ))
             ) : (
                 <ListItem
                     accentColor={accentColor}
@@ -189,12 +185,13 @@ const Autocomplete = forwardRef(
                 <Styles.StyledAutocomplete
                     ref={ref}
                     id={id}
+                    onChange={handleChange}
                     onFocus={!disabled ? handleOpen : undefined}
                     onBlur={!disabled ? handleClose : undefined}
+                    onKeyDown={(e: any) => handleKeyNavigation(e)}
                     type="text"
                     value={value}
                     autoFocus={autoFocus}
-                    onChange={handleFilter}
                     $hasIcon={!!icon}
                     $validation={getValidationStatus}
                     $accentColor={accentColor}

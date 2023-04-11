@@ -49,7 +49,7 @@ import styled from "styled-components"
 import {} from "../../"
 import type {} from "../../types"
 
-import setDefaultTheme from "../../utils/setDefaultTheme"
+import { setDefaultTheme } from "../../utils"
 
 const Styled$(name) = styled.div<{ }>`
 
@@ -77,8 +77,8 @@ define PAGE_FILE
 
 import React from "react"
 
-import { Page } from "components"
-import { $(name) } from "lib"
+import { Page } from "../../components"
+import { $(name) } from "../../lib"
 
 const $(name)Page = () => {
 	const props: string[] = []

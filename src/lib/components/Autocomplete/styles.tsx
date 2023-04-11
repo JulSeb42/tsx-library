@@ -1,9 +1,10 @@
-/*=============================================== Autocomplete styles ===============================================*/
+/*=============================================== AutocompleteNew styles ===============================================*/
 
 import styled from "styled-components"
 
-import { InputBaseMixin } from "../InputComponents"
+import {} from "../.."
 import type { ColorsHoverTypes, ValidationTypes } from "../../types"
+import { InputBaseMixin } from "../InputComponents/styles"
 import type {
     InputBackgroundTypes,
     InputVariantTypes,
@@ -33,6 +34,6 @@ const StyledAutocomplete = styled.input<{
         })};
 `
 
-setDefaultTheme([InputContainer, StyledAutocomplete])
+setDefaultTheme([StyledAutocomplete, InputContainer])
 
-export { InputContainer, StyledAutocomplete }
+export { StyledAutocomplete, InputContainer }
