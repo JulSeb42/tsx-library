@@ -15,6 +15,8 @@ import type {
     LinkType,
     ButtonLinkTypeRequire,
     LinkTypeBlank,
+    PaddingTypes,
+    SpacersTypes,
 } from "./"
 
 /*==================== Accordion item ====================*/
@@ -51,6 +53,15 @@ export type TabsItemProps = {
 
 export type StepProps = LinkTypeBlank & {
     text: string
+}
+
+/*==================== Dropdown item ====================*/
+
+export type DropdownItemProps = ButtonLinkTypeRequire & {
+    text: string
+    icon?: string | JSX.Element
+    padding?: PaddingTypes
+    gap?: SpacersTypes
 }
 
 /*==================== useForm ====================*/

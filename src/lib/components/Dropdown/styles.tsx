@@ -6,12 +6,11 @@ import {
     Radiuses,
     Shadows,
     Transitions,
-    Spacers,
     Breakpoints,
     Mixins,
     stringifyPx,
 } from "../../"
-import type { ColorsHoverTypes } from "../../types"
+import type { ColorsHoverTypes, PaddingTypes, SpacersTypes } from "../../types"
 import type { DropdownJustifyTypes } from "./types"
 import type { ListDirectionTypes } from "../ListInputs/types"
 
@@ -44,34 +43,6 @@ const StyledDropdown = styled.div<{
             : css`
                   top: 42px;
               `}
-
-    a,
-    button {
-        color: ${({ $accentColor, theme }) =>
-            theme.ColorsHoverDefault({ $color: $accentColor })};
-        text-decoration: none;
-        text-align: left;
-        background-color: transparent;
-        border: none;
-        padding: ${Spacers.XS} ${Spacers.S};
-        transition: ${Transitions.Short};
-
-        @media ${Breakpoints.Hover} {
-            &:hover {
-                background-color: ${({ $accentColor, theme }) =>
-                    theme.ColorsHoverHover({ $color: $accentColor })};
-                color: ${({ $accentColor, theme }) =>
-                    $accentColor === "white"
-                        ? theme.Primary500
-                        : theme.Background};
-            }
-
-            &:active {
-                background-color: ${({ $accentColor, theme }) =>
-                    theme.ColorsHoverActive({ $color: $accentColor })};
-            }
-        }
-    }
 `
 
 const DropdownContainer = styled.div<{ $justify?: DropdownJustifyTypes }>`
@@ -87,6 +58,39 @@ const DropdownContainer = styled.div<{ $justify?: DropdownJustifyTypes }>`
     }
 `
 
-setDefaultTheme([DropdownContainer, StyledDropdown])
+const DropdownItem = styled.button<{
+    $color?: ColorsHoverTypes
+    $padding?: PaddingTypes
+    $gap?: SpacersTypes
+}>`
+    color: ${({ $color, theme }) => theme.ColorsHoverDefault({ $color })};
+    text-decoration: none;
+    text-align: left;
+    background-color: transparent;
+    border: none;
+    ${Mixins.Padding};
+    transition: ${Transitions.Short};
+    ${({ $gap }) =>
+        Mixins.Flexbox({
+            $alignItems: "center",
+            $gap,
+        })};
 
-export { DropdownContainer, StyledDropdown }
+    @media ${Breakpoints.Hover} {
+        &:hover {
+            background-color: ${({ $color, theme }) =>
+                theme.ColorsHoverHover({ $color })};
+            color: ${({ $color, theme }) =>
+                $color === "white" ? theme.Primary500 : theme.Background};
+        }
+
+        &:active {
+            background-color: ${({ $color, theme }) =>
+                theme.ColorsHoverActive({ $color })};
+        }
+    }
+`
+
+setDefaultTheme([DropdownContainer, StyledDropdown, DropdownItem])
+
+export { DropdownContainer, StyledDropdown, DropdownItem }

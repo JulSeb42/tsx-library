@@ -28,10 +28,8 @@ enum buttonSizes {
 
 export type ButtonSizesTypes = keyof typeof buttonSizes
 
-type ButtonBaseProps = HTMLAttributes<
-    HTMLButtonElement & HTMLHyperlinkElementUtils
-> &
-    ButtonHTMLAttributes<HTMLButtonElement & HTMLHyperlinkElementUtils> &
+type ButtonBaseProps = HTMLAttributes<HTMLButtonElement & HTMLAnchorElement> &
+    ButtonHTMLAttributes<HTMLButtonElement & HTMLAnchorElement> &
     ButtonLinkType & {
         as?: ElementType
         color?: ColorsHoverTypes

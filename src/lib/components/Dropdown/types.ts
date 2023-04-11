@@ -1,8 +1,11 @@
 /*=============================================== Dropdown types ===============================================*/
 
-import type { HTMLAttributes, ElementType } from "react"
+import type { HTMLAttributes, ElementType, ReactNode } from "react"
 
-import type { ColorsHoverTypes } from "../../types"
+import type {
+    ColorsHoverTypes,
+    DropdownItemProps as ItemProps,
+} from "../../types"
 import type { ListDirectionTypes } from "../ListInputs/types"
 
 enum justify {
@@ -17,7 +20,7 @@ export interface DropdownContainerProps extends HTMLAttributes<HTMLDivElement> {
     justify?: DropdownJustifyTypes
 }
 
-export interface DropdownProps extends HTMLAttributes<HTMLDivElement> {
+interface DropdownPropsBase extends HTMLAttributes<HTMLDivElement> {
     as?: ElementType
     isOpen: boolean
     setIsOpen: (isOpen: boolean) => void
@@ -25,3 +28,21 @@ export interface DropdownProps extends HTMLAttributes<HTMLDivElement> {
     direction?: ListDirectionTypes
     maxHeightOpen?: number
 }
+
+interface DropdownPropsContent1 extends DropdownPropsBase {
+    items: ItemProps[]
+    children?: never
+}
+
+interface DropdownPropsContent2 extends DropdownPropsBase {
+    items?: never
+    children?: ReactNode | ReactNode[]
+}
+
+export type DropdownProps = DropdownPropsContent1 | DropdownPropsContent2
+
+export type DropdownItemProps = HTMLAttributes<HTMLAnchorElement> &
+    ItemProps & {
+        as?: ElementType
+        color?: ColorsHoverTypes
+    }

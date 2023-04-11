@@ -27,9 +27,9 @@ enum labelDirections {
 export type ButtonIconLabelDirectionsTypes = keyof typeof labelDirections
 
 type ButtonIconBaseProps = HTMLAttributes<
-    HTMLButtonElement & HTMLHyperlinkElementUtils
+    HTMLButtonElement & HTMLAnchorElement
 > &
-    ButtonHTMLAttributes<HTMLButtonElement & HTMLHyperlinkElementUtils> &
+    ButtonHTMLAttributes<HTMLButtonElement & HTMLAnchorElement> &
     ButtonLinkType & {
         as?: ElementType
         isLoading?: boolean

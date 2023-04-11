@@ -1,15 +1,16 @@
 /*=============================================== DropdownPage ===============================================*/
 
 import { useState } from "react"
-import { Link } from "react-router-dom"
 
 import { Page } from "../../components"
-import { DropdownContainer, Dropdown, Button, uuid } from "../../lib"
+import { DropdownContainer, Dropdown, Button, DropdownItem } from "../../lib"
+import type { DropdownItemProps } from "../../lib/types"
 
 const DropdownPage = () => {
     const [isOpen, setIsOpen] = useState(false)
+    const [isSecondOpen, setIsSecondOpen] = useState(true)
 
-    const items = [
+    const items: DropdownItemProps[] = [
         {
             text: "Link",
             to: "/",
@@ -27,18 +28,34 @@ const DropdownPage = () => {
                     Open dropdown
                 </Button>
 
-                <Dropdown isOpen={isOpen} setIsOpen={setIsOpen}>
-                    {items.map(item =>
-                        item.to ? (
-                            <Link to={item.to} key={uuid()}>
-                                {item.text}
-                            </Link>
-                        ) : (
-                            <button onClick={item.onClick} key={uuid()}>
-                                {item.text}
-                            </button>
-                        )
-                    )}
+                <Dropdown
+                    isOpen={isOpen}
+                    setIsOpen={setIsOpen}
+                    items={items}
+                    accentColor="success"
+                />
+            </DropdownContainer>
+
+            <DropdownContainer>
+                <Button onClick={() => setIsSecondOpen(!isSecondOpen)}>
+                    Open dropdown
+                </Button>
+
+                <Dropdown isOpen={isSecondOpen} setIsOpen={setIsSecondOpen}>
+                    <DropdownItem text="Link" to="/" />
+
+                    <DropdownItem
+                        text="Button"
+                        onClick={() => alert("Clicked")}
+                        padding={{
+                            left: "xl",
+                            right: "s",
+                            topBottom: "xs",
+                        }}
+                        icon="chevron-left"
+                        gap="xs"
+                        color="secondary"
+                    />
                 </Dropdown>
             </DropdownContainer>
         </Page>
