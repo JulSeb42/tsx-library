@@ -36,6 +36,7 @@ const Button = styled.button<{
     height: ${({ $buttonSize }) => $buttonSize}px;
     border-radius: ${Radiuses.Circle};
     border: none;
+    ${Mixins.FontSize};
     ${Mixins.Flexbox({
         $alignItems: "center",
         $justifyContent: "center",

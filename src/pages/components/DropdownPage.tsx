@@ -8,7 +8,7 @@ import type { DropdownItemProps } from "../../lib/types"
 
 const DropdownPage = () => {
     const [isOpen, setIsOpen] = useState(false)
-    const [isSecondOpen, setIsSecondOpen] = useState(true)
+    const [isSecondOpen, setIsSecondOpen] = useState(false)
 
     const items: DropdownItemProps[] = [
         {
