@@ -1,8 +1,7 @@
-/*=============================================== AutocompleteNew styles ===============================================*/
+/*=============================================== Autocomplete styles ===============================================*/
 
 import styled from "styled-components"
 
-import {} from "../.."
 import type { ColorsHoverTypes, ValidationTypes } from "../../types"
 import { InputBaseMixin } from "../InputComponents/styles"
 import type {

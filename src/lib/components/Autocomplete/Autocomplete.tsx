@@ -1,11 +1,10 @@
-/*=============================================== AutocompleteNew component ===============================================*/
+/*=============================================== Autocomplete component ===============================================*/
 
-import React, { forwardRef, useState } from "react"
+import React, { forwardRef, useState, useEffect } from "react"
 import type { ForwardedRef, ChangeEvent } from "react"
 import Fuse from "fuse.js"
 
 import { uuid, getHighlightedText } from "../.."
-import type {} from "../../types"
 import { InputContainer } from "../InputContainer"
 import { ListInputs, ListItem } from "../ListInputs"
 import {
@@ -73,35 +72,74 @@ const Autocomplete = forwardRef(
 
         // Keyboard navigation
         const [isOpen, setIsOpen] = useState(false)
+        const [isFocus, setIsFocus] = useState(false)
 
-        const handleOpen = () => setIsOpen(true)
-        const handleClose = () => setTimeout(() => setIsOpen(false), 100)
+        const handleOpen = () => {
+            setIsFocus(true)
+            setIsOpen(true)
+        }
+        const handleClose = () =>
+            setTimeout(() => {
+                setIsFocus(false)
+                setIsOpen(false)
+            }, 100)
 
         const [cursor, setCursor] = useState<number>(0)
 
+        // eslint-disable-next-line
         const handleKeyNavigation = (e: KeyboardEvent) => {
-            if (e.key === "ArrowDown" && isOpen && results?.length) {
-                setCursor(prevState =>
-                    prevState < results?.length - 1 ? prevState + 1 : prevState
-                )
-            }
+            if (isOpen) {
+                if (e.key === "ArrowDown") {
+                    e.preventDefault()
 
-            if (e.key === "ArrowUp" && isOpen && results?.length) {
-                setCursor(prevState =>
-                    prevState > 0 ? prevState - 1 : prevState
-                )
-            }
+                    if (fuzzyResults) {
+                        setCursor(prevState =>
+                            prevState < fuzzyResults?.length - 1
+                                ? prevState + 1
+                                : prevState
+                        )
+                    } else {
+                        setCursor(prevState =>
+                            prevState < results?.length - 1
+                                ? prevState + 1
+                                : prevState
+                        )
+                    }
+                }
 
-            if (
-                e.key === "Tab" &&
-                isOpen &&
-                (fuzzy ? fuzzyResults?.length : results?.length)
-            ) {
-                e.preventDefault()
-                setValue(fuzzy ? fuzzyResults[cursor].item : results[cursor])
-                handleClose()
+                if (e.key === "ArrowUp") {
+                    e.preventDefault()
+
+                    if (fuzzyResults) {
+                        setCursor(prevState =>
+                            prevState > 0 ? prevState - 1 : prevState
+                        )
+                    } else {
+                        setCursor(prevState =>
+                            prevState > 0 ? prevState - 1 : prevState
+                        )
+                    }
+                }
+
+                if (e.key === "Tab") {
+                    e.preventDefault()
+                    setValue(
+                        fuzzy ? fuzzyResults[cursor].item : results[cursor]
+                    )
+                    handleClose()
+                }
             }
         }
+
+        useEffect(() => {
+            window.addEventListener("keypress", () => handleKeyNavigation)
+
+            if (isFocus && value?.length) {
+                handleOpen()
+            } else {
+                setIsOpen(false)
+            }
+        }, [handleKeyNavigation, isFocus, value])
 
         // Components
         const listItemsFn = () =>
@@ -186,8 +224,8 @@ const Autocomplete = forwardRef(
                     ref={ref}
                     id={id}
                     onChange={handleChange}
-                    onFocus={!disabled ? handleOpen : undefined}
-                    onBlur={!disabled ? handleClose : undefined}
+                    onFocus={!disabled ? () => setIsFocus(true) : undefined}
+                    onBlur={!disabled ? () => setIsFocus(false) : undefined}
                     onKeyDown={(e: any) => handleKeyNavigation(e)}
                     type="text"
                     value={value}
@@ -218,6 +256,9 @@ const Autocomplete = forwardRef(
                 helperBottom={helperBottom}
                 accentColor={accentColor}
             >
+                {/* <p>focus: {isFocus.toString()}</p>
+                <p>open: {isOpen.toString()}</p> */}
+
                 {inputFn()}
             </InputContainer>
         ) : (
