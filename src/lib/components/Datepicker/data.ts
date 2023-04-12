@@ -1,9 +1,13 @@
 /*=============================================== Calendar data ===============================================*/
 
-const allDays: number[] = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-const leapDays: number[] = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+export const allDays: number[] = [
+    31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31,
+]
+export const leapDays: number[] = [
+    31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31,
+]
 
-const weekDaysEn = {
+export const weekDaysEn = {
     mon: "Monday",
     tue: "Tuesday",
     wed: "Wednesday",
@@ -13,7 +17,7 @@ const weekDaysEn = {
     sun: "Sunday",
 }
 
-const monthsEn = {
+export const monthsEn = {
     jan: "January",
     feb: "February",
     mar: "March",
@@ -27,5 +31,3 @@ const monthsEn = {
     nov: "November",
     dec: "December",
 }
-
-export { allDays, leapDays, weekDaysEn, monthsEn }
