@@ -12,8 +12,10 @@ const StyledMarkdownContainer = styled(Markdown)<{
     $gap?: SpacersTypes
 }>`
     ${({ $gap }) =>
-        Mixins.Grid({
+        Mixins.Flexbox({
             $gap,
+            $alignItems: "stretch",
+            $flexDirection: "column",
         })};
 `
 

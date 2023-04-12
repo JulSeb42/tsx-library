@@ -4,10 +4,10 @@ import type { HTMLAttributes, ElementType } from "react"
 
 import type {
     SpacersTypes,
-    GridAlignContentTypes,
-    GridAlignItemsTypes,
-    GridJustifyContentTypes,
-    GridJustifyItemsTypes,
+    FlexAlignContentTypes,
+    FlexAlignItemsTypes,
+    FlexJustifyContentTypes,
+    FlexJustifyItemsTypes,
 } from "../../types"
 
 enum asideSizes {
@@ -29,10 +29,10 @@ export interface AsideProps extends HTMLAttributes<HTMLDivElement> {
     as?: ElementType
     gap?: SpacersTypes
     position?: AsidePositionTypes
-    alignContent?: GridAlignContentTypes
-    alignItems?: GridAlignItemsTypes
-    justifyContent?: GridJustifyContentTypes
-    justifyItems?: GridJustifyItemsTypes
+    alignContent?: FlexAlignContentTypes
+    alignItems?: FlexAlignItemsTypes
+    justifyContent?: FlexJustifyContentTypes
+    justifyItems?: FlexJustifyItemsTypes
     size?: AsideSizeTypes
     paddingTopBottom?: SpacersTypes
     minHeight?: string | number

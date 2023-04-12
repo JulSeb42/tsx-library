@@ -8,8 +8,10 @@ import type { ColorsHoverTypes } from "../../types"
 import { setDefaultTheme } from "../../utils"
 
 const StyledInputContainer = styled.div`
-    ${Mixins.Grid({
+    ${Mixins.Flexbox({
         $gap: "xxs",
+        $flexDirection: "column",
+        $alignItems: "stretch",
     })};
 `
 

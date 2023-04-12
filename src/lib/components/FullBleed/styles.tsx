@@ -12,7 +12,7 @@ const StyledFullBleed = styled.div<{
     $aspectRatio?: string
     $padding?: PaddingTypes
 }>`
-    grid-column: 1/4;
+    grid-column: 1/4 !important;
     ${Mixins.Padding};
     width: 100%;
     aspect-ratio: ${({ $aspectRatio }) => $aspectRatio};

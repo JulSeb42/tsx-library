@@ -6,10 +6,10 @@ import { Mixins, Layouts, Breakpoints, stringifyPx } from "../../"
 import type { AsidePositionTypes, AsideSizeTypes } from "./types"
 import type {
     SpacersTypes,
-    GridAlignContentTypes,
-    GridAlignItemsTypes,
-    GridJustifyContentTypes,
-    GridJustifyItemsTypes,
+    FlexAlignContentTypes,
+    FlexAlignItemsTypes,
+    FlexJustifyContentTypes,
+    FlexJustifyItemsTypes,
 } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
@@ -17,10 +17,10 @@ import { setDefaultTheme } from "../../utils"
 const StyledAside = styled.aside<{
     $size?: AsideSizeTypes
     $position?: AsidePositionTypes
-    $justifyContent?: GridJustifyContentTypes
-    $justifyItems?: GridJustifyItemsTypes
-    $alignContent?: GridAlignContentTypes
-    $alignItems?: GridAlignItemsTypes
+    $justifyContent?: FlexJustifyContentTypes
+    $justifyItems?: FlexJustifyItemsTypes
+    $alignContent?: FlexAlignContentTypes
+    $alignItems?: FlexAlignItemsTypes
     $gap?: SpacersTypes
     $paddingTopBottom?: SpacersTypes
     $minHeight?: string | number
@@ -39,15 +39,16 @@ const StyledAside = styled.aside<{
         $gap,
         $paddingTopBottom,
     }) =>
-        Mixins.Grid({
-            $alignContent: $alignContent || "start",
-            $justifyItems: $justifyItems || "start",
-            $justifyContent: $justifyContent || "stretch",
-            $alignItems: $alignItems || "start",
+        Mixins.Flexbox({
+            $alignContent: $alignContent,
+            $justifyItems: $justifyItems,
+            $justifyContent: $justifyContent,
+            $alignItems: $alignItems,
             $gap,
             $padding: {
                 topBottom: $paddingTopBottom,
             },
+            $flexDirection: "column",
         })};
     min-height: ${({ $minHeight }) => $minHeight && stringifyPx($minHeight)};
     grid-column: ${({ $position }) =>
@@ -84,7 +85,7 @@ const StyledAside = styled.aside<{
     & > select,
     & > textarea,
     & > form {
-        justify-self: stretch;
+        align-self: stretch;
     }
 `
 

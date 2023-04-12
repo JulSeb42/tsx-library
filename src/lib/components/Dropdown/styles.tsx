@@ -23,7 +23,10 @@ const StyledDropdown = styled.div<{
     $maxHeightOpen: number
 }>`
     position: absolute;
-    ${Mixins.Grid({})};
+    ${Mixins.Flexbox({
+        $flexDirection: "column",
+        $alignItems: "stretch",
+    })};
     min-width: 200px;
     background-color: ${({ theme }) => theme.Background};
     border-radius: ${Radiuses.M};

@@ -9,9 +9,11 @@ import { setDefaultTheme } from "../../utils"
 
 const StyledSection = styled.section<{ $gap?: SpacersTypes }>`
     ${({ $gap }) =>
-        Mixins.Grid({
+        Mixins.Flexbox({
             $gap,
             $justifyItems: "start",
+            $alignItems: "stretch",
+            $flexDirection: "column",
         })};
 
     & > div,
