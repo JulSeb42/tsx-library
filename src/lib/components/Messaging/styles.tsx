@@ -57,14 +57,11 @@ const MessagesContainer = styled.div<{
     ${Mixins.HideScrollbar};
     position: relative;
 
-    & > div {
-        ${Mixins.HideScrollbar};
-        ${({ $gap }) =>
-            Mixins.Flexbox({
-                $flexDirection: "column",
-                $gap,
-            })};
-    }
+    ${({ $gap }) =>
+        Mixins.Flexbox({
+            $flexDirection: "column",
+            $gap,
+        })};
 `
 
 const InputContainer = styled.form`
@@ -176,7 +173,9 @@ const StyledMessage = styled(Linkify)<{
     }
 `
 
-export const Bottom = styled.div`
+export const Bottom = styled.div<{
+    $gap: SpacersTypes
+}>`
     width: 100%;
     height: 0;
 `

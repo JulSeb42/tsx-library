@@ -22,6 +22,7 @@ export const Message = forwardRef(
             dateTimeColor = "gray",
             textColor,
             linkColor,
+            gap = "xxs",
             ...rest
         }: MessageProps,
         ref?: ForwardedRef<HTMLDivElement>
@@ -31,6 +32,7 @@ export const Message = forwardRef(
             ref={ref}
             alignItems={type === "sent" ? "flex-end" : "flex-start"}
             flexDirection="column"
+            gap={gap}
             {...rest}
         >
             <Styles.StyledMessage
@@ -82,7 +84,6 @@ export const Messaging = forwardRef(
             input,
             submit,
             borderColor = "gray-200",
-            messagesGap = "xs",
             textDateTime,
             backgroundColorSent,
             backgroundColorReceived,
@@ -92,6 +93,8 @@ export const Messaging = forwardRef(
             linkColorReceived,
             dateTimeColor,
             iconScroll = <ChevronDownIcon size={32 * 0.6} />,
+            messageGap,
+            listGap = "s",
             ...rest
         }: MessagingProps,
         ref?: ForwardedRef<HTMLFormElement>
@@ -169,7 +172,7 @@ export const Messaging = forwardRef(
 
         return (
             <Styles.StyledMessaging as={as} $borderColor={borderColor}>
-                <Styles.MessagesContainer $gap={messagesGap} ref={containerRef}>
+                <Styles.MessagesContainer $gap={listGap} ref={containerRef}>
                     {data && data.length
                         ? data.map(message => (
                               <Message
@@ -194,6 +197,7 @@ export const Messaging = forwardRef(
                                           : linkColorReceived
                                   }
                                   dateTimeColor={dateTimeColor}
+                                  gap={messageGap}
                                   key={uuid()}
                               />
                           ))
@@ -201,7 +205,7 @@ export const Messaging = forwardRef(
                         ? children
                         : emptyMessage()}
 
-                    <Styles.Bottom ref={bottomRef} />
+                    <Styles.Bottom ref={bottomRef} $gap={listGap} />
                 </Styles.MessagesContainer>
 
                 <Styles.ScrollButton

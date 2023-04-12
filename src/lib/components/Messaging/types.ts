@@ -25,6 +25,7 @@ export interface MessageProps
     textColor?: AllColorsTypes
     linkColor?: ColorsHoverTypes
     dateTimeColor?: AllColorsTypes
+    gap?: SpacersTypes
 }
 
 interface MessagingPropsBase extends HTMLAttributes<HTMLFormElement> {
@@ -43,7 +44,8 @@ interface MessagingPropsBase extends HTMLAttributes<HTMLFormElement> {
         placeholder?: string
         autoFocus?: boolean
     }
-    messagesGap?: SpacersTypes
+    listGap?: SpacersTypes
+    messageGap?: SpacersTypes
     iconScroll?: string | JSX.Element
 }
 
