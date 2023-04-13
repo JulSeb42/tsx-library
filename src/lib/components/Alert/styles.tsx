@@ -1,29 +1,66 @@
 /*=============================================== Alert styles ===============================================*/
 
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
-import { Spacers, Radiuses, Mixins } from "../../"
-import type { ColorsHoverTypes } from "../../types"
+import { Mixins, stringifyPx } from "../../"
+import type {
+    ColorsHoverTypes,
+    AllColorsTypes,
+    PaddingTypes,
+    RadiusesTypes,
+    FontSizeTypes,
+    CustomFontSizeTypes,
+    FontWeightTypes,
+    SpacersTypes,
+} from "../../types"
 
 import { setDefaultTheme } from "../../utils"
 
 const StyledAlert = styled.div<{
+    $maxWidth?: number
+    $padding?: PaddingTypes
+    $borderRadius?: RadiusesTypes
+    $fontSize?: FontSizeTypes
+    $customFontSize?: CustomFontSizeTypes
+    $fontWeight?: FontWeightTypes
+    $gap?: SpacersTypes
     $color: ColorsHoverTypes
-    $isModal?: boolean
+    $backgroundColor?: AllColorsTypes
+    $borderColor?: AllColorsTypes
+    $textColor?: AllColorsTypes
+    $borderWidth?: number
 }>`
-    ${Mixins.Flexbox({
-        $gap: "s",
-        $flexDirection: "column",
-        $alignItems: "stretch",
-    })};
-    padding: ${Spacers.M};
-    width: ${({ $isModal }) => $isModal && "100%"};
-    max-width: ${({ $isModal }) => $isModal && "400px"};
-    border-radius: ${Radiuses.M};
-    color: ${({ theme, $color }) =>
-        $color === "white" ? theme.Black : theme.Font};
-    background-color: ${({ $color, theme }) => theme.Colors50({ $color })};
-    border: 1px solid ${({ theme }) => theme.ColorsShort};
+    width: 100%;
+    max-width: ${({ $maxWidth }) => $maxWidth && stringifyPx($maxWidth)};
+    ${Mixins.Padding};
+    ${Mixins.BorderRadius};
+    ${Mixins.FontSize};
+    ${Mixins.FontWeight};
+    border-width: var(--border-width);
+    border-style: solid;
+    color: ${({ theme, $textColor }) =>
+        theme.AllColors({ $color: $textColor })};
+    ${({ $gap }) =>
+        Mixins.Flexbox({
+            $gap,
+            $flexDirection: "column",
+            $alignItems: "stretch",
+        })};
+
+    ${({ $color, $backgroundColor, $borderColor, theme, $borderWidth }) =>
+        $backgroundColor || $borderColor
+            ? css`
+                  background-color: ${theme.AllColors({
+                      $color: $backgroundColor,
+                  })};
+                  border-color: ${theme.AllColors({
+                      $color: $borderColor,
+                  })};
+              `
+            : css`
+                  background-color: ${theme.Colors50({ $color })};
+                  border-color: ${theme.ColorsShort({ $color })};
+              `};
 `
 
 setDefaultTheme([StyledAlert])

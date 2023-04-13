@@ -10,14 +10,45 @@ import type { AlertProps } from "./types"
 
 const Alert = forwardRef(
     (
-        { as, color = "primary", children, isModal, ...rest }: AlertProps,
+        {
+            as,
+            children,
+            fontSize = "body",
+            customFontSize,
+            fontWeight = "regular",
+            color = "primary",
+            backgroundColor,
+            borderColor,
+            textColor = color === "white" ? "black" : "font",
+            padding = "m",
+            borderRadius = "m",
+            maxWidth,
+            gap = "xs",
+            borderWidth = 1,
+            style,
+            ...rest
+        }: AlertProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => (
         <Styles.StyledAlert
             ref={ref}
             as={as ? as : typeof children === "string" ? Text : "div"}
+            $maxWidth={maxWidth}
+            $padding={padding}
+            $borderRadius={borderRadius}
+            $borderWidth={borderWidth}
+            $fontSize={fontSize}
+            $customFontSize={customFontSize}
+            $fontWeight={fontWeight}
+            $gap={gap}
             $color={color}
-            $isModal={isModal}
+            $backgroundColor={backgroundColor}
+            $borderColor={borderColor}
+            $textColor={textColor}
+            style={{
+                ...style,
+                "--border-width": `${borderWidth}px`,
+            }}
             {...rest}
         >
             {children}
