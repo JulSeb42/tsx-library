@@ -2,17 +2,12 @@
 
 import type { HTMLAttributes, ElementType } from "react"
 
-import type { AllColorsTypes, RadiusesTypes } from "../../types"
+import type { AllColorsTypes, RadiusesTypes, BorderTypes } from "../../types"
 
 interface AvatarPropsBase extends HTMLAttributes<HTMLSpanElement> {
     as?: ElementType
     size?: number
-    border?:
-        | boolean
-        | {
-              width?: number
-              color?: AllColorsTypes
-          }
+    border?: boolean | BorderTypes
     badge?:
         | boolean
         | number

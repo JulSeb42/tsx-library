@@ -66,8 +66,7 @@ const Toast = forwardRef(
                 $right={position?.right}
                 $bottom={position?.bottom}
                 $borderRadius={borderRadius}
-                $borderWidth={border?.width}
-                $borderColor={border?.color}
+                $border={border}
                 $padding={padding}
                 {...rest}
             >

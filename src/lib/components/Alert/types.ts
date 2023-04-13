@@ -56,7 +56,3 @@ type AlertPropsContent2 = AlertPropsColor & {
 }
 
 export type AlertProps = AlertPropsContent1 | AlertPropsContent2
-
-// type AlertPropsBorder1 = AlertPropsContent & {
-//     border?: BorderTypes
-// }

@@ -79,9 +79,7 @@ export const SkeletonCard = forwardRef(
     (
         {
             as,
-            borderColor,
-            borderWidth,
-            borderStyle,
+            border,
             borderRadius,
             width = "100%",
             height,
@@ -117,9 +115,7 @@ export const SkeletonCard = forwardRef(
                 $columnGap={columnGap}
                 $rowGap={rowGap}
                 $padding={padding}
-                $borderColor={borderColor}
-                $borderWidth={borderWidth}
-                $borderStyle={borderStyle}
+                $border={border}
                 $borderRadius={borderRadius}
                 $width={width}
                 $height={height}

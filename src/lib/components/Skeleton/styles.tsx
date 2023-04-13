@@ -6,7 +6,6 @@ import { Mixins, stringifyPx } from "../../"
 import type {
     AllColorsTypes,
     RadiusesTypes,
-    BorderStylesTypes,
     FlexAlignContentTypes,
     FlexAlignItemsTypes,
     FlexDirectionTypes,
@@ -14,6 +13,7 @@ import type {
     FlexJustifyItemsTypes,
     FlexWrapTypes,
     SpacersTypes,
+    BorderTypes,
 } from "../../types"
 import type { SkeletonAnimationTypes } from "./types"
 
@@ -88,16 +88,7 @@ const Shine = styled.span<{
 `
 
 export const Card = styled.div<{
-    $borderColor?: AllColorsTypes
-    $borderWidth?: number
-    $borderStyle?:
-        | BorderStylesTypes
-        | {
-              left?: BorderStylesTypes
-              top?: BorderStylesTypes
-              right?: BorderStylesTypes
-              bottom?: BorderStylesTypes
-          }
+    $border?: BorderTypes
     $borderRadius?: RadiusesTypes
     $width?: string | number
     $height?: string | number
@@ -121,15 +112,7 @@ export const Card = styled.div<{
     position: relative;
     ${Mixins.BorderRadius};
     ${Mixins.Padding({})};
-    ${({ $borderWidth, $borderColor, $borderStyle, theme }) =>
-        ($borderWidth || $borderStyle || $borderColor) &&
-        css`
-            border-width: ${$borderWidth ? stringifyPx($borderWidth) : "1px"};
-            border-style: ${$borderStyle || "solid"};
-            border-color: ${theme.AllColors({
-                $color: $borderColor || "gray-200",
-            })};
-        `};
+    ${({ $border }) => $border && Mixins.Border({ $border })};
     ${({
         $inline,
         $flexDirection,

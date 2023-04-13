@@ -85,6 +85,7 @@ export const Dropdown = ({
     children,
     items,
     maxHeightOpen = 40 * 3 + 24,
+    borderRadius = "m",
     ...rest
 }: DropdownProps) => {
     const el = useRef<HTMLButtonElement>(null)
@@ -99,6 +100,7 @@ export const Dropdown = ({
             $accentColor={accentColor}
             $direction={direction}
             $maxHeightOpen={maxHeightOpen}
+            $borderRadius={borderRadius}
             {...rest}
         >
             {items

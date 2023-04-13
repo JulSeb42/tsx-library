@@ -20,6 +20,8 @@ const ToastPage = () => {
                 shadow="s"
                 border={{
                     color: "secondary",
+                    style: "dashed",
+                    width: 4,
                 }}
                 close
             >

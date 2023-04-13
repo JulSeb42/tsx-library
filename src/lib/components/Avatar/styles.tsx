@@ -1,9 +1,9 @@
 /*=============================================== Avatar styles ===============================================*/
 
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
 import { Mixins, FontWeights, Radiuses, Spacers } from "../../"
-import type { AllColorsTypes, RadiusesTypes } from "../../types"
+import type { AllColorsTypes, RadiusesTypes, BorderTypes } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
 
@@ -17,9 +17,7 @@ const StyledAvatar = styled.span<{
     $color?: AllColorsTypes
     $contentColor?: AllColorsTypes
     $size?: number
-    $border?: boolean
-    $borderWidth?: number
-    $borderColor?: AllColorsTypes
+    $border?: boolean | BorderTypes
     $borderRadius?: RadiusesTypes
 }>`
     width: ${({ $size }) => $size}px;
@@ -46,12 +44,30 @@ const StyledAvatar = styled.span<{
     overflow: hidden;
     padding: 0;
 
-    ${({ $border, theme, $borderColor, $borderWidth }) =>
+    ${({ $border }) =>
         $border &&
-        css`
-            border: ${$borderWidth}px solid
-                ${theme.AllColors({ $color: $borderColor })};
-        `}
+        Mixins.Border({
+            $border: {
+                width:
+                    typeof $border === "boolean"
+                        ? 1
+                        : $border?.width
+                        ? $border.width
+                        : 1,
+                color:
+                    typeof $border === "boolean"
+                        ? "primary"
+                        : $border?.color
+                        ? $border?.color
+                        : "primary",
+                style:
+                    typeof $border === "boolean"
+                        ? "solid"
+                        : $border?.style
+                        ? $border.style
+                        : "solid",
+            },
+        })};
 `
 
 const badgeSize = 16

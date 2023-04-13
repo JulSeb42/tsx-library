@@ -1,6 +1,6 @@
 /*=============================================== Toast styles ===============================================*/
 
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
 import {
     Spacers,
@@ -16,8 +16,8 @@ import type {
     ShadowsTypes,
     SpacersTypes,
     RadiusesTypes,
-    AllColorsTypes,
     PaddingTypes,
+    BorderTypes,
 } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
@@ -33,8 +33,7 @@ const StyledToast = styled.div<{
     $bottom?: SpacersTypes | string
     $zIndex?: number
     $borderRadius?: RadiusesTypes
-    $borderWidth?: number
-    $borderColor?: AllColorsTypes
+    $border?: BorderTypes
     $padding?: PaddingTypes
 }>`
     width: 100%;
@@ -61,13 +60,7 @@ const StyledToast = styled.div<{
             $right,
             $bottom,
         })};
-
-    ${({ $borderWidth, $borderColor, theme }) =>
-        ($borderColor || $borderWidth) &&
-        css`
-            border: ${$borderWidth || 1}px solid
-                ${theme.AllColors({ $color: $borderColor || "gray-200" })};
-        `}
+    ${({ $border }) => $border && Mixins.Border({ $border })};
 `
 
 export const Title = styled(Text)``

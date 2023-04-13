@@ -5,7 +5,7 @@ import styled, { css } from "styled-components"
 import { stringifyPx, Mixins } from "../.."
 import type {
     AllColorsTypes,
-    BorderStylesTypes,
+    BorderTypes,
     RadiusesTypes,
     PaddingTypes,
     CursorTypes,
@@ -29,16 +29,7 @@ const StyledCard = styled.div<{
     $width?: string | number
     $height?: string | number
     $textColor?: AllColorsTypes
-    $borderColor?: AllColorsTypes
-    $borderWidth?: number
-    $borderStyle?:
-        | BorderStylesTypes
-        | {
-              left?: BorderStylesTypes
-              top?: BorderStylesTypes
-              right?: BorderStylesTypes
-              bottom?: BorderStylesTypes
-          }
+    $border?: BorderTypes
     $shadow?: ShadowsTypes
     $shadowDefault?: ShadowsTypes
     $shadowHover?: ShadowsTypes
@@ -77,7 +68,10 @@ const StyledCard = styled.div<{
             $shadowActive,
         })};
 
-    ${({ $borderWidth, $borderColor, $borderStyle, theme }) =>
+    ${({ $border }) => $border && Mixins.Border({ $border })};
+
+    ${
+        "" /* ${({ $borderWidth, $borderColor, $borderStyle, theme }) =>
         ($borderWidth || $borderStyle || $borderColor) &&
         css`
             border-width: ${$borderWidth ? stringifyPx($borderWidth) : "1px"};
@@ -85,7 +79,8 @@ const StyledCard = styled.div<{
             border-color: ${theme.AllColors({
                 $color: $borderColor || "gray-200",
             })};
-        `}
+        `} */
+    }
 
     ${({
         $inline,

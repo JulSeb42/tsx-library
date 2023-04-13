@@ -11,6 +11,7 @@ import type {
     PaddingTypes,
     FontWeightTypes,
     SpacersTypes,
+    BorderTypes,
 } from "../../types"
 
 enum tags {
@@ -47,9 +48,6 @@ export interface ToastProps extends HTMLAttributes<HTMLDivElement> {
     labelClose?: string
     position?: ObjectPositionTypes
     borderRadius?: RadiusesTypes
-    border?: {
-        width?: number
-        color?: AllColorsTypes
-    }
+    border?: BorderTypes
     padding?: PaddingTypes
 }

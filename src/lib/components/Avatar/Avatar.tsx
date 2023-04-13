@@ -34,15 +34,7 @@ const Avatar = forwardRef(
                 $size={size}
                 $color={color}
                 $contentColor={contentColor}
-                $border={typeof border === "object" ? true : border}
-                $borderWidth={
-                    border && typeof border === "object" ? border.width : 2
-                }
-                $borderColor={
-                    typeof border === "object" && border.color
-                        ? border.color
-                        : "primary"
-                }
+                $border={border}
                 $borderRadius={borderRadius}
                 {...rest}
             >

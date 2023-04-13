@@ -256,9 +256,6 @@ const Autocomplete = forwardRef(
                 helperBottom={helperBottom}
                 accentColor={accentColor}
             >
-                {/* <p>focus: {isFocus.toString()}</p>
-                <p>open: {isOpen.toString()}</p> */}
-
                 {inputFn()}
             </InputContainer>
         ) : (

@@ -2,11 +2,7 @@
 
 import type { HTMLAttributes, ElementType } from "react"
 
-import type {
-    AllColorsTypes,
-    RadiusesTypes,
-    BorderStylesTypes,
-} from "../../types"
+import type { AllColorsTypes, RadiusesTypes, BorderTypes } from "../../types"
 import type { FlexboxProps } from "../Flexbox/types"
 
 enum animations {
@@ -56,16 +52,7 @@ export interface ShineProps extends HTMLAttributes<HTMLSpanElement> {
 export interface SkeletonCardProps
     extends HTMLAttributes<HTMLDivElement>,
         FlexboxProps {
-    borderColor?: AllColorsTypes
-    borderWidth?: number
-    borderStyle?:
-        | BorderStylesTypes
-        | {
-              left?: BorderStylesTypes
-              top?: BorderStylesTypes
-              right?: BorderStylesTypes
-              bottom?: BorderStylesTypes
-          }
+    border?: BorderTypes
     borderRadius?: RadiusesTypes
     width?: string | number
     height?: string | number

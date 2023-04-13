@@ -38,7 +38,9 @@ const SkeletonPage = () => {
             <SkeletonCard
                 flexDirection="column"
                 gap="xs"
-                borderWidth={1}
+                border={{
+                    width: 1,
+                }}
                 padding="s"
                 borderRadius="m"
             >

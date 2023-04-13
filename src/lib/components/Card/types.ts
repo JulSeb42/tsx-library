@@ -9,8 +9,8 @@ import type {
     BoxShadowProps,
     PaddingTypes,
     CursorTypes,
-    BorderStylesTypes,
     ButtonLinkTypes,
+    BorderTypes,
 } from "../../types"
 import type { FlexboxProps } from "../Flexbox/types"
 
@@ -33,16 +33,7 @@ export type CardProps = HTMLAttributes<HTMLDivElement> &
     FlexboxProps &
     ButtonLinkTypes & {
         as?: ElementType
-        borderColor?: AllColorsTypes
-        borderWidth?: number
-        borderStyle?:
-            | BorderStylesTypes
-            | {
-                  left?: BorderStylesTypes
-                  top?: BorderStylesTypes
-                  right?: BorderStylesTypes
-                  bottom?: BorderStylesTypes
-              }
+        border?: BorderTypes
         borderRadius?: RadiusesTypes
         padding?: PaddingTypes
         cursor?: CursorTypes

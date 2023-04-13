@@ -592,7 +592,7 @@ ${$bottom &&
         border-width: ${$border?.width || 1}px;
         border-style: ${$border?.style || "solid"};
         border-color: ${({ theme }) =>
-            theme.AllColors({ $color: $border?.color || "primary" })};
+            theme.AllColors({ $color: $border?.color || "gray-200" })};
     `,
 }
 

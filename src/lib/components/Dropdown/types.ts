@@ -5,6 +5,7 @@ import type { HTMLAttributes, ElementType, ReactNode } from "react"
 import type {
     ColorsHoverTypes,
     DropdownItemProps as ItemProps,
+    RadiusesTypes,
 } from "../../types"
 import type { ListDirectionTypes } from "../ListInputs/types"
 
@@ -27,6 +28,7 @@ interface DropdownPropsBase extends HTMLAttributes<HTMLDivElement> {
     accentColor?: ColorsHoverTypes
     direction?: ListDirectionTypes
     maxHeightOpen?: number
+    borderRadius?: RadiusesTypes
 }
 
 interface DropdownPropsContent1 extends DropdownPropsBase {

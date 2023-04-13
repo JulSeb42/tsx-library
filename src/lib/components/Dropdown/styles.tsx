@@ -2,15 +2,13 @@
 
 import styled, { css } from "styled-components"
 
-import {
-    Radiuses,
-    Shadows,
-    Transitions,
-    Breakpoints,
-    Mixins,
-    stringifyPx,
-} from "../../"
-import type { ColorsHoverTypes, PaddingTypes, SpacersTypes } from "../../types"
+import { Shadows, Transitions, Breakpoints, Mixins, stringifyPx } from "../../"
+import type {
+    ColorsHoverTypes,
+    PaddingTypes,
+    SpacersTypes,
+    RadiusesTypes,
+} from "../../types"
 import type { DropdownJustifyTypes } from "./types"
 import type { ListDirectionTypes } from "../ListInputs/types"
 
@@ -21,6 +19,7 @@ const StyledDropdown = styled.div<{
     $accentColor?: ColorsHoverTypes
     $direction?: ListDirectionTypes
     $maxHeightOpen: number
+    $borderRadius?: RadiusesTypes
 }>`
     position: absolute;
     ${Mixins.Flexbox({
@@ -29,7 +28,7 @@ const StyledDropdown = styled.div<{
     })};
     min-width: 200px;
     background-color: ${({ theme }) => theme.Background};
-    border-radius: ${Radiuses.M};
+    ${Mixins.BorderRadius};
     overflow-y: scroll;
     box-shadow: ${({ $isOpen }) => $isOpen && Shadows.M};
     transition: ${Transitions.Short};

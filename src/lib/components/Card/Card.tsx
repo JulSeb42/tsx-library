@@ -12,9 +12,7 @@ const Card = forwardRef(
         {
             as,
             children,
-            borderWidth,
-            borderColor,
-            borderStyle,
+            border,
             borderRadius = "m",
             padding = "s",
             cursor,
@@ -56,9 +54,7 @@ const Card = forwardRef(
             $width={width}
             $height={height}
             $textColor={textColor}
-            $borderColor={borderColor}
-            $borderWidth={borderWidth}
-            $borderStyle={borderStyle}
+            $border={border}
             $shadow={shadow}
             $shadowDefault={typeof shadow === "object" && shadow.default}
             $shadowHover={typeof shadow === "object" && shadow.hover}
