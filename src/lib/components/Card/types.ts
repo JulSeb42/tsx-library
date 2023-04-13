@@ -10,7 +10,7 @@ import type {
     PaddingTypes,
     CursorTypes,
     BorderStylesTypes,
-    ButtonLinkType,
+    ButtonLinkTypes,
 } from "../../types"
 import type { FlexboxProps } from "../Flexbox/types"
 
@@ -31,7 +31,7 @@ export type BackgroundImgType = {
 
 export type CardProps = HTMLAttributes<HTMLDivElement> &
     FlexboxProps &
-    ButtonLinkType & {
+    ButtonLinkTypes & {
         as?: ElementType
         borderColor?: AllColorsTypes
         borderWidth?: number

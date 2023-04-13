@@ -12,9 +12,9 @@ import type {
 import type {
     AllColorsTypes,
     ColorsHoverTypes,
-    LinkType,
-    ButtonLinkTypeRequire,
-    LinkTypeBlank,
+    LinkTypes,
+    ButtonLinkTypesRequire,
+    LinkTypesBlank,
     PaddingTypes,
     SpacersTypes,
 } from "./"
@@ -29,7 +29,7 @@ export type AccordionItemProps = {
 
 /*==================== Breadcrumbs item ====================*/
 
-export type BreadcrumbsItemProps = LinkType & {
+export type BreadcrumbsItemProps = LinkTypes & {
     text: string
 }
 
@@ -51,13 +51,13 @@ export type TabsItemProps = {
 
 /*==================== Stepper step ====================*/
 
-export type StepProps = LinkTypeBlank & {
+export type StepProps = LinkTypesBlank & {
     text: string
 }
 
 /*==================== Dropdown item ====================*/
 
-export type DropdownItemProps = ButtonLinkTypeRequire & {
+export type DropdownItemProps = ButtonLinkTypesRequire & {
     text: string
     icon?: string | JSX.Element
     padding?: PaddingTypes
@@ -74,7 +74,7 @@ export type BaseUseFormType = {
 
 /*==================== Footer links ====================*/
 
-export type FooterItemProps = ButtonLinkTypeRequire & {
+export type FooterItemProps = ButtonLinkTypesRequire & {
     content: string | JSX.Element
 }
 
@@ -99,7 +99,7 @@ type ButtonGroupPropsBase = HTMLAttributes<
     HTMLButtonElement & HTMLHyperlinkElementUtils
 > &
     ButtonHTMLAttributes<HTMLButtonElement & HTMLHyperlinkElementUtils> &
-    ButtonLinkTypeRequire & {
+    ButtonLinkTypesRequire & {
         "aria-label"?: string
     }
 
@@ -189,7 +189,7 @@ export type ListGroupItemProps =
 
 /*==================== Icon menu ====================*/
 
-export type IconMenuItemProps = ButtonLinkTypeRequire & {
+export type IconMenuItemProps = ButtonLinkTypesRequire & {
     icon: string
     label: string
 }

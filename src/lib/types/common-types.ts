@@ -512,6 +512,10 @@ enum borderStyles {
 
 export type BorderStylesTypes = keyof typeof borderStyles
 
+/*==================== Border ====================*/
+
+export type BorderTypes = {}
+
 /*==================== Links ====================*/
 
 type LinkType1 = {
@@ -524,13 +528,13 @@ type LinkType2 = {
     to?: never
 }
 
-export type LinkType = LinkType1 | LinkType2
+export type LinkTypes = LinkType1 | LinkType2
 
-export type LinkTypeRequire = RequireAtLeastOne<LinkType, "href" | "to">
+export type LinkTypesRequire = RequireAtLeastOne<LinkTypes, "href" | "to">
 
-export type LinkTypeBlank = LinkType & { blank?: boolean }
+export type LinkTypesBlank = LinkTypes & { blank?: boolean }
 
-export type LinkTypeBlankRequire = LinkTypeRequire & { blank?: boolean }
+export type LinkTypesBlankRequire = LinkTypesRequire & { blank?: boolean }
 
 /*==================== ButtonLinks ====================*/
 
@@ -555,9 +559,12 @@ type ButtonLinkType3 = {
     blank?: boolean
 }
 
-export type ButtonLinkType = ButtonLinkType1 | ButtonLinkType2 | ButtonLinkType3
+export type ButtonLinkTypes =
+    | ButtonLinkType1
+    | ButtonLinkType2
+    | ButtonLinkType3
 
-export type ButtonLinkTypeRequire = RequireAtLeastOne<
-    ButtonLinkType,
+export type ButtonLinkTypesRequire = RequireAtLeastOne<
+    ButtonLinkTypes,
     "href" | "to" | "onClick"
 >

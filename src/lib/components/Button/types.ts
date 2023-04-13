@@ -8,7 +8,7 @@ import type {
     BoxShadowProps,
     RadiusesTypes,
     SpacersTypes,
-    ButtonLinkType,
+    ButtonLinkTypes,
 } from "../../types"
 import type { LoaderVariantTypes } from "../Loader/types"
 
@@ -30,7 +30,7 @@ export type ButtonSizesTypes = keyof typeof buttonSizes
 
 type ButtonBaseProps = HTMLAttributes<HTMLButtonElement & HTMLAnchorElement> &
     ButtonHTMLAttributes<HTMLButtonElement & HTMLAnchorElement> &
-    ButtonLinkType & {
+    ButtonLinkTypes & {
         as?: ElementType
         color?: ColorsHoverTypes
         shadow?: ShadowsTypes | BoxShadowProps

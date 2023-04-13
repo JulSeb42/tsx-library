@@ -8,7 +8,7 @@ import type {
     ObjectPositionTypes,
     BoxShadowProps,
     RadiusesTypes,
-    ButtonLinkType,
+    ButtonLinkTypes,
 } from "../../types"
 
 enum buttonIconVariants {
@@ -30,7 +30,7 @@ type ButtonIconBaseProps = HTMLAttributes<
     HTMLButtonElement & HTMLAnchorElement
 > &
     ButtonHTMLAttributes<HTMLButtonElement & HTMLAnchorElement> &
-    ButtonLinkType & {
+    ButtonLinkTypes & {
         as?: ElementType
         isLoading?: boolean
         color?: ColorsHoverTypes
