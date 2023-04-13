@@ -2,12 +2,13 @@
 
 import type { HTMLAttributes, ElementType } from "react"
 
-import type { AllColorsTypes, PaddingTypes } from "../../types"
+import type { AllColorsTypes, PaddingTypes, RadiusesTypes } from "../../types"
 
 interface BadgeBaseProps extends HTMLAttributes<HTMLSpanElement> {
     as?: ElementType
     color?: AllColorsTypes
     size?: number
+    borderRadius?: RadiusesTypes
 }
 
 interface BadgeContent1 extends BadgeBaseProps {

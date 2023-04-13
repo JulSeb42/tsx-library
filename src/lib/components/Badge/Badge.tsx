@@ -18,6 +18,7 @@ const Badge = forwardRef(
             children,
             padding,
             content,
+            borderRadius = "round",
             ...rest
         }: BadgeProps,
         ref?: ForwardedRef<HTMLSpanElement>
@@ -35,6 +36,7 @@ const Badge = forwardRef(
             $padding={padding}
             $size={size}
             $textColor={contentColor}
+            $borderRadius={borderRadius}
             {...rest}
         >
             {typeof content === "number" ? (

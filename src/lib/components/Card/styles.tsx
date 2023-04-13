@@ -70,18 +70,6 @@ const StyledCard = styled.div<{
 
     ${({ $border }) => $border && Mixins.Border({ $border })};
 
-    ${
-        "" /* ${({ $borderWidth, $borderColor, $borderStyle, theme }) =>
-        ($borderWidth || $borderStyle || $borderColor) &&
-        css`
-            border-width: ${$borderWidth ? stringifyPx($borderWidth) : "1px"};
-            border-style: ${$borderStyle || "solid"};
-            border-color: ${theme.AllColors({
-                $color: $borderColor || "gray-200",
-            })};
-        `} */
-    }
-
     ${({
         $inline,
         $flexDirection,

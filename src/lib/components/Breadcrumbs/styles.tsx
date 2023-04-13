@@ -4,16 +4,20 @@ import styled from "styled-components"
 
 import { Mixins, Text } from "../../"
 import type { SeparatorTypes } from "./types"
+import type { SpacersTypes } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledBreadcrumbs = styled(Text)<{ $separator?: SeparatorTypes }>`
-    ${({ $separator }) =>
+const StyledBreadcrumbs = styled(Text)<{
+    $separator?: SeparatorTypes
+    $gap?: SpacersTypes
+}>`
+    ${({ $separator, $gap }) =>
         Mixins.Flexbox({
             $alignItems: "center",
             $justifyContent: "flex-start",
             $flexWrap: "wrap",
-            $gap: $separator === "slash" ? "xs" : "xxs",
+            $gap: $gap ? $gap : $separator === "slash" ? "xs" : "xxs",
         })};
 `
 

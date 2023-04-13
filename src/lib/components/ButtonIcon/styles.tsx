@@ -220,17 +220,6 @@ const Tip = styled.span<{
         position: absolute;
         left: ${({ $width }) =>
             `calc((${$width}px + ${Spacers.XXS} * 2) / 2 - 10px)`};
-
-        ${
-            "" /* ${({ $position }) =>
-            $position === "down"
-                ? css`
-                      top: calc(${Spacers.XS} * -1 - 2px);
-                  `
-                : css`
-                      bottom: calc(${Spacers.XS} * -1 - 2px);
-                  `} */
-        }
     }
 
     ${({ $position, $bottom }) =>

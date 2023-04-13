@@ -6,6 +6,7 @@ import type {
     BreadcrumbsItemProps,
     AllColorsTypes,
     ColorsHoverTypes,
+    SpacersTypes,
 } from "../../types"
 
 enum separators {
@@ -17,9 +18,9 @@ export type SeparatorTypes = keyof typeof separators
 
 interface BreadcrumbsPropsBase extends HTMLAttributes<HTMLParagraphElement> {
     as?: ElementType
-
     color?: AllColorsTypes
     linkColor?: ColorsHoverTypes
+    gap?: SpacersTypes
 }
 
 interface BreadcrumbsSeparator1 extends BreadcrumbsPropsBase {

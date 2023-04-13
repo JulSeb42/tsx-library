@@ -2,8 +2,8 @@
 
 import styled from "styled-components"
 
-import { Mixins, FontWeights, Radiuses } from "../../"
-import type { AllColorsTypes, PaddingTypes } from "../../types"
+import { Mixins, FontWeights } from "../../"
+import type { AllColorsTypes, PaddingTypes, RadiusesTypes } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
 
@@ -14,6 +14,7 @@ const StyledBadge = styled.span<{
     $children?: boolean
     $childrenLength?: number
     $padding?: PaddingTypes
+    $borderRadius?: RadiusesTypes
 }>`
     min-width: ${({ $size }) => $size}px;
     height: ${({ $size }) => $size}px;
@@ -24,7 +25,7 @@ const StyledBadge = styled.span<{
         $justifyContent: "center",
     })};
     background-color: ${({ theme }) => theme.AllColors};
-    border-radius: ${Radiuses.Round};
+    ${Mixins.BorderRadius};
     color: ${({ $color, $textColor, theme }) =>
         $color === "white"
             ? theme.Primary500
@@ -34,16 +35,6 @@ const StyledBadge = styled.span<{
             ? theme.AllColors({ $color: $textColor })
             : theme.Background};
     font-weight: ${FontWeights.Black};
-    ${
-        "" /* padding: ${({ $children, $childrenLength, $padding }) =>
-        $children && $childrenLength && $childrenLength > 2 && $padding
-            ? Mixins.Spacers({ $spacer: $padding })
-            : $children &&
-              $childrenLength &&
-              $childrenLength > 2 &&
-              !$padding &&
-            `0 ${Spacers.XXS}`}; */
-    }
     ${({ $children, $childrenLength, $padding }) =>
         $children &&
         $childrenLength &&

@@ -20,6 +20,7 @@ const Breadcrumbs = forwardRef(
             linkColor = "primary",
             separator = "slash",
             customIcon,
+            gap,
             ...rest
         }: BreadcrumbsProps,
         ref?: ForwardedRef<HTMLParagraphElement>
@@ -30,6 +31,7 @@ const Breadcrumbs = forwardRef(
             color={color}
             linkColor={linkColor}
             $separator={separator}
+            $gap={gap}
             {...rest}
         >
             {items
