@@ -41,6 +41,8 @@ const IconMenuPage = () => {
                     bottom: 48,
                     right: 48,
                 }}
+                buttonsSize={120}
+                gap="xxl"
             />
         </Page>
     )

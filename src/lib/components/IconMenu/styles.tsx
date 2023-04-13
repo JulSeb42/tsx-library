@@ -2,21 +2,21 @@
 
 import styled, { css } from "styled-components"
 
-import { Radiuses, Breakpoints, Spacers, Transitions, Mixins } from "../../"
+import { Breakpoints, Mixins, Radiuses, Transitions } from "../../"
 import { PlusIcon } from "../../icons"
 import type {
     ColorsHoverTypes,
-    ShadowsTypes,
     ObjectPositionTypes,
+    ShadowsTypes,
+    SpacersTypes,
 } from "../../types"
 import type { IconMenuDirectionTypes } from "./types"
 
 import { setDefaultTheme } from "../../utils"
 
-const buttonSize = 48
-
 const StyledIconMenu = styled.div<{
     $position?: ObjectPositionTypes
+    $buttonSize: number
 }>`
     ${({ $position }) =>
         Mixins.Position({
@@ -28,8 +28,8 @@ const StyledIconMenu = styled.div<{
             $zIndex: $position?.zIndex,
         })};
 
-    width: ${buttonSize}px;
-    height: ${buttonSize}px;
+    width: ${({ $buttonSize }) => $buttonSize}px;
+    height: ${({ $buttonSize }) => $buttonSize}px;
 `
 
 const StyledOpenButton = styled.button<{
@@ -37,9 +37,10 @@ const StyledOpenButton = styled.button<{
     $shadowDefault?: ShadowsTypes
     $shadowHover?: ShadowsTypes
     $shadowActive?: ShadowsTypes
+    $buttonSize: number
 }>`
-    width: ${buttonSize}px;
-    height: ${buttonSize}px;
+    width: ${({ $buttonSize }) => $buttonSize}px;
+    height: ${({ $buttonSize }) => $buttonSize}px;
     border: none;
     border-radius: ${Radiuses.Circle};
     ${Mixins.Flexbox({
@@ -70,14 +71,35 @@ const StyledOpenButton = styled.button<{
     }
 `
 
+const ButtonPosition = ({
+    $isOpen,
+    $index,
+    $buttonSize,
+    $gap,
+}: {
+    $isOpen: boolean
+    $index: number
+    $buttonSize: number
+    $gap: SpacersTypes
+}) =>
+    css`
+        ${$isOpen
+            ? `calc(${
+                  ($index + 1) * $buttonSize
+              }px + var(--icon-menu-position-open) * ${$index + 1})`
+            : 0}
+    `
+
 const StyledButton = styled.button<{
     $color?: ColorsHoverTypes
-    $isOpen?: boolean
-    $index: number
     $direction?: IconMenuDirectionTypes
+    $isOpen: boolean
+    $index: number
+    $buttonSize: number
+    $gap: SpacersTypes
 }>`
-    width: ${buttonSize}px;
-    height: ${buttonSize}px;
+    width: ${({ $buttonSize }) => $buttonSize}px;
+    height: ${({ $buttonSize }) => $buttonSize}px;
     border: none;
     border-radius: ${Radiuses.Circle};
     ${Mixins.Flexbox({
@@ -100,42 +122,46 @@ const StyledButton = styled.button<{
         background-color 0.2s ease, color 0.2s ease;
     text-decoration: none;
 
-    ${({ $direction, $isOpen, $index }) =>
+    ${({ $direction, $isOpen, $index, $buttonSize, $gap }) =>
         $direction === "left"
             ? css`
                   top: 0;
-                  left: ${$isOpen
-                      ? `calc(${($index + 1) * buttonSize}px + ${
-                            Spacers.XS
-                        } * ${$index + 1})`
-                      : 0};
+                  left: ${ButtonPosition({
+                      $buttonSize,
+                      $gap,
+                      $index,
+                      $isOpen,
+                  })};
               `
             : $direction === "up"
             ? css`
-                  bottom: ${$isOpen
-                      ? `calc(${($index + 1) * buttonSize}px + ${
-                            Spacers.XS
-                        } * ${$index + 1})`
-                      : 0};
+                  bottom: ${ButtonPosition({
+                      $buttonSize,
+                      $gap,
+                      $index,
+                      $isOpen,
+                  })};
                   left: 0;
               `
             : $direction === "right"
             ? css`
                   top: 0;
-                  right: ${$isOpen
-                      ? `calc(${($index + 1) * buttonSize}px + ${
-                            Spacers.XS
-                        } * ${$index + 1})`
-                      : 0};
+                  right: ${ButtonPosition({
+                      $buttonSize,
+                      $gap,
+                      $index,
+                      $isOpen,
+                  })};
               `
             : $direction === "down" &&
               css`
-                  top: ${$isOpen
-                      ? `calc(${($index + 1) * buttonSize}px + ${
-                            Spacers.XS
-                        } * ${$index + 1})`
-                      : 0};
                   left: 0;
+                  top: ${ButtonPosition({
+                      $buttonSize,
+                      $gap,
+                      $index,
+                      $isOpen,
+                  })};
               `}
 
     @media ${Breakpoints.Hover} {

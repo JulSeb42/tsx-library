@@ -7,6 +7,7 @@ import type {
     ColorsHoverTypes,
     ObjectPositionTypes,
     IconMenuItemProps,
+    SpacersTypes,
 } from "../../types"
 
 enum directions {
@@ -18,16 +19,9 @@ enum directions {
 
 export type IconMenuDirectionTypes = keyof typeof directions
 
-export interface IconMenuProps extends HTMLAttributes<HTMLDivElement> {
+interface IconMenuPropsBase extends HTMLAttributes<HTMLDivElement> {
     as?: ElementType
     items: IconMenuItemProps[]
-    icon?:
-        | "plus"
-        | "burger"
-        | {
-              open: string
-              close: string
-          }
     direction?: IconMenuDirectionTypes
     shadow?:
         | ShadowsTypes
@@ -38,4 +32,39 @@ export interface IconMenuProps extends HTMLAttributes<HTMLDivElement> {
           }
     position?: ObjectPositionTypes
     color?: ColorsHoverTypes
+    buttonsSize?: number
+    gap?: SpacersTypes
 }
+
+interface IconMenuIconSize1 extends IconMenuPropsBase {
+    icon?: "plus"
+    openIconSize?: number
+}
+
+interface IconMenuIconSize2 extends IconMenuPropsBase {
+    icon?: "burger"
+    openIconSize?: {
+        width?: number
+        height?: number
+        open?: never
+        close?: never
+    }
+}
+
+interface IconMenuIconSize3 extends IconMenuPropsBase {
+    icon?: {
+        open: string
+        close: string
+    }
+    openIconSize?: {
+        width?: never
+        height?: never
+        open?: number
+        close?: number
+    }
+}
+
+export type IconMenuProps =
+    | IconMenuIconSize1
+    | IconMenuIconSize2
+    | IconMenuIconSize3

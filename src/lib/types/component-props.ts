@@ -191,6 +191,7 @@ export type ListGroupItemProps =
 
 export type IconMenuItemProps = ButtonLinkTypesRequire & {
     icon: string
+    iconSize?: number
     label: string
 }
 
