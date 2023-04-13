@@ -12,6 +12,7 @@ import type {
     CustomFontSizeTypes,
     FontWeightTypes,
     SpacersTypes,
+    BorderTypes,
 } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
@@ -26,9 +27,8 @@ const StyledAlert = styled.div<{
     $gap?: SpacersTypes
     $color: ColorsHoverTypes
     $backgroundColor?: AllColorsTypes
-    $borderColor?: AllColorsTypes
     $textColor?: AllColorsTypes
-    $borderWidth?: number
+    $border?: BorderTypes
 }>`
     width: 100%;
     max-width: ${({ $maxWidth }) => $maxWidth && stringifyPx($maxWidth)};
@@ -36,8 +36,6 @@ const StyledAlert = styled.div<{
     ${Mixins.BorderRadius};
     ${Mixins.FontSize};
     ${Mixins.FontWeight};
-    border-width: var(--border-width);
-    border-style: solid;
     color: ${({ theme, $textColor }) =>
         theme.AllColors({ $color: $textColor })};
     ${({ $gap }) =>
@@ -47,19 +45,24 @@ const StyledAlert = styled.div<{
             $alignItems: "stretch",
         })};
 
-    ${({ $color, $backgroundColor, $borderColor, theme, $borderWidth }) =>
-        $backgroundColor || $borderColor
+    ${({ $border, $color }) =>
+        Mixins.Border({
+            $border: {
+                width: $border?.width || 1,
+                style: $border?.style || "solid",
+                color: $border?.color || $color || "primary",
+            },
+        })}
+
+    ${({ $color, $backgroundColor, theme }) =>
+        $backgroundColor
             ? css`
                   background-color: ${theme.AllColors({
                       $color: $backgroundColor,
                   })};
-                  border-color: ${theme.AllColors({
-                      $color: $borderColor,
-                  })};
               `
             : css`
                   background-color: ${theme.Colors50({ $color })};
-                  border-color: ${theme.ColorsShort({ $color })};
               `};
 `
 

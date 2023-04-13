@@ -514,7 +514,11 @@ export type BorderStylesTypes = keyof typeof borderStyles
 
 /*==================== Border ====================*/
 
-export type BorderTypes = {}
+export type BorderTypes = {
+    style?: BorderStylesTypes
+    width?: number
+    color?: AllColorsTypes
+}
 
 /*==================== Links ====================*/
 

@@ -10,6 +10,7 @@ import type {
     FontSizeTypes,
     CustomFontSizeTypes,
     FontWeightTypes,
+    BorderTypes,
 } from "../../types"
 
 interface AlertPropsBase extends HTMLAttributes<HTMLDivElement> {
@@ -18,19 +19,22 @@ interface AlertPropsBase extends HTMLAttributes<HTMLDivElement> {
     textColor?: AllColorsTypes
     padding?: PaddingTypes
     borderRadius?: RadiusesTypes
-    borderWidth?: number
 }
 
 interface AlertPropsColor1 extends AlertPropsBase {
     color?: ColorsHoverTypes
     backgroundColor?: never
-    borderColor?: never
+    border?: BorderTypes & {
+        color?: never
+    }
 }
 
 interface AlertPropsColor2 extends AlertPropsBase {
     color?: never
     backgroundColor?: AllColorsTypes
-    borderColor?: AllColorsTypes
+    border?: BorderTypes & {
+        color?: AllColorsTypes
+    }
 }
 
 type AlertPropsColor = AlertPropsColor1 | AlertPropsColor2
@@ -52,3 +56,7 @@ type AlertPropsContent2 = AlertPropsColor & {
 }
 
 export type AlertProps = AlertPropsContent1 | AlertPropsContent2
+
+// type AlertPropsBorder1 = AlertPropsContent & {
+//     border?: BorderTypes
+// }

@@ -18,14 +18,15 @@ const Alert = forwardRef(
             fontWeight = "regular",
             color = "primary",
             backgroundColor,
-            borderColor,
             textColor = color === "white" ? "black" : "font",
             padding = "m",
             borderRadius = "m",
             maxWidth,
             gap = "xs",
-            borderWidth = 1,
-            style,
+            border = {
+                width: 1,
+                style: "solid",
+            },
             ...rest
         }: AlertProps,
         ref?: ForwardedRef<HTMLDivElement>
@@ -36,19 +37,14 @@ const Alert = forwardRef(
             $maxWidth={maxWidth}
             $padding={padding}
             $borderRadius={borderRadius}
-            $borderWidth={borderWidth}
+            $border={border}
             $fontSize={fontSize}
             $customFontSize={customFontSize}
             $fontWeight={fontWeight}
             $gap={gap}
             $color={color}
             $backgroundColor={backgroundColor}
-            $borderColor={borderColor}
             $textColor={textColor}
-            style={{
-                ...style,
-                "--border-width": `${borderWidth}px`,
-            }}
             {...rest}
         >
             {children}

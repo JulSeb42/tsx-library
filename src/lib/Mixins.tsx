@@ -39,6 +39,7 @@ import type {
     FontWeightTypes,
     FontSizeTypes,
     CustomFontSizeTypes,
+    BorderTypes,
 } from "./types"
 
 /*==================== Types ====================*/
@@ -142,6 +143,12 @@ export interface FontWeightsProps {
 export interface FontSizesProps {
     $fontSize?: FontSizeTypes
     $customFontSize?: CustomFontSizeTypes
+}
+
+/*==== Border ====*/
+
+export interface BorderProps {
+    $border?: BorderTypes
 }
 
 /*==================== Mixins ====================*/
@@ -580,6 +587,13 @@ ${$bottom &&
                 ? FontSizes.Small
                 : ""};
         `,
+
+    Border: ({ $border }: BorderProps) => css`
+        border-width: ${$border?.width || 1}px;
+        border-style: ${$border?.style || "solid"};
+        border-color: ${({ theme }) =>
+            theme.AllColors({ $color: $border?.color || "primary" })};
+    `,
 }
 
 export default Mixins
