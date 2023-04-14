@@ -2,20 +2,19 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
-import styled from "styled-components"
 
 import { FontSizes } from "../../../"
 
 import type { TextProps } from "../types"
-import { StyledH5, MaxLinesMixin } from "../styles"
+import { StyledH5 } from "../styles"
 
 const H5 = forwardRef(
     (
-        { as, children, maxLines, display, style, ...rest }: TextProps,
+        { as, children, display, style, ...rest }: TextProps,
         ref?: ForwardedRef<HTMLHeadingElement>
     ) => {
         return (
-            <H5MaxLines
+            <StyledH5
                 ref={ref}
                 as={as}
                 style={{
@@ -24,17 +23,12 @@ const H5 = forwardRef(
                         ? FontSizes.Display.H5
                         : FontSizes.Titles.H5,
                 }}
-                $maxLines={maxLines}
                 {...rest}
             >
                 {children}
-            </H5MaxLines>
+            </StyledH5>
         )
     }
 )
-
-const H5MaxLines = styled(StyledH5)<{ $maxLines?: number }>`
-    ${({ $maxLines }) => $maxLines && MaxLinesMixin({ $maxLines })}
-`
 
 export default H5

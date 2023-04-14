@@ -60,26 +60,6 @@ const FontCommon = ({
     }
 `
 
-const MaxLinesMixin = ({ $maxLines }: { $maxLines?: number }) => css`
-    ${$maxLines &&
-    css`
-        ${$maxLines === 1
-            ? css`
-                  white-space: nowrap;
-                  overflow: hidden;
-                  text-overflow: ellipsis;
-              `
-            : css`
-                  overflow: hidden;
-                  text-overflow: ellipsis;
-                  display: -webkit-box;
-                  -webkit-line-clamp: ${$maxLines};
-                  line-clamp: ${$maxLines};
-                  -webkit-box-orient: vertical;
-              `}
-    `}
-`
-
 const StyledH1 = styled.h1`
     font-size: var(--font-size);
     ${FontCommon({
@@ -221,7 +201,6 @@ setDefaultTheme([
     StyledOl,
     StyledDl,
     FontCommon,
-    MaxLinesMixin,
 ])
 
 export {
@@ -240,5 +219,4 @@ export {
     StyledOl,
     StyledDl,
     FontCommon,
-    MaxLinesMixin,
 }

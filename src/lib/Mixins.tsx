@@ -149,6 +149,12 @@ export interface BorderProps {
     $border?: BorderTypes
 }
 
+/*==== Max line ====*/
+
+export interface MaxLinesProps {
+    $maxLines?: number
+}
+
 /*==================== Mixins ====================*/
 
 const Mixins = {
@@ -619,6 +625,24 @@ const Mixins = {
         border-color: ${({ theme }) =>
             theme.AllColors({ $color: $border?.color || "gray-200" })};
     `,
+
+    MaxLines: ({ $maxLines }: MaxLinesProps) =>
+        css`
+            ${$maxLines === 1
+                ? css`
+                      white-space: nowrap;
+                      overflow: hidden;
+                      text-overflow: ellipsis;
+                  `
+                : css`
+                      overflow: hidden;
+                      text-overflow: ellipsis;
+                      display: -webkit-box;
+                      -webkit-line-clamp: ${$maxLines};
+                      line-clamp: ${$maxLines};
+                      -webkit-box-orient: vertical;
+                  `}
+        `,
 }
 
 export default Mixins

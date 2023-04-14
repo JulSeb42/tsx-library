@@ -2,20 +2,19 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
-import styled from "styled-components"
 
 import { FontSizes } from "../../../"
 
 import type { TextProps } from "../types"
-import { StyledH1, MaxLinesMixin } from "../styles"
+import { StyledH1 } from "../styles"
 
 const H1 = forwardRef(
     (
-        { as, children, maxLines, display, style, ...rest }: TextProps,
+        { as, children, display, style, ...rest }: TextProps,
         ref?: ForwardedRef<HTMLHeadingElement>
     ) => {
         return (
-            <H1MaxLines
+            <StyledH1
                 ref={ref}
                 as={as}
                 style={{
@@ -24,17 +23,12 @@ const H1 = forwardRef(
                         ? FontSizes.Display.H1
                         : FontSizes.Titles.H1,
                 }}
-                $maxLines={maxLines}
                 {...rest}
             >
                 {children}
-            </H1MaxLines>
+            </StyledH1>
         )
     }
 )
-
-const H1MaxLines = styled(StyledH1)<{ $maxLines?: number }>`
-    ${({ $maxLines }) => $maxLines && MaxLinesMixin({ $maxLines })}
-`
 
 export default H1
