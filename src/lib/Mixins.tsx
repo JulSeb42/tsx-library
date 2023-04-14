@@ -39,7 +39,6 @@ import type {
     TextDecorationTypes,
     FontWeightTypes,
     FontSizeTypes,
-    CustomFontSizeTypes,
     BorderTypes,
 } from "./types"
 
@@ -421,7 +420,7 @@ const Mixins = {
         })};
     `,
 
-    PaddingVar: (variablesDefinitions: FlattenSimpleInterpolation) => css`
+    PaddingVar: (variablesDefinitions?: FlattenSimpleInterpolation) => css`
         ${variablesDefinitions};
         padding-left: var(--padding-left);
         padding-top: var(--padding-top);

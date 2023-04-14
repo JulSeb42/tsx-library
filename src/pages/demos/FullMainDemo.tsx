@@ -12,7 +12,7 @@ const StyledMain = styled(Main)`
 const FullMainDemo = () => {
     return (
         <DefaultLayout title="Demo Main Full">
-            <StyledMain size="full" gap="xl">
+            <StyledMain size="full">
                 <Text tag="h2">Main</Text>
 
                 <Section gap="xs">
@@ -128,7 +128,7 @@ const FullMainDemo = () => {
                 </Section>
             </StyledMain>
 
-            <StyledMain size="full" contentSize="large" gap="xl">
+            <StyledMain size="full" contentSize="large">
                 <Text tag="h2">Main</Text>
 
                 <Section gap="xs">

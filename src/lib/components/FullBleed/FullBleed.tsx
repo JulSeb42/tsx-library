@@ -3,25 +3,37 @@
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
+import { stringifyPx, variableAllPaddings } from "../../"
+
 import * as Styles from "./styles"
 import type { FullBleedProps } from "./types"
 
 const FullBleed = forwardRef(
     (
-        { as, children, height, aspectRatio, padding, ...rest }: FullBleedProps,
+        {
+            as,
+            children,
+            height,
+            aspectRatio,
+            padding = "none",
+            style,
+            ...rest
+        }: FullBleedProps,
         ref?: ForwardedRef<HTMLDivElement>
-    ) => (
-        <Styles.StyledFullBleed
-            ref={ref}
-            as={as}
-            $padding={padding}
-            $height={height}
-            $aspectRatio={aspectRatio}
-            {...rest}
-        >
-            {children}
-        </Styles.StyledFullBleed>
-    )
+    ) => {
+        const styles = {
+            ...style,
+            ...variableAllPaddings(padding),
+            ["--aspect-ratio" as any]: aspectRatio,
+            ["--height" as any]: height && stringifyPx(height),
+        }
+
+        return (
+            <Styles.StyledFullBleed ref={ref} as={as} style={styles} {...rest}>
+                {children}
+            </Styles.StyledFullBleed>
+        )
+    }
 )
 
 export default FullBleed

@@ -1,31 +1,21 @@
 /*=============================================== FullBleed styles ===============================================*/
 
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
-import { Mixins, stringifyPx } from "../../"
-import type { PaddingTypes } from "../../types"
+import { Mixins } from "../../"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledFullBleed = styled.div<{
-    $height?: number | string
-    $aspectRatio?: string
-    $padding?: PaddingTypes
-}>`
+const StyledFullBleed = styled.div`
     grid-column: 1/4 !important;
-    ${Mixins.Padding};
+    ${Mixins.PaddingVar()};
     width: 100%;
-    aspect-ratio: ${({ $aspectRatio }) => $aspectRatio};
+    aspect-ratio: var(--aspect-ratio);
+    height: var(--height);
 
-    ${({ $height }) =>
-        $height &&
-        css`
-            height: ${stringifyPx($height)};
-
-            img {
-                height: 100%;
-            }
-        `}
+    img {
+        height: 100%;
+    }
 `
 
 setDefaultTheme([StyledFullBleed])

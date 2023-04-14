@@ -3,7 +3,7 @@
 import { Spacers } from "../"
 import type { PaddingTypes } from "../types"
 
-const getPadding = (padding: PaddingTypes) => {
+export const variablePadding = (padding: PaddingTypes) => {
     switch (padding) {
         case "xxl":
             return Spacers.XXL
@@ -24,15 +24,47 @@ const getPadding = (padding: PaddingTypes) => {
     }
 }
 
-export const variablePadding = (padding: PaddingTypes) => {
-    if (typeof padding === "object") {
-        if (padding?.leftRight) getPadding(padding?.leftRight)
-        if (padding?.topBottom) getPadding(padding?.topBottom)
-        if (padding?.left) getPadding(padding?.left)
-        if (padding?.top) getPadding(padding?.top)
-        if (padding?.right) getPadding(padding?.right)
-        if (padding?.bottom) getPadding(padding?.bottom)
-    }
+export const variablePaddingLeft = (padding: PaddingTypes) =>
+    variablePadding(
+        typeof padding === "object" && padding?.left
+            ? padding?.left
+            : typeof padding === "object" && padding?.leftRight
+            ? padding?.leftRight
+            : padding
+    )
 
-    return getPadding(padding)
+export const variablePaddingTop = (padding: PaddingTypes) =>
+    variablePadding(
+        typeof padding === "object" && padding?.top
+            ? padding?.top
+            : typeof padding === "object" && padding?.topBottom
+            ? padding?.topBottom
+            : padding
+    )
+
+export const variablePaddingRight = (padding: PaddingTypes) =>
+    variablePadding(
+        typeof padding === "object" && padding?.right
+            ? padding?.right
+            : typeof padding === "object" && padding?.leftRight
+            ? padding?.leftRight
+            : padding
+    )
+
+export const variablePaddingBottom = (padding: PaddingTypes) =>
+    variablePadding(
+        typeof padding === "object" && padding?.bottom
+            ? padding?.bottom
+            : typeof padding === "object" && padding?.topBottom
+            ? padding?.topBottom
+            : padding
+    )
+
+export const variableAllPaddings = (padding: PaddingTypes) => {
+    return {
+        ["--padding-left" as any]: variablePaddingLeft(padding),
+        ["--padding-top" as any]: variablePaddingTop(padding),
+        ["--padding-right" as any]: variablePaddingRight(padding),
+        ["--padding-bottom" as any]: variablePaddingBottom(padding),
+    }
 }
