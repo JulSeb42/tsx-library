@@ -249,7 +249,7 @@ enum spacers {
     none,
 }
 
-export type SpacersTypes = keyof typeof spacers | number
+export type SpacersTypes = keyof typeof spacers | number | null
 
 /*==================== Paddings ====================*/
 
@@ -317,7 +317,7 @@ enum gridJustifyItems {
     stretch,
 }
 
-export type GridJustifyItemsTypes = keyof typeof gridJustifyItems
+export type GridJustifyItemsTypes = keyof typeof gridJustifyItems | null
 
 /* Align items */
 
@@ -328,7 +328,7 @@ enum gridAlignItems {
     stretch,
 }
 
-export type GridAlignItemsTypes = keyof typeof gridAlignItems
+export type GridAlignItemsTypes = keyof typeof gridAlignItems | null
 
 /* Justify content */
 
@@ -342,7 +342,7 @@ enum gridJustifyContent {
     "space-evenly",
 }
 
-export type GridJustifyContentTypes = keyof typeof gridJustifyContent
+export type GridJustifyContentTypes = keyof typeof gridJustifyContent | null
 
 /* Align content */
 
@@ -356,7 +356,7 @@ enum gridAlignContent {
     "space-evenly",
 }
 
-export type GridAlignContentTypes = keyof typeof gridAlignContent
+export type GridAlignContentTypes = keyof typeof gridAlignContent | null
 
 /*==================== Flexbox ====================*/
 

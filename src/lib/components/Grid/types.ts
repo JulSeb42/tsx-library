@@ -23,6 +23,4 @@ export interface GridProps extends HTMLAttributes<HTMLDivElement> {
     justifyContent?: GridJustifyContentTypes
     alignContent?: GridAlignContentTypes
     padding?: PaddingTypes
-    colTablet?: string
-    colMobile?: string
 }

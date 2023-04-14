@@ -15,12 +15,12 @@ export * from "./utils/get-highlighted-text"
 
 export * from "./variable-utils"
 
-export * from "./components/Text"
-export * from "./components/Wrapper"
-export * from "./components/Main"
-export * from "./components/Aside"
-export * from "./components/FullBleed"
-export * from "./components/Section"
+export * from "./components/Text" // ✅
+export * from "./components/Wrapper" // ✅
+export * from "./components/Main" // ✅
+export * from "./components/Aside" // ✅
+export * from "./components/FullBleed" // ✅
+export * from "./components/Section" // ✅
 export * from "./components/Grid"
 export * from "./components/Flexbox"
 export * from "./components/Masonry"

@@ -3,7 +3,6 @@
 /*==================== Imports ====================*/
 
 import { css } from "styled-components"
-import type { FlattenSimpleInterpolation } from "styled-components"
 
 import {
     Overlays,
@@ -280,8 +279,7 @@ const Mixins = {
             : ""};
     `,
 
-    BorderRadiusVar: (variablesDefinitions: FlattenSimpleInterpolation) => css`
-        ${variablesDefinitions};
+    BorderRadiusVar: () => css`
         border-top-left-radius: var(--radius-top-left);
         border-top-right-radius: var(--radius-top-right);
         border-bottom-left-radius: var(--radius-bottom-left);
@@ -386,42 +384,44 @@ const Mixins = {
     `,
 
     Padding: ({ $padding }: PaddingProps) => css`
-        padding-left: ${Mixins.Spacers({
-            $spacer:
-                typeof $padding === "object"
-                    ? $padding.left || $padding.leftRight
-                    : $padding
-                    ? $padding
-                    : 0,
-        })};
-        padding-right: ${Mixins.Spacers({
-            $spacer:
-                typeof $padding === "object"
-                    ? $padding.right || $padding.leftRight
-                    : $padding
-                    ? $padding
-                    : 0,
-        })};
-        padding-top: ${Mixins.Spacers({
-            $spacer:
-                typeof $padding === "object"
-                    ? $padding.top || $padding.topBottom
-                    : $padding
-                    ? $padding
-                    : 0,
-        })};
-        padding-bottom: ${Mixins.Spacers({
-            $spacer:
-                typeof $padding === "object"
-                    ? $padding.bottom || $padding.topBottom
-                    : $padding
-                    ? $padding
-                    : 0,
-        })};
+        ${$padding &&
+        css`
+            padding-left: ${Mixins.Spacers({
+                $spacer:
+                    typeof $padding === "object"
+                        ? $padding.left || $padding.leftRight
+                        : $padding
+                        ? $padding
+                        : 0,
+            })};
+            padding-right: ${Mixins.Spacers({
+                $spacer:
+                    typeof $padding === "object"
+                        ? $padding.right || $padding.leftRight
+                        : $padding
+                        ? $padding
+                        : 0,
+            })};
+            padding-top: ${Mixins.Spacers({
+                $spacer:
+                    typeof $padding === "object"
+                        ? $padding.top || $padding.topBottom
+                        : $padding
+                        ? $padding
+                        : 0,
+            })};
+            padding-bottom: ${Mixins.Spacers({
+                $spacer:
+                    typeof $padding === "object"
+                        ? $padding.bottom || $padding.topBottom
+                        : $padding
+                        ? $padding
+                        : 0,
+            })};
+        `}
     `,
 
-    PaddingVar: (variablesDefinitions?: FlattenSimpleInterpolation) => css`
-        ${variablesDefinitions};
+    PaddingVar: () => css`
         padding-left: var(--padding-left);
         padding-top: var(--padding-top);
         padding-right: var(--padding-right);

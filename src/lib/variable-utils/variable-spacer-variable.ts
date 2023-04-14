@@ -4,6 +4,8 @@ import { Spacers, stringifyPx } from ".."
 import type { SpacersTypes } from "../types"
 
 export const variableSpacer = (spacer: SpacersTypes) => {
+    if (typeof spacer === "number") return stringifyPx(spacer)
+
     switch (spacer) {
         case "xxl":
             return Spacers.XXL
@@ -22,6 +24,6 @@ export const variableSpacer = (spacer: SpacersTypes) => {
         case "none":
             return "0"
         default:
-            return stringifyPx(spacer) || 0
+            return null
     }
 }

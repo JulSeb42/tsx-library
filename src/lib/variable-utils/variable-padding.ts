@@ -19,8 +19,10 @@ export const variablePadding = (padding: PaddingTypes) => {
             return Spacers.XS
         case "xxs":
             return Spacers.XXS
-        default:
+        case "none":
             return "0"
+        default:
+            return null
     }
 }
 

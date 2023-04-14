@@ -15,7 +15,7 @@ const FullBleed = forwardRef(
             children,
             height,
             aspectRatio,
-            padding = "none",
+            padding = null,
             style,
             ...rest
         }: FullBleedProps,
