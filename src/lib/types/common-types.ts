@@ -188,7 +188,7 @@ enum shadows {
     none,
 }
 
-export type ShadowsTypes = keyof typeof shadows
+export type ShadowsTypes = keyof typeof shadows | null
 
 export type BoxShadowProps = {
     default: ShadowsTypes

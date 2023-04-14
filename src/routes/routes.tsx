@@ -19,7 +19,6 @@ import GridPage from "../pages/layouts/GridPage"
 import FlexboxPage from "../pages/layouts/FlexboxPage"
 import MasonryPage from "../pages/layouts/MasonryPage"
 
-import PlaceholderPage from "../pages/components/PlaceholderPage"
 import SkeletonPage from "../pages/components/SkeletonPage"
 import IconPage from "../pages/components/IconPage"
 import KeyPage from "../pages/components/KeyPage"
@@ -116,7 +115,6 @@ export const router: RouteType[] = [
     { path: "/flexbox", element: <FlexboxPage /> },
     { path: "/masonry", element: <MasonryPage /> },
 
-    { path: "/placeholder", element: <PlaceholderPage /> },
     { path: "/skeleton", element: <SkeletonPage /> },
     { path: "/icon", element: <IconPage /> },
     { path: "/key", element: <KeyPage /> },

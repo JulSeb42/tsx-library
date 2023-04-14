@@ -351,6 +351,18 @@ const Mixins = {
         `}
     `,
 
+    ShadowVar: () => css`
+        box-shadow: var(--box-shadow-default, var(--box-shadow));
+
+        &:hover {
+            box-shadow: var(--box-shadow-hover, var(--box-shadow));
+        }
+
+        &:active {
+            box-shadow: var(--box-shadow-active, var(--box-shadow));
+        }
+    `,
+
     Spacers: ({ $spacer }: SpacersProps) =>
         css`
             ${$spacer === "xxl"

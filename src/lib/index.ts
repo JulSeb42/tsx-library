@@ -23,8 +23,7 @@ export * from "./components/FullBleed" // ✅
 export * from "./components/Section" // ✅
 export * from "./components/Grid" // ✅
 export * from "./components/Flexbox" // ✅
-export * from "./components/Masonry"
-export * from "./components/Placeholder"
+export * from "./components/Masonry" // ✅
 export * from "./components/Skeleton"
 export * from "./components/Icon"
 export * from "./components/Key"
