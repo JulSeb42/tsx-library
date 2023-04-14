@@ -2,7 +2,6 @@
 
 import styled from "styled-components"
 
-import { Mixins } from "../../"
 import type { SpacersTypes } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
@@ -12,12 +11,12 @@ const StyledMasonry = styled.div<{
 }>`
     display: grid;
     grid-auto-flow: column;
-    grid-gap: ${({ $gap }) => Mixins.Spacers({ $spacer: $gap })};
+    grid-gap: var(--gap);
 `
 
 const Col = styled.div<{ $gap?: SpacersTypes }>`
     display: grid;
-    grid-gap: ${({ $gap }) => Mixins.Spacers({ $spacer: $gap })};
+    grid-gap: var(--gap);
     height: fit-content;
 `
 

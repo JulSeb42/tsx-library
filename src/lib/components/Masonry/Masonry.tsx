@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react"
 
-import { uuid } from "../../"
+import { uuid, variableSpacer } from "../../"
 
 import * as Styles from "./styles"
 import type { MasonryProps } from "./types"
@@ -36,6 +36,7 @@ const Masonry = ({
     col = 4,
     gap = "l",
     children,
+    style,
     ...rest
 }: MasonryProps) => {
     const ref = useRef<any>()
@@ -49,10 +50,25 @@ const Masonry = ({
     useEffect(resizeHandler, [numCols])
     useEventListener(`resize`, resizeHandler)
 
+    const gapVar = {
+        ["--gap" as any]: variableSpacer(gap),
+    }
+
+    const styles = {
+        ...style,
+        ...gapVar,
+    }
+
     return (
-        <Styles.StyledMasonry ref={ref} as={as} $gap={gap} {...rest}>
+        <Styles.StyledMasonry
+            ref={ref}
+            as={as}
+            $gap={gap}
+            style={styles}
+            {...rest}
+        >
             {[...Array(numCols)].map((_, index) => (
-                <Styles.Col $gap={gap} key={uuid()}>
+                <Styles.Col style={{ ...gapVar }} key={uuid()}>
                     {cols[index]}
                 </Styles.Col>
             ))}
