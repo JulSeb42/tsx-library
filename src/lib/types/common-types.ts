@@ -125,6 +125,16 @@ export type OverlayTypes = keyof typeof overlays
 
 export type AllColorsTypes = LibColorsTypes | ColorsShortTypes
 
+/*==================== Font families ====================*/
+
+enum fontFamilies {
+    body,
+    code,
+    custom,
+}
+
+export type FontFamiliesTypes = keyof typeof fontFamilies
+
 /*==================== Font sizes ====================*/
 
 enum fontSizes {
@@ -156,6 +166,15 @@ enum weights {
 }
 
 export type FontWeightTypes = keyof typeof weights | number
+
+/*==================== Line heights ====================*/
+
+enum lineHeights {
+    regular,
+    code,
+}
+
+export type LineHeightsTypes = keyof typeof lineHeights | number
 
 /*==================== Shadows ====================*/
 
@@ -241,8 +260,8 @@ export type PaddingTypes =
           top?: SpacersTypes
           right?: SpacersTypes
           bottom?: SpacersTypes
-          leftRight?: SpacersTypes | string
-          topBottom?: SpacersTypes | string
+          leftRight?: SpacersTypes
+          topBottom?: SpacersTypes
       }
 
 /*==================== Transitions ====================*/

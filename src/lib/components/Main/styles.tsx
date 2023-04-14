@@ -2,79 +2,28 @@
 
 import styled, { css } from "styled-components"
 
-import type { MainPositionTypes, MainSizeTypes } from "./types"
-import { Mixins, Layouts, Breakpoints, stringifyPx } from "../../"
-import type {
-    SpacersTypes,
-    GridAlignContentTypes,
-    GridAlignItemsTypes,
-    GridJustifyContentTypes,
-    GridJustifyItemsTypes,
-} from "../../types"
+import { Breakpoints } from "../../"
+import type { MainSizeTypes } from "./types"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledMain = styled.main<{
-    $size?: MainSizeTypes
-    $position?: MainPositionTypes
-    $justifyContent?: GridJustifyContentTypes
-    $justifyItems?: GridJustifyItemsTypes
-    $alignContent?: GridAlignContentTypes
-    $alignItems?: GridAlignItemsTypes
-    $gap?: SpacersTypes
-    $contentWidth?: "default" | "large" | "form"
-    $paddingTopBottom?: SpacersTypes
-    $minHeight?: string | number
-}>`
-    width: ${({ $size }) =>
-        $size === "large"
-            ? Layouts.Main.Large
-            : $size === "form"
-            ? Layouts.Main.Form
-            : $size === "full"
-            ? Layouts.Main.Full
-            : typeof $size === "number"
-            ? stringifyPx($size)
-            : Layouts.Main.Default};
-    ${({
-        $justifyContent,
-        $justifyItems,
-        $alignContent,
-        $alignItems,
-        $gap,
-        $paddingTopBottom,
-    }) =>
-        Mixins.Grid({
-            $alignContent: $alignContent || "start",
-            $justifyItems: $justifyItems || "start",
-            $justifyContent: $justifyContent || "stretch",
-            $alignItems: $alignItems || "start",
-            $gap,
-            $padding: {
-                topBottom: $paddingTopBottom,
-            },
-        })};
-    min-height: ${({ $minHeight }) => $minHeight && stringifyPx($minHeight)};
-    grid-column: ${({ $position }) => ($position ? $position + 1 : 2)};
+const MainBase = styled.main`
+    width: var(--main-size);
+    gap: var(--main-gap);
+    padding-top: var(--main-padding);
+    padding-bottom: var(--main-padding);
+    min-height: var(--main-min-height, 100vh);
+    grid-column: calc(var(--main-position) + 1);
+    display: grid;
+    align-content: var(--main-align-content, start);
+    align-items: var(--main-align-items, start);
+    justify-content: var(--main-justify-content, stretch);
+    justify-items: var(--main-justify-items, start);
 
     @media ${Breakpoints.Tablet} {
         min-height: inherit;
         grid-column: 2;
     }
-
-    ${({ $size, $contentWidth }) =>
-        $size === "full" &&
-        css`
-            grid-template-columns: 1fr ${$contentWidth === "large"
-                    ? Layouts.Main.Large
-                    : $contentWidth === "form"
-                    ? Layouts.Main.Form
-                    : Layouts.Main.Default} 1fr;
-
-            & > * {
-                grid-column: 2;
-            }
-        `}
 
     & > div,
     & > h1,
@@ -104,6 +53,20 @@ const StyledMain = styled.main<{
     & > form {
         justify-self: stretch;
     }
+`
+
+const StyledMain = styled(MainBase)<{
+    $size?: MainSizeTypes
+}>`
+    ${({ $size }) =>
+        $size === "full" &&
+        css`
+            grid-template-columns: 1fr var(--main-content-size) 1fr;
+
+            & > * {
+                grid-column: 2;
+            }
+        `}
 `
 
 setDefaultTheme([StyledMain])

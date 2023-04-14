@@ -13,6 +13,8 @@ export * from "./utils/options-markdown"
 export * from "./utils/ts-utils"
 export * from "./utils/get-highlighted-text"
 
+export * from "./variable-utils"
+
 export * from "./components/Text"
 export * from "./components/Wrapper"
 export * from "./components/Main"

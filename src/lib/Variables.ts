@@ -899,6 +899,7 @@ const Overlays = {
 const FontFamilies = {
     Body: "var(--font-family-body)",
     Code: "var(--font-family-code)",
+    Custom: "var(--font-family-custom)",
 }
 
 const FontSizes = {

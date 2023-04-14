@@ -126,6 +126,6 @@ const renderComponent = (
     }
 }
 
-const Text = ({ tag, ...props }: TextProps) => renderComponent(props, tag)
+const Text = ({ tag = "p", ...props }: TextProps) => renderComponent(props, tag)
 
 export default Text

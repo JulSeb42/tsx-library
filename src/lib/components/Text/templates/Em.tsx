@@ -8,26 +8,10 @@ import { StyledEm } from "../styles"
 
 const Em = forwardRef(
     (
-        {
-            as,
-            children,
-            color,
-            linkStyles,
-            fontWeight,
-            maxLines,
-            ...rest
-        }: TextProps,
+        { as, children, ...rest }: TextProps,
         ref?: ForwardedRef<HTMLParagraphElement>
     ) => (
-        <StyledEm
-            ref={ref}
-            as={as}
-            $color={color}
-            $linkStyles={linkStyles}
-            $fontWeight={fontWeight}
-            $maxLines={maxLines}
-            {...rest}
-        >
+        <StyledEm ref={ref} as={as} {...rest}>
             {children}
         </StyledEm>
     )

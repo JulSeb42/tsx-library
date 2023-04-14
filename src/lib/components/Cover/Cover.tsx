@@ -28,7 +28,7 @@ const Cover = forwardRef(
             rowGap,
             padding = {
                 topBottom: "xxl",
-                leftRight: "5vw",
+                leftRight: "xxl",
             },
             ...rest
         }: CoverProps,

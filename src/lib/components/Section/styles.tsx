@@ -3,18 +3,16 @@
 import styled from "styled-components"
 
 import { Mixins } from "../../"
-import type { SpacersTypes } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledSection = styled.section<{ $gap?: SpacersTypes }>`
-    ${({ $gap }) =>
-        Mixins.Flexbox({
-            $gap,
-            $justifyItems: "start",
-            $alignItems: "stretch",
-            $flexDirection: "column",
-        })};
+const StyledSection = styled.section`
+    ${Mixins.Flexbox({
+        $justifyItems: "start",
+        $alignItems: "stretch",
+        $flexDirection: "column",
+    })};
+    gap: var(--section-gap);
 
     & > div,
     & > h1,

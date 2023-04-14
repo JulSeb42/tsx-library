@@ -9,10 +9,10 @@ enum templates {
     "3cols",
 }
 
-export type TemplateType = keyof typeof templates
+export type WrapperTemplateType = keyof typeof templates
 
 export interface WrapperProps extends HTMLAttributes<HTMLDivElement> {
     as?: ElementType
-    template?: TemplateType
+    template?: WrapperTemplateType
     gap?: SpacersTypes
 }

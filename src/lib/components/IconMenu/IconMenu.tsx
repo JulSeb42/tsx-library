@@ -3,35 +3,10 @@
 import React, { useRef, useState } from "react"
 import { Link } from "react-router-dom"
 
-import { useClickOutside, Icon, Burger, Spacers, stringifyPx } from "../../"
+import { useClickOutside, Icon, Burger, variableSpacer } from "../../"
 
 import * as Styles from "./styles"
 import type { IconMenuProps } from "./types"
-
-import type { SpacersTypes } from "../../types"
-
-const getSpacer = (spacer: SpacersTypes) => {
-    switch (spacer) {
-        case "xxl":
-            return Spacers.XXL
-        case "xl":
-            return Spacers.XL
-        case "l":
-            return Spacers.L
-        case "m":
-            return Spacers.M
-        case "s":
-            return Spacers.S
-        case "xs":
-            return Spacers.XS
-        case "xxs":
-            return Spacers.XXS
-        case "none":
-            return "0"
-        default:
-            return stringifyPx(spacer) || 0
-    }
-}
 
 const IconMenu = ({
     as,
@@ -153,7 +128,7 @@ const IconMenu = ({
                         $gap={gap}
                         style={{
                             ["--icon-menu-position-open" as any]:
-                                getSpacer(gap),
+                                variableSpacer(gap),
                         }}
                         key={`button-${icon}-${label}`}
                     >

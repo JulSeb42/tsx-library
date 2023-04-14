@@ -3,15 +3,25 @@
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
+import { variableSpacer } from "../../"
+
 import * as Styles from "./styles"
 import type { SectionProps } from "./types"
 
 const Section = forwardRef(
     (
-        { as, gap = "m", children, ...rest }: SectionProps,
+        { as, gap = "m", children, style, ...rest }: SectionProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => (
-        <Styles.StyledSection ref={ref} as={as} $gap={gap} {...rest}>
+        <Styles.StyledSection
+            ref={ref}
+            as={as}
+            style={{
+                ...style,
+                ["--section-gap" as any]: variableSpacer(gap),
+            }}
+            {...rest}
+        >
             {children}
         </Styles.StyledSection>
     )

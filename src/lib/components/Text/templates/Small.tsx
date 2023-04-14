@@ -2,45 +2,26 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
+import styled from "styled-components"
 
 import type { TextProps } from "../types"
-import { StyledSmall } from "../styles"
+import { StyledSmall, MaxLinesMixin } from "../styles"
 
 const Small = forwardRef(
     (
-        {
-            as,
-            children,
-            color,
-            linkStyles,
-            fontSize,
-            customFontSize,
-            textAlign,
-            lineHeight,
-            fontWeight,
-            maxLines,
-            codeStyles,
-            ...rest
-        }: TextProps,
+        { as, children, maxLines, ...rest }: TextProps,
         ref?: ForwardedRef<HTMLParagraphElement>
-    ) => (
-        <StyledSmall
-            ref={ref}
-            as={as}
-            $color={color}
-            $linkStyles={linkStyles}
-            $fontSize={fontSize}
-            $customFontSize={customFontSize}
-            $textAlign={textAlign}
-            $lineHeight={lineHeight}
-            $fontWeight={fontWeight}
-            $maxLines={maxLines}
-            $codeStyles={codeStyles}
-            {...rest}
-        >
-            {children}
-        </StyledSmall>
-    )
+    ) => {
+        return (
+            <SmallMaxLines ref={ref} as={as} $maxLines={maxLines} {...rest}>
+                {children}
+            </SmallMaxLines>
+        )
+    }
 )
+
+const SmallMaxLines = styled(StyledSmall)<{ $maxLines?: number }>`
+    ${({ $maxLines }) => $maxLines && MaxLinesMixin({ $maxLines })}
+`
 
 export default Small

@@ -123,7 +123,7 @@ const ContainerPage = () => {
             </Wrapper>
 
             <Wrapper template="3cols">
-                <StyledAside position={1}>
+                <StyledAside position={1} size="small">
                     <Text tag="h2">Aside</Text>
 
                     <Content />
@@ -135,7 +135,7 @@ const ContainerPage = () => {
                     <Content />
                 </StyledMain>
 
-                <StyledAside position={3}>
+                <StyledAside position={3} size="small">
                     <Text tag="h2">Aside</Text>
 
                     <Content />

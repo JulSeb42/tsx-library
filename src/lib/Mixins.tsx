@@ -3,6 +3,7 @@
 /*==================== Imports ====================*/
 
 import { css } from "styled-components"
+import type { FlattenSimpleInterpolation } from "styled-components"
 
 import {
     Overlays,
@@ -142,7 +143,6 @@ export interface FontWeightsProps {
 
 export interface FontSizesProps {
     $fontSize?: FontSizeTypes
-    $customFontSize?: CustomFontSizeTypes
 }
 
 /*==== Border ====*/
@@ -281,6 +281,14 @@ const Mixins = {
             : ""};
     `,
 
+    BorderRadiusVar: (variablesDefinitions: FlattenSimpleInterpolation) => css`
+        ${variablesDefinitions};
+        border-top-left-radius: var(--radius-top-left);
+        border-top-right-radius: var(--radius-top-right);
+        border-bottom-left-radius: var(--radius-bottom-left);
+        border-bottom-right-radius: var(--radius-bottom-right);
+    `,
+
     Shadow: ({
         $shadow,
         $shadowDefault,
@@ -413,6 +421,14 @@ const Mixins = {
         })};
     `,
 
+    PaddingVar: (variablesDefinitions: FlattenSimpleInterpolation) => css`
+        ${variablesDefinitions};
+        padding-left: var(--padding-left);
+        padding-top: var(--padding-top);
+        padding-right: var(--padding-right);
+        padding-bottom: var(--padding-bottom);
+    `,
+
     Grid: ({
         $inline,
         $col,
@@ -502,7 +518,7 @@ const Mixins = {
                 : stringifyPx($top)};
         `}
 
-${$right &&
+        ${$right &&
         css`
             right: ${$right === "xxl" ||
             $right === "xl" ||
@@ -515,7 +531,7 @@ ${$right &&
                 : stringifyPx($right)};
         `}
 
-${$bottom &&
+        ${$bottom &&
         css`
             bottom: ${$bottom === "xxl" ||
             $bottom === "xl" ||
@@ -555,11 +571,9 @@ ${$bottom &&
             : ""};
     `,
 
-    FontSize: ({ $fontSize, $customFontSize }: FontSizesProps) =>
+    FontSize: ({ $fontSize }: FontSizesProps) =>
         css`
-            font-size: ${$customFontSize
-                ? stringifyPx($customFontSize)
-                : $fontSize === "display-h1"
+            font-size: ${$fontSize === "display-h1"
                 ? FontSizes.Display.H1
                 : $fontSize === "display-h2"
                 ? FontSizes.Display.H2

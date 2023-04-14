@@ -2,45 +2,26 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
+import styled from "styled-components"
 
 import type { TextProps } from "../types"
-import { StyledH6 } from "../styles"
+import { StyledH6, MaxLinesMixin } from "../styles"
 
 const H6 = forwardRef(
     (
-        {
-            as,
-            children,
-            color,
-            linkStyles,
-            fontSize,
-            customFontSize,
-            textAlign,
-            lineHeight,
-            fontWeight,
-            maxLines,
-            codeStyles,
-            ...rest
-        }: TextProps,
+        { as, children, maxLines, ...rest }: TextProps,
         ref?: ForwardedRef<HTMLHeadingElement>
-    ) => (
-        <StyledH6
-            ref={ref}
-            as={as}
-            $color={color}
-            $linkStyles={linkStyles}
-            $fontSize={fontSize}
-            $customFontSize={customFontSize}
-            $textAlign={textAlign}
-            $lineHeight={lineHeight}
-            $fontWeight={fontWeight}
-            $maxLines={maxLines}
-            $codeStyles={codeStyles}
-            {...rest}
-        >
-            {children}
-        </StyledH6>
-    )
+    ) => {
+        return (
+            <H6MaxLines ref={ref} as={as} $maxLines={maxLines} {...rest}>
+                {children}
+            </H6MaxLines>
+        )
+    }
 )
+
+const H6MaxLines = styled(StyledH6)<{ $maxLines?: number }>`
+    ${({ $maxLines }) => $maxLines && MaxLinesMixin({ $maxLines })}
+`
 
 export default H6

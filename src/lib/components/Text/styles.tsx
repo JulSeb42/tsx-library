@@ -3,51 +3,64 @@
 import styled, { css } from "styled-components"
 
 import { setDefaultTheme } from "../../utils"
-import { LineHeights, FontFamilies, Spacers, Breakpoints, Mixins } from "../../"
-import type {
-    AllColorsTypes,
-    FontSizeTypes,
-    CustomFontSizeTypes,
-    TextAlignTypes,
-    FontWeightTypes,
-} from "../../types"
-import type { LinkStyleTypes, CodeStyleTypes } from "./types"
+import {
+    LineHeights,
+    FontFamilies,
+    Spacers,
+    Breakpoints,
+    Mixins,
+    Transitions,
+    FontWeights,
+    Radiuses,
+    FontSizes,
+} from "../../"
+import type { FontWeightTypes } from "../../types"
 
 const FontCommon = ({
-    $textAlign,
-    $lineHeight = LineHeights.Regular,
-    $fontSize,
-    $customFontSize,
-    $maxLines,
-    $linkStyles,
-    $fontWeight,
-    $color = "currentColor",
-    $codeStyles,
+    $fontWeight = "regular",
 }: {
-    $fontSize?: FontSizeTypes
-    $customFontSize?: CustomFontSizeTypes
-    $textAlign?: TextAlignTypes
-    $lineHeight?: string | number
-    $maxLines?: number
-    $linkStyles?: LinkStyleTypes
     $fontWeight?: FontWeightTypes
-    $color?: AllColorsTypes
-    $codeStyles?: CodeStyleTypes
 }) => css`
-    text-align: ${$textAlign};
-    ${Mixins.FontSize({ $fontSize, $customFontSize })};
-    line-height: ${$lineHeight};
-    ${Mixins.FontWeight({ $fontWeight: $fontWeight })};
-    color: ${({ theme }) => theme.AllColors({ $color })};
+    font-family: ${FontFamilies.Body};
+    line-height: ${LineHeights.Regular};
+    ${Mixins.FontWeight({ $fontWeight })};
 
-    & > * {
-        ${Mixins.FontSize({ $fontSize, $customFontSize })};
+    a,
+    button {
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        font-family: ${FontFamilies.Body};
+        transition: ${Transitions.Short};
+        text-decoration: none;
+        font-weight: ${FontWeights.Black};
         color: ${({ theme }) =>
-            theme.AllColors({
-                $color: $color,
-            })};
+            theme.ColorsHoverDefault({ $color: "primary" })};
+
+        @media ${Breakpoints.Hover} {
+            &:hover {
+                color: ${({ theme }) =>
+                    theme.ColorsHoverHover({ $color: "primary" })};
+            }
+
+            &:active {
+                color: ${({ theme }) =>
+                    theme.ColorsHoverActive({ $color: "primary" })};
+            }
+        }
     }
 
+    code {
+        font-family: ${FontFamilies.Code};
+        line-height: ${LineHeights.Code};
+        color: ${({ theme }) => theme.Primary500};
+        padding: ${Spacers.XXS};
+        background-color: ${({ theme }) => theme.Gray50};
+        border-radius: ${Radiuses.S};
+    }
+`
+
+const MaxLinesMixin = ({ $maxLines }: { $maxLines?: number }) => css`
     ${$maxLines &&
     css`
         ${$maxLines === 1
@@ -65,459 +78,87 @@ const FontCommon = ({
                   -webkit-box-orient: vertical;
               `}
     `}
-
-    a, button {
-        color: ${({ theme }) =>
-            theme.ColorsHoverDefault({
-                $color: $linkStyles?.color || "primary",
-            })};
-        ${Mixins.Transition({ $transition: $linkStyles?.transition })};
-        ${Mixins.TextDecoration({
-            $textDecoration: $linkStyles?.textDecorationDefault || "none",
-        })};
-        padding: 0;
-        border: none;
-        background-color: transparent;
-        font-family: ${FontFamilies.Body};
-        ${Mixins.FontWeight({
-            $fontWeight: $linkStyles?.fontWeight || "black",
-        })};
-
-        @media ${Breakpoints.Hover} {
-            &:hover {
-                color: ${({ theme }) =>
-                    theme.ColorsHoverHover({
-                        $color: $linkStyles?.color || "primary",
-                    })};
-                ${Mixins.TextDecoration({
-                    $textDecoration: $linkStyles?.textDecorationHover || "none",
-                })};
-            }
-
-            &:active {
-                color: ${({ theme }) =>
-                    theme.ColorsHoverActive({
-                        $color: $linkStyles?.color || "primary",
-                    })};
-                ${Mixins.TextDecoration({
-                    $textDecoration:
-                        $linkStyles?.textDecorationActive || "none",
-                })};
-            }
-        }
-    }
-
-    code {
-        font-family: ${FontFamilies.Code};
-        line-height: ${LineHeights.Code};
-        color: ${({ theme }) =>
-            theme.AllColors({ $color: $codeStyles?.color || "primary" })};
-        ${Mixins.Padding({
-            $padding: $codeStyles?.padding || "xxs",
-        })};
-        ${Mixins.BorderRadius({
-            $borderRadius: $codeStyles?.borderRadius || "xs",
-        })};
-        background-color: ${({ theme }) =>
-            theme.AllColors({
-                $color: $codeStyles?.backgroundColor || "gray-50",
-            })};
-    }
 `
 
-const StyledH1 = styled.h1<{
-    $color?: AllColorsTypes
-    $linkStyles?: LinkStyleTypes
-    $fontSize?: FontSizeTypes
-    $customFontSize?: CustomFontSizeTypes
-    $textAlign?: TextAlignTypes
-    $lineHeight?: string | number
-    $display?: boolean
-    $fontWeight?: FontWeightTypes
-    $maxLines?: number
-    $codeStyles?: CodeStyleTypes
-}>`
-    ${({
-        $display,
-        $textAlign,
-        $lineHeight,
-        $fontSize,
-        $customFontSize,
-        $maxLines,
-        $linkStyles,
-        $fontWeight,
-        $color,
-        $codeStyles,
-    }) =>
-        FontCommon({
-            $textAlign,
-            $lineHeight,
-            $fontSize: $fontSize
-                ? $fontSize
-                : $display
-                ? "display-h1"
-                : "title-h1",
-            $customFontSize,
-            $maxLines,
-            $linkStyles,
-            $codeStyles,
-            $color,
-            $fontWeight: $fontWeight || "black",
-        })};
-    color: ${({ theme, $color }) =>
-        theme.AllColors({
-            $color: $color,
-        })};
-
-    & > * {
-        color: ${({ theme, $color }) =>
-            theme.AllColors({
-                $color: $color,
-            })};
-    }
+const StyledH1 = styled.h1`
+    font-size: var(--font-size);
+    ${FontCommon({
+        $fontWeight: "black",
+    })};
 `
 
-const StyledH2 = styled.h2<{
-    $color?: AllColorsTypes
-    $linkStyles?: LinkStyleTypes
-    $fontSize?: FontSizeTypes
-    $customFontSize?: CustomFontSizeTypes
-    $textAlign?: TextAlignTypes
-    $lineHeight?: string | number
-    $display?: boolean
-    $fontWeight?: FontWeightTypes
-    $maxLines?: number
-    $codeStyles?: CodeStyleTypes
-}>`
-    ${({
-        $display,
-        $textAlign,
-        $lineHeight,
-        $fontSize,
-        $customFontSize,
-        $maxLines,
-        $linkStyles,
-        $fontWeight,
-        $color,
-        $codeStyles,
-    }) =>
-        FontCommon({
-            $textAlign,
-            $lineHeight,
-            $fontSize: $fontSize
-                ? $fontSize
-                : $display
-                ? "display-h2"
-                : "title-h2",
-            $customFontSize,
-            $maxLines,
-            $linkStyles,
-            $codeStyles,
-            $color,
-            $fontWeight: $fontWeight || "black",
-        })};
+const StyledH2 = styled.h2`
+    font-size: var(--font-size);
+    ${FontCommon({
+        $fontWeight: "black",
+    })};
 `
 
-const StyledH3 = styled.h3<{
-    $color?: AllColorsTypes
-    $linkStyles?: LinkStyleTypes
-    $fontSize?: FontSizeTypes
-    $customFontSize?: CustomFontSizeTypes
-    $textAlign?: TextAlignTypes
-    $lineHeight?: string | number
-    $display?: boolean
-    $fontWeight?: FontWeightTypes
-    $maxLines?: number
-    $codeStyles?: CodeStyleTypes
-}>`
-    ${({
-        $display,
-        $textAlign,
-        $lineHeight,
-        $fontSize,
-        $customFontSize,
-        $maxLines,
-        $linkStyles,
-        $fontWeight,
-        $color,
-        $codeStyles,
-    }) =>
-        FontCommon({
-            $textAlign,
-            $lineHeight,
-            $fontSize: $fontSize
-                ? $fontSize
-                : $display
-                ? "display-h3"
-                : "title-h3",
-            $customFontSize,
-            $maxLines,
-            $linkStyles,
-            $codeStyles,
-            $color,
-            $fontWeight: $fontWeight || "black",
-        })};
+const StyledH3 = styled.h3`
+    font-size: var(--font-size);
+    ${FontCommon({
+        $fontWeight: "black",
+    })};
 `
 
-const StyledH4 = styled.h4<{
-    $color?: AllColorsTypes
-    $linkStyles?: LinkStyleTypes
-    $fontSize?: FontSizeTypes
-    $customFontSize?: CustomFontSizeTypes
-    $textAlign?: TextAlignTypes
-    $lineHeight?: string | number
-    $display?: boolean
-    $fontWeight?: FontWeightTypes
-    $maxLines?: number
-    $codeStyles?: CodeStyleTypes
-}>`
-    ${({
-        $display,
-        $textAlign,
-        $lineHeight,
-        $fontSize,
-        $customFontSize,
-        $maxLines,
-        $linkStyles,
-        $fontWeight,
-        $color,
-        $codeStyles,
-    }) =>
-        FontCommon({
-            $textAlign,
-            $lineHeight,
-            $fontSize: $fontSize
-                ? $fontSize
-                : $display
-                ? "display-h4"
-                : "title-h4",
-            $customFontSize,
-            $maxLines,
-            $linkStyles,
-            $codeStyles,
-            $color,
-            $fontWeight: $fontWeight || "black",
-        })};
+const StyledH4 = styled.h4`
+    font-size: var(--font-size);
+    ${FontCommon({
+        $fontWeight: "black",
+    })};
 `
 
-const StyledH5 = styled.h5<{
-    $color?: AllColorsTypes
-    $linkStyles?: LinkStyleTypes
-    $fontSize?: FontSizeTypes
-    $customFontSize?: CustomFontSizeTypes
-    $textAlign?: TextAlignTypes
-    $lineHeight?: string | number
-    $display?: boolean
-    $fontWeight?: FontWeightTypes
-    $maxLines?: number
-    $codeStyles?: CodeStyleTypes
-}>`
-    ${({
-        $display,
-        $textAlign,
-        $lineHeight,
-        $fontSize,
-        $customFontSize,
-        $maxLines,
-        $linkStyles,
-        $fontWeight,
-        $color,
-        $codeStyles,
-    }) =>
-        FontCommon({
-            $textAlign,
-            $lineHeight,
-            $fontSize: $fontSize
-                ? $fontSize
-                : $display
-                ? "display-h5"
-                : "title-h5",
-            $customFontSize,
-            $maxLines,
-            $linkStyles,
-            $codeStyles,
-            $color,
-            $fontWeight: $fontWeight || "black",
-        })};
+const StyledH5 = styled.h5`
+    font-size: var(--font-size);
+    ${FontCommon({
+        $fontWeight: "black",
+    })};
 `
 
-const StyledH6 = styled.h6<{
-    $color?: AllColorsTypes
-    $linkStyles?: LinkStyleTypes
-    $fontSize?: FontSizeTypes
-    $customFontSize?: CustomFontSizeTypes
-    $textAlign?: TextAlignTypes
-    $lineHeight?: string | number
-    $fontWeight?: FontWeightTypes
-    $maxLines?: number
-    $codeStyles?: CodeStyleTypes
-}>`
-    ${({
-        $textAlign,
-        $lineHeight,
-        $fontSize,
-        $customFontSize,
-        $maxLines,
-        $linkStyles,
-        $fontWeight,
-        $color,
-        $codeStyles,
-    }) =>
-        FontCommon({
-            $textAlign,
-            $lineHeight,
-            $fontSize: $fontSize ? $fontSize : "title-h6",
-            $customFontSize,
-            $maxLines,
-            $linkStyles,
-            $codeStyles,
-            $color,
-            $fontWeight: $fontWeight || "black",
-        })};
+const StyledH6 = styled.h6`
+    font-size: ${FontSizes.Titles.H6};
+    ${FontCommon({
+        $fontWeight: "black",
+    })};
 `
 
-const StyledP = styled.p<{
-    $color?: AllColorsTypes
-    $linkStyles?: LinkStyleTypes
-    $fontSize?: FontSizeTypes
-    $customFontSize?: CustomFontSizeTypes
-    $textAlign?: TextAlignTypes
-    $lineHeight?: string | number
-    $fontWeight?: FontWeightTypes
-    $maxLines?: number
-    $codeStyles?: CodeStyleTypes
-}>`
-    ${({
-        $textAlign,
-        $lineHeight,
-        $fontSize,
-        $customFontSize,
-        $maxLines,
-        $linkStyles,
-        $fontWeight,
-        $color,
-        $codeStyles,
-    }) =>
-        FontCommon({
-            $textAlign,
-            $lineHeight,
-            $fontSize: $fontSize || "body",
-            $customFontSize,
-            $maxLines,
-            $linkStyles,
-            $codeStyles,
-            $color,
-            $fontWeight: $fontWeight || "regular",
-        })};
+const StyledP = styled.p`
+    font-size: ${FontSizes.Body};
+    ${FontCommon({
+        $fontWeight: "regular",
+    })};
 `
 
-const StyledStrong = styled.strong<{
-    $color?: AllColorsTypes
-    $linkStyles?: LinkStyleTypes
-    $fontWeight?: FontWeightTypes
-    $maxLines?: number
-}>`
-    ${({ $linkStyles, $fontWeight, $color }) =>
-        FontCommon({
-            $linkStyles,
-            $fontWeight: $fontWeight || "black",
-            $color,
-        })};
+const StyledStrong = styled.strong`
+    ${FontCommon({
+        $fontWeight: "black",
+    })};
 `
 
-const StyledEm = styled.em<{
-    $color?: AllColorsTypes
-    $linkStyles?: LinkStyleTypes
-    $fontWeight?: FontWeightTypes
-    $maxLines?: number
-}>`
-    ${({ $linkStyles, $fontWeight, $color }) =>
-        FontCommon({ $linkStyles, $fontWeight, $color })};
+const StyledEm = styled.em`
+    ${FontCommon({
+        $fontWeight: "regular",
+    })};
     font-style: italic;
 `
 
-const StyledSmall = styled.small<{
-    $color?: AllColorsTypes
-    $linkStyles?: LinkStyleTypes
-    $fontSize?: FontSizeTypes
-    $customFontSize?: CustomFontSizeTypes
-    $textAlign?: TextAlignTypes
-    $lineHeight?: string | number
-    $fontWeight?: FontWeightTypes
-    $maxLines?: number
-    $codeStyles?: CodeStyleTypes
-}>`
-    ${({
-        $textAlign,
-        $lineHeight,
-        $fontSize,
-        $customFontSize,
-        $maxLines,
-        $linkStyles,
-        $fontWeight,
-        $color,
-        $codeStyles,
-    }) =>
-        FontCommon({
-            $textAlign,
-            $lineHeight,
-            $fontSize: $fontSize || "small",
-            $customFontSize,
-            $maxLines,
-            $linkStyles,
-            $fontWeight,
-            $color,
-            $codeStyles,
-        })};
+const StyledSmall = styled.small`
+    font-size: ${FontSizes.Small};
+    ${FontCommon({
+        $fontWeight: "regular",
+    })};
 `
 
-const StyledBlockquote = styled.blockquote<{
-    $color?: AllColorsTypes
-    $linkStyles?: LinkStyleTypes
-    $fontSize?: FontSizeTypes
-    $customFontSize?: CustomFontSizeTypes
-    $textAlign?: TextAlignTypes
-    $lineHeight?: string | number
-    $fontWeight?: FontWeightTypes
-    $maxLines?: number
-    $codeStyles?: CodeStyleTypes
-}>`
-    ${({
-        $textAlign,
-        $lineHeight,
-        $fontSize,
-        $customFontSize,
-        $maxLines,
-        $linkStyles,
-        $fontWeight,
-        $color,
-        $codeStyles,
-    }) =>
-        FontCommon({
-            $textAlign,
-            $lineHeight,
-            $fontSize: $fontSize || "title-h6",
-            $customFontSize,
-            $maxLines,
-            $linkStyles,
-            $fontWeight,
-            $color,
-            $codeStyles,
-        })};
+const StyledBlockquote = styled.blockquote`
+    font-size: ${FontSizes.Titles.H6};
+    ${FontCommon({
+        $fontWeight: "regular",
+    })};
     font-style: italic;
 `
 
-const StyledUl = styled.ul<{
-    $color?: AllColorsTypes
-    $linkStyles?: LinkStyleTypes
-    $fontSize?: FontSizeTypes
-    $customFontSize?: CustomFontSizeTypes
-    $textAlign?: TextAlignTypes
-    $lineHeight?: string | number
-    $fontWeight?: FontWeightTypes
-    $maxLines?: number
-    $codeStyles?: CodeStyleTypes
-}>`
+const ListStyles = css`
+    font-size: ${FontSizes.Body};
     padding: 0;
     margin: 0;
     padding-left: ${Spacers.S};
@@ -526,74 +167,8 @@ const StyledUl = styled.ul<{
         $flexDirection: "column",
         $alignItems: "stretch",
     })};
-    ${({
-        $textAlign,
-        $lineHeight,
-        $fontSize,
-        $customFontSize,
-        $maxLines,
-        $linkStyles,
-        $fontWeight,
-        $color,
-        $codeStyles,
-    }) =>
-        FontCommon({
-            $textAlign,
-            $lineHeight,
-            $fontSize: $fontSize || "body",
-            $customFontSize,
-            $maxLines,
-            $linkStyles,
-            $fontWeight,
-            $color,
-            $codeStyles,
-        })};
-
-    li {
-        padding-inline-start: ${Spacers.XXS};
-    }
-`
-
-const StyledOl = styled.ol<{
-    $color?: AllColorsTypes
-    $linkStyles?: LinkStyleTypes
-    $fontSize?: FontSizeTypes
-    $customFontSize?: CustomFontSizeTypes
-    $textAlign?: TextAlignTypes
-    $lineHeight?: string | number
-    $fontWeight?: FontWeightTypes
-    $maxLines?: number
-    $codeStyles?: CodeStyleTypes
-}>`
-    ${({
-        $textAlign,
-        $lineHeight,
-        $fontSize,
-        $customFontSize,
-        $maxLines,
-        $linkStyles,
-        $fontWeight,
-        $color,
-        $codeStyles,
-    }) =>
-        FontCommon({
-            $textAlign,
-            $lineHeight,
-            $fontSize: $fontSize || "body",
-            $customFontSize,
-            $maxLines,
-            $linkStyles,
-            $fontWeight,
-            $color,
-            $codeStyles,
-        })};
-    padding: 0;
-    margin: 0;
-    padding-left: ${Spacers.S};
-    ${Mixins.Flexbox({
-        $gap: "xxs",
-        $flexDirection: "column",
-        $alignItems: "stretch",
+    ${FontCommon({
+        $fontWeight: "regular",
     })};
 
     li {
@@ -601,47 +176,27 @@ const StyledOl = styled.ol<{
     }
 `
 
-const StyledDl = styled.dl<{
-    $color?: AllColorsTypes
-    $linkStyles?: LinkStyleTypes
-    $fontSize?: FontSizeTypes
-    $customFontSize?: CustomFontSizeTypes
-    $textAlign?: TextAlignTypes
-    $lineHeight?: string | number
-    $fontWeightDt?: FontWeightTypes
-    $fontWeightDd?: FontWeightTypes
-    $maxLines?: number
-    $codeStyles?: CodeStyleTypes
-}>`
-    ${({
-        $textAlign,
-        $lineHeight,
-        $fontSize,
-        $customFontSize,
-        $maxLines,
-        $linkStyles,
-        $color,
-        $codeStyles,
-    }) =>
-        FontCommon({
-            $textAlign,
-            $lineHeight,
-            $fontSize: $fontSize || "body",
-            $customFontSize,
-            $maxLines,
-            $linkStyles,
-            $color,
-            $codeStyles,
-        })};
+const StyledUl = styled.ul`
+    ${ListStyles};
+`
+
+const StyledOl = styled.ol`
+    ${ListStyles};
+`
+
+const StyledDl = styled.dl`
+    ${FontCommon({
+        $fontWeight: "regular",
+    })};
 
     dt {
-        ${({ $fontWeightDt }) =>
-            Mixins.FontWeight({ $fontWeight: $fontWeightDt || "black" })};
+        font-size: ${FontSizes.Titles.H6};
+        ${Mixins.FontWeight({ $fontWeight: "black" })};
     }
 
     dd {
-        ${({ $fontWeightDd }) =>
-            Mixins.FontWeight({ $fontWeight: $fontWeightDd })};
+        font-size: ${FontSizes.Body};
+        ${Mixins.FontWeight({ $fontWeight: "regular" })};
         padding-inline-start: ${Spacers.M};
 
         &:not(:last-of-type) {
@@ -666,6 +221,7 @@ setDefaultTheme([
     StyledOl,
     StyledDl,
     FontCommon,
+    MaxLinesMixin,
 ])
 
 export {
@@ -684,4 +240,5 @@ export {
     StyledOl,
     StyledDl,
     FontCommon,
+    MaxLinesMixin,
 }

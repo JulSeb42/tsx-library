@@ -3,6 +3,7 @@
 import React from "react"
 
 import Homepage from "../pages/Homepage"
+import StyledFixes from "../pages/StyledFixes"
 // import Generate from "../pages/Generate"
 
 import ColorsPage from "../pages/styles/ColorsPage"
@@ -100,6 +101,7 @@ export type RouteType = {
 export const router: RouteType[] = [
     { path: "/", element: <Homepage /> },
     // { path: "/generate", element: <Generate /> },
+    { path: "/styled", element: <StyledFixes /> },
 
     { path: "/colors", element: <ColorsPage /> },
     { path: "/text", element: <TextPage /> },

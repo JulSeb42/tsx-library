@@ -2,45 +2,26 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
+import styled from "styled-components"
 
 import type { TextProps } from "../types"
-import { StyledP } from "../styles"
+import { StyledP, MaxLinesMixin } from "../styles"
 
 const P = forwardRef(
     (
-        {
-            as,
-            children,
-            color,
-            linkStyles,
-            fontSize,
-            customFontSize,
-            textAlign,
-            lineHeight,
-            fontWeight,
-            maxLines,
-            codeStyles,
-            ...rest
-        }: TextProps,
+        { as, children, maxLines, ...rest }: TextProps,
         ref?: ForwardedRef<HTMLParagraphElement>
-    ) => (
-        <StyledP
-            ref={ref}
-            as={as}
-            $color={color}
-            $linkStyles={linkStyles}
-            $fontSize={fontSize}
-            $customFontSize={customFontSize}
-            $textAlign={textAlign}
-            $lineHeight={lineHeight}
-            $fontWeight={fontWeight}
-            $maxLines={maxLines}
-            $codeStyles={codeStyles}
-            {...rest}
-        >
-            {children}
-        </StyledP>
-    )
+    ) => {
+        return (
+            <PMaxLines ref={ref} as={as} $maxLines={maxLines} {...rest}>
+                {children}
+            </PMaxLines>
+        )
+    }
 )
+
+const PMaxLines = styled(StyledP)<{ $maxLines?: number }>`
+    ${({ $maxLines }) => $maxLines && MaxLinesMixin({ $maxLines })}
+`
 
 export default P
