@@ -2,23 +2,25 @@
 
 import styled, { css } from "styled-components"
 
-import { Breakpoints } from "../../"
+import { Breakpoints, Mixins } from "../../"
 import type { MainSizeTypes } from "./types"
 
 import { setDefaultTheme } from "../../utils"
 
 const MainBase = styled.main`
+    ${Mixins.Grid({
+        $alignContent: "start",
+        $alignItems: "start",
+        $justifyContent: "stretch",
+        $justifyItems: "stretch",
+        $gap: "l",
+        $padding: {
+            topBottom: "xxl",
+        },
+    })};
     width: var(--main-size);
-    gap: var(--main-gap);
-    padding-top: var(--main-padding);
-    padding-bottom: var(--main-padding);
     min-height: var(--main-min-height, 100vh);
     grid-column: calc(var(--main-position) + 1);
-    display: grid;
-    align-content: var(--main-align-content, start);
-    align-items: var(--main-align-items, start);
-    justify-content: var(--main-justify-content, stretch);
-    justify-items: var(--main-justify-items, start);
 
     @media ${Breakpoints.Tablet} {
         min-height: inherit;

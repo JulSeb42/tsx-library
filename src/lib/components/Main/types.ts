@@ -1,14 +1,6 @@
 /*=============================================== Main types ===============================================*/
 
-import type { HTMLAttributes, ElementType } from "react"
-
-import type {
-    SpacersTypes,
-    GridAlignContentTypes,
-    GridAlignItemsTypes,
-    GridJustifyContentTypes,
-    GridJustifyItemsTypes,
-} from "../../types"
+import type { ElementType, HTMLAttributes } from "react"
 
 enum mainSizes {
     default,
@@ -28,14 +20,8 @@ export type MainPositionTypes = keyof typeof mainPositions
 
 interface BaseMainProps extends HTMLAttributes<HTMLDivElement> {
     as?: ElementType
-    gap?: SpacersTypes
-    position?: MainPositionTypes
-    alignContent?: GridAlignContentTypes
-    alignItems?: GridAlignItemsTypes
-    justifyContent?: GridJustifyContentTypes
-    justifyItems?: GridJustifyItemsTypes
-    paddingTopBottom?: SpacersTypes
     minHeight?: string | number
+    position?: MainPositionTypes
 }
 
 interface MainSize1 extends BaseMainProps {

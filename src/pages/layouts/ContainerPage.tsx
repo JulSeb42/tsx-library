@@ -115,7 +115,7 @@ const ContainerPage = () => {
                     <Content />
                 </StyledMain>
 
-                <StyledAside position={2}>
+                <StyledAside position={2} minHeight={100}>
                     <Text tag="h2">Aside</Text>
 
                     <Content />

@@ -2,14 +2,17 @@
 
 import styled from "styled-components"
 
+import { Mixins } from "../../"
+
 import { setDefaultTheme } from "../../utils"
 
 const StyledWrapper = styled.div`
-    display: grid;
+    ${Mixins.Grid({
+        $gap: "l",
+        $col: "var(--wrapper-template)",
+    })};
     position: relative;
     z-index: 10;
-    grid-template-columns: var(--wrapper-template);
-    gap: var(--wrapper-gap);
     background-color: ${({ theme }) => theme.Background};
 `
 
