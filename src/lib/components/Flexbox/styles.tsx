@@ -3,33 +3,20 @@
 import styled from "styled-components"
 
 import { Mixins } from "../../"
-import type {
-    SpacersTypes,
-    FlexAlignContentTypes,
-    FlexAlignItemsTypes,
-    FlexDirectionTypes,
-    FlexJustifyContentTypes,
-    FlexJustifyItemsTypes,
-    FlexWrapTypes,
-    PaddingTypes,
-} from "../../types"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledFlexbox = styled.div<{
-    $inline?: boolean
-    $flexDirection?: FlexDirectionTypes
-    $flexWrap?: FlexWrapTypes
-    $justifyContent?: FlexJustifyContentTypes
-    $alignItems?: FlexAlignItemsTypes
-    $justifyItems?: FlexJustifyItemsTypes
-    $alignContent?: FlexAlignContentTypes
-    $gap?: SpacersTypes
-    $columnGap?: SpacersTypes
-    $rowGap?: SpacersTypes
-    $padding?: PaddingTypes
-}>`
-    ${Mixins.Flexbox};
+const StyledFlexbox = styled.div`
+    display: var(--flex-display, flex);
+    column-gap: var(--column-gap);
+    row-gap: var(--row-gap);
+    flex-direction: var(--flex-direction);
+    flex-wrap: var(--flex-wrap);
+    justify-content: var(--justify-content);
+    align-items: var(--align-items);
+    justify-items: var(--justify-items);
+    align-content: var(--align-content);
+    ${Mixins.PaddingVar()}
 `
 
 setDefaultTheme([StyledFlexbox])

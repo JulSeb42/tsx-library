@@ -21,8 +21,8 @@ export * from "./components/Main" // ✅
 export * from "./components/Aside" // ✅
 export * from "./components/FullBleed" // ✅
 export * from "./components/Section" // ✅
-export * from "./components/Grid"
-export * from "./components/Flexbox"
+export * from "./components/Grid" // ✅
+export * from "./components/Flexbox" // ✅
 export * from "./components/Masonry"
 export * from "./components/Placeholder"
 export * from "./components/Skeleton"

@@ -9,9 +9,8 @@ import { setDefaultTheme } from "../../utils"
 const StyledGrid = styled.div`
     display: var(--grid-display, grid);
     grid-template-columns: var(--template-col, repeat(var(--col, 1), 1fr));
-    column-gap: var(--column-gap);
-    row-gap: var(--row-gap);
-    gap: var(--grid-gap);
+    row-gap: var(--grid-row-gap);
+    column-gap: var(--grid-column-gap);
     justify-items: var(--justify-items);
     justify-content: var(--justify-content);
     align-items: var(--align-items);

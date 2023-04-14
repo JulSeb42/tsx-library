@@ -9,7 +9,8 @@ const FlexboxPage = () => {
         <Page title="Flexbox">
             <Flexbox
                 flexDirection="column-reverse"
-                gap="l"
+                // gap="l"
+                rowGap="xs"
                 alignItems="flex-end"
                 justifyContent="flex-end"
             >

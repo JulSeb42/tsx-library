@@ -369,7 +369,7 @@ enum flexDirection {
     "column-reverse",
 }
 
-export type FlexDirectionTypes = keyof typeof flexDirection
+export type FlexDirectionTypes = keyof typeof flexDirection | null
 
 /* Wrap */
 
@@ -379,7 +379,7 @@ enum flexWrap {
     "wrap-reverse",
 }
 
-export type FlexWrapTypes = keyof typeof flexWrap
+export type FlexWrapTypes = keyof typeof flexWrap | null
 
 /* Justify content */
 
@@ -392,7 +392,7 @@ enum flexJustifyContent {
     "space-evenly",
 }
 
-export type FlexJustifyContentTypes = keyof typeof flexJustifyContent
+export type FlexJustifyContentTypes = keyof typeof flexJustifyContent | null
 
 /* Align items */
 
@@ -404,7 +404,7 @@ enum flexAlignItems {
     baseline,
 }
 
-export type FlexAlignItemsTypes = keyof typeof flexAlignItems
+export type FlexAlignItemsTypes = keyof typeof flexAlignItems | null
 
 /* Justify items */
 
@@ -424,7 +424,7 @@ enum flexJustifyItems {
     legacy,
 }
 
-export type FlexJustifyItemsTypes = keyof typeof flexJustifyItems
+export type FlexJustifyItemsTypes = keyof typeof flexJustifyItems | null
 
 /* Align content */
 
@@ -439,7 +439,7 @@ enum flexAlignContent {
     normal,
 }
 
-export type FlexAlignContentTypes = keyof typeof flexAlignContent
+export type FlexAlignContentTypes = keyof typeof flexAlignContent | null
 
 /*==================== Object fit ====================*/
 
