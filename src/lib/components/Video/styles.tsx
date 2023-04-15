@@ -2,22 +2,14 @@
 
 import styled from "styled-components"
 
-import { stringifyPx } from "../../"
-import type { ObjectFitTypes } from "../../types"
+import { Mixins } from "../../"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledVideo = styled.video<{
-    $width?: string | number
-    $height?: string | number
-    $fit?: ObjectFitTypes
-    $aspectRatio?: string
-}>`
+const StyledVideo = styled.video`
     display: block;
-    object-fit: ${({ $fit }) => $fit};
-    width: ${({ $width }) => stringifyPx($width)};
-    height: ${({ $height }) => stringifyPx($height)};
-    aspect-ratio: ${({ $aspectRatio }) => $aspectRatio};
+    object-fit: var(--object-fit);
+    ${Mixins.ImgSizeVar()};
 `
 
 setDefaultTheme([StyledVideo])

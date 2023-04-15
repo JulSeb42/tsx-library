@@ -1,20 +1,18 @@
 /*=============================================== Video types ===============================================*/
 
-import type { HTMLAttributes, ElementType } from "react"
+import type { HTMLAttributes, ElementType, VideoHTMLAttributes } from "react"
 
 import type { ObjectFitTypes } from "../../types"
 
-export interface VideoProps extends HTMLAttributes<HTMLVideoElement> {
+export interface VideoProps
+    extends HTMLAttributes<HTMLVideoElement>,
+        VideoHTMLAttributes<HTMLVideoElement> {
     as?: ElementType
     src: string
     width?: string | number
     height?: string | number
     fit?: ObjectFitTypes
-    aspectRatio?: string
     emptyText?: string
-    autoPlay?: boolean
-    muted?: boolean
-    controls?: boolean
     type?:
         | "video/x-flv"
         | "video/mp4"

@@ -6,10 +6,7 @@ import { Mixins } from "../../"
 
 import { setDefaultTheme } from "../../utils"
 
-const Fallback = styled.div<{
-    $width?: number | string
-    $height?: number | string
-}>`
+const Fallback = styled.div`
     position: relative;
     ${Mixins.ImgSizeVar()};
     background-color: ${({ theme }) => theme.Gray500};
