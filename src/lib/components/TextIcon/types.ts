@@ -2,7 +2,7 @@
 
 import type { ElementType } from "react"
 
-import type { AllColorsTypes, SpacersTypes } from "../../types"
+import type { AllColorsTypes } from "../../types"
 import type { TextProps } from "../Text/types"
 
 enum tags {
@@ -26,8 +26,5 @@ export type TextIconProps = TextProps & {
     iconColor?: AllColorsTypes
     iconSize?: number
     tag?: PossibleTextIconTags
-    gap?: SpacersTypes
     display?: boolean
-    fontWeightDt?: never
-    fontWeightDd?: never
 }

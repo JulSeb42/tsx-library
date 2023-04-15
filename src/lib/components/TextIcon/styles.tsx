@@ -18,36 +18,35 @@ const StyledTextIcon = styled.div<{ $gap?: SpacersTypes }>`
 
 const IconContainer = styled.span<{
     $tag?: PossibleTextIconTags
-    $lineHeight: number
     $display?: boolean
 }>`
-    height: ${({ $tag, $lineHeight, $display }) =>
+    height: ${({ $tag, $display }) =>
         $tag === "h1" && $display
-            ? 80 * $lineHeight
+            ? 80 * 1.5
             : $tag === "h2" && $display
-            ? 64 * $lineHeight
+            ? 64 * 1.5
             : $tag === "h3" && $display
-            ? 56 * $lineHeight
+            ? 56 * 1.5
             : $tag === "h4" && $display
-            ? 48 * $lineHeight
+            ? 48 * 1.5
             : $tag === "h5" && $display
-            ? 40 * $lineHeight
+            ? 40 * 1.5
             : $tag === "h1"
-            ? 40 * $lineHeight
+            ? 40 * 1.5
             : $tag === "h2"
-            ? 32 * $lineHeight
+            ? 32 * 1.5
             : $tag === "h3"
-            ? 28.8 * $lineHeight
+            ? 28.8 * 1.5
             : $tag === "h4"
-            ? 24 * $lineHeight
+            ? 24 * 1.5
             : $tag === "h5"
-            ? 20.8 * $lineHeight
+            ? 20.8 * 1.5
             : $tag === "h6" || $tag === "blockquote"
-            ? 17.6 * $lineHeight
+            ? 17.6 * 1.5
             : $tag === "p"
-            ? 16 * $lineHeight
+            ? 16 * 1.5
             : $tag === "small"
-            ? 14 * $lineHeight
+            ? 14 * 1.5
             : ""}px;
     display: inline-block;
     ${Mixins.Flexbox({

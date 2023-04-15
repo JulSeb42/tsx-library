@@ -9,6 +9,14 @@ const TextIconPage = () => {
             <TextIcon icon="arrow-right" tag="h1" display>
                 Hello
             </TextIcon>
+
+            <TextIcon icon="arrow-right" tag="h6">
+                Hello
+            </TextIcon>
+
+            <TextIcon icon="arrow-right" iconColor="secondary">
+                Hello
+            </TextIcon>
         </Page>
     )
 }
