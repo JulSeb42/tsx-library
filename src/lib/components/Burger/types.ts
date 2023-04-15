@@ -11,5 +11,5 @@ export interface BurgerProps extends HTMLAttributes<HTMLButtonElement> {
     width?: number
     height?: number
     noHover?: boolean
-    borderWidth?: number
+    borderHeight?: number
 }

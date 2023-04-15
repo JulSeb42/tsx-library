@@ -1,45 +1,23 @@
 /*=============================================== Burger styles ===============================================*/
 
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
 import { Breakpoints, Radiuses, Transitions } from "../../"
 import type { ColorsHoverTypes } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledBurger = styled.button<{
-    $isOpen: boolean
-    $color?: ColorsHoverTypes
-    $width?: number
-    $height?: number
-    $noHover?: boolean
-    $borderWidth?: number
-}>`
+const BaseBurger = styled.button`
     position: relative;
     border: none;
     background-color: transparent;
-    width: ${({ $width }) => $width}px;
-    height: ${({ $height }) => $height}px;
-    color: ${({ theme }) => theme.ColorsHoverDefault};
-
-    ${({ $noHover }) =>
-        !$noHover &&
-        css`
-            @media ${Breakpoints.Hover} {
-                &:hover {
-                    color: ${({ theme }) => theme.ColorsHoverHover};
-                }
-
-                &:active {
-                    color: ${({ theme }) => theme.ColorsHoverActive};
-                }
-            }
-        `}
+    width: var(--burger-width, 32px);
+    height: var(--burger-height, 24px);
 
     span {
         display: block;
         width: 100%;
-        height: ${({ $borderWidth }) => $borderWidth}px;
+        height: var(--burger-border-height, 2px);
         border-radius: ${Radiuses.Round};
         position: absolute;
         left: 0;
@@ -47,18 +25,50 @@ const StyledBurger = styled.button<{
         transition: ${Transitions.Short};
 
         &:first-child {
-            top: ${({ $isOpen }) => ($isOpen ? "45%" : 0)};
-            transform: ${({ $isOpen }) => $isOpen && "rotate(45deg)"};
+            top: 0;
+        }
+
+        &:nth-child(2) {
+            top: calc(50% - var(--burger-border-height, 2px) / 2);
+        }
+
+        &:last-child {
+            bottom: 0;
+        }
+    }
+
+    &.open span {
+        &:first-child {
+            top: 45%;
+            transform: rotate(45deg);
         }
 
         &:nth-child(2) {
             top: calc(50% - 2px / 2);
-            width: ${({ $isOpen }) => $isOpen && 0};
+            width: 0;
         }
 
         &:last-child {
-            bottom: ${({ $isOpen }) => ($isOpen ? "45%" : 0)};
-            transform: ${({ $isOpen }) => $isOpen && "rotate(-45deg)"};
+            bottom: 45%;
+            transform: rotate(-45deg);
+        }
+    }
+`
+
+const StyledBurger = styled(BaseBurger)<{
+    $color?: ColorsHoverTypes
+}>`
+    color: ${({ theme }) => theme.ColorsHoverDefault};
+
+    &:not(.no-hover) {
+        @media ${Breakpoints.Hover} {
+            &:hover {
+                color: ${({ theme }) => theme.ColorsHoverHover};
+            }
+
+            &:active {
+                color: ${({ theme }) => theme.ColorsHoverActive};
+            }
         }
     }
 `

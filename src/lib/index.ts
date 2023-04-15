@@ -37,7 +37,7 @@ export * from "./components/Avatar" // ✅
 export * from "./components/Loader" // ✅
 export * from "./components/Button" // ✅
 export * from "./components/ButtonIcon" // ✅
-export * from "./components/Burger"
+export * from "./components/Burger" // ✅
 export * from "./components/ButtonGroup"
 export * from "./components/Tag"
 export * from "./components/Truncate"

@@ -3,6 +3,8 @@
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
+import { stringifyPx } from "../../"
+
 import * as Styles from "./styles"
 import type { BurgerProps } from "./types"
 
@@ -13,31 +15,46 @@ const Burger = forwardRef(
             isOpen,
             "aria-label": ariaLabel = `${isOpen ? "Close" : "Open"} burger`,
             color = "primary",
-            width = 32,
-            height = 24,
+            width,
+            height,
             noHover,
-            borderWidth = 2,
+            borderHeight,
+            className = undefined,
+            style,
             ...rest
         }: BurgerProps,
         ref?: ForwardedRef<HTMLButtonElement>
-    ) => (
-        <Styles.StyledBurger
-            ref={ref}
-            as={as}
-            aria-label={ariaLabel}
-            $isOpen={isOpen}
-            $color={color}
-            $width={width}
-            $height={height}
-            $noHover={noHover}
-            $borderWidth={borderWidth}
-            {...rest}
-        >
-            <span />
-            <span />
-            <span />
-        </Styles.StyledBurger>
-    )
+    ) => {
+        const classes = [
+            className ? className : null,
+            noHover ? "no-hover" : null,
+            isOpen ? "open" : null,
+        ].join(" ")
+
+        const styles = {
+            ["--burger-width" as any]: width && stringifyPx(width),
+            ["--burger-height" as any]: height && stringifyPx(height),
+            ["--burger-border-height" as any]:
+                borderHeight && stringifyPx(borderHeight),
+            ...style,
+        }
+
+        return (
+            <Styles.StyledBurger
+                ref={ref}
+                as={as}
+                aria-label={ariaLabel}
+                className={classes}
+                style={styles}
+                $color={color}
+                {...rest}
+            >
+                <span />
+                <span />
+                <span />
+            </Styles.StyledBurger>
+        )
+    }
 )
 
 export default Burger

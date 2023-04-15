@@ -20,6 +20,9 @@ const BurgerPage = () => {
                     color="primary"
                     isOpen={isPrimaryOpen}
                     onClick={() => setIsPrimaryOpen(!isPrimaryOpen)}
+                    width={100}
+                    height={75}
+                    borderHeight={4}
                 />
                 <Burger
                     color="secondary"
