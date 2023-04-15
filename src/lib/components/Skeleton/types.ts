@@ -10,43 +10,21 @@ enum animations {
     shine,
 }
 
-export type SkeletonAnimationTypes = keyof typeof animations
+export type SkeletonAnimationTypes = keyof typeof animations | null
 
-export interface SkeletonPropsBase extends HTMLAttributes<HTMLDivElement> {
+export interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {
     as?: ElementType
     width?: string | number
     height?: string | number
-    aspectRatio?: string
     backgroundColor?: AllColorsTypes
     borderRadius?: RadiusesTypes
     flex?: string | number
     flexGrow?: string | number
+    animation?: SkeletonAnimationTypes
 }
-
-interface SkeletonAnimation1 extends SkeletonPropsBase {
-    animation?: "pulse"
-    shineOpacity?: never
-    shineColor?: never
-    shineSpeed?: never
-    shineWidth?: never
-}
-
-interface SkeletonAnimation2 extends SkeletonPropsBase {
-    animation?: "shine"
-    shineOpacity?: number
-    shineColor?: AllColorsTypes
-    shineSpeed?: number
-    shineWidth?: string | number
-}
-
-export type SkeletonProps = SkeletonAnimation1 | SkeletonAnimation2
 
 export interface ShineProps extends HTMLAttributes<HTMLSpanElement> {
     as?: ElementType
-    speed?: number
-    opacity?: number
-    color?: AllColorsTypes
-    width?: string | number
 }
 
 export interface SkeletonCardProps
@@ -57,4 +35,5 @@ export interface SkeletonCardProps
     width?: string | number
     height?: string | number
     backgroundColor?: AllColorsTypes
+    isShiny?: boolean
 }

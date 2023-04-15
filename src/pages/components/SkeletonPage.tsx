@@ -1,7 +1,7 @@
 /*=============================================== SkeletonPage ===============================================*/
 
 import { Page } from "../../components"
-import { Skeleton, SkeletonShine, SkeletonCard } from "../../lib"
+import { Skeleton, SkeletonCard } from "../../lib"
 
 const SkeletonPage = () => {
     return (
@@ -43,12 +43,11 @@ const SkeletonPage = () => {
                 }}
                 padding="s"
                 borderRadius="m"
+                isShiny
             >
                 <Skeleton width={200} height={150} borderRadius="l" />
                 <Skeleton width="100%" height={24} borderRadius="s" />
                 <Skeleton width="90%" height={24} borderRadius="s" />
-
-                <SkeletonShine speed={3000} />
             </SkeletonCard>
         </Page>
     )

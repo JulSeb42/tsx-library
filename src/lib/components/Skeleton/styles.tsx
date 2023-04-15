@@ -1,20 +1,9 @@
 /*=============================================== Skeleton styles ===============================================*/
 
-import styled, { keyframes, css } from "styled-components"
+import styled, { css, keyframes } from "styled-components"
 
-import { Mixins, stringifyPx } from "../../"
-import type {
-    AllColorsTypes,
-    RadiusesTypes,
-    FlexAlignContentTypes,
-    FlexAlignItemsTypes,
-    FlexDirectionTypes,
-    FlexJustifyContentTypes,
-    FlexJustifyItemsTypes,
-    FlexWrapTypes,
-    SpacersTypes,
-    BorderTypes,
-} from "../../types"
+import { Flexbox, Mixins } from "../../"
+import type { AllColorsTypes, BorderTypes } from "../../types"
 import type { SkeletonAnimationTypes } from "./types"
 
 import { setDefaultTheme } from "../../utils"
@@ -29,33 +18,31 @@ const Pulse = keyframes`
     }
 `
 
-const StyledSkeleton = styled.div<{
-    $width?: string | number
-    $height?: string | number
-    $aspectRatio?: string
+const BaseSkeleton = styled.div`
+    position: relative;
+    overflow: hidden;
+    width: var(--width);
+    height: var(--height);
+    flex: var(--flex);
+    flex-grow: var(--flex-grow);
+    ${Mixins.BorderRadiusVar};
+`
+
+const SkeletonBackground = styled(BaseSkeleton)<{
     $backgroundColor?: AllColorsTypes
-    $borderRadius?: RadiusesTypes
-    $animation?: SkeletonAnimationTypes
-    $flex?: string | number
-    $flexGrow?: string | number
 }>`
     background-color: ${({ theme, $backgroundColor }) =>
         theme.AllColors({ $color: $backgroundColor })};
-    width: ${({ $width }) => $width && stringifyPx($width)};
-    height: ${({ $height }) => $height && stringifyPx($height)};
-    aspect-ratio: ${({ $aspectRatio }) => $aspectRatio};
-    background-color: ${({ theme, $backgroundColor }) =>
-        theme.AllColors({ $color: $backgroundColor })};
-    ${Mixins.BorderRadius};
-    position: relative;
-    overflow: hidden;
-    flex: ${({ $flex }) => $flex};
-    flex-grow: ${({ $flexGrow }) => $flexGrow};
+`
 
+const StyledSkeleton = styled(SkeletonBackground)<{
+    $animation?: SkeletonAnimationTypes
+}>`
     ${({ $animation }) =>
+        $animation &&
         $animation === "pulse" &&
         css`
-            animation: ${Pulse} 500ms infinite alternate;
+            animation: ${Pulse} 1000ms infinite alternate;
         `}
 `
 
@@ -69,75 +56,37 @@ const ShineLoad = keyframes`
     }
 `
 
-const Shine = styled.span<{
-    $speed?: number
-    $opacity?: number
-    $color?: AllColorsTypes
-    $width?: number | string
-}>`
+const Shine = styled.span`
     position: absolute;
     top: -200px;
     bottom: -200px;
-    width: ${({ $width }) => $width && stringifyPx($width)};
+    width: 100px;
     filter: blur(20px);
     transform: skew(-15deg);
-    background-color: ${({ theme, $color }) =>
-        theme.AllColors({ $color: $color })};
-    animation: ${ShineLoad} ${({ $speed }) => $speed}ms infinite;
-    opacity: ${({ $opacity }) => $opacity};
+    background-color: ${({ theme }) => theme.White};
+    animation: ${ShineLoad} 2000ms infinite;
+    opacity: 0.7;
 `
 
-export const Card = styled.div<{
-    $border?: BorderTypes
-    $borderRadius?: RadiusesTypes
-    $width?: string | number
-    $height?: string | number
+const BaseCard = styled(Flexbox)`
+    width: var(--width);
+    height: var(--height);
+    overflow: hidden;
+    position: relative;
+    ${Mixins.BorderRadiusVar()};
+`
+
+const CardBorder = styled(BaseCard)<{ $border?: BorderTypes }>`
+    ${({ $border }) => $border && Mixins.Border({ $border })};
+`
+
+const Card = styled(CardBorder)<{
     $backgroundColor?: AllColorsTypes
-    $inline?: boolean
-    $flexDirection?: FlexDirectionTypes
-    $flexWrap?: FlexWrapTypes
-    $justifyContent?: FlexJustifyContentTypes
-    $alignItems?: FlexAlignItemsTypes
-    $justifyItems?: FlexJustifyItemsTypes
-    $alignContent?: FlexAlignContentTypes
-    $gap?: SpacersTypes
-    $columnGap?: SpacersTypes
-    $rowGap?: SpacersTypes
 }>`
     background-color: ${({ theme, $backgroundColor }) =>
         theme.AllColors({ $color: $backgroundColor })};
-    width: ${({ $width }) => $width && stringifyPx($width)};
-    height: ${({ $height }) => $height && stringifyPx($height)};
-    overflow: hidden;
-    position: relative;
-    ${Mixins.BorderRadius};
-    ${Mixins.Padding({})};
-    ${({ $border }) => $border && Mixins.Border({ $border })};
-    ${({
-        $inline,
-        $flexDirection,
-        $flexWrap,
-        $justifyContent,
-        $alignItems,
-        $justifyItems,
-        $alignContent,
-        $gap,
-        $columnGap,
-        $rowGap,
-    }) =>
-        ($inline ||
-            $flexDirection ||
-            $flexWrap ||
-            $justifyContent ||
-            $alignItems ||
-            $justifyItems ||
-            $alignContent ||
-            $gap ||
-            $columnGap ||
-            $rowGap) &&
-        Mixins.Flexbox};
 `
 
-setDefaultTheme([StyledSkeleton, Shine])
+setDefaultTheme([StyledSkeleton, Shine, Card])
 
-export { StyledSkeleton, Shine }
+export { StyledSkeleton, Shine, Card }

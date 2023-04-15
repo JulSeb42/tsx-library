@@ -214,11 +214,12 @@ export type RadiusesTypes =
     | keyof typeof radiuses
     | number
     | {
-          topLeft?: keyof typeof radiuses | number
-          topRight?: keyof typeof radiuses | number
-          bottomRight?: keyof typeof radiuses | number
-          bottomLeft?: keyof typeof radiuses | number
+          topLeft?: keyof typeof radiuses | number | null
+          topRight?: keyof typeof radiuses | number | null
+          bottomRight?: keyof typeof radiuses | number | null
+          bottomLeft?: keyof typeof radiuses | number | null
       }
+    | null
 
 /*==================== Text align ====================*/
 

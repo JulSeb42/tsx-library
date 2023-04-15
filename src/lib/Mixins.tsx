@@ -176,10 +176,10 @@ const Mixins = {
 
     BorderRadius: ({ $borderRadius }: RadiusesProps) => css`
         border-radius: ${(typeof $borderRadius === "object" &&
-            $borderRadius.topLeft) ||
-        (typeof $borderRadius === "object" && $borderRadius.topRight) ||
-        (typeof $borderRadius === "object" && $borderRadius.bottomRight) ||
-        (typeof $borderRadius === "object" && $borderRadius.bottomLeft)
+            $borderRadius?.topLeft) ||
+        (typeof $borderRadius === "object" && $borderRadius?.topRight) ||
+        (typeof $borderRadius === "object" && $borderRadius?.bottomRight) ||
+        (typeof $borderRadius === "object" && $borderRadius?.bottomLeft)
             ? `${
                   $borderRadius.topLeft === "xxl"
                       ? Radiuses.XXL
