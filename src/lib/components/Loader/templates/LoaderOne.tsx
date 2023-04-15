@@ -3,6 +3,8 @@
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
+import { variablesAllLoaders } from "../variables-loader"
+
 import * as Styles from "../styles"
 import type { LoaderProps } from "../types"
 
@@ -10,24 +12,29 @@ const LoaderOne = forwardRef(
     (
         {
             as,
-            size = 48,
+            size = null,
             color = "primary",
-            borderWidth = 8,
-            speed = 1200,
+            borderWidth = null,
+            style,
             ...rest
         }: LoaderProps,
         ref?: ForwardedRef<HTMLSpanElement>
-    ) => (
-        <Styles.StyledLoaderOne
-            ref={ref}
-            as={as}
-            $size={size}
-            $color={color}
-            $borderWidth={borderWidth}
-            $speed={speed}
-            {...rest}
-        />
-    )
+    ) => {
+        const styles = {
+            ...variablesAllLoaders(size, borderWidth),
+            ...style,
+        }
+
+        return (
+            <Styles.StyledLoaderOne
+                ref={ref}
+                as={as}
+                style={styles}
+                $color={color}
+                {...rest}
+            />
+        )
+    }
 )
 
 export default LoaderOne

@@ -6,7 +6,16 @@ import { Avatar, Flexbox } from "../../lib"
 const AvatarPage = () => {
     return (
         <Page title="Avatar">
-            <Avatar size={64} img="/images/pic-avatar.jpg" />
+            <Avatar
+                size={64}
+                img="/images/pic-avatar.jpg"
+                borderRadius={{
+                    topRight: "l",
+                    topLeft: "s",
+                    bottomRight: "m",
+                    bottomLeft: "xxl",
+                }}
+            />
 
             <Flexbox gap="s">
                 <Avatar letter="A" color="primary" />

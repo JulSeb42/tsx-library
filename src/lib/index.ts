@@ -34,7 +34,7 @@ export * from "./components/Image" // ✅
 export * from "./components/Video" // ✅
 export * from "./components/Youtube" // ✅
 export * from "./components/Avatar" // ✅
-export * from "./components/Loader"
+export * from "./components/Loader" // ✅
 export * from "./components/Button"
 export * from "./components/ButtonIcon"
 export * from "./components/Burger"

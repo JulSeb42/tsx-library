@@ -1,11 +1,16 @@
 /*=============================================== Loader styles ===============================================*/
 
-import styled, { keyframes } from "styled-components"
+import styled, { keyframes, css } from "styled-components"
 
 import { Radiuses, Mixins } from "../../"
 import type { AllColorsTypes } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
+
+const LoaderSize = css`
+    width: var(--size, 48px);
+    height: var(--size, 48px);
+`
 
 const SpinLoaderOne = keyframes`
     0% {
@@ -17,18 +22,17 @@ const SpinLoaderOne = keyframes`
     }
 `
 
-const StyledLoaderOne = styled.span<{
-    $size?: number
-    $color?: AllColorsTypes
-    $speed?: number
-    $borderWidth?: number
-}>`
-    width: ${({ $size }) => $size}px;
-    height: ${({ $size }) => $size}px;
+const BaseLoaderOne = styled.span`
+    ${LoaderSize};
     border-radius: ${Radiuses.Circle};
-    border: ${({ $borderWidth }) => $borderWidth}px solid transparent;
+    border: var(--border-width, 8px) solid transparent;
+    animation: ${SpinLoaderOne} 1200ms linear infinite;
+`
+
+const StyledLoaderOne = styled(BaseLoaderOne)<{
+    $color?: AllColorsTypes
+}>`
     border-bottom-color: ${({ theme }) => theme.AllColors};
-    animation: ${SpinLoaderOne} ${({ $speed }) => $speed}ms linear infinite;
 `
 
 const SpinLoaderTwo = keyframes`
@@ -41,20 +45,19 @@ const SpinLoaderTwo = keyframes`
     }
 `
 
-const StyledLoaderTwo = styled.span<{
-    $size?: number
-    $color?: AllColorsTypes
-    $speed?: number
-    $borderWidth?: number
-}>`
-    width: ${({ $size }) => $size}px;
-    height: ${({ $size }) => $size}px;
+const BaseLoaderTwo = styled.span`
+    ${LoaderSize};
     display: inline-block;
     border-radius: ${Radiuses.Circle};
-    border: ${({ $borderWidth }) => $borderWidth}px solid transparent;
+    border: var(--border-width, 8px) solid transparent;
+    animation: ${SpinLoaderTwo} 1200ms linear infinite;
+`
+
+const StyledLoaderTwo = styled(BaseLoaderTwo)<{
+    $color?: AllColorsTypes
+}>`
     border-top-color: ${({ theme }) => theme.AllColors};
     border-bottom-color: ${({ theme }) => theme.AllColors};
-    animation: ${SpinLoaderTwo} ${({ $speed }) => $speed}ms linear infinite;
 `
 
 const SpinLoaderThree = keyframes`
@@ -67,14 +70,8 @@ const SpinLoaderThree = keyframes`
     }
 `
 
-const StyledLoaderThree = styled.span<{
-    $size?: number
-    $color?: AllColorsTypes
-    $speed?: number
-    $borderWidth?: number
-}>`
-    width: ${({ $size }) => $size}px;
-    height: ${({ $size }) => $size}px;
+const BaseLoaderThree = styled.span`
+    ${LoaderSize};
     display: inline-block;
     position: relative;
 
@@ -83,11 +80,10 @@ const StyledLoaderThree = styled.span<{
         position: absolute;
         width: 100%;
         height: 100%;
-        border: ${({ $borderWidth }) => $borderWidth}px solid transparent;
+        border: var(--border-width, 8px) solid transparent;
         border-radius: ${Radiuses.Circle};
-        animation: ${SpinLoaderThree} ${({ $speed }) => $speed}ms
-            cubic-bezier(0.5, 0, 0.5, 1) infinite;
-        border-top-color: ${({ theme }) => theme.AllColors};
+        animation: ${SpinLoaderThree} 1200ms cubic-bezier(0.5, 0, 0.5, 1)
+            infinite;
 
         &:nth-child(1) {
             animation-delay: -0.45s;
@@ -103,6 +99,14 @@ const StyledLoaderThree = styled.span<{
     }
 `
 
+const StyledLoaderThree = styled(BaseLoaderThree)<{
+    $color?: AllColorsTypes
+}>`
+    span {
+        border-top-color: ${({ theme }) => theme.AllColors};
+    }
+`
+
 const Flash = keyframes`
     0% {
         opacity: 1;
@@ -115,12 +119,8 @@ const Flash = keyframes`
 
 const durationLoaderFour = 1000
 
-const StyledLoaderFour = styled.span<{
-    $size: number
-    $color?: AllColorsTypes
-}>`
-    width: ${({ $size }) => $size}px;
-    height: ${({ $size }) => $size}px;
+const BaseLoaderFour = styled.span`
+    ${LoaderSize};
     ${Mixins.Flexbox({
         $alignItems: "center",
         $justifyContent: "center",
@@ -133,7 +133,6 @@ const StyledLoaderFour = styled.span<{
         flex-grow: 1;
         display: inline-block;
         border-radius: ${Radiuses.Circle};
-        background-color: ${({ $color, theme }) => theme.AllColors({ $color })};
 
         &:first-child {
             animation: ${Flash} ${durationLoaderFour}ms infinite alternate;
@@ -150,6 +149,14 @@ const StyledLoaderFour = styled.span<{
             animation: ${Flash} ${durationLoaderFour}ms infinite alternate;
             animation-delay: 500ms;
         }
+    }
+`
+
+const StyledLoaderFour = styled(BaseLoaderFour)<{
+    $color?: AllColorsTypes
+}>`
+    span {
+        background-color: ${({ theme }) => theme.AllColors};
     }
 `
 
