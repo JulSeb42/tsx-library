@@ -10,60 +10,26 @@ import type { KeyProps } from "./types"
 
 const Key = forwardRef(
     (
-        {
-            as,
-            keys,
-            fontColor,
-            fontSize = "small",
-            backgroundColor,
-            separator,
-            gap = "xxs",
-            borderColor,
-            padding = {
-                topBottom: "none",
-                leftRight: "xxs",
-            },
-            borderWidth = 1,
-            borderRadius = "xs",
-            accentColor = "primary",
-            ...rest
-        }: KeyProps,
+        { as, keys, withSeparator, accentColor = "primary", ...rest }: KeyProps,
         ref?: ForwardedRef<HTMLSpanElement>
     ) => {
         const props = {
             as,
-            $fontColor: fontColor,
-            $fontSize: fontSize,
-            $backgroundColor: backgroundColor || accentColor,
-            $gap: gap,
-            ref: ref,
-            $borderColor: borderColor || accentColor,
-            $padding: padding,
-            $borderRadius: borderRadius,
-            $borderWidth: borderWidth,
+            ref,
+            $accentColor: accentColor,
             ...rest,
         }
 
-        if (separator)
+        if (withSeparator)
             return (
-                <Flexbox gap={gap} alignItems="center" inline>
+                <Flexbox gap="xxs" alignItems="center" inline>
                     {keys.map((key, i) => (
                         <Fragment key={uuid()}>
                             <Styles.StyledKey {...props}>
                                 {key}
                             </Styles.StyledKey>
 
-                            {i !== keys?.length - 1 && (
-                                <Styles.Separator
-                                    $color={
-                                        typeof separator === "string"
-                                            ? separator
-                                            : fontColor
-                                    }
-                                >
-                                    +
-                                </Styles.Separator>
-                            )}
+                            {i !== keys?.length - 1 && <span>+</span>}
                         </Fragment>
                     ))}
                 </Flexbox>

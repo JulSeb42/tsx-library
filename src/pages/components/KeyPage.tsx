@@ -8,7 +8,7 @@ const KeyPage = () => {
         <Page title="Key">
             <Key keys={["⌘", "K"]} accentColor="success" />
 
-            <Key keys={["⌘", "K"]} separator />
+            <Key keys={["⌘", "K"]} withSeparator />
         </Page>
     )
 }
