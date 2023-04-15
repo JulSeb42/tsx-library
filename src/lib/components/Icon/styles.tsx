@@ -7,12 +7,14 @@ import type { AllColorsTypes } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledIcon = styled(SVG)<{
-    $size?: number
+const BaseIcon = styled(SVG)`
+    width: var(--size);
+    height: var(--size);
+`
+
+const StyledIcon = styled(BaseIcon)<{
     $color?: AllColorsTypes
 }>`
-    width: ${({ $size }) => $size}px;
-    height: ${({ $size }) => $size}px;
     fill: ${({ theme, $color }) => theme.AllColors({ $color: $color })};
 
     path {
