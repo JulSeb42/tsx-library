@@ -2,18 +2,12 @@
 
 import styled from "styled-components"
 
-import { stringifyPx } from "../../"
+import { Mixins } from "../../"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledYoutube = styled.iframe<{
-    $width?: string | number
-    $height?: string | number
-    $aspectRatio?: string
-}>`
-    width: ${({ $width }) => stringifyPx($width)};
-    height: ${({ $height }) => $height};
-    aspect-ratio: ${({ $aspectRatio, $height }) => !$height && $aspectRatio};
+const StyledYoutube = styled.iframe`
+    ${Mixins.ImgSizeVar()};
 `
 
 setDefaultTheme([StyledYoutube])
