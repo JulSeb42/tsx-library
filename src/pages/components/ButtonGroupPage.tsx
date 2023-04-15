@@ -10,15 +10,15 @@ const ButtonGroupPage = () => {
         {
             // text: "Button",
             iconOnly: "arrow-left",
-            onClick: () => console.log("Clicked"),
+            onClick: () => alert("Clicked"),
         },
         {
             text: "Button",
-            onClick: () => console.log("Clicked"),
+            onClick: () => alert("Clicked"),
         },
         {
             text: "Button",
-            onClick: () => console.log("Clicked"),
+            onClick: () => alert("Clicked"),
         },
         {
             text: "Link",
@@ -42,6 +42,7 @@ const ButtonGroupPage = () => {
                 color="secondary"
                 buttonsSize="small"
             />
+
             <ButtonGroup buttons={buttons} variant="transparent" />
         </Page>
     )

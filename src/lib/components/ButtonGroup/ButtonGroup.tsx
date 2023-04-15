@@ -15,7 +15,6 @@ const ButtonGroup = forwardRef(
             variant = "plain",
             color = "primary",
             buttons,
-            borderRadius = "m",
             buttonsSize = "default",
             ...rest
         }: ButtonGroupProps,
@@ -25,9 +24,7 @@ const ButtonGroup = forwardRef(
             ref={ref}
             as={as}
             $hasBorders={variant === "transparent" && true}
-            $borders={color}
-            $borderRadius={borderRadius}
-            $buttonsSize={buttonsSize}
+            $color={color}
             {...rest}
         >
             {buttons.map(
@@ -79,9 +76,7 @@ const ButtonGroup = forwardRef(
                             )
                         ) : href ? (
                             <Styles.StyledButton
-                                variant={
-                                    variant === "transparent" ? "text" : variant
-                                }
+                                variant={variant}
                                 color={color}
                                 aria-label={ariaLabel}
                                 icons={{
@@ -96,9 +91,7 @@ const ButtonGroup = forwardRef(
                             </Styles.StyledButton>
                         ) : to ? (
                             <Styles.StyledButton
-                                variant={
-                                    variant === "transparent" ? "text" : variant
-                                }
+                                variant={variant}
                                 color={color}
                                 aria-label={ariaLabel}
                                 icons={{
@@ -114,9 +107,7 @@ const ButtonGroup = forwardRef(
                         ) : (
                             <Styles.StyledButton
                                 onClick={onClick}
-                                variant={
-                                    variant === "transparent" ? "text" : variant
-                                }
+                                variant={variant}
                                 color={color}
                                 aria-label={ariaLabel}
                                 icons={{

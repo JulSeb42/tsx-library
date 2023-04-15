@@ -1,11 +1,10 @@
 /*=============================================== ButtonGroup types ===============================================*/
 
-import type { HTMLAttributes, ElementType } from "react"
+import type { ElementType, HTMLAttributes } from "react"
 
 import type {
-    ColorsHoverTypes,
     ButtonGroupProps as ButtonProps,
-    RadiusesTypes,
+    ColorsHoverTypes,
 } from "../../types"
 import type { ButtonSizesTypes } from "../Button/types"
 
@@ -22,6 +21,5 @@ export interface ButtonGroupProps extends HTMLAttributes<HTMLDivElement> {
     variant?: ButtonGroupVariantsTypes
     color?: ColorsHoverTypes
     buttons: ButtonProps[]
-    borderRadius?: RadiusesTypes
     buttonsSize?: ButtonSizesTypes
 }
