@@ -2,40 +2,19 @@
 
 import styled from "styled-components"
 
-import { Mixins, FontWeights, Radiuses, Spacers } from "../../"
-import type { AllColorsTypes, RadiusesTypes, BorderTypes } from "../../types"
+import { FontWeights, Mixins } from "../../"
+import type { AllColorsTypes } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
 
-const AvatarContainer = styled.span<{ $size?: number }>`
-    position: relative;
-    width: ${({ $size }) => $size}px;
-    height: ${({ $size }) => $size}px;
-`
+const avatarSize = "var(--size, 48px)"
 
-const StyledAvatar = styled.span<{
-    $color?: AllColorsTypes
-    $contentColor?: AllColorsTypes
-    $size?: number
-    $border?: boolean | BorderTypes
-    $borderRadius?: RadiusesTypes
-}>`
-    width: ${({ $size }) => $size}px;
-    height: ${({ $size }) => $size}px;
-    ${Mixins.BorderRadius};
-    background-color: ${({ theme }) => theme.AllColors};
-    color: ${({ $color, $contentColor, theme }) =>
-        $color === "white" && !$contentColor
-            ? theme.Primary500
-            : $color === "black" && !$contentColor
-            ? theme.White
-            : $contentColor
-            ? theme.AllColors({
-                  $color: $contentColor,
-              })
-            : theme.Background};
+const BaseAvatar = styled.span`
+    width: ${avatarSize};
+    height: ${avatarSize};
+    ${Mixins.BorderRadiusVar()};
     font-weight: ${FontWeights.Black};
-    font-size: ${({ $size }) => ($size ? $size * 0.7 : 48 * 0.7)}px;
+    font-size: calc(${avatarSize} * 0.7);
     ${Mixins.Flexbox({
         $alignItems: "center",
         $justifyContent: "center",
@@ -43,63 +22,25 @@ const StyledAvatar = styled.span<{
     })};
     overflow: hidden;
     padding: 0;
-
-    ${({ $border }) =>
-        $border &&
-        Mixins.Border({
-            $border: {
-                width:
-                    typeof $border === "boolean"
-                        ? 1
-                        : $border?.width
-                        ? $border.width
-                        : 1,
-                color:
-                    typeof $border === "boolean"
-                        ? "primary"
-                        : $border?.color
-                        ? $border?.color
-                        : "primary",
-                style:
-                    typeof $border === "boolean"
-                        ? "solid"
-                        : $border?.style
-                        ? $border.style
-                        : "solid",
-            },
-        })};
 `
 
-const badgeSize = 16
-
-const Badge = styled.span<{
-    $background?: AllColorsTypes
-    $textColor?: AllColorsTypes
-    $length: number
-    $position?: "top" | "bottom"
-    $width: number
+const StyledAvatar = styled(BaseAvatar)<{
+    $color?: AllColorsTypes
+    $contentColor?: AllColorsTypes
 }>`
-    min-width: ${badgeSize}px;
-    width: ${({ $length }) => $length <= 1 && `${badgeSize}px`};
-    height: ${badgeSize}px;
-    background-color: ${({ theme, $background }) =>
-        theme.AllColors({ $color: $background })};
-    color: ${({ theme, $textColor }) =>
-        theme.AllColors({ $color: $textColor })};
-    ${Mixins.Flexbox({
-        $inline: true,
-        $alignItems: "center",
-        $justifyContent: "center",
-    })};
-    border-radius: ${Radiuses.Round};
-    padding: 0 ${({ $length }) => $length > 1 && Spacers.XXS};
-    font-size: ${badgeSize * 0.7}px;
-    position: absolute;
-    top: ${({ $position }) => $position === "top" && 0};
-    bottom: ${({ $position }) => $position === "bottom" && 0};
-    right: calc(${Spacers.XS} * -1);
+    background-color: ${({ theme, $color }) => theme.AllColors({ $color })};
+    color: ${({ $color, $contentColor, theme }) =>
+        $contentColor
+            ? theme.AllColors({
+                  $color: $contentColor,
+              })
+            : $color === "white"
+            ? theme.Primary500
+            : $color === "black"
+            ? theme.White
+            : theme.Background};
 `
 
-setDefaultTheme([StyledAvatar, AvatarContainer, Badge])
+setDefaultTheme([StyledAvatar])
 
-export { StyledAvatar, AvatarContainer, Badge }
+export { StyledAvatar }
