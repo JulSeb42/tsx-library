@@ -18,25 +18,25 @@ const BadgePage = () => {
             </Flexbox>
 
             <Flexbox gap="xs">
-                <Badge color="primary" size={48} content="star" />
-                <Badge color="secondary" size={48} content="star" />
-                <Badge color="success" size={48} content="star" />
-                <Badge color="danger" size={48} content="star" />
-                <Badge color="warning" size={48} content="star" />
-                <Badge color="gray" size={48} content="star" />
-                <Badge color="black" size={48} content="star" />
-                <Badge color="white" size={48} content="star" />
+                <Badge color="primary" size={48} icon="star" />
+                <Badge color="secondary" size={48} icon="star" />
+                <Badge color="success" size={48} icon="star" />
+                <Badge color="danger" size={48} icon="star" />
+                <Badge color="warning" size={48} icon="star" />
+                <Badge color="gray" size={48} icon="star" />
+                <Badge color="black" size={48} icon="star" />
+                <Badge color="white" size={48} icon="star" />
             </Flexbox>
 
             <Flexbox gap="xs">
-                <Badge content={300} color="primary" size={64} padding="l" />
-                <Badge content={1} color="secondary" size={64} />
-                <Badge content={1} color="success" size={64} />
-                <Badge content={1} color="danger" size={64} />
-                <Badge content={1} color="warning" size={64} />
-                <Badge content={1} color="gray" size={64} />
-                <Badge content={1} color="black" size={64} />
-                <Badge content={1} color="white" size={64} />
+                <Badge number={300} color="primary" />
+                <Badge number={1} color="secondary" />
+                <Badge number={1} color="success" />
+                <Badge number={1} color="danger" />
+                <Badge number={1} color="warning" />
+                <Badge number={1} color="gray" />
+                <Badge number={1} color="black" />
+                <Badge number={1} color="white" />
             </Flexbox>
         </Page>
     )

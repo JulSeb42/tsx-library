@@ -2,51 +2,45 @@
 
 import styled from "styled-components"
 
-import { Mixins, FontWeights } from "../../"
-import type { AllColorsTypes, PaddingTypes, RadiusesTypes } from "../../types"
+import { FontWeights, Mixins, Radiuses } from "../../"
+import type { ColorsShortTypes } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledBadge = styled.span<{
-    $color?: AllColorsTypes
-    $textColor?: AllColorsTypes
-    $size?: number
-    $children?: boolean
-    $childrenLength?: number
-    $padding?: PaddingTypes
-    $borderRadius?: RadiusesTypes
-}>`
-    min-width: ${({ $size }) => $size}px;
-    height: ${({ $size }) => $size}px;
-    font-size: ${({ $size }) => ($size ? $size * 0.7 : 16 * 0.7)}px;
+const BaseBadge = styled.span`
+    min-width: var(--badge-size, 16px);
+    height: var(--badge-size, 16px);
+    font-size: calc(var(--badge-size, 16px) * 0.7);
     ${Mixins.Flexbox({
         $inline: true,
         $alignItems: "center",
         $justifyContent: "center",
     })};
-    background-color: ${({ theme }) => theme.AllColors};
-    ${Mixins.BorderRadius};
-    color: ${({ $color, $textColor, theme }) =>
-        $color === "white"
-            ? theme.Primary500
-            : $color === "black"
-            ? theme.White
-            : $textColor
-            ? theme.AllColors({ $color: $textColor })
-            : theme.Background};
     font-weight: ${FontWeights.Black};
-    ${({ $children, $childrenLength, $padding }) =>
-        $children &&
+    border-radius: ${Radiuses.Round};
+`
+
+const BadgeContent = styled(BaseBadge)<{
+    $hasChildren?: boolean
+    $childrenLength?: number
+}>`
+    ${({ $hasChildren, $childrenLength }) =>
+        $hasChildren &&
         $childrenLength &&
         $childrenLength > 2 &&
         Mixins.Padding({
-            $padding: !$padding
-                ? {
-                      leftRight: "xxs",
-                      topBottom: 0,
-                  }
-                : $padding,
+            $padding: {
+                leftRight: "xs",
+                topBottom: 0,
+            },
         })};
+`
+
+const StyledBadge = styled(BadgeContent)<{
+    $color?: ColorsShortTypes
+}>`
+    background-color: ${({ theme, $color }) => theme.AllColors({ $color })};
+    color: ${({ $color }) => Mixins.FontColorBackgroundShort({ $color })};
 `
 
 setDefaultTheme([StyledBadge])

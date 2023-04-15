@@ -3,7 +3,7 @@
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
-import { Icon } from "../../"
+import { Icon, stringifyPx } from "../../"
 
 import * as Styles from "./styles"
 import type { BadgeProps } from "./types"
@@ -13,41 +13,41 @@ const Badge = forwardRef(
         {
             as,
             color = "primary",
-            contentColor,
-            size = 16,
-            children,
-            padding,
-            content,
-            borderRadius = "round",
+            size,
+            icon,
+            number,
+            style,
             ...rest
         }: BadgeProps,
         ref?: ForwardedRef<HTMLSpanElement>
-    ) => (
-        <Styles.StyledBadge
-            ref={ref}
-            as={as}
-            $children={!!content}
-            $childrenLength={
-                typeof content === "number"
-                    ? content?.toString().length
-                    : content?.length
-            }
-            $color={color}
-            $padding={padding}
-            $size={size}
-            $textColor={contentColor}
-            $borderRadius={borderRadius}
-            {...rest}
-        >
-            {typeof content === "number" ? (
-                content
-            ) : typeof content === "string" ? (
-                <Icon src={content} size={size * 0.7} />
-            ) : (
-                ""
-            )}
-        </Styles.StyledBadge>
-    )
+    ) => {
+        const styles = {
+            ["--badge-size" as any]: size && stringifyPx(size),
+            ...style,
+        }
+
+        return (
+            <Styles.StyledBadge
+                ref={ref}
+                as={as}
+                style={styles}
+                $hasChildren={!!number}
+                $childrenLength={number?.toString().length}
+                $color={color}
+                {...rest}
+            >
+                {icon ? (
+                    typeof icon === "string" ? (
+                        <Icon src={icon} size={size ? size * 0.7 : 16 * 0.7} />
+                    ) : (
+                        icon
+                    )
+                ) : (
+                    number && number
+                )}
+            </Styles.StyledBadge>
+        )
+    }
 )
 
 export default Badge

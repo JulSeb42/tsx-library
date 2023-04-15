@@ -23,13 +23,7 @@ const TagColor = styled(BaseTag)<{
     color: ${({ $color, theme, $variant }) =>
         $variant === "outline"
             ? theme.AllColors
-            : $color === "white"
-            ? theme.Primary500
-            : $color === "black"
-            ? theme.White
-            : $color === "background"
-            ? theme.Font
-            : theme.Background};
+            : Mixins.FontColorBackgroundShort({ $color })};
     border: 1px solid
         ${({ $variant, theme }) =>
             $variant === "outline" ? theme.AllColors : "transparent"};

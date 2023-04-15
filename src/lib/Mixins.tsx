@@ -39,6 +39,7 @@ import type {
     FontWeightTypes,
     FontSizeTypes,
     BorderTypes,
+    ColorsShortTypes,
 } from "./types"
 
 /*==================== Types ====================*/
@@ -47,6 +48,12 @@ import type {
 
 export interface OverlayProps {
     $overlay?: OverlayTypes
+}
+
+/*==== Color background short ====*/
+
+export interface ColorBgShortProps {
+    $color?: ColorsShortTypes
 }
 
 /*==== Spacers ====*/
@@ -612,6 +619,17 @@ const Mixins = {
         border-style: ${$border?.style || "solid"};
         border-color: ${({ theme }) =>
             theme.AllColors({ $color: $border?.color || "gray-200" })};
+    `,
+
+    FontColorBackgroundShort: ({ $color }: ColorBgShortProps) => css`
+        ${({ theme }) =>
+            $color === "white"
+                ? theme.Primary500
+                : $color === "black"
+                ? theme.White
+                : $color === "background"
+                ? theme.Font
+                : theme.Background};
     `,
 
     MaxLines: ({ $maxLines }: MaxLinesProps) =>

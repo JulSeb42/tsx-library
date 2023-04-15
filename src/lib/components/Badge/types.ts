@@ -1,32 +1,23 @@
 /*=============================================== Badge types ===============================================*/
 
-import type { HTMLAttributes, ElementType } from "react"
+import type { ElementType, HTMLAttributes } from "react"
 
-import type { AllColorsTypes, PaddingTypes, RadiusesTypes } from "../../types"
+import type { ColorsShortTypes } from "../../types"
 
-interface BadgeBaseProps extends HTMLAttributes<HTMLSpanElement> {
+interface BadgePropsBase extends HTMLAttributes<HTMLSpanElement> {
     as?: ElementType
-    color?: AllColorsTypes
+    color?: ColorsShortTypes
     size?: number
-    borderRadius?: RadiusesTypes
 }
 
-interface BadgeContent1 extends BadgeBaseProps {
-    content?: number
-    contentColor?: AllColorsTypes
-    padding?: PaddingTypes
+interface BadgePropsContent1 extends BadgePropsBase {
+    icon?: string | JSX.Element
+    number?: never
 }
 
-interface BadgeContent2 extends BadgeBaseProps {
-    content?: string
-    contentColor?: AllColorsTypes
-    padding?: never
+interface BadgePropsContent2 extends BadgePropsBase {
+    icon?: never
+    number?: number
 }
 
-interface BadgeContent3 extends BadgeBaseProps {
-    content?: undefined
-    contentColor?: never
-    padding?: never
-}
-
-export type BadgeProps = BadgeContent1 | BadgeContent2 | BadgeContent3
+export type BadgeProps = BadgePropsContent1 | BadgePropsContent2
