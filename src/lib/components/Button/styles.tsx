@@ -65,7 +65,7 @@ const StyledButton = styled(ButtonSize)<{
                     ? theme.ColorsHoverHover
                     : $variant === "ghost" && theme.ColorsGhostHover};
             color: ${({ $variant, theme }) =>
-                ($variant === "text" || $variant === "outline") &&
+                ($variant === "transparent" || $variant === "outline") &&
                 theme.ColorsHoverHover};
             border-color: ${({ $variant, theme }) =>
                 $variant === "outline" && theme.ColorsHoverHover};
@@ -77,7 +77,7 @@ const StyledButton = styled(ButtonSize)<{
                     ? theme.ColorsHoverActive
                     : $variant === "ghost" && theme.ColorsGhostActive};
             color: ${({ $variant, theme }) =>
-                ($variant === "text" || $variant === "outline") &&
+                ($variant === "transparent" || $variant === "outline") &&
                 theme.ColorsHoverActive};
             border-color: ${({ $variant, theme }) =>
                 $variant === "outline" && theme.ColorsHoverActive};

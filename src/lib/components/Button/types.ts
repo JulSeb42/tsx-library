@@ -8,7 +8,7 @@ import type { LoaderVariantTypes } from "../Loader/types"
 enum buttonVariants {
     plain,
     outline,
-    text,
+    transparent,
     ghost,
 }
 

@@ -77,58 +77,58 @@ const ButtonPage = () => {
             </Flexbox>
 
             <Flexbox gap="s">
-                <Button variant="text" color="primary">
+                <Button variant="transparent" color="primary">
                     Button
                 </Button>
-                <Button variant="text" color="secondary">
+                <Button variant="transparent" color="secondary">
                     Button
                 </Button>
-                <Button variant="text" color="success">
+                <Button variant="transparent" color="success">
                     Button
                 </Button>
-                <Button variant="text" color="danger">
+                <Button variant="transparent" color="danger">
                     Button
                 </Button>
-                <Button variant="text" color="warning">
+                <Button variant="transparent" color="warning">
                     Button
                 </Button>
-                <Button variant="text" color="white">
+                <Button variant="transparent" color="white">
                     Button
                 </Button>
-                <Button variant="text" color="font">
+                <Button variant="transparent" color="font">
                     Button
                 </Button>
-                <Button variant="text" color="background">
+                <Button variant="transparent" color="background">
                     Button
                 </Button>
-                <Button variant="text" color="primary" disabled>
+                <Button variant="transparent" color="primary" disabled>
                     Button
                 </Button>
             </Flexbox>
 
             <Flexbox gap="s">
-                <Button variant="text" color="primary" href="#">
+                <Button variant="transparent" color="primary" href="#">
                     Button
                 </Button>
-                <Button variant="text" color="secondary" href="#">
+                <Button variant="transparent" color="secondary" href="#">
                     Button
                 </Button>
-                <Button variant="text" color="success" href="#">
+                <Button variant="transparent" color="success" href="#">
                     Button
                 </Button>
-                <Button variant="text" color="danger" href="#">
+                <Button variant="transparent" color="danger" href="#">
                     Button
                 </Button>
-                <Button variant="text" color="warning" href="#">
+                <Button variant="transparent" color="warning" href="#">
                     Button
                 </Button>
-                <Button variant="text" color="white" href="#">
+                <Button variant="transparent" color="white" href="#">
                     Button
                 </Button>
-                <Button variant="text" color="font" href="#">
+                <Button variant="transparent" color="font" href="#">
                     Button
                 </Button>
-                <Button variant="text" color="background" href="#">
+                <Button variant="transparent" color="background" href="#">
                     Button
                 </Button>
             </Flexbox>
@@ -256,7 +256,7 @@ const ButtonPage = () => {
                     Button
                 </Button>
                 <Button
-                    variant="text"
+                    variant="transparent"
                     color="secondary"
                     icons={{ right: "chevron-down" }}
                 >
