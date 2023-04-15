@@ -2,11 +2,7 @@
 
 import type { ButtonHTMLAttributes, ElementType, HTMLAttributes } from "react"
 
-import type {
-    ButtonLinkTypes,
-    ColorsHoverTypes,
-    ObjectPositionTypes,
-} from "../../types"
+import type { ButtonLinkTypes, ColorsHoverTypes } from "../../types"
 
 enum buttonIconVariants {
     plain,
@@ -17,8 +13,8 @@ enum buttonIconVariants {
 export type ButtonIconVariantTypes = keyof typeof buttonIconVariants
 
 enum labelDirections {
-    up,
-    down,
+    top,
+    bottom,
 }
 
 export type ButtonIconLabelDirectionsTypes = keyof typeof labelDirections
@@ -73,8 +69,7 @@ export type ButtonIconProps = ButtonIconBehaviour1 | ButtonIconBehaviour2
 export interface TipsProps {
     label?: string
     bottom?: string | number
-    children?: string
-    position?: ObjectPositionTypes
+    children?: JSX.Element
     size?: number
     tipPosition?: ButtonIconLabelDirectionsTypes
     className?: string

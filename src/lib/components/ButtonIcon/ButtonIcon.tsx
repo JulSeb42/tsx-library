@@ -4,7 +4,7 @@ import React, { forwardRef, useRef, useState, useLayoutEffect } from "react"
 import type { ForwardedRef } from "react"
 import { Link } from "react-router-dom"
 
-import { useTouchScreen, Icon, Loader, Burger, Avatar } from "../../"
+import { useTouchScreen, Icon, Loader, stringifyPx } from "../../"
 
 import * as Styles from "./styles"
 import type { ButtonIconProps, TipsProps } from "./types"
@@ -12,17 +12,16 @@ import type { ButtonIconProps, TipsProps } from "./types"
 const Tooltip = ({
     label,
     children,
-    position,
     size,
     bottom = "125%",
-    tipPosition = "up",
+    tipPosition = "top",
     className,
 }: TipsProps) => {
-    const ref = useRef<any>(null)
+    const ref = useRef<HTMLSpanElement>(null)
     const [width, setWidth] = useState(0)
 
     useLayoutEffect(() => {
-        setWidth(ref.current.offsetWidth)
+        setWidth(ref?.current?.offsetWidth || 200)
     }, [])
 
     const [isVisible, setIsVisible] = useState(false)
@@ -31,20 +30,16 @@ const Tooltip = ({
         <Styles.TooltipContainer
             onMouseEnter={() => setIsVisible(true)}
             onMouseLeave={() => setIsVisible(false)}
-            $position={position?.position}
-            $left={position?.left}
-            $top={position?.top}
-            $right={position?.right}
-            $bottom={position?.bottom}
-            $zIndex={position?.zIndex}
-            $size={size}
             className={className}
+            style={{
+                ["--button-size" as any]: size && stringifyPx(size),
+            }}
         >
             <Styles.Tip
-                $isVisible={isVisible}
+                ref={ref}
+                className={isVisible ? "visible" : ""}
                 $width={width}
                 $bottom={bottom}
-                ref={ref}
                 $position={tipPosition}
             >
                 {label}
@@ -63,26 +58,18 @@ const ButtonIcon = forwardRef(
             color = "primary",
             size = 48,
             loaderBorder = 4,
-            shadow,
-            position,
             label,
             showLabel,
-            type,
             disabled,
             icon,
-            burger,
-            isBurgerOpen,
             variant = "plain",
-            hoverBackground,
-            borderRadius = "circle",
             iconSize = size * 0.7,
             href,
             blank,
-            avatar,
             className,
             to,
-            ...rest
-        }: ButtonIconProps,
+        }: // ...rest
+        ButtonIconProps,
         ref?: ForwardedRef<HTMLButtonElement>
     ) => {
         const buttonFn = () => (
@@ -95,28 +82,10 @@ const ButtonIcon = forwardRef(
                 target={(href || to) && blank && "_blank"}
                 rel={(href || to) && blank && "noreferrer noopener"}
                 disabled={!!isLoading || disabled}
-                type={type}
-                $hoverBackground={hoverBackground}
-                $color={color}
-                $size={size}
-                $variant={variant}
-                $shadow={typeof shadow === "object" ? shadow.default : shadow}
-                $shadowHover={
-                    typeof shadow === "object" ? shadow.hover : shadow
-                }
-                $shadowActive={
-                    typeof shadow === "object" ? shadow.active : shadow
-                }
-                $position={!showLabel ? position?.position : "relative"}
-                $left={!showLabel ? position?.left : undefined}
-                $top={!showLabel ? position?.top : undefined}
-                $right={!showLabel ? position?.right : undefined}
-                $bottom={!showLabel ? position?.bottom : undefined}
-                $zIndex={!showLabel ? position?.zIndex : undefined}
-                $borderRadius={borderRadius}
-                $isAvatar={!!avatar}
                 className={className}
-                {...rest}
+                $color={color}
+                $variant={variant}
+                // {...rest}
             >
                 {isLoading ? (
                     <Loader
@@ -126,19 +95,8 @@ const ButtonIcon = forwardRef(
                     />
                 ) : icon && typeof icon === "string" ? (
                     <Icon src={icon} size={iconSize || size * 0.7} />
-                ) : icon ? (
-                    icon
-                ) : burger ? (
-                    <Burger
-                        isOpen={isBurgerOpen}
-                        color={color === "white" ? "primary" : "white"}
-                        width={size * 0.5}
-                        height={size * 0.4}
-                        noHover
-                        as="span"
-                    />
                 ) : (
-                    avatar && <Avatar img={avatar} size={size} alt={label} />
+                    icon
                 )}
             </Styles.StyledButtonIcon>
         )
@@ -148,10 +106,9 @@ const ButtonIcon = forwardRef(
         return showLabel && !isTouchScreen ? (
             <Tooltip
                 label={label}
-                position={position}
                 size={size}
                 tipPosition={
-                    typeof showLabel === "object" ? showLabel?.position : "up"
+                    typeof showLabel === "object" ? showLabel?.position : "top"
                 }
                 bottom={
                     typeof showLabel === "object" ? showLabel?.bottom : "125%"

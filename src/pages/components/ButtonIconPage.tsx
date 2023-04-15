@@ -1,33 +1,20 @@
 /*=============================================== ButtonIconPage ===============================================*/
 
-import React, { useState } from "react"
+import React from "react"
 
 import { Page } from "../../components"
 import { ButtonIcon, Flexbox } from "../../lib"
 
 const ButtonIconPage = () => {
-    const [isOpen, setIsOpen] = useState(false)
-
     return (
         <Page title="ButtonIcon">
             <ButtonIcon
                 icon="mail"
-                variant="transparent"
+                // variant="transparent"
                 color="secondary"
-                // position={{
-                //     position: "fixed",
-                //     bottom: "l",
-                //     right: "l",
-                // }}
-                // shadow={{
-                //     default: "s",
-                //     hover: "l",
-                //     active: "m",
-                // }}
                 label="email"
                 showLabel
-                // labelBottom="0px"
-                // size={24}
+                size={120}
             />
 
             <Flexbox gap="xs">
@@ -268,140 +255,6 @@ const ButtonIconPage = () => {
             <Flexbox gap="xs">
                 <ButtonIcon
                     icon="mail"
-                    variant="transparent"
-                    color="primary"
-                    hoverBackground
-                    label="email"
-                />
-                <ButtonIcon
-                    icon="mail"
-                    variant="transparent"
-                    color="secondary"
-                    hoverBackground
-                    label="email"
-                />
-                <ButtonIcon
-                    icon="mail"
-                    variant="transparent"
-                    color="success"
-                    hoverBackground
-                    label="email"
-                />
-                <ButtonIcon
-                    icon="mail"
-                    variant="transparent"
-                    color="danger"
-                    hoverBackground
-                    label="email"
-                />
-                <ButtonIcon
-                    icon="mail"
-                    variant="transparent"
-                    color="warning"
-                    hoverBackground
-                    label="email"
-                />
-                <ButtonIcon
-                    icon="mail"
-                    variant="transparent"
-                    color="white"
-                    hoverBackground
-                    label="email"
-                />
-                <ButtonIcon
-                    icon="mail"
-                    variant="transparent"
-                    color="font"
-                    hoverBackground
-                    label="email"
-                />
-                <ButtonIcon
-                    icon="mail"
-                    variant="transparent"
-                    color="background"
-                    hoverBackground
-                    label="email"
-                />
-                <ButtonIcon
-                    icon="mail"
-                    variant="transparent"
-                    color="primary"
-                    disabled
-                    hoverBackground
-                    label="email"
-                />
-            </Flexbox>
-
-            <Flexbox gap="xs">
-                <ButtonIcon
-                    icon="mail"
-                    variant="transparent"
-                    color="primary"
-                    href="#"
-                    hoverBackground
-                    label="email"
-                />
-                <ButtonIcon
-                    icon="mail"
-                    variant="transparent"
-                    color="secondary"
-                    href="#"
-                    hoverBackground
-                    label="email"
-                />
-                <ButtonIcon
-                    icon="mail"
-                    variant="transparent"
-                    color="success"
-                    href="#"
-                    hoverBackground
-                    label="email"
-                />
-                <ButtonIcon
-                    icon="mail"
-                    variant="transparent"
-                    color="danger"
-                    href="#"
-                    hoverBackground
-                    label="email"
-                />
-                <ButtonIcon
-                    icon="mail"
-                    variant="transparent"
-                    color="warning"
-                    href="#"
-                    hoverBackground
-                    label="email"
-                />
-                <ButtonIcon
-                    icon="mail"
-                    variant="transparent"
-                    color="white"
-                    href="#"
-                    hoverBackground
-                    label="email"
-                />
-                <ButtonIcon
-                    icon="mail"
-                    variant="transparent"
-                    color="font"
-                    href="#"
-                    hoverBackground
-                    label="email"
-                />
-                <ButtonIcon
-                    icon="mail"
-                    variant="transparent"
-                    color="background"
-                    href="#"
-                    hoverBackground
-                    label="email"
-                />
-            </Flexbox>
-
-            <Flexbox gap="xs">
-                <ButtonIcon
-                    icon="mail"
                     variant="ghost"
                     color="primary"
                     label="email"
@@ -520,21 +373,7 @@ const ButtonIconPage = () => {
                 isLoading
                 icon="mail"
                 variant="transparent"
-                hoverBackground
                 label="email"
-            />
-
-            <ButtonIcon
-                burger
-                isBurgerOpen={isOpen}
-                onClick={() => setIsOpen(!isOpen)}
-                label="email"
-            />
-
-            <ButtonIcon
-                avatar="/images/pic-avatar.jpg"
-                label="Avatar"
-                showLabel
             />
         </Page>
     )
