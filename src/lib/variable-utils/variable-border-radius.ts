@@ -54,12 +54,18 @@ const variableBorderRadiusBottomRight = (radius: RadiusesTypes) =>
             : radius
     )
 
-export const variableBorderRadius = (radius: RadiusesTypes) => {
+export const variableBorderRadius = (
+    radius: RadiusesTypes,
+    component: string
+) => {
     return {
-        ["--radius-top-left" as any]: variableBorderRadiusTopLeft(radius),
-        ["--radius-top-right" as any]: variableBorderRadiusTopRight(radius),
-        ["--radius-bottom-left" as any]: variableBorderRadiusBottomLeft(radius),
-        ["--radius-bottom-right" as any]:
+        [`--${component}-radius-top-left` as any]:
+            variableBorderRadiusTopLeft(radius),
+        [`--${component}-radius-top-right` as any]:
+            variableBorderRadiusTopRight(radius),
+        [`--${component}-radius-bottom-left` as any]:
+            variableBorderRadiusBottomLeft(radius),
+        [`--${component}-radius-bottom-right` as any]:
             variableBorderRadiusBottomRight(radius),
     }
 }

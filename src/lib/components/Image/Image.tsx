@@ -34,7 +34,7 @@ const Image = forwardRef(
 
         const containerStyles = {
             ...sizeStyles,
-            ...variableBorderRadius(borderRadius),
+            ...variableBorderRadius(borderRadius, "image"),
             ...style,
         }
 

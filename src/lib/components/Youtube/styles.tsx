@@ -7,7 +7,7 @@ import { Mixins } from "../../"
 import { setDefaultTheme } from "../../utils"
 
 const StyledYoutube = styled.iframe`
-    ${Mixins.ImgSizeVar()};
+    ${Mixins.ImgSizeVar("youtube")};
 `
 
 setDefaultTheme([StyledYoutube])

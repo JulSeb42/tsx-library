@@ -62,11 +62,15 @@ export const variablePaddingBottom = (padding: PaddingTypes) =>
             : padding
     )
 
-export const variableAllPaddings = (padding: PaddingTypes) => {
+export const variableAllPaddings = (
+    padding: PaddingTypes,
+    component: string
+) => {
     return {
-        ["--padding-left" as any]: variablePaddingLeft(padding),
-        ["--padding-top" as any]: variablePaddingTop(padding),
-        ["--padding-right" as any]: variablePaddingRight(padding),
-        ["--padding-bottom" as any]: variablePaddingBottom(padding),
+        [`--${component}-padding-left` as any]: variablePaddingLeft(padding),
+        [`--${component}-padding-top` as any]: variablePaddingTop(padding),
+        [`--${component}-padding-right` as any]: variablePaddingRight(padding),
+        [`--${component}-padding-bottom` as any]:
+            variablePaddingBottom(padding),
     }
 }

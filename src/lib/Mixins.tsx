@@ -285,11 +285,11 @@ const Mixins = {
             : ""};
     `,
 
-    BorderRadiusVar: () => css`
-        border-top-left-radius: var(--radius-top-left);
-        border-top-right-radius: var(--radius-top-right);
-        border-bottom-left-radius: var(--radius-bottom-left);
-        border-bottom-right-radius: var(--radius-bottom-right);
+    BorderRadiusVar: (component: string) => css`
+        border-top-left-radius: var(--${component}-radius-top-left);
+        border-top-right-radius: var(--${component}-radius-top-right);
+        border-bottom-left-radius: var(--${component}-radius-bottom-left);
+        border-bottom-right-radius: var(--${component}-radius-bottom-right);
     `,
 
     Shadow: ({
@@ -355,18 +355,6 @@ const Mixins = {
                 }
             }
         `}
-    `,
-
-    ShadowVar: () => css`
-        box-shadow: var(--box-shadow-default, var(--box-shadow));
-
-        &:hover {
-            box-shadow: var(--box-shadow-hover, var(--box-shadow));
-        }
-
-        &:active {
-            box-shadow: var(--box-shadow-active, var(--box-shadow));
-        }
     `,
 
     Spacers: ({ $spacer }: SpacersProps) =>
@@ -439,11 +427,11 @@ const Mixins = {
         `}
     `,
 
-    PaddingVar: () => css`
-        padding-left: var(--padding-left);
-        padding-top: var(--padding-top);
-        padding-right: var(--padding-right);
-        padding-bottom: var(--padding-bottom);
+    PaddingVar: (component: string) => css`
+        padding-left: var(--${component}-padding-left);
+        padding-top: var(--${component}-padding-top);
+        padding-right: var(--${component}-padding-right);
+        padding-bottom: var(--${component}-padding-bottom);
     `,
 
     Grid: ({
@@ -644,9 +632,9 @@ const Mixins = {
                   `}
         `,
 
-    ImgSizeVar: () => css`
-        width: var(--width, 100%);
-        height: var(--height, auto);
+    ImgSizeVar: (component: string) => css`
+        width: var(--${component}-width, 100%);
+        height: var(--${component}-height, auto);
     `,
 }
 

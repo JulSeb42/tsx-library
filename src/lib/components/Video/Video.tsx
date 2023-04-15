@@ -29,13 +29,13 @@ const Video = forwardRef(
         ref?: ForwardedRef<HTMLVideoElement>
     ) => {
         const sizeStyles = {
-            ["--width" as any]: width && stringifyPx(width),
-            ["--height" as any]: height && stringifyPx(height),
+            ["--video-width" as any]: width && stringifyPx(width),
+            ["--video-height" as any]: height && stringifyPx(height),
         }
 
         const styles = {
             ...sizeStyles,
-            ["--object-fit" as any]: fit,
+            ["--video-object-fit" as any]: fit,
             ...style,
         }
 

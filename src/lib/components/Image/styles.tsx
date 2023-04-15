@@ -15,7 +15,7 @@ const Img = styled.img`
     width: var(--image-width, 100%);
     height: var(--image-height, auto);
     object-fit: var(--image-object-fit);
-    ${Mixins.BorderRadiusVar()};
+    ${Mixins.BorderRadiusVar("image")};
 `
 
 export default Img
@@ -27,7 +27,7 @@ const ImgContainer = styled.figure`
     width: var(--image-width, 100%);
     height: var(--image-height, auto);
     overflow: hidden;
-    ${Mixins.BorderRadiusVar()};
+    ${Mixins.BorderRadiusVar("image")};
 `
 
 const CaptionBase = styled(Text).attrs({ as: "figcaption" })`

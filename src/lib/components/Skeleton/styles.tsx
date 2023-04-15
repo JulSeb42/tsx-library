@@ -25,7 +25,7 @@ const BaseSkeleton = styled.div`
     height: var(--skeleton-height);
     flex: var(--skeleton-flex);
     flex-grow: var(--skeleton-flex-grow);
-    ${Mixins.BorderRadiusVar};
+    ${Mixins.BorderRadiusVar("skeleton")};
 `
 
 const SkeletonBackground = styled(BaseSkeleton)<{
@@ -73,7 +73,7 @@ const BaseCard = styled(Flexbox)`
     height: var(--skeleton-card-height);
     overflow: hidden;
     position: relative;
-    ${Mixins.BorderRadiusVar()};
+    ${Mixins.BorderRadiusVar("skeleton-card")};
 `
 
 const CardBorder = styled(BaseCard)<{ $border?: BorderTypes }>`

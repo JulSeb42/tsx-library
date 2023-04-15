@@ -4,6 +4,8 @@ import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 import { Link } from "react-router-dom"
 
+import { variableBorderRadius, variableAllPaddings, stringifyPx } from "../../"
+
 import * as Styles from "./styles"
 import type { CardProps } from "./types"
 
@@ -15,67 +17,54 @@ const Card = forwardRef(
             border,
             borderRadius = "m",
             padding = "s",
-            cursor,
-            width = "100%",
+            width,
             height,
-            shadow,
-            backgroundColor = "background",
-            textColor = "currentColor",
             href,
             blank,
             to,
+            style,
             onClick,
-            inline,
-            flexDirection,
-            flexWrap,
-            justifyContent,
-            alignItems,
-            justifyItems,
-            alignContent,
-            gap,
-            columnGap,
-            rowGap,
-            backgroundImg,
+            backgroundImg = null,
             ...rest
         }: CardProps,
         ref?: ForwardedRef<HTMLDivElement>
-    ) => (
-        <Styles.StyledCard
-            ref={ref}
-            as={as ? as : to ? Link : href ? "a" : "div"}
-            href={href}
-            to={to}
-            target={(href || to) && blank && "_blank"}
-            rel={(href || to) && blank && "noreferrer noopener"}
-            onClick={onClick}
-            $borderRadius={borderRadius}
-            $padding={padding}
-            $cursor={cursor}
-            $width={width}
-            $height={height}
-            $textColor={textColor}
-            $border={border}
-            $shadow={shadow}
-            $shadowDefault={typeof shadow === "object" && shadow.default}
-            $shadowHover={typeof shadow === "object" && shadow.hover}
-            $shadowActive={typeof shadow === "object" && shadow.active}
-            $backgroundColor={backgroundColor}
-            $inline={inline}
-            $flexDirection={flexDirection}
-            $flexWrap={flexWrap}
-            $justifyContent={justifyContent}
-            $alignItems={alignItems}
-            $justifyItems={justifyItems}
-            $alignContent={alignContent}
-            $gap={gap}
-            $columnGap={columnGap}
-            $rowGap={rowGap}
-            $backgroundImg={backgroundImg}
-            {...rest}
-        >
-            {children}
-        </Styles.StyledCard>
-    )
+    ) => {
+        const styles = {
+            ...variableBorderRadius(borderRadius, "card"),
+            ...variableAllPaddings(padding, "card"),
+            ["--card-width" as any]: width && stringifyPx(width),
+            ["--card-height" as any]: height && stringifyPx(height),
+            ["--card-background-image" as any]: backgroundImg,
+            ...style,
+        }
+
+        return (
+            <Styles.StyledCard
+                ref={ref}
+                as={
+                    as
+                        ? as
+                        : onClick
+                        ? "button"
+                        : to
+                        ? Link
+                        : href
+                        ? "a"
+                        : "div"
+                }
+                href={href}
+                to={to}
+                target={(href || to) && blank && "_blank"}
+                rel={(href || to) && blank && "noreferrer noopener"}
+                onClick={onClick}
+                style={styles}
+                $border={border}
+                {...rest}
+            >
+                {children}
+            </Styles.StyledCard>
+        )
+    }
 )
 
 export default Card

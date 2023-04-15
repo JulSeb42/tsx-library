@@ -18,7 +18,7 @@ const StyledGrid = styled.div`
     justify-content: var(--grid-justify-content);
     align-items: var(--grid-align-items);
     align-content: var(--grid-align-content);
-    ${Mixins.PaddingVar()}
+    ${Mixins.PaddingVar("grid")}
 `
 
 setDefaultTheme([StyledGrid])

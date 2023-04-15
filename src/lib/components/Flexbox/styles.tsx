@@ -16,7 +16,7 @@ const StyledFlexbox = styled.div`
     align-items: var(--flex-align-items);
     justify-items: var(--flex-justify-items);
     align-content: var(--flex-align-content);
-    ${Mixins.PaddingVar()}
+    ${Mixins.PaddingVar("flex")}
 `
 
 setDefaultTheme([StyledFlexbox])

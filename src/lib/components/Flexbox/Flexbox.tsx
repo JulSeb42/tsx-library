@@ -30,7 +30,7 @@ const Flexbox = forwardRef(
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         const styles = {
-            ...variableAllPaddings(padding),
+            ...variableAllPaddings(padding, "flex"),
             ["--flex-display" as any]: inline ? "inline-flex" : "flex",
             ["--flex-direction" as any]: flexDirection,
             ["--flex-wrap" as any]: flexWrap,

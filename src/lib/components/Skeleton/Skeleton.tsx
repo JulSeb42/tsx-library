@@ -31,7 +31,7 @@ export const Skeleton = forwardRef(
         ref?: ForwardedRef<HTMLSpanElement>
     ) => {
         const styles = {
-            ...variableBorderRadius(borderRadius),
+            ...variableBorderRadius(borderRadius, "skeleton"),
             ["--skeleton-width" as any]: stringifyPx(width),
             ["--skeleton-height" as any]: stringifyPx(height),
             ["--skeleton-flex" as any]: flex,
@@ -72,7 +72,7 @@ export const SkeletonCard = forwardRef(
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         const styles = {
-            ...variableBorderRadius(borderRadius),
+            ...variableBorderRadius(borderRadius, "skeleton-card"),
             ["--skeleton-card-width" as any]: width && stringifyPx(width),
             ["--skeleton-card-height" as any]: height && stringifyPx(height),
             ...style,

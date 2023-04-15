@@ -12,7 +12,7 @@ const avatarSize = "var(--avatar-size, 48px)"
 const BaseAvatar = styled.span`
     width: ${avatarSize};
     height: ${avatarSize};
-    ${Mixins.BorderRadiusVar()};
+    ${Mixins.BorderRadiusVar("avatar")};
     font-weight: ${FontWeights.Black};
     font-size: calc(${avatarSize} * 0.7);
     border: none;

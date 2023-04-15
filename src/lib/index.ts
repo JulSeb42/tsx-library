@@ -41,7 +41,7 @@ export * from "./components/ButtonGroup" // ✅
 export * from "./components/Burger" // ✅
 export * from "./components/Tag" // ✅
 export * from "./components/Truncate" // ✅
-export * from "./components/Card"
+export * from "./components/Card" // ✅
 export * from "./components/Badge"
 export * from "./components/Tooltip"
 export * from "./components/Input"

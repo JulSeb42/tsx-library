@@ -8,7 +8,7 @@ import { setDefaultTheme } from "../../utils"
 
 const Fallback = styled.div`
     position: relative;
-    ${Mixins.ImgSizeVar()};
+    ${Mixins.ImgSizeVar("fallback")};
     background-color: ${({ theme }) => theme.Gray500};
 `
 

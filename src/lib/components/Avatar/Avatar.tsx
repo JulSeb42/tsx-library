@@ -27,7 +27,7 @@ const Avatar = forwardRef(
         ref?: ForwardedRef<HTMLSpanElement>
     ) => {
         const styles = {
-            ...variableBorderRadius(borderRadius),
+            ...variableBorderRadius(borderRadius, "avatar"),
             ["--avatar-size" as any]: stringifyPx(size),
             ...style,
         }

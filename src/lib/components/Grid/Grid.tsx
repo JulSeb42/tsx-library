@@ -29,7 +29,7 @@ const Grid = forwardRef(
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         const styles = {
-            ...variableAllPaddings(padding),
+            ...variableAllPaddings(padding, "grid"),
             ["--grid-display" as any]: inline ? "inline-grid" : "grid",
             ["--grid-template-col" as any]:
                 typeof col === "string" ? col : null,
