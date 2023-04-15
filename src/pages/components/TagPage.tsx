@@ -10,77 +10,49 @@ const TagPage = () => {
                 <Tag
                     color="primary"
                     icons={{ left: "chevron-right", right: "close" }}
-                    variant="outline"
                 >
                     Tag
                 </Tag>
-                <Tag color="secondary" variant="outline">
-                    Tag
-                </Tag>
+                <Tag color="secondary">Tag</Tag>
                 <Tag color="success">Tag</Tag>
                 <Tag color="danger">Tag</Tag>
                 <Tag color="warning">Tag</Tag>
                 <Tag color="gray">Tag</Tag>
                 <Tag color="black">Tag</Tag>
                 <Tag color="white">Tag</Tag>
+                <Tag color="background">Tag</Tag>
+                <Tag color="font">Tag</Tag>
             </Flexbox>
 
             <Flexbox gap="xs" alignItems="flex-start">
-                <Tag
-                    color="primary"
-                    borderRadius="round"
-                    padding={{ leftRight: "m", topBottom: "xxs" }}
-                    variant="outline"
-                >
+                <Tag color="primary" variant="outline">
                     Tag
                 </Tag>
-                <Tag
-                    color="secondary"
-                    borderRadius="round"
-                    padding={{ leftRight: "m", topBottom: "xxs" }}
-                >
+                <Tag color="secondary" variant="outline">
                     Tag
                 </Tag>
-                <Tag
-                    color="success"
-                    borderRadius="round"
-                    padding={{ leftRight: "m", topBottom: "xxs" }}
-                >
+                <Tag color="success" variant="outline">
                     Tag
                 </Tag>
-                <Tag
-                    color="danger"
-                    borderRadius="round"
-                    padding={{ leftRight: "m", topBottom: "xxs" }}
-                >
+                <Tag color="danger" variant="outline">
                     Tag
                 </Tag>
-                <Tag
-                    color="warning"
-                    borderRadius="round"
-                    padding={{ leftRight: "m", topBottom: "xxs" }}
-                >
+                <Tag color="warning" variant="outline">
                     Tag
                 </Tag>
-                <Tag
-                    color="gray"
-                    borderRadius="round"
-                    padding={{ leftRight: "m", topBottom: "xxs" }}
-                >
+                <Tag color="gray" variant="outline">
                     Tag
                 </Tag>
-                <Tag
-                    color="black"
-                    borderRadius="round"
-                    padding={{ leftRight: "m", topBottom: "xxs" }}
-                >
+                <Tag color="black" variant="outline">
                     Tag
                 </Tag>
-                <Tag
-                    color="white"
-                    borderRadius="round"
-                    padding={{ leftRight: "m", topBottom: "xxs" }}
-                >
+                <Tag color="white" variant="outline">
+                    Tag
+                </Tag>
+                <Tag color="background" variant="outline">
+                    Tag
+                </Tag>
+                <Tag color="font" variant="outline">
                     Tag
                 </Tag>
             </Flexbox>

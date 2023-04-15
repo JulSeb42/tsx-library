@@ -2,54 +2,50 @@
 
 import styled from "styled-components"
 
-import { FontSizes, Mixins } from "../../"
-import type {
-    AllColorsTypes,
-    SpacersTypes,
-    PaddingTypes,
-    RadiusesTypes,
-} from "../../types"
+import { FontSizes, Mixins, Radiuses, Spacers } from "../../"
+import type { ColorsShortTypes } from "../../types"
 import type { TagVariantTypes } from "./types"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledTag = styled.span<{
-    $color?: AllColorsTypes
-    $textColor?: AllColorsTypes
-    $hasIcon?: boolean
-    $gap?: SpacersTypes
-    $padding?: PaddingTypes
-    $borderRadius?: RadiusesTypes
+const BaseTag = styled.span`
+    font-size: ${FontSizes.Small};
+    border-radius: ${Radiuses.S};
+    padding: ${Spacers.XXS} ${Spacers.S};
+`
+
+const TagColor = styled(BaseTag)<{
+    $color?: ColorsShortTypes
     $variant?: TagVariantTypes
 }>`
-    font-size: ${FontSizes.Small};
-    ${Mixins.Padding};
-    ${Mixins.BorderRadius};
     background-color: ${({ theme, $variant }) =>
         $variant === "outline" ? "transparent" : theme.AllColors};
-    color: ${({ $color, $textColor, theme, $variant }) =>
-        $textColor
-            ? theme.AllColors({ $color: $textColor })
-            : $variant === "outline"
-            ? theme.AllColors({ $color })
+    color: ${({ $color, theme, $variant }) =>
+        $variant === "outline"
+            ? theme.AllColors
             : $color === "white"
             ? theme.Primary500
             : $color === "black"
             ? theme.White
+            : $color === "background"
+            ? theme.Font
             : theme.Background};
     border: 1px solid
-        ${({ $variant, theme, $color }) =>
-            $variant === "outline"
-                ? theme.AllColors({ $color: $color })
-                : "transparent"}
-        ${({ $hasIcon, $gap }) =>
-            $hasIcon &&
-            Mixins.Flexbox({
-                $alignItems: "center",
-                $justifyContent: "center",
-                $gap,
-                $inline: true,
-            })};
+        ${({ $variant, theme }) =>
+            $variant === "outline" ? theme.AllColors : "transparent"};
+`
+
+const StyledTag = styled(TagColor)<{
+    $hasIcon?: boolean
+}>`
+    ${({ $hasIcon }) =>
+        $hasIcon &&
+        Mixins.Flexbox({
+            $alignItems: "center",
+            $justifyContent: "center",
+            $gap: "xxs",
+            $inline: true,
+        })};
 `
 
 setDefaultTheme([StyledTag])

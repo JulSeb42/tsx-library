@@ -14,14 +14,7 @@ const Tag = forwardRef(
             as,
             children,
             color = "primary",
-            textColor,
             icons,
-            gap = "xxs",
-            padding = {
-                topBottom: "xxs",
-                leftRight: "xs",
-            },
-            borderRadius = "s",
             variant = "plain",
             ...rest
         }: TagProps,
@@ -36,12 +29,8 @@ const Tag = forwardRef(
                 ref={ref}
                 as={as}
                 $color={color}
-                $textColor={textColor}
-                $hasIcon={icons}
-                $gap={gap}
-                $padding={padding}
-                $borderRadius={borderRadius}
                 $variant={variant}
+                $hasIcon={!!icons}
                 {...rest}
             >
                 {icons?.left && typeof icons?.left === "string" ? (
