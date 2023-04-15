@@ -2,23 +2,17 @@
 
 import styled from "styled-components"
 
-import { Mixins, Tag, FontWeights } from "../../"
-import type { SpacersTypes } from "../../types"
+import { FontWeights, Mixins, Tag } from "../../"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledTruncate = styled.div<{
-    $gap?: SpacersTypes
-    $showFullList?: boolean
-}>`
-    ${({ $gap, $showFullList }) =>
-        Mixins.Flexbox({
-            $flexDirection: "row",
-            $alignItems: "center",
-            $justifyContent: "flex-start",
-            $gap: $gap,
-            $flexWrap: $showFullList ? "wrap" : "nowrap",
-        })};
+const StyledTruncate = styled.div`
+    ${Mixins.Flexbox({
+        $flexDirection: "row",
+        $alignItems: "center",
+        $justifyContent: "flex-start",
+        $gap: "xs",
+    })};
     overflow: hidden;
 `
 
@@ -27,7 +21,9 @@ const Number = styled(Tag)`
     padding: 0;
     font-weight: ${FontWeights.Black};
     white-space: nowrap;
-    display: block !important;
+    display: block;
+    background-color: transparent;
+    color: currentColor;
 `
 
 setDefaultTheme([StyledTruncate, Number])

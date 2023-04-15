@@ -5,7 +5,7 @@ import React, { useLayoutEffect, useRef, useState } from "react"
 import * as Styles from "./styles"
 import type { TruncateProps } from "./types"
 
-const Truncate = ({ as, children, gap = "xs", ...rest }: TruncateProps) => {
+const Truncate = ({ as, children, ...rest }: TruncateProps) => {
     const containerRef = useRef<HTMLElement>(null)
     const [invisibleNumber, setInvisibleNumber] = useState<number>(0)
 
@@ -76,13 +76,11 @@ const Truncate = ({ as, children, gap = "xs", ...rest }: TruncateProps) => {
     }, [children])
 
     return (
-        <Styles.StyledTruncate ref={containerRef} as={as} $gap={gap} {...rest}>
+        <Styles.StyledTruncate ref={containerRef} as={as} {...rest}>
             {children}
 
             {invisibleNumber > 0 && (
-                <Styles.Number color="transparent" textColor="font">
-                    {`+ ${invisibleNumber}`}
-                </Styles.Number>
+                <Styles.Number>{`+ ${invisibleNumber}`}</Styles.Number>
             )}
         </Styles.StyledTruncate>
     )
