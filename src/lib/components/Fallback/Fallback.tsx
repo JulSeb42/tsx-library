@@ -1,7 +1,8 @@
 /*=============================================== Fallback ===============================================*/
 
 import styled from "styled-components"
-import { stringifyPx } from "ts-utils-julseb"
+
+import { Mixins } from "../../"
 
 import { setDefaultTheme } from "../../utils"
 
@@ -10,8 +11,7 @@ const Fallback = styled.div<{
     $height?: number | string
 }>`
     position: relative;
-    width: ${({ $width }) => ($width ? stringifyPx($width) : "100%")};
-    height: ${({ $height }) => ($height ? stringifyPx($height) : "auto")};
+    ${Mixins.ImgSizeVar()};
     background-color: ${({ theme }) => theme.Gray500};
 `
 

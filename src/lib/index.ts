@@ -30,7 +30,7 @@ export * from "./components/Key" // ✅
 export * from "./components/TextIcon" // ✅
 export * from "./components/Linkify" // ✅
 export * from "./components/Hr" // ✅
-export * from "./components/Image"
+export * from "./components/Image" // ✅
 export * from "./components/Video"
 export * from "./components/Youtube"
 export * from "./components/Avatar"

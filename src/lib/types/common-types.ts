@@ -457,7 +457,7 @@ enum objectFit {
     unset,
 }
 
-export type ObjectFitTypes = keyof typeof objectFit
+export type ObjectFitTypes = keyof typeof objectFit | null
 
 /*==================== Inputs ====================*/
 

@@ -3,7 +3,7 @@
 import React, { forwardRef, Suspense, lazy } from "react"
 import type { ForwardedRef } from "react"
 
-import Fallback from "../Fallback"
+import { Fallback } from "../Fallback"
 
 import type { VideoProps } from "./types"
 

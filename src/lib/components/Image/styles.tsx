@@ -2,53 +2,44 @@
 
 import styled from "styled-components"
 
-import { Text, Mixins, stringifyPx, Spacers, Overlays } from "../../"
-import type { RadiusesTypes, ObjectFitTypes } from "../../types"
+import { Mixins, Overlays, Spacers, Text } from "../../"
 
 import { setDefaultTheme } from "../../utils"
 
 // Import for lazyloading
 
-const Img = styled.img<{
-    $width?: number | string
-    $height?: number | string
-    $fit?: ObjectFitTypes
-    $borderRadius?: RadiusesTypes
-}>`
+const Img = styled.img`
     display: block;
     position: relative;
     z-index: 0;
-    width: ${({ $width }) => $width && stringifyPx($width)};
-    height: ${({ $height }) => $height && stringifyPx($height)};
-    object-fit: ${({ $fit }) => $fit};
-    ${Mixins.BorderRadius};
+    ${Mixins.ImgSizeVar()};
+    object-fit: var(--object-fit);
+    ${Mixins.BorderRadiusVar()};
 `
 
 export default Img
 
-const ImgContainer = styled.figure<{
-    $width?: number | string
-    $height?: number | string
-    $borderRadius?: RadiusesTypes
-}>`
+const ImgContainer = styled.figure`
     display: block;
     position: relative;
     z-index: 0;
-    width: ${({ $width }) => $width && stringifyPx($width)};
-    height: ${({ $height }) => $height && stringifyPx($height)};
+    ${Mixins.ImgSizeVar()};
     overflow: hidden;
-    ${Mixins.BorderRadius};
+    ${Mixins.BorderRadiusVar()};
 `
 
-const Caption = styled(Text).attrs({ as: "figcaption" })<{
-    $background?: "black" | "white"
-}>`
+const CaptionBase = styled(Text).attrs({ as: "figcaption" })`
     position: absolute;
     z-index: 1;
     bottom: 0;
     left: 0;
     width: 100%;
     padding: ${Spacers.M};
+`
+
+const Caption = styled(CaptionBase)<{
+    $background?: "black" | "white"
+}>`
     background-color: ${({ $background }) =>
         $background === "white"
             ? Overlays.Plain.White80

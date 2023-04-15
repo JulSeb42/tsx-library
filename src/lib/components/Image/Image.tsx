@@ -3,7 +3,8 @@
 import React, { forwardRef, Suspense, lazy } from "react"
 import type { ForwardedRef } from "react"
 
-import Fallback from "../Fallback"
+import { Fallback } from "../Fallback"
+import { variableBorderRadius, stringifyPx } from "../../"
 
 import * as Styles from "./styles"
 import type { ImageProps } from "./types"
@@ -16,39 +17,53 @@ const Image = forwardRef(
             as,
             src,
             alt,
-            width = "100%",
-            height = "auto",
-            borderRadius,
-            fit,
+            width,
+            height,
+            borderRadius = null,
+            fit = null,
             caption,
+            style,
             ...rest
         }: ImageProps,
         ref?: ForwardedRef<HTMLImageElement>
     ) => {
+        const sizeStyles = {
+            ["--width" as any]: width && stringifyPx(width),
+            ["--height" as any]: height && stringifyPx(height),
+        }
+
+        const containerStyles = {
+            ...style,
+            ...sizeStyles,
+            ...variableBorderRadius(borderRadius),
+        }
+
+        const imgStyles = {
+            ...containerStyles,
+            ["--object-fit" as any]: fit,
+        }
+
         const img = () => (
             <Img
                 ref={ref}
                 as={as}
                 src={src}
                 alt={alt}
-                $width={width}
-                $height={height}
-                $fit={fit}
-                $borderRadius={!caption ? borderRadius : undefined}
+                style={imgStyles}
                 {...rest}
             />
         )
 
         return (
-            <Suspense fallback={<Fallback $width={width} $height={height} />}>
+            <Suspense fallback={<Fallback style={sizeStyles} />}>
                 {caption ? (
                     <Styles.ImgContainer
-                        $borderRadius={borderRadius}
                         as={
-                            typeof caption === "object"
+                            typeof caption === "object" && caption.asContainer
                                 ? caption.asContainer
-                                : "div"
+                                : "figcaption"
                         }
+                        style={containerStyles}
                     >
                         {img()}
 

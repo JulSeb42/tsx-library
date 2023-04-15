@@ -643,6 +643,11 @@ const Mixins = {
                       -webkit-box-orient: vertical;
                   `}
         `,
+
+    ImgSizeVar: () => css`
+        width: var(--width, 100%);
+        height: var(--height, auto);
+    `,
 }
 
 export default Mixins
