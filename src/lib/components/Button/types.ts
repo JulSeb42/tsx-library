@@ -1,15 +1,8 @@
 /*=============================================== Button types ===============================================*/
 
-import type { HTMLAttributes, ElementType, ButtonHTMLAttributes } from "react"
+import type { ButtonHTMLAttributes, ElementType, HTMLAttributes } from "react"
 
-import type {
-    ColorsHoverTypes,
-    ShadowsTypes,
-    BoxShadowProps,
-    RadiusesTypes,
-    SpacersTypes,
-    ButtonLinkTypes,
-} from "../../types"
+import type { ButtonLinkTypes, ColorsHoverTypes } from "../../types"
 import type { LoaderVariantTypes } from "../Loader/types"
 
 enum buttonVariants {
@@ -33,9 +26,13 @@ type ButtonBaseProps = HTMLAttributes<HTMLButtonElement & HTMLAnchorElement> &
     ButtonLinkTypes & {
         as?: ElementType
         color?: ColorsHoverTypes
-        shadow?: ShadowsTypes | BoxShadowProps
-        borderRadius?: RadiusesTypes
         size?: ButtonSizesTypes
+        variant?: ButtonVariantTypes
+        icons?: {
+            left?: string | JSX.Element
+            right?: string | JSX.Element
+            size?: number
+        }
     }
 
 type ButtonBehaviour1 = ButtonBaseProps & {
@@ -50,40 +47,12 @@ type ButtonBehaviour2 = ButtonBaseProps & {
 
 type ButtonBehaviour = ButtonBehaviour1 | ButtonBehaviour2
 
-type ButtonIcon0 = ButtonBehaviour & {
-    icons?: undefined
-    gap?: never
-}
-
-type ButtonIcon1 = ButtonBehaviour & {
-    gap?: SpacersTypes
-    icons?: {
-        left?: string | JSX.Element
-        right?: string | JSX.Element
-        size?: number
-    }
-}
-
-type ButtonIcon = ButtonIcon0 | ButtonIcon1
-
-type ButtonVariant1 = ButtonIcon & {
-    variant?: "plain" | "outline" | "ghost"
-    noPadding?: never
-}
-
-type ButtonVariant2 = ButtonIcon & {
-    variant?: "text"
-    noPadding?: boolean
-}
-
-type ButtonVariant = ButtonVariant1 | ButtonVariant2
-
-type ButtonLoading1 = ButtonVariant & {
+type ButtonLoading1 = ButtonBehaviour & {
     isLoading?: true
     loaderVariant?: LoaderVariantTypes
 }
 
-type ButtonLoading2 = ButtonVariant & {
+type ButtonLoading2 = ButtonBehaviour & {
     isLoading?: false
     loaderVariant?: never
 }

@@ -14,20 +14,16 @@ const Button = forwardRef(
         {
             as,
             color = "primary",
-            shadow,
             disabled,
             type = "button",
             children,
             icons,
             variant = "plain",
-            noPadding,
             isLoading,
             loaderVariant = 1,
-            borderRadius = "m",
             href,
             blank,
             size = "default",
-            gap = "xs",
             to,
             ...rest
         }: ButtonProps,
@@ -44,16 +40,7 @@ const Button = forwardRef(
             disabled={!!isLoading || disabled}
             $variant={variant}
             $color={color}
-            $noPadding={noPadding}
-            $shadow={typeof shadow === "string" ? shadow : undefined}
-            $shadowDefault={
-                typeof shadow === "object" ? shadow.default : undefined
-            }
-            $shadowHover={typeof shadow === "object" ? shadow.hover : shadow}
-            $shadowActive={typeof shadow === "object" ? shadow.active : shadow}
-            $borderRadius={borderRadius}
             $size={size}
-            $gap={gap}
             {...rest}
         >
             {isLoading &&
@@ -63,7 +50,6 @@ const Button = forwardRef(
                         size={16}
                         color="gray"
                         borderWidth={2}
-                        speed={loaderVariant === 3 ? 1200 : 1000}
                     />
                 ) : (
                     <Loader variant={4} size={16} color="gray" />

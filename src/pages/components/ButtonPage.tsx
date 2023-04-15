@@ -7,26 +7,17 @@ import { Button, Flexbox } from "../../lib"
 const ButtonPage = () => {
     return (
         <Page title="Button">
-            <Flexbox gap="xs" flexDirection="column">
-                <Flexbox gap="s" alignItems="flex-start">
+            <Flexbox flexDirection="column" gap="xs">
+                <Flexbox gap="s" flexDirection="row" alignItems="flex-start">
                     <Button
                         variant="plain"
                         color="primary"
-                        shadow="s"
                         onClick={() => alert("Clicked")}
                         size="small"
                     >
                         Button
                     </Button>
-                    <Button
-                        variant="plain"
-                        color="secondary"
-                        shadow={{
-                            default: "m",
-                            hover: "xl",
-                            active: "l",
-                        }}
-                    >
+                    <Button variant="plain" color="secondary">
                         Button
                     </Button>
                     <Button variant="plain" color="success">
@@ -52,7 +43,7 @@ const ButtonPage = () => {
                     </Button>
                 </Flexbox>
 
-                <Flexbox gap="s">
+                <Flexbox gap="s" flexDirection="row">
                     <Button
                         variant="plain"
                         color="primary"
