@@ -21,10 +21,10 @@ const Pulse = keyframes`
 const BaseSkeleton = styled.div`
     position: relative;
     overflow: hidden;
-    width: var(--width);
-    height: var(--height);
-    flex: var(--flex);
-    flex-grow: var(--flex-grow);
+    width: var(--skeleton-width);
+    height: var(--skeleton-height);
+    flex: var(--skeleton-flex);
+    flex-grow: var(--skeleton-flex-grow);
     ${Mixins.BorderRadiusVar};
 `
 
@@ -69,8 +69,8 @@ const Shine = styled.span`
 `
 
 const BaseCard = styled(Flexbox)`
-    width: var(--width);
-    height: var(--height);
+    width: var(--skeleton-card-width);
+    height: var(--skeleton-card-height);
     overflow: hidden;
     position: relative;
     ${Mixins.BorderRadiusVar()};

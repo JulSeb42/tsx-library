@@ -34,9 +34,9 @@ const Video = forwardRef(
         }
 
         const styles = {
-            ...style,
             ...sizeStyles,
             ["--object-fit" as any]: fit,
+            ...style,
         }
 
         return (

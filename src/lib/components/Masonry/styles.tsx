@@ -11,12 +11,12 @@ const StyledMasonry = styled.div<{
 }>`
     display: grid;
     grid-auto-flow: column;
-    grid-gap: var(--gap);
+    grid-gap: var(--masonry-gap);
 `
 
 const Col = styled.div<{ $gap?: SpacersTypes }>`
     display: grid;
-    grid-gap: var(--gap);
+    grid-gap: var(--masonry-gap);
     height: fit-content;
 `
 

@@ -29,12 +29,12 @@ const Main = forwardRef(
                 ref={ref}
                 as={as}
                 style={{
-                    ...style,
                     ["--main-min-height" as any]: stringifyPx(minHeight),
                     ["--main-size" as any]: getMainSize(size),
                     ["--main-position" as any]: position,
                     ["--main-content-size" as any]:
                         getMainContentSize(contentSize),
+                    ...style,
                 }}
                 $size={size}
                 {...rest}

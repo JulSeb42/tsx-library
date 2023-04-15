@@ -7,7 +7,7 @@ import type { AllColorsTypes } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
 
-const avatarSize = "var(--size, 48px)"
+const avatarSize = "var(--avatar-size, 48px)"
 
 const BaseAvatar = styled.span`
     width: ${avatarSize};
@@ -15,6 +15,7 @@ const BaseAvatar = styled.span`
     ${Mixins.BorderRadiusVar()};
     font-weight: ${FontWeights.Black};
     font-size: calc(${avatarSize} * 0.7);
+    border: none;
     ${Mixins.Flexbox({
         $alignItems: "center",
         $justifyContent: "center",

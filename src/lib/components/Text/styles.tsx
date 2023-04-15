@@ -61,35 +61,35 @@ const FontCommon = ({
 `
 
 const StyledH1 = styled.h1`
-    font-size: var(--font-size);
+    font-size: var(--text-h1-font-size);
     ${FontCommon({
         $fontWeight: "black",
     })};
 `
 
 const StyledH2 = styled.h2`
-    font-size: var(--font-size);
+    font-size: var(--text-h2-font-size);
     ${FontCommon({
         $fontWeight: "black",
     })};
 `
 
 const StyledH3 = styled.h3`
-    font-size: var(--font-size);
+    font-size: var(--text-h3-font-size);
     ${FontCommon({
         $fontWeight: "black",
     })};
 `
 
 const StyledH4 = styled.h4`
-    font-size: var(--font-size);
+    font-size: var(--text-h4-font-size);
     ${FontCommon({
         $fontWeight: "black",
     })};
 `
 
 const StyledH5 = styled.h5`
-    font-size: var(--font-size);
+    font-size: var(--text-h5-font-size);
     ${FontCommon({
         $fontWeight: "black",
     })};

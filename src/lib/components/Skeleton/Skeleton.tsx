@@ -31,12 +31,12 @@ export const Skeleton = forwardRef(
         ref?: ForwardedRef<HTMLSpanElement>
     ) => {
         const styles = {
-            ...style,
             ...variableBorderRadius(borderRadius),
-            ["--width" as any]: stringifyPx(width),
-            ["--height" as any]: stringifyPx(height),
-            ["--flex" as any]: flex,
-            ["--flex-grow" as any]: flexGrow,
+            ["--skeleton-width" as any]: stringifyPx(width),
+            ["--skeleton-height" as any]: stringifyPx(height),
+            ["--skeleton-flex" as any]: flex,
+            ["--skeleton-flex-grow" as any]: flexGrow,
+            ...style,
         }
 
         return (
@@ -58,20 +58,24 @@ export const SkeletonCard = forwardRef(
     (
         {
             as,
+            children,
             border,
             backgroundColor = "background",
-            children,
             isShiny,
             borderRadius = null,
             padding = null,
             style,
+            width,
+            height,
             ...rest
         }: SkeletonCardProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         const styles = {
-            ...style,
             ...variableBorderRadius(borderRadius),
+            ["--skeleton-card-width" as any]: width && stringifyPx(width),
+            ["--skeleton-card-height" as any]: height && stringifyPx(height),
+            ...style,
         }
 
         return (

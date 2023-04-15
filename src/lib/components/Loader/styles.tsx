@@ -8,8 +8,8 @@ import type { AllColorsTypes } from "../../types"
 import { setDefaultTheme } from "../../utils"
 
 const LoaderSize = css`
-    width: var(--size, 48px);
-    height: var(--size, 48px);
+    width: var(--loader-size, 48px);
+    height: var(--loader-size, 48px);
 `
 
 const SpinLoaderOne = keyframes`
@@ -25,7 +25,7 @@ const SpinLoaderOne = keyframes`
 const BaseLoaderOne = styled.span`
     ${LoaderSize};
     border-radius: ${Radiuses.Circle};
-    border: var(--border-width, 8px) solid transparent;
+    border: var(--loader-border-width, 8px) solid transparent;
     animation: ${SpinLoaderOne} 1200ms linear infinite;
 `
 
@@ -49,7 +49,7 @@ const BaseLoaderTwo = styled.span`
     ${LoaderSize};
     display: inline-block;
     border-radius: ${Radiuses.Circle};
-    border: var(--border-width, 8px) solid transparent;
+    border: var(--loader-border-width, 8px) solid transparent;
     animation: ${SpinLoaderTwo} 1200ms linear infinite;
 `
 
@@ -80,7 +80,7 @@ const BaseLoaderThree = styled.span`
         position: absolute;
         width: 100%;
         height: 100%;
-        border: var(--border-width, 8px) solid transparent;
+        border: var(--loader-border-width, 8px) solid transparent;
         border-radius: ${Radiuses.Circle};
         animation: ${SpinLoaderThree} 1200ms cubic-bezier(0.5, 0, 0.5, 1)
             infinite;

@@ -28,19 +28,19 @@ const Image = forwardRef(
         ref?: ForwardedRef<HTMLImageElement>
     ) => {
         const sizeStyles = {
-            ["--width" as any]: width && stringifyPx(width),
-            ["--height" as any]: height && stringifyPx(height),
+            ["--image-width" as any]: width && stringifyPx(width),
+            ["--image-height" as any]: height && stringifyPx(height),
         }
 
         const containerStyles = {
-            ...style,
             ...sizeStyles,
             ...variableBorderRadius(borderRadius),
+            ...style,
         }
 
         const imgStyles = {
+            ["--image-object-fit" as any]: fit,
             ...containerStyles,
-            ["--object-fit" as any]: fit,
         }
 
         const img = () => (

@@ -22,10 +22,10 @@ const FullBleed = forwardRef(
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         const styles = {
-            ...style,
             ...variableAllPaddings(padding),
-            ["--aspect-ratio" as any]: aspectRatio,
-            ["--height" as any]: height && stringifyPx(height),
+            ["--full-bleed-aspect-ratio" as any]: aspectRatio,
+            ["--full-bleed-height" as any]: height && stringifyPx(height),
+            ...style,
         }
 
         return (

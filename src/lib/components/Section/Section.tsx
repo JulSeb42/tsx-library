@@ -17,8 +17,8 @@ const Section = forwardRef(
             ref={ref}
             as={as}
             style={{
-                ...style,
                 ["--section-gap" as any]: variableSpacer(gap),
+                ...style,
             }}
             {...rest}
         >

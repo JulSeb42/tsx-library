@@ -17,8 +17,8 @@ const Icon = forwardRef(
             ref={ref}
             src={`/icons/${src}.svg`}
             style={{
+                ["--icon-size" as any]: stringifyPx(size),
                 ...style,
-                ["--size" as any]: stringifyPx(size),
             }}
             $color={color}
             {...rest}

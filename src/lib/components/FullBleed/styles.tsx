@@ -10,8 +10,8 @@ const StyledFullBleed = styled.div`
     grid-column: 1/4 !important;
     ${Mixins.PaddingVar()};
     width: 100%;
-    aspect-ratio: var(--aspect-ratio);
-    height: var(--height);
+    aspect-ratio: var(--full-bleed-aspect-ratio);
+    height: var(--full-bleed-height);
 
     img {
         height: 100%;

@@ -28,6 +28,11 @@ import type {
 
 import { setDefaultTheme } from "../../utils"
 
+const BaseButtonIcon = styled.button`
+    width: var(--button-size, 48px);
+    height: var(--button-size, 48px);
+`
+
 const StyledButtonIcon = styled.button<{
     $variant?: ButtonIconVariantTypes
     $color?: ColorsHoverTypes
@@ -77,14 +82,7 @@ const StyledButtonIcon = styled.button<{
                 ? theme.Background
                 : theme.ColorsHoverDefault
             : theme.ColorsHoverDefault};
-    ${({ $shadow, $shadowDefault, $shadowHover, $shadowActive }) =>
-        Mixins.Shadow({
-            $shadow: $shadow,
-            $isExtended: $shadowDefault && true,
-            $shadowDefault: $shadowDefault,
-            $shadowHover: $shadowHover,
-            $shadowActive: $shadowActive,
-        })};
+
     text-decoration: none;
 
     @media ${Breakpoints.Hover} {

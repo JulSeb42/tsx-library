@@ -29,21 +29,22 @@ const Grid = forwardRef(
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         const styles = {
-            ...style,
             ...variableAllPaddings(padding),
             ["--grid-display" as any]: inline ? "inline-grid" : "grid",
-            ["--template-col" as any]: typeof col === "string" ? col : null,
-            ["--col" as any]: typeof col === "number" ? col : null,
-            ["--justify-items" as any]: justifyItems,
-            ["--justify-content" as any]: justifyContent,
-            ["--align-items" as any]: alignItems,
-            ["--align-content" as any]: alignContent,
+            ["--grid-template-col" as any]:
+                typeof col === "string" ? col : null,
+            ["--grid-col" as any]: typeof col === "number" ? col : null,
+            ["--grid-justify-items" as any]: justifyItems,
+            ["--grid-justify-content" as any]: justifyContent,
+            ["--grid-align-items" as any]: alignItems,
+            ["--grid-align-content" as any]: alignContent,
             ["--grid-column-gap" as any]: variableSpacer(
                 columnGap ? columnGap : gap ? gap : null
             ),
             ["--grid-row-gap" as any]: variableSpacer(
                 rowGap ? rowGap : gap ? gap : null
             ),
+            ...style,
         }
 
         return (

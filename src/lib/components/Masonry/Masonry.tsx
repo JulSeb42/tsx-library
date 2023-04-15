@@ -51,12 +51,12 @@ const Masonry = ({
     useEventListener(`resize`, resizeHandler)
 
     const gapVar = {
-        ["--gap" as any]: variableSpacer(gap),
+        ["--masonry-gap" as any]: variableSpacer(gap),
     }
 
     const styles = {
-        ...style,
         ...gapVar,
+        ...style,
     }
 
     return (

@@ -7,7 +7,7 @@ const AvatarPage = () => {
     return (
         <Page title="Avatar">
             <Avatar
-                size={64}
+                size={120}
                 img="/images/pic-avatar.jpg"
                 borderRadius={{
                     topRight: "l",

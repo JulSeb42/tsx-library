@@ -4,7 +4,7 @@ import { stringifyPx } from "../../"
 
 export const variablesLoaderFour = (size: number | null) => {
     return {
-        ["--size" as any]: size && stringifyPx(size),
+        ["--loader-size" as any]: size && stringifyPx(size),
     }
 }
 
@@ -14,6 +14,7 @@ export const variablesAllLoaders = (
 ) => {
     return {
         ...variablesLoaderFour(size),
-        ["--border-width" as any]: borderWidth && stringifyPx(borderWidth),
+        ["--loader-border-width" as any]:
+            borderWidth && stringifyPx(borderWidth),
     }
 }

@@ -12,8 +12,9 @@ const Img = styled.img`
     display: block;
     position: relative;
     z-index: 0;
-    ${Mixins.ImgSizeVar()};
-    object-fit: var(--object-fit);
+    width: var(--image-width, 100%);
+    height: var(--image-height, auto);
+    object-fit: var(--image-object-fit);
     ${Mixins.BorderRadiusVar()};
 `
 
@@ -23,7 +24,8 @@ const ImgContainer = styled.figure`
     display: block;
     position: relative;
     z-index: 0;
-    ${Mixins.ImgSizeVar()};
+    width: var(--image-width, 100%);
+    height: var(--image-height, auto);
     overflow: hidden;
     ${Mixins.BorderRadiusVar()};
 `

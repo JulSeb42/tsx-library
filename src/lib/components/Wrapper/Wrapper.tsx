@@ -17,8 +17,8 @@ const Wrapper = forwardRef(
             ref={ref}
             as={as}
             style={{
-                ...style,
                 ["--wrapper-template" as any]: getWrapperTemplate(template),
+                ...style,
             }}
             {...rest}
         >

@@ -28,10 +28,10 @@ const Aside = forwardRef(
                 ref={ref}
                 as={as}
                 style={{
-                    ...style,
                     ["--aside-size" as any]: getAsideSize(size),
                     ["--aside-min-height" as any]: stringifyPx(minHeight),
                     ["--aside-position" as any]: getAsidePosition(position),
+                    ...style,
                 }}
                 {...rest}
             >

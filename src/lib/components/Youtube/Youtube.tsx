@@ -21,9 +21,9 @@ const Youtube = forwardRef(
         ref?: ForwardedRef<HTMLIFrameElement>
     ) => {
         const styles = {
-            ...style,
             ["--width" as any]: width && stringifyPx(width),
             ["--height" as any]: height && stringifyPx(height),
+            ...style,
         }
 
         return (

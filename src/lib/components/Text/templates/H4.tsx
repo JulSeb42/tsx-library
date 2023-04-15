@@ -18,10 +18,10 @@ const H4 = forwardRef(
                 ref={ref}
                 as={as}
                 style={{
-                    ...style,
-                    ["--font-size" as any]: display
+                    ["--text-h4-font-size" as any]: display
                         ? FontSizes.Display.H4
                         : FontSizes.Titles.H4,
+                    ...style,
                 }}
                 {...rest}
             >

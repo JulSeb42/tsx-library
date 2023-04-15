@@ -30,21 +30,21 @@ const Flexbox = forwardRef(
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         const styles = {
-            ...style,
             ...variableAllPaddings(padding),
             ["--flex-display" as any]: inline ? "inline-flex" : "flex",
             ["--flex-direction" as any]: flexDirection,
             ["--flex-wrap" as any]: flexWrap,
-            ["--justify-content" as any]: justifyContent,
-            ["--align-items" as any]: alignItems,
-            ["--justify-items" as any]: justifyItems,
-            ["--align-content" as any]: alignContent,
-            ["--column-gap" as any]: variableSpacer(
+            ["--flex-justify-content" as any]: justifyContent,
+            ["--flex-align-items" as any]: alignItems,
+            ["--flex-justify-items" as any]: justifyItems,
+            ["--flex-align-content" as any]: alignContent,
+            ["--flex-column-gap" as any]: variableSpacer(
                 columnGap ? columnGap : gap ? gap : null
             ),
-            ["--row-gap" as any]: variableSpacer(
+            ["--flex-row-gap" as any]: variableSpacer(
                 rowGap ? rowGap : gap ? gap : null
             ),
+            ...style,
         }
 
         return (
