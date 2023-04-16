@@ -2,8 +2,9 @@
 
 import React, { forwardRef, useState } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
-import { Icon, Text, uuid } from "../../"
+import { Text, uuid } from "../../"
 
 import * as Styles from "./styles"
 import type {
@@ -14,21 +15,14 @@ import type {
 
 export const AccordionContainer = forwardRef(
     (
-        {
-            children,
-            as,
-            variant,
-            separatorColor,
-            ...rest
-        }: AccordionContainerProps,
+        { children, as, variant, className, ...rest }: AccordionContainerProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         return (
             <Styles.StyledAccordion
                 ref={ref}
                 as={as}
-                $variant={variant}
-                $separatorColor={separatorColor}
+                className={classNames(variant, className)}
                 {...rest}
             >
                 {children}
@@ -42,14 +36,10 @@ export const AccordionItem = forwardRef(
         {
             as,
             isOpen = false,
-            icon = "plus",
             title,
             children,
             variant = "basic",
             noBorder,
-            customIcon,
-            accentColor = "primary",
-            separatorColor,
             ...rest
         }: ItemProps,
         ref?: ForwardedRef<HTMLDivElement>
@@ -60,38 +50,24 @@ export const AccordionItem = forwardRef(
             <Styles.Item as={as} ref={ref} {...rest}>
                 <Styles.Button
                     onClick={() => setOpen(!open)}
-                    $variant={variant}
-                    $noBorder={noBorder}
-                    $accentColor={accentColor}
-                    $separatorColor={separatorColor}
+                    className={classNames(
+                        variant,
+                        { open: open },
+                        { noBorder: noBorder }
+                    )}
                 >
                     {title}
 
                     <Styles.IconContainer
-                        $isOpen={open}
-                        $icon={icon}
-                        $hasIconCustom={!!customIcon}
+                        className={classNames({ open: open })}
                     >
-                        {customIcon ? (
-                            typeof customIcon === "string" ? (
-                                <Icon src={customIcon} size={20} />
-                            ) : (
-                                customIcon
-                            )
-                        ) : icon === "plus" ? (
-                            <Styles.StyledIconPlus size={20} />
-                        ) : (
-                            icon === "chevron" && (
-                                <Styles.StyledIconChevron size={20} />
-                            )
-                        )}
+                        <Styles.StyledIconPlus size={20} />
                     </Styles.IconContainer>
                 </Styles.Button>
 
                 <Styles.Content
                     as={typeof children === "string" ? Text : "div"}
-                    $isOpen={open}
-                    $variant={variant}
+                    className={classNames({ open: open }, variant)}
                 >
                     {children}
                 </Styles.Content>
@@ -102,65 +78,27 @@ export const AccordionItem = forwardRef(
 
 export const Accordion = forwardRef(
     (
-        {
-            as,
-            variant = "basic",
-            icon = "plus",
-            accentColor = "primary",
-            separatorColor,
-            customIcon,
-            items,
-            children,
-            ...rest
-        }: AccordionProps,
+        { as, variant = "basic", items, children, ...rest }: AccordionProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         return (
-            <AccordionContainer
-                ref={ref}
-                as={as}
-                variant={variant}
-                separatorColor={separatorColor}
-                {...rest}
-            >
+            <AccordionContainer ref={ref} as={as} variant={variant} {...rest}>
                 {items
-                    ? items.map((item, i) =>
-                          customIcon ? (
-                              <AccordionItem
-                                  isOpen={item.isOpen}
-                                  title={item.title}
-                                  variant={variant}
-                                  customIcon={customIcon}
-                                  noBorder={
-                                      variant === "rounded" &&
-                                      i === items.length - 1 &&
-                                      true
-                                  }
-                                  separatorColor={separatorColor}
-                                  accentColor={accentColor}
-                                  key={uuid()}
-                              >
-                                  {item.content}
-                              </AccordionItem>
-                          ) : (
-                              <AccordionItem
-                                  icon={icon}
-                                  isOpen={item.isOpen}
-                                  title={item.title}
-                                  variant={variant}
-                                  noBorder={
-                                      variant === "rounded" &&
-                                      i === items.length - 1 &&
-                                      true
-                                  }
-                                  separatorColor={separatorColor}
-                                  accentColor={accentColor}
-                                  key={uuid()}
-                              >
-                                  {item.content}
-                              </AccordionItem>
-                          )
-                      )
+                    ? items.map((item, i) => (
+                          <AccordionItem
+                              isOpen={item.isOpen}
+                              title={item.title}
+                              variant={variant}
+                              noBorder={
+                                  variant === "rounded" &&
+                                  i === items.length - 1 &&
+                                  true
+                              }
+                              key={uuid()}
+                          >
+                              {item.content}
+                          </AccordionItem>
+                      ))
                     : children}
             </AccordionContainer>
         )

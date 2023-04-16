@@ -1,78 +1,65 @@
 /*=============================================== Accordion styles ===============================================*/
 
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
 import { Transitions, Spacers, Radiuses, Mixins } from "../../"
-import { PlusIcon, ChevronDownIcon } from "../../icons"
+import { PlusIcon } from "../../icons"
 import type { ColorsHoverTypes, AllColorsTypes } from "../../types"
-import type { AccordionStyleTypes, IconTypes } from "./types"
+import type { AccordionStyleTypes } from "./types"
 
 import { setDefaultTheme } from "../../utils"
 
 const StyledIconPlus = styled(PlusIcon)``
 
-const StyledIconChevron = styled(ChevronDownIcon)``
-
-const StyledAccordion = styled.div<{
-    $variant?: AccordionStyleTypes
-    $isOpen?: boolean
-    $separatorColor?: AllColorsTypes
-}>`
+const StyledAccordion = styled.div`
     position: relative;
-    ${({ $variant }) =>
-        Mixins.Flexbox({
-            $flexDirection: "column",
-            $alignItems: "stretch",
-            $gap: $variant === "rounded" ? 0 : "xxs",
-        })};
+    ${Mixins.Flexbox({
+        $flexDirection: "column",
+        $alignItems: "stretch",
+    })};
 
-    ${({ $variant, $separatorColor, theme }) =>
-        $variant === "rounded" &&
-        css`
-            border-radius: ${Radiuses.M};
-            overflow: hidden;
-            border: 1px solid
-                ${$separatorColor
-                    ? theme.AllColors({ $color: $separatorColor })
-                    : theme.Gray200};
-            gap: 0;
-        `}
+    &.basic {
+        gap: ${Spacers.XXS};
+    }
+
+    &.rounded {
+        border-radius: ${Radiuses.M};
+        overflow: hidden;
+        border: 1px solid ${({ theme }) => theme.Gray200};
+    }
 `
 
 const Item = styled.div``
 
-const Content = styled.div<{
-    $isOpen?: boolean
-    $variant?: AccordionStyleTypes
-}>`
-    max-height: ${({ $isOpen }) => ($isOpen ? "600px" : 0)};
+const Content = styled.div`
+    max-height: 0;
     overflow: hidden;
     transition: ${Transitions.Long};
     color: ${({ theme }) => theme.Font};
 
-    ${({ $variant, $isOpen }) =>
-        $variant === "rounded"
-            ? css`
-                  padding: ${$isOpen ? Spacers.S : `0 ${Spacers.S}`};
-              `
-            : css`
-                  padding: ${$isOpen ? `${Spacers.XS} 0` : 0};
-              `}
+    &.rounded {
+        padding: 0 ${Spacers.S};
+    }
+
+    &.open {
+        max-height: 300vh;
+
+        &.basic {
+            padding: ${Spacers.S} 0;
+        }
+
+        &.rounded {
+            padding: ${Spacers.S};
+        }
+    }
 `
 
-const IconContainer = styled.span<{
-    $isOpen: boolean
-    $icon?: IconTypes
-    $hasIconCustom?: boolean
-}>`
+const IconContainer = styled.span`
     transition: ${Transitions.Short};
 
-    ${({ $isOpen, $icon, $hasIconCustom }) =>
-        !$hasIconCustom &&
-        $isOpen &&
-        css`
-            transform: rotate(${$icon === "chevron" ? 180 : 45}deg);
-        `}
+    &.open {
+        transform: rotate(45deg);
+    }
 `
 
 const Button = styled.button<{
@@ -86,38 +73,33 @@ const Button = styled.button<{
         $alignItems: "center",
         $justifyContent: "space-between",
     })};
-    padding: ${({ $variant }) => ($variant === "rounded" ? Spacers.S : 0)};
     border: none;
-    border-bottom: 1px solid
-        ${({ $variant, $separatorColor, theme }) =>
-            $separatorColor
-                ? theme.AllColors({ $color: $separatorColor })
-                : $variant === "rounded"
-                ? theme.Background
-                : theme.Gray200};
-    background-color: ${({ $variant, $accentColor, theme }) =>
-        $variant === "rounded"
-            ? theme.AllColors({ $color: $accentColor })
-            : "transparent"};
-    padding-bottom: ${({ $variant }) => $variant === "basic" && Spacers.XXS};
-    color: ${({ $variant, $accentColor, theme }) =>
-        $variant === "rounded"
-            ? $accentColor === "white"
-                ? theme.Primary500
-                : theme.Background
-            : theme.AllColors({ $color: $accentColor })};
-    height: ${({ $variant }) => ($variant === "rounded" ? "49px" : "29px")};
+    border-bottom: 1px solid;
 
-    ${({ $noBorder }) =>
-        $noBorder &&
-        css`
+    &.basic {
+        padding: 0;
+        padding-bottom: ${Spacers.XXS};
+        border-bottom-color: ${({ theme }) => theme.Gray200};
+        background-color: transparent;
+        color: ${({ theme }) => theme.Primary500};
+        height: 29px;
+    }
+
+    &.rounded {
+        padding: ${Spacers.S};
+        border-bottom-color: ${({ theme }) => theme.Background};
+        background-color: ${({ theme }) => theme.Primary500};
+        color: ${({ theme }) => theme.Background};
+        height: 49px;
+
+        &.no-border {
             border-bottom: none;
-        `}
+        }
+    }
 `
 
 setDefaultTheme([
     StyledAccordion,
-    StyledIconChevron,
     StyledIconPlus,
     Item,
     Content,
@@ -125,12 +107,4 @@ setDefaultTheme([
     Button,
 ])
 
-export {
-    StyledAccordion,
-    StyledIconChevron,
-    StyledIconPlus,
-    Item,
-    Content,
-    IconContainer,
-    Button,
-}
+export { StyledAccordion, StyledIconPlus, Item, Content, IconContainer, Button }
