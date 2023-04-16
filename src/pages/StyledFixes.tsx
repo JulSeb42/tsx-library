@@ -56,6 +56,69 @@ const ExtendedButton = styled(ButtonColor)<{
             : `4px 8px`};
 `
 
+// const ButtonColors = css`
+//     &.primary {
+//         background-color: ${({ theme }) => theme.Primary};
+
+//         &:hover {
+//             background-color: ${({ theme }) => theme.PrimaryHover};
+//         }
+
+//         &:active {
+//             background-color: ${({ theme }) => theme.PrimaryActive};
+//         }
+//     }
+
+//     &.secondary {
+//         background-color: ${({ theme }) => theme.Secondary};
+
+//         &:hover {
+//             background-color: ${({ theme }) => theme.SecondaryHover};
+//         }
+
+//         &:active {
+//             background-color: ${({ theme }) => theme.SecondaryActive};
+//         }
+//     }
+// `
+
+const StyledButton = styled.button`
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 4px 8px;
+    color: white;
+`
+
+const ButtonWithColor = styled(StyledButton)<{
+    buttonColor?: "primary" | "secondary"
+}>`
+    background-color: ${({ theme, buttonColor }) =>
+        buttonColor === "primary"
+            ? theme.Primary
+            : buttonColor === "secondary"
+            ? theme.Secondary
+            : "etc"};
+
+    &:hover {
+        background-color: ${({ theme, buttonColor }) =>
+            buttonColor === "primary"
+                ? theme.PrimaryHover
+                : buttonColor === "secondary"
+                ? theme.SecondaryHover
+                : "etc"};
+    }
+
+    &:active {
+        background-color: ${({ theme, buttonColor }) =>
+            buttonColor === "primary"
+                ? theme.PrimaryActive
+                : buttonColor === "secondary"
+                ? theme.SecondaryActive
+                : "etc"};
+    }
+`
+
 const StyledFixes = () => {
     return (
         <Page title="Styled">
@@ -99,6 +162,10 @@ const StyledFixes = () => {
                 <ExtendedButton $color="blue" $size="large">
                     Blue
                 </ExtendedButton>
+            </Flexbox>
+
+            <Flexbox>
+                <ButtonWithColor buttonColor="primary">Button</ButtonWithColor>
             </Flexbox>
         </Page>
     )

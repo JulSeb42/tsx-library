@@ -1,6 +1,6 @@
 /*=============================================== Tooltip styles ===============================================*/
 
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
 import {
     FontWeights,
@@ -11,35 +11,16 @@ import {
     ThemeDark,
     Radiuses,
 } from "../../"
-import type { AllColorsTypes } from "../../types"
-import type { TextStylesTypes } from "./types"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledTooltip = styled.span<{
-    $textStyle?: TextStylesTypes
-    $color?: AllColorsTypes
-}>`
+const StyledTooltip = styled.span`
     display: inline;
     position: relative;
-    color: ${({ theme }) => theme.AllColors};
-
-    ${({ $textStyle }) =>
-        $textStyle === "dotted" || $textStyle === "underline"
-            ? css`
-                  border-bottom: 1px
-                      ${$textStyle === "dotted"
-                          ? "dotted"
-                          : $textStyle === "underline" && "solid"}
-                      currentColor;
-              `
-            : css`
-                  font-weight: ${FontWeights.Black};
-              `}
+    border-bottom: 1px dotted currentColor;
 `
 
-const Tip = styled.span<{ $isVisible: boolean; $width: number }>`
-    width: ${({ $width }) => $width}px;
+const BaseTip = styled.span`
     min-width: 60px;
     background-color: ${({ theme }) =>
         theme === ThemeDark ? Overlays.Plain.White80 : Overlays.Plain.Black80};
@@ -48,11 +29,10 @@ const Tip = styled.span<{ $isVisible: boolean; $width: number }>`
     padding: ${Spacers.XS};
     border-radius: ${Radiuses.S};
     bottom: 125%;
-    left: ${({ $width }) => `calc(50% - ${$width}px / 2)`};
     font-size: ${FontSizes.Small};
     font-weight: ${FontWeights.Regular};
-    opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
-    visibility: ${({ $isVisible }) => ($isVisible ? "visible" : "hidden")};
+    opacity: 0;
+    visibility: hidden;
     z-index: 1;
     transition: ${Transitions.Short};
     position: absolute;
@@ -60,7 +40,6 @@ const Tip = styled.span<{ $isVisible: boolean; $width: number }>`
     &:after {
         content: "";
         bottom: calc(${Spacers.XS} * -1 - 2px);
-        left: ${({ $width }) => `calc(${$width}px / 2 - 5px)`};
         margin-left: 2px;
         border-width: 5px;
         border-style: solid;
@@ -69,11 +48,30 @@ const Tip = styled.span<{ $isVisible: boolean; $width: number }>`
                     ? Overlays.Plain.White80
                     : Overlays.Plain.Black80}
             transparent transparent transparent;
-        opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
-        visibility: ${({ $isVisible }) => ($isVisible ? "visible" : "hidden")};
+        opacity: 0;
+        visibility: hidden;
         z-index: 1;
         transition: ${Transitions.Short};
         position: absolute;
+    }
+
+    &.visible {
+        opacity: 1;
+        visibility: visible;
+
+        &:after {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+`
+
+const Tip = styled(BaseTip)<{ $width: number }>`
+    width: ${({ $width }) => $width}px;
+    left: ${({ $width }) => `calc(50% - ${$width}px / 2)`};
+
+    &:after {
+        left: ${({ $width }) => `calc(${$width}px / 2 - 5px)`};
     }
 `
 
