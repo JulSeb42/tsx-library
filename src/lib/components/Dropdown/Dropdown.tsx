@@ -3,6 +3,7 @@
 import React, { forwardRef, useRef, Fragment } from "react"
 import type { ForwardedRef } from "react"
 import { Link } from "react-router-dom"
+import classNames from "classnames"
 
 import { useClickOutside, Icon, uuid } from "../../"
 
@@ -15,13 +16,26 @@ import type {
 
 export const DropdownContainer = forwardRef(
     (
-        { as, children, justify = "left", ...rest }: DropdownContainerProps,
+        {
+            as,
+            children,
+            className,
+            justifyContent = "flex-start",
+            ...rest
+        }: DropdownContainerProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => (
         <Styles.DropdownContainer
             ref={ref}
             as={as}
-            $justify={justify}
+            className={classNames(
+                {
+                    "justify-left": justifyContent === "flex-start",
+                },
+                { "justify-right": justifyContent === "flex-end" },
+                className
+            )}
+            justifyContent={justifyContent}
             {...rest}
         >
             {children}
@@ -33,18 +47,12 @@ export const DropdownItem = forwardRef(
     (
         {
             as,
-            color = "primary",
             to,
             href,
             blank,
             onClick,
             text,
             icon,
-            padding = {
-                topBottom: "xs",
-                leftRight: "s",
-            },
-            gap = "xxs",
             ...rest
         }: DropdownItemProps,
         ref?: ForwardedRef<HTMLButtonElement & HTMLAnchorElement>
@@ -58,9 +66,6 @@ export const DropdownItem = forwardRef(
                 onClick={onClick}
                 target={(href || to) && blank && "_blank"}
                 rel={(href || to) && blank && "noreferrer noopener"}
-                $color={color}
-                $padding={padding}
-                $gap={gap}
                 {...rest}
             >
                 {icon &&
@@ -80,12 +85,10 @@ export const Dropdown = ({
     as,
     isOpen,
     setIsOpen,
-    accentColor = "primary",
     direction = "down",
     children,
     items,
-    maxHeightOpen = 40 * 3 + 24,
-    borderRadius = "m",
+    className,
     ...rest
 }: DropdownProps) => {
     const el = useRef<HTMLButtonElement>(null)
@@ -96,21 +99,14 @@ export const Dropdown = ({
         <Styles.StyledDropdown
             ref={el}
             as={as}
-            $isOpen={isOpen}
-            $accentColor={accentColor}
-            $direction={direction}
-            $maxHeightOpen={maxHeightOpen}
-            $borderRadius={borderRadius}
+            className={classNames({ open: isOpen }, direction, className)}
             {...rest}
         >
             {items
                 ? items?.map(item => {
                       const itemProps = {
-                          color: accentColor,
                           text: item.text,
                           icon: item.icon,
-                          padding: item.padding,
-                          gap: item.gap,
                       }
 
                       return (

@@ -1,21 +1,19 @@
 /*=============================================== Component types ===============================================*/
 
 import type {
-    ReactNode,
-    ChangeEvent,
-    HTMLAttributes,
     ButtonHTMLAttributes,
+    ChangeEvent,
     ForwardedRef,
+    HTMLAttributes,
+    ReactNode,
 } from "react"
 
 import type {
-    LinkTypes,
-    ButtonLinkTypesRequire,
-    LinkTypesBlank,
-    PaddingTypes,
-    SpacersTypes,
-    ColorsShortTypes,
     ButtonLinkDisabledTypes,
+    ButtonLinkTypesRequire,
+    ColorsShortTypes,
+    LinkTypes,
+    LinkTypesBlank,
 } from "./"
 
 /*==================== Accordion item ====================*/
@@ -59,8 +57,6 @@ export type StepProps = LinkTypesBlank & {
 export type DropdownItemProps = ButtonLinkTypesRequire & {
     text: string
     icon?: string | JSX.Element
-    padding?: PaddingTypes
-    gap?: SpacersTypes
 }
 
 /*==================== useForm ====================*/

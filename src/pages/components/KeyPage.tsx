@@ -6,7 +6,7 @@ import { Key } from "../../lib"
 const KeyPage = () => {
     return (
         <Page title="Key">
-            <Key keys={["⌘", "K"]} accentColor="success" />
+            <Key keys={["⌘", "K"]} />
 
             <Key keys={["⌘", "K"]} withSeparator />
         </Page>

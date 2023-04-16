@@ -26,13 +26,8 @@ const AccordionPage = () => {
 
     return (
         <Page title="Accordion">
-            <Accordion
-                items={items}
-                variant="basic"
-                icon="plus"
-                accentColor="secondary"
-            />
-            <Accordion items={items} variant="rounded" icon="chevron" />
+            <Accordion items={items} variant="basic" />
+            <Accordion items={items} variant="rounded" />
         </Page>
     )
 }

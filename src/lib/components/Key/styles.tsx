@@ -29,6 +29,8 @@ const StyledKey = styled(BaseKey)<{
         theme.ColorsHoverDefault({ $color: $accentColor })};
     background-color: ${({ $accentColor, theme }) =>
         theme.Colors50({ $color: $accentColor })};
+    color: ${({ $accentColor, theme }) =>
+        $accentColor === "white" ? theme.Black : theme.Font};
 `
 
 setDefaultTheme([StyledKey])

@@ -1,26 +1,20 @@
 /*=============================================== Dropdown styles ===============================================*/
 
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
-import { Shadows, Transitions, Breakpoints, Mixins, stringifyPx } from "../../"
-import type {
-    ColorsHoverTypes,
-    PaddingTypes,
-    SpacersTypes,
-    RadiusesTypes,
-} from "../../types"
-import type { DropdownJustifyTypes } from "./types"
-import type { ListDirectionTypes } from "../ListInputs/types"
+import {
+    Breakpoints,
+    Flexbox,
+    Mixins,
+    Radiuses,
+    Shadows,
+    Spacers,
+    Transitions,
+} from "../../"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledDropdown = styled.div<{
-    $isOpen: boolean
-    $accentColor?: ColorsHoverTypes
-    $direction?: ListDirectionTypes
-    $maxHeightOpen: number
-    $borderRadius?: RadiusesTypes
-}>`
+const StyledDropdown = styled.div`
     position: absolute;
     ${Mixins.Flexbox({
         $flexDirection: "column",
@@ -28,67 +22,66 @@ const StyledDropdown = styled.div<{
     })};
     min-width: 200px;
     background-color: ${({ theme }) => theme.Background};
-    ${Mixins.BorderRadius};
+    border-radius: ${Radiuses.M};
     overflow-y: scroll;
-    box-shadow: ${({ $isOpen }) => $isOpen && Shadows.M};
     transition: ${Transitions.Short};
     z-index: 50;
     ${Mixins.HideScrollbar};
-    max-height: ${({ $isOpen, $maxHeightOpen }) =>
-        $isOpen ? stringifyPx($maxHeightOpen) : 0};
+    max-height: 0;
 
-    ${({ $direction }) =>
-        $direction === "up"
-            ? css`
-                  bottom: 42px;
-              `
-            : css`
-                  top: 42px;
-              `}
-`
+    &.open {
+        box-shadow: ${Shadows.M};
+        max-height: 144px;
+    }
 
-const DropdownContainer = styled.div<{ $justify?: DropdownJustifyTypes }>`
-    position: relative;
-    ${({ $justify }) =>
-        Mixins.Flexbox({
-            $justifyContent: $justify === "right" ? "flex-end" : "flex-start",
-        })};
+    &.up {
+        bottom: 42px;
+    }
 
-    ${StyledDropdown} {
-        left: ${({ $justify }) => $justify === "left" && 0};
-        right: ${({ $justify }) => $justify === "right" && 0};
+    &.down {
+        top: 42px;
     }
 `
 
-const DropdownItem = styled.button<{
-    $color?: ColorsHoverTypes
-    $padding?: PaddingTypes
-    $gap?: SpacersTypes
-}>`
-    color: ${({ $color, theme }) => theme.ColorsHoverDefault({ $color })};
+const DropdownContainer = styled(Flexbox)`
+    position: relative;
+
+    &.justify-left {
+        ${StyledDropdown} {
+            left: 0;
+        }
+    }
+
+    &.justify-right {
+        ${StyledDropdown} {
+            right: 0;
+        }
+    }
+`
+
+const DropdownItem = styled.button`
+    color: ${({ theme }) => theme.ColorsHoverDefault({ $color: "primary" })};
     text-decoration: none;
     text-align: left;
     background-color: transparent;
     border: none;
-    ${Mixins.Padding};
+    padding: ${Spacers.XS} ${Spacers.S};
     transition: ${Transitions.Short};
-    ${({ $gap }) =>
-        Mixins.Flexbox({
-            $alignItems: "center",
-            $gap,
-        })};
+    ${Mixins.Flexbox({
+        $alignItems: "center",
+        $gap: "xs",
+    })};
 
     @media ${Breakpoints.Hover} {
         &:hover {
-            background-color: ${({ $color, theme }) =>
-                theme.ColorsHoverHover({ $color })};
-            color: ${({ $color, theme }) =>
-                $color === "white" ? theme.Primary500 : theme.Background};
+            background-color: ${({ theme }) =>
+                theme.ColorsHoverHover({ $color: "primary" })};
+            color: ${({ theme }) => theme.Background};
         }
 
         &:active {
-            background-color: ${({ $color, theme }) =>
-                theme.ColorsHoverActive({ $color })};
+            background-color: ${({ theme }) =>
+                theme.ColorsHoverActive({ $color: "primary" })};
         }
     }
 `

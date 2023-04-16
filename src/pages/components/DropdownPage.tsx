@@ -28,15 +28,10 @@ const DropdownPage = () => {
                     Open dropdown
                 </Button>
 
-                <Dropdown
-                    isOpen={isOpen}
-                    setIsOpen={setIsOpen}
-                    items={items}
-                    accentColor="success"
-                />
+                <Dropdown isOpen={isOpen} setIsOpen={setIsOpen} items={items} />
             </DropdownContainer>
 
-            <DropdownContainer>
+            <DropdownContainer justifyContent="flex-end">
                 <Button onClick={() => setIsSecondOpen(!isSecondOpen)}>
                     Open dropdown
                 </Button>
@@ -47,14 +42,7 @@ const DropdownPage = () => {
                     <DropdownItem
                         text="Button"
                         onClick={() => alert("Clicked")}
-                        padding={{
-                            left: "xl",
-                            right: "s",
-                            topBottom: "xs",
-                        }}
                         icon="chevron-left"
-                        gap="xs"
-                        color="secondary"
                     />
                 </Dropdown>
             </DropdownContainer>
