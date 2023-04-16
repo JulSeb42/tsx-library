@@ -1,52 +1,26 @@
 /*=============================================== ProgressBar styles ===============================================*/
 
-import styled, { keyframes, css } from "styled-components"
+import styled, { keyframes } from "styled-components"
 
-import { Mixins, Radiuses, Transitions, getPercentage } from "../../"
-import type { AllColorsTypes, SpacersTypes } from "../../types"
-import type { ProgressDirectionType } from "./types"
+import { Radiuses, Transitions } from "../../"
+import type { ColorsHoverTypes } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
 
-const Progress = ({
-    value,
-    $direction,
-}: {
-    value: number
-    $direction?: ProgressDirectionType
-}) => keyframes`
+const Progress = keyframes`
     0% {
-        width: ${$direction === "horizontal" && 0};
-        height: ${$direction === "vertical" && 0};
+        width: 0;
     }
 
     100% {
-        width: ${$direction === "horizontal" && value}%;
-        height: ${$direction === "vertical" && value}%;
+        width: var(--progress-value);
     }
 `
 
-const StyledProgressBar = styled.meter<{
-    value: number
-    $color?: AllColorsTypes
-    $backgroundColor?: AllColorsTypes
-    $animated?: boolean
-    $direction?: ProgressDirectionType
-    $width?: string | SpacersTypes
-    $height?: string | SpacersTypes
-    $speed?: number
-    max: number
-}>`
-    width: ${({ $width, $direction, $height }) =>
-        $direction === "vertical"
-            ? Mixins.Spacers({ $spacer: $height })
-            : Mixins.Spacers({ $spacer: $width })};
-    height: ${({ $width, $direction, $height }) =>
-        $direction === "vertical"
-            ? Mixins.Spacers({ $spacer: $width })
-            : Mixins.Spacers({ $spacer: $height })};
-    background-color: ${({ $backgroundColor, theme }) =>
-        theme.AllColors({ $color: $backgroundColor })};
+const BaseProgressBar = styled.meter`
+    width: 100%;
+    height: 16px;
+    background-color: ${({ theme }) => theme.Gray200};
     border-radius: ${Radiuses.Round};
     position: relative;
     display: block;
@@ -58,34 +32,31 @@ const StyledProgressBar = styled.meter<{
     &:before {
         content: "";
         position: absolute;
+        transition: ${Transitions.Short};
+        line-height: 100%;
+        height: 100%;
+        top: 0;
+        width: var(--progress-value);
+    }
+
+    &.is-animated:before {
+        animation: ${Progress} 2000ms 1;
+    }
+`
+
+const ProgressColor = styled(BaseProgressBar)<{ $color?: ColorsHoverTypes }>`
+    &:before {
+        background-color: ${({ theme, $color }) => theme.AllColors({ $color })};
+    }
+`
+
+const StyledProgressBar = styled(ProgressColor)<{
+    value: number
+    max: number
+}>`
+    &:before {
         border-radius: ${({ value }) =>
             value < 3 ? Radiuses.Circle : Radiuses.Round};
-        transition: ${Transitions.Short};
-        background-color: ${({ theme }) => theme.AllColors};
-        line-height: 100%;
-
-        ${({ $direction, value, max }) =>
-            $direction === "horizontal"
-                ? css`
-                      width: ${getPercentage(value, max)}%;
-                      height: 100%;
-                      top: 0;
-                  `
-                : css`
-                      width: 100%;
-                      height: ${getPercentage(value, max)}%;
-                      bottom: 0;
-                  `};
-
-        ${({ $animated, value, $direction, $speed }) =>
-            $animated === true &&
-            css`
-                animation: ${Progress({
-                        value: value,
-                        $direction: $direction,
-                    })}
-                    ${$speed ? `${$speed}ms` : `calc(${value} * 50ms) 1`};
-            `}
     }
 `
 

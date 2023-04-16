@@ -2,6 +2,7 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
 import { SrOnly } from "../../"
 
@@ -15,13 +16,10 @@ const ProgressBar = forwardRef(
             value,
             animated = true,
             color = "primary",
-            backgroundColor = "gray-200",
-            width = "100%",
-            height = "m",
-            direction = "horizontal",
             min = 0,
             max = 100,
-            speed,
+            className,
+            style,
             ...rest
         }: ProgressBarProps,
         ref?: ForwardedRef<HTMLMeterElement>
@@ -32,13 +30,12 @@ const ProgressBar = forwardRef(
             value={value}
             min={min}
             max={max}
+            style={{
+                ["--progress-value" as any]: `${value}%`,
+                ...style,
+            }}
+            className={classNames({ "is-animated": animated }, className)}
             $color={color}
-            $backgroundColor={backgroundColor}
-            $animated={animated}
-            $direction={direction}
-            $width={width}
-            $height={height}
-            $speed={speed}
             {...rest}
         >
             <SrOnly>{`${value} / ${max}`}</SrOnly>

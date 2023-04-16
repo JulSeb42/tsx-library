@@ -15,17 +15,9 @@ const ProgressBarPage = () => {
             <ProgressBar value={getRandomNumber(0, 100)} color="success" />
             <ProgressBar value={getRandomNumber(0, 100)} color="danger" />
             <ProgressBar value={getRandomNumber(0, 100)} color="warning" />
-            <ProgressBar value={getRandomNumber(0, 100)} color="gray" />
-            <ProgressBar value={getRandomNumber(0, 100)} color="black" />
+            <ProgressBar value={getRandomNumber(0, 100)} color="background" />
+            <ProgressBar value={getRandomNumber(0, 100)} color="font" />
             <ProgressBar value={getRandomNumber(0, 100)} color="white" />
-
-            <div style={{ height: 400 }}>
-                <ProgressBar
-                    value={getRandomNumber(0, 100)}
-                    color="primary"
-                    direction="vertical"
-                />
-            </div>
         </Page>
     )
 }
