@@ -592,3 +592,39 @@ export type ButtonLinkTypesRequire = RequireAtLeastOne<
     ButtonLinkTypes,
     "href" | "to" | "onClick"
 >
+
+/*==================== ButtonLinksDisabled ====================*/
+
+type ButtonLinkDisabledType1 = {
+    onClick?: () => void
+    disabled?: boolean
+    href?: never
+    to?: never
+    blank?: never
+}
+
+type ButtonLinkDisabledType2 = {
+    onClick?: never
+    disabled?: never
+    href?: string
+    to?: never
+    blank?: boolean
+}
+
+type ButtonLinkDisabledType3 = {
+    onClick?: never
+    disabled?: never
+    href?: never
+    to?: string
+    blank?: boolean
+}
+
+export type ButtonLinkDisabledTypes =
+    | ButtonLinkDisabledType1
+    | ButtonLinkDisabledType2
+    | ButtonLinkDisabledType3
+
+export type ButtonLinkTypesDisabledRequire = RequireAtLeastOne<
+    ButtonLinkTypes,
+    "href" | "to" | "onClick"
+>

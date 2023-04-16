@@ -4,7 +4,7 @@ import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 import { Link } from "react-router-dom"
 
-import { Icon, Text, convertDateShort, Flexbox, uuid } from "../../"
+import { Text, convertDateShort, Flexbox, uuid, Badge } from "../../"
 
 import * as Styles from "./styles"
 import type { ListGroupProps, ListGroupItemProps } from "./types"
@@ -16,110 +16,75 @@ export const ListItem = ({
         subtext,
         badge,
         badgeColor = "primary",
-        badgeContentColor = "background",
         date,
         onClick,
         disabled,
         ref,
         href,
         blank,
-        color = "primary",
         to,
     },
     number,
-    borderColor,
+    className,
     ...rest
 }: ListGroupItemProps) => (
     <Styles.Item
         as={as ? as : onClick ? "button" : to ? Link : href ? "a" : "span"}
+        ref={ref}
         href={href}
         to={to}
         onClick={onClick}
         disabled={disabled}
-        $borderColor={borderColor}
-        $isHover={!!onClick || !!href || !!to}
-        $color={color}
-        ref={ref}
         target={(href || to) && blank && "_blank"}
         rel={(href || to) && blank && "noreferrer noopener"}
+        className={`${className} ${
+            to || href || onClick ? "is-hoverable" : ""
+        }`}
         {...rest}
     >
         <Flexbox justifyContent="space-between" gap="xxs">
             {number && (
-                <Styles.NumberContainer>{number}</Styles.NumberContainer>
+                <Styles.NumberContainer>{number}.</Styles.NumberContainer>
             )}
 
             <Styles.Title>{text}</Styles.Title>
 
-            {badge && (
-                <Styles.NumberContainer>
-                    <Styles.Badge
-                        $background={badgeColor}
-                        $textColor={badgeContentColor}
-                        $length={
-                            typeof badge === "number"
-                                ? badge.toString().length
-                                : 0
-                        }
-                    >
-                        {typeof badge === "string" ? (
-                            <Icon src={badge} size={16 * 0.7} />
-                        ) : typeof badge === "object" ? (
-                            badge
-                        ) : typeof badge === "number" ? (
-                            badge
+            {(badge || date) && (
+                <Styles.BadgeContainer>
+                    {badge &&
+                        (typeof badge === "object" ? (
+                            badge.icon ? (
+                                <Badge icon={badge.icon} color={badgeColor} />
+                            ) : (
+                                <Badge number={badge.number} />
+                            )
                         ) : (
-                            ""
-                        )}
-                    </Styles.Badge>
-                </Styles.NumberContainer>
-            )}
+                            <Badge color={badgeColor} />
+                        ))}
 
-            {date && (
-                <Styles.NumberContainer>
-                    <Text tag="small" color="gray">
-                        {convertDateShort(new Date(date))}
-                    </Text>
-                </Styles.NumberContainer>
+                    {date && (
+                        <Text tag="small">
+                            {convertDateShort(new Date(date))}
+                        </Text>
+                    )}
+                </Styles.BadgeContainer>
             )}
         </Flexbox>
 
-        {subtext && (
-            <Text tag="small" color="gray">
-                {subtext}
-            </Text>
-        )}
+        {subtext && <Text tag="small">{subtext}</Text>}
     </Styles.Item>
 )
 
 export const ListGroup = forwardRef(
     (
-        {
-            as,
-            items,
-            showNumbers,
-            maxHeight,
-            bordersColor = "gray-200",
-            accentColor = "primary",
-            borderRadius = "m",
-            ...rest
-        }: ListGroupProps,
+        { as, items, showNumbers, ...rest }: ListGroupProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => (
-        <Styles.StyledListGroup
-            ref={ref}
-            as={as}
-            $borderColor={bordersColor}
-            $maxHeight={maxHeight}
-            $borderRadius={borderRadius}
-            {...rest}
-        >
+        <Styles.StyledListGroup ref={ref} as={as} {...rest}>
             {items.map((item, i) => (
                 <ListItem
                     item={item}
-                    color={accentColor}
                     number={showNumbers ? i + 1 : undefined}
-                    borderColor={bordersColor}
                     key={uuid()}
                 />
             ))}

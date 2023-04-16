@@ -3,20 +3,19 @@
 import type {
     ReactNode,
     ChangeEvent,
-    MouseEvent,
     HTMLAttributes,
     ButtonHTMLAttributes,
     ForwardedRef,
 } from "react"
 
 import type {
-    AllColorsTypes,
-    ColorsHoverTypes,
     LinkTypes,
     ButtonLinkTypesRequire,
     LinkTypesBlank,
     PaddingTypes,
     SpacersTypes,
+    ColorsShortTypes,
+    ButtonLinkDisabledTypes,
 } from "./"
 
 /*==================== Accordion item ====================*/
@@ -123,69 +122,44 @@ export type ButtonGroupProps =
 
 /*==================== ListGroup ====================*/
 
-type ListGroupPropsBase = {
+type ListGroupPropsBase = ButtonLinkDisabledTypes & {
     text: string
     subtext?: string
-    ref?: ForwardedRef<HTMLSpanElement>
+    ref?: ForwardedRef<HTMLLIElement>
 }
 
-type ListGroupPropsContent1 = ListGroupPropsBase & {
-    badge?: true | string | JSX.Element | number
-    badgeColor?: AllColorsTypes
-    badgeContentColor?: AllColorsTypes
+type ListGroupBadge1 = ListGroupPropsBase & {
+    badge?:
+        | true
+        | {
+              icon?: string | JSX.Element
+              number?: never
+          }
+}
+
+type ListGroupBadge2 = ListGroupPropsBase & {
+    badge?:
+        | true
+        | {
+              icon?: never
+              number?: number
+          }
+}
+
+type ListGroupBadge = ListGroupBadge1 | ListGroupBadge2
+
+type ListGroupPropsContent1 = ListGroupBadge & {
+    badgeColor?: ColorsShortTypes
     date?: never
 }
 
-type ListGroupPropsContent2 = ListGroupPropsBase & {
+type ListGroupPropsContent2 = ListGroupBadge & {
     badge?: never
     badgeColor?: never
-    badgeContentColor?: never
     date?: string | Date
 }
 
-type ListGroupPropsContent = ListGroupPropsContent1 | ListGroupPropsContent2
-
-type ListGroupPropsBehaviour0 = ListGroupPropsContent & {
-    href?: undefined
-    blank?: undefined
-    onClick?: undefined
-    disabled?: never
-    color?: never
-    to?: never
-}
-
-type ListGroupPropsBehaviour1 = ListGroupPropsContent & {
-    href?: string
-    blank?: boolean
-    onClick?: never
-    disabled?: never
-    color?: ColorsHoverTypes
-    to?: never
-}
-
-type ListGroupPropsBehaviour2 = ListGroupPropsContent & {
-    href?: never
-    blank?: never
-    onClick?: (e: MouseEvent<HTMLButtonElement>) => void
-    disabled?: boolean
-    color?: ColorsHoverTypes
-    to?: never
-}
-
-type ListGroupPropsBehaviour3 = ListGroupPropsContent & {
-    href?: never
-    blank?: boolean
-    onClick?: never
-    disabled?: never
-    color?: ColorsHoverTypes
-    to?: string
-}
-
-export type ListGroupItemProps =
-    | ListGroupPropsBehaviour0
-    | ListGroupPropsBehaviour1
-    | ListGroupPropsBehaviour2
-    | ListGroupPropsBehaviour3
+export type ListGroupItemProps = ListGroupPropsContent1 | ListGroupPropsContent2
 
 /*==================== Icon menu ====================*/
 

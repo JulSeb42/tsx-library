@@ -16,12 +16,12 @@ const ListGroupPage = () => {
         },
         {
             text: "Item",
-            badge: 350,
+            badge: { number: 350 },
             badgeColor: "danger",
         },
         {
             text: "Item",
-            badge: "star",
+            badge: { icon: "star" },
             badgeColor: "success",
         },
         {
@@ -47,7 +47,6 @@ const ListGroupPage = () => {
             date: "2022-09-07",
             subtext: "Subtext",
             onClick: () => console.log("Clicked!"),
-            color: "secondary",
         },
         {
             text: "Item",
@@ -61,7 +60,7 @@ const ListGroupPage = () => {
         <Page title="ListGroup">
             <ListGroup items={items} />
 
-            <ListGroup items={items} showNumbers maxHeight={100} />
+            <ListGroup items={items} showNumbers />
         </Page>
     )
 }

@@ -3,48 +3,26 @@
 import styled, { css } from "styled-components"
 
 import {
-    Radiuses,
-    Spacers,
-    Transitions,
     Breakpoints,
     FontWeights,
     Mixins,
+    Radiuses,
+    Spacers,
     Text,
-    stringifyPx,
+    Transitions,
 } from "../../"
-import type {
-    AllColorsTypes,
-    ColorsHoverTypes,
-    RadiusesTypes,
-} from "../../types"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledListGroup = styled.div<{
-    $borderColor?: AllColorsTypes
-    $maxHeight?: number
-    $borderRadius?: RadiusesTypes
-}>`
-    border: 1px solid
-        ${({ theme, $borderColor }) =>
-            theme.AllColors({ $color: $borderColor })};
-    ${Mixins.BorderRadius};
+const StyledListGroup = styled.ul`
+    border: 1px solid ${({ theme }) => theme.Gray200};
+    border-radius: ${Radiuses.M};
     overflow: hidden;
-    ${Mixins.HideScrollbar};
-
-    ${({ $maxHeight }) =>
-        $maxHeight &&
-        css`
-            max-height: ${stringifyPx($maxHeight)};
-            overflow-y: scroll;
-        `}
+    list-style: none;
+    padding: 0;
 `
 
-const Item = styled.span<{
-    $isHover?: boolean
-    $borderColor?: AllColorsTypes
-    $color?: ColorsHoverTypes
-}>`
+const Item = styled.li`
     display: block;
     width: 100%;
     padding: ${Spacers.XS};
@@ -55,77 +33,60 @@ const Item = styled.span<{
     font-weight: ${FontWeights.Regular};
 
     &:not(:last-child) {
-        border-bottom: 1px solid
-            ${({ theme, $borderColor }) =>
-                theme.AllColors({ $color: $borderColor })};
+        border-bottom: 1px solid ${({ theme }) => theme.Gray200};
     }
 
-    ${({ $isHover, theme, $color }) =>
-        $isHover &&
-        css`
-            color: ${theme.ColorsHoverDefault({ $color: $color })};
-            transition: ${Transitions.Short};
+    &.is-hoverable {
+        color: ${({ theme }) =>
+            theme.ColorsHoverDefault({ $color: "primary" })};
+        transition: ${Transitions.Short};
 
-            @media ${Breakpoints.Hover} {
-                &:hover {
-                    background-color: ${theme.ColorsHoverHover({
-                        $color: $color,
+        @media ${Breakpoints.Hover} {
+            &:hover {
+                background-color: ${({ theme }) =>
+                    theme.ColorsHoverHover({
+                        $color: "primary",
                     })};
-                    color: ${$color === "white"
-                        ? theme.Primary500
-                        : theme.Background};
-                }
-
-                &:active {
-                    background-color: ${theme.ColorsHoverActive({
-                        $color: $color,
-                    })};
-                }
+                color: ${({ theme }) => theme.Background};
             }
 
-            &:disabled {
-                background-color: ${theme.Gray100};
-                color: ${theme.Gray500};
+            &:active {
+                background-color: ${({ theme }) =>
+                    theme.ColorsHoverActive({
+                        $color: "primary",
+                    })};
             }
-        `}
+        }
+
+        &:disabled {
+            background-color: ${({ theme }) => theme.Gray100};
+            color: ${({ theme }) => theme.Gray500};
+        }
+    }
 `
 
 const Title = styled(Text).attrs({ tag: "h6" })`
     flex-grow: 1;
 `
 
-const NumberContainer = styled.span`
+const ContainerBase = css`
     height: 27px;
     ${Mixins.Flexbox({
         $inline: true,
         $alignItems: "center",
     })};
-    font-weight: ${FontWeights.Black};
 `
 
-const badgeSize = 16
-
-const Badge = styled.span<{
-    $background?: AllColorsTypes
-    $textColor?: AllColorsTypes
-    $length: number
-}>`
-    min-width: ${badgeSize}px;
-    height: ${badgeSize}px;
-    background-color: ${({ theme, $background }) =>
-        theme.AllColors({ $color: $background })};
-    color: ${({ theme, $textColor }) =>
-        theme.AllColors({ $color: $textColor })};
-    ${Mixins.Flexbox({
-        $inline: true,
-        $alignItems: "center",
-        $justifyContent: "center",
-    })};
-    border-radius: ${Radiuses.Round};
-    padding: 0 ${({ $length }) => $length > 2 && Spacers.XS};
-    font-size: ${badgeSize * 0.7}px;
+const BadgeContainer = styled.span`
+    ${ContainerBase};
+    color: ${({ theme }) => theme.Gray500};
 `
 
-setDefaultTheme([StyledListGroup, Item, Title, NumberContainer, Badge])
+const NumberContainer = styled.span`
+    ${ContainerBase};
+    color: currentColor;
+`
 
-export { StyledListGroup, Item, Title, NumberContainer, Badge }
+setDefaultTheme([StyledListGroup, Item, Title, NumberContainer, BadgeContainer])
+
+export { StyledListGroup, Item, Title, NumberContainer, BadgeContainer }
