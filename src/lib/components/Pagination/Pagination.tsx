@@ -7,8 +7,9 @@ import {
     createSearchParams,
     useSearchParams,
 } from "react-router-dom"
+import classNames from "classnames"
 
-import { Icon, useMaxWidth } from "../../"
+import { Icon } from "../../"
 import { ChevronLeftIcon, ChevronRightIcon } from "../../icons"
 import { usePaginationNav } from "../../utils"
 
@@ -23,47 +24,42 @@ export const PaginationButton = forwardRef(
     (
         {
             as,
-            color = "primary",
             isActive,
-            content,
+            buttonContent,
             icon,
             iconSize = 16,
             disabled,
-            buttonSize,
-            fontSize = "small",
+            className,
             ...rest
         }: PaginationButtonProps,
         ref?: ForwardedRef<HTMLButtonElement>
     ) => {
-        const isMobile = useMaxWidth(600)
-
         return (
             <Styles.Button
                 as={as}
                 ref={ref}
                 disabled={disabled}
-                $isActive={isActive}
-                $more={content === "more"}
-                $color={color}
-                $buttonSize={buttonSize ? buttonSize : isMobile ? 24 : 32}
-                $fontSize={fontSize}
+                className={classNames(
+                    { more: buttonContent === "more" },
+                    { active: isActive }
+                )}
                 {...rest}
             >
-                {content === "more" ? (
+                {buttonContent === "more" ? (
                     "..."
-                ) : (content === "prev" && icon) ||
-                  (content === "next" && icon) ? (
+                ) : (buttonContent === "prev" && icon) ||
+                  (buttonContent === "next" && icon) ? (
                     typeof icon === "string" ? (
                         <Icon src={icon} size={iconSize} />
                     ) : (
                         icon
                     )
-                ) : content === "prev" ? (
+                ) : buttonContent === "prev" ? (
                     <ChevronLeftIcon size={20} />
-                ) : content === "next" ? (
+                ) : buttonContent === "next" ? (
                     <ChevronRightIcon size={20} />
                 ) : (
-                    content
+                    buttonContent
                 )}
             </Styles.Button>
         )
@@ -72,25 +68,11 @@ export const PaginationButton = forwardRef(
 
 export const PaginationContainer = forwardRef(
     (
-        {
-            as,
-            justify = "center",
-            children,
-            gap,
-            ...rest
-        }: PaginationContainerProps,
+        { as, children, ...rest }: PaginationContainerProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
-        const isMobile = useMaxWidth(600)
-
         return (
-            <Styles.StyledPagination
-                ref={ref}
-                as={as}
-                $justify={justify}
-                $gap={gap ? gap : isMobile ? "xxs" : "xs"}
-                {...rest}
-            >
+            <Styles.StyledPagination ref={ref} as={as} {...rest}>
                 {children}
             </Styles.StyledPagination>
         )
@@ -101,15 +83,10 @@ export const Pagination = forwardRef(
     (
         {
             as,
-            justify,
             totalPages,
             pageLimit = 5,
             icons,
-            color = "primary",
             queries,
-            gap,
-            buttonSize,
-            buttonFontSize,
             ...rest
         }: PaginationProps,
         ref?: ForwardedRef<HTMLDivElement>
@@ -160,70 +137,53 @@ export const Pagination = forwardRef(
             )
         }
 
-        const buttonsProps = {
-            color,
-            buttonSize,
-            fontSize: buttonFontSize,
-        }
-
         return (
-            <PaginationContainer
-                ref={ref}
-                as={as}
-                justify={justify}
-                gap={gap}
-                {...rest}
-            >
+            <PaginationContainer ref={ref} as={as} {...rest}>
                 <PaginationButton
                     onClick={handlePrev}
-                    content="prev"
+                    buttonContent="prev"
                     disabled={currentPage === 1}
                     icon={icons?.prev}
                     iconSize={icons?.prevSize}
-                    {...buttonsProps}
                 />
 
                 {getPaginationGroup()[0] !== 1 && (
                     <>
                         <PaginationButton
-                            content={1}
+                            buttonContent={1}
                             onClick={() => goToPage(1)}
-                            {...buttonsProps}
                         />
-                        <PaginationButton content="more" {...buttonsProps} />
+                        <PaginationButton buttonContent="more" />
                     </>
                 )}
 
                 {getPaginationGroup().map(item => (
                     <PaginationButton
-                        content={item}
+                        buttonContent={item}
                         key={item}
                         onClick={() => goToPage(item)}
                         isActive={currentPage === item}
-                        {...buttonsProps}
                     />
                 ))}
 
                 {getPaginationGroup()[getPaginationGroup().length - 1] !==
                     totalPages && (
                     <>
-                        <PaginationButton content="more" {...buttonsProps} />
+                        <PaginationButton buttonContent="more" />
 
                         <PaginationButton
-                            content={totalPages}
+                            buttonContent={totalPages}
                             onClick={() => goToPage(totalPages)}
-                            {...buttonsProps}
                         />
                     </>
                 )}
 
                 <PaginationButton
                     onClick={handleNext}
-                    content="next"
+                    buttonContent="next"
                     disabled={currentPage === totalPages}
                     icon={icons?.next}
                     iconSize={icons?.nextSize}
-                    {...buttonsProps}
                 />
             </PaginationContainer>
         )

@@ -1,77 +1,71 @@
 /*=============================================== Pagination styles ===============================================*/
 
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
-import { Radiuses, Transitions, Breakpoints, Mixins } from "../../"
-import type { ColorsHoverTypes, SpacersTypes, FontSizeTypes } from "../../types"
-import type { JustifyType } from "./types"
+import {
+    Breakpoints,
+    FontSizes,
+    Mixins,
+    Radiuses,
+    Spacers,
+    Transitions,
+} from "../../"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledPagination = styled.div<{
-    $justify?: JustifyType
-    $gap?: SpacersTypes
-}>`
-    ${({ $justify, $gap }) =>
-        Mixins.Flexbox({
-            $alignItems: "center",
-            $justifyContent:
-                $justify === "center"
-                    ? "center"
-                    : $justify === "right"
-                    ? "flex-end"
-                    : "flex-start",
-            $gap,
-        })};
+const StyledPagination = styled.div`
+    ${Mixins.Flexbox({
+        $alignItems: "center",
+        $justifyContent: "center",
+        $gap: "xs",
+    })};
+
+    @media ${Breakpoints.Mobile} {
+        gap: ${Spacers.XXS};
+    }
 `
 
-const Button = styled.button<{
-    $isActive?: boolean
-    $more?: boolean
-    $color?: ColorsHoverTypes
-    $fontSize?: FontSizeTypes
-    $buttonSize?: number
-}>`
-    width: ${({ $buttonSize }) => $buttonSize}px;
-    height: ${({ $buttonSize }) => $buttonSize}px;
+const Button = styled.button`
+    --button-size: 32px;
+    width: var(--button-size);
+    height: var(--button-size);
     border-radius: ${Radiuses.Circle};
     border: none;
-    ${Mixins.FontSize};
+    font-size: ${FontSizes.Small};
+    cursor: pointer;
     ${Mixins.Flexbox({
         $alignItems: "center",
         $justifyContent: "center",
         $inline: true,
     })};
-    color: ${({ $isActive, $color, theme }) =>
-        $isActive && $color === "white"
-            ? theme.Primary500
-            : $isActive
-            ? theme.Background
-            : theme.ColorsHoverDefault};
-    background-color: ${({ $isActive, $color, theme }) =>
-        $isActive ? theme.ColorsHoverDefault({ $color }) : "transparent"};
-    text-decoration: none;
-    cursor: ${({ $more }) => $more && "default"};
+    color: ${({ theme }) => theme.ColorsHoverDefault({ $color: "primary" })};
+    transition: ${Transitions.Short};
+    background-color: transparent;
 
-    ${({ $more, disabled, theme, $color }) =>
-        !$more &&
-        !disabled &&
-        css`
-            transition: ${Transitions.Short};
+    &.active {
+        background-color: ${({ theme }) =>
+            theme.ColorsHoverDefault({ $color: "primary" })};
+        color: ${({ theme }) => theme.Background};
+    }
 
-            @media ${Breakpoints.Hover} {
-                &:hover {
-                    background-color: ${theme.ColorsHoverHover({ $color })};
-                    color: ${$color === "white"
-                        ? theme.Primary500
-                        : theme.Background};
-                }
+    &.more {
+        cursor: default;
+    }
 
-                &:active {
-                    background-color: ${theme.ColorsHoverActive({ $color })};
-                }
+    &:not(.more) {
+        @media ${Breakpoints.Hover} {
+            &:not(:disabled):hover {
+                background-color: ${({ theme }) =>
+                    theme.ColorsHoverHover({ $color: "primary" })};
+                color: ${({ theme }) => theme.Background};
             }
-        `}
+
+            &:not(:disabled):active {
+                background-color: ${({ theme }) =>
+                    theme.ColorsHoverActive({ $color: "primary" })};
+            }
+        }
+    }
 
     &:disabled {
         color: ${({ theme }) => theme.Gray500};

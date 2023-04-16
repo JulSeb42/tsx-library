@@ -222,7 +222,7 @@ const PaginationPage = () => {
             {paginatedData && (
                 <Grid col={4} gap="s">
                     {paginatedData.map(({ name }) => (
-                        <Card borderWidth={1} key={uuid()}>
+                        <Card border={{ width: 1 }} key={uuid()}>
                             <Text>{name}</Text>
                         </Card>
                     ))}

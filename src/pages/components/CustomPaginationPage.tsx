@@ -293,7 +293,7 @@ const CustomPaginationPage = () => {
             {getPaginatedData() && (
                 <Grid col={4} gap="s">
                     {getPaginatedData().map(({ name }) => (
-                        <Card borderWidth={1} key={uuid()}>
+                        <Card border={{ width: 1 }} key={uuid()}>
                             <Text>{name}</Text>
                         </Card>
                     ))}
@@ -304,23 +304,23 @@ const CustomPaginationPage = () => {
                 <PaginationContainer>
                     <PaginationButton
                         onClick={handlePrev}
-                        content="prev"
+                        buttonContent="prev"
                         disabled={currentPage === 1}
                     />
 
                     {getPaginationGroup()[0] !== 1 && (
                         <>
                             <PaginationButton
-                                content={1}
+                                buttonContent={1}
                                 onClick={() => goToPage(1)}
                             />
-                            <PaginationButton content="more" />
+                            <PaginationButton buttonContent="more" />
                         </>
                     )}
 
                     {getPaginationGroup().map(item => (
                         <PaginationButton
-                            content={item}
+                            buttonContent={item}
                             key={item}
                             onClick={() => goToPage(item)}
                             isActive={currentPage === item}
@@ -330,10 +330,10 @@ const CustomPaginationPage = () => {
                     {getPaginationGroup()[getPaginationGroup().length - 1] !==
                         getNumberOfPages() && (
                         <>
-                            <PaginationButton content="more" />
+                            <PaginationButton buttonContent="more" />
 
                             <PaginationButton
-                                content={getNumberOfPages()}
+                                buttonContent={getNumberOfPages()}
                                 onClick={() => goToPage(getNumberOfPages())}
                             />
                         </>
@@ -341,7 +341,7 @@ const CustomPaginationPage = () => {
 
                     <PaginationButton
                         onClick={handleNext}
-                        content="next"
+                        buttonContent="next"
                         disabled={currentPage === getNumberOfPages()}
                     />
                 </PaginationContainer>
