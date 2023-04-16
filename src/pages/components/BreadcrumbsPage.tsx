@@ -26,12 +26,7 @@ const BreadcrumbsPage = () => {
 
     return (
         <Page title="Breadcrumbs">
-            <Breadcrumbs
-                items={items}
-                separator="slash"
-                linkColor="secondary"
-                color="secondary"
-            />
+            <Breadcrumbs items={items} separator="slash" color="secondary" />
             <Breadcrumbs items={items} separator="icon" />
         </Page>
     )

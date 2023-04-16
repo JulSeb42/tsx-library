@@ -16,11 +16,9 @@ const Breadcrumbs = forwardRef(
             as,
             items,
             children,
-            color = "currentColor",
-            linkColor = "primary",
+            color = "primary",
             separator = "slash",
             customIcon,
-            gap,
             ...rest
         }: BreadcrumbsProps,
         ref?: ForwardedRef<HTMLParagraphElement>
@@ -28,10 +26,8 @@ const Breadcrumbs = forwardRef(
         <Styles.StyledBreadcrumbs
             ref={ref}
             as={as}
-            color={color}
-            linkColor={linkColor}
             $separator={separator}
-            $gap={gap}
+            $color={color}
             {...rest}
         >
             {items
@@ -45,7 +41,7 @@ const Breadcrumbs = forwardRef(
                               {text}
                           </Styles.Item>
 
-                          {href && (
+                          {(href || to) && (
                               <Styles.Separator
                                   $separator={separator || "slash"}
                                   $customIcon={!!customIcon}

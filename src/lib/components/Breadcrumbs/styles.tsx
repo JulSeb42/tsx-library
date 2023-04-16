@@ -2,31 +2,55 @@
 
 import styled from "styled-components"
 
-import { Mixins, Text } from "../../"
+import { Mixins, Text, Spacers } from "../../"
+import type { ColorsHoverTypes } from "../../types"
 import type { SeparatorTypes } from "./types"
-import type { SpacersTypes } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledBreadcrumbs = styled(Text)<{
-    $separator?: SeparatorTypes
-    $gap?: SpacersTypes
-}>`
-    ${({ $separator, $gap }) =>
-        Mixins.Flexbox({
-            $alignItems: "center",
-            $justifyContent: "flex-start",
-            $flexWrap: "wrap",
-            $gap: $gap ? $gap : $separator === "slash" ? "xs" : "xxs",
-        })};
+const BaseBreadcrumbs = styled(Text).attrs({ tag: "p" })`
+    ${Mixins.Flexbox({
+        $alignItems: "center",
+        $justifyContent: "flex-start",
+        $flexWrap: "wrap",
+    })};
 `
 
-const Separator = styled.span<{
+const BreadcrumbsColor = styled(BaseBreadcrumbs)<{
+    $color?: ColorsHoverTypes
+}>`
+    color: ${({ theme, $color }) => theme.ColorsHoverDefault({ $color })};
+
+    a {
+        color: ${({ theme, $color }) => theme.ColorsHoverDefault({ $color })};
+
+        &:hover {
+            color: ${({ theme, $color }) => theme.ColorsHoverHover({ $color })};
+        }
+
+        &:active {
+            color: ${({ theme, $color }) =>
+                theme.ColorsHoverActive({ $color })};
+        }
+    }
+`
+
+const StyledBreadcrumbs = styled(BreadcrumbsColor)<{
+    $separator?: SeparatorTypes
+}>`
+    gap: ${({ $separator }) =>
+        $separator === "slash" ? Spacers.XS : Spacers.XXS};
+`
+
+const BaseSeparator = styled.span`
+    color: currentColor;
+    position: relative;
+`
+
+const Separator = styled(BaseSeparator)<{
     $separator?: SeparatorTypes
     $customIcon?: boolean
 }>`
-    color: currentColor;
-    position: relative;
     top: ${({ $separator, $customIcon }) =>
         ($separator === "icon" || $customIcon) && "4px"};
 `

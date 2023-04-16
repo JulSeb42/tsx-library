@@ -1,13 +1,8 @@
 /*=============================================== Breadcrumbs types ===============================================*/
 
-import type { HTMLAttributes, ElementType, ReactNode } from "react"
+import type { ElementType, HTMLAttributes, ReactNode } from "react"
 
-import type {
-    BreadcrumbsItemProps,
-    AllColorsTypes,
-    ColorsHoverTypes,
-    SpacersTypes,
-} from "../../types"
+import type { BreadcrumbsItemProps, ColorsHoverTypes } from "../../types"
 
 enum separators {
     slash,
@@ -18,9 +13,7 @@ export type SeparatorTypes = keyof typeof separators
 
 interface BreadcrumbsPropsBase extends HTMLAttributes<HTMLParagraphElement> {
     as?: ElementType
-    color?: AllColorsTypes
-    linkColor?: ColorsHoverTypes
-    gap?: SpacersTypes
+    color?: ColorsHoverTypes
 }
 
 interface BreadcrumbsSeparator1 extends BreadcrumbsPropsBase {
