@@ -19,9 +19,6 @@ const Paginator = forwardRef(
     (
         {
             as,
-            justify = "left",
-            accentColor = "primary",
-            inputBackgroundColor,
             texts = {
                 page: "Page",
                 of: "of",
@@ -29,8 +26,8 @@ const Paginator = forwardRef(
             totalPages,
             icons,
             buttons = {
-                variant: "transparent",
-                hoverBackground: true,
+                labelNext: "Next page",
+                labelPrev: "Previous page",
             },
             isInputEditable = true,
             queries,
@@ -88,7 +85,6 @@ const Paginator = forwardRef(
 
         const baseButtonProps = {
             size: 24,
-            color: accentColor,
             showLabel: buttons?.showLabel,
         }
 
@@ -107,16 +103,13 @@ const Paginator = forwardRef(
         }
 
         const text = () => (
-            <Text>{`${texts.page} ${currentPage} ${texts.of} ${totalPages}`}</Text>
+            <Text>{`${texts.page} ${page || currentPage} ${
+                texts.of
+            } ${totalPages}`}</Text>
         )
 
         return (
-            <Styles.StyledPaginator
-                ref={ref}
-                as={as}
-                $justify={justify}
-                {...rest}
-            >
+            <Styles.StyledPaginator ref={ref} as={as} {...rest}>
                 {isInputEditable ? (
                     <>
                         <span>{texts.page}</span>
@@ -128,8 +121,6 @@ const Paginator = forwardRef(
                             step={1}
                             min={1}
                             max={totalPages}
-                            $accentColor={accentColor}
-                            $background={inputBackgroundColor}
                         />
 
                         <span>{texts.of}</span>
@@ -140,43 +131,17 @@ const Paginator = forwardRef(
                     text()
                 )}
 
-                {buttons?.variant === "transparent" ? (
-                    <ButtonIcon
-                        icon={
-                            icons?.prev || <ChevronLeftIcon size={24 * 0.7} />
-                        }
-                        variant={buttons?.variant}
-                        hoverBackground={buttons?.hoverBackground}
-                        {...buttonPrev}
-                    />
-                ) : (
-                    <ButtonIcon
-                        icon={
-                            icons?.prev || <ChevronLeftIcon size={24 * 0.7} />
-                        }
-                        variant={buttons?.variant}
-                        {...buttonPrev}
-                    />
-                )}
+                <ButtonIcon
+                    icon={icons?.prev || <ChevronLeftIcon size={24 * 0.7} />}
+                    variant="transparent"
+                    {...buttonPrev}
+                />
 
-                {buttons?.variant === "transparent" ? (
-                    <ButtonIcon
-                        icon={
-                            icons?.next || <ChevronRightIcon size={24 * 0.7} />
-                        }
-                        variant={buttons?.variant}
-                        hoverBackground={buttons?.hoverBackground}
-                        {...buttonNext}
-                    />
-                ) : (
-                    <ButtonIcon
-                        icon={
-                            icons?.next || <ChevronRightIcon size={24 * 0.7} />
-                        }
-                        variant={buttons?.variant}
-                        {...buttonNext}
-                    />
-                )}
+                <ButtonIcon
+                    icon={icons?.next || <ChevronRightIcon size={24 * 0.7} />}
+                    variant="transparent"
+                    {...buttonNext}
+                />
             </Styles.StyledPaginator>
         )
     }

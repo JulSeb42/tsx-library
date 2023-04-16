@@ -287,7 +287,7 @@ const CustomPaginatorPage = () => {
             {getPaginatedData() && (
                 <Grid col={4} gap="s">
                     {getPaginatedData().map(({ name }) => (
-                        <Card borderWidth={1} key={uuid()}>
+                        <Card border={{ width: 1 }} key={uuid()}>
                             <Text>{name}</Text>
                         </Card>
                     ))}
@@ -301,6 +301,7 @@ const CustomPaginatorPage = () => {
                     handlePrevPage={handlePrev}
                     handleNextPage={handleNext}
                     handleInput={handlePage}
+                    isInputEditable={false}
                 />
             )}
         </Page>

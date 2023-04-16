@@ -2,34 +2,19 @@
 
 import styled from "styled-components"
 
-import {
-    ThemeDark,
-    ThemeLight,
-    Radiuses,
-    FontSizes,
-    FontFamilies,
-    Spacers,
-    Mixins,
-} from "../../"
-import type { ColorsHoverTypes } from "../../types"
-import type { InputBackgroundTypes } from "../InputComponents/types"
-import type { PaginatorJustifyType } from "./types"
+import { FontFamilies, FontSizes, Mixins, Radiuses, Spacers } from "../../"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledPaginator = styled.div<{ $justify?: PaginatorJustifyType }>`
-    ${({ $justify }) =>
-        Mixins.Flexbox({
-            $alignItems: "center",
-            $justifyContent: $justify === "right" ? "flex-end" : "flex-start",
-            $gap: "xs",
-        })};
+const StyledPaginator = styled.div`
+    ${Mixins.Flexbox({
+        $alignItems: "center",
+        $justifyContent: "flex-start",
+        $gap: "xs",
+    })};
 `
 
-const StyledInput = styled.input<{
-    $accentColor?: ColorsHoverTypes
-    $background?: InputBackgroundTypes
-}>`
+const StyledInput = styled.input`
     height: 32px;
     line-height: 32px;
     width: 48px;
@@ -38,26 +23,15 @@ const StyledInput = styled.input<{
     font-size: ${FontSizes.Body};
     font-family: ${FontFamilies.Body};
     padding: 0 ${Spacers.XS};
-    background-color: ${({ theme, $background }) =>
-        $background === "dark"
-            ? ThemeDark.Background
-            : $background === "light"
-            ? ThemeLight.Background
-            : theme.Background};
-    color: ${({ theme, $background }) =>
-        $background === "dark"
-            ? ThemeDark.Font
-            : $background === "light"
-            ? ThemeLight.Font
-            : theme.Font};
+    background-color: ${({ theme }) => theme.Background};
+    color: ${({ theme }) => theme.Font};
     line-height: 100%;
     outline: none;
     z-index: 0;
     -moz-appearance: textfield;
 
     &:focus {
-        border-color: ${({ $accentColor, theme }) =>
-            theme.AllColors({ $color: $accentColor })};
+        border-color: ${({ theme }) => theme.AllColors({ $color: "primary" })};
     }
 
     &::-webkit-outer-spin-button,

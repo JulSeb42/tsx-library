@@ -1,24 +1,10 @@
 /*=============================================== Paginator types ===============================================*/
 
-import type { HTMLAttributes, ElementType, ChangeEvent } from "react"
-
-import type { ColorsHoverTypes } from "../../types"
-import type { InputBackgroundTypes } from "../InputComponents/types"
-import type { ButtonIconVariantTypes } from "../ButtonIcon/types"
-
-enum justify {
-    left,
-    right,
-}
-
-export type PaginatorJustifyType = keyof typeof justify
+import type { ChangeEvent, ElementType, HTMLAttributes } from "react"
 
 export interface PaginatorPropsBase extends HTMLAttributes<HTMLDivElement> {
     as?: ElementType
     totalPages: number
-    justify?: PaginatorJustifyType
-    accentColor?: ColorsHoverTypes
-    inputBackgroundColor?: InputBackgroundTypes
     isInputEditable?: boolean
     queries?: string[][]
 
@@ -28,13 +14,12 @@ export interface PaginatorPropsBase extends HTMLAttributes<HTMLDivElement> {
     }
 
     icons?: {
-        prev?: string
-        next?: string
+        prev?: string | JSX.Element
+        next?: string | JSX.Element
+        size?: number
     }
 
     buttons?: {
-        variant?: ButtonIconVariantTypes
-        hoverBackground?: boolean
         labelPrev?: string
         labelNext?: string
         showLabel?: boolean
@@ -46,6 +31,7 @@ interface PaginatorBehaviour1 extends PaginatorPropsBase {
     handleNextPage: () => void
     handleInput: (e: ChangeEvent<HTMLInputElement>) => void
     page: number
+    queries?: never
 }
 
 interface PaginatorBehaviour2 extends PaginatorPropsBase {
@@ -53,6 +39,7 @@ interface PaginatorBehaviour2 extends PaginatorPropsBase {
     handleNextPage?: never
     handleInput?: never
     page?: never
+    queries?: string[][]
 }
 
 export type PaginatorProps = PaginatorBehaviour1 | PaginatorBehaviour2

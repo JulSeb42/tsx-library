@@ -219,7 +219,7 @@ const PaginatorPage = () => {
             {getPaginatedData() && (
                 <Grid col={4} gap="s">
                     {getPaginatedData().map(({ name }) => (
-                        <Card borderWidth={1} key={uuid()}>
+                        <Card border={{ width: 1 }} key={uuid()}>
                             <Text>{name}</Text>
                         </Card>
                     ))}
@@ -231,13 +231,9 @@ const PaginatorPage = () => {
                     totalPages={getNumberOfPages()}
                     queries={searchParams}
                     isInputEditable
-                    accentColor="secondary"
                     icons={{ prev: "arrow-left", next: "arrow-right" }}
-                    justify="right"
-                    inputBackgroundColor="light"
                     buttons={{
-                        variant: "transparent",
-                        hoverBackground: false,
+                        showLabel: true,
                     }}
                 />
             )}
