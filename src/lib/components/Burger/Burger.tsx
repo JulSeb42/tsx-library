@@ -2,6 +2,7 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
 import { stringifyPx } from "../../"
 
@@ -25,11 +26,11 @@ const Burger = forwardRef(
         }: BurgerProps,
         ref?: ForwardedRef<HTMLButtonElement>
     ) => {
-        const classes = [
-            className ? className : null,
-            noHover ? "no-hover" : null,
-            isOpen ? "open" : null,
-        ].join(" ")
+        const classes = classNames(
+            { "no-hover": noHover },
+            { open: isOpen },
+            className
+        )
 
         const styles = {
             ["--burger-width" as any]: width && stringifyPx(width),

@@ -2,6 +2,7 @@
 
 import React, { forwardRef, useRef, useState, useLayoutEffect } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
 import * as Styles from "./styles"
 import type { TooltipProps } from "./types"
@@ -28,7 +29,7 @@ const Tooltip = forwardRef(
             >
                 <Styles.Tip
                     ref={tooltipRef}
-                    className={isVisible ? "visible" : ""}
+                    className={classNames({ visible: isVisible })}
                     $width={width}
                 >
                     {tooltip}
