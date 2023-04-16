@@ -12,13 +12,15 @@ const AlertPage = () => {
             <Alert color="danger">Alert</Alert>
             <Alert color="warning">Alert</Alert>
             <Alert color="white">Alert</Alert>
+            <Alert color="font">Alert</Alert>
+            <Alert color="background">Alert</Alert>
 
             <Alert color="danger">
                 <Text>Alert with button</Text>
 
                 <Flexbox alignItems="center" gap="xs">
                     <Button color="danger">Button</Button>
-                    <Button variant="text">Button</Button>
+                    <Button variant="transparent">Button</Button>
                 </Flexbox>
             </Alert>
         </Page>

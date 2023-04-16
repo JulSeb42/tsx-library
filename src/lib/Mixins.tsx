@@ -632,6 +632,18 @@ const Mixins = {
                 : theme.Background};
     `,
 
+    FontColorBackground50: ({ $color }: ColorBgShortProps) =>
+        css`
+            ${({ theme }) =>
+                $color === "white"
+                    ? theme.Black
+                    : $color === "black"
+                    ? theme.White
+                    : $color === "font"
+                    ? theme.Background
+                    : theme.Font};
+        `,
+
     MaxLines: ({ $maxLines }: MaxLinesProps) =>
         css`
             ${$maxLines === 1

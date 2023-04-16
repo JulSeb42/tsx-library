@@ -61,7 +61,7 @@ export * from "./components/Breadcrumbs" // ✅
 export * from "./components/Accordion" // ✅
 export * from "./components/Dropdown" // ✅
 export * from "./components/Toast" // ✅
-export * from "./components/Alert"
+export * from "./components/Alert" // ✅
 export * from "./components/Modal"
 export * from "./components/Pagination"
 export * from "./components/Paginator"
