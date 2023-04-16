@@ -15,14 +15,7 @@ const ToastPage = () => {
             <Toast
                 title="Super long title title title title title title"
                 icon={{ name: "check-circle", color: "success" }}
-                position={{ position: "fixed", bottom: "xxl", right: "xxl" }}
                 maxWidth={400}
-                shadow="s"
-                border={{
-                    color: "secondary",
-                    style: "dashed",
-                    width: 4,
-                }}
                 close
             >
                 Content

@@ -2,10 +2,10 @@
 
 import React, { forwardRef, useState } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
-import { Text, ButtonIcon, Icon } from "../../"
+import { Text, Icon, stringifyPx } from "../../"
 import { CloseIcon } from "../../icons"
-import { getLineHeight } from "../../utils/get-line-height"
 
 import * as Styles from "./styles"
 import type { ToastProps } from "./types"
@@ -15,73 +15,37 @@ const Toast = forwardRef(
         {
             as,
             title,
-            titleSize,
-            titleTag = "h5",
-            titleAs,
-            titleWeight,
             maxWidth,
-            shadow,
             icon,
             close,
             labelClose = "Close",
-            position,
             children,
-            borderRadius = "m",
-            border,
-            padding = "m",
+            style,
+            className,
             ...rest
         }: ToastProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         const [isClosed, setIsClosed] = useState(false)
 
-        const titleFn = () => (
-            <Styles.Title
-                tag={titleTag}
-                as={titleAs}
-                fontWeight={titleWeight}
-                fontSize={titleSize}
-            >
-                {title}
-            </Styles.Title>
-        )
-
-        const closeProps = {
-            onClick: () => setIsClosed(true),
-            size: 32,
-            hoverBackground: true,
-        }
+        const titleFn = () => <Styles.Title>{title}</Styles.Title>
 
         return (
             <Styles.StyledToast
                 ref={ref}
                 as={as}
-                $isClosed={isClosed}
-                $maxWidth={maxWidth}
-                $shadow={shadow}
-                $position={position?.position || "relative"}
-                $zIndex={position?.zIndex}
-                $left={position?.left}
-                $top={position?.top}
-                $right={position?.right}
-                $bottom={position?.bottom}
-                $borderRadius={borderRadius}
-                $border={border}
-                $padding={padding}
+                style={{
+                    ["--toast-max-width" as any]:
+                        maxWidth && stringifyPx(maxWidth),
+                    ...style,
+                }}
+                className={classNames({ closed: isClosed }, className)}
                 {...rest}
             >
                 {icon || close ? (
-                    <Styles.TitleContainer
-                        $gap={
-                            icon && typeof icon === "object" && icon.gap
-                                ? icon.gap
-                                : "xs"
-                        }
-                    >
+                    <Styles.TitleContainer>
                         {icon && (
-                            <Styles.IconContainer
-                                $height={getLineHeight(titleTag)}
-                            >
+                            <Styles.IconContainer>
                                 <Icon
                                     src={
                                         typeof icon === "object"
@@ -105,7 +69,7 @@ const Toast = forwardRef(
                         {titleFn()}
 
                         {close && (
-                            <ButtonIcon
+                            <Styles.CloseButton
                                 icon={
                                     typeof close === "string" ? (
                                         close
@@ -113,9 +77,8 @@ const Toast = forwardRef(
                                         <CloseIcon size={32 * 0.7} />
                                     )
                                 }
-                                variant="transparent"
                                 label={labelClose}
-                                {...closeProps}
+                                onClick={() => setIsClosed(true)}
                             />
                         )}
                     </Styles.TitleContainer>

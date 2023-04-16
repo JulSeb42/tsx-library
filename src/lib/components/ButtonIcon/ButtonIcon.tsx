@@ -68,8 +68,9 @@ const ButtonIcon = forwardRef(
             blank,
             className,
             to,
-        }: // ...rest
-        ButtonIconProps,
+            style,
+            ...rest
+        }: ButtonIconProps,
         ref?: ForwardedRef<HTMLButtonElement>
     ) => {
         const buttonFn = () => (
@@ -83,9 +84,13 @@ const ButtonIcon = forwardRef(
                 rel={(href || to) && blank && "noreferrer noopener"}
                 disabled={!!isLoading || disabled}
                 className={className}
+                style={{
+                    ["--button-size" as any]: size && stringifyPx(size),
+                    ...style,
+                }}
                 $color={color}
                 $variant={variant}
-                // {...rest}
+                {...rest}
             >
                 {isLoading ? (
                     <Loader
