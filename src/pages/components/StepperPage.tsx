@@ -27,11 +27,7 @@ const StepperPage = () => {
 
     return (
         <Page title="Stepper">
-            <Stepper
-                steps={steps}
-                iconActive="check-circle"
-                accentColor="secondary"
-            />
+            <Stepper steps={steps} iconActive="check-circle" />
 
             <Stepper steps={steps} active={2} direction="column" />
         </Page>

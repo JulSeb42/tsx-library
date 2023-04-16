@@ -1,12 +1,8 @@
 /*=============================================== Stepper types ===============================================*/
 
-import type { HTMLAttributes, ElementType, ReactNode } from "react"
+import type { ElementType, HTMLAttributes, ReactNode } from "react"
 
-import type {
-    StepProps as StepItemProps,
-    ColorsHoverTypes,
-    LinkTypesBlank,
-} from "../../types"
+import type { LinkTypesBlank, StepProps as StepItemProps } from "../../types"
 
 enum direction {
     column,
@@ -20,7 +16,7 @@ interface StepperPropsBase extends HTMLAttributes<HTMLDivElement> {
     active?: number
     direction?: StepperDirectionType
     iconActive?: string | JSX.Element
-    accentColor?: ColorsHoverTypes
+    iconSize?: number
 }
 
 interface StepperPropsContent1 extends StepperPropsBase {
@@ -40,8 +36,8 @@ export type StepProps = HTMLAttributes<HTMLSpanElement> &
         as?: ElementType
         children: string | ReactNode
         direction?: StepperDirectionType
-        accentColor?: ColorsHoverTypes
         isActive?: boolean
         iconActive?: string | JSX.Element
+        iconSize?: number
         number?: number
     }
