@@ -2,9 +2,9 @@
 
 import type { HTMLAttributes } from "react"
 
-import type { ColorsHoverTypes, SpacersTypes } from "../../types"
+import type { ColorsHoverTypes, ButtonLinkTypesRequire } from "../../types"
 
-interface BaseFormProps extends HTMLAttributes<HTMLFormElement> {
+export interface FormProps extends HTMLAttributes<HTMLFormElement> {
     buttonPrimary?:
         | string
         | {
@@ -15,28 +15,9 @@ interface BaseFormProps extends HTMLAttributes<HTMLFormElement> {
     accentColor?: ColorsHoverTypes
     isLoading?: boolean
     disabled?: boolean
-    gap?: SpacersTypes
-    maxWidth?: string | number
-}
-
-interface ButtonSecondary1 extends BaseFormProps {
-    buttonSecondary?: {
+    buttonSecondary?: ButtonLinkTypesRequire & {
         text?: "prev" | string | undefined
         iconLeft?: string
         iconRight?: string
-        to: string | undefined
-        onClick?: never
     }
 }
-
-interface ButtonSecondary2 extends BaseFormProps {
-    buttonSecondary?: {
-        text?: string | undefined
-        iconLeft?: string
-        iconRight?: string
-        to?: never
-        onClick: () => void | undefined
-    }
-}
-
-export type FormProps = ButtonSecondary1 | ButtonSecondary2

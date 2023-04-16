@@ -36,7 +36,6 @@ const FormPage = () => {
             <Form
                 buttonPrimary={{ text: "Submit", iconLeft: "send" }}
                 buttonSecondary={{ onClick: resetForm }}
-                // buttonSecondary={{ href: "/", isRouterLink: true }}
                 onSubmit={handleSubmit}
             >
                 <Input

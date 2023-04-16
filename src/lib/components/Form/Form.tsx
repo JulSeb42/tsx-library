@@ -15,75 +15,75 @@ const Form = forwardRef(
             accentColor = "primary",
             isLoading,
             disabled,
-            gap = "m",
             buttonSecondary,
             children,
-            maxWidth,
             ...rest
         }: FormProps,
         ref?: ForwardedRef<HTMLFormElement>
-    ) => (
-        <Styles.StyledForm ref={ref} $gap={gap} $maxWidth={maxWidth} {...rest}>
-            {children}
+    ) => {
+        return (
+            <Styles.StyledForm ref={ref} {...rest}>
+                {children}
 
-            {(buttonPrimary || buttonSecondary) && (
-                <Flexbox>
-                    {buttonPrimary && (
-                        <Button
-                            type="submit"
-                            variant="plain"
-                            color={accentColor}
-                            icons={{
-                                left:
-                                    typeof buttonPrimary === "object"
-                                        ? buttonPrimary.iconLeft
-                                        : undefined,
-                                right:
-                                    typeof buttonPrimary === "object"
-                                        ? buttonPrimary.iconRight
-                                        : undefined,
-                            }}
-                            isLoading={isLoading}
-                            disabled={disabled}
-                        >
-                            {typeof buttonPrimary === "object"
-                                ? buttonPrimary.text
-                                : buttonPrimary}
-                        </Button>
-                    )}
-
-                    {buttonSecondary &&
-                        (buttonSecondary.to ? (
+                {(buttonPrimary || buttonSecondary) && (
+                    <Flexbox>
+                        {buttonPrimary && (
                             <Button
-                                to={buttonSecondary.to}
-                                variant="text"
+                                type="submit"
+                                variant="plain"
                                 color={accentColor}
                                 icons={{
-                                    left: buttonSecondary.iconLeft,
-                                    right: buttonSecondary.iconRight,
+                                    left:
+                                        typeof buttonPrimary === "object"
+                                            ? buttonPrimary.iconLeft
+                                            : undefined,
+                                    right:
+                                        typeof buttonPrimary === "object"
+                                            ? buttonPrimary.iconRight
+                                            : undefined,
                                 }}
+                                isLoading={isLoading}
+                                disabled={disabled}
                             >
-                                {buttonSecondary.text || "Cancel"}
+                                {typeof buttonPrimary === "object"
+                                    ? buttonPrimary.text
+                                    : buttonPrimary}
                             </Button>
-                        ) : (
-                            buttonSecondary.onClick && (
+                        )}
+
+                        {buttonSecondary &&
+                            (buttonSecondary.to ? (
                                 <Button
-                                    onClick={buttonSecondary.onClick}
-                                    variant="text"
+                                    variant="transparent"
                                     color={accentColor}
                                     icons={{
                                         left: buttonSecondary.iconLeft,
                                         right: buttonSecondary.iconRight,
                                     }}
+                                    to={buttonSecondary.to}
                                 >
-                                    {buttonSecondary.text || "Reset"}
+                                    {buttonSecondary.text || "Cancel"}
                                 </Button>
-                            )
-                        ))}
-                </Flexbox>
-            )}
-        </Styles.StyledForm>
-    )
+                            ) : (
+                                buttonSecondary.onClick && (
+                                    <Button
+                                        variant="transparent"
+                                        color={accentColor}
+                                        icons={{
+                                            left: buttonSecondary.iconLeft,
+                                            right: buttonSecondary.iconRight,
+                                        }}
+                                        onClick={buttonSecondary.onClick}
+                                    >
+                                        {buttonSecondary.text || "Reset"}
+                                    </Button>
+                                )
+                            ))}
+                    </Flexbox>
+                )}
+            </Styles.StyledForm>
+        )
+    }
 )
 
 export default Form
