@@ -6,17 +6,21 @@ import { Overlays, Mixins, ButtonIcon, Spacers } from "../../"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledModal = styled.div<{ $isOpen: boolean }>`
+const StyledModal = styled.div`
     position: fixed;
     top: 0;
     left: 0;
     z-index: 9999;
     width: 100vw;
     height: 100vh;
-    display: ${({ $isOpen }) => ($isOpen ? "flex" : "none")};
+    display: none;
     align-items: center;
     justify-content: center;
     background-color: ${Overlays.Plain.Black80};
+
+    &.modal-open {
+        display: flex;
+    }
 `
 
 const Content = styled.div`

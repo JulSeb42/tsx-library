@@ -1,9 +1,6 @@
 /*=============================================== Modal types ===============================================*/
 
-import type { HTMLAttributes, ElementType } from "react"
-
-import type { ColorsHoverTypes } from "../../types"
-import type { ButtonIconVariantTypes } from "../ButtonIcon/types"
+import type { ElementType, HTMLAttributes } from "react"
 
 interface ModalPropsBase extends HTMLAttributes<HTMLDivElement> {
     as?: ElementType
@@ -13,19 +10,17 @@ interface ModalPropsBase extends HTMLAttributes<HTMLDivElement> {
 }
 
 interface ModalPropsBehaviour1 extends ModalPropsBase {
-    close?: undefined
+    showCloseButton?: false
     iconClose?: never
+    iconCloseSize?: never
     labelClose?: never
-    colorClose?: never
-    variantClose?: never
 }
 
 interface ModalPropsBehaviour2 extends ModalPropsBase {
-    close?: () => void
-    iconClose?: string
+    showCloseButton?: true
+    iconClose?: string | JSX.Element
+    iconCloseSize?: number
     labelClose?: string
-    colorClose?: ColorsHoverTypes
-    variantClose?: ButtonIconVariantTypes
 }
 
 export type ModalProps = ModalPropsBehaviour1 | ModalPropsBehaviour2

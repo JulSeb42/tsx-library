@@ -2,6 +2,7 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
 import { useKeyPress } from "../../"
 import { CloseIcon } from "../../icons"
@@ -15,47 +16,42 @@ const Modal = forwardRef(
             as,
             children,
             isOpen,
-            close,
+            showCloseButton,
             setIsOpen,
             disableEsc,
             iconClose,
             labelClose = "Close",
-            colorClose = "white",
-            variantClose = "transparent",
+            className,
             ...rest
         }: ModalProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
+        const closeModal = () => isOpen && setIsOpen(false)
+
         useKeyPress(() => {
-            if (!disableEsc) {
-                setIsOpen(false)
+            if (!disableEsc && isOpen) {
+                closeModal()
             }
         }, ["Escape"])
 
-        const buttonProps = {
-            onClick: close,
-            label: labelClose,
-            size: 48,
-            color: colorClose,
-        }
-
         return (
-            <Styles.StyledModal ref={ref} as={as} $isOpen={isOpen} {...rest}>
-                {close &&
-                    (variantClose === "transparent" ? (
-                        <Styles.CloseButton
-                            icon={iconClose || <CloseIcon size={48 * 0.7} />}
-                            variant="transparent"
-                            hoverBackground
-                            {...buttonProps}
-                        />
-                    ) : (
-                        <Styles.CloseButton
-                            icon={iconClose || <CloseIcon size={48 * 0.7} />}
-                            variant="plain"
-                            {...buttonProps}
-                        />
-                    ))}
+            <Styles.StyledModal
+                ref={ref}
+                as={as}
+                $isOpen={isOpen}
+                className={classNames({ "modal-open": isOpen }, className)}
+                {...rest}
+            >
+                {showCloseButton && (
+                    <Styles.CloseButton
+                        icon={iconClose || <CloseIcon size={48 * 0.7} />}
+                        variant="transparent"
+                        color="white"
+                        size={48}
+                        onClick={closeModal}
+                        label={labelClose}
+                    />
+                )}
 
                 <Styles.Content>{children}</Styles.Content>
             </Styles.StyledModal>

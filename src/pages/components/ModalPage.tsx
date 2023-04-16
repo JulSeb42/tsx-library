@@ -45,9 +45,8 @@ const ModalPage = () => {
                 <Modal
                     isOpen={isSecondOpen}
                     setIsOpen={setIsSecondOpen}
-                    close={() => setIsSecondOpen(false)}
+                    showCloseButton
                     iconClose="close-circle"
-                    colorClose="primary"
                 >
                     <Image
                         src="/images/image-card.jpg"
@@ -63,7 +62,7 @@ const ModalPage = () => {
                 <Modal
                     isOpen={isThirdOpen}
                     setIsOpen={setIsThirdOpen}
-                    close={() => setIsThirdOpen(false)}
+                    showCloseButton
                 >
                     <Image
                         src="/images/image-card.jpg"
@@ -79,13 +78,17 @@ const ModalPage = () => {
                 </Button>
 
                 <Modal isOpen={isFourthOpen} setIsOpen={setIsFourthOpen}>
-                    <Alert color="danger" isModal>
+                    <Alert color="danger" maxWidth={400}>
                         <Text>Modal content</Text>
 
-                        <Flexbox alignItems="center" gap="xs">
+                        <Flexbox
+                            flexDirection="row"
+                            alignItems="center"
+                            gap="xs"
+                        >
                             <Button color="danger">Button</Button>
                             <Button
-                                variant="text"
+                                variant="transparent"
                                 onClick={() => setIsFourthOpen(false)}
                             >
                                 Close
