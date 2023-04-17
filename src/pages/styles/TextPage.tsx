@@ -43,30 +43,6 @@ const TextPage = () => {
             <Grid gap="xs">
                 <Text tag="p">Paragraph</Text>
 
-                <Text maxLines={1}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nulla egestas pretium sem et hendrerit. Vivamus mauris nisi,
-                    varius a orci ut, posuere vestibulum ligula. Quisque
-                    sollicitudin condimentum tortor, ut ullamcorper dui placerat
-                    condimentum. Nulla ac erat sit amet risus varius ornare sed
-                    non turpis. Proin sed nulla scelerisque, auctor orci at,
-                    ullamcorper sem. Ut eget dui ac ligula pellentesque rhoncus.
-                    Vestibulum finibus tincidunt lorem, at aliquet orci pharetra
-                    nec.
-                </Text>
-
-                <Text maxLines={2}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nulla egestas pretium sem et hendrerit. Vivamus mauris nisi,
-                    varius a orci ut, posuere vestibulum ligula. Quisque
-                    sollicitudin condimentum tortor, ut ullamcorper dui placerat
-                    condimentum. Nulla ac erat sit amet risus varius ornare sed
-                    non turpis. Proin sed nulla scelerisque, auctor orci at,
-                    ullamcorper sem. Ut eget dui ac ligula pellentesque rhoncus.
-                    Vestibulum finibus tincidunt lorem, at aliquet orci pharetra
-                    nec.
-                </Text>
-
                 <Text tag="p">
                     Paragraph <Text tag="strong">strong</Text>
                 </Text>

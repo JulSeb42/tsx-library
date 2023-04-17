@@ -2,27 +2,21 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
-
-import { FontSizes } from "../../../"
+import classNames from "classnames"
 
 import type { TextProps } from "../types"
 import { StyledH4 } from "../styles"
 
 const H4 = forwardRef(
     (
-        { as, children, display, style, ...rest }: TextProps,
+        { as, children, display, style, className, ...rest }: TextProps,
         ref?: ForwardedRef<HTMLHeadingElement>
     ) => {
         return (
             <StyledH4
                 ref={ref}
                 as={as}
-                style={{
-                    ["--text-h4-font-size" as any]: display
-                        ? FontSizes.Display.H4
-                        : FontSizes.Titles.H4,
-                    ...style,
-                }}
+                className={classNames({ display }, className)}
                 {...rest}
             >
                 {children}

@@ -61,38 +61,58 @@ const FontCommon = ({
 `
 
 const StyledH1 = styled.h1`
-    font-size: var(--text-h1-font-size);
+    font-size: ${FontSizes.Titles.H1};
     ${FontCommon({
         $fontWeight: "black",
     })};
+
+    &.display {
+        font-size: ${FontSizes.Display.H1};
+    }
 `
 
 const StyledH2 = styled.h2`
-    font-size: var(--text-h2-font-size);
+    font-size: ${FontSizes.Titles.H2};
     ${FontCommon({
         $fontWeight: "black",
     })};
+
+    &.display {
+        font-size: ${FontSizes.Display.H2};
+    }
 `
 
 const StyledH3 = styled.h3`
-    font-size: var(--text-h3-font-size);
+    font-size: ${FontSizes.Titles.H3};
     ${FontCommon({
         $fontWeight: "black",
     })};
+
+    &.display {
+        font-size: ${FontSizes.Display.H3};
+    }
 `
 
 const StyledH4 = styled.h4`
-    font-size: var(--text-h4-font-size);
+    font-size: ${FontSizes.Titles.H4};
     ${FontCommon({
         $fontWeight: "black",
     })};
+
+    &.display {
+        font-size: ${FontSizes.Display.H4};
+    }
 `
 
 const StyledH5 = styled.h5`
-    font-size: var(--text-h5-font-size);
+    font-size: ${FontSizes.Titles.H5};
     ${FontCommon({
         $fontWeight: "black",
     })};
+
+    &.display {
+        font-size: ${FontSizes.Display.H5};
+    }
 `
 
 const StyledH6 = styled.h6`
