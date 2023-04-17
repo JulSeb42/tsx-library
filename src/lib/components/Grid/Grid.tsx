@@ -34,10 +34,6 @@ const Grid = forwardRef(
             ["--grid-template-col" as any]:
                 typeof col === "string" ? col : null,
             ["--grid-col" as any]: typeof col === "number" ? col : null,
-            ["--grid-justify-items" as any]: justifyItems,
-            ["--grid-justify-content" as any]: justifyContent,
-            ["--grid-align-items" as any]: alignItems,
-            ["--grid-align-content" as any]: alignContent,
             ["--grid-column-gap" as any]: variableSpacer(
                 columnGap ? columnGap : gap ? gap : null
             ),
@@ -52,9 +48,10 @@ const Grid = forwardRef(
                 ref={ref}
                 as={as}
                 style={styles}
-                $rowGap={rowGap}
-                $columnGap={columnGap}
-                $gap={gap}
+                data-justify-items={justifyItems}
+                data-justify-content={justifyContent}
+                data-align-content={alignContent}
+                data-align-items={alignItems}
                 {...rest}
             >
                 {children}
