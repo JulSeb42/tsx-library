@@ -3,6 +3,7 @@
 import React, { forwardRef, useRef, useState, useLayoutEffect } from "react"
 import type { ForwardedRef } from "react"
 import { Link } from "react-router-dom"
+import classNames from "classnames"
 
 import { useTouchScreen, Icon, Loader, stringifyPx } from "../../"
 
@@ -83,7 +84,14 @@ const ButtonIcon = forwardRef(
                 target={(href || to) && blank && "_blank"}
                 rel={(href || to) && blank && "noreferrer noopener"}
                 disabled={!!isLoading || disabled}
-                className={className}
+                className={classNames(
+                    {
+                        plain: variant === "plain",
+                        transparent: variant === "transparent",
+                        ghost: variant === "ghost",
+                    },
+                    className
+                )}
                 style={{
                     ["--button-size" as any]: size && stringifyPx(size),
                     ...style,
