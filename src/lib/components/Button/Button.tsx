@@ -3,6 +3,7 @@
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 import { Link } from "react-router-dom"
+import classNames from "classnames"
 
 import { Loader, Icon } from "../../"
 
@@ -25,6 +26,7 @@ const Button = forwardRef(
             blank,
             size = "default",
             to,
+            className,
             ...rest
         }: ButtonProps,
         ref?: ForwardedRef<HTMLButtonElement>
@@ -38,9 +40,17 @@ const Button = forwardRef(
             rel={(href || to) && blank && "noreferrer noopener"}
             type={href || to ? undefined : type}
             disabled={!!isLoading || disabled}
-            $variant={variant}
+            className={classNames(
+                {
+                    plain: variant === "plain",
+                    transparent: variant === "transparent",
+                    ghost: variant === "ghost",
+                    outline: variant === "outline",
+                },
+                { small: size === "small" },
+                className
+            )}
             $color={color}
-            $size={size}
             {...rest}
         >
             {isLoading &&

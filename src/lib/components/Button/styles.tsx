@@ -2,99 +2,139 @@
 
 import styled from "styled-components"
 
-import { Breakpoints, FontSizes, Mixins, Radiuses } from "../../"
+import { Breakpoints, FontSizes, Mixins, Radiuses, Spacers } from "../../"
 import type { ColorsHoverTypes } from "../../types"
-import type { ButtonSizesTypes, ButtonVariantTypes } from "./types"
 
 import { setDefaultTheme } from "../../utils"
 
 const ButtonBase = styled.button`
     border: 1px solid transparent;
     text-decoration: none;
+    font-size: ${FontSizes.Body};
     ${Mixins.Flexbox({
         $inline: true,
         $alignItems: "center",
         $justifyContent: "center",
         $gap: "xs",
+        $padding: {
+            topBottom: "xs",
+            leftRight: "s",
+        },
     })};
     border-radius: ${Radiuses.M};
+
+    &.small {
+        font-size: ${FontSizes.Small};
+        padding: ${Spacers.XXS} ${Spacers.XS};
+    }
 `
 
-const ButtonSize = styled(ButtonBase)<{ $size?: ButtonSizesTypes }>`
-    font-size: ${({ $size }) =>
-        $size === "small" ? FontSizes.Small : FontSizes.Body};
-    ${({ $size }) =>
-        $size === "small"
-            ? Mixins.Padding({
-                  $padding: { topBottom: "xxs", leftRight: "xs" },
-              })
-            : Mixins.Padding({
-                  $padding: { topBottom: "xs", leftRight: "s" },
-              })};
-`
-
-const StyledButton = styled(ButtonSize)<{
+const StyledButton = styled(ButtonBase)<{
     $color?: ColorsHoverTypes
-    $variant?: ButtonVariantTypes
 }>`
-    background-color: ${({ $variant, theme }) =>
-        $variant === "plain"
-            ? theme.ColorsHoverDefault
-            : $variant === "ghost"
-            ? theme.ColorsGhostDefault
-            : "transparent"};
-    color: ${({ $variant, $color, theme }) =>
-        $variant === "plain"
-            ? $color === "white"
+    &.plain {
+        background-color: ${({ theme, $color }) =>
+            theme.ColorsHoverDefault({ $color })};
+        color: ${({ $color, theme }) =>
+            $color === "white"
                 ? theme.Primary500
                 : $color === "background"
                 ? theme.Font
-                : theme.Background
-            : $variant === "ghost"
-            ? $color === "white" || $color === "background"
-                ? theme.Primary500
-                : $color === "font"
-                ? theme.Background
-                : theme.ColorsHoverDefault
-            : theme.ColorsHoverDefault};
+                : theme.Background};
 
-    @media ${Breakpoints.Hover} {
-        &:not(:disabled):hover {
-            background-color: ${({ $variant, theme }) =>
-                $variant === "plain"
-                    ? theme.ColorsHoverHover
-                    : $variant === "ghost" && theme.ColorsGhostHover};
-            color: ${({ $variant, theme }) =>
-                ($variant === "transparent" || $variant === "outline") &&
-                theme.ColorsHoverHover};
-            border-color: ${({ $variant, theme }) =>
-                $variant === "outline" && theme.ColorsHoverHover};
+        @media ${Breakpoints.Hover} {
+            &:not(:disabled):hover {
+                background-color: ${({ theme, $color }) =>
+                    theme.ColorsHoverHover({ $color })};
+            }
+
+            &:not(:disabled):active {
+                background-color: ${({ theme, $color }) =>
+                    theme.ColorsHoverActive({ $color })};
+            }
         }
 
-        &:not(:disabled):active {
-            background-color: ${({ $variant, theme }) =>
-                $variant === "plain"
-                    ? theme.ColorsHoverActive
-                    : $variant === "ghost" && theme.ColorsGhostActive};
-            color: ${({ $variant, theme }) =>
-                ($variant === "transparent" || $variant === "outline") &&
-                theme.ColorsHoverActive};
-            border-color: ${({ $variant, theme }) =>
-                $variant === "outline" && theme.ColorsHoverActive};
+        &:disabled {
+            background-color: ${({ theme }) => theme.Gray100};
+            color: ${({ theme }) => theme.Gray500};
         }
     }
 
-    &:disabled {
-        background-color: ${({ $variant, theme }) =>
-            $variant === "plain"
-                ? theme.Gray100
-                : $variant === "ghost"
-                ? theme.Gray50
-                : undefined};
-        color: ${({ theme }) => theme.Gray500};
-        border-color: ${({ $variant, theme }) =>
-            $variant === "outline" && theme.Gray500};
-        box-shadow: none;
+    &.transparent {
+        background-color: transparent;
+        color: ${({ $color, theme }) => theme.ColorsHoverDefault({ $color })};
+
+        @media ${Breakpoints.Hover} {
+            &:not(:disabled):hover {
+                color: ${({ $color, theme }) =>
+                    theme.ColorsHoverHover({ $color })};
+            }
+
+            &:not(:disabled):active {
+                color: ${({ $color, theme }) =>
+                    theme.ColorsHoverActive({ $color })};
+            }
+        }
+
+        &:disabled {
+            color: ${({ theme }) => theme.Gray500};
+        }
+    }
+
+    &.ghost {
+        background-color: ${({ theme, $color }) =>
+            theme.ColorsGhostDefault({ $color })};
+        color: ${({ $color, theme }) =>
+            $color === "white" || $color === "background"
+                ? theme.Primary500
+                : $color === "font"
+                ? theme.Background
+                : theme.ColorsHoverDefault({ $color })};
+
+        @media ${Breakpoints.Hover} {
+            &:not(:disabled):hover {
+                background-color: ${({ theme, $color }) =>
+                    theme.ColorsGhostHover({ $color })};
+            }
+
+            &:not(:disabled):active {
+                background-color: ${({ theme, $color }) =>
+                    theme.ColorsGhostActive({ $color })};
+            }
+        }
+
+        &:disabled {
+            background-color: ${({ theme }) => theme.Gray50};
+            color: ${({ theme }) => theme.Gray500};
+        }
+    }
+
+    &.outline {
+        background-color: transparent;
+        border-color: ${({ $color, theme }) =>
+            theme.ColorsHoverDefault({ $color })};
+        color: ${({ $color, theme }) => theme.ColorsHoverDefault({ $color })};
+
+        @media ${Breakpoints.Hover} {
+            &:not(:disabled):hover {
+                border-color: ${({ $color, theme }) =>
+                    theme.ColorsHoverHover({ $color })};
+                color: ${({ $color, theme }) =>
+                    theme.ColorsHoverHover({ $color })};
+            }
+
+            &:not(:disabled):active {
+                border-color: ${({ $color, theme }) =>
+                    theme.ColorsHoverActive({ $color })};
+                color: ${({ $color, theme }) =>
+                    theme.ColorsHoverActive({ $color })};
+            }
+        }
+
+        &:disabled {
+            color: ${({ theme }) => theme.Gray500};
+            border-color: ${({ theme }) => theme.Gray500};
+        }
     }
 `
 

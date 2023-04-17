@@ -36,14 +36,14 @@ export * from "./components/Youtube" // ✅
 export * from "./components/Avatar" // ✅
 export * from "./components/Loader" // ✅
 export * from "./components/Button" // ✅
-export * from "./components/ButtonIcon" // ✅
-export * from "./components/ButtonGroup" // ✅
-export * from "./components/Burger" // ✅
-export * from "./components/Tag" // ✅
-export * from "./components/Truncate" // ✅
-export * from "./components/Card" // ✅
-export * from "./components/Badge" // ✅
-export * from "./components/Tooltip" // ✅
+export * from "./components/ButtonIcon"
+export * from "./components/ButtonGroup"
+export * from "./components/Burger"
+export * from "./components/Tag"
+export * from "./components/Truncate"
+export * from "./components/Card"
+export * from "./components/Badge"
+export * from "./components/Tooltip"
 export * from "./components/Input"
 export * from "./components/InputImage"
 export * from "./components/InputCheck"
@@ -55,17 +55,17 @@ export * from "./components/Autocomplete"
 export * from "./components/Rating"
 export * from "./components/Datepicker"
 export * from "./components/Timepicker"
-export * from "./components/Form" // ✅
-export * from "./components/ListGroup" // ✅
-export * from "./components/Breadcrumbs" // ✅
-export * from "./components/Accordion" // ✅
-export * from "./components/Dropdown" // ✅
-export * from "./components/Toast" // ✅
-export * from "./components/Alert" // ✅
-export * from "./components/Modal" // ✅
-export * from "./components/Pagination" // ✅
-export * from "./components/Paginator" // ✅
-export * from "./components/Stepper" // ✅
+export * from "./components/Form"
+export * from "./components/ListGroup"
+export * from "./components/Breadcrumbs"
+export * from "./components/Accordion"
+export * from "./components/Dropdown"
+export * from "./components/Toast"
+export * from "./components/Alert"
+export * from "./components/Modal"
+export * from "./components/Pagination"
+export * from "./components/Paginator"
+export * from "./components/Stepper"
 export * from "./components/ProgressBar"
 export * from "./components/ProgressCircle"
 export * from "./components/Tabs"
