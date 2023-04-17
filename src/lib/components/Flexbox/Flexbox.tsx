@@ -31,13 +31,6 @@ const Flexbox = forwardRef(
     ) => {
         const styles = {
             ...variableAllPaddings(padding, "flex"),
-            ["--flex-display" as any]: inline ? "inline-flex" : "flex",
-            ["--flex-direction" as any]: flexDirection,
-            ["--flex-wrap" as any]: flexWrap,
-            ["--flex-justify-content" as any]: justifyContent,
-            ["--flex-align-items" as any]: alignItems,
-            ["--flex-justify-items" as any]: justifyItems,
-            ["--flex-align-content" as any]: alignContent,
             ["--flex-column-gap" as any]: variableSpacer(
                 columnGap ? columnGap : gap ? gap : null
             ),
@@ -48,7 +41,19 @@ const Flexbox = forwardRef(
         }
 
         return (
-            <Styles.StyledFlexbox ref={ref} as={as} style={styles} {...rest}>
+            <Styles.StyledFlexbox
+                ref={ref}
+                as={as}
+                style={styles}
+                data-inline={inline?.toString()}
+                data-flex-direction={flexDirection}
+                data-flex-wrap={flexWrap}
+                data-flex-justify-content={justifyContent}
+                data-flex-justify-items={justifyItems}
+                data-flex-align-content={alignContent}
+                data-flex-align-items={alignItems}
+                {...rest}
+            >
                 {children}
             </Styles.StyledFlexbox>
         )
