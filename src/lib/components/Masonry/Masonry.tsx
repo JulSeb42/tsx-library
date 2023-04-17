@@ -63,8 +63,8 @@ const Masonry = ({
         <Styles.StyledMasonry
             ref={ref}
             as={as}
-            $gap={gap}
             style={styles}
+            $gap={gap}
             {...rest}
         >
             {[...Array(numCols)].map((_, index) => (

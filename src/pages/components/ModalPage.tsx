@@ -81,11 +81,7 @@ const ModalPage = () => {
                     <Alert color="danger" maxWidth={400}>
                         <Text>Modal content</Text>
 
-                        <Flexbox
-                            flexDirection="row"
-                            alignItems="center"
-                            gap="xs"
-                        >
+                        <Flexbox alignItems="center" gap="xs">
                             <Button color="danger">Button</Button>
                             <Button
                                 variant="transparent"

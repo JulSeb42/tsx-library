@@ -8,7 +8,7 @@ const ButtonPage = () => {
     return (
         <Page title="Button">
             <Flexbox flexDirection="column" gap="xs">
-                <Flexbox gap="s" flexDirection="row" alignItems="flex-start">
+                <Flexbox gap="s" alignItems="flex-start">
                     <Button
                         variant="plain"
                         color="primary"
@@ -43,7 +43,7 @@ const ButtonPage = () => {
                     </Button>
                 </Flexbox>
 
-                <Flexbox gap="s" flexDirection="row">
+                <Flexbox gap="s">
                     <Button
                         variant="plain"
                         color="primary"

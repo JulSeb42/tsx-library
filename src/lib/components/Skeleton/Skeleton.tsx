@@ -2,6 +2,7 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
 import { variableBorderRadius, stringifyPx } from "../../"
 
@@ -26,6 +27,7 @@ export const Skeleton = forwardRef(
             flexGrow,
             flex,
             style,
+            className,
             ...rest
         }: SkeletonProps,
         ref?: ForwardedRef<HTMLSpanElement>
@@ -45,7 +47,10 @@ export const Skeleton = forwardRef(
                 as={as}
                 style={styles}
                 $backgroundColor={backgroundColor}
-                $animation={animation}
+                className={classNames(
+                    { pulse: animation === "pulse" },
+                    className
+                )}
                 {...rest}
             >
                 {animation === "shine" && <SkeletonShine />}

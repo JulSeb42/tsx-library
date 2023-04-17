@@ -1,10 +1,9 @@
 /*=============================================== Skeleton styles ===============================================*/
 
-import styled, { css, keyframes } from "styled-components"
+import styled, { keyframes } from "styled-components"
 
 import { Flexbox, Mixins } from "../../"
 import type { AllColorsTypes, BorderTypes } from "../../types"
-import type { SkeletonAnimationTypes } from "./types"
 
 import { setDefaultTheme } from "../../utils"
 
@@ -26,24 +25,17 @@ const BaseSkeleton = styled.div`
     flex: var(--skeleton-flex);
     flex-grow: var(--skeleton-flex-grow);
     ${Mixins.BorderRadiusVar("skeleton")};
+
+    &.pulse {
+        animation: ${Pulse} 1000ms infinite alternate;
+    }
 `
 
-const SkeletonBackground = styled(BaseSkeleton)<{
+const StyledSkeleton = styled(BaseSkeleton)<{
     $backgroundColor?: AllColorsTypes
 }>`
     background-color: ${({ theme, $backgroundColor }) =>
         theme.AllColors({ $color: $backgroundColor })};
-`
-
-const StyledSkeleton = styled(SkeletonBackground)<{
-    $animation?: SkeletonAnimationTypes
-}>`
-    ${({ $animation }) =>
-        $animation &&
-        $animation === "pulse" &&
-        css`
-            animation: ${Pulse} 1000ms infinite alternate;
-        `}
 `
 
 const ShineLoad = keyframes`
