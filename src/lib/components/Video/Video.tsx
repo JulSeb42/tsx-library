@@ -33,11 +33,6 @@ const Video = forwardRef(
             ["--video-height" as any]: height && stringifyPx(height),
         }
 
-        const styles = {
-            ...sizeStyles,
-            ...style,
-        }
-
         return (
             <Suspense fallback={<Fallback style={sizeStyles} />}>
                 <StyledVideo
@@ -46,7 +41,10 @@ const Video = forwardRef(
                     autoPlay={autoPlay}
                     muted={autoPlay ? true : autoPlay}
                     controls={!autoPlay ? true : controls}
-                    style={styles}
+                    style={{
+                        ...sizeStyles,
+                        ...style,
+                    }}
                     data-fit={fit}
                     {...rest}
                 >

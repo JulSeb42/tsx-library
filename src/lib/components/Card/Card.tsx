@@ -29,15 +29,6 @@ const Card = forwardRef(
         }: CardProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
-        const styles = {
-            ...variableBorderRadius(borderRadius, "card"),
-            ...variableAllPaddings(padding, "card"),
-            ["--card-width" as any]: width && stringifyPx(width),
-            ["--card-height" as any]: height && stringifyPx(height),
-            ["--card-background-image" as any]: backgroundImg,
-            ...style,
-        }
-
         return (
             <Styles.StyledCard
                 ref={ref}
@@ -57,7 +48,14 @@ const Card = forwardRef(
                 target={(href || to) && blank && "_blank"}
                 rel={(href || to) && blank && "noreferrer noopener"}
                 onClick={onClick}
-                style={styles}
+                style={{
+                    ...variableBorderRadius(borderRadius, "card"),
+                    ...variableAllPaddings(padding, "card"),
+                    ["--card-width" as any]: width && stringifyPx(width),
+                    ["--card-height" as any]: height && stringifyPx(height),
+                    ["--card-background-image" as any]: backgroundImg,
+                    ...style,
+                }}
                 $border={border}
                 {...rest}
             >

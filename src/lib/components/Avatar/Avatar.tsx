@@ -26,17 +26,15 @@ const Avatar = forwardRef(
         }: AvatarProps,
         ref?: ForwardedRef<HTMLSpanElement>
     ) => {
-        const styles = {
-            ...variableBorderRadius(borderRadius, "avatar"),
-            ["--avatar-size" as any]: stringifyPx(size),
-            ...style,
-        }
-
         return (
             <Styles.StyledAvatar
                 ref={ref}
                 as={as}
-                style={styles}
+                style={{
+                    ...variableBorderRadius(borderRadius, "avatar"),
+                    ["--avatar-size" as any]: stringifyPx(size),
+                    ...style,
+                }}
                 $color={color}
                 $contentColor={contentColor}
                 {...rest}

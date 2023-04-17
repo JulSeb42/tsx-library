@@ -29,22 +29,20 @@ const Flexbox = forwardRef(
         }: FlexboxProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
-        const styles = {
-            ...variableAllPaddings(padding, "flex"),
-            ["--flex-column-gap" as any]: variableSpacer(
-                columnGap ? columnGap : gap ? gap : null
-            ),
-            ["--flex-row-gap" as any]: variableSpacer(
-                rowGap ? rowGap : gap ? gap : null
-            ),
-            ...style,
-        }
-
         return (
             <Styles.StyledFlexbox
                 ref={ref}
                 as={as}
-                style={styles}
+                style={{
+                    ...variableAllPaddings(padding, "flex"),
+                    ["--flex-column-gap" as any]: variableSpacer(
+                        columnGap ? columnGap : gap ? gap : null
+                    ),
+                    ["--flex-row-gap" as any]: variableSpacer(
+                        rowGap ? rowGap : gap ? gap : null
+                    ),
+                    ...style,
+                }}
                 data-inline={inline?.toString()}
                 data-flex-direction={flexDirection}
                 data-flex-wrap={flexWrap}

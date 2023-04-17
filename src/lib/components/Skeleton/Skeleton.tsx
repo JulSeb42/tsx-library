@@ -32,25 +32,23 @@ export const Skeleton = forwardRef(
         }: SkeletonProps,
         ref?: ForwardedRef<HTMLSpanElement>
     ) => {
-        const styles = {
-            ...variableBorderRadius(borderRadius, "skeleton"),
-            ["--skeleton-width" as any]: stringifyPx(width),
-            ["--skeleton-height" as any]: stringifyPx(height),
-            ["--skeleton-flex" as any]: flex,
-            ["--skeleton-flex-grow" as any]: flexGrow,
-            ...style,
-        }
-
         return (
             <Styles.StyledSkeleton
                 ref={ref}
                 as={as}
-                style={styles}
-                $backgroundColor={backgroundColor}
+                style={{
+                    ...variableBorderRadius(borderRadius, "skeleton"),
+                    ["--skeleton-width" as any]: stringifyPx(width),
+                    ["--skeleton-height" as any]: stringifyPx(height),
+                    ["--skeleton-flex" as any]: flex,
+                    ["--skeleton-flex-grow" as any]: flexGrow,
+                    ...style,
+                }}
                 className={classNames(
                     { pulse: animation === "pulse" },
                     className
                 )}
+                $backgroundColor={backgroundColor}
                 {...rest}
             >
                 {animation === "shine" && <SkeletonShine />}
@@ -76,19 +74,19 @@ export const SkeletonCard = forwardRef(
         }: SkeletonCardProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
-        const styles = {
-            ...variableBorderRadius(borderRadius, "skeleton-card"),
-            ["--skeleton-card-width" as any]: width && stringifyPx(width),
-            ["--skeleton-card-height" as any]: height && stringifyPx(height),
-            ...style,
-        }
-
         return (
             <Styles.Card
                 ref={ref}
                 as={as}
                 padding={padding}
-                style={styles}
+                style={{
+                    ...variableBorderRadius(borderRadius, "skeleton-card"),
+                    ["--skeleton-card-width" as any]:
+                        width && stringifyPx(width),
+                    ["--skeleton-card-height" as any]:
+                        height && stringifyPx(height),
+                    ...style,
+                }}
                 $border={border}
                 $backgroundColor={backgroundColor}
                 {...rest}

@@ -21,16 +21,14 @@ const Badge = forwardRef(
         }: BadgeProps,
         ref?: ForwardedRef<HTMLSpanElement>
     ) => {
-        const styles = {
-            ["--badge-size" as any]: size && stringifyPx(size),
-            ...style,
-        }
-
         return (
             <Styles.StyledBadge
                 ref={ref}
                 as={as}
-                style={styles}
+                style={{
+                    ["--badge-size" as any]: size && stringifyPx(size),
+                    ...style,
+                }}
                 $hasChildren={!!number}
                 $childrenLength={number?.toString().length}
                 $color={color}

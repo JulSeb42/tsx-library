@@ -26,27 +26,23 @@ const Burger = forwardRef(
         }: BurgerProps,
         ref?: ForwardedRef<HTMLButtonElement>
     ) => {
-        const classes = classNames(
-            { "no-hover": noHover },
-            { open: isOpen },
-            className
-        )
-
-        const styles = {
-            ["--burger-width" as any]: width && stringifyPx(width),
-            ["--burger-height" as any]: height && stringifyPx(height),
-            ["--burger-border-height" as any]:
-                borderHeight && stringifyPx(borderHeight),
-            ...style,
-        }
-
         return (
             <Styles.StyledBurger
                 ref={ref}
                 as={as}
                 aria-label={ariaLabel}
-                className={classes}
-                style={styles}
+                className={classNames(
+                    { "no-hover": noHover },
+                    { open: isOpen },
+                    className
+                )}
+                style={{
+                    ["--burger-width" as any]: width && stringifyPx(width),
+                    ["--burger-height" as any]: height && stringifyPx(height),
+                    ["--burger-border-height" as any]:
+                        borderHeight && stringifyPx(borderHeight),
+                    ...style,
+                }}
                 $color={color}
                 {...rest}
             >

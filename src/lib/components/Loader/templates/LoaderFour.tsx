@@ -13,16 +13,14 @@ const LoaderFour = forwardRef(
         { as, size = null, color = "primary", style, ...rest }: LoaderProps,
         ref?: ForwardedRef<HTMLSpanElement>
     ) => {
-        const styles = {
-            ...variablesLoaderFour(size),
-            ...style,
-        }
-
         return (
             <Styles.StyledLoaderFour
                 ref={ref}
                 as={as}
-                style={styles}
+                style={{
+                    ...variablesLoaderFour(size),
+                    ...style,
+                }}
                 $color={color}
                 {...rest}
             >

@@ -54,16 +54,14 @@ const Masonry = ({
         ["--masonry-gap" as any]: variableSpacer(gap),
     }
 
-    const styles = {
-        ...gapVar,
-        ...style,
-    }
-
     return (
         <Styles.StyledMasonry
             ref={ref}
             as={as}
-            style={styles}
+            style={{
+                ...gapVar,
+                ...style,
+            }}
             $gap={gap}
             {...rest}
         >

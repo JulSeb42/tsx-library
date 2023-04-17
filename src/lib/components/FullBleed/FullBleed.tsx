@@ -21,15 +21,19 @@ const FullBleed = forwardRef(
         }: FullBleedProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
-        const styles = {
-            ...variableAllPaddings(padding, "full-bleed"),
-            ["--full-bleed-aspect-ratio" as any]: aspectRatio,
-            ["--full-bleed-height" as any]: height && stringifyPx(height),
-            ...style,
-        }
-
         return (
-            <Styles.StyledFullBleed ref={ref} as={as} style={styles} {...rest}>
+            <Styles.StyledFullBleed
+                ref={ref}
+                as={as}
+                style={{
+                    ...variableAllPaddings(padding, "full-bleed"),
+                    ["--full-bleed-aspect-ratio" as any]: aspectRatio,
+                    ["--full-bleed-height" as any]:
+                        height && stringifyPx(height),
+                    ...style,
+                }}
+                {...rest}
+            >
                 {children}
             </Styles.StyledFullBleed>
         )
