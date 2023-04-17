@@ -20,7 +20,18 @@ const StyledAside = styled.aside`
     })};
     width: var(--aside-size);
     min-height: var(--aside-min-height, 100vh);
-    grid-column: var(--aside-position);
+
+    &.position-one {
+        grid-column: 2;
+    }
+
+    &.position-two {
+        grid-column: 3;
+    }
+
+    &.position-three {
+        grid-column: 4;
+    }
 
     @media ${Breakpoints.Tablet} {
         min-height: inherit;

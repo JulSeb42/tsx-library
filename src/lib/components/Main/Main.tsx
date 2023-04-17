@@ -2,6 +2,7 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
 import { stringifyPx } from "../../"
 import { getMainSize } from "./get-main-size"
@@ -18,8 +19,9 @@ const Main = forwardRef(
             size = "default",
             contentSize = "default",
             children,
-            minHeight = "100vh",
+            minHeight,
             style,
+            className,
             ...rest
         }: MainProps,
         ref?: ForwardedRef<HTMLDivElement>
@@ -29,14 +31,19 @@ const Main = forwardRef(
                 ref={ref}
                 as={as}
                 style={{
-                    ["--main-min-height" as any]: stringifyPx(minHeight),
+                    ["--main-min-height" as any]:
+                        minHeight && stringifyPx(minHeight),
                     ["--main-size" as any]: getMainSize(size),
-                    ["--main-position" as any]: position,
                     ["--main-content-size" as any]:
                         getMainContentSize(contentSize),
                     ...style,
                 }}
-                $size={size}
+                className={classNames(
+                    { "position-one": position === 1 },
+                    { "position-two": position === 2 },
+                    { full: size === "full" },
+                    className
+                )}
                 {...rest}
             >
                 {children}

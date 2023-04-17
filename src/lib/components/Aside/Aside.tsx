@@ -2,9 +2,9 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
 import { stringifyPx } from "../../"
-import { getAsidePosition } from "./get-aside-position"
 import { getAsideSize } from "./get-aside-size"
 
 import * as Styles from "./styles"
@@ -17,8 +17,9 @@ const Aside = forwardRef(
             position = 1,
             size = "default",
             children,
-            minHeight = "100vh",
+            minHeight,
             style,
+            className,
             ...rest
         }: AsideProps,
         ref?: ForwardedRef<HTMLDivElement>
@@ -27,10 +28,16 @@ const Aside = forwardRef(
             <Styles.StyledAside
                 ref={ref}
                 as={as}
+                className={classNames(
+                    { "position-one": position === 1 },
+                    { "position-two": position === 2 },
+                    { "position-three": position === 3 },
+                    className
+                )}
                 style={{
                     ["--aside-size" as any]: getAsideSize(size),
-                    ["--aside-min-height" as any]: stringifyPx(minHeight),
-                    ["--aside-position" as any]: getAsidePosition(position),
+                    ["--aside-min-height" as any]:
+                        minHeight && stringifyPx(minHeight),
                     ...style,
                 }}
                 {...rest}

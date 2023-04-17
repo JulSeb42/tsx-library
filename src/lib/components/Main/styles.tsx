@@ -1,13 +1,12 @@
 /*=============================================== Main styles ===============================================*/
 
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
 import { Breakpoints, Mixins } from "../../"
-import type { MainSizeTypes } from "./types"
 
 import { setDefaultTheme } from "../../utils"
 
-const MainBase = styled.main`
+const StyledMain = styled.main`
     ${Mixins.Grid({
         $alignContent: "start",
         $alignItems: "start",
@@ -20,7 +19,22 @@ const MainBase = styled.main`
     })};
     width: var(--main-size);
     min-height: var(--main-min-height, 100vh);
-    grid-column: calc(var(--main-position) + 1);
+
+    &.position-one {
+        grid-column: 2;
+    }
+
+    &.position-two {
+        grid-column: 3;
+    }
+
+    &.full {
+        grid-template-columns: 1fr var(--main-content-size) 1fr;
+
+        & > * {
+            grid-column: 2;
+        }
+    }
 
     @media ${Breakpoints.Tablet} {
         min-height: inherit;
@@ -55,20 +69,6 @@ const MainBase = styled.main`
     & > form {
         justify-self: stretch;
     }
-`
-
-const StyledMain = styled(MainBase)<{
-    $size?: MainSizeTypes
-}>`
-    ${({ $size }) =>
-        $size === "full" &&
-        css`
-            grid-template-columns: 1fr var(--main-content-size) 1fr;
-
-            & > * {
-                grid-column: 2;
-            }
-        `}
 `
 
 setDefaultTheme([StyledMain])
