@@ -27,6 +27,7 @@ const Button = forwardRef(
             size = "default",
             to,
             className,
+            noPadding,
             ...rest
         }: ButtonProps,
         ref?: ForwardedRef<HTMLButtonElement>
@@ -48,6 +49,7 @@ const Button = forwardRef(
                     outline: variant === "outline",
                 },
                 { small: size === "small" },
+                { "no-padding": noPadding },
                 className
             )}
             $color={color}

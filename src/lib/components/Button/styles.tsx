@@ -64,6 +64,10 @@ const StyledButton = styled(ButtonBase)<{
         background-color: transparent;
         color: ${({ $color, theme }) => theme.ColorsHoverDefault({ $color })};
 
+        &.no-padding {
+            padding: 0;
+        }
+
         @media ${Breakpoints.Hover} {
             &:not(:disabled):hover {
                 color: ${({ $color, theme }) =>

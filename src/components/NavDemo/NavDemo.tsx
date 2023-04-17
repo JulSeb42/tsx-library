@@ -34,7 +34,7 @@ const NavDemo = () => {
                 showKeys
             />
 
-            <Button onClick={toggleTheme} variant="text" color="white">
+            <Button onClick={toggleTheme} variant="transparent" color="white">
                 Toggle theme
             </Button>
 

@@ -29,7 +29,9 @@ const Key = forwardRef(
                                 {key}
                             </Styles.StyledKey>
 
-                            {i !== keys?.length - 1 && <span>+</span>}
+                            {i !== keys?.length - 1 && (
+                                <span className="separator">+</span>
+                            )}
                         </Fragment>
                     ))}
                 </Flexbox>

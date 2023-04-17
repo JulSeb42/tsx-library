@@ -27,7 +27,6 @@ type ButtonBaseProps = HTMLAttributes<HTMLButtonElement & HTMLAnchorElement> &
         as?: ElementType
         color?: ColorsHoverTypes
         size?: ButtonSizesTypes
-        variant?: ButtonVariantTypes
         icons?: {
             left?: string | JSX.Element
             right?: string | JSX.Element
@@ -57,4 +56,16 @@ type ButtonLoading2 = ButtonBehaviour & {
     loaderVariant?: never
 }
 
-export type ButtonProps = ButtonLoading1 | ButtonLoading2
+type ButtonLoading = ButtonLoading1 | ButtonLoading2
+
+type ButtonVariant1 = ButtonLoading & {
+    variant?: "plain" | "outline" | "ghost"
+    noPadding?: never
+}
+
+type ButtonVariant2 = ButtonLoading & {
+    variant?: "transparent"
+    noPadding?: boolean
+}
+
+export type ButtonProps = ButtonVariant1 | ButtonVariant2
