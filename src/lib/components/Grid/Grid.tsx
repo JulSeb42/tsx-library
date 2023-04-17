@@ -30,7 +30,7 @@ const Grid = forwardRef(
     ) => {
         const styles = {
             ...variableAllPaddings(padding, "grid"),
-            ["--grid-display" as any]: inline ? "inline-grid" : "grid",
+            // ["--grid-display" as any]: inline ? "inline-grid" : "grid",
             ["--grid-template-col" as any]:
                 typeof col === "string" ? col : null,
             ["--grid-col" as any]: typeof col === "number" ? col : null,
@@ -52,6 +52,7 @@ const Grid = forwardRef(
                 data-justify-content={justifyContent}
                 data-align-content={alignContent}
                 data-align-items={alignItems}
+                data-inline={inline?.toString()}
                 {...rest}
             >
                 {children}
