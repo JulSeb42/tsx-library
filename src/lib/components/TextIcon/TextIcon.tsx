@@ -3,7 +3,7 @@
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
-import { Icon, Text } from "../../"
+import { Icon, Text, stringifyPx } from "../../"
 
 import * as Styles from "./styles"
 import type { TextIconProps, PossibleTextIconTags } from "./types"
@@ -19,13 +19,26 @@ const TextIcon = forwardRef(
             icon,
             iconSize,
             iconColor,
+            className,
+            style,
             ...rest
         }: TextIconProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         return (
-            <Styles.StyledTextIcon ref={ref} as={as}>
-                <Styles.IconContainer $display={display} $tag={tag}>
+            <Styles.StyledTextIcon
+                ref={ref}
+                as={as}
+                className={className}
+                style={style}
+            >
+                <Styles.IconContainer
+                    style={{
+                        ["--text-icon-container-size" as any]: stringifyPx(
+                            getIconSize(tag, display) * 1.5
+                        ),
+                    }}
+                >
                     <Icon
                         src={icon}
                         size={getIconSize(tag, display, iconSize)}
