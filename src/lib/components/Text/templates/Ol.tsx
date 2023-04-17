@@ -8,11 +8,11 @@ import { StyledOl } from "../styles"
 
 const Ol = forwardRef(
     (
-        { as, children, ...rest }: TextProps,
+        { as, children, textAlign, ...rest }: TextProps,
         ref?: ForwardedRef<HTMLOListElement>
     ) => {
         return (
-            <StyledOl ref={ref} as={as} {...rest}>
+            <StyledOl ref={ref} as={as} data-align={textAlign} {...rest}>
                 {children}
             </StyledOl>
         )

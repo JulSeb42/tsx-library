@@ -20,12 +20,6 @@ const Youtube = forwardRef(
         }: YoutubeProps,
         ref?: ForwardedRef<HTMLIFrameElement>
     ) => {
-        const styles = {
-            ["--youtube-width" as any]: width && stringifyPx(width),
-            ["--youtube-height" as any]: height && stringifyPx(height),
-            ...style,
-        }
-
         return (
             <Styles.StyledYoutube
                 ref={ref}
@@ -34,7 +28,11 @@ const Youtube = forwardRef(
                 frameborder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
-                style={styles}
+                style={{
+                    ["--youtube-width" as any]: width && stringifyPx(width),
+                    ["--youtube-height" as any]: height && stringifyPx(height),
+                    ...style,
+                }}
                 {...rest}
             />
         )

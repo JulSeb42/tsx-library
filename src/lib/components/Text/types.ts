@@ -2,6 +2,8 @@
 
 import type { ElementType, HTMLAttributes } from "react"
 
+import type { TextAlignTypes } from "../../types"
+
 /*==================== List possibilities ====================*/
 
 enum tags {
@@ -27,6 +29,7 @@ export type TagTypes = keyof typeof tags
 
 interface BaseTextProps extends HTMLAttributes<HTMLElement> {
     as?: ElementType
+    textAlign?: TextAlignTypes
 }
 
 interface TextBehaviour1 extends BaseTextProps {

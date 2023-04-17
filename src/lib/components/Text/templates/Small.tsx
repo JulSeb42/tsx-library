@@ -8,11 +8,11 @@ import { StyledSmall } from "../styles"
 
 const Small = forwardRef(
     (
-        { as, children, ...rest }: TextProps,
+        { as, children, textAlign, ...rest }: TextProps,
         ref?: ForwardedRef<HTMLParagraphElement>
     ) => {
         return (
-            <StyledSmall ref={ref} as={as} {...rest}>
+            <StyledSmall ref={ref} as={as} data-align={textAlign} {...rest}>
                 {children}
             </StyledSmall>
         )

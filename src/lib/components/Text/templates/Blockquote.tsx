@@ -8,11 +8,16 @@ import { StyledBlockquote } from "../styles"
 
 const Blockquote = forwardRef(
     (
-        { as, children, ...rest }: TextProps,
+        { as, children, textAlign, ...rest }: TextProps,
         ref?: ForwardedRef<HTMLQuoteElement>
     ) => {
         return (
-            <StyledBlockquote ref={ref} as={as} {...rest}>
+            <StyledBlockquote
+                ref={ref}
+                as={as}
+                data-align={textAlign}
+                {...rest}
+            >
                 {children}
             </StyledBlockquote>
         )

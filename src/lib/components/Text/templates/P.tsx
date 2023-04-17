@@ -8,11 +8,11 @@ import { StyledP } from "../styles"
 
 const P = forwardRef(
     (
-        { as, children, ...rest }: TextProps,
+        { as, children, textAlign, ...rest }: TextProps,
         ref?: ForwardedRef<HTMLParagraphElement>
     ) => {
         return (
-            <StyledP ref={ref} as={as} {...rest}>
+            <StyledP ref={ref} as={as} data-align={textAlign} {...rest}>
                 {children}
             </StyledP>
         )

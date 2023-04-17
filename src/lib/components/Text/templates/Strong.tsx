@@ -8,11 +8,11 @@ import { StyledStrong } from "../styles"
 
 const Strong = forwardRef(
     (
-        { as, children, ...rest }: TextProps,
+        { as, children, textAlign, ...rest }: TextProps,
         ref?: ForwardedRef<HTMLParagraphElement>
     ) => {
         return (
-            <StyledStrong ref={ref} as={as} {...rest}>
+            <StyledStrong ref={ref} as={as} data-align={textAlign} {...rest}>
                 {children}
             </StyledStrong>
         )

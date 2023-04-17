@@ -8,11 +8,11 @@ import { StyledDl } from "../styles"
 
 const Dl = forwardRef(
     (
-        { as, children, ...rest }: TextProps,
+        { as, children, textAlign, ...rest }: TextProps,
         ref?: ForwardedRef<HTMLDListElement>
     ) => {
         return (
-            <StyledDl ref={ref} as={as} {...rest}>
+            <StyledDl ref={ref} as={as} data-align={textAlign} {...rest}>
                 {children}
             </StyledDl>
         )

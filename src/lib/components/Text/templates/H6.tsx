@@ -8,11 +8,11 @@ import { StyledH6 } from "../styles"
 
 const H6 = forwardRef(
     (
-        { as, children, ...rest }: TextProps,
+        { as, children, textAlign, ...rest }: TextProps,
         ref?: ForwardedRef<HTMLHeadingElement>
     ) => {
         return (
-            <StyledH6 ref={ref} as={as} {...rest}>
+            <StyledH6 ref={ref} as={as} data-align={textAlign} {...rest}>
                 {children}
             </StyledH6>
         )

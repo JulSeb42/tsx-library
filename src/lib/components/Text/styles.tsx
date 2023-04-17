@@ -14,16 +14,55 @@ import {
     Radiuses,
     FontSizes,
 } from "../../"
-import type { FontWeightTypes } from "../../types"
+import type { FontSizeTypes, FontWeightTypes } from "../../types"
 
 const FontCommon = ({
     $fontWeight = "regular",
+    $fontSize,
 }: {
     $fontWeight?: FontWeightTypes
+    $fontSize?: FontSizeTypes
 }) => css`
     font-family: ${FontFamilies.Body};
     line-height: ${LineHeights.Regular};
     ${Mixins.FontWeight({ $fontWeight })};
+    ${Mixins.FontSize({ $fontSize })};
+
+    &[data-align="left"] {
+        text-align: left;
+    }
+
+    &[data-align="center"] {
+        text-align: center;
+    }
+
+    &[data-align="right"] {
+        text-align: right;
+    }
+
+    &[data-align="justify"] {
+        text-align: justify;
+    }
+
+    &[data-align="inherit"] {
+        text-align: inherit;
+    }
+
+    &[data-align="initial"] {
+        text-align: initial;
+    }
+
+    &[data-align="revert"] {
+        text-align: revert;
+    }
+
+    &[data-align="revert-layer"] {
+        text-align: revert-layer;
+    }
+
+    &[data-align="unset"] {
+        text-align: unset;
+    }
 
     a,
     button {
@@ -61,9 +100,9 @@ const FontCommon = ({
 `
 
 const StyledH1 = styled.h1`
-    font-size: ${FontSizes.Titles.H1};
     ${FontCommon({
         $fontWeight: "black",
+        $fontSize: "title-h1",
     })};
 
     &.display {
@@ -72,9 +111,9 @@ const StyledH1 = styled.h1`
 `
 
 const StyledH2 = styled.h2`
-    font-size: ${FontSizes.Titles.H2};
     ${FontCommon({
         $fontWeight: "black",
+        $fontSize: "title-h2",
     })};
 
     &.display {
@@ -83,9 +122,9 @@ const StyledH2 = styled.h2`
 `
 
 const StyledH3 = styled.h3`
-    font-size: ${FontSizes.Titles.H3};
     ${FontCommon({
         $fontWeight: "black",
+        $fontSize: "title-h3",
     })};
 
     &.display {
@@ -94,9 +133,9 @@ const StyledH3 = styled.h3`
 `
 
 const StyledH4 = styled.h4`
-    font-size: ${FontSizes.Titles.H4};
     ${FontCommon({
         $fontWeight: "black",
+        $fontSize: "title-h4",
     })};
 
     &.display {
@@ -105,9 +144,9 @@ const StyledH4 = styled.h4`
 `
 
 const StyledH5 = styled.h5`
-    font-size: ${FontSizes.Titles.H5};
     ${FontCommon({
         $fontWeight: "black",
+        $fontSize: "title-h5",
     })};
 
     &.display {
@@ -116,16 +155,16 @@ const StyledH5 = styled.h5`
 `
 
 const StyledH6 = styled.h6`
-    font-size: ${FontSizes.Titles.H6};
     ${FontCommon({
         $fontWeight: "black",
+        $fontSize: "title-h6",
     })};
 `
 
 const StyledP = styled.p`
-    font-size: ${FontSizes.Body};
     ${FontCommon({
         $fontWeight: "regular",
+        $fontSize: "body",
     })};
 `
 
@@ -143,22 +182,21 @@ const StyledEm = styled.em`
 `
 
 const StyledSmall = styled.small`
-    font-size: ${FontSizes.Small};
     ${FontCommon({
         $fontWeight: "regular",
+        $fontSize: "small",
     })};
 `
 
 const StyledBlockquote = styled.blockquote`
-    font-size: ${FontSizes.Titles.H6};
     ${FontCommon({
         $fontWeight: "regular",
+        $fontSize: "title-h6",
     })};
     font-style: italic;
 `
 
 const ListStyles = css`
-    font-size: ${FontSizes.Body};
     padding: 0;
     margin: 0;
     padding-left: ${Spacers.S};
@@ -169,6 +207,7 @@ const ListStyles = css`
     })};
     ${FontCommon({
         $fontWeight: "regular",
+        $fontSize: "body",
     })};
 
     li {
@@ -187,6 +226,7 @@ const StyledOl = styled.ol`
 const StyledDl = styled.dl`
     ${FontCommon({
         $fontWeight: "regular",
+        $fontSize: "body",
     })};
 
     dt {
@@ -195,7 +235,6 @@ const StyledDl = styled.dl`
     }
 
     dd {
-        font-size: ${FontSizes.Body};
         ${Mixins.FontWeight({ $fontWeight: "regular" })};
         padding-inline-start: ${Spacers.M};
 

@@ -8,11 +8,11 @@ import { StyledUl } from "../styles"
 
 const Ul = forwardRef(
     (
-        { as, children, ...rest }: TextProps,
+        { as, children, textAlign, ...rest }: TextProps,
         ref?: ForwardedRef<HTMLUListElement>
     ) => {
         return (
-            <StyledUl ref={ref} as={as} {...rest}>
+            <StyledUl ref={ref} as={as} data-align={textAlign} {...rest}>
                 {children}
             </StyledUl>
         )

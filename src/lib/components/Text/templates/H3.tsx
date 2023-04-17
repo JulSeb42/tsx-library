@@ -9,7 +9,15 @@ import { StyledH3 } from "../styles"
 
 const H3 = forwardRef(
     (
-        { as, children, display, style, className, ...rest }: TextProps,
+        {
+            as,
+            children,
+            display,
+            style,
+            className,
+            textAlign,
+            ...rest
+        }: TextProps,
         ref?: ForwardedRef<HTMLHeadingElement>
     ) => {
         return (
@@ -17,6 +25,7 @@ const H3 = forwardRef(
                 ref={ref}
                 as={as}
                 className={classNames({ display }, className)}
+                data-align={textAlign}
                 {...rest}
             >
                 {children}
