@@ -14,7 +14,7 @@ const Img = styled.img`
     z-index: 0;
     width: var(--image-width, 100%);
     height: var(--image-height, auto);
-    object-fit: var(--image-object-fit);
+    ${Mixins.DataFit()};
     ${Mixins.BorderRadiusVar("image")};
 `
 

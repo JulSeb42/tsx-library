@@ -35,7 +35,6 @@ const Video = forwardRef(
 
         const styles = {
             ...sizeStyles,
-            ["--video-object-fit" as any]: fit,
             ...style,
         }
 
@@ -48,6 +47,7 @@ const Video = forwardRef(
                     muted={autoPlay ? true : autoPlay}
                     controls={!autoPlay ? true : controls}
                     style={styles}
+                    data-fit={fit}
                     {...rest}
                 >
                     <source src={src} type={type} />

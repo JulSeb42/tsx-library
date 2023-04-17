@@ -23,6 +23,7 @@ const Image = forwardRef(
             fit = null,
             caption,
             style,
+            className,
             ...rest
         }: ImageProps,
         ref?: ForwardedRef<HTMLImageElement>
@@ -32,15 +33,10 @@ const Image = forwardRef(
             ["--image-height" as any]: height && stringifyPx(height),
         }
 
-        const containerStyles = {
+        const styles = {
             ...sizeStyles,
             ...variableBorderRadius(borderRadius, "image"),
             ...style,
-        }
-
-        const imgStyles = {
-            ["--image-object-fit" as any]: fit,
-            ...containerStyles,
         }
 
         const img = () => (
@@ -49,7 +45,9 @@ const Image = forwardRef(
                 as={as}
                 src={src}
                 alt={alt}
-                style={imgStyles}
+                style={styles}
+                data-fit={fit}
+                className={!caption && className}
                 {...rest}
             />
         )
@@ -63,7 +61,8 @@ const Image = forwardRef(
                                 ? caption.asContainer
                                 : "figcaption"
                         }
-                        style={containerStyles}
+                        style={styles}
+                        className={caption && className}
                     >
                         {img()}
 

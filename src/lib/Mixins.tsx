@@ -666,6 +666,48 @@ const Mixins = {
         width: var(--${component}-width, 100%);
         height: var(--${component}-height, auto);
     `,
+
+    DataFit: () => css`
+        &[data-fit="contain"] {
+            object-fit: contain;
+        }
+
+        &[data-fit="cover"] {
+            object-fit: cover;
+        }
+
+        &[data-fit="fill"] {
+            object-fit: fill;
+        }
+
+        &[data-fit="none"] {
+            object-fit: none;
+        }
+
+        &[data-fit="scale-down"] {
+            object-fit: scale-down;
+        }
+
+        &[data-fit="inherit"] {
+            object-fit: inherit;
+        }
+
+        &[data-fit="initial"] {
+            object-fit: initial;
+        }
+
+        &[data-fit="revert"] {
+            object-fit: revert;
+        }
+
+        &[data-fit="revert-layer"] {
+            object-fit: revert-layer;
+        }
+
+        &[data-fit="unset"] {
+            object-fit: unset;
+        }
+    `,
 }
 
 export default Mixins

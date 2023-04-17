@@ -8,8 +8,8 @@ import { setDefaultTheme } from "../../utils"
 
 const StyledVideo = styled.video`
     display: block;
-    object-fit: var(--video-object-fit);
     ${Mixins.ImgSizeVar("video")};
+    ${Mixins.DataFit()};
 `
 
 setDefaultTheme([StyledVideo])
