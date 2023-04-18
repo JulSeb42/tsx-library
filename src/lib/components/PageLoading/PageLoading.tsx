@@ -5,7 +5,7 @@ import type { ForwardedRef } from "react"
 
 import { Loader, disableScroll } from "../../"
 
-import * as Styles from "./styles"
+import { StyledPageLoading } from "./styles"
 import type { PageLoadingProps } from "./types"
 
 const PageLoading = forwardRef(
@@ -16,8 +16,6 @@ const PageLoading = forwardRef(
             loaderColor,
             loaderVariant = 1,
             stopScrolling,
-            loaderSize = 64,
-            loaderBorder = 12,
             ...rest
         }: PageLoadingProps,
         ref?: ForwardedRef<HTMLDivElement>
@@ -27,16 +25,17 @@ const PageLoading = forwardRef(
         }, [stopScrolling])
 
         const loaderProps = {
-            size: loaderSize,
+            size: 64,
             color: loaderColor
                 ? loaderColor
                 : backgroundColor === "white"
                 ? "primary"
                 : "background",
+            className: "loader",
         }
 
         return (
-            <Styles.StyledPageLoading
+            <StyledPageLoading
                 ref={ref}
                 as={as}
                 $backgroundColor={backgroundColor}
@@ -46,12 +45,12 @@ const PageLoading = forwardRef(
                     <Loader variant={loaderVariant} {...loaderProps} />
                 ) : (
                     <Loader
-                        borderWidth={loaderBorder}
+                        borderWidth={12}
                         variant={loaderVariant}
                         {...loaderProps}
                     />
                 )}
-            </Styles.StyledPageLoading>
+            </StyledPageLoading>
         )
     }
 )
