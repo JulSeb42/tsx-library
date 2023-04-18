@@ -3,17 +3,27 @@
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
-import * as Styles from "./styles"
+import { variableSpacer } from "../../"
+
+import { StyledSticky } from "./styles"
 import type { StickyProps } from "./types"
 
 const Sticky = forwardRef(
     (
-        { as, top = "s", children, ...rest }: StickyProps,
+        { as, top = "s", children, style, ...rest }: StickyProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => (
-        <Styles.StyledSticky ref={ref} as={as} $top={top} {...rest}>
+        <StyledSticky
+            ref={ref}
+            as={as}
+            style={{
+                ["--sticky-top" as any]: variableSpacer(top),
+                ...style,
+            }}
+            {...rest}
+        >
             {children}
-        </Styles.StyledSticky>
+        </StyledSticky>
     )
 )
 
