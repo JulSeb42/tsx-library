@@ -51,7 +51,7 @@ export const Skeleton = forwardRef(
                 $backgroundColor={backgroundColor}
                 {...rest}
             >
-                {animation === "shine" && <SkeletonShine />}
+                {animation === "shine" && <SkeletonShine className="shine" />}
             </Styles.StyledSkeleton>
         )
     }
@@ -93,7 +93,7 @@ export const SkeletonCard = forwardRef(
             >
                 {children}
 
-                {isShiny && <SkeletonShine />}
+                {isShiny && <SkeletonShine className="shine" />}
             </Styles.Card>
         )
     }

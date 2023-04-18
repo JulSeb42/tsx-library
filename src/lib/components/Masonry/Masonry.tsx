@@ -66,7 +66,7 @@ const Masonry = ({
             {...rest}
         >
             {[...Array(numCols)].map((_, index) => (
-                <Styles.Col style={{ ...gapVar }} key={uuid()}>
+                <Styles.Col style={{ ...gapVar }} className="col" key={uuid()}>
                     {cols[index]}
                 </Styles.Col>
             ))}

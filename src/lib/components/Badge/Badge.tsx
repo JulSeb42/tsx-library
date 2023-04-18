@@ -36,7 +36,11 @@ const Badge = forwardRef(
             >
                 {icon ? (
                     typeof icon === "string" ? (
-                        <Icon src={icon} size={size ? size * 0.7 : 16 * 0.7} />
+                        <Icon
+                            src={icon}
+                            size={size ? size * 0.7 : 16 * 0.7}
+                            className="badge-icon"
+                        />
                     ) : (
                         icon
                     )

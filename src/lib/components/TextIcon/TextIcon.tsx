@@ -38,11 +38,13 @@ const TextIcon = forwardRef(
                             getIconSize(tag, display) * 1.5
                         ),
                     }}
+                    className="icon-container"
                 >
                     <Icon
                         src={icon}
                         size={getIconSize(tag, display, iconSize)}
                         color={iconColor}
+                        className="icon"
                     />
                 </Styles.IconContainer>
 
@@ -51,11 +53,17 @@ const TextIcon = forwardRef(
                 tag === "h3" ||
                 tag === "h4" ||
                 tag === "h5" ? (
-                    <Text tag={tag} display={display} as={textAs} {...rest}>
+                    <Text
+                        tag={tag}
+                        display={display}
+                        as={textAs}
+                        className="text"
+                        {...rest}
+                    >
                         {children}
                     </Text>
                 ) : (
-                    <Text tag={tag} as={textAs} {...rest}>
+                    <Text tag={tag} as={textAs} className="text" {...rest}>
                         {children}
                     </Text>
                 )}

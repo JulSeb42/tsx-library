@@ -47,31 +47,44 @@ export const ListItem = ({
             className={classes}
             {...rest}
         >
-            <Flexbox justifyContent="space-between" gap="xxs">
+            <Flexbox
+                justifyContent="space-between"
+                gap="xxs"
+                className="item-title-container"
+            >
                 {number && (
-                    <Styles.NumberContainer>{number}.</Styles.NumberContainer>
+                    <Styles.NumberContainer className="item-number-container">
+                        {number}.
+                    </Styles.NumberContainer>
                 )}
 
-                <Styles.Title>{text}</Styles.Title>
+                <Styles.Title className="item-title">{text}</Styles.Title>
 
                 {(badge || date) && (
-                    <Styles.BadgeContainer>
+                    <Styles.BadgeContainer className="item-badge-container">
                         {badge &&
                             (typeof badge === "object" ? (
                                 badge.icon ? (
                                     <Badge
                                         icon={badge.icon}
                                         color={badgeColor}
+                                        className="item-badge"
                                     />
                                 ) : (
-                                    <Badge number={badge.number} />
+                                    <Badge
+                                        number={badge.number}
+                                        className="item-badge"
+                                    />
                                 )
                             ) : (
-                                <Badge color={badgeColor} />
+                                <Badge
+                                    color={badgeColor}
+                                    className="item-badge"
+                                />
                             ))}
 
                         {date && (
-                            <Text tag="small">
+                            <Text tag="small" className="item-date">
                                 {convertDateShort(new Date(date))}
                             </Text>
                         )}
@@ -79,7 +92,11 @@ export const ListItem = ({
                 )}
             </Flexbox>
 
-            {subtext && <Text tag="small">{subtext}</Text>}
+            {subtext && (
+                <Text tag="small" className="item-subtext">
+                    {subtext}
+                </Text>
+            )}
         </Styles.Item>
     )
 }

@@ -22,7 +22,7 @@ export const AccordionContainer = forwardRef(
             <Styles.StyledAccordion
                 ref={ref}
                 as={as}
-                className={classNames(variant, className)}
+                className={classNames(variant, className, "accordion")}
                 {...rest}
             >
                 {children}
@@ -47,27 +47,38 @@ export const AccordionItem = forwardRef(
         const [open, setOpen] = useState(isOpen)
 
         return (
-            <Styles.Item as={as} ref={ref} {...rest}>
+            <Styles.Item as={as} ref={ref} className="accordion-item" {...rest}>
                 <Styles.Button
                     onClick={() => setOpen(!open)}
                     className={classNames(
                         variant,
                         { open: open },
-                        { noBorder: noBorder }
+                        { noBorder: noBorder },
+                        "accordion-button"
                     )}
                 >
                     {title}
 
                     <Styles.IconContainer
-                        className={classNames({ open: open })}
+                        className={classNames(
+                            { open: open },
+                            "accordion-icon-container"
+                        )}
                     >
-                        <Styles.StyledIconPlus size={20} />
+                        <Styles.StyledIconPlus
+                            size={20}
+                            className="accordion-icon"
+                        />
                     </Styles.IconContainer>
                 </Styles.Button>
 
                 <Styles.Content
                     as={typeof children === "string" ? Text : "div"}
-                    className={classNames({ open: open }, variant)}
+                    className={classNames(
+                        { open: open },
+                        variant,
+                        "accordion-content"
+                    )}
                 >
                     {children}
                 </Styles.Content>

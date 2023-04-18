@@ -62,15 +62,25 @@ const Button = forwardRef(
                         size={16}
                         color="gray"
                         borderWidth={2}
+                        className="loader"
                     />
                 ) : (
-                    <Loader variant={4} size={16} color="gray" />
+                    <Loader
+                        variant={4}
+                        size={16}
+                        color="gray"
+                        className="loader"
+                    />
                 ))}
 
             {!isLoading &&
                 icons?.left &&
                 (typeof icons.left === "string" ? (
-                    <Icon src={icons.left} size={icons?.size || 16} />
+                    <Icon
+                        src={icons.left}
+                        size={icons?.size || 16}
+                        className="icon-left"
+                    />
                 ) : (
                     icons.left
                 ))}
@@ -79,7 +89,11 @@ const Button = forwardRef(
 
             {icons?.right &&
                 (typeof icons.right === "string" ? (
-                    <Icon src={icons.right} size={icons?.size || 16} />
+                    <Icon
+                        src={icons.right}
+                        size={icons?.size || 16}
+                        className="icon-left"
+                    />
                 ) : (
                     icons.right
                 ))}

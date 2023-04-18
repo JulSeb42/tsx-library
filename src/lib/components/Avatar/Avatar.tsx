@@ -46,9 +46,14 @@ const Avatar = forwardRef(
                         width="100%"
                         height="100%"
                         fit="cover"
+                        className="avatar-img"
                     />
                 ) : icon ? (
-                    <Icon src={icon} size={iconSize || size * 0.7} />
+                    <Icon
+                        src={icon}
+                        size={iconSize || size * 0.7}
+                        className="avatar-icon"
+                    />
                 ) : (
                     letter
                 )}

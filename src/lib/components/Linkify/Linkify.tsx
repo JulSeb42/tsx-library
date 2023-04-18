@@ -37,6 +37,7 @@ const Linkify = forwardRef(
                                 href={word}
                                 target={blank ? "_blank" : undefined}
                                 rel={blank ? "noreferrer noopener" : undefined}
+                                className="linkify"
                             >
                                 {word}
                             </Styles.StyledLinkify>{" "}

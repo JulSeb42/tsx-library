@@ -36,7 +36,11 @@ const Tag = forwardRef(
                 {...rest}
             >
                 {icons?.left && typeof icons?.left === "string" ? (
-                    <Icon src={icons.left} {...iconProps} />
+                    <Icon
+                        src={icons.left}
+                        className="tag-icon icon-left"
+                        {...iconProps}
+                    />
                 ) : (
                     icons?.left
                 )}
@@ -44,7 +48,11 @@ const Tag = forwardRef(
                 {children}
 
                 {icons?.right && typeof icons?.right === "string" ? (
-                    <Icon src={icons.right} {...iconProps} />
+                    <Icon
+                        src={icons.right}
+                        className="tag-icon icon-right"
+                        {...iconProps}
+                    />
                 ) : (
                     icons?.right
                 )}

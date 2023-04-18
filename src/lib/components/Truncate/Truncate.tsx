@@ -80,7 +80,7 @@ const Truncate = ({ as, children, ...rest }: TruncateProps) => {
             {children}
 
             {invisibleNumber > 0 && (
-                <Styles.Number>{`+ ${invisibleNumber}`}</Styles.Number>
+                <Styles.Number className="invisible-number">{`+ ${invisibleNumber}`}</Styles.Number>
             )}
         </Styles.StyledTruncate>
     )

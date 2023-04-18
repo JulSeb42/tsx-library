@@ -26,7 +26,7 @@ const Form = forwardRef(
                 {children}
 
                 {(buttonPrimary || buttonSecondary) && (
-                    <Flexbox>
+                    <Flexbox className="form-buttons-container">
                         {buttonPrimary && (
                             <Button
                                 type="submit"
@@ -44,6 +44,7 @@ const Form = forwardRef(
                                 }}
                                 isLoading={isLoading}
                                 disabled={disabled}
+                                className="form-button-primary"
                             >
                                 {typeof buttonPrimary === "object"
                                     ? buttonPrimary.text
@@ -61,6 +62,7 @@ const Form = forwardRef(
                                         right: buttonSecondary.iconRight,
                                     }}
                                     to={buttonSecondary.to}
+                                    className="form-button-secondary"
                                 >
                                     {buttonSecondary.text || "Cancel"}
                                 </Button>
@@ -74,6 +76,7 @@ const Form = forwardRef(
                                             right: buttonSecondary.iconRight,
                                         }}
                                         onClick={buttonSecondary.onClick}
+                                        className="form-button-secondary"
                                     >
                                         {buttonSecondary.text || "Reset"}
                                     </Button>

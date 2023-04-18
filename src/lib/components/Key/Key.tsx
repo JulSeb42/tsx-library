@@ -2,6 +2,7 @@
 
 import React, { forwardRef, Fragment } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
 import { Flexbox, uuid } from "../../"
 
@@ -10,7 +11,14 @@ import type { KeyProps } from "./types"
 
 const Key = forwardRef(
     (
-        { as, keys, withSeparator, accentColor = "primary", ...rest }: KeyProps,
+        {
+            as,
+            keys,
+            withSeparator,
+            accentColor = "primary",
+            className,
+            ...rest
+        }: KeyProps,
         ref?: ForwardedRef<HTMLSpanElement>
     ) => {
         const props = {
@@ -22,10 +30,15 @@ const Key = forwardRef(
 
         if (withSeparator)
             return (
-                <Flexbox gap="xxs" alignItems="center" inline>
+                <Flexbox
+                    gap="xxs"
+                    alignItems="center"
+                    className={className}
+                    inline
+                >
                     {keys.map((key, i) => (
                         <Fragment key={uuid()}>
-                            <Styles.StyledKey {...props}>
+                            <Styles.StyledKey className="key" {...props}>
                                 {key}
                             </Styles.StyledKey>
 
@@ -37,7 +50,14 @@ const Key = forwardRef(
                 </Flexbox>
             )
 
-        return <Styles.StyledKey {...props}>{keys.join("")}</Styles.StyledKey>
+        return (
+            <Styles.StyledKey
+                className={classNames("key", className)}
+                {...props}
+            >
+                {keys.join("")}
+            </Styles.StyledKey>
+        )
     }
 )
 

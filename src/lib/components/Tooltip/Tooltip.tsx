@@ -31,7 +31,10 @@ const Tooltip = forwardRef(
             >
                 <Styles.Tip
                     ref={tooltipRef}
-                    className={classNames({ visible: isVisible })}
+                    className={classNames(
+                        { visible: isVisible },
+                        "tooltip-tip"
+                    )}
                     style={{
                         ["--tip-width" as any]: stringifyPx(width),
                     }}

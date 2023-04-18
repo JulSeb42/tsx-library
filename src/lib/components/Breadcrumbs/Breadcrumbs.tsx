@@ -37,6 +37,7 @@ const Breadcrumbs = forwardRef(
                               as={to ? Link : href ? "a" : "span"}
                               href={href ? href : undefined}
                               to={to ? to : undefined}
+                              className="breadcrumbs-item"
                           >
                               {text}
                           </Styles.Item>
@@ -45,15 +46,23 @@ const Breadcrumbs = forwardRef(
                               <Styles.Separator
                                   $separator={separator || "slash"}
                                   $customIcon={!!customIcon}
+                                  className="breadcrumbs-separator"
                               >
                                   {customIcon ? (
                                       typeof customIcon === "string" ? (
-                                          <Icon src={customIcon} size={20} />
+                                          <Icon
+                                              src={customIcon}
+                                              size={20}
+                                              className="breadcrumbs-icon"
+                                          />
                                       ) : (
                                           customIcon
                                       )
                                   ) : separator === "icon" ? (
-                                      <ChevronRightIcon size={20} />
+                                      <ChevronRightIcon
+                                          size={20}
+                                          className="breadcrumbs-icon"
+                                      />
                                   ) : (
                                       "/"
                                   )}

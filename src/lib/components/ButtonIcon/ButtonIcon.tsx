@@ -31,7 +31,7 @@ const Tooltip = ({
         <Styles.TooltipContainer
             onMouseEnter={() => setIsVisible(true)}
             onMouseLeave={() => setIsVisible(false)}
-            className={className}
+            className={classNames(className, "tooltip-container")}
             style={{
                 ["--button-size" as any]: size && stringifyPx(size),
             }}
@@ -107,9 +107,14 @@ const ButtonIcon = forwardRef(
                         size={iconSize}
                         color="gray"
                         borderWidth={loaderBorder}
+                        className="loader"
                     />
                 ) : icon && typeof icon === "string" ? (
-                    <Icon src={icon} size={iconSize || size * 0.7} />
+                    <Icon
+                        src={icon}
+                        size={iconSize || size * 0.7}
+                        className="icon"
+                    />
                 ) : (
                     icon
                 )}

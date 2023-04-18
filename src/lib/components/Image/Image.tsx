@@ -2,6 +2,7 @@
 
 import React, { forwardRef, Suspense, lazy } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
 import { Fallback } from "../Fallback"
 import { variableBorderRadius, stringifyPx } from "../../"
@@ -47,7 +48,7 @@ const Image = forwardRef(
                 alt={alt}
                 style={styles}
                 data-fit={fit}
-                className={!caption && className}
+                className={!caption ? classNames(className) : "img"}
                 {...rest}
             />
         )
@@ -62,7 +63,9 @@ const Image = forwardRef(
                                 : "figcaption"
                         }
                         style={styles}
-                        className={caption && className}
+                        className={
+                            caption ? classNames(className) : "img-container"
+                        }
                     >
                         {img()}
 
@@ -72,6 +75,7 @@ const Image = forwardRef(
                                     ? caption.background
                                     : "black"
                             }
+                            className="img-caption"
                         >
                             {typeof caption === "object"
                                 ? caption.text
