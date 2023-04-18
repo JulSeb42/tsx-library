@@ -3,7 +3,9 @@
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
-import * as Styles from "./styles"
+import { stringifyPx } from "../../"
+
+import { StyledCover, Content, CoverImage } from "./styles"
 import type { CoverProps } from "./types"
 
 const Cover = forwardRef(
@@ -16,57 +18,44 @@ const Cover = forwardRef(
             overlay,
             height = "100vh",
             gap = "s",
-            textColor = "white",
             flexDirection = "column",
-            flexWrap,
             justifyContent = "center",
-            justifyItems,
-            alignContent,
             alignItems = "center",
-            textAlign = "center",
-            columnGap,
-            rowGap,
-            padding = {
-                topBottom: "xxl",
-                leftRight: "xxl",
-            },
+            padding = "xxl",
+            style,
             ...rest
         }: CoverProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => (
-        <Styles.StyledCover
+        <StyledCover
             ref={ref}
             as={as}
-            $overlay={overlay}
-            $height={height}
+            data-overlay={overlay}
+            style={{
+                ["--cover-height" as any]: height && stringifyPx(height),
+                ...style,
+            }}
             {...rest}
         >
-            <Styles.CoverImage src={src} alt={alt} height={height} />
+            <CoverImage
+                src={src}
+                alt={alt}
+                height={height}
+                className="cover-image"
+            />
 
-            <Styles.Content
-                $color={
-                    textColor
-                        ? textColor
-                        : overlay === "gradient-white" || overlay === "white"
-                        ? "black"
-                        : "white"
-                }
-                $gap={gap}
-                $alignContent={alignContent}
-                $alignItems={alignItems}
-                $columnGap={columnGap}
-                $flexDirection={flexDirection}
-                $flexWrap={flexWrap}
-                $height={height}
-                $justifyContent={justifyContent}
-                $justifyItems={justifyItems}
-                $padding={padding}
-                $rowGap={rowGap}
-                $textAlign={textAlign}
+            <Content
+                data-overlay={overlay}
+                className="cover-content"
+                gap={gap}
+                flexDirection={flexDirection}
+                justifyContent={justifyContent}
+                alignItems={alignItems}
+                padding={padding}
             >
                 {children}
-            </Styles.Content>
-        </Styles.StyledCover>
+            </Content>
+        </StyledCover>
     )
 )
 
