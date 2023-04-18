@@ -40,7 +40,7 @@ const BaseProgressBar = styled.meter`
     }
 
     &.is-animated:before {
-        animation: ${Progress} 2000ms 1;
+        animation: ${Progress} calc(var(--progress-speed) * 50ms) 1;
     }
 `
 
