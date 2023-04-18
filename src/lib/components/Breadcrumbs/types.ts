@@ -4,10 +4,7 @@ import type { ElementType, HTMLAttributes, ReactNode } from "react"
 
 import type { BreadcrumbsItemProps, ColorsHoverTypes } from "../../types"
 
-enum separators {
-    slash,
-    icon,
-}
+const separators = { slash: "slash", icon: "icon" } as const
 
 export type SeparatorTypes = keyof typeof separators
 

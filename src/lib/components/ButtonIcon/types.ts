@@ -4,18 +4,15 @@ import type { ButtonHTMLAttributes, ElementType, HTMLAttributes } from "react"
 
 import type { ButtonLinkTypes, ColorsHoverTypes } from "../../types"
 
-enum buttonIconVariants {
-    plain,
-    transparent,
-    ghost,
-}
+const buttonIconVariants = {
+    plain: "plain",
+    transparent: "transparent",
+    ghost: "ghost",
+} as const
 
 export type ButtonIconVariantTypes = keyof typeof buttonIconVariants
 
-enum labelDirections {
-    top,
-    bottom,
-}
+const labelDirections = { top: "top", bottom: "bottom" } as const
 
 export type ButtonIconLabelDirectionsTypes = keyof typeof labelDirections
 

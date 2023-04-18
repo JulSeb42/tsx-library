@@ -2,11 +2,7 @@
 
 import type { ButtonHTMLAttributes, ElementType, HTMLAttributes } from "react"
 
-enum justify {
-    left,
-    right,
-    center,
-}
+const justify = { left: "left", right: "right", center: "center" } as const
 
 export type JustifyType = keyof typeof justify
 

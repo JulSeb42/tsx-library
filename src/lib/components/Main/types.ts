@@ -2,19 +2,16 @@
 
 import type { ElementType, HTMLAttributes } from "react"
 
-enum mainSizes {
-    default,
-    large,
-    form,
-    full,
-}
+const mainSizes = {
+    default: "default",
+    large: "large",
+    form: "form",
+    full: "full",
+} as const
 
 export type MainSizeTypes = keyof typeof mainSizes | number
 
-const mainPositions = {
-    1: 1,
-    2: 2,
-} as const
+const mainPositions = { 1: 1, 2: 2 } as const
 
 export type MainPositionTypes = keyof typeof mainPositions
 

@@ -12,18 +12,15 @@ import type {
     InputVariantTypes,
 } from "../InputComponents/types"
 
-enum navMenuVariants {
-    left,
-    right,
-}
+const navMenuVariants = { left: "left", right: "right" } as const
 
 export type NavMenuVariantsTypes = keyof typeof navMenuVariants
 
-enum navMobileVariants {
-    full,
-    top,
-    drawer,
-}
+const navMobileVariants = {
+    full: "full",
+    top: "top",
+    drawer: "drawer",
+} as const
 
 export type NavMobileVariantsTypes = keyof typeof navMobileVariants
 

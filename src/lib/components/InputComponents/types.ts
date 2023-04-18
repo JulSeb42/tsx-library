@@ -4,17 +4,11 @@ import type { HTMLAttributes } from "react"
 
 import type { ColorsHoverTypes, ValidationTypes } from "../../types"
 
-enum inputVariants {
-    rounded,
-    pill,
-}
+const inputVariants = { rounded: "rounded", pill: "pill" } as const
 
 export type InputVariantTypes = keyof typeof inputVariants
 
-enum inputBackgrounds {
-    light,
-    dark,
-}
+const inputBackgrounds = { light: "light", dark: "dark" } as const
 
 export type InputBackgroundTypes = keyof typeof inputBackgrounds
 

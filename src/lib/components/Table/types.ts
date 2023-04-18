@@ -9,22 +9,22 @@ import type {
 } from "../../types"
 // import type { LinkStyleTypes, CodeStyleTypes } from "../Text/types"
 
-enum tableStyle {
-    bordered,
-    stripped,
-    "border-bottom",
-}
+const tableStyle = {
+    bordered: "bordered",
+    stripped: "stripped",
+    "border-bottom": "border-bottom",
+} as const
 
 export type TableStyleTypes = keyof typeof tableStyle
 
-enum vAlign {
-    baseline,
-    top,
-    middle,
-    bottom,
-    sub,
-    "text-top",
-}
+const vAlign = {
+    baseline: "baseline",
+    top: "top",
+    middle: "middle",
+    bottom: "bottom",
+    sub: "sub",
+    "text-top": "text-top",
+} as const
 
 export type TableVerticalAlignTypes = keyof typeof vAlign
 

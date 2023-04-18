@@ -14,24 +14,24 @@ import type {
 } from "../InputComponents/types"
 import type { ExtendedInputContainerProps } from "../InputContainer/types"
 
-enum inputTypes {
-    color,
-    date,
-    "datetime-local",
-    email,
-    file,
-    month,
-    number,
-    password,
-    search,
-    tel,
-    text,
-    time,
-    url,
-    week,
-    textarea,
-    select,
-}
+const inputTypes = {
+    color: "color",
+    date: "date",
+    "datetime-local": "datetime-local",
+    email: "email",
+    file: "file",
+    month: "month",
+    number: "number",
+    password: "password",
+    search: "search",
+    tel: "tel",
+    text: "text",
+    time: "time",
+    url: "url",
+    week: "week",
+    textarea: "textarea",
+    select: "select",
+} as const
 
 export type InputTypesType = keyof typeof inputTypes
 

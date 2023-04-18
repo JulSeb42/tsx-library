@@ -9,10 +9,7 @@ import type {
     RequireAtLeastOne,
 } from "../../types"
 
-enum directions {
-    horizontal,
-    vertical,
-}
+const directions = { horizontal: "horizontal", vertical: "vertical" } as const
 
 export type FooterDirectionsTypes = keyof typeof directions
 

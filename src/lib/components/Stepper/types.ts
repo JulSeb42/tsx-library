@@ -4,10 +4,7 @@ import type { ElementType, HTMLAttributes, ReactNode } from "react"
 
 import type { LinkTypesBlank, StepProps as StepItemProps } from "../../types"
 
-enum direction {
-    column,
-    row,
-}
+const direction = { column: "column", row: "row" } as const
 
 export type StepperDirectionType = keyof typeof direction
 

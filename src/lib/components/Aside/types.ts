@@ -2,10 +2,7 @@
 
 import type { ElementType, HTMLAttributes } from "react"
 
-enum asideSizes {
-    default,
-    small,
-}
+const asideSizes = { default: "default", small: "small" } as const
 
 export type AsideSizeTypes = keyof typeof asideSizes | number
 

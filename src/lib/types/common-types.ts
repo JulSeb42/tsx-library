@@ -6,118 +6,114 @@ import type { RequireAtLeastOne } from "./"
 
 /* Library colors */
 
-enum libColors {
-    black,
-    white,
-    "gray-50",
-    "gray-100",
-    "gray-200",
-    "gray-300",
-    "gray-400",
-    "gray-500",
-    "gray-600",
-    "gray-700",
-    "gray-800",
-    "gray-900",
-    "primary-50",
-    "primary-100",
-    "primary-200",
-    "primary-300",
-    "primary-400",
-    "primary-500",
-    "primary-600",
-    "primary-700",
-    "primary-800",
-    "primary-900",
-    "secondary-50",
-    "secondary-100",
-    "secondary-200",
-    "secondary-300",
-    "secondary-400",
-    "secondary-500",
-    "secondary-600",
-    "secondary-700",
-    "secondary-800",
-    "secondary-900",
-    "success-50",
-    "success-100",
-    "success-200",
-    "success-300",
-    "success-400",
-    "success-500",
-    "success-600",
-    "success-700",
-    "success-800",
-    "success-900",
-    "danger-50",
-    "danger-100",
-    "danger-200",
-    "danger-300",
-    "danger-400",
-    "danger-500",
-    "danger-600",
-    "danger-700",
-    "danger-800",
-    "danger-900",
-    "warning-50",
-    "warning-100",
-    "warning-200",
-    "warning-300",
-    "warning-400",
-    "warning-500",
-    "warning-600",
-    "warning-700",
-    "warning-800",
-    "warning-900",
-    currentColor,
-    transparent,
-    background,
-    font,
-}
+const libColors = {
+    black: "black",
+    white: "white",
+    "gray-50": "gray-50",
+    "gray-100": "gray-100",
+    "gray-200": "gray-200",
+    "gray-300": "gray-300",
+    "gray-400": "gray-400",
+    "gray-500": "gray-500",
+    "gray-600": "gray-600",
+    "gray-700": "gray-700",
+    "gray-800": "gray-800",
+    "gray-900": "gray-900",
+    "primary-50": "primary-50",
+    "primary-100": "primary-100",
+    "primary-200": "primary-200",
+    "primary-300": "primary-300",
+    "primary-400": "primary-400",
+    "primary-500": "primary-500",
+    "primary-600": "primary-600",
+    "primary-700": "primary-700",
+    "primary-800": "primary-800",
+    "primary-900": "primary-900",
+    "secondary-50": "secondary-50",
+    "secondary-100": "secondary-100",
+    "secondary-200": "secondary-200",
+    "secondary-300": "secondary-300",
+    "secondary-400": "secondary-400",
+    "secondary-500": "secondary-500",
+    "secondary-600": "secondary-600",
+    "secondary-700": "secondary-700",
+    "secondary-800": "secondary-800",
+    "secondary-900": "secondary-900",
+    "success-50": "success-50",
+    "success-100": "success-100",
+    "success-200": "success-200",
+    "success-300": "success-300",
+    "success-400": "success-400",
+    "success-500": "success-500",
+    "success-600": "success-600",
+    "success-700": "success-700",
+    "success-800": "success-800",
+    "success-900": "success-900",
+    "danger-50": "danger-50",
+    "danger-100": "danger-100",
+    "danger-200": "danger-200",
+    "danger-300": "danger-300",
+    "danger-400": "danger-400",
+    "danger-500": "danger-500",
+    "danger-600": "danger-600",
+    "danger-700": "danger-700",
+    "danger-800": "danger-800",
+    "danger-900": "danger-900",
+    "warning-50": "warning-50",
+    "warning-100": "warning-100",
+    "warning-200": "warning-200",
+    "warning-300": "warning-300",
+    "warning-400": "warning-400",
+    "warning-500": "warning-500",
+    "warning-600": "warning-600",
+    "warning-700": "warning-700",
+    "warning-800": "warning-800",
+    "warning-900": "warning-900",
+    currentColor: "currentColor",
+    transparent: "transparent",
+    background: "background",
+    font: "font",
+} as const
 
 export type LibColorsTypes = keyof typeof libColors
 
 /* Colors hover */
 
-enum colorsHover {
-    primary,
-    secondary,
-    success,
-    danger,
-    warning,
-    white,
-    font,
-    background,
-}
+const colorsHover = {
+    primary: "primary",
+    secondary: "secondary",
+    success: "success",
+    danger: "danger",
+    warning: "warning",
+    white: "white",
+    font: "font",
+    background: "background",
+} as const
 
 export type ColorsHoverTypes = keyof typeof colorsHover
 
 /* Colors input */
 
-enum colorsInput {
-    gray,
-}
+const colorsInput = { gray: "gray" } as const
 
 export type ColorsInputTypes = keyof typeof colorsInput | ColorsHoverTypes
 
 /* Colors short */
 
-enum colorsShort {
-    black,
-}
+const colorsShort = { black: "black" } as const
 
 export type ColorsShortTypes = keyof typeof colorsShort | ColorsInputTypes
 
 /* Overlays */
 
-enum overlays {
-    "overlay-black-50",
-    "overlay-black-80",
-    "overlay-white-50",
-    "overlay-white-80",
-    "overlay-gradient-black",
-    "overlay-gradient-white",
-}
+const overlays = {
+    "overlay-black-50": "overlay-black-50",
+    "overlay-black-80": "overlay-black-80",
+    "overlay-white-50": "overlay-white-50",
+    "overlay-white-80": "overlay-white-80",
+    "overlay-gradient-black": "overlay-gradient-black",
+    "overlay-gradient-white": "overlay-gradient-white",
+} as const
 
 export type OverlayTypes = keyof typeof overlays
 
@@ -127,31 +123,27 @@ export type AllColorsTypes = LibColorsTypes | ColorsShortTypes
 
 /*==================== Font families ====================*/
 
-enum fontFamilies {
-    body,
-    code,
-    custom,
-}
+const fontFamilies = { body: "body", code: "code", custom: "custom" } as const
 
 export type FontFamiliesTypes = keyof typeof fontFamilies
 
 /*==================== Font sizes ====================*/
 
-enum fontSizes {
-    "display-h1",
-    "display-h2",
-    "display-h3",
-    "display-h4",
-    "display-h5",
-    "title-h1",
-    "title-h2",
-    "title-h3",
-    "title-h4",
-    "title-h5",
-    "title-h6",
-    body,
-    small,
-}
+const fontSizes = {
+    "display-h1": "display-h1",
+    "display-h2": "display-h2",
+    "display-h3": "display-h3",
+    "display-h4": "display-h4",
+    "display-h5": "display-h5",
+    "title-h1": "title-h1",
+    "title-h2": "title-h2",
+    "title-h3": "title-h3",
+    "title-h4": "title-h4",
+    "title-h5": "title-h5",
+    "title-h6": "title-h6",
+    body: "body",
+    small: "small",
+} as const
 
 export type FontSizeTypes = keyof typeof fontSizes
 
@@ -159,34 +151,27 @@ export type CustomFontSizeTypes = string | number
 
 /*==================== Font weights ====================*/
 
-enum weights {
-    regular,
-    bold,
-    black,
-}
+const weights = { regular: "regular", bold: "bold", black: "black" } as const
 
 export type FontWeightTypes = keyof typeof weights | number
 
 /*==================== Line heights ====================*/
 
-enum lineHeights {
-    regular,
-    code,
-}
+const lineHeights = { regular: "regular", code: "code" } as const
 
 export type LineHeightsTypes = keyof typeof lineHeights | number
 
 /*==================== Shadows ====================*/
 
-enum shadows {
-    xxl,
-    xl,
-    l,
-    m,
-    s,
-    xs,
-    none,
-}
+const shadows = {
+    xxl: "xxl",
+    xl: "xl",
+    l: "l",
+    m: "m",
+    s: "s",
+    xs: "xs",
+    none: "none",
+} as const
 
 export type ShadowsTypes = keyof typeof shadows | null
 
@@ -198,17 +183,17 @@ export type BoxShadowProps = {
 
 /*==================== Radiuses ====================*/
 
-enum radiuses {
-    xxl,
-    xl,
-    l,
-    m,
-    s,
-    xs,
-    round,
-    circle,
-    none,
-}
+const radiuses = {
+    xxl: "xxl",
+    xl: "xl",
+    l: "l",
+    m: "m",
+    s: "s",
+    xs: "xs",
+    round: "round",
+    circle: "circle",
+    none: "none",
+} as const
 
 export type RadiusesTypes =
     | keyof typeof radiuses
@@ -223,32 +208,32 @@ export type RadiusesTypes =
 
 /*==================== Text align ====================*/
 
-enum textAlign {
-    left,
-    center,
-    right,
-    justify,
-    inherit,
-    initial,
-    revert,
-    "revert-layer",
-    unset,
-}
+const textAlign = {
+    left: "left",
+    center: "center",
+    right: "right",
+    justify: "justify",
+    inherit: "inherit",
+    initial: "initial",
+    revert: "revert",
+    "revert-layer": "revert-layer",
+    unset: "unset",
+} as const
 
 export type TextAlignTypes = keyof typeof textAlign
 
 /*==================== Spacers ====================*/
 
-enum spacers {
-    xxl,
-    xl,
-    l,
-    m,
-    s,
-    xs,
-    xxs,
-    none,
-}
+const spacers = {
+    xxl: "xxl",
+    xl: "xl",
+    l: "l",
+    m: "m",
+    s: "s",
+    xs: "xs",
+    xxs: "xxs",
+    none: "none",
+} as const
 
 export type SpacersTypes = keyof typeof spacers | number | null
 
@@ -267,34 +252,30 @@ export type PaddingTypes =
 
 /*==================== Transitions ====================*/
 
-enum transitions {
-    short,
-    long,
-    bezier,
-}
+const transitions = { short: "short", long: "long", bezier: "bezier" } as const
 
 export type TransitionTypes = keyof typeof transitions
 
 /*==================== Text decoration ====================*/
 
-enum textDecorations {
-    underline,
-    overline,
-    "line-through",
-    initial,
-    inherit,
-    none,
-}
+const textDecorations = {
+    underline: "underline",
+    overline: "overline",
+    "line-through": "line-through",
+    initial: "initial",
+    inherit: "inherit",
+    none: "none",
+} as const
 
 export type TextDecorationTypes = keyof typeof textDecorations
 
 /*==================== Custom position ====================*/
 
-enum positions {
-    relative,
-    absolute,
-    fixed,
-}
+const positions = {
+    relative: "relative",
+    absolute: "absolute",
+    fixed: "fixed",
+} as const
 
 export type PositionsTypes = keyof typeof positions
 
@@ -311,51 +292,51 @@ export type ObjectPositionTypes = {
 
 /* Justify items */
 
-enum gridJustifyItems {
-    start,
-    end,
-    center,
-    stretch,
-}
+const gridJustifyItems = {
+    start: "start",
+    end: "end",
+    center: "center",
+    stretch: "stretch",
+} as const
 
 export type GridJustifyItemsTypes = keyof typeof gridJustifyItems | null
 
 /* Align items */
 
-enum gridAlignItems {
-    start,
-    end,
-    center,
-    stretch,
-}
+const gridAlignItems = {
+    start: "start",
+    end: "end",
+    center: "center",
+    stretch: "stretch",
+} as const
 
 export type GridAlignItemsTypes = keyof typeof gridAlignItems | null
 
 /* Justify content */
 
-enum gridJustifyContent {
-    start,
-    end,
-    center,
-    stretch,
-    "space-around",
-    "space-between",
-    "space-evenly",
-}
+const gridJustifyContent = {
+    start: "start",
+    end: "end",
+    center: "center",
+    stretch: "stretch",
+    "space-around": "space-around",
+    "space-between": "space-between",
+    "space-evenly": "space-evenly",
+} as const
 
 export type GridJustifyContentTypes = keyof typeof gridJustifyContent | null
 
 /* Align content */
 
-enum gridAlignContent {
-    start,
-    end,
-    center,
-    stretch,
-    "space-around",
-    "space-between",
-    "space-evenly",
-}
+const gridAlignContent = {
+    start: "start",
+    end: "end",
+    center: "center",
+    stretch: "stretch",
+    "space-around": "space-around",
+    "space-between": "space-between",
+    "space-evenly": "space-evenly",
+} as const
 
 export type GridAlignContentTypes = keyof typeof gridAlignContent | null
 
@@ -363,99 +344,101 @@ export type GridAlignContentTypes = keyof typeof gridAlignContent | null
 
 /* Direction */
 
-enum flexDirection {
-    row,
-    "row-reverse",
-    column,
-    "column-reverse",
-}
+export const flexDirectionValues = {
+    row: "row",
+    "row-reverse": "row-reverse",
+    column: "column",
+    "column-reverse": "column-reverse",
+} as const
 
-export type FlexDirectionTypes = keyof typeof flexDirection | null
+export type FlexDirectionTypes = keyof typeof flexDirectionValues | null
 
 /* Wrap */
 
-enum flexWrap {
-    nowrap,
-    wrap,
-    "wrap-reverse",
-}
+export const flexWrapValues = {
+    nowrap: "nowrap",
+    wrap: "wrap",
+    "wrap-reverse": "wrap-reverse",
+} as const
 
-export type FlexWrapTypes = keyof typeof flexWrap | null
+export type FlexWrapTypes = keyof typeof flexWrapValues | null
 
 /* Justify content */
 
-enum flexJustifyContent {
-    "flex-start",
-    "flex-end",
-    center,
-    "space-between",
-    "space-around",
-    "space-evenly",
-}
+const flexJustifyContentValues = {
+    "flex-start": "flex-start",
+    "flex-end": "flex-end",
+    center: "center",
+    "space-between": "space-between",
+    "space-around": "space-around",
+    "space-evenly": "space-evenly",
+} as const
 
-export type FlexJustifyContentTypes = keyof typeof flexJustifyContent | null
+export type FlexJustifyContentTypes =
+    | keyof typeof flexJustifyContentValues
+    | null
 
 /* Align items */
 
-enum flexAlignItems {
-    stretch,
-    "flex-start",
-    "flex-end",
-    center,
-    baseline,
-}
+const flexAlignItems = {
+    stretch: "stretch",
+    "flex-start": "flex-start",
+    "flex-end": "flex-end",
+    center: "center",
+    baseline: "baseline",
+} as const
 
 export type FlexAlignItemsTypes = keyof typeof flexAlignItems | null
 
 /* Justify items */
 
-enum flexJustifyItems {
-    normal,
-    stretch,
-    baseline,
-    center,
-    start,
-    end,
-    "flex-start",
-    "flex-end",
-    "self-start",
-    "self-end",
-    left,
-    right,
-    legacy,
-}
+const flexJustifyItems = {
+    normal: "normal",
+    stretch: "stretch",
+    baseline: "baseline",
+    center: "center",
+    start: "start",
+    end: "end",
+    "flex-start": "flex-start",
+    "flex-end": "flex-end",
+    "self-start": "self-start",
+    "self-end": "self-end",
+    left: "left",
+    right: "right",
+    legacy: "legacy",
+} as const
 
 export type FlexJustifyItemsTypes = keyof typeof flexJustifyItems | null
 
 /* Align content */
 
-enum flexAlignContent {
-    "flex-start",
-    "flex-end",
-    center,
-    "space-between",
-    "space-around",
-    "space-evenly",
-    stretch,
-    normal,
-}
+const flexAlignContent = {
+    "flex-start": "flex-start",
+    "flex-end": "flex-end",
+    center: "center",
+    "space-between": "space-between",
+    "space-around": "space-around",
+    "space-evenly": "space-evenly",
+    stretch: "stretch",
+    normal: "normal",
+} as const
 
 export type FlexAlignContentTypes = keyof typeof flexAlignContent | null
 
 /*==================== Object fit ====================*/
 
-enum objectFit {
-    contain,
-    cover,
-    fill,
-    none,
-    "scale-down",
-    inherit,
-    initial,
-    revert,
-    "revert-layer",
-    unset,
-}
+const objectFit = {
+    contain: "contain",
+    cover: "cover",
+    fill: "fill",
+    none: "none",
+    "scale-down": "scale-down",
+    inherit: "inherit",
+    initial: "initial",
+    revert: "revert",
+    "revert-layer": "revert-layer",
+    unset: "unset",
+} as const
 
 export type ObjectFitTypes = keyof typeof objectFit | null
 
@@ -463,72 +446,69 @@ export type ObjectFitTypes = keyof typeof objectFit | null
 
 /* Validation */
 
-enum validation {
-    passed,
-    "not-passed",
-}
+const validation = { passed: "passed", "not-passed": "not-passed" } as const
 
 export type ValidationTypes = keyof typeof validation | undefined
 
 /*==================== Cursor ====================*/
 
-enum cursors {
-    alias,
-    "all-scroll",
-    auto,
-    cell,
-    "col-resize",
-    "context-menu",
-    copy,
-    crosshair,
-    default,
-    "e-resize",
-    "ew-resize",
-    grab,
-    grabbing,
-    help,
-    move,
-    "n-resize",
-    "ne-resize",
-    "nesw-resize",
-    "ns-resize",
-    "nw-resize",
-    "nwse-resize",
-    "no-drop",
-    none,
-    "not-allowed",
-    pointer,
-    progress,
-    "row-resize",
-    "s-resize",
-    "se-resize",
-    "sw-resize",
-    text,
-    "vertical-text",
-    "w-resize",
-    wait,
-    "zoom-in",
-    "zoom-out",
-    initial,
-    inherit,
-}
+const cursors = {
+    alias: "alias",
+    "all-scroll": "all-scroll",
+    auto: "auto",
+    cell: "cell",
+    "col-resize": "col-resize",
+    "context-menu": "context-menu",
+    copy: "copy",
+    crosshair: "crosshair",
+    default: "default",
+    "e-resize": "e-resize",
+    "ew-resize": "ew-resize",
+    grab: "grab",
+    grabbing: "grabbing",
+    help: "help",
+    move: "move",
+    "n-resize": "n-resize",
+    "ne-resize": "ne-resize",
+    "nesw-resize": "nesw-resize",
+    "ns-resize": "ns-resize",
+    "nw-resize": "nw-resize",
+    "nwse-resize": "nwse-resize",
+    "no-drop": "no-drop",
+    none: "none",
+    "not-allowed": "not-allowed",
+    pointer: "pointer",
+    progress: "progress",
+    "row-resize": "row-resize",
+    "s-resize": "s-resize",
+    "se-resize": "se-resize",
+    "sw-resize": "sw-resize",
+    text: "text",
+    "vertical-text": "vertical-text",
+    "w-resize": "w-resize",
+    wait: "wait",
+    "zoom-in": "zoom-in",
+    "zoom-out": "zoom-out",
+    initial: "initial",
+    inherit: "inherit",
+} as const
 
 export type CursorTypes = keyof typeof cursors
 
 /*==================== Border styles ====================*/
 
-enum borderStyles {
-    dotted,
-    dashed,
-    solid,
-    double,
-    groove,
-    ridge,
-    inset,
-    outset,
-    none,
-    hidden,
-}
+const borderStyles = {
+    dotted: "dotted",
+    dashed: "dashed",
+    solid: "solid",
+    double: "double",
+    groove: "groove",
+    ridge: "ridge",
+    inset: "inset",
+    outset: "outset",
+    none: "none",
+    hidden: "hidden",
+} as const
 
 export type BorderStylesTypes = keyof typeof borderStyles
 

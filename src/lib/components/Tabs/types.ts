@@ -9,17 +9,11 @@ import type {
     SpacersTypes,
 } from "../../types"
 
-enum tabsVariants {
-    basic,
-    rounded,
-}
+const tabsVariants = { basic: "basic", rounded: "rounded" } as const
 
 export type TabsVariantsType = keyof typeof tabsVariants
 
-enum justify {
-    start,
-    stretch,
-}
+const justify = { start: "start", stretch: "stretch" } as const
 
 export type TabsJustifyTypes = keyof typeof justify
 

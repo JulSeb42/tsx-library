@@ -8,10 +8,7 @@ import type {
     ObjectFitTypes,
 } from "../../types"
 
-enum buttonPositions {
-    left,
-    right,
-}
+const buttonPositions = { left: "left", right: "right" } as const
 
 export type ButtonPositionsTypes = keyof typeof buttonPositions
 

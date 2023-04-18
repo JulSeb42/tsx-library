@@ -5,19 +5,16 @@ import type { ButtonHTMLAttributes, ElementType, HTMLAttributes } from "react"
 import type { ButtonLinkTypes, ColorsHoverTypes } from "../../types"
 import type { LoaderVariantTypes } from "../Loader/types"
 
-enum buttonVariants {
-    plain,
-    outline,
-    transparent,
-    ghost,
-}
+const buttonVariants = {
+    plain: "plain",
+    outline: "outline",
+    transparent: "transparent",
+    ghost: "ghost",
+} as const
 
 export type ButtonVariantTypes = keyof typeof buttonVariants
 
-enum buttonSizes {
-    default,
-    small,
-}
+const buttonSizes = { default: "default", small: "small" } as const
 
 export type ButtonSizesTypes = keyof typeof buttonSizes
 

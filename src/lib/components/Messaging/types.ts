@@ -9,10 +9,7 @@ import type {
     SpacersTypes,
 } from "../../types"
 
-enum messageType {
-    sent,
-    received,
-}
+const messageType = { sent: "sent", received: "received" } as const
 
 export type MessageTypeTypes = keyof typeof messageType
 

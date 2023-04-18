@@ -6,10 +6,7 @@ import type { DropdownItemProps as ItemProps } from "../../types"
 import type { FlexboxProps } from "../Flexbox/types"
 import type { ListDirectionTypes } from "../ListInputs/types"
 
-enum justify {
-    left,
-    right,
-}
+const justify = { left: "left", right: "right" } as const
 
 export type DropdownJustifyTypes = keyof typeof justify
 

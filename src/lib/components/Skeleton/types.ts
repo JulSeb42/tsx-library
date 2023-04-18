@@ -5,10 +5,7 @@ import type { HTMLAttributes, ElementType } from "react"
 import type { AllColorsTypes, RadiusesTypes, BorderTypes } from "../../types"
 import type { FlexboxProps } from "../Flexbox/types"
 
-enum animations {
-    pulse,
-    shine,
-}
+const animations = { pulse: "pulse", shine: "shine" } as const
 
 export type SkeletonAnimationTypes = keyof typeof animations | null
 

@@ -8,11 +8,11 @@ import type {
 } from "../../types"
 import type { ButtonSizesTypes } from "../Button/types"
 
-enum buttonGroupVariants {
-    plain,
-    transparent,
-    ghost,
-}
+const buttonGroupVariants = {
+    plain: "plain",
+    transparent: "transparent",
+    ghost: "ghost",
+} as const
 
 export type ButtonGroupVariantsTypes = keyof typeof buttonGroupVariants
 

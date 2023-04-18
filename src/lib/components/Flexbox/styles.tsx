@@ -2,7 +2,8 @@
 
 import styled from "styled-components"
 
-import { Mixins } from "../../"
+import { Mixins, generateDataAttributes } from "../../"
+import { flexDirectionValues } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
 
@@ -16,7 +17,13 @@ const StyledFlexbox = styled.div`
         display: inline-flex;
     }
 
-    &[data-flex-direction="row"] {
+    ${generateDataAttributes(
+        "flex-direction",
+        Object.keys(flexDirectionValues)
+    )};
+
+    ${
+        "" /* &[data-flex-direction="row"] {
         flex-direction: row;
     }
 
@@ -30,6 +37,7 @@ const StyledFlexbox = styled.div`
 
     &[data-flex-direction="column-reverse"] {
         flex-direction: column-reverse;
+    } */
     }
 
     &[data-flex-wrap="nowrap"] {

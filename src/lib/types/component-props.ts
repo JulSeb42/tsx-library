@@ -34,7 +34,7 @@ export type BreadcrumbsItemProps = LinkTypes & {
 
 export type MessageProps = {
     type: "received" | "sent"
-    content: string
+    text: string
     date?: string
     time?: string
 }
@@ -75,10 +75,10 @@ export type FooterItemProps = ButtonLinkTypesRequire & {
 
 /*==================== Theme ====================*/
 
-enum themeNames {
-    light,
-    dark,
-}
+const themeNames = {
+    light: "light",
+    dark: "dark",
+} as const
 
 export type ThemeNameTypes = keyof typeof themeNames
 

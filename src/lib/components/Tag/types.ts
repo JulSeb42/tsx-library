@@ -4,10 +4,7 @@ import type { ElementType, HTMLAttributes } from "react"
 
 import type { ColorsShortTypes } from "../../types"
 
-enum tagVariants {
-    plain,
-    outline,
-}
+const tagVariants = { plain: "plain", outline: "outline" } as const
 
 export type TagVariantTypes = keyof typeof tagVariants
 

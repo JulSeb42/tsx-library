@@ -10,12 +10,12 @@ import type {
     SpacersTypes,
 } from "../../types"
 
-enum directions {
-    left,
-    up,
-    right,
-    down,
-}
+const directions = {
+    left: "left",
+    up: "up",
+    right: "right",
+    down: "down",
+} as const
 
 export type IconMenuDirectionTypes = keyof typeof directions
 

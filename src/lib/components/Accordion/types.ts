@@ -4,10 +4,7 @@ import type { HTMLAttributes, ElementType, ReactNode } from "react"
 
 import type { AccordionItemProps } from "../../types"
 
-enum accordionStyle {
-    basic,
-    rounded,
-}
+const accordionStyle = { basic: "basic", rounded: "rounded" } as const
 
 export type AccordionStyleTypes = keyof typeof accordionStyle
 
