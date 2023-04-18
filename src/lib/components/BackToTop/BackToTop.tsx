@@ -2,11 +2,12 @@
 
 import React, { forwardRef, useState, useEffect } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
 import { ButtonIcon } from "../../"
 import { ArrowUpIcon } from "../../icons"
 
-import * as Styles from "./styles"
+import { StyledBackToTop, ButtonText } from "./styles"
 import type { BackToTopProps } from "./types"
 
 const BackToTop = forwardRef(
@@ -14,14 +15,11 @@ const BackToTop = forwardRef(
         {
             as,
             color = "primary",
-            size = 32,
-            shadow = "m",
             icon,
             variant,
             text = "Back to top",
             showText = "hover",
-            textColor = "gray",
-            position,
+            className,
             ...rest
         }: BackToTopProps,
         ref?: ForwardedRef<HTMLButtonElement>
@@ -57,46 +55,41 @@ const BackToTop = forwardRef(
             }, 1000)
         }
 
-        const propsButton = {
-            shadow: shadow,
-            size: size,
-            color: color,
-            variant: variant,
-            onClick: scrollToTop,
-            onMouseEnter: () => setIsTextVisible(true),
-            onMouseLeave: () => setIsTextVisible(false),
-            label: text || "Back to top",
-        }
-
         return (
-            <Styles.StyledBackToTop
+            <StyledBackToTop
                 ref={ref}
                 as={as}
-                $isVisible={isVisible}
-                $position={position?.position || "fixed"}
-                $left={position?.left}
-                $top={position?.top}
-                $right={position?.right || "xxl"}
-                $bottom={position?.bottom || "xxl"}
-                $zIndex={position?.zIndex || 999}
+                className={classNames({ visible: isVisible }, className)}
                 {...rest}
             >
                 <ButtonIcon
-                    icon={icon || <ArrowUpIcon size={size * 0.7} {...rest} />}
-                    {...propsButton}
+                    icon={icon || <ArrowUpIcon size={48 * 0.7} {...rest} />}
+                    size={48}
+                    color={color}
+                    variant={variant}
+                    onClick={scrollToTop}
+                    onMouseEnter={() => setIsTextVisible(true)}
+                    onMouseLeave={() => setIsTextVisible(false)}
+                    label={text || "Back to top"}
+                    className="button"
                 />
 
                 {text && (
-                    <Styles.ButtonText
-                        color={textColor}
-                        $isVisible={
-                            showText === "always" ? true : isTextVisible
-                        }
+                    <ButtonText
+                        className={classNames(
+                            {
+                                visible:
+                                    showText === "always" || showText === true
+                                        ? true
+                                        : showText === "hover" && isTextVisible,
+                            },
+                            "text"
+                        )}
                     >
                         {text}
-                    </Styles.ButtonText>
+                    </ButtonText>
                 )}
-            </Styles.StyledBackToTop>
+            </StyledBackToTop>
         )
     }
 )

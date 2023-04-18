@@ -1,34 +1,16 @@
 /*=============================================== BackToTop types ===============================================*/
 
-import type { ElementType, ButtonHTMLAttributes } from "react"
+import type { ButtonHTMLAttributes, ElementType } from "react"
 
-import type {
-    ColorsHoverTypes,
-    ShadowsTypes,
-    ObjectPositionTypes,
-    AllColorsTypes,
-    BoxShadowProps,
-} from "../../types"
+import type { ColorsHoverTypes } from "../../types"
+import type { ButtonIconVariantTypes } from "../ButtonIcon/types"
 
-interface BackToTopPropsBase extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface BackToTopProps
+    extends ButtonHTMLAttributes<HTMLButtonElement> {
     as?: ElementType
     icon?: string
     color?: ColorsHoverTypes
-    size?: number
-    shadow?: ShadowsTypes | BoxShadowProps
-    variant?: "plain" | "transparent"
-    position?: ObjectPositionTypes
+    variant?: ButtonIconVariantTypes
     text?: string
+    showText?: boolean | "always" | "hover"
 }
-
-interface BackToTopContent1 extends BackToTopPropsBase {
-    showText?: "always" | "hover" | true
-    textColor?: AllColorsTypes
-}
-
-interface BackToTopContent2 extends BackToTopPropsBase {
-    showText?: false
-    textColor?: never
-}
-
-export type BackToTopProps = BackToTopContent1 | BackToTopContent2

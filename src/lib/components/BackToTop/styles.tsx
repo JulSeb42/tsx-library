@@ -2,39 +2,43 @@
 
 import styled from "styled-components"
 
-import { Transitions, Mixins, Text } from "../../"
-import type { SpacersTypes, PositionsTypes } from "../../types"
+import { Mixins, Text, Transitions } from "../../"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledBackToTop = styled.div<{
-    $isVisible?: boolean
-    $position?: PositionsTypes
-    $left?: SpacersTypes
-    $top?: SpacersTypes
-    $right?: SpacersTypes
-    $bottom?: SpacersTypes
-    $zIndex?: number
-}>`
-    ${({ $position, $left, $top, $right, $bottom, $zIndex }) =>
-        Mixins.Position({ $position, $left, $top, $right, $bottom, $zIndex })};
+const StyledBackToTop = styled.div`
+    opacity: 0;
+    visibility: hidden;
+    transition: ${Transitions.Short};
+    ${Mixins.Position({
+        $position: "fixed",
+        $right: "xxl",
+        $bottom: "xxl",
+        $zIndex: 999,
+    })};
     ${Mixins.Flexbox({
         $alignItems: "center",
         $gap: "xs",
         $flexDirection: "row-reverse",
     })};
-    opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
-    visibility: ${({ $isVisible }) => ($isVisible ? "visible" : "hidden")};
-    transition: ${Transitions.Short};
-    z-index: ${({ $zIndex }) => $zIndex};
+
+    &.visible {
+        opacity: 1;
+        visibility: visible;
+    }
 `
 
 const ButtonText = styled(Text).attrs({ tag: "small" })<{
     $isVisible?: boolean
 }>`
-    opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
-    visibility: ${({ $isVisible }) => ($isVisible ? "visible" : "hidden")};
+    opacity: 0;
+    visibility: hidden;
     transition: ${Transitions.Short};
+
+    &.visible {
+        opacity: 1;
+        visibility: visible;
+    }
 `
 
 setDefaultTheme([StyledBackToTop, ButtonText])
