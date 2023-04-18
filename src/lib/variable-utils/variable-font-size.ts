@@ -1,16 +1,9 @@
 /*=============================================== Get font size ===============================================*/
 
-import { stringifyPx, FontSizes } from ".."
-import type { FontSizeTypes, CustomFontSizeTypes } from "../types"
+import { FontSizes } from ".."
+import type { FontSizeTypes } from "../types"
 
-export const variableFontSize = (
-    fontSize: FontSizeTypes,
-    customFontSize?: CustomFontSizeTypes
-) => {
-    if (customFontSize) {
-        return stringifyPx(customFontSize)
-    }
-
+export const variableFontSize = (fontSize: FontSizeTypes) => {
     switch (fontSize) {
         case "display-h1":
             return FontSizes.Display.H1

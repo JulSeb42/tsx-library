@@ -46,10 +46,10 @@ const Flexbox = forwardRef(
                 data-inline={inline?.toString()}
                 data-flex-direction={flexDirection}
                 data-flex-wrap={flexWrap}
-                data-flex-justify-content={justifyContent}
-                data-flex-justify-items={justifyItems}
-                data-flex-align-content={alignContent}
-                data-flex-align-items={alignItems}
+                data-justify-content={justifyContent}
+                data-justify-items={justifyItems}
+                data-align-content={alignContent}
+                data-align-items={alignItems}
                 {...rest}
             >
                 {children}

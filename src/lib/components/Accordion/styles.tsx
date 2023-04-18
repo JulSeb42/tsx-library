@@ -2,10 +2,8 @@
 
 import styled from "styled-components"
 
-import { Transitions, Spacers, Radiuses, Mixins } from "../../"
+import { Mixins, Radiuses, Spacers, Transitions } from "../../"
 import { PlusIcon } from "../../icons"
-import type { ColorsHoverTypes, AllColorsTypes } from "../../types"
-import type { AccordionStyleTypes } from "./types"
 
 import { setDefaultTheme } from "../../utils"
 
@@ -62,12 +60,7 @@ const IconContainer = styled.span`
     }
 `
 
-const Button = styled.button<{
-    $variant?: AccordionStyleTypes
-    $noBorder?: boolean
-    $accentColor?: ColorsHoverTypes
-    $separatorColor?: AllColorsTypes
-}>`
+const Button = styled.button`
     width: 100%;
     ${Mixins.Flexbox({
         $alignItems: "center",

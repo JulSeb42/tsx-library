@@ -12,7 +12,6 @@ export * from "./hooks"
 export * from "./utils/options-markdown"
 export * from "./utils/ts-utils"
 export * from "./utils/get-highlighted-text"
-export * from "./utils/generate-data-attributes"
 
 export * from "./variable-utils"
 

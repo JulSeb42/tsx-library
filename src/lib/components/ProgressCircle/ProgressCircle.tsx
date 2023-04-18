@@ -93,11 +93,7 @@ const ProgressCircle = forwardRef(
                         <Icon src={icon} size={size * 0.4} color={iconColor} />
                     )}
 
-                    {showValue && (
-                        <Text customFontSize={size * 0.2} color={textColor}>
-                            {value}%
-                        </Text>
-                    )}
+                    {showValue && <Text color={textColor}>{value}%</Text>}
                 </Styles.Content>
             </Styles.ProgressCircleContainer>
         ) : (
