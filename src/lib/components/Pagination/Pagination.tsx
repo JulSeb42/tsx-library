@@ -50,14 +50,24 @@ export const PaginationButton = forwardRef(
                 ) : (buttonContent === "prev" && icon) ||
                   (buttonContent === "next" && icon) ? (
                     typeof icon === "string" ? (
-                        <Icon src={icon} size={iconSize} />
+                        <Icon
+                            src={icon}
+                            size={iconSize}
+                            className={`icon-button icon-button-${buttonContent}`}
+                        />
                     ) : (
                         icon
                     )
                 ) : buttonContent === "prev" ? (
-                    <ChevronLeftIcon size={20} />
+                    <ChevronLeftIcon
+                        size={20}
+                        className="icon-button icon-button-prev"
+                    />
                 ) : buttonContent === "next" ? (
-                    <ChevronRightIcon size={20} />
+                    <ChevronRightIcon
+                        size={20}
+                        className="icon-button icon-button-next"
+                    />
                 ) : (
                     buttonContent
                 )}
@@ -145,6 +155,7 @@ export const Pagination = forwardRef(
                     disabled={currentPage === 1}
                     icon={icons?.prev}
                     iconSize={icons?.prevSize}
+                    className="button button-prev"
                 />
 
                 {getPaginationGroup()[0] !== 1 && (
@@ -152,8 +163,12 @@ export const Pagination = forwardRef(
                         <PaginationButton
                             buttonContent={1}
                             onClick={() => goToPage(1)}
+                            className="button"
                         />
-                        <PaginationButton buttonContent="more" />
+                        <PaginationButton
+                            buttonContent="more"
+                            className="button button-more"
+                        />
                     </>
                 )}
 
@@ -163,17 +178,22 @@ export const Pagination = forwardRef(
                         key={item}
                         onClick={() => goToPage(item)}
                         isActive={currentPage === item}
+                        className="button"
                     />
                 ))}
 
                 {getPaginationGroup()[getPaginationGroup().length - 1] !==
                     totalPages && (
                     <>
-                        <PaginationButton buttonContent="more" />
+                        <PaginationButton
+                            buttonContent="more"
+                            className="button button-more"
+                        />
 
                         <PaginationButton
                             buttonContent={totalPages}
                             onClick={() => goToPage(totalPages)}
+                            className="button"
                         />
                     </>
                 )}
@@ -184,6 +204,7 @@ export const Pagination = forwardRef(
                     disabled={currentPage === totalPages}
                     icon={icons?.next}
                     iconSize={icons?.nextSize}
+                    className="button button-next"
                 />
             </PaginationContainer>
         )
