@@ -22,10 +22,10 @@ const StyledButtonGroup = styled(BaseButtonGroup)<{
     $color?: ColorsHoverTypes
     $hasBorders?: boolean
 }>`
-    ${({ $hasBorders, theme }) =>
+    ${({ $hasBorders, theme, $color }) =>
         $hasBorders &&
         css`
-            border: 1px solid ${theme.ColorsHoverDefault};
+            border: 1px solid ${theme.ColorsHoverDefault({ $color })};
         `}
 `
 

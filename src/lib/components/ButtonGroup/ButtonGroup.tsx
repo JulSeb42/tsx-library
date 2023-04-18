@@ -23,7 +23,7 @@ const ButtonGroup = forwardRef(
         <Styles.StyledButtonGroup
             ref={ref}
             as={as}
-            $hasBorders={variant === "transparent" && true}
+            $hasBorders={!!(variant === "transparent")}
             $color={color}
             {...rest}
         >
