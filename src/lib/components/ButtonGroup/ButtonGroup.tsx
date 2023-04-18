@@ -53,6 +53,7 @@ const ButtonGroup = forwardRef(
                                     iconSize={16}
                                     href={href}
                                     blank={blank}
+                                    className="button"
                                 />
                             ) : to ? (
                                 <Styles.StyledButtonIcon
@@ -63,6 +64,7 @@ const ButtonGroup = forwardRef(
                                     iconSize={16}
                                     to={to}
                                     blank={blank}
+                                    className="button"
                                 />
                             ) : (
                                 <Styles.StyledButtonIcon
@@ -72,6 +74,7 @@ const ButtonGroup = forwardRef(
                                     color={color}
                                     aria-label={ariaLabel}
                                     iconSize={16}
+                                    className="button"
                                 />
                             )
                         ) : href ? (
@@ -86,6 +89,7 @@ const ButtonGroup = forwardRef(
                                 href={href}
                                 blank={blank}
                                 size={buttonsSize}
+                                className="button"
                             >
                                 {text}
                             </Styles.StyledButton>
@@ -101,6 +105,7 @@ const ButtonGroup = forwardRef(
                                 to={to}
                                 blank={blank}
                                 size={buttonsSize}
+                                className="button"
                             >
                                 {text}
                             </Styles.StyledButton>
@@ -115,6 +120,7 @@ const ButtonGroup = forwardRef(
                                     right: iconRight,
                                 }}
                                 size={buttonsSize}
+                                className="button"
                             >
                                 {text}
                             </Styles.StyledButton>
@@ -122,7 +128,10 @@ const ButtonGroup = forwardRef(
 
                         {variant === "transparent" &&
                             i !== buttons.length - 1 && (
-                                <Styles.Separator $color={color} />
+                                <Styles.Separator
+                                    className="separator"
+                                    $color={color}
+                                />
                             )}
                     </Fragment>
                 )

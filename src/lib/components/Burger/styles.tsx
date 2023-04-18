@@ -58,16 +58,18 @@ const BaseBurger = styled.button`
 const StyledBurger = styled(BaseBurger)<{
     $color?: ColorsHoverTypes
 }>`
-    color: ${({ theme }) => theme.ColorsHoverDefault};
+    color: ${({ theme, $color }) => theme.ColorsHoverDefault({ $color })};
 
     &:not(.no-hover) {
         @media ${Breakpoints.Hover} {
             &:hover {
-                color: ${({ theme }) => theme.ColorsHoverHover};
+                color: ${({ theme, $color }) =>
+                    theme.ColorsHoverHover({ $color })};
             }
 
             &:active {
-                color: ${({ theme }) => theme.ColorsHoverActive};
+                color: ${({ theme, $color }) =>
+                    theme.ColorsHoverActive({ $color })};
             }
         }
     }
