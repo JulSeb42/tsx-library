@@ -42,12 +42,7 @@ const Button = forwardRef(
             type={href || to ? undefined : type}
             disabled={!!isLoading || disabled}
             className={classNames(
-                {
-                    plain: variant === "plain",
-                    transparent: variant === "transparent",
-                    ghost: variant === "ghost",
-                    outline: variant === "outline",
-                },
+                variant,
                 { small: size === "small" },
                 { "no-padding": noPadding },
                 className

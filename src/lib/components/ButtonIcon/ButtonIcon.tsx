@@ -86,14 +86,7 @@ const ButtonIcon = forwardRef(
                 target={(href || to) && blank && "_blank"}
                 rel={(href || to) && blank && "noreferrer noopener"}
                 disabled={!!isLoading || disabled}
-                className={classNames(
-                    {
-                        plain: variant === "plain",
-                        transparent: variant === "transparent",
-                        ghost: variant === "ghost",
-                    },
-                    className
-                )}
+                className={classNames(variant, className)}
                 style={{
                     ["--button-size" as any]: size && stringifyPx(size),
                     ...style,

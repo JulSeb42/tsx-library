@@ -68,7 +68,7 @@ export * from "./components/Paginator" // ✅
 export * from "./components/Stepper" // ✅
 export * from "./components/ProgressBar" // ✅
 export * from "./components/ProgressCircle" // ✅
-export * from "./components/Tabs"
+export * from "./components/Tabs" // ✅
 export * from "./components/Slideshow"
 export * from "./components/Cover"
 export * from "./components/Table"

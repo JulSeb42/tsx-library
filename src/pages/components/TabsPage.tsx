@@ -25,10 +25,10 @@ const TabsPage = () => {
         {
             title: "Tab 2",
             content: (
-                <div>
+                <>
                     <Text>Hello</Text>
                     <Text>World</Text>
-                </div>
+                </>
             ),
         },
         {
@@ -44,8 +44,6 @@ const TabsPage = () => {
                 variant="basic"
                 justify="start"
                 active={1}
-                accentColor="secondary"
-                gap="l"
                 showInUrl
             />
 
