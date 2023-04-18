@@ -34,11 +34,11 @@ const StyledDropdown = styled.div`
         max-height: 144px;
     }
 
-    &.up {
+    &[data-direction="up"] {
         bottom: 42px;
     }
 
-    &.down {
+    &[data-direction="down"] {
         top: 42px;
     }
 `

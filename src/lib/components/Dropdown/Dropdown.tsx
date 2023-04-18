@@ -99,7 +99,8 @@ export const Dropdown = ({
         <Styles.StyledDropdown
             ref={el}
             as={as}
-            className={classNames({ open: isOpen }, direction, className)}
+            className={classNames({ open: isOpen }, className)}
+            data-direction={direction}
             {...rest}
         >
             {items
