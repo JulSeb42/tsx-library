@@ -20,7 +20,7 @@ const StyledTooltip = styled.span`
     border-bottom: 1px dotted currentColor;
 `
 
-const BaseTip = styled.span`
+const Tip = styled.span`
     min-width: 60px;
     background-color: ${({ theme }) =>
         theme === ThemeDark ? Overlays.Plain.White80 : Overlays.Plain.Black80};
@@ -36,6 +36,8 @@ const BaseTip = styled.span`
     z-index: 1;
     transition: ${Transitions.Short};
     position: absolute;
+    width: var(--tip-width);
+    left: calc(50% - var(--tip-width) / 2);
 
     &:after {
         content: "";
@@ -53,6 +55,7 @@ const BaseTip = styled.span`
         z-index: 1;
         transition: ${Transitions.Short};
         position: absolute;
+        left: calc(var(--tip-width) / 2 - 5px);
     }
 
     &.visible {
@@ -63,15 +66,6 @@ const BaseTip = styled.span`
             opacity: 1;
             visibility: visible;
         }
-    }
-`
-
-const Tip = styled(BaseTip)<{ $width: number }>`
-    width: ${({ $width }) => $width}px;
-    left: ${({ $width }) => `calc(50% - ${$width}px / 2)`};
-
-    &:after {
-        left: ${({ $width }) => `calc(${$width}px / 2 - 5px)`};
     }
 `
 
