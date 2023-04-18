@@ -6,14 +6,15 @@ import { Spacers } from "../../"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledFade = styled.div<{
-    $isVisible: boolean
-}>`
-    opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
-    transform: translateX(
-        ${({ $isVisible }) => ($isVisible ? 0 : `calc(${Spacers.S} * -1)`)}
-    );
+const StyledFade = styled.div`
+    opacity: 0;
+    transform: translateX(calc(${Spacers.S} * -1));
     transition: opacity 0.4s ease-out, transform 0.8s ease-out;
+
+    &.visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
 `
 
 setDefaultTheme([StyledFade])

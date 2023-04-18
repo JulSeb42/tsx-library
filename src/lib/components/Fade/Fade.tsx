@@ -1,11 +1,12 @@
 /*=============================================== Fade component ===============================================*/
 
 import React, { useState, useEffect, useRef } from "react"
+import classNames from "classnames"
 
-import * as Styles from "./styles"
+import { StyledFade } from "./styles"
 import type { FadeProps } from "./types"
 
-const Fade = ({ as, children, ...rest }: FadeProps) => {
+const Fade = ({ as, children, className, ...rest }: FadeProps) => {
     const [isVisible, setVisible] = useState(true)
     const ref = useRef<any>()
 
@@ -18,9 +19,14 @@ const Fade = ({ as, children, ...rest }: FadeProps) => {
     }, [])
 
     return (
-        <Styles.StyledFade ref={ref} as={as} $isVisible={isVisible} {...rest}>
+        <StyledFade
+            ref={ref}
+            as={as}
+            className={classNames({ visible: isVisible }, className)}
+            {...rest}
+        >
             {children}
-        </Styles.StyledFade>
+        </StyledFade>
     )
 }
 
