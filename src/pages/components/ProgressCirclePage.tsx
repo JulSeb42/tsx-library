@@ -1,12 +1,12 @@
 /*=============================================== ProgressCirclePage ===============================================*/
 
 import { Page } from "../../components"
-import { ProgressCircle } from "../../lib"
+import { ProgressCircle, getRandomNumber } from "../../lib"
 
 const ProgressCirclePage = () => {
     return (
         <Page title="ProgressCircle">
-            <ProgressCircle value={10} showValue />
+            <ProgressCircle value={getRandomNumber()} showValue />
         </Page>
     )
 }

@@ -2,10 +2,12 @@
 
 import styled from "styled-components"
 
-import { Mixins } from "../../"
+import { Mixins, Text } from "../../"
 import type { AllColorsTypes } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
+
+export const PROGRESS_CIRCLE_SIZE = 64
 
 const ProgressCircleContainer = styled.span`
     position: relative;
@@ -13,14 +15,19 @@ const ProgressCircleContainer = styled.span`
 
 const StyledProgressCircle = styled.svg``
 
-const Circle = styled.circle<{ $color?: AllColorsTypes; $speed?: number }>`
-    stroke: ${({ $color, theme }) => theme.AllColors({ $color: $color })};
-    transition: all ${({ $speed }) => $speed}ms ease-in-out;
+const BaseCircle = styled.circle`
+    &.animated {
+        transition: all 1000ms ease-in-out;
+    }
 `
 
-const Content = styled.span<{ $size?: number }>`
-    width: ${({ $size }) => $size}px;
-    height: ${({ $size }) => $size}px;
+const Circle = styled(BaseCircle)<{ $color?: AllColorsTypes }>`
+    stroke: ${({ $color, theme }) => theme.AllColors({ $color })};
+`
+
+const Content = styled.span`
+    width: ${PROGRESS_CIRCLE_SIZE}px;
+    height: ${PROGRESS_CIRCLE_SIZE}px;
     position: absolute;
     top: 0;
     left: 0;
@@ -30,11 +37,16 @@ const Content = styled.span<{ $size?: number }>`
     })};
 `
 
+const Value = styled(Text).attrs({ tag: "small" })`
+    color: ${({ theme }) => theme.Gray500};
+`
+
 setDefaultTheme([
     ProgressCircleContainer,
     StyledProgressCircle,
     Circle,
     Content,
+    Value,
 ])
 
-export { ProgressCircleContainer, StyledProgressCircle, Circle, Content }
+export { ProgressCircleContainer, StyledProgressCircle, Circle, Content, Value }

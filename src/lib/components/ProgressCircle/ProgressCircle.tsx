@@ -2,8 +2,9 @@
 
 import React, { forwardRef, useEffect, useState } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
-import { Icon, Text } from "../../"
+import { Icon, SrOnly } from "../../"
 
 import * as Styles from "./styles"
 import type { ProgressCircleProps } from "./types"
@@ -14,7 +15,7 @@ const cleanPercentage = (value: number) => {
     return isNegativeOrNaN ? 0 : isTooHigh ? 100 : +value
 }
 
-const Circle = ({ value, color, strokeWidth, speed }: ProgressCircleProps) => {
+const Circle = ({ value, color, animated, className }: ProgressCircleProps) => {
     const r = 70
     const circ = 2 * Math.PI * r
     const strokePct = ((100 - value) * circ) / 100
@@ -25,11 +26,11 @@ const Circle = ({ value, color, strokeWidth, speed }: ProgressCircleProps) => {
             cx={100}
             cy={100}
             fill="transparent"
-            strokeWidth={strokeWidth}
+            strokeWidth={12}
             strokeDasharray={circ}
             strokeDashoffset={value ? strokePct : 0}
+            className={classNames({ animated: animated }, "circle", className)}
             $color={color}
-            $speed={speed}
         />
     )
 }
@@ -38,16 +39,11 @@ const ProgressCircle = forwardRef(
     (
         {
             value,
-            color = "primary",
-            strokeColor = "gray-200",
-            size = 48,
-            strokeWidth = 12,
             animated = true,
-            speed = 500,
             showValue = true,
-            textColor = "gray",
             icon,
-            iconColor = "primary",
+            color = "primary",
+            className,
             ...rest
         }: ProgressCircleProps,
         ref?: ForwardedRef<any>
@@ -62,38 +58,43 @@ const ProgressCircle = forwardRef(
 
         const progressFn = () => (
             <Styles.StyledProgressCircle
-                width={size}
-                height={size}
+                width={Styles.PROGRESS_CIRCLE_SIZE}
+                height={Styles.PROGRESS_CIRCLE_SIZE}
                 viewBox="0 0 200 200"
                 ref={ref}
                 {...rest}
             >
                 <g transform={`rotate(-90 ${"100 100"})`}>
+                    <Circle value={100} color="gray-200" />
                     <Circle
-                        color={strokeColor}
-                        value={100}
-                        strokeWidth={strokeWidth}
-                    />
-                    <Circle
-                        color={color}
                         value={animated ? animatedValue : pct}
-                        strokeWidth={strokeWidth}
-                        speed={speed}
+                        className={classNames({ animated: animated })}
+                        animated={animated}
+                        color={color}
                     />
                 </g>
             </Styles.StyledProgressCircle>
         )
 
         return showValue || icon ? (
-            <Styles.ProgressCircleContainer>
+            <Styles.ProgressCircleContainer className={className}>
                 {progressFn()}
 
-                <Styles.Content $size={size}>
+                <Styles.Content className="value-container">
                     {icon && (
-                        <Icon src={icon} size={size * 0.4} color={iconColor} />
+                        <Icon
+                            src={icon}
+                            size={Styles.PROGRESS_CIRCLE_SIZE * 0.4}
+                            color="gray"
+                            className="icon"
+                        />
                     )}
 
-                    {showValue && <Text color={textColor}>{value}%</Text>}
+                    {showValue ? (
+                        <Styles.Value className="value">{value}%</Styles.Value>
+                    ) : (
+                        <SrOnly>{value}%</SrOnly>
+                    )}
                 </Styles.Content>
             </Styles.ProgressCircleContainer>
         ) : (
