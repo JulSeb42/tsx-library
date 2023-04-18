@@ -70,7 +70,7 @@ export const DropdownItem = forwardRef(
             >
                 {icon &&
                     (typeof icon === "string" ? (
-                        <Icon src={icon} size={16} />
+                        <Icon src={icon} size={16} className="icon" />
                     ) : (
                         icon
                     ))}
@@ -108,6 +108,7 @@ export const Dropdown = ({
                       const itemProps = {
                           text: item.text,
                           icon: item.icon,
+                          className: "dropdown-item",
                       }
 
                       return (

@@ -50,10 +50,13 @@ const Modal = forwardRef(
                         size={48}
                         onClick={closeModal}
                         label={labelClose}
+                        className="close-button"
                     />
                 )}
 
-                <Styles.Content>{children}</Styles.Content>
+                <Styles.Content className="modal-content">
+                    {children}
+                </Styles.Content>
             </Styles.StyledModal>
         )
     }
