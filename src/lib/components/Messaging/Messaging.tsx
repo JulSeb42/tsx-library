@@ -2,11 +2,31 @@
 
 import React, { forwardRef, useRef, useEffect, useState } from "react"
 import type { ForwardedRef, ChangeEvent, FormEvent } from "react"
+import classNames from "classnames"
 
-import { Flexbox, Text, uuid, Hr, Icon, useKeyPress } from "../.."
+import {
+    Flexbox,
+    Text,
+    uuid,
+    Hr,
+    useKeyPress,
+    Button,
+    ButtonIcon,
+    stringifyPx,
+} from "../.."
 import { SendIcon, ChevronDownIcon } from "../../icons"
 
-import * as Styles from "./styles"
+import {
+    StyledMessaging,
+    EmptyContainer,
+    MessagesContainer,
+    InputContainer,
+    Input,
+    StyledMessage,
+    Bottom,
+    ScrollButton,
+    DateTime,
+} from "./styles"
 import type { MessagingProps, MessageProps } from "./types"
 
 export const Message = forwardRef(
@@ -14,15 +34,11 @@ export const Message = forwardRef(
         {
             as,
             type,
-            content,
+            text,
             date,
             time,
             textDateTime = "at",
-            backgroundColor,
-            dateTimeColor = "gray",
-            textColor,
-            linkColor,
-            gap = "xxs",
+            className,
             ...rest
         }: MessageProps,
         ref?: ForwardedRef<HTMLDivElement>
@@ -32,42 +48,20 @@ export const Message = forwardRef(
             ref={ref}
             alignItems={type === "sent" ? "flex-end" : "flex-start"}
             flexDirection="column"
-            gap={gap}
+            gap="xxs"
+            className={classNames("message-container", className)}
             {...rest}
         >
-            <Styles.StyledMessage
-                $type={type}
-                $backgroundColor={
-                    backgroundColor
-                        ? backgroundColor
-                        : type === "received"
-                        ? "gray-100"
-                        : "primary"
-                }
-                $textColor={
-                    textColor
-                        ? textColor
-                        : type === "sent"
-                        ? "background"
-                        : "font"
-                }
-                $linkColor={
-                    linkColor
-                        ? linkColor
-                        : type === "sent"
-                        ? "background"
-                        : "primary"
-                }
-            >
-                {content ? content : ""}
-            </Styles.StyledMessage>
+            <StyledMessage data-message-type={type} className="message-text">
+                {text}
+            </StyledMessage>
 
             {(date || time) && (
-                <Text tag="small" color={dateTimeColor}>
+                <DateTime className="date-time">
                     {date && date}
                     {date && time && ` ${textDateTime} `}
                     {time && time}
-                </Text>
+                </DateTime>
             )}
         </Flexbox>
     )
@@ -83,18 +77,9 @@ export const Messaging = forwardRef(
             button,
             input,
             submit,
-            borderColor = "gray-200",
             textDateTime,
-            backgroundColorSent,
-            backgroundColorReceived,
-            textColorSent,
-            textColorReceived,
-            linkColorSent,
-            linkColorReceived,
-            dateTimeColor,
             iconScroll = <ChevronDownIcon size={32 * 0.6} />,
-            messageGap,
-            listGap = "s",
+            className,
             ...rest
         }: MessagingProps,
         ref?: ForwardedRef<HTMLFormElement>
@@ -157,47 +142,25 @@ export const Messaging = forwardRef(
         }
 
         const emptyMessage = () => (
-            <Styles.EmptyContainer>
-                <Text
-                    color={
-                        typeof emptyText === "object"
-                            ? emptyText.color
-                            : "currentColor"
-                    }
-                >
-                    {typeof emptyText === "object" ? emptyText.text : emptyText}
-                </Text>
-            </Styles.EmptyContainer>
+            <EmptyContainer>
+                <Text>{emptyText}</Text>
+            </EmptyContainer>
         )
 
         return (
-            <Styles.StyledMessaging as={as} $borderColor={borderColor}>
-                <Styles.MessagesContainer $gap={listGap} ref={containerRef}>
+            <StyledMessaging as={as} className={className}>
+                <MessagesContainer
+                    ref={containerRef}
+                    className="messages-container"
+                >
                     {data && data.length
                         ? data.map(message => (
                               <Message
                                   type={message.type}
-                                  content={message.content}
+                                  text={message.text}
                                   date={message.date}
                                   time={message.time}
                                   textDateTime={textDateTime}
-                                  backgroundColor={
-                                      message.type === "sent"
-                                          ? backgroundColorSent
-                                          : backgroundColorReceived
-                                  }
-                                  textColor={
-                                      message.type === "sent"
-                                          ? textColorSent
-                                          : textColorReceived
-                                  }
-                                  linkColor={
-                                      message.type === "sent"
-                                          ? linkColorSent
-                                          : linkColorReceived
-                                  }
-                                  dateTimeColor={dateTimeColor}
-                                  gap={messageGap}
                                   key={uuid()}
                               />
                           ))
@@ -205,32 +168,37 @@ export const Messaging = forwardRef(
                         ? children
                         : emptyMessage()}
 
-                    <Styles.Bottom ref={bottomRef} $gap={listGap} />
-                </Styles.MessagesContainer>
+                    <Bottom ref={bottomRef} className="messages-bottom" />
+                </MessagesContainer>
 
-                <Styles.ScrollButton
+                <ScrollButton
                     icon={iconScroll}
                     size={32}
                     variant="ghost"
                     onClick={() => scrollToBottom()}
-                    $inputHeight={inputHeight}
-                    $isVisible={isButtonVisible}
+                    className={classNames(
+                        { visible: isButtonVisible },
+                        "scroll-button"
+                    )}
+                    style={{
+                        ["--input-height" as any]: stringifyPx(inputHeight),
+                    }}
                 />
 
-                <Hr color={borderColor} />
+                <Hr />
 
-                <Styles.InputContainer
+                <InputContainer
                     onSubmit={handleSubmit}
                     ref={ref}
+                    className="message-form"
                     {...rest}
                 >
-                    <Styles.Input
+                    <Input
                         value={input.message}
                         onChange={handleMessage}
                         placeholder={
                             input.placeholder || "Type your message..."
                         }
-                        $height={inputHeight}
                         autoFocus={input.autoFocus}
                         onKeyPress={e => {
                             if (e.key === "Enter") e.preventDefault()
@@ -241,24 +209,35 @@ export const Messaging = forwardRef(
                         }}
                         onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
+                        style={{
+                            ["--input-height" as any]: stringifyPx(inputHeight),
+                        }}
+                        className="message-input"
                     />
 
-                    <Styles.SendButton
-                        $hasText={!!button?.text}
-                        type="submit"
-                        disabled={input.message === "" && true}
-                        $color={button?.color || "primary"}
-                    >
-                        {button?.text ? (
-                            button.text
-                        ) : button?.icon ? (
-                            <Icon src={button.icon} size={24} />
-                        ) : (
-                            <SendIcon size={24} />
-                        )}
-                    </Styles.SendButton>
-                </Styles.InputContainer>
-            </Styles.StyledMessaging>
+                    {button?.text ? (
+                        <Button
+                            type="submit"
+                            disabled={input.message === ""}
+                            color="primary"
+                            variant="transparent"
+                            noPadding
+                            className="message-button"
+                        >
+                            {button?.text}
+                        </Button>
+                    ) : (
+                        <ButtonIcon
+                            icon={button?.icon || <SendIcon size={24} />}
+                            disabled={input.message === ""}
+                            color="primary"
+                            variant="transparent"
+                            size={32}
+                            className="message-button"
+                        />
+                    )}
+                </InputContainer>
+            </StyledMessaging>
         )
     }
 )
