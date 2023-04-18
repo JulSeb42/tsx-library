@@ -173,14 +173,14 @@ const StyledMessage = styled(Linkify)<{
     }
 `
 
-export const Bottom = styled.div<{
+const Bottom = styled.div<{
     $gap: SpacersTypes
 }>`
     width: 100%;
     height: 0;
 `
 
-export const ScrollButton = styled(ButtonIcon)<{
+const ScrollButton = styled(ButtonIcon)<{
     $inputHeight: number
     $isVisible?: boolean
 }>`
@@ -202,6 +202,8 @@ setDefaultTheme([
     Input,
     SendButton,
     StyledMessage,
+    Bottom,
+    ScrollButton,
 ])
 
 export {
@@ -212,4 +214,6 @@ export {
     Input,
     SendButton,
     StyledMessage,
+    Bottom,
+    ScrollButton,
 }

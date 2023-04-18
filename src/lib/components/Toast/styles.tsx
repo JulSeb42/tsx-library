@@ -24,7 +24,7 @@ const StyledToast = styled.div`
     }
 `
 
-export const Title = styled(Text).attrs({ tag: "h5" })``
+const Title = styled(Text).attrs({ tag: "h5" })``
 
 const TitleContainer = styled.div`
     ${Mixins.Flexbox({
@@ -38,7 +38,7 @@ const TitleContainer = styled.div`
     }
 `
 
-export const IconContainer = styled.span`
+const IconContainer = styled.span`
     height: 32px;
     ${Mixins.Flexbox({
         $alignItems: "center",
@@ -62,6 +62,20 @@ const CloseButton = styled(ButtonIcon).attrs({
     min-width: 32px;
 `
 
-setDefaultTheme([StyledToast, TitleContainer, Content, CloseButton])
+setDefaultTheme([
+    StyledToast,
+    TitleContainer,
+    Content,
+    CloseButton,
+    Title,
+    IconContainer,
+])
 
-export { StyledToast, TitleContainer, Content, CloseButton }
+export {
+    StyledToast,
+    TitleContainer,
+    Content,
+    CloseButton,
+    Title,
+    IconContainer,
+}

@@ -2,19 +2,15 @@
 
 import styled from "styled-components"
 
-import type { SpacersTypes } from "../../types"
-
 import { setDefaultTheme } from "../../utils"
 
-const StyledMasonry = styled.div<{
-    $gap?: SpacersTypes
-}>`
+const StyledMasonry = styled.div`
     display: grid;
     grid-auto-flow: column;
     grid-gap: var(--masonry-gap);
 `
 
-const Col = styled.div<{ $gap?: SpacersTypes }>`
+const Col = styled.div`
     display: grid;
     grid-gap: var(--masonry-gap);
     height: fit-content;

@@ -117,7 +117,7 @@ const Flash = keyframes`
     }
 `
 
-const durationLoaderFour = 1000
+const DURATION_LOADER_FOUR = 1000
 
 const BaseLoaderFour = styled.span`
     ${LoaderSize};
@@ -135,18 +135,18 @@ const BaseLoaderFour = styled.span`
         border-radius: ${Radiuses.Circle};
 
         &:first-child {
-            animation: ${Flash} ${durationLoaderFour}ms infinite alternate;
+            animation: ${Flash} ${DURATION_LOADER_FOUR}ms infinite alternate;
             animation-delay: 0ms;
         }
 
         &:nth-child(2) {
-            animation: ${Flash} ${durationLoaderFour}ms infinite linear
+            animation: ${Flash} ${DURATION_LOADER_FOUR}ms infinite linear
                 alternate;
             animation-delay: 250ms;
         }
 
         &:last-child {
-            animation: ${Flash} ${durationLoaderFour}ms infinite alternate;
+            animation: ${Flash} ${DURATION_LOADER_FOUR}ms infinite alternate;
             animation-delay: 500ms;
         }
     }

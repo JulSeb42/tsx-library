@@ -7,14 +7,14 @@ import type { AllColorsTypes } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
 
-const avatarSize = "var(--avatar-size, 48px)"
+const AVATAR_SIZE = "var(--avatar-size, 48px)"
 
 const BaseAvatar = styled.span`
-    width: ${avatarSize};
-    height: ${avatarSize};
+    width: ${AVATAR_SIZE};
+    height: ${AVATAR_SIZE};
     ${Mixins.BorderRadiusVar("avatar")};
     font-weight: ${FontWeights.Black};
-    font-size: calc(${avatarSize} * 0.7);
+    font-size: calc(${AVATAR_SIZE} * 0.7);
     border: none;
     ${Mixins.Flexbox({
         $alignItems: "center",

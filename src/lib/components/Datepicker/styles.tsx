@@ -25,8 +25,8 @@ import type { ListDirectionTypes } from "../ListInputs/types"
 
 import { setDefaultTheme } from "../../utils"
 
-const buttonSize = 32
-const buttonMobile = 24
+const BUTTON_SIZE = 32
+const BUTTON_MOBILE = 24
 
 const DatepickerContainer = styled.div<{
     disabled?: boolean
@@ -34,7 +34,7 @@ const DatepickerContainer = styled.div<{
 }>`
     position: relative;
     width: 100%;
-    height: ${buttonSize}px;
+    height: ${BUTTON_SIZE}px;
     cursor: ${({ disabled }) => (disabled ? "not-allowed" : "default")};
     z-index: ${({ $isOpen }) => ($isOpen ? 30 : 0)};
 `
@@ -95,10 +95,10 @@ const StyledDatepicker = styled.div<{
     ${({ $calendarDirection }) =>
         $calendarDirection === "up"
             ? css`
-                  bottom: ${buttonSize}px;
+                  bottom: ${BUTTON_SIZE}px;
               `
             : css`
-                  top: ${buttonSize}px;
+                  top: ${BUTTON_SIZE}px;
               `}
 
     ${({ $variant, $accentColor, $validation, $shadow, $isOpen }) =>
@@ -139,8 +139,8 @@ const NavButton = styled.button<{
     $accentColor?: ColorsHoverTypes
     $validation?: ValidationTypes
 }>`
-    width: ${buttonSize}px;
-    height: ${buttonSize}px;
+    width: ${BUTTON_SIZE}px;
+    height: ${BUTTON_SIZE}px;
     ${Mixins.Flexbox({
         $inline: true,
         $alignItems: "center",
@@ -174,8 +174,8 @@ const NavButton = styled.button<{
 `
 
 const Empty = styled.span`
-    width: ${buttonSize}px;
-    height: ${buttonSize}px;
+    width: ${BUTTON_SIZE}px;
+    height: ${BUTTON_SIZE}px;
 `
 
 const DaysContainer = styled.div<{ $backgroundColor?: InputBackgroundTypes }>`
@@ -206,8 +206,8 @@ const Day = styled.button<{
     $validation?: ValidationTypes
     $backgroundColor?: InputBackgroundTypes
 }>`
-    width: ${buttonSize}px;
-    height: ${buttonSize}px;
+    width: ${BUTTON_SIZE}px;
+    height: ${BUTTON_SIZE}px;
     padding: 0;
     border: 1px solid
         ${({ $isToday, $accentColor, theme, $validation }) =>
@@ -264,8 +264,8 @@ const Day = styled.button<{
     }
 
     @media ${Breakpoints.Mobile} {
-        width: ${buttonMobile}px;
-        height: ${buttonMobile}px;
+        width: ${BUTTON_MOBILE}px;
+        height: ${BUTTON_MOBILE}px;
     }
 `
 

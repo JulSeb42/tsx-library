@@ -1,23 +1,27 @@
 /*=============================================== Slideshow types ===============================================*/
 
-import type { HTMLAttributes, ElementType, ReactNode } from "react"
+import type { ElementType, HTMLAttributes, ReactNode } from "react"
 
-import type {
-    ColorsHoverTypes,
-    RadiusesTypes,
-    ObjectFitTypes,
-} from "../../types"
+import type { ColorsHoverTypes } from "../../types"
 
 const buttonPositions = { left: "left", right: "right" } as const
 
 export type ButtonPositionsTypes = keyof typeof buttonPositions
 
+const buttonVariants = {
+    dots: "dots",
+    "dots-outline": "dots-outline",
+    bars: "bars",
+} as const
+
+export type ButtonVariantTypes = keyof typeof buttonVariants
+
 export interface SlideshowButtonProps
     extends HTMLAttributes<HTMLButtonElement> {
     iconPrev?: string
     iconNext?: string
-    prev?: boolean
-    next?: boolean
+    isPrev?: boolean
+    isNext?: boolean
     position: ButtonPositionsTypes
     hideTouch?: boolean
     isLarge?: boolean
@@ -27,9 +31,8 @@ export interface SlideshowButtonProps
 interface SlideshowPropsBase extends HTMLAttributes<HTMLDivElement> {
     as?: ElementType
     children?: ReactNode[]
-    borderRadius?: RadiusesTypes
-    imgFit?: ObjectFitTypes
     activeSlide?: number
+    height?: string | number
     controls?:
         | boolean
         | {
@@ -39,21 +42,13 @@ interface SlideshowPropsBase extends HTMLAttributes<HTMLDivElement> {
               iconPrev?: string
               iconNext?: string
           }
+    options?: {
+        autoplay?: number
+        speed?: number
+    }
 }
 
-interface SlideshowHeight1 extends SlideshowPropsBase {
-    height?: never
-    aspectRatio?: string
-}
-
-interface SlideshowHeight2 extends SlideshowPropsBase {
-    height?: string | number
-    aspectRatio?: never
-}
-
-type SlideshowHeight = SlideshowHeight1 | SlideshowHeight2
-
-type SlideshowPagination1 = SlideshowHeight & {
+type SlideshowPagination1 = SlideshowPropsBase & {
     pagination?:
         | boolean
         | {
@@ -62,39 +57,12 @@ type SlideshowPagination1 = SlideshowHeight & {
               color?: ColorsHoverTypes
               hideTouchScreens?: boolean
           }
-
     thumbnails?: never
-
-    options?: {
-        show?: never
-        autoplay?: number
-        speed?: number
-    }
 }
 
-type SlideshowPagination2 = SlideshowHeight & {
+type SlideshowPagination2 = SlideshowPropsBase & {
     pagination?: never
     thumbnails?: string[]
-
-    options?: {
-        show?: never
-        autoplay?: number
-        speed?: number
-    }
 }
 
-type SlideshowPagination3 = SlideshowHeight & {
-    pagination?: never
-    thumbnails?: never
-
-    options?: {
-        show?: number
-        autoplay?: number
-        speed?: number
-    }
-}
-
-export type SlideshowProps =
-    | SlideshowPagination1
-    | SlideshowPagination2
-    | SlideshowPagination3
+export type SlideshowProps = SlideshowPagination1 | SlideshowPagination2

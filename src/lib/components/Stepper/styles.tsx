@@ -74,11 +74,11 @@ const StyledStepper = styled.div`
     }
 `
 
-const numberSize = 24
+const NUMBER_SIZE = 24
 
 const Number = styled.span`
-    width: ${numberSize}px;
-    height: ${numberSize}px;
+    width: ${NUMBER_SIZE}px;
+    height: ${NUMBER_SIZE}px;
     border-radius: ${Radiuses.Circle};
     outline: 2px solid ${({ theme }) => theme.Background};
     ${Mixins.Flexbox({

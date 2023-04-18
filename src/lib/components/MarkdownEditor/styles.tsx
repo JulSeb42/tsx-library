@@ -64,7 +64,7 @@ const TitlesDropdownContainer = styled.div`
     position: relative;
 `
 
-export const TitlesDropdown = styled.div<{
+const TitlesDropdown = styled.div<{
     $isOpen: boolean
     $backgroundColor?: InputBackgroundTypes
 }>`
@@ -173,9 +173,11 @@ setDefaultTheme([
     Input,
     MarkdownContainer,
     IconButton,
+    TitlesDropdown,
 ])
 
 export {
+    TitlesDropdown,
     StyledMarkdownEditor,
     ButtonsContainer,
     TitlesDropdownContainer,

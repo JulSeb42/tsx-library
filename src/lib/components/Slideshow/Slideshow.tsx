@@ -2,56 +2,66 @@
 
 import React, { forwardRef, useState, useEffect, useCallback } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
-import { Icon, uuid, Flexbox } from "../../"
+import { Icon, uuid, Flexbox, stringifyPx } from "../../"
 import { ChevronLeftIcon, ChevronRightIcon } from "../../icons"
 
-import * as Styles from "./styles"
+import {
+    StyledSlideshow,
+    Wrapper,
+    ContentWrapper,
+    Content,
+    Button,
+    Pagination,
+    Dot,
+    Thumbnail,
+} from "./styles"
 import type { SlideshowProps, SlideshowButtonProps } from "./types"
 
 const SlideshowButton = ({
     onClick,
     iconPrev,
     iconNext,
-    prev,
-    next,
+    isPrev,
+    isNext,
     position,
     hideTouch,
     isLarge,
     color = "primary",
-}: SlideshowButtonProps) => (
-    <Styles.Button
-        onClick={onClick}
-        $position={position}
-        $hideTouch={hideTouch}
-        $isLarge={isLarge}
-        $color={color}
-    >
-        {prev &&
-            (iconPrev ? (
-                <Icon src={iconPrev} size={24} />
-            ) : (
-                <ChevronLeftIcon size={24} />
-            ))}
+    className,
+}: SlideshowButtonProps) => {
+    return (
+        <Button
+            onClick={onClick}
+            data-size={isLarge ? "large" : "small"}
+            data-position={position}
+            className={classNames({ "hide-on-touch": hideTouch }, className)}
+            $color={color}
+        >
+            {isPrev &&
+                (iconPrev ? (
+                    <Icon src={iconPrev} size={24} />
+                ) : (
+                    <ChevronLeftIcon size={24} />
+                ))}
 
-        {next &&
-            (iconNext ? (
-                <Icon src={iconNext} size={24} />
-            ) : (
-                <ChevronRightIcon size={24} />
-            ))}
-    </Styles.Button>
-)
+            {isNext &&
+                (iconNext ? (
+                    <Icon src={iconNext} size={24} />
+                ) : (
+                    <ChevronRightIcon size={24} />
+                ))}
+        </Button>
+    )
+}
 
 const Slideshow = forwardRef(
     (
         {
             as,
-            borderRadius,
-            imgFit = "cover",
             controls,
             height,
-            aspectRatio = "16/9",
             pagination,
             thumbnails,
             options,
@@ -66,26 +76,11 @@ const Slideshow = forwardRef(
         const length = children ? children.length : 0
 
         const handleNext = () => {
-            if (!options?.show) {
-                setActive(active < length - 1 ? active + 1 : 0)
-            } else {
-                setActive(
-                    active < length + options.show ? active + options.show : 0
-                )
-            }
+            setActive(active < length - 1 ? active + 1 : 0)
+            console.log("Clicked next")
         }
 
-        const handlePrev = () => {
-            if (!options?.show) {
-                setActive(active > 0 ? active - 1 : length - 1)
-            } else {
-                setActive(
-                    active > 0
-                        ? active - options.show
-                        : length + options.show + (options.show - 1)
-                )
-            }
-        }
+        const handlePrev = () => setActive(active > 0 ? active - 1 : length - 1)
 
         // Automatic slideshow
         const autoSlideshow = useCallback(() => {
@@ -139,17 +134,20 @@ const Slideshow = forwardRef(
         }, [controls])
 
         return (
-            <Styles.StyledSlideshow ref={ref} as={as} {...rest}>
-                <Styles.Wrapper
-                    $aspectRatio={aspectRatio}
+            <StyledSlideshow ref={ref} as={as} {...rest}>
+                <Wrapper
                     flexDirection="column"
-                    $height={height}
+                    style={{
+                        ["--slideshow-height" as any]:
+                            height && stringifyPx(height),
+                    }}
+                    className="slideshow-wrapper"
                 >
                     {children && length > 1 && controls && (
                         <SlideshowButton
                             position="left"
                             onClick={handlePrev}
-                            prev
+                            isPrev
                             hideTouch={controlsHidden}
                             iconNext={
                                 typeof controls === "object" &&
@@ -173,29 +171,33 @@ const Slideshow = forwardRef(
                                     ? controls.color
                                     : "primary"
                             }
+                            className="slideshow-button slideshow-button-prev"
                         />
                     )}
 
-                    <Styles.ContentWrapper
+                    <ContentWrapper
                         onTouchStart={handleTouchStart}
                         onTouchMove={handleTouchMove}
-                        $borderRadius={borderRadius}
+                        className="slideshow-content-wrapper"
                     >
-                        <Styles.Content
-                            $show={options?.show}
-                            $active={active}
-                            $speed={options?.speed || 1000}
-                            $imgFit={imgFit}
+                        <Content
+                            style={{
+                                ["--slideshow-speed" as any]: options?.speed
+                                    ? `${options?.speed}ms`
+                                    : null,
+                                ["--translate" as any]: `-${active * 100}%`,
+                            }}
+                            className="slideshow-content"
                         >
                             {children}
-                        </Styles.Content>
-                    </Styles.ContentWrapper>
+                        </Content>
+                    </ContentWrapper>
 
                     {children && length > 1 && controls && (
                         <SlideshowButton
                             position="right"
                             onClick={handleNext}
-                            next
+                            isNext
                             hideTouch={controlsHidden}
                             iconNext={
                                 typeof controls === "object" &&
@@ -219,22 +221,27 @@ const Slideshow = forwardRef(
                                     ? controls.color
                                     : "primary"
                             }
+                            className="slideshow-button slideshow-button-next"
                         />
                     )}
-                </Styles.Wrapper>
+                </Wrapper>
 
                 {thumbnails && (
                     <Flexbox
                         justifyContent="center"
                         alignItems="center"
                         gap="xs"
+                        className="slideshow-thumbnails"
                     >
                         {thumbnails.map((image, i) => (
-                            <Styles.Thumbnail
+                            <Thumbnail
                                 src={image}
                                 alt={`Image ${i}`}
-                                $isActive={active === i && true}
                                 onClick={() => setActive(i)}
+                                className={classNames(
+                                    { active: active === i },
+                                    "slideshow-thumbnail"
+                                )}
                                 key={uuid()}
                             />
                         ))}
@@ -242,40 +249,46 @@ const Slideshow = forwardRef(
                 )}
 
                 {children && length > 1 && pagination && (
-                    <Styles.Pagination
-                        $hideTouch={
-                            typeof pagination === "object" &&
-                            pagination.hideTouchScreens
-                        }
-                        $position={
-                            typeof pagination === "object" &&
-                            pagination.position
-                                ? pagination.position
+                    <Pagination
+                        data-position={
+                            typeof pagination === "object"
+                                ? pagination?.position
                                 : "outside"
                         }
+                        className={classNames(
+                            {
+                                "hide-on-touch":
+                                    typeof pagination === "object"
+                                        ? pagination?.hideTouchScreens
+                                        : false,
+                            },
+                            "slideshow-pagination"
+                        )}
                     >
                         {children.map((_: any, i: number) => (
-                            <Styles.Dot
+                            <Dot
                                 onClick={() => setActive(i)}
-                                $isActive={active === i && true}
+                                data-variant={
+                                    typeof pagination === "object"
+                                        ? pagination.variant
+                                        : "dots"
+                                }
+                                className={classNames(
+                                    { active: active === i },
+                                    "slideshow-pagination-item"
+                                )}
                                 $color={
                                     typeof pagination === "object" &&
                                     pagination.color
                                         ? pagination.color
                                         : "primary"
                                 }
-                                $variant={
-                                    typeof pagination === "object" &&
-                                    pagination.variant
-                                        ? pagination.variant
-                                        : "dots"
-                                }
                                 key={uuid()}
                             />
                         ))}
-                    </Styles.Pagination>
+                    </Pagination>
                 )}
-            </Styles.StyledSlideshow>
+            </StyledSlideshow>
         )
     }
 )

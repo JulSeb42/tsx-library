@@ -1,23 +1,17 @@
 /*=============================================== Slideshow styles ===============================================*/
 
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
 import {
-    stringifyPx,
-    Transitions,
-    Radiuses,
     Breakpoints,
-    Spacers,
-    Mixins,
     Flexbox,
     Image,
+    Mixins,
+    Radiuses,
+    Spacers,
+    Transitions,
 } from "../../"
-import type {
-    ColorsHoverTypes,
-    RadiusesTypes,
-    ObjectFitTypes,
-} from "../../types"
-import type { ButtonPositionsTypes } from "./types"
+import type { ColorsHoverTypes } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
 
@@ -32,38 +26,26 @@ const StyledSlideshow = styled.div`
     position: relative;
 `
 
-const Wrapper = styled(Flexbox)<{
-    $height?: string | number
-    $aspectRatio?: string
-}>`
+const Wrapper = styled(Flexbox)`
     width: 100%;
-    height: ${({ $height }) => $height && stringifyPx($height)};
-    aspect-ratio: ${({ $aspectRatio, $height }) => !$height && $aspectRatio};
+    height: var(--slideshow-height, 30vw);
     position: relative;
     overflow: hidden;
 `
 
-const ContentWrapper = styled(Flexbox)<{ $borderRadius?: RadiusesTypes }>`
+const ContentWrapper = styled(Flexbox)`
     overflow: hidden;
     width: 100%;
     height: 100%;
-    ${Mixins.BorderRadius};
 `
 
-const Content = styled(Flexbox)<{
-    $speed?: number
-    $show?: number
-    $active: number
-    $imgFit?: ObjectFitTypes
-}>`
-    transition: all ${({ $speed }) => $speed}ms ease;
-    ${Mixins.HideScrollbar};
-    width: ${({ $show }) => ($show ? `calc(100% / ${$show})` : "100%")};
-    transform: ${({ $show, $active }) =>
-        $show
-            ? `translateX(-${$active * (100 / $show)}%)`
-            : `translateX(-${$active * 100}%)`};
+const Content = styled(Flexbox)`
+    transition: all var(--slideshow-speed, 1000ms) ease;
+    width: 100%;
+    transform: translateX(var(--translate));
     height: 100%;
+
+    ${Mixins.HideScrollbar}
 
     & > * {
         width: 100%;
@@ -76,62 +58,76 @@ const Content = styled(Flexbox)<{
     img {
         width: 100%;
         height: 100%;
-        object-fit: ${({ $imgFit }) => $imgFit};
     }
 `
 
-const buttonSize = 32
-const buttonSizeLarge = 48
+const BUTTON_SIZE = 32
+const BUTTON_SIZE_LARGE = 48
 
-const Button = styled.button<{
-    $position: ButtonPositionsTypes
-    $hideTouch?: boolean
-    $isLarge?: boolean
-    $color?: ColorsHoverTypes
-}>`
-    width: ${({ $isLarge }) => ($isLarge ? buttonSizeLarge : buttonSize)}px;
-    height: ${({ $isLarge }) => ($isLarge ? buttonSizeLarge : buttonSize)}px;
-    border-radius: ${({ $isLarge, $position }) =>
-        $isLarge && $position === "left"
-            ? `0 ${Radiuses.M} ${Radiuses.M} 0`
-            : $isLarge && $position === "right"
-            ? `${Radiuses.M} 0 0 ${Radiuses.M}`
-            : Radiuses.Circle};
+const BaseButton = styled.button`
+    border-radius: ${Radiuses.Circle};
     padding: 0;
     border: none;
     position: absolute;
-    top: calc(
-        50% - ${({ $isLarge }) => ($isLarge ? buttonSizeLarge : buttonSize)}px /
-            2
-    );
-    left: ${({ $position, $isLarge }) =>
-        $position === "left" && $isLarge
-            ? 0
-            : $position === "left" && !$isLarge && Spacers.XS};
-    right: ${({ $position, $isLarge }) =>
-        $position === "right" && $isLarge
-            ? 0
-            : $position === "right" && !$isLarge && Spacers.XS};
+    z-index: 2;
     ${Mixins.Flexbox({
         $alignItems: "center",
         $justifyContent: "center",
-    })};
-    color: ${({ $color, theme }) =>
-        $color === "white" ? theme.Primary500 : theme.Background};
-    background-color: ${({ theme }) => theme.ColorsHoverDefault};
-    z-index: 2;
+    })}
 
-    @media ${Breakpoints.Hover} {
-        &:hover {
-            background-color: ${({ theme }) => theme.ColorsHoverHover};
+    &[data-size="small"] {
+        width: ${BUTTON_SIZE}px;
+        height: ${BUTTON_SIZE}px;
+        top: calc(50% - ${BUTTON_SIZE}px / 2);
+
+        &[data-position="left"] {
+            left: ${Spacers.XS};
         }
-        &:active {
-            background-color: ${({ theme }) => theme.ColorsHoverActive};
+
+        &[data-position="right"] {
+            right: ${Spacers.XS};
         }
     }
 
-    @media ${Breakpoints.Touch} {
-        display: ${({ $hideTouch }) => $hideTouch && "none"};
+    &[data-size="large"] {
+        width: ${BUTTON_SIZE_LARGE}px;
+        height: ${BUTTON_SIZE_LARGE}px;
+        top: calc(50% - ${BUTTON_SIZE_LARGE}px / 2);
+
+        &[data-position="left"] {
+            border-radius: 0 ${Radiuses.M} ${Radiuses.M} 0;
+            left: 0;
+        }
+
+        &[data-position="right"] {
+            border-radius: ${Radiuses.M} 0 0 ${Radiuses.M};
+            right: 0;
+        }
+    }
+
+    &.hide-on-touch {
+        @media ${Breakpoints.Touch} {
+            display: none;
+        }
+    }
+`
+
+const Button = styled(BaseButton)<{ $color?: ColorsHoverTypes }>`
+    color: ${({ $color, theme }) =>
+        $color === "white" ? theme.Primary500 : theme.Background};
+    background-color: ${({ theme, $color }) =>
+        theme.ColorsHoverDefault({ $color })};
+
+    @media ${Breakpoints.Hover} {
+        &:hover {
+            background-color: ${({ theme, $color }) =>
+                theme.ColorsHoverHover({ $color })};
+        }
+
+        &:active {
+            background-color: ${({ theme, $color }) =>
+                theme.ColorsHoverActive({ $color })};
+        }
     }
 `
 
@@ -139,123 +135,155 @@ const Pagination = styled(Flexbox).attrs({
     justifyContent: "center",
     alignItems: "center",
     gap: "xs",
-})<{
-    $hideTouch?: boolean
-    $position?: "inside" | "outside"
-}>`
+})`
     width: 100%;
     max-width: 70%;
 
-    @media ${Breakpoints.Touch} {
-        display: ${({ $hideTouch }) => $hideTouch && "none"};
+    &.hide-on-touch {
+        @media ${Breakpoints.Touch} {
+            display: none;
+        }
     }
 
-    ${({ $position }) =>
-        $position === "inside" &&
-        css`
-            position: absolute;
-            bottom: 8px;
-        `}
+    &[data-position="inside"] {
+        position: absolute;
+        bottom: 8px;
+    }
 `
 
-const dotSize = 8
+const DOT_SIZE = 8
 
-const Dot = styled.button<{
-    $isActive?: boolean
-    $color?: ColorsHoverTypes
-    $variant?: "dots" | "dots-outline" | "bars"
-}>`
+const DotBase = styled.button`
     padding: 0;
     border: none;
     transition: ${Transitions.Short};
 
-    ${({ $variant, $isActive, theme, $color }) =>
-        $variant === "dots-outline"
-            ? css`
-                  width: ${dotSize}px;
-                  height: ${dotSize}px;
-                  border-radius: 50%;
-                  background-color: ${$isActive
-                      ? theme.ColorsHoverDefault({ $color: $color })
-                      : "transparent"};
-                  border: 1px solid
-                      ${theme.ColorsHoverDefault({ $color: $color })};
+    &[data-variant="dots"] {
+        width: ${DOT_SIZE}px;
+        height: ${DOT_SIZE}px;
+        border-radius: 50%;
+    }
 
-                  @media ${Breakpoints.Hover} {
-                      &:hover {
-                          border-color: ${theme.ColorsHoverHover({
-                              $color: $color,
-                          })};
-                          background-color: ${$isActive &&
-                          theme.ColorsHoverHover({ $color: $color })};
-                      }
+    &[data-variant="dots-outline"] {
+        width: ${DOT_SIZE}px;
+        height: ${DOT_SIZE}px;
+        border-radius: 50%;
+        background-color: transparent;
+        border: 1px solid;
+    }
 
-                      &:active {
-                          border-color: ${theme.ColorsHoverActive({
-                              $color: $color,
-                          })};
-                          background-color: ${$isActive &&
-                          theme.ColorsHoverActive({ $color: $color })};
-                      }
-                  }
-              `
-            : $variant === "bars"
-            ? css`
-                  background-color: ${$isActive
-                      ? theme.ColorsHoverDefault({ $color: $color })
-                      : theme.ColorsHoverHover({ $color: $color })};
-                  flex-grow: 1;
-                  height: 4px;
-                  border-radius: ${Radiuses.Round};
-
-                  @media ${Breakpoints.Hover} {
-                      &:hover {
-                          background-color: ${$isActive
-                              ? theme.ColorsHoverHover({ $color: $color })
-                              : theme.ColorsHoverDefault({
-                                    $color: $color,
-                                })};
-                      }
-
-                      &:active {
-                          background-color: ${theme.ColorsHoverActive({
-                              $color: $color,
-                          })};
-                      }
-                  }
-              `
-            : css`
-                  width: ${dotSize}px;
-                  height: ${dotSize}px;
-                  border-radius: 50%;
-                  background-color: ${$isActive
-                      ? theme.ColorsHoverDefault({ $color: $color })
-                      : theme.ColorsHoverHover({ $color: $color })};
-
-                  @media ${Breakpoints.Hover} {
-                      &:hover {
-                          background-color: ${$isActive
-                              ? theme.ColorsHoverHover({ $color: $color })
-                              : theme.ColorsHoverDefault({
-                                    $color: $color,
-                                })};
-                      }
-
-                      &:active {
-                          background-color: ${theme.ColorsHoverActive({
-                              $color: $color,
-                          })};
-                      }
-                  }
-              `}
+    &[data-variant="bars"] {
+        flex-grow: 1;
+        height: 4px;
+        border-radius: ${Radiuses.Round};
+    }
 `
 
-const Thumbnail = styled(Image).attrs({ fit: "cover", width: 48, height: 48 })<{
-    $isActive: boolean
+const Dot = styled(DotBase)<{
+    $color?: ColorsHoverTypes
 }>`
-    opacity: ${({ $isActive }) => ($isActive ? 1 : 0.5)};
+    &[data-variant="dots"] {
+        background-color: ${({ $color, theme }) =>
+            theme.ColorsHoverHover({ $color })};
+
+        @media ${Breakpoints.Hover} {
+            &:hover {
+                background-color: ${({ $color, theme }) =>
+                    theme.ColorsHoverDefault({ $color })};
+            }
+
+            &:active {
+                background-color: ${({ $color, theme }) =>
+                    theme.ColorsHoverActive({ $color })};
+            }
+        }
+
+        &.active {
+            background-color: ${({ $color, theme }) =>
+                theme.ColorsHoverDefault({ $color })};
+
+            @media ${Breakpoints.Hover} {
+                &:hover {
+                    background-color: ${({ $color, theme }) =>
+                        theme.ColorsHoverHover({ $color })};
+                }
+            }
+        }
+    }
+
+    &[data-variant="dots-outline"] {
+        ${({ theme, $color }) => theme.ColorsHoverDefault({ $color })};
+
+        @media ${Breakpoints.Hover} {
+            &:hover {
+                border-color: ${({ theme, $color }) =>
+                    theme.ColorsHoverHover({ $color })};
+            }
+
+            &:active {
+                border-color: ${({ theme, $color }) =>
+                    theme.ColorsHoverActive({ $color })};
+            }
+        }
+
+        &.active {
+            background-color: ${({ theme, $color }) =>
+                theme.ColorsHoverDefault({ $color: $color })};
+
+            &:hover {
+                border-color: ${({ theme, $color }) =>
+                    theme.ColorsHoverHover({ $color: $color })};
+                background-color: ${({ theme, $color }) =>
+                    theme.ColorsHoverHover({ $color: $color })};
+            }
+
+            &:active {
+                border-color: ${({ theme, $color }) =>
+                    theme.ColorsHoverActive({ $color: $color })};
+                background-color: ${({ theme, $color }) =>
+                    theme.ColorsHoverActive({ $color: $color })};
+            }
+        }
+    }
+
+    &[data-variant="bars"] {
+        background-color: ${({ theme, $color }) =>
+            theme.ColorsHoverHover({ $color })};
+
+        @media ${Breakpoints.Hover} {
+            &:hover {
+                background-color: ${({ theme, $color }) =>
+                    theme.ColorsHoverDefault({ $color })};
+            }
+
+            &:active {
+                background-color: ${({ theme, $color }) =>
+                    theme.ColorsHoverActive({ $color: $color })};
+            }
+        }
+
+        &.active {
+            background-color: ${({ theme, $color }) =>
+                theme.ColorsHoverDefault({ $color: $color })};
+
+            @media ${Breakpoints.Hover} {
+                &:hover {
+                    background-color: ${({ theme, $color }) =>
+                        theme.ColorsHoverHover({ $color })};
+                }
+            }
+        }
+    }
+`
+
+const Thumbnail = styled(Image).attrs({ fit: "cover", width: 48, height: 48 })`
+    opacity: 0.5;
     transition: ${Transitions.Short};
     cursor: pointer;
+
+    &.active {
+        opacity: 1;
+    }
 
     @media ${Breakpoints.Hover} {
         &:hover {
