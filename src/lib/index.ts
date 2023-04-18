@@ -71,7 +71,7 @@ export * from "./components/ProgressCircle" // ✅
 export * from "./components/Tabs" // ✅
 export * from "./components/Slideshow" // ✅
 export * from "./components/Cover" // ✅
-export * from "./components/Table"
+export * from "./components/Table" // ✅
 export * from "./components/PageLoading"
 export * from "./components/Sticky"
 export * from "./components/Messaging"

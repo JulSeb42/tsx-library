@@ -3,9 +3,9 @@
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
-import { uuid } from "../../"
+import { uuid, Linkify } from "../../"
 
-import * as Styles from "./styles"
+import { StyledTable } from "./styles"
 import type { TableProps } from "./types"
 
 const Table = forwardRef(
@@ -14,59 +14,31 @@ const Table = forwardRef(
             as,
             children,
             variant = "bordered",
-            textAlign = "left",
-            vAlign = "text-top",
-            headerBackground = "primary",
-            headerTextColor = "background",
-            textColor = "currentColor",
-            borderColor = "gray-200",
-            headerBorderColor = "background",
-            backgroundEven = "gray-50",
-            backgroundOdd = "background",
-            textColorEven = "currentColor",
-            textColorOdd = "currentColor",
             headers,
-            linkStylesHead,
-            linkStylesBody,
-            codeStylesHead,
-            codeStylesBody,
+            linkifyHeaders,
             ...rest
         }: TableProps,
         ref?: ForwardedRef<HTMLTableElement>
     ) => (
-        <Styles.StyledTable
-            ref={ref}
-            as={as}
-            $tableStyle={variant || "bordered"}
-            $textAlign={textAlign}
-            $vAlign={vAlign || "top"}
-            $backgroundEven={backgroundEven}
-            $backgroundOdd={backgroundOdd}
-            $borderColor={borderColor}
-            $headerBackground={headerBackground}
-            $headerTextColor={headerTextColor}
-            $textColor={textColor}
-            $textColorEven={textColorEven}
-            $textColorOdd={textColorOdd}
-            $headerBorderColor={headerBorderColor}
-            $linkStylesHead={linkStylesHead}
-            $linkStylesBody={linkStylesBody}
-            $codeStylesHead={codeStylesHead}
-            $codeStylesBody={codeStylesBody}
-            {...rest}
-        >
+        <StyledTable ref={ref} as={as} data-table-variant={variant} {...rest}>
             {headers && (
                 <thead>
                     <tr>
                         {headers.map(header => (
-                            <th key={uuid()}>{header}</th>
+                            <th key={uuid()}>
+                                {linkifyHeaders ? (
+                                    <Linkify>{header}</Linkify>
+                                ) : (
+                                    header
+                                )}
+                            </th>
                         ))}
                     </tr>
                 </thead>
             )}
 
             {headers ? <tbody>{children}</tbody> : children}
-        </Styles.StyledTable>
+        </StyledTable>
     )
 )
 

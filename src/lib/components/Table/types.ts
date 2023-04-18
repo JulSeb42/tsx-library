@@ -1,69 +1,28 @@
 /*=============================================== Table types ===============================================*/
 
-import type { HTMLAttributes, ElementType } from "react"
+import type { ElementType, HTMLAttributes } from "react"
 
-import type {
-    TextAlignTypes,
-    ColorsHoverTypes,
-    AllColorsTypes,
-} from "../../types"
-// import type { LinkStyleTypes, CodeStyleTypes } from "../Text/types"
-
-const tableStyle = {
+const tableVariants = {
     bordered: "bordered",
     stripped: "stripped",
     "border-bottom": "border-bottom",
 } as const
 
-export type TableStyleTypes = keyof typeof tableStyle
-
-const vAlign = {
-    baseline: "baseline",
-    top: "top",
-    middle: "middle",
-    bottom: "bottom",
-    sub: "sub",
-    "text-top": "text-top",
-} as const
-
-export type TableVerticalAlignTypes = keyof typeof vAlign
+export type TableVariantsTypes = keyof typeof tableVariants
 
 interface TablePropsBase extends HTMLAttributes<HTMLTableElement> {
     as?: ElementType
-    textAlign?: TextAlignTypes
-    vAlign?: TableVerticalAlignTypes
-    headerBackground?: ColorsHoverTypes
-    headerTextColor?: AllColorsTypes
+    variant?: TableVariantsTypes
+}
+
+interface TablePropsHeaders1 extends TablePropsBase {
     headers?: string[]
-
-    // linkStylesHead?: LinkStyleTypes
-    // linkStylesBody?: LinkStyleTypes
-    // codeStylesHead?: CodeStyleTypes
-    // codeStylesBody?: CodeStyleTypes
+    linkifyHeaders?: boolean
 }
 
-interface TableVariant1 extends TablePropsBase {
-    variant?: "bordered" | "border-bottom"
-    borderColor?: AllColorsTypes
-    headerBorderColor?: AllColorsTypes
-    textColor?: AllColorsTypes
-
-    backgroundEven?: never
-    backgroundOdd?: never
-    textColorEven?: never
-    textColorOdd?: never
+interface TablePropsHeaders2 extends TablePropsBase {
+    headers?: undefined | null
+    linkifyHeaders?: never
 }
 
-interface TableVariant2 extends TablePropsBase {
-    variant?: "stripped"
-    borderColor?: never
-    headerBorderColor?: never
-    textColor?: never
-
-    backgroundEven?: AllColorsTypes
-    backgroundOdd?: AllColorsTypes
-    textColorEven?: AllColorsTypes
-    textColorOdd?: AllColorsTypes
-}
-
-export type TableProps = TableVariant1 | TableVariant2
+export type TableProps = TablePropsHeaders1 | TablePropsHeaders2
