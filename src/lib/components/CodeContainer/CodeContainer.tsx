@@ -5,10 +5,9 @@ import type { ForwardedRef } from "react"
 import SyntaxHighlighter from "react-syntax-highlighter"
 import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs"
 
-import { ButtonIcon } from "../../"
 import { ClipboardIcon, CheckIcon } from "../../icons"
 
-import * as Styles from "./styles"
+import { StyledCodeContainer, Code, StyledButtonIcon } from "./styles"
 import type { CodeContainerProps } from "./types"
 
 const CodeContainer = forwardRef(
@@ -18,8 +17,8 @@ const CodeContainer = forwardRef(
             language = "javascript",
             style = atomOneDark,
             copyButton = true,
-            backgroundColor,
-            textColor,
+            color,
+            className,
             ...rest
         }: CodeContainerProps,
         ref?: ForwardedRef<HTMLDivElement>
@@ -35,28 +34,25 @@ const CodeContainer = forwardRef(
         }
 
         return (
-            <Styles.StyledCodeContainer
+            <StyledCodeContainer
                 ref={ref}
-                $backgroundColor={backgroundColor}
-                $textColor={textColor}
-                as={backgroundColor || textColor ? "pre" : "div"}
+                as={color ? "pre" : "div"}
+                $color={color}
+                className={className}
             >
-                <Styles.Code
+                <Code
                     language={language}
                     style={style}
-                    as={
-                        textColor || backgroundColor
-                            ? "code"
-                            : SyntaxHighlighter
-                    }
-                    $textColor={textColor}
+                    as={color ? "code" : SyntaxHighlighter}
+                    className="code-container-content"
+                    $color={color}
                     {...rest}
                 >
                     {children}
-                </Styles.Code>
+                </Code>
 
                 {copyButton && (
-                    <ButtonIcon
+                    <StyledButtonIcon
                         icon={
                             hasCopied ? (
                                 typeof copyButton === "object" &&
@@ -72,30 +68,22 @@ const CodeContainer = forwardRef(
                                 <ClipboardIcon size={32 * 0.7} />
                             )
                         }
-                        color={
-                            hasCopied
-                                ? typeof copyButton === "object"
-                                    ? copyButton.colorCopied
-                                    : "success"
-                                : typeof copyButton === "object"
-                                ? copyButton.colorCopy
-                                : "white"
-                        }
+                        color={hasCopied ? "success" : "white"}
                         onClick={copyToClipboard}
                         size={32}
-                        position={{
-                            position: "absolute",
-                            top: "s",
-                            right: "m",
-                        }}
                         label={
-                            typeof copyButton === "object"
-                                ? copyButton.label
+                            hasCopied
+                                ? typeof copyButton === "object"
+                                    ? copyButton?.labelCopied
+                                    : "Copied!"
+                                : typeof copyButton === "object"
+                                ? copyButton?.labelCopy
                                 : "Copy"
                         }
+                        className="code-container-button"
                     />
                 )}
-            </Styles.StyledCodeContainer>
+            </StyledCodeContainer>
         )
     }
 )

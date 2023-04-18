@@ -1,11 +1,7 @@
 /*=============================================== MarkdownContainer types ===============================================*/
 
-import type { HTMLAttributes, ReactNode } from "react"
-
-import type { SpacersTypes } from "../../types"
+import type { HTMLAttributes } from "react"
 
 export interface MarkdownContainerProps extends HTMLAttributes<HTMLDivElement> {
-    gap?: SpacersTypes
     options?: any
-    content: string | ReactNode | ReactNode[]
 }

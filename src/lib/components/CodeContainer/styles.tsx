@@ -10,53 +10,60 @@ import {
     Spacers,
     ThemeLight,
     Mixins,
+    ButtonIcon,
 } from "../../"
 import type { AllColorsTypes } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledCodeContainer = styled.div<{
-    $backgroundColor?: AllColorsTypes
-    $textColor?: AllColorsTypes
-}>`
-    background-color: ${({ theme, $backgroundColor }) =>
-        $backgroundColor
-            ? theme.AllColors({ $color: $backgroundColor })
-            : ThemeLight.Gray800};
+const BaseCodeContainer = styled.div`
     position: relative;
     overflow-x: scroll;
     padding: ${Spacers.M};
-    ${Mixins.HideScrollbar};
+    background-color: ${ThemeLight.Gray800};
+    ${Mixins.HideScrollbar}
+`
 
+const StyledCodeContainer = styled(BaseCodeContainer)<{
+    $color?: AllColorsTypes
+}>`
     & > code {
-        color: ${({ $textColor, theme }) =>
-            theme.AllColors({ $color: $textColor })};
+        color: ${({ $color, theme }) => $color && theme.AllColors({ $color })};
     }
 `
 
-const Code = styled(SyntaxHighlighter)<{
-    $textColor?: AllColorsTypes
-}>`
+const BaseCode = styled(SyntaxHighlighter)`
     background-color: transparent !important;
     font-family: ${FontFamilies.Code};
     line-height: ${LineHeights.Code};
     font-size: ${FontSizes.Small};
     padding: 0 !important;
-    ${Mixins.HideScrollbar};
-    color: ${({ $textColor, theme }) =>
-        $textColor && theme.AllColors({ $color: $textColor })};
     white-space: pre;
     line-height: ${LineHeights.Code};
+    ${Mixins.HideScrollbar}
 
     & > code {
         background-color: transparent !important;
         line-height: ${LineHeights.Code};
-
-        color: ${({ theme, $textColor }) =>
-            $textColor && theme.AllColors({ $color: $textColor })};
     }
 `
 
-setDefaultTheme([StyledCodeContainer, Code])
+const Code = styled(BaseCode)<{
+    $color?: AllColorsTypes
+}>`
+    color: ${({ $color, theme }) => $color && theme.AllColors({ $color })};
 
-export { StyledCodeContainer, Code }
+    & > code {
+        color: ${({ theme, $color }) => $color && theme.AllColors({ $color })};
+    }
+`
+
+const StyledButtonIcon = styled(ButtonIcon)`
+    position: absolute;
+    top: ${Spacers.S};
+    right: ${Spacers.M};
+`
+
+setDefaultTheme([StyledCodeContainer, Code, StyledButtonIcon])
+
+export { StyledCodeContainer, Code, StyledButtonIcon }

@@ -1,22 +1,18 @@
 /*=============================================== MarkdownContainer styles ===============================================*/
 
-import styled from "styled-components"
 import Markdown from "markdown-to-jsx"
+import styled from "styled-components"
 
 import { Mixins } from "../../"
-import type { SpacersTypes } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledMarkdownContainer = styled(Markdown)<{
-    $gap?: SpacersTypes
-}>`
-    ${({ $gap }) =>
-        Mixins.Flexbox({
-            $gap,
-            $alignItems: "stretch",
-            $flexDirection: "column",
-        })};
+const StyledMarkdownContainer = styled(Markdown)`
+    ${Mixins.Flexbox({
+        $gap: "s",
+        $alignItems: "stretch",
+        $flexDirection: "column",
+    })};
 `
 
 setDefaultTheme([StyledMarkdownContainer])

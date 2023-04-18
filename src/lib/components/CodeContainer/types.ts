@@ -2,7 +2,7 @@
 
 import type { HTMLAttributes } from "react"
 
-import type { AllColorsTypes, ColorsHoverTypes } from "../../types"
+import type { AllColorsTypes } from "../../types"
 
 export interface CodeContainerProps extends HTMLAttributes<HTMLDivElement> {
     language?:
@@ -200,15 +200,13 @@ export interface CodeContainerProps extends HTMLAttributes<HTMLDivElement> {
     copyButton?:
         | boolean
         | {
-              colorCopy?: ColorsHoverTypes
-              colorCopied?: ColorsHoverTypes
-              iconColorCopy?: AllColorsTypes
-              iconColorCopied?: AllColorsTypes
-              iconCopy?: string
-              iconCopied?: string
-              label?: string
+              iconCopy?: string | JSX.Element
+              iconCopied?: string | JSX.Element
+              iconSizeCopy?: number
+              iconSizeCopied?: number
+              labelCopy?: string
+              labelCopied?: string
           }
-    backgroundColor?: AllColorsTypes
-    textColor?: AllColorsTypes
+    color?: AllColorsTypes
     style?: any
 }
