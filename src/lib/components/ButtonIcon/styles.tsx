@@ -141,6 +141,8 @@ const BaseTip = styled.span`
     color: ${({ theme }) => theme.Background};
     background-color: ${({ theme }) =>
         theme === ThemeDark ? Overlays.Plain.White80 : Overlays.Plain.Black80};
+    max-width: calc(var(--tip-width) + ${Spacers.XXS} * 2);
+    left: calc(50% - var(--tip-width) / 2 - 2px);
 
     &:after {
         content: "";
@@ -157,6 +159,7 @@ const BaseTip = styled.span`
         z-index: 1;
         transition: ${Transitions.Short};
         position: absolute;
+        left: calc((var(--tip-width) + ${Spacers.XXS} * 2) / 2 - 10px);
     }
 
     &.visible {
@@ -170,17 +173,7 @@ const BaseTip = styled.span`
     }
 `
 
-const TipSize = styled(BaseTip)<{ $width: number }>`
-    max-width: ${({ $width }) => `calc(${$width} + ${Spacers.XXS} * 2)`};
-    left: ${({ $width }) => `calc(50% - ${$width}px / 2 - 2px)`};
-
-    &:after {
-        left: ${({ $width }) =>
-            `calc((${$width}px + ${Spacers.XXS} * 2) / 2 - 10px)`};
-    }
-`
-
-const Tip = styled(TipSize)<{
+const Tip = styled(BaseTip)<{
     $bottom?: string | number
     $position?: ButtonIconLabelDirectionsTypes
 }>`

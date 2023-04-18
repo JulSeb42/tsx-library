@@ -38,8 +38,10 @@ const Tooltip = ({
         >
             <Styles.Tip
                 ref={ref}
-                className={isVisible ? "visible" : ""}
-                $width={width}
+                className={classNames("tip", { visible: isVisible })}
+                style={{
+                    ["--tip-width" as any]: stringifyPx(width),
+                }}
                 $bottom={bottom}
                 $position={tipPosition}
             >

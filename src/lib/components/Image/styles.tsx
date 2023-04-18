@@ -12,10 +12,9 @@ const Img = styled.img`
     display: block;
     position: relative;
     z-index: 0;
-    width: var(--image-width, 100%);
-    height: var(--image-height, auto);
-    ${Mixins.DataFit()};
+    ${Mixins.ImgSizeVar("image")}
     ${Mixins.BorderRadiusVar("image")};
+    ${Mixins.DataFit()};
 `
 
 export default Img
