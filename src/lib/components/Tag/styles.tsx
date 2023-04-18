@@ -12,34 +12,32 @@ const BaseTag = styled.span`
     font-size: ${FontSizes.Small};
     border-radius: ${Radiuses.S};
     padding: ${Spacers.XXS} ${Spacers.S};
-`
 
-const TagColor = styled(BaseTag)<{
-    $color?: ColorsShortTypes
-    $variant?: TagVariantTypes
-}>`
-    background-color: ${({ theme, $variant }) =>
-        $variant === "outline" ? "transparent" : theme.AllColors};
-    color: ${({ $color, theme, $variant }) =>
-        $variant === "outline"
-            ? theme.AllColors
-            : Mixins.FontColorBackgroundShort({ $color })};
-    border: 1px solid
-        ${({ $variant, theme }) =>
-            $variant === "outline" ? theme.AllColors : "transparent"};
-`
-
-const StyledTag = styled(TagColor)<{
-    $hasIcon?: boolean
-}>`
-    ${({ $hasIcon }) =>
-        $hasIcon &&
-        Mixins.Flexbox({
+    &.with-icon {
+        ${Mixins.Flexbox({
             $alignItems: "center",
             $justifyContent: "center",
             $gap: "xxs",
             $inline: true,
-        })};
+        })}
+    }
+`
+
+const StyledTag = styled(BaseTag)<{
+    $color?: ColorsShortTypes
+    $variant?: TagVariantTypes
+}>`
+    background-color: ${({ theme, $variant, $color }) =>
+        $variant === "outline" ? "transparent" : theme.AllColors({ $color })};
+    color: ${({ $color, theme, $variant }) =>
+        $variant === "outline"
+            ? theme.AllColors({ $color })
+            : Mixins.FontColorBackgroundShort({ $color })};
+    border: 1px solid
+        ${({ $variant, theme, $color }) =>
+            $variant === "outline"
+                ? theme.AllColors({ $color })
+                : "transparent"};
 `
 
 setDefaultTheme([StyledTag])

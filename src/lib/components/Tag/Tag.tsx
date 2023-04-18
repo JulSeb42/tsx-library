@@ -2,6 +2,7 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
 import { Icon } from "../../"
 
@@ -16,6 +17,7 @@ const Tag = forwardRef(
             color = "primary",
             icons,
             variant = "plain",
+            className,
             ...rest
         }: TagProps,
         ref?: ForwardedRef<HTMLSpanElement>
@@ -28,9 +30,9 @@ const Tag = forwardRef(
             <Styles.StyledTag
                 ref={ref}
                 as={as}
+                className={classNames({ "with-icon": !!icons }, className)}
                 $color={color}
                 $variant={variant}
-                $hasIcon={!!icons}
                 {...rest}
             >
                 {icons?.left && typeof icons?.left === "string" ? (
