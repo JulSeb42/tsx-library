@@ -103,16 +103,16 @@ const Paginator = forwardRef(
         }
 
         const text = () => (
-            <Text>{`${texts.page} ${page || currentPage} ${
-                texts.of
-            } ${totalPages}`}</Text>
+            <Text className="paginator-text">{`${texts.page} ${
+                page || currentPage
+            } ${texts.of} ${totalPages}`}</Text>
         )
 
         return (
             <Styles.StyledPaginator ref={ref} as={as} {...rest}>
                 {isInputEditable ? (
                     <>
-                        <span>{texts.page}</span>
+                        <span className="paginator-text">{texts.page}</span>
 
                         <Styles.StyledInput
                             value={page || currentPage}
@@ -121,11 +121,12 @@ const Paginator = forwardRef(
                             step={1}
                             min={1}
                             max={totalPages}
+                            className="paginator-input"
                         />
 
-                        <span>{texts.of}</span>
+                        <span className="paginator-text">{texts.of}</span>
 
-                        <span>{totalPages}</span>
+                        <span className="paginator-text">{totalPages}</span>
                     </>
                 ) : (
                     text()
@@ -134,12 +135,14 @@ const Paginator = forwardRef(
                 <ButtonIcon
                     icon={icons?.prev || <ChevronLeftIcon size={24 * 0.7} />}
                     variant="transparent"
+                    className="paginator-button paginator-button-prev"
                     {...buttonPrev}
                 />
 
                 <ButtonIcon
                     icon={icons?.next || <ChevronRightIcon size={24 * 0.7} />}
                     variant="transparent"
+                    className="paginator-button paginator-button-next"
                     {...buttonNext}
                 />
             </Styles.StyledPaginator>

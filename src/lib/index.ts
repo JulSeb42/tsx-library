@@ -64,7 +64,7 @@ export * from "./components/Toast" // ✅
 export * from "./components/Alert" // ✅
 export * from "./components/Modal" // ✅
 export * from "./components/Pagination" // ✅
-export * from "./components/Paginator"
+export * from "./components/Paginator" // ✅
 export * from "./components/Stepper"
 export * from "./components/ProgressBar"
 export * from "./components/ProgressCircle"
