@@ -7,7 +7,7 @@ import { Grid } from "../../lib"
 const GridPage = () => {
     return (
         <Page title="Grid">
-            <Grid col={4} columnGap="xs" rowGap="l" inline>
+            <Grid col={4} columnGap="xs" rowGap="l">
                 <GridItem />
                 <GridItem />
                 <GridItem />
