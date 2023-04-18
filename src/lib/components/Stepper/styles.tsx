@@ -41,7 +41,7 @@ const StyledStepper = styled.div`
         z-index: 0;
     }
 
-    &.column {
+    &[data-direction="column"] {
         justify-content: flex-start;
         gap: ${Spacers.L};
         flex-direction: column;
@@ -57,7 +57,7 @@ const StyledStepper = styled.div`
         }
     }
 
-    &.row {
+    &[data-direction="row"] {
         justify-content: space-between;
         gap: ${Spacers.XS};
         flex-direction: row;

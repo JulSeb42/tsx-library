@@ -24,34 +24,47 @@ export const Step = forwardRef(
             children,
             to,
             blank,
+            className,
             ...rest
         }: StepProps,
         ref?: ForwardedRef<HTMLSpanElement>
     ) => {
         return (
-            <Styles.Item as={as} ref={ref} {...rest}>
-                <Styles.Number className={classNames({ active: isActive })}>
+            <Styles.Item
+                as={as}
+                ref={ref}
+                className={classNames("step", className)}
+                {...rest}
+            >
+                <Styles.Number
+                    className={classNames({ active: isActive }, "step-number")}
+                >
                     {isActive ? (
                         iconActive ? (
                             typeof iconActive === "string" ? (
-                                <Icon src={iconActive} size={iconSize} />
+                                <Icon
+                                    src={iconActive}
+                                    size={iconSize}
+                                    className="step-icon-active"
+                                />
                             ) : (
                                 iconActive
                             )
                         ) : (
-                            <CheckIcon size={16} />
+                            <CheckIcon size={16} className="step-icon-active" />
                         )
                     ) : (
                         number
                     )}
                 </Styles.Number>
 
-                <Text tag="small">
+                <Text tag="small" className="step-text">
                     {to ? (
                         <Link
                             to={to}
                             target={blank ? "_blank" : undefined}
                             rel={blank ? "noreferrer noopener" : undefined}
+                            className="step-link"
                         >
                             {children}
                         </Link>
@@ -60,6 +73,7 @@ export const Step = forwardRef(
                             href={href}
                             target={blank ? "_blank" : undefined}
                             rel={blank ? "noreferrer noopener" : undefined}
+                            className="step-link"
                         >
                             {children}
                         </a>
@@ -97,7 +111,8 @@ export const Stepper = forwardRef(
             <Styles.StyledStepper
                 ref={ref}
                 as={as}
-                className={classNames(direction, className)}
+                className={className}
+                data-direction={direction}
                 {...rest}
             >
                 {steps
