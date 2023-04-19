@@ -2,25 +2,12 @@
 
 import type { InputHTMLAttributes } from "react"
 
-import type { ValidationTypes, ColorsHoverTypes } from "../../types"
+import type { ValidationTypes } from "../../types"
 
-export interface InputCheckBaseProps
-    extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputCheckProps extends InputHTMLAttributes<HTMLInputElement> {
     id: string
     label: string | JSX.Element
     validation?: ValidationTypes
-    checkStyle?: "tile" | "toggle" | "selector" | undefined
-    accentColor?: ColorsHoverTypes
+    type?: "checkbox" | "radio"
+    variant?: "tile" | "toggle" | "selector" | undefined
 }
-
-interface InputCheckType1 extends InputCheckBaseProps {
-    type?: "checkbox"
-    iconCheck?: string
-}
-
-interface InputCheckType2 extends InputCheckBaseProps {
-    type?: "radio"
-    iconCheck?: never
-}
-
-export type InputCheckProps = InputCheckType1 | InputCheckType2

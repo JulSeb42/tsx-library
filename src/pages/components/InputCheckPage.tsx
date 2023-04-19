@@ -20,7 +20,7 @@ const InputCheckPage = () => {
                         type="radio"
                         id="radio-2"
                         name="radio"
-                        label="Radio"
+                        label="Radio checked"
                         defaultChecked
                     />
                 </Flexbox>
@@ -30,14 +30,14 @@ const InputCheckPage = () => {
                         type="radio"
                         id="radio-3"
                         name="radio-validation"
-                        label="Radio"
+                        label="Radio not passed"
                         validation="not-passed"
                     />
                     <InputCheck
                         type="radio"
                         id="radio-4"
                         name="radio-validation"
-                        label="Radio"
+                        label="Radio checked not passed"
                         validation="not-passed"
                         defaultChecked
                     />
@@ -48,14 +48,14 @@ const InputCheckPage = () => {
                         type="radio"
                         id="radio-5"
                         name="radio-disabled"
-                        label="Radio"
+                        label="Radio disabled"
                         disabled
                     />
                     <InputCheck
                         type="radio"
                         id="radio-6"
                         name="radio-disabled"
-                        label="Radio"
+                        label="Radio checked disabled"
                         disabled
                         defaultChecked
                     />
@@ -67,7 +67,7 @@ const InputCheckPage = () => {
                         id="radio-5"
                         name="radio-validation-disabled"
                         validation="not-passed"
-                        label="Radio"
+                        label="Radio disabled not passed"
                         disabled
                     />
                     <InputCheck
@@ -75,7 +75,7 @@ const InputCheckPage = () => {
                         id="radio-6"
                         name="radio-validation-disabled"
                         validation="not-passed"
-                        label="Radio"
+                        label="Radio disabled not passed"
                         disabled
                         defaultChecked
                     />
@@ -96,7 +96,7 @@ const InputCheckPage = () => {
                         type="checkbox"
                         id="checkbox-2"
                         name="checkbox"
-                        label="Checkbox"
+                        label="Checkbox checked"
                         defaultChecked
                     />
                 </Flexbox>
@@ -106,14 +106,14 @@ const InputCheckPage = () => {
                         type="checkbox"
                         id="checkbox-3"
                         name="checkbox-validation"
-                        label="Checkbox"
+                        label="Checkbox not passed"
                         validation="not-passed"
                     />
                     <InputCheck
                         type="checkbox"
                         id="checkbox-4"
                         name="checkbox-validation"
-                        label="Checkbox"
+                        label="Checkbox checked not passed"
                         validation="not-passed"
                         defaultChecked
                     />
@@ -124,14 +124,14 @@ const InputCheckPage = () => {
                         type="checkbox"
                         id="checkbox-5"
                         name="checkbox-disabled"
-                        label="Checkbox"
+                        label="Checkbox disabled"
                         disabled
                     />
                     <InputCheck
                         type="checkbox"
                         id="checkbox-6"
                         name="checkbox-disabled"
-                        label="Checkbox"
+                        label="Checkbox checked disabled"
                         disabled
                         defaultChecked
                     />
@@ -143,7 +143,7 @@ const InputCheckPage = () => {
                         id="checkbox-5"
                         name="checkbox-validation-disabled"
                         validation="not-passed"
-                        label="Checkbox"
+                        label="Checkbox disabled not passed"
                         disabled
                     />
                     <InputCheck
@@ -151,7 +151,7 @@ const InputCheckPage = () => {
                         id="checkbox-6"
                         name="checkbox-validation-disabled"
                         validation="not-passed"
-                        label="Checkbox"
+                        label="Checkbox disabled not passed"
                         disabled
                         defaultChecked
                     />
@@ -166,15 +166,15 @@ const InputCheckPage = () => {
                         type="radio"
                         id="radio-tile-1"
                         name="radio-tile"
-                        label="Radio"
-                        checkStyle="tile"
+                        label="Radio tile"
+                        variant="tile"
                     />
                     <InputCheck
                         type="radio"
                         id="radio-tile-2"
                         name="radio-tile"
-                        label="Radio"
-                        checkStyle="tile"
+                        label="Radio tile checked"
+                        variant="tile"
                         defaultChecked
                     />
                 </Flexbox>
@@ -184,17 +184,17 @@ const InputCheckPage = () => {
                         type="radio"
                         id="radio-tile-3"
                         name="radio-tile-validation"
-                        label="Radio"
+                        label="Radio tile not passed"
                         validation="not-passed"
-                        checkStyle="tile"
+                        variant="tile"
                     />
                     <InputCheck
                         type="radio"
                         id="radio-tile-4"
                         name="radio-tile-validation"
-                        label="Radio"
+                        label="Radio tile checked not passed"
                         validation="not-passed"
-                        checkStyle="tile"
+                        variant="tile"
                         defaultChecked
                     />
                 </Flexbox>
@@ -204,16 +204,16 @@ const InputCheckPage = () => {
                         type="radio"
                         id="radio-tile-5"
                         name="radio-tile-disabled"
-                        label="Radio"
-                        checkStyle="tile"
+                        label="Radio tile disabled"
+                        variant="tile"
                         disabled
                     />
                     <InputCheck
                         type="radio"
                         id="radio-tile-6"
                         name="radio-tile-disabled"
-                        label="Radio"
-                        checkStyle="tile"
+                        label="Radio tile disabled checked"
+                        variant="tile"
                         disabled
                         defaultChecked
                     />
@@ -225,8 +225,8 @@ const InputCheckPage = () => {
                         id="radio-tile-7"
                         name="radio-tile-validation-disabled"
                         validation="not-passed"
-                        label="Radio"
-                        checkStyle="tile"
+                        label="Radio tile disabled not passed"
+                        variant="tile"
                         disabled
                     />
                     <InputCheck
@@ -234,8 +234,8 @@ const InputCheckPage = () => {
                         id="radio-tile-8"
                         name="radio-tile-validation-disabled"
                         validation="not-passed"
-                        label="Radio"
-                        checkStyle="tile"
+                        label="Radio tile disabled checked not passed"
+                        variant="tile"
                         disabled
                         defaultChecked
                     />
@@ -250,15 +250,15 @@ const InputCheckPage = () => {
                         type="checkbox"
                         id="checkbox-tile-1"
                         name="checkbox-tile"
-                        label="Checkbox"
-                        checkStyle="tile"
+                        label="Checkbox tile"
+                        variant="tile"
                     />
                     <InputCheck
                         type="checkbox"
                         id="checkbox-tile-2"
                         name="checkbox-tile"
-                        label="Checkbox"
-                        checkStyle="tile"
+                        label="Checkbox tile checked"
+                        variant="tile"
                         defaultChecked
                     />
                 </Flexbox>
@@ -268,17 +268,17 @@ const InputCheckPage = () => {
                         type="checkbox"
                         id="checkbox-tile-3"
                         name="checkbox-tile-validation"
-                        label="Checkbox"
+                        label="Checkbox tile not passed"
                         validation="not-passed"
-                        checkStyle="tile"
+                        variant="tile"
                     />
                     <InputCheck
                         type="checkbox"
                         id="checkbox-tile-4"
                         name="checkbox-tile-validation"
-                        label="Checkbox"
+                        label="Checkbox tile checked not passed"
                         validation="not-passed"
-                        checkStyle="tile"
+                        variant="tile"
                         defaultChecked
                     />
                 </Flexbox>
@@ -288,16 +288,16 @@ const InputCheckPage = () => {
                         type="checkbox"
                         id="checkbox-tile-5"
                         name="checkbox-tile-disabled"
-                        label="Checkbox"
-                        checkStyle="tile"
+                        label="Checkbox tile disabled"
+                        variant="tile"
                         disabled
                     />
                     <InputCheck
                         type="checkbox"
                         id="checkbox-tile-6"
                         name="checkbox-tile-disabled"
-                        label="Checkbox"
-                        checkStyle="tile"
+                        label="Checkbox tile disabled checked"
+                        variant="tile"
                         disabled
                         defaultChecked
                     />
@@ -308,18 +308,18 @@ const InputCheckPage = () => {
                         type="checkbox"
                         id="checkbox-tile-7"
                         name="checkbox-tile-validation-disabled"
-                        label="Checkbox"
                         validation="not-passed"
-                        checkStyle="tile"
+                        label="Checkbox tile disabled not passed"
+                        variant="tile"
                         disabled
                     />
                     <InputCheck
                         type="checkbox"
                         id="checkbox-tile-8"
                         name="checkbox-tile-validation-disabled"
-                        label="Checkbox"
                         validation="not-passed"
-                        checkStyle="tile"
+                        label="Checkbox tile disabled checked not passed"
+                        variant="tile"
                         disabled
                         defaultChecked
                     />
@@ -335,14 +335,14 @@ const InputCheckPage = () => {
                         id="checkbox-toggle-1"
                         name="checkbox-toggle"
                         label="Toggle"
-                        checkStyle="toggle"
+                        variant="toggle"
                     />
                     <InputCheck
                         type="checkbox"
                         id="checkbox-toggle-2"
                         name="checkbox-toggle"
-                        label="Toggle"
-                        checkStyle="toggle"
+                        label="Toggle checked"
+                        variant="toggle"
                         defaultChecked
                     />
                 </Flexbox>
@@ -352,17 +352,17 @@ const InputCheckPage = () => {
                         type="checkbox"
                         id="checkbox-toggle-3"
                         name="checkbox-toggle-validation"
-                        label="Toggle"
+                        label="Toggle not passed"
                         validation="not-passed"
-                        checkStyle="toggle"
+                        variant="toggle"
                     />
                     <InputCheck
                         type="checkbox"
                         id="checkbox-toggle-4"
                         name="checkbox-toggle-validation"
-                        label="Toggle"
+                        label="Toggle checked not passed"
                         validation="not-passed"
-                        checkStyle="toggle"
+                        variant="toggle"
                         defaultChecked
                     />
                 </Flexbox>
@@ -372,16 +372,16 @@ const InputCheckPage = () => {
                         type="checkbox"
                         id="checkbox-toggle-5"
                         name="checkbox-toggle-disabled"
-                        label="Toggle"
-                        checkStyle="toggle"
+                        label="Toggle disabled"
+                        variant="toggle"
                         disabled
                     />
                     <InputCheck
                         type="checkbox"
                         id="checkbox-toggle-6"
                         name="checkbox-toggle-disabled"
-                        label="Toggle"
-                        checkStyle="toggle"
+                        label="Toggle checked disabled"
+                        variant="toggle"
                         disabled
                         defaultChecked
                     />
@@ -392,18 +392,18 @@ const InputCheckPage = () => {
                         type="checkbox"
                         id="checkbox-toggle-5"
                         name="checkbox-toggle-validation-disabled"
-                        label="Toggle"
+                        label="Toggle disabled not passed"
                         validation="not-passed"
-                        checkStyle="toggle"
+                        variant="toggle"
                         disabled
                     />
                     <InputCheck
                         type="checkbox"
                         id="checkbox-toggle-6"
                         name="checkbox-toggle-validation-disabled"
-                        label="Toggle"
+                        label="Toggle checked disabled not passed"
                         validation="not-passed"
-                        checkStyle="toggle"
+                        variant="toggle"
                         disabled
                         defaultChecked
                     />
@@ -419,14 +419,14 @@ const InputCheckPage = () => {
                         id="checkbox-selector-1"
                         name="checkbox-selector"
                         label="Selector"
-                        checkStyle="selector"
+                        variant="selector"
                     />
                     <InputCheck
                         type="checkbox"
                         id="checkbox-selector-2"
                         name="checkbox-selector"
-                        label="Selector"
-                        checkStyle="selector"
+                        label="Selector checked"
+                        variant="selector"
                         defaultChecked
                     />
                 </Flexbox>
@@ -436,17 +436,17 @@ const InputCheckPage = () => {
                         type="checkbox"
                         id="checkbox-selector-3"
                         name="checkbox-selector-validation"
-                        label="Selector"
+                        label="Selector not passed"
                         validation="not-passed"
-                        checkStyle="selector"
+                        variant="selector"
                     />
                     <InputCheck
                         type="checkbox"
                         id="checkbox-selector-4"
                         name="checkbox-selector-validation"
-                        label="Selector"
+                        label="Selector checked not passed"
                         validation="not-passed"
-                        checkStyle="selector"
+                        variant="selector"
                         defaultChecked
                     />
                 </Flexbox>
@@ -456,16 +456,16 @@ const InputCheckPage = () => {
                         type="checkbox"
                         id="checkbox-selector-5"
                         name="checkbox-selector-disabled"
-                        label="Selector"
-                        checkStyle="selector"
+                        label="Selector disabled"
+                        variant="selector"
                         disabled
                     />
                     <InputCheck
                         type="checkbox"
                         id="checkbox-selector-6"
                         name="checkbox-selector-disabled"
-                        label="Selector"
-                        checkStyle="selector"
+                        label="Selector checked disabled"
+                        variant="selector"
                         disabled
                         defaultChecked
                     />
@@ -476,18 +476,18 @@ const InputCheckPage = () => {
                         type="checkbox"
                         id="checkbox-selector-5"
                         name="checkbox-selector-validation-disabled"
-                        label="Selector"
+                        label="Selector disabled not passed"
                         validation="not-passed"
-                        checkStyle="selector"
+                        variant="selector"
                         disabled
                     />
                     <InputCheck
                         type="checkbox"
                         id="checkbox-selector-6"
                         name="checkbox-selector-validation-disabled"
-                        label="Selector"
+                        label="Selector checked disabled not passed"
                         validation="not-passed"
-                        checkStyle="selector"
+                        variant="selector"
                         disabled
                         defaultChecked
                     />
