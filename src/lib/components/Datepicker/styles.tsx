@@ -48,24 +48,7 @@ const Selected = styled.span<{
     $hasIcon?: boolean
     $variant?: InputVariantTypes
 }>`
-    ${({
-        $accentColor,
-        $isOpen,
-        $disabled,
-        $backgroundColor,
-        $validation,
-        $hasIcon,
-        $variant,
-    }) =>
-        InputBaseMixin({
-            $accentColor: $accentColor,
-            $isFocus: $isOpen,
-            $disabled: $disabled,
-            $backgroundColor: $backgroundColor,
-            $validation: $validation,
-            $hasIcon: $hasIcon,
-            $variant: $variant,
-        })};
+    ${InputBaseMixin};
     ${Mixins.Flexbox({
         $alignItems: "center",
         $justifyContent: "space-between",

@@ -2,12 +2,13 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
 import { Icon } from "../../../"
 import { ChevronDownIcon } from "../../../icons"
 import { RightContainer } from "../../InputComponents"
 
-import * as Styles from "../styles"
+import { StyledInput, StyledInputContent } from "../styles"
 import type { SelectInputProps } from "../types"
 
 const SelectInput = forwardRef(
@@ -16,30 +17,34 @@ const SelectInput = forwardRef(
             children,
             type,
             iconSelect,
-            accentColor = "primary",
             backgroundColor,
             variant = "rounded",
             disabled,
+            className,
             ...rest
         }: SelectInputProps,
         ref?: ForwardedRef<HTMLInputElement>
     ) => {
-        const iconColor = disabled ? "gray" : accentColor
+        const iconColor = disabled ? "gray" : "primary"
 
         return (
-            <Styles.StyledInputContent>
-                <Styles.StyledInput
-                    $type={type}
+            <StyledInputContent
+                className={classNames("input-content", className)}
+            >
+                <StyledInput
                     as="select"
                     ref={ref}
                     disabled={disabled}
-                    $accentColor={accentColor}
-                    $backgroundColor={backgroundColor}
-                    $variant={variant}
+                    data-variant={variant}
+                    data-background={backgroundColor}
+                    data-type={type}
+                    className={classNames("input input-select", {
+                        disabled: disabled,
+                    })}
                     {...rest}
                 >
                     {children}
-                </Styles.StyledInput>
+                </StyledInput>
 
                 <RightContainer disabled={disabled} variant={variant}>
                     {iconSelect ? (
@@ -48,15 +53,20 @@ const SelectInput = forwardRef(
                                 src={iconSelect}
                                 size={16}
                                 color={iconColor}
+                                className="icon-select"
                             />
                         ) : (
                             iconSelect
                         )
                     ) : (
-                        <ChevronDownIcon size={16} color={iconColor} />
+                        <ChevronDownIcon
+                            size={16}
+                            color={iconColor}
+                            className="icon-select"
+                        />
                     )}
                 </RightContainer>
-            </Styles.StyledInputContent>
+            </StyledInputContent>
         )
     }
 )

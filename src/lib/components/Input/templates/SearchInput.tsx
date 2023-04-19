@@ -2,12 +2,13 @@
 
 import React, { forwardRef, useRef } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
 import { ButtonIcon, Key, useKeyPress } from "../../../"
 import { CloseIcon } from "../../../icons"
 import { RightContainer, IconComponent } from "../../InputComponents"
 
-import * as Styles from "../styles"
+import { StyledInputContent, StyledInput } from "../styles"
 import type { SearchInputProps } from "../types"
 
 const SearchInput = forwardRef(
@@ -17,7 +18,6 @@ const SearchInput = forwardRef(
             type = "search",
             clearSearch,
             iconClear,
-            accentColor = "primary",
             backgroundColor,
             iconSize,
             variant = "rounded",
@@ -25,6 +25,7 @@ const SearchInput = forwardRef(
             value,
             focusKeys,
             showKeys,
+            className,
             ...rest
         }: SearchInputProps,
         ref?: ForwardedRef<HTMLInputElement>
@@ -49,27 +50,30 @@ const SearchInput = forwardRef(
         )
 
         return (
-            <Styles.StyledInputContent>
+            <StyledInputContent
+                className={classNames("input-content", className)}
+            >
                 {icon && (
                     <IconComponent
                         icon={icon}
                         disabled={disabled}
-                        accentColor={accentColor}
                         size={iconSize}
                         variant={variant}
                     />
                 )}
 
-                <Styles.StyledInput
+                <StyledInput
                     type={type}
                     ref={ref || focusRef}
-                    $type={type}
-                    $hasIcon={!!icon}
                     disabled={disabled}
-                    $accentColor={accentColor}
-                    $backgroundColor={backgroundColor}
-                    $variant={variant}
                     value={value}
+                    data-variant={variant}
+                    data-background={backgroundColor}
+                    data-type={type}
+                    className={classNames(
+                        { "with-icon": !!icon },
+                        "input input-search"
+                    )}
                     {...rest}
                 />
 
@@ -82,20 +86,20 @@ const SearchInput = forwardRef(
                             size={24}
                             onClick={clearSearch}
                             disabled={disabled}
-                            color={accentColor}
-                            borderRadius="xs"
+                            color="primary"
+                            className="button-clear"
                         />
                     )}
 
                     {focusKeys && showKeys && keyArr && (
                         <Key
                             keys={keyArr}
-                            borderColor={accentColor}
-                            backgroundColor={accentColor}
+                            accentColor="primary"
+                            className="keys"
                         />
                     )}
                 </RightContainer>
-            </Styles.StyledInputContent>
+            </StyledInputContent>
         )
     }
 )

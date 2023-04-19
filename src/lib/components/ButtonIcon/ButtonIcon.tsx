@@ -72,6 +72,7 @@ const ButtonIcon = forwardRef(
             className,
             to,
             style,
+            onClick,
             ...rest
         }: ButtonIconProps,
         ref?: ForwardedRef<HTMLButtonElement>
@@ -81,6 +82,7 @@ const ButtonIcon = forwardRef(
                 as={as ? as : to ? Link : href ? "a" : "button"}
                 ref={ref}
                 aria-label={label}
+                onClick={onClick}
                 href={href}
                 to={to === "prev" ? -1 : to}
                 target={(href || to) && blank && "_blank"}

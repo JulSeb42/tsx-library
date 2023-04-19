@@ -18,7 +18,7 @@ import type {
     InputBackgroundTypes,
     InputVariantTypes,
 } from "../InputComponents/types"
-import { ConstantValues } from "../InputComponents/styles"
+import { CONSTANT_VALUES } from "../InputComponents/styles"
 
 import { setDefaultTheme } from "../../utils"
 
@@ -29,7 +29,7 @@ const StyledInputPhone = styled.div<{ $isOpen: boolean }>`
 `
 
 const Button = styled.button<{ $variant?: InputVariantTypes }>`
-    height: ${ConstantValues.InputHeight}px;
+    height: ${CONSTANT_VALUES.InputHeight}px;
     padding: 0
         ${({ $variant }) => ($variant === "pill" ? Spacers.S : Spacers.XS)};
     border: none;
@@ -96,7 +96,7 @@ const InputSearch = styled.input<{
 const CountryCode = styled.span<{ $backgroundColor?: InputBackgroundTypes }>`
     position: absolute;
     left: 48px;
-    height: ${ConstantValues.InputHeight}px;
+    height: ${CONSTANT_VALUES.InputHeight}px;
     ${Mixins.Flexbox({
         $alignItems: "center",
     })};
@@ -117,13 +117,7 @@ const Input = styled.input<{
     $backgroundColor?: InputBackgroundTypes
     $variant?: InputVariantTypes
 }>`
-    ${({ $accentColor, $backgroundColor, $validation, $variant }) =>
-        InputBaseMixin({
-            $accentColor: $accentColor,
-            $backgroundColor: $backgroundColor,
-            $validation: $validation,
-            $variant: $variant,
-        })};
+    ${InputBaseMixin};
     border-color: ${({
         $accentColor,
         $isListOpen,

@@ -23,14 +23,7 @@ const StyledAutocomplete = styled.input<{
     $backgroundColor?: InputBackgroundTypes
     $variant?: InputVariantTypes
 }>`
-    ${({ $accentColor, $backgroundColor, $hasIcon, $validation, $variant }) =>
-        InputBaseMixin({
-            $accentColor: $accentColor,
-            $backgroundColor: $backgroundColor,
-            $hasIcon: $hasIcon,
-            $validation: $validation,
-            $variant: $variant,
-        })};
+    ${InputBaseMixin};
 `
 
 setDefaultTheme([StyledAutocomplete, InputContainer])

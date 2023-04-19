@@ -73,8 +73,8 @@ const Input = forwardRef(
             counter,
             maxLength,
             id,
-            accentColor = "primary",
             value,
+            className,
             ...rest
         }: InputProps,
         ref?: ForwardedRef<
@@ -86,8 +86,12 @@ const Input = forwardRef(
                 id={id}
                 maxLength={maxLength}
                 value={value}
-                accentColor={accentColor}
                 ref={ref}
+                className={
+                    !label && !helper && !helperBottom && !counter
+                        ? className
+                        : ""
+                }
                 {...rest}
             />
         )
@@ -101,7 +105,7 @@ const Input = forwardRef(
                 counter={counter}
                 maxLength={maxLength}
                 value={value}
-                accentColor={accentColor}
+                className={className}
             >
                 {inputFn()}
             </InputContainer>

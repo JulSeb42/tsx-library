@@ -20,7 +20,7 @@ import type {
 } from "../../types"
 import type { VariantTypes, ListDirectionTypes } from "./types"
 import type { InputBackgroundTypes } from "../InputComponents/types"
-import { ConstantValues } from "../InputComponents/styles"
+import { CONSTANT_VALUES } from "../InputComponents/styles"
 
 import { setDefaultTheme } from "../../utils"
 
@@ -53,8 +53,8 @@ const StyledListInputs = styled.div<{
     max-height: ${({ $isOpen }) =>
         $isOpen
             ? `${
-                  ConstantValues.ListItemHeight * 4 +
-                  ConstantValues.InputHeight / 2
+                  CONSTANT_VALUES.ListItemHeight * 4 +
+                  CONSTANT_VALUES.InputHeight / 2
               }px`
             : 0};
     transition: ${Transitions.Short};

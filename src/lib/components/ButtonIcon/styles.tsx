@@ -15,10 +15,7 @@ import {
     stringifyPx,
 } from "../../"
 import type { ColorsHoverTypes } from "../../types"
-import type {
-    ButtonIconLabelDirectionsTypes,
-    ButtonIconVariantTypes,
-} from "./types"
+import type { ButtonIconLabelDirectionsTypes } from "./types"
 
 import { setDefaultTheme } from "../../utils"
 
@@ -39,7 +36,6 @@ const BaseButtonIcon = styled.button`
 `
 
 const StyledButtonIcon = styled(BaseButtonIcon)<{
-    $variant?: ButtonIconVariantTypes
     $color?: ColorsHoverTypes
 }>`
     &.plain {

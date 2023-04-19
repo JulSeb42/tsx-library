@@ -2,6 +2,7 @@
 
 import React, { forwardRef, useState } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
 import { Button, ButtonIcon } from "../../../"
 import {
@@ -10,7 +11,7 @@ import {
     ValidationComponent,
 } from "../../InputComponents"
 
-import * as Styles from "../styles"
+import { StyledInput, StyledInputContent } from "../styles"
 import type { PasswordInputProps } from "../types"
 
 const PasswordInput = forwardRef(
@@ -19,11 +20,11 @@ const PasswordInput = forwardRef(
             validation,
             icon,
             button,
-            accentColor = "primary",
             backgroundColor,
             iconSize,
             variant = "rounded",
             disabled,
+            className,
             ...rest
         }: PasswordInputProps,
         ref?: ForwardedRef<HTMLInputElement>
@@ -33,42 +34,48 @@ const PasswordInput = forwardRef(
         const getValidationStatus =
             typeof validation === "object" ? validation?.status : validation
 
-        const buttonProps = {
-            onClick: () => setIsVisible(!isVisible),
+        const baseButtonProps = {
             disabled,
-            color: accentColor,
+            onClick: () => setIsVisible(!isVisible),
+            className: "button-password",
+        }
+
+        const buttonProps = {
+            ...baseButtonProps,
             noPadding: true,
         }
 
         const buttonIconProps = {
-            onClick: () => setIsVisible(!isVisible),
-            disabled,
-            color: accentColor,
+            ...baseButtonProps,
             size: 32,
         }
 
         return (
-            <Styles.StyledInputContent>
+            <StyledInputContent
+                className={classNames("input-content", className)}
+            >
                 {icon && (
                     <IconComponent
                         icon={icon}
                         disabled={disabled}
-                        accentColor={accentColor}
                         validation={getValidationStatus}
                         size={iconSize}
                         variant={variant}
                     />
                 )}
 
-                <Styles.StyledInput
+                <StyledInput
                     ref={ref}
                     disabled={disabled}
                     type={isVisible ? "text" : "password"}
-                    $validation={getValidationStatus}
-                    $hasIcon={!!icon}
-                    $accentColor={accentColor}
-                    $backgroundColor={backgroundColor}
-                    $variant={variant}
+                    data-variant={variant}
+                    data-background={backgroundColor}
+                    data-type={isVisible ? "text" : "password"}
+                    data-validation={getValidationStatus}
+                    className={classNames(
+                        { "with-icon": !!icon },
+                        "input input-password"
+                    )}
                     {...rest}
                 />
 
@@ -77,15 +84,16 @@ const PasswordInput = forwardRef(
                         button?.iconHide ? (
                             <ButtonIcon
                                 icon={button.iconHide}
-                                variant="transparent"
-                                borderRadius="none"
                                 type="button"
+                                color="primary"
+                                variant="transparent"
                                 {...buttonIconProps}
                             />
                         ) : (
                             <Button
-                                variant="text"
                                 type="button"
+                                color="primary"
+                                variant="transparent"
                                 {...buttonProps}
                             >
                                 {button?.textHide || "Hide"}
@@ -94,13 +102,18 @@ const PasswordInput = forwardRef(
                     ) : button?.iconShow ? (
                         <ButtonIcon
                             icon={button.iconShow}
-                            variant="transparent"
-                            borderRadius="none"
                             type="button"
+                            color="primary"
+                            variant="transparent"
                             {...buttonIconProps}
                         />
                     ) : (
-                        <Button variant="text" type="button" {...buttonProps}>
+                        <Button
+                            type="button"
+                            color="primary"
+                            variant="transparent"
+                            {...buttonProps}
+                        >
                             {button?.textShow || "Show"}
                         </Button>
                     )}
@@ -109,7 +122,7 @@ const PasswordInput = forwardRef(
                         <ValidationComponent validation={validation} />
                     )}
                 </RightContainer>
-            </Styles.StyledInputContent>
+            </StyledInputContent>
         )
     }
 )

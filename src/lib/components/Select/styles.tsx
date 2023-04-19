@@ -5,7 +5,7 @@ import styled, { css } from "styled-components"
 import { Mixins, Transitions, Icon } from "../../"
 import { ChevronDownIcon } from "../../icons"
 import { InputBaseMixin } from "../InputComponents"
-import { ConstantValues } from "../InputComponents/styles"
+import { CONSTANT_VALUES } from "../InputComponents/styles"
 import type { ColorsHoverTypes } from "../../types"
 import type {
     InputBackgroundTypes,
@@ -21,7 +21,7 @@ const StyledSelect = styled.div<{
 }>`
     position: relative;
     width: 100%;
-    height: ${ConstantValues.InputHeight}px;
+    height: ${CONSTANT_VALUES.InputHeight}px;
     cursor: ${({ $isEmpty, disabled }) =>
         $isEmpty ? "default" : disabled ? "not-allowed" : "pointer"};
     z-index: ${({ $isOpen }) => ($isOpen ? 30 : 0)};
@@ -34,14 +34,7 @@ const Selected = styled.span<{
     $backgroundColor?: InputBackgroundTypes
     $variant?: InputVariantTypes
 }>`
-    ${({ $accentColor, $isOpen, $disabled, $backgroundColor, $variant }) =>
-        InputBaseMixin({
-            $accentColor: $accentColor,
-            $isFocus: $isOpen,
-            $disabled: $disabled,
-            $backgroundColor: $backgroundColor,
-            $variant: $variant,
-        })};
+    ${InputBaseMixin};
     ${Mixins.Flexbox({
         $alignItems: "center",
         $justifyContent: "space-between",

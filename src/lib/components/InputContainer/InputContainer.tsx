@@ -1,10 +1,17 @@
 /*=============================================== InputContainer ===============================================*/
 
 import React from "react"
+import classNames from "classnames"
 
 import { Text, Icon } from "../../"
 
-import * as Styles from "./styles"
+import {
+    StyledInputContainer,
+    Label,
+    HelperBottomContainer,
+    IconContainer,
+    Counter,
+} from "./styles"
 import type { InputContainerProps } from "./types"
 
 const InputContainer = ({
@@ -16,34 +23,27 @@ const InputContainer = ({
     counter,
     maxLength,
     value,
-    accentColor = "primary",
+    className,
 }: InputContainerProps) => {
     const helperBottomFn = () => (
-        <Styles.HelperBottom
-            $style={
-                typeof helperBottom === "object"
-                    ? helperBottom.style
-                    : "default"
-            }
-            color={
-                typeof helperBottom === "object" ? helperBottom.color : "font"
-            }
-        >
+        <Text tag="small" className="helper-bottom">
             {typeof helperBottom === "object"
                 ? helperBottom.text
                 : helperBottom}
-        </Styles.HelperBottom>
+        </Text>
     )
 
     return (
-        <Styles.StyledInputContainer>
+        <StyledInputContainer
+            className={classNames("input-container", className)}
+        >
             {label && (
-                <Styles.Label $color={accentColor} htmlFor={id}>
+                <Label htmlFor={id} className="label">
                     {label}
-                </Styles.Label>
+                </Label>
             )}
 
-            {helper && <Text>{helper}</Text>}
+            {helper && <Text className="helper">{helper}</Text>}
 
             {children}
 
@@ -51,28 +51,29 @@ const InputContainer = ({
                 ((typeof helperBottom === "object" && helperBottom.text) ||
                     typeof helperBottom === "string") &&
                 (typeof helperBottom === "object" && helperBottom.icon ? (
-                    <Styles.HelperBottomContainer>
-                        <Styles.IconContainer>
+                    <HelperBottomContainer className="helper-bottom-container">
+                        <IconContainer className="helper-bottom-icon-container">
                             <Icon
                                 src={helperBottom.icon}
                                 size={14}
                                 color={helperBottom.iconColor || "primary"}
+                                className="helper-bottom-icon"
                             />
-                        </Styles.IconContainer>
+                        </IconContainer>
 
                         {helperBottomFn()}
-                    </Styles.HelperBottomContainer>
+                    </HelperBottomContainer>
                 ) : (
                     helperBottomFn()
                 ))}
 
             {typeof value === "string" && counter && (
-                <Styles.Counter>
+                <Counter className="input-counter">
                     {value.toString().length}
                     {maxLength ? ` / ${maxLength}` : ""}
-                </Styles.Counter>
+                </Counter>
             )}
-        </Styles.StyledInputContainer>
+        </StyledInputContainer>
     )
 }
 

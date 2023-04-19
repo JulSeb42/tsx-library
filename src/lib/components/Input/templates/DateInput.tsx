@@ -2,6 +2,7 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
 import {
     RightContainer,
@@ -9,7 +10,7 @@ import {
     ValidationComponent,
 } from "../../InputComponents"
 
-import * as Styles from "../styles"
+import { StyledInput, StyledInputContent } from "../styles"
 import type { DateInputProps } from "../types"
 
 const DateInput = forwardRef(
@@ -17,13 +18,12 @@ const DateInput = forwardRef(
         {
             type,
             icon,
-            iconCalendar,
             validation,
-            accentColor = "primary",
             backgroundColor,
             iconSize,
             variant = "rounded",
             disabled,
+            className,
             ...rest
         }: DateInputProps,
         ref?: ForwardedRef<HTMLInputElement>
@@ -32,28 +32,31 @@ const DateInput = forwardRef(
             typeof validation === "object" ? validation?.status : validation
 
         const inputFn = () => (
-            <Styles.StyledInput
+            <StyledInput
                 ref={ref}
-                $iconCalendar={iconCalendar}
-                $validation={getValidationStatus}
-                $hasIcon={!!icon}
-                $accentColor={accentColor}
-                $backgroundColor={backgroundColor}
-                $variant={variant}
                 disabled={disabled}
                 type={type}
-                $type={type}
+                data-variant={variant}
+                data-background={backgroundColor}
+                data-type={type}
+                data-validation={getValidationStatus}
+                className={classNames(
+                    { "with-icon": !!icon },
+                    "input input-date",
+                    !icon && !validation && className
+                )}
                 {...rest}
             />
         )
 
         return icon || validation ? (
-            <Styles.StyledInputContent>
+            <StyledInputContent
+                className={classNames("input-content", className)}
+            >
                 {icon && (
                     <IconComponent
                         icon={icon}
                         disabled={disabled}
-                        accentColor={accentColor}
                         validation={getValidationStatus}
                         size={iconSize}
                         variant={variant}
@@ -67,7 +70,7 @@ const DateInput = forwardRef(
                         <ValidationComponent validation={validation} />
                     </RightContainer>
                 )}
-            </Styles.StyledInputContent>
+            </StyledInputContent>
         ) : (
             inputFn()
         )

@@ -2,7 +2,7 @@
 
 import type { HTMLAttributes } from "react"
 
-import type { ColorsHoverTypes, ValidationTypes } from "../../types"
+import type { ValidationTypes } from "../../types"
 
 const inputVariants = { rounded: "rounded", pill: "pill" } as const
 
@@ -20,10 +20,10 @@ export interface RightContainerProps extends HTMLAttributes<HTMLSpanElement> {
 export interface IconComponentProps extends HTMLAttributes<HTMLSpanElement> {
     disabled?: boolean
     icon: string | JSX.Element
-    accentColor?: ColorsHoverTypes
-    validation?: "passed" | "not-passed"
+    validation?: ValidationTypes
     size?: number
     variant?: InputVariantTypes
+    backgroundColor?: InputBackgroundTypes
 }
 
 export interface ValidationComponentProps {

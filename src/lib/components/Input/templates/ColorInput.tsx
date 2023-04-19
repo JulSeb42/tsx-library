@@ -2,28 +2,29 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
-import * as Styles from "../styles"
+import { StyledInput } from "../styles"
 import type { ColorInputProps } from "../types"
 
 const ColorInput = forwardRef(
     (
         {
             type = "color",
-            accentColor = "primary",
             backgroundColor,
             variant = "rounded",
+            className,
             ...rest
         }: ColorInputProps,
         ref?: ForwardedRef<HTMLInputElement>
     ) => (
-        <Styles.StyledInput
+        <StyledInput
             ref={ref}
             type={type}
-            $type={type}
-            $accentColor={accentColor}
-            $backgroundColor={backgroundColor}
-            $variant={variant}
+            data-type={type}
+            data-variant={variant}
+            data-background={backgroundColor}
+            className={classNames("input input-color", className)}
             {...rest}
         />
     )

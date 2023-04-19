@@ -3,9 +3,9 @@
 import React from "react"
 import { Icon } from "../../"
 import { CheckCircleIcon, CloseCircleIcon } from "../../icons"
+import classNames from "classnames"
 
-import * as Styles from "./styles"
-import { InputBaseMixin } from "./styles"
+import { InputBaseMixin, StyledRightContainer, IconContainer } from "./styles"
 
 import type {
     RightContainerProps,
@@ -17,53 +17,94 @@ const RightContainer = ({
     disabled,
     children,
     variant = "rounded",
+    className,
 }: RightContainerProps) => (
-    <Styles.RightContainer $disabled={disabled} $variant={variant}>
+    <StyledRightContainer
+        data-variant={variant}
+        className={classNames(
+            { disabled: disabled },
+            "input-right-container",
+            className
+        )}
+    >
         {children}
-    </Styles.RightContainer>
+    </StyledRightContainer>
 )
 
 const IconComponent = ({
     icon,
     disabled,
-    accentColor = "primary",
     validation,
     size = 24,
     variant = "rounded",
+    backgroundColor,
+    className,
 }: IconComponentProps) => (
-    <Styles.IconContainer
-        $color={
-            disabled
-                ? "gray"
-                : validation === "not-passed"
-                ? "danger"
-                : accentColor
-        }
-        $variant={variant}
+    <IconContainer
+        data-variant={variant}
+        data-background={backgroundColor}
+        data-validation={validation}
+        className={classNames(
+            { disabled: disabled },
+            "input-icon-container",
+            className
+        )}
     >
-        {typeof icon === "string" ? <Icon src={icon} size={size} /> : icon}
-    </Styles.IconContainer>
+        {typeof icon === "string" ? (
+            <Icon src={icon} size={size} className="input-icon" />
+        ) : (
+            icon
+        )}
+    </IconContainer>
 )
 
 const ValidationComponent = ({ validation }: ValidationComponentProps) => {
     const getValidationStatus =
         typeof validation === "object" ? validation?.status : validation
 
-    return getValidationStatus === "passed" ? (
-        typeof validation === "object" && validation.iconPassed ? (
-            <Icon src={validation.iconPassed} size={16} color="success" />
-        ) : (
-            <CheckCircleIcon size={16} color="success" />
+    if (getValidationStatus === "passed") {
+        if (typeof validation === "object" && validation.iconPassed) {
+            return (
+                <Icon
+                    src={validation.iconPassed}
+                    size={16}
+                    color="success"
+                    className="validation-icon icon-success"
+                />
+            )
+        }
+
+        return (
+            <CheckCircleIcon
+                size={16}
+                color="success"
+                className="validation-icon icon-success"
+            />
         )
-    ) : getValidationStatus === "not-passed" ? (
-        typeof validation === "object" && validation.iconNotPassed ? (
-            <Icon src={validation.iconNotPassed} size={16} color="danger" />
-        ) : (
-            <CloseCircleIcon size={16} color="danger" />
+    }
+
+    if (getValidationStatus === "not-passed") {
+        if (typeof validation === "object" && validation.iconNotPassed) {
+            return (
+                <Icon
+                    src={validation.iconNotPassed}
+                    size={16}
+                    color="danger"
+                    className="validation-icon icon-danger"
+                />
+            )
+        }
+
+        return (
+            <CloseCircleIcon
+                size={16}
+                color="danger"
+                className="validation-icon icon-danger"
+            />
         )
-    ) : (
-        <></>
-    )
+    }
+
+    return null
 }
 
 export { RightContainer, InputBaseMixin, IconComponent, ValidationComponent }

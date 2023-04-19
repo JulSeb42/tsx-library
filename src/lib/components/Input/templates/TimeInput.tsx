@@ -2,6 +2,7 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
 import {
     RightContainer,
@@ -9,7 +10,7 @@ import {
     ValidationComponent,
 } from "../../InputComponents"
 
-import * as Styles from "../styles"
+import { StyledInput, StyledInputContent } from "../styles"
 import type { TimeInputProps } from "../types"
 
 const TimeInput = forwardRef(
@@ -18,12 +19,11 @@ const TimeInput = forwardRef(
             icon,
             validation,
             type = "time",
-            iconClock,
-            accentColor = "primary",
             backgroundColor,
             iconSize,
             variant = "rounded",
             disabled,
+            className,
             ...rest
         }: TimeInputProps,
         ref?: ForwardedRef<HTMLInputElement>
@@ -32,29 +32,31 @@ const TimeInput = forwardRef(
             typeof validation === "object" ? validation?.status : validation
 
         return (
-            <Styles.StyledInputContent>
+            <StyledInputContent
+                className={classNames("input-content", className)}
+            >
                 {icon && (
                     <IconComponent
                         icon={icon}
                         disabled={disabled}
-                        accentColor={accentColor}
                         validation={getValidationStatus}
                         size={iconSize}
                         variant={variant}
                     />
                 )}
 
-                <Styles.StyledInput
+                <StyledInput
                     ref={ref}
-                    $iconClock={iconClock}
-                    $type={type}
-                    $validation={getValidationStatus}
                     disabled={disabled}
                     type={type}
-                    $hasIcon={!!icon}
-                    $accentColor={accentColor}
-                    $backgroundColor={backgroundColor}
-                    $variant={variant}
+                    data-variant={variant}
+                    data-background={backgroundColor}
+                    data-type={type}
+                    data-validation={getValidationStatus}
+                    className={classNames(
+                        { "with-icon": !!icon },
+                        "input input-time"
+                    )}
                     {...rest}
                 />
 
@@ -63,7 +65,7 @@ const TimeInput = forwardRef(
                         <ValidationComponent validation={validation} />
                     </RightContainer>
                 )}
-            </Styles.StyledInputContent>
+            </StyledInputContent>
         )
     }
 )

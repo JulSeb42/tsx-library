@@ -2,8 +2,9 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
-import * as Styles from "../styles"
+import { StyledInput } from "../styles"
 import type { TextareaProps } from "../types"
 
 const Textarea = forwardRef(
@@ -11,8 +12,8 @@ const Textarea = forwardRef(
         {
             validation,
             type = "textarea",
-            accentColor = "primary",
             backgroundColor,
+            className,
             ...rest
         }: TextareaProps,
         ref?: ForwardedRef<HTMLInputElement>
@@ -21,13 +22,13 @@ const Textarea = forwardRef(
             typeof validation === "object" ? validation?.status : validation
 
         return (
-            <Styles.StyledInput
+            <StyledInput
                 ref={ref}
                 as="textarea"
-                $type={type}
-                $validation={getValidationStatus}
-                $accentColor={accentColor}
-                $backgroundColor={backgroundColor}
+                data-background={backgroundColor}
+                data-type={type}
+                data-validation={getValidationStatus}
+                className={classNames("input input-textarea", className)}
                 {...rest}
             />
         )

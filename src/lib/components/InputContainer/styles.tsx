@@ -3,7 +3,6 @@
 import styled from "styled-components"
 
 import { FontWeights, Mixins, Text } from "../../"
-import type { ColorsHoverTypes } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
 
@@ -15,10 +14,8 @@ const StyledInputContainer = styled.div`
     })};
 `
 
-const Label = styled.label<{
-    $color?: ColorsHoverTypes
-}>`
-    color: ${({ theme }) => theme.AllColors};
+const Label = styled.label`
+    color: ${({ theme }) => theme.Primary500};
     font-weight: ${FontWeights.Black};
 `
 
@@ -26,12 +23,6 @@ const HelperBottomContainer = styled.span`
     ${Mixins.Flexbox({
         $gap: "xxs",
     })};
-`
-
-const HelperBottom = styled(Text).attrs({ tag: "small" })<{
-    $style?: "default" | "italic"
-}>`
-    font-style: ${({ $style }) => $style === "italic" && "italic"};
 `
 
 const IconContainer = styled.span`
@@ -43,14 +34,14 @@ const IconContainer = styled.span`
     })}
 `
 
-const Counter = styled(Text).attrs({ tag: "small", color: "gray" })`
+const Counter = styled(Text).attrs({ tag: "small" })`
     font-style: italic;
+    color: ${({ theme }) => theme.Gray500};
 `
 
 setDefaultTheme([
     StyledInputContainer,
     Label,
-    HelperBottom,
     HelperBottomContainer,
     IconContainer,
     Counter,
@@ -60,7 +51,6 @@ export {
     StyledInputContainer,
     Label,
     HelperBottomContainer,
-    HelperBottom,
     IconContainer,
     Counter,
 }

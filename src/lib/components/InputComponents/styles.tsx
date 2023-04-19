@@ -3,103 +3,51 @@
 import styled, { css } from "styled-components"
 
 import {
-    ThemeLight,
-    ThemeDark,
-    FontSizes,
     FontFamilies,
-    Spacers,
-    Radiuses,
+    FontSizes,
     Mixins,
+    Radiuses,
+    Spacers,
+    ThemeDark,
+    ThemeLight,
 } from "../../"
-import type {
-    ValidationTypes,
-    ColorsHoverTypes,
-    ColorsInputTypes,
-} from "../../types"
-import type { InputBackgroundTypes, InputVariantTypes } from "./types"
 
 import { setDefaultTheme } from "../../utils"
 
-interface BaseInputProps {
-    $validation?: ValidationTypes
-    $backgroundColor?: InputBackgroundTypes
-    $accentColor?: ColorsHoverTypes
-    $disabled?: boolean
-    $isFocus?: boolean
-    $hasIcon?: boolean
-    $variant?: InputVariantTypes
-}
-
-const ConstantValues = {
+export const CONSTANT_VALUES = {
     InputHeight: 32,
     ListItemHeight: 40,
 }
 
-const InputBaseMixin = ({
-    $validation,
-    $backgroundColor,
-    $accentColor,
-    $disabled,
-    $isFocus,
-    $hasIcon,
-    $variant,
-}: BaseInputProps) => css`
+const InputBaseMixin = css`
     width: 100%;
-    height: ${ConstantValues.InputHeight}px;
+    height: ${CONSTANT_VALUES.InputHeight}px;
     position: relative;
-    border: 1px solid
-        ${({ theme }) =>
-            $isFocus
-                ? $validation === "not-passed"
-                    ? theme.Danger500
-                    : theme.AllColors({ $color: $accentColor })
-                : theme.Gray200};
-    background-color: ${({ theme }) =>
-        $validation === "not-passed"
-            ? $backgroundColor === "dark"
-                ? ThemeDark.Danger50
-                : $backgroundColor === "light"
-                ? ThemeLight.Danger50
-                : theme.Danger50
-            : $disabled
-            ? theme.Gray100
-            : $backgroundColor === "dark"
-            ? ThemeDark.Background
-            : $backgroundColor === "light"
-            ? ThemeLight.Background
-            : theme.Background};
-    border-radius: ${$variant === "pill" ? Radiuses.Round : Radiuses.S};
     font-size: ${FontSizes.Body};
     font-family: ${FontFamilies.Body};
-    padding: ${$variant === "pill" ? `0 ${Spacers.S}` : `0 ${Spacers.XS}`};
-    padding-left: ${$hasIcon &&
-    ($variant === "pill"
-        ? `calc(40px + ${Spacers.XS})`
-        : `calc(${ConstantValues.InputHeight}px + ${Spacers.XS})`)};
-    color: ${({ theme }) =>
-        $disabled
-            ? theme.Gray500
-            : $validation === "not-passed"
-            ? $backgroundColor === "dark"
-                ? ThemeDark.Font
-                : $backgroundColor === "light"
-                ? ThemeLight.Font
-                : theme.Font
-            : $backgroundColor === "dark"
-            ? ThemeDark.Font
-            : $backgroundColor === "light"
-            ? ThemeLight.Font
-            : theme.Font};
     line-height: 100%;
     outline: none;
     position: relative;
     z-index: 2;
+    border: 1px solid ${({ theme }) => theme.Gray200};
+    background-color: ${({ theme }) => theme.Background};
+    color: ${({ theme }) => theme.Font};
+    border-radius: ${Radiuses.S};
+    padding: 0 ${Spacers.XS};
 
-    &:focus {
-        border-color: ${({ theme }) =>
-            $validation === "not-passed"
-                ? theme.Danger500
-                : theme.AllColors({ $color: $accentColor })};
+    &[data-variant="pill"] {
+        border-radius: ${Radiuses.Round};
+        padding: 0 ${Spacers.S};
+    }
+
+    &[data-validation="not-passed"] {
+        background-color: ${({ theme }) => theme.Danger50};
+        color: ${({ theme }) => theme.Font};
+        ${"" /* border-color: ${({ theme }) => theme.Danger500}; */}
+    }
+
+    &::placeholder {
+        color: ${({ theme }) => theme.Gray400};
     }
 
     &:disabled {
@@ -112,26 +60,76 @@ const InputBaseMixin = ({
         }
     }
 
-    &::placeholder {
-        color: ${({ theme }) =>
-            $backgroundColor === "dark"
-                ? ThemeDark.Gray400
-                : $backgroundColor === "light"
-                ? ThemeLight.Gray400
-                : theme.Gray400};
+    &[data-background="light"] {
+        background-color: ${ThemeLight.Background};
+        color: ${ThemeLight.Font};
+
+        &[data-validation="not-passed"] {
+            background-color: ${ThemeLight.Danger50};
+            color: ${ThemeLight.Font};
+        }
+
+        &::placeholder {
+            color: ${ThemeLight.Gray400};
+        }
+
+        &:disabled {
+            background-color: ${ThemeLight.Gray100};
+            color: ${ThemeLight.Gray500};
+
+            &::placeholder {
+                color: ${ThemeLight.Gray500};
+            }
+        }
+    }
+
+    &[data-background="dark"] {
+        background-color: ${ThemeDark.Background};
+        color: ${ThemeDark.Font};
+
+        &[data-validation="not-passed"] {
+            background-color: ${ThemeDark.Danger50};
+            color: ${ThemeDark.Font};
+        }
+
+        &::placeholder {
+            color: ${ThemeDark.Gray400};
+        }
+
+        &:disabled {
+            background-color: ${ThemeDark.Gray100};
+            color: ${ThemeDark.Gray500};
+
+            &::placeholder {
+                color: ${ThemeDark.Gray500};
+            }
+        }
+    }
+
+    &.with-icon {
+        padding-left: calc(${CONSTANT_VALUES.InputHeight}px + ${Spacers.XS});
+
+        &[data-variant="pill"] {
+            padding-left: calc(40px + ${Spacers.XS});
+        }
+    }
+
+    &:focus,
+    &.is-focused {
+        border-color: ${({ theme }) => theme.Primary500};
+
+        &[data-validation="not-passed"] {
+            border-color: ${({ theme }) => theme.Danger500};
+        }
     }
 `
 
-const RightContainer = styled.span<{
-    $disabled?: boolean
-    $variant?: InputVariantTypes
-}>`
+const StyledRightContainer = styled.span`
     position: absolute;
     top: 0;
     right: 0;
-    height: ${ConstantValues.InputHeight}px;
-    padding: 0
-        ${({ $variant }) => ($variant === "pill" ? Spacers.S : Spacers.XS)};
+    height: ${CONSTANT_VALUES.InputHeight}px;
+    padding: 0 ${Spacers.XS};
     ${Mixins.Flexbox({
         $inline: true,
         $alignItems: "center",
@@ -140,32 +138,28 @@ const RightContainer = styled.span<{
     gap: ${Spacers.XS};
     z-index: 10;
 
-    ${({ $disabled }) =>
-        $disabled &&
-        css`
-            cursor: not-allowed;
-        `}
+    &[data-variant="pill"] {
+        padding: 0 ${Spacers.S};
+    }
+
+    &.disabled {
+        cursor: not-allowed;
+    }
 `
 
-const IconContainer = styled.span<{
-    $color?: ColorsInputTypes
-    $variant?: InputVariantTypes
-}>`
+const IconContainer = styled.span`
     position: absolute;
     left: 0;
     top: 0;
     z-index: 5;
-    width: ${({ $variant }) =>
-        $variant === "pill"
-            ? `calc(${Spacers.XS} + ${ConstantValues.InputHeight}px)`
-            : `${ConstantValues.InputHeight}px`};
-    height: ${ConstantValues.InputHeight}px;
+    width: ${CONSTANT_VALUES.InputHeight}px;
+    height: ${CONSTANT_VALUES.InputHeight}px;
     ${Mixins.Flexbox({
         $inline: true,
         $alignItems: "center",
         $justifyContent: "center",
     })};
-    color: ${({ theme }) => theme.AllColors};
+    color: ${({ theme }) => theme.Primary500};
 
     &:after {
         content: "";
@@ -176,8 +170,28 @@ const IconContainer = styled.span<{
         height: 30px;
         background-color: ${({ theme }) => theme.Gray200};
     }
+
+    &[data-variant="pill"] {
+        width: calc(${Spacers.XS} + ${CONSTANT_VALUES.InputHeight}px);
+    }
+
+    &[data-background="light"] {
+        color: ${ThemeLight.Primary500};
+
+        &:after {
+            background-color: ${ThemeLight.Gray200};
+        }
+    }
+
+    &[data-background="dark"] {
+        color: ${ThemeDark.Primary500};
+
+        &:after {
+            background-color: ${ThemeDark.Gray200};
+        }
+    }
 `
 
-setDefaultTheme([InputBaseMixin, RightContainer, IconContainer])
+setDefaultTheme([InputBaseMixin, StyledRightContainer, IconContainer])
 
-export { InputBaseMixin, RightContainer, IconContainer, ConstantValues }
+export { InputBaseMixin, StyledRightContainer, IconContainer }

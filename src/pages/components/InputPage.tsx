@@ -53,12 +53,7 @@ const InputPage = () => {
     return (
         <Page title="Input">
             <button onClick={handleClick}>Focus</button>
-            <Input
-                id="input-text"
-                placeholder="Text"
-                autoFocus
-                accentColor="secondary"
-            />
+            <Input id="input-text" placeholder="Text" autoFocus />
             <Input
                 id="input-email"
                 placeholder="Email"
@@ -115,7 +110,6 @@ const InputPage = () => {
                 clearSearch={clearSearch}
                 focusKeys={["Command", "KeyJ"]}
                 showKeys
-                accentColor="secondary"
                 label="Search"
             />
             <Input
@@ -157,12 +151,14 @@ const InputPage = () => {
             />
             <Input
                 id="counter"
+                label="Input counter"
                 value={counter}
                 onChange={handleCounter}
                 counter
             />
             <Input
                 id="counter-max"
+                label="Input counter max"
                 value={max}
                 onChange={handleMax}
                 counter

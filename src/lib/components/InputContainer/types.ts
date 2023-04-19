@@ -2,7 +2,7 @@
 
 import type { ElementType } from "react"
 
-import type { AllColorsTypes, ColorsHoverTypes } from "../../types"
+import type { AllColorsTypes } from "../../types"
 
 export interface InputBaseProps {
     as?: ElementType
@@ -16,10 +16,7 @@ export interface InputBaseProps {
               text?: string | undefined
               icon?: string
               iconColor?: AllColorsTypes
-              color?: AllColorsTypes
-              style?: "default" | "italic"
           }
-    accentColor?: ColorsHoverTypes
 }
 
 export interface ExtendedInputContainerProps extends InputBaseProps {
@@ -32,4 +29,5 @@ export interface InputContainerProps
         ExtendedInputContainerProps {
     children?: any
     value?: any
+    className?: string
 }
