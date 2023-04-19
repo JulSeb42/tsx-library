@@ -53,7 +53,13 @@ const InputPage = () => {
     return (
         <Page title="Input">
             <button onClick={handleClick}>Focus</button>
-            <Input id="input-text" placeholder="Text" autoFocus />
+            <Input
+                id="input-text"
+                placeholder="Text"
+                variant="pill"
+                icon="search"
+                autoFocus
+            />
             <Input
                 id="input-email"
                 placeholder="Email"

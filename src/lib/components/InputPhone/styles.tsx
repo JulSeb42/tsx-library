@@ -3,35 +3,33 @@
 import styled from "styled-components"
 
 import {
-    Mixins,
     FontFamilies,
     FontSizes,
+    Mixins,
     Spacers,
     ThemeDark,
     ThemeLight,
     Transitions,
 } from "../../"
 import { SearchIcon } from "../../icons"
-import type { ColorsHoverTypes, ValidationTypes } from "../../types"
 import { InputBaseMixin } from "../InputComponents"
-import type {
-    InputBackgroundTypes,
-    InputVariantTypes,
-} from "../InputComponents/types"
 import { CONSTANT_VALUES } from "../InputComponents/styles"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledInputPhone = styled.div<{ $isOpen: boolean }>`
+const StyledInputPhone = styled.div`
     position: relative;
     width: 100%;
-    z-index: ${({ $isOpen }) => ($isOpen ? 20 : 0)};
+    z-index: 0;
+
+    &.open {
+        z-index: 20;
+    }
 `
 
-const Button = styled.button<{ $variant?: InputVariantTypes }>`
+const Button = styled.button`
     height: ${CONSTANT_VALUES.InputHeight}px;
-    padding: 0
-        ${({ $variant }) => ($variant === "pill" ? Spacers.S : Spacers.XS)};
+    padding: 0 ${Spacers.XS};
     border: none;
     background-color: transparent;
     position: absolute;
@@ -41,6 +39,10 @@ const Button = styled.button<{ $variant?: InputVariantTypes }>`
     ${Mixins.Flexbox({
         $alignItems: "center",
     })};
+
+    &[data-variant="pill"] {
+        padding: 0 ${Spacers.S};
+    }
 
     & > svg:first-of-type {
         width: 20px;
@@ -62,11 +64,7 @@ const SearchContainer = styled.div`
     position: relative;
 `
 
-const InputSearch = styled.input<{
-    $accentColor?: ColorsHoverTypes
-    $validation?: ValidationTypes
-    $backgroundColor?: InputBackgroundTypes
-}>`
+const InputSearch = styled.input`
     font-family: ${FontFamilies.Body};
     font-size: ${FontSizes.Body};
     width: 100%;
@@ -78,22 +76,36 @@ const InputSearch = styled.input<{
     border-radius: 0;
     transition: ${Transitions.Short};
     background-color: transparent;
-    color: ${({ theme, $backgroundColor }) =>
-        $backgroundColor === "dark"
-            ? ThemeDark.Font
-            : $backgroundColor === "light"
-            ? ThemeLight.Font
-            : theme.Font};
+    color: ${({ theme }) => theme.Font};
 
     &:focus {
-        border-bottom-color: ${({ $accentColor, $validation, theme }) =>
-            $validation === "not-passed"
-                ? theme.Danger500
-                : theme.AllColors({ $color: $accentColor })};
+        border-bottom-color: ${({ theme }) => theme.Primary500};
+    }
+
+    &[data-validation="not-passed"]:focus {
+        border-bottom-color: ${({ theme }) => theme.Danger500};
+    }
+
+    &[data-background="light"] {
+        border-bottom-color: ${ThemeLight.Gray200};
+        color: ${ThemeLight.Font};
+
+        &[data-validation="not-passed"]:focus {
+            border-bottom-color: ${ThemeLight.Danger500};
+        }
+    }
+
+    &[data-background="dark"] {
+        border-bottom-color: ${ThemeDark.Gray200};
+        color: ${ThemeDark.Font};
+
+        &[data-validation="not-passed"]:focus {
+            border-bottom-color: ${ThemeDark.Danger500};
+        }
     }
 `
 
-const CountryCode = styled.span<{ $backgroundColor?: InputBackgroundTypes }>`
+const CountryCode = styled.span`
     position: absolute;
     left: 48px;
     height: ${CONSTANT_VALUES.InputHeight}px;
@@ -101,50 +113,44 @@ const CountryCode = styled.span<{ $backgroundColor?: InputBackgroundTypes }>`
         $alignItems: "center",
     })};
     z-index: 10;
-    color: ${({ $backgroundColor, theme }) =>
-        $backgroundColor === "dark"
-            ? ThemeDark.Font
-            : $backgroundColor === "light"
-            ? ThemeLight.Font
-            : theme.Font};
+    color: ${({ theme }) => theme.Font};
+
+    &[data-background="light"] {
+        color: ${ThemeLight.Font};
+    }
+
+    &[data-background="dark"] {
+        color: ${ThemeDark.Font};
+    }
 `
 
-const Input = styled.input<{
-    $validation?: ValidationTypes
-    $codeLength: number
-    $isListOpen?: boolean
-    $accentColor?: ColorsHoverTypes
-    $backgroundColor?: InputBackgroundTypes
-    $variant?: InputVariantTypes
-}>`
+const Input = styled.input`
     ${InputBaseMixin};
-    border-color: ${({
-        $accentColor,
-        $isListOpen,
-        $validation,
-        theme,
-        $backgroundColor,
-    }) =>
-        $isListOpen
-            ? $validation === "not-passed"
-                ? $backgroundColor === "dark"
-                    ? ThemeDark.Danger500
-                    : $backgroundColor === "light"
-                    ? ThemeLight.Danger500
-                    : theme.Danger500
-                : theme.AllColors({ $color: $accentColor })
-            : theme.Gray200};
-    padding-left: calc(
-        48px +
-            ${({ $codeLength }) =>
-                $codeLength === 3
-                    ? 28
-                    : $codeLength === 4
-                    ? 38
-                    : $codeLength === 5
-                    ? 47
-                    : 19}px
-    );
+    padding-left: calc(48px + var(--country-code-length, 19px));
+
+    &.list-open {
+        border-color: ${({ theme }) => theme.Primary500};
+    }
+
+    &[data-validation="not-passed"].list-open {
+        border-color: ${({ theme }) => theme.Danger500};
+    }
+
+    &[data-background="light"].list-open {
+        border-color: ${ThemeLight.Primary500};
+
+        &[data-validation="not-passed"] {
+            border-color: ${ThemeLight.Danger500};
+        }
+    }
+
+    &[data-background="dark"].list-open {
+        border-color: ${ThemeDark.Primary500};
+
+        &[data-validation="not-passed"] {
+            border-color: ${ThemeDark.Danger500};
+        }
+    }
 `
 
 setDefaultTheme([

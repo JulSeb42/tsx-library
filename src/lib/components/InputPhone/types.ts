@@ -2,17 +2,17 @@
 
 import type { InputHTMLAttributes } from "react"
 
-import type { ShadowsTypes, InputPhoneCountryType } from "../../types"
-import type { InputBaseProps } from "../InputContainer/types"
+import type { InputPhoneCountryType } from "../../types"
+import type { CountryCodesTypes } from "../../utils/countries"
 import type {
-    ValidationComponentProps,
     InputBackgroundTypes,
     InputVariantTypes,
+    ValidationComponentProps,
 } from "../InputComponents/types"
-import type { CountryCodesTypes } from "../../utils/countries"
+import type { InputBaseProps } from "../InputContainer/types"
 import type { ListDirectionTypes } from "../ListInputs/types"
 
-interface InputPhonePropsBase
+export interface InputPhoneProps
     extends InputHTMLAttributes<HTMLInputElement>,
         InputBaseProps,
         ValidationComponentProps {
@@ -22,24 +22,10 @@ interface InputPhonePropsBase
     setSelectedCountry: (
         country: InputPhoneCountryType | undefined | any
     ) => void
-    hasSearch?: boolean
     searchIcon?: string
-    iconButton?: string
     searchPlaceholder?: string
     listDirection?: ListDirectionTypes
     variant?: InputVariantTypes
     textEmpty?: string
     type?: never
 }
-
-interface InputPhoneList1 extends InputPhonePropsBase {
-    listVariant?: "bordered"
-    listShadow?: never
-}
-
-interface InputPhoneList2 extends InputPhonePropsBase {
-    listVariant?: "shadow"
-    listShadow?: ShadowsTypes
-}
-
-export type InputPhoneProps = InputPhoneList1 | InputPhoneList2

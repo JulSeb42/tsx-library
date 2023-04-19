@@ -2,8 +2,9 @@
 
 import React, { forwardRef, useEffect, useState, useRef } from "react"
 import type { ForwardedRef, ChangeEvent } from "react"
+import classNames from "classnames"
 
-import { useClickOutside, uuid, Icon } from "../../"
+import { useClickOutside, uuid, Icon, stringifyPx } from "../../"
 import { CaretDownIcon } from "../../icons"
 import type { InputPhoneCountryType } from "../../types"
 import { countries } from "../../utils/countries"
@@ -11,7 +12,16 @@ import { ListInputs, ListItem } from "../ListInputs"
 import { RightContainer, ValidationComponent } from "../InputComponents"
 import { InputContainer } from "../InputContainer"
 
-import * as Styles from "./styles"
+import {
+    StyledInputPhone,
+    Button,
+    Flag,
+    StyledIconSearch,
+    SearchContainer,
+    InputSearch,
+    CountryCode,
+    Input,
+} from "./styles"
 import type { InputPhoneProps } from "./types"
 
 const InputPhone = forwardRef(
@@ -22,21 +32,17 @@ const InputPhone = forwardRef(
             defaultCountry = "de",
             selectedCountry = undefined,
             setSelectedCountry,
-            iconButton,
             label,
             helper,
             helperBottom,
-            accentColor = "primary",
             validation,
             searchPlaceholder = "Search",
-            hasSearch = true,
             backgroundColor,
-            listVariant,
-            listShadow,
             listDirection,
             variant,
             textEmpty = "Your search did not return any result.",
             searchIcon,
+            className,
             ...rest
         }: InputPhoneProps,
         ref?: ForwardedRef<HTMLInputElement>
@@ -78,12 +84,44 @@ const InputPhone = forwardRef(
             typeof validation === "object" ? validation?.status : validation
 
         const searchIconColor =
-            getValidationStatus === "not-passed" ? "danger" : accentColor
+            getValidationStatus === "not-passed" ? "danger" : "primary"
 
-        const listItems = () => (
-            <>
-                {hasSearch && (
-                    <Styles.SearchContainer>
+        const iconColor =
+            getValidationStatus === "not-passed" && isOpen
+                ? "danger"
+                : isOpen
+                ? "primary"
+                : "gray"
+
+        const inputContent = () => (
+            <StyledInputPhone
+                ref={listRef}
+                className={classNames(
+                    { open: isOpen },
+                    !label && !helper && !helperBottom && className,
+                    "input-content"
+                )}
+            >
+                <Button
+                    type="button"
+                    data-variant={variant}
+                    onClick={() => setIsOpen(!isOpen)}
+                >
+                    <Flag
+                        src={selectedCountry && selectedCountry.flag}
+                        alt={`Flag ${selectedCountry && selectedCountry.name}`}
+                    />
+
+                    <CaretDownIcon size={12} color={iconColor} />
+                </Button>
+
+                <ListInputs
+                    isOpen={isOpen}
+                    validation={getValidationStatus}
+                    backgroundColor={backgroundColor}
+                    direction={listDirection}
+                >
+                    <SearchContainer>
                         {searchIcon ? (
                             <Icon
                                 src={searchIcon}
@@ -91,118 +129,67 @@ const InputPhone = forwardRef(
                                 color={searchIconColor}
                             />
                         ) : (
-                            <Styles.StyledIconSearch
+                            <StyledIconSearch
                                 size={16}
                                 color={searchIconColor}
                             />
                         )}
 
-                        <Styles.InputSearch
+                        <InputSearch
                             placeholder={searchPlaceholder}
                             onChange={handleSearch}
                             value={search}
-                            $accentColor={accentColor}
-                            $validation={getValidationStatus}
-                            $backgroundColor={backgroundColor}
+                            data-validation={validation}
+                            data-background={backgroundColor}
                         />
-                    </Styles.SearchContainer>
-                )}
+                    </SearchContainer>
 
-                {results.length > 0 ? (
-                    results.map(country => (
-                        <ListItem
-                            isActive={country === selectedCountry && true}
-                            onClick={() => selectCountry(country)}
-                            accentColor={accentColor}
-                            validation={getValidationStatus}
-                            backgroundColor={backgroundColor}
-                            key={uuid()}
-                        >
-                            <Styles.Flag
-                                src={country.flag}
-                                alt={`Flag ${country.name}`}
-                            />
-                            <span>
-                                ({country.dial_code}) {country.name}
-                            </span>
-                        </ListItem>
-                    ))
-                ) : (
-                    <ListItem accentColor={accentColor} readOnly>
-                        {textEmpty}
-                    </ListItem>
-                )}
-            </>
-        )
-
-        const listProps = {
-            isOpen: isOpen,
-            accentColor: accentColor,
-            validation: getValidationStatus,
-            backgroundColor: backgroundColor,
-            direction: listDirection,
-        }
-
-        const listFn = () =>
-            listVariant === "bordered" ? (
-                <ListInputs {...listProps} variant={listVariant}>
-                    {listItems()}
-                </ListInputs>
-            ) : (
-                <ListInputs
-                    {...listProps}
-                    variant={listVariant}
-                    shadow={listShadow}
-                >
-                    {listItems()}
-                </ListInputs>
-            )
-
-        const iconColor =
-            getValidationStatus === "not-passed" && isOpen
-                ? "danger"
-                : isOpen
-                ? accentColor
-                : "gray"
-
-        const inputContent = () => (
-            <Styles.StyledInputPhone $isOpen={isOpen} ref={listRef}>
-                <Styles.Button
-                    type="button"
-                    onClick={() => setIsOpen(!isOpen)}
-                    $variant={variant}
-                >
-                    <Styles.Flag
-                        src={selectedCountry && selectedCountry.flag}
-                        alt={`Flag ${selectedCountry && selectedCountry.name}`}
-                    />
-
-                    {iconButton ? (
-                        <Icon src={iconButton} size={12} color={iconColor} />
+                    {results.length > 0 ? (
+                        results.map(country => (
+                            <ListItem
+                                isActive={country === selectedCountry && true}
+                                onClick={() => selectCountry(country)}
+                                validation={getValidationStatus}
+                                backgroundColor={backgroundColor}
+                                key={uuid()}
+                            >
+                                <Flag
+                                    src={country.flag}
+                                    alt={`Flag ${country.name}`}
+                                />
+                                <span>
+                                    ({country.dial_code}) {country.name}
+                                </span>
+                            </ListItem>
+                        ))
                     ) : (
-                        <CaretDownIcon size={12} color={iconColor} />
+                        <ListItem readOnly>{textEmpty}</ListItem>
                     )}
-                </Styles.Button>
+                </ListInputs>
 
-                {listFn()}
-
-                <Styles.CountryCode $backgroundColor={backgroundColor}>
+                <CountryCode data-background={backgroundColor}>
                     {selectedCountry && selectedCountry.dial_code}
-                </Styles.CountryCode>
+                </CountryCode>
 
-                <Styles.Input
+                <Input
                     ref={ref}
                     id={id}
                     type="tel"
                     disabled={disabled}
-                    $codeLength={
-                        selectedCountry ? selectedCountry.dial_code.length : 3
-                    }
-                    $accentColor={accentColor}
-                    $isListOpen={isOpen}
-                    $validation={getValidationStatus}
-                    $backgroundColor={backgroundColor}
-                    $variant={variant}
+                    data-variant={variant}
+                    data-background={backgroundColor}
+                    data-type="tel"
+                    data-validation={getValidationStatus}
+                    className={classNames("input input-phone", {
+                        "list-open": isOpen,
+                    })}
+                    style={{
+                        ["--country-code-length" as any]: stringifyPx(
+                            getCodeLength(
+                                selectedCountry?.dial_code.length || 3
+                            )
+                        ),
+                    }}
                     {...rest}
                 />
 
@@ -211,7 +198,7 @@ const InputPhone = forwardRef(
                         <ValidationComponent validation={validation} />
                     </RightContainer>
                 )}
-            </Styles.StyledInputPhone>
+            </StyledInputPhone>
         )
 
         return label || helper || helperBottom ? (
@@ -220,7 +207,7 @@ const InputPhone = forwardRef(
                 label={label}
                 helper={helper}
                 helperBottom={helperBottom}
-                accentColor={accentColor}
+                className={className}
             >
                 {inputContent()}
             </InputContainer>
@@ -229,5 +216,18 @@ const InputPhone = forwardRef(
         )
     }
 )
+
+const getCodeLength = (length: number) => {
+    switch (length) {
+        case 3:
+            return 28
+        case 4:
+            return 38
+        case 5:
+            return 47
+        default:
+            return 19
+    }
+}
 
 export default InputPhone

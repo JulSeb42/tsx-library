@@ -3,186 +3,266 @@
 import styled, { css } from "styled-components"
 
 import {
+    Breakpoints,
+    Icon,
+    Mixins,
+    Radiuses,
+    Spacers,
     ThemeDark,
     ThemeLight,
-    Radiuses,
     Transitions,
-    Mixins,
-    Breakpoints,
-    Spacers,
-    Icon,
 } from "../../"
 import { ChevronDownIcon } from "../../icons"
-import type {
-    ShadowsTypes,
-    ColorsHoverTypes,
-    ValidationTypes,
-} from "../../types"
-import type { VariantTypes, ListDirectionTypes } from "./types"
-import type { InputBackgroundTypes } from "../InputComponents/types"
 import { CONSTANT_VALUES } from "../InputComponents/styles"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledListInputs = styled.div<{
-    $isOpen: boolean
-    $variant?: VariantTypes
-    $shadow?: ShadowsTypes
-    $accentColor?: ColorsHoverTypes
-    $backgroundColor?: InputBackgroundTypes
-    $validation?: ValidationTypes
-    $direction?: ListDirectionTypes
-}>`
+const StyledListInputs = styled.div`
     position: absolute;
     left: 0;
     width: 100%;
     z-index: 0;
-    background-color: ${({ theme, $backgroundColor, $validation }) =>
-        $validation === "not-passed"
-            ? $backgroundColor === "dark"
-                ? ThemeDark.Danger50
-                : $backgroundColor === "light"
-                ? ThemeLight.Danger50
-                : theme.Danger50
-            : $backgroundColor === "dark"
-            ? ThemeDark.Background
-            : $backgroundColor === "light"
-            ? ThemeLight.Background
-            : theme.Background};
     border-radius: ${Radiuses.M};
-    max-height: ${({ $isOpen }) =>
-        $isOpen
-            ? `${
-                  CONSTANT_VALUES.ListItemHeight * 4 +
-                  CONSTANT_VALUES.InputHeight / 2
-              }px`
-            : 0};
     transition: ${Transitions.Short};
     overflow-y: scroll;
-    ${Mixins.HideScrollbar};
+    max-height: 0;
+    background-color: ${({ theme }) => theme.Background};
+    border: 1px solid ${({ theme }) => theme.Primary500};
+    ${Mixins.HideScrollbar}
 
-    ${({ $direction, $isOpen }) =>
-        $direction === "up"
-            ? css`
-                  bottom: ${$isOpen ? "12px" : "16px"};
-                  padding-bottom: ${$isOpen ? "19px" : 0};
-              `
-            : css`
-                  top: ${$isOpen ? "12px" : "16px"};
-                  padding-top: ${$isOpen ? "19px" : 0};
-              `}
+    &.open {
+        max-height: ${CONSTANT_VALUES.ListItemHeight * 4 +
+        CONSTANT_VALUES.InputHeight / 2}px;
+    }
 
-    ${({ $variant, $accentColor, $validation, $shadow, $isOpen }) =>
-        $variant === "bordered"
-            ? css`
-                  border: 1px solid
-                      ${({ theme }) =>
-                          $validation === "not-passed"
-                              ? theme.Danger500
-                              : theme.AllColors({ $color: $accentColor })};
-              `
-            : $variant === "shadow" &&
-              css`
-                  ${$isOpen ? Mixins.Shadow({ $shadow: $shadow }) : ""}
-              `}
+    &[data-direction="up"] {
+        bottom: 16px;
+        padding-bottom: 0;
+
+        &.open {
+            bottom: 12px;
+            padding-bottom: 19px;
+        }
+    }
+
+    &[data-direction="down"] {
+        top: 16px;
+        padding-top: 0;
+
+        &.open {
+            top: 12px;
+            padding-top: 19px;
+        }
+    }
+
+    &[data-validation="not-passed"] {
+        background-color: ${({ theme }) => theme.Danger50};
+        border-color: ${({ theme }) => theme.Danger500};
+    }
+
+    &[data-background="light"] {
+        background-color: ${ThemeLight.Background};
+
+        &[data-validation="not-passed"] {
+            background-color: ${ThemeLight.Danger50};
+            border-color: ${ThemeLight.Danger500};
+        }
+    }
+
+    &[data-background="dark"] {
+        background-color: ${ThemeDark.Background};
+
+        &[data-validation="not-passed"] {
+            background-color: ${ThemeDark.Danger50};
+            border-color: ${ThemeDark.Danger500};
+        }
+    }
 `
 
-const Item = styled.span<{
-    $accentColor?: ColorsHoverTypes
-    $backgroundColor?: InputBackgroundTypes
-    $validation?: ValidationTypes
-    $isActive?: boolean
-    $readOnly?: boolean
-}>`
+const Item = styled.span`
     padding: 0 ${Spacers.XS};
-    background-color: ${({ $isActive, $accentColor, theme, $validation }) =>
-        $isActive
-            ? $validation === "not-passed"
-                ? theme.Danger500
-                : theme.ColorsHoverDefault({ $color: $accentColor })
-            : "transparent"};
-    color: ${({ $isActive, $accentColor, theme, $backgroundColor }) =>
-        $isActive
-            ? $accentColor === "white"
-                ? theme.Primary500
-                : $backgroundColor === "dark"
-                ? ThemeDark.Background
-                : $backgroundColor === "light"
-                ? ThemeLight.Background
-                : theme.Background
-            : $backgroundColor === "dark"
-            ? ThemeDark.Font
-            : $backgroundColor === "light"
-            ? ThemeLight.Font
-            : theme.Font};
+    background-color: transparent;
+    color: ${({ theme }) => theme.Font};
     transition: ${Transitions.Short};
     height: 40px;
     line-height: 40px;
     display: block;
 
-    ${({ $readOnly, $accentColor, $validation, $backgroundColor, theme }) =>
-        !$readOnly
-            ? css`
-                  cursor: pointer;
-                  transition: ${Transitions.Short};
+    &.read-only {
+        color: ${({ theme }) => theme.Gray500};
+    }
 
-                  @media ${Breakpoints.Hover} {
-                      &:hover {
-                          background-color: ${({ theme }) =>
-                              $validation === "not-passed"
-                                  ? theme.Danger300
-                                  : theme.ColorsHoverHover({
-                                        $color: $accentColor,
-                                    })};
-                          color: ${({ theme }) =>
-                              $accentColor === "white"
-                                  ? theme.Primary500
-                                  : $backgroundColor === "dark"
-                                  ? ThemeDark.Background
-                                  : $backgroundColor === "light"
-                                  ? ThemeLight.Background
-                                  : theme.Background};
-                      }
+    &.active {
+        background-color: ${({ theme }) =>
+            theme.ColorsHoverDefault({ $color: "primary" })};
+        color: ${({ theme }) => theme.Background};
 
-                      &:active {
-                          background-color: ${({ theme }) =>
-                              $validation === "not-passed"
-                                  ? theme.Danger600
-                                  : theme.ColorsHoverActive({
-                                        $color: $accentColor,
-                                    })};
-                      }
-                  }
-              `
-            : css`
-                  color: ${theme.Gray500};
-              `}
+        &[data-validation="not-passed"] {
+            background-color: ${({ theme }) =>
+                theme.ColorsHoverDefault({ $color: "danger" })};
+        }
+    }
+
+    &:not(.read-only) {
+        cursor: pointer;
+        transition: ${Transitions.Short};
+
+        @media ${Breakpoints.Hover} {
+            &:hover {
+                background-color: ${({ theme }) =>
+                    theme.ColorsHoverHover({
+                        $color: "primary",
+                    })};
+                color: ${({ theme }) => theme.Background};
+            }
+
+            &:active {
+                background-color: ${({ theme }) =>
+                    theme.ColorsHoverActive({
+                        $color: "primary",
+                    })};
+            }
+
+            &[data-validation="not-passed"] {
+                &:hover {
+                    background-color: ${({ theme }) =>
+                        theme.ColorsHoverHover({
+                            $color: "danger",
+                        })};
+                }
+
+                &:active {
+                    background-color: ${({ theme }) =>
+                        theme.ColorsHoverActive({
+                            $color: "danger",
+                        })};
+                }
+            }
+        }
+    }
+
+    &[data-background="light"] {
+        color: ${ThemeLight.Font};
+
+        &.read-only {
+            color: ${ThemeLight.Gray500};
+        }
+
+        &.active {
+            background-color: ${ThemeLight.ColorsHoverDefault({
+                $color: "primary",
+            })};
+            color: ${ThemeLight.Background};
+
+            &[data-validation="not-passed"] {
+                background-color: ${ThemeLight.ColorsHoverDefault({
+                    $color: "danger",
+                })};
+            }
+        }
+
+        &:not(.read-only) {
+            @media ${Breakpoints.Hover} {
+                &:hover {
+                    background-color: ${ThemeLight.ColorsHoverHover({
+                        $color: "primary",
+                    })};
+                    color: ${ThemeLight.Background};
+                }
+
+                &:active {
+                    background-color: ${ThemeLight.ColorsHoverActive({
+                        $color: "primary",
+                    })};
+                }
+
+                &[data-validation="not-passed"] {
+                    &:hover {
+                        background-color: ${ThemeLight.ColorsHoverHover({
+                            $color: "danger",
+                        })};
+                    }
+
+                    &:active {
+                        background-color: ${ThemeLight.ColorsHoverActive({
+                            $color: "danger",
+                        })};
+                    }
+                }
+            }
+        }
+    }
+
+    &[data-background="dark"] {
+        color: ${ThemeDark.Font};
+
+        &.read-only {
+            color: ${ThemeDark.Gray500};
+        }
+
+        &.active {
+            background-color: ${ThemeDark.ColorsHoverDefault({
+                $color: "primary",
+            })};
+            color: ${ThemeDark.Background};
+
+            &[data-validation="not-passed"] {
+                background-color: ${ThemeDark.ColorsHoverDefault({
+                    $color: "danger",
+                })};
+            }
+        }
+
+        &:not(.read-only) {
+            @media ${Breakpoints.Hover} {
+                &:hover {
+                    background-color: ${ThemeDark.ColorsHoverHover({
+                        $color: "primary",
+                    })};
+                    color: ${ThemeDark.Background};
+                }
+
+                &:active {
+                    background-color: ${ThemeDark.ColorsHoverActive({
+                        $color: "primary",
+                    })};
+                }
+
+                &[data-validation="not-passed"] {
+                    &:hover {
+                        background-color: ${ThemeDark.ColorsHoverHover({
+                            $color: "danger",
+                        })};
+                    }
+
+                    &:active {
+                        background-color: ${ThemeDark.ColorsHoverActive({
+                            $color: "danger",
+                        })};
+                    }
+                }
+            }
+        }
+    }
 `
 
-const IconAnim = ({
-    $isOpen,
-    $hasAnimation,
-}: {
-    $isOpen: boolean
-    $hasAnimation?: boolean
-}) => css`
-    transform: ${$isOpen && $hasAnimation && "rotate(180deg)"};
+const IconAnim = css`
     transition: ${Transitions.Short};
+
+    &.with-animation.open {
+        transform: rotate(180deg);
+    }
 `
 
-const StyledChevronDown = styled(ChevronDownIcon)<{
-    $isOpen?: boolean
-}>`
-    ${({ $isOpen }) =>
-        IconAnim({ $isOpen: $isOpen || false, $hasAnimation: true })}
+const StyledChevronDown = styled(ChevronDownIcon).attrs({
+    size: 16,
+    color: "primary",
+})`
+    ${IconAnim}
 `
 
-const StyledIcon = styled(Icon)<{
-    $isOpen?: boolean
-    $hasAnimation?: boolean
-}>`
-    ${({ $isOpen, $hasAnimation }) =>
-        IconAnim({ $isOpen: $isOpen || false, $hasAnimation: $hasAnimation })}
+const StyledIcon = styled(Icon).attrs({ color: "primary", size: 16 })`
+    ${IconAnim}
 `
 
 setDefaultTheme([StyledListInputs, Item, StyledChevronDown, StyledIcon])

@@ -2,8 +2,9 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
-import * as Styles from "./styles"
+import { StyledListInputs, Item, StyledChevronDown, StyledIcon } from "./styles"
 import type {
     ListInputsProps,
     ListInputsItemProps,
@@ -14,84 +15,93 @@ export const ListInputs = forwardRef(
     (
         {
             isOpen,
-            accentColor = "primary",
             backgroundColor,
             validation,
             children,
-            variant = "bordered",
-            shadow = "s",
             direction = "down",
+            className,
             ...rest
         }: ListInputsProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => (
-        <Styles.StyledListInputs
+        <StyledListInputs
             ref={ref}
-            $isOpen={isOpen}
-            $accentColor={accentColor}
-            $backgroundColor={backgroundColor}
-            $shadow={shadow}
-            $validation={validation}
-            $variant={variant}
-            $direction={direction}
+            data-direction={direction}
+            data-background={backgroundColor}
+            data-validation={validation}
+            className={classNames({ open: isOpen }, className, "list-inputs")}
             {...rest}
         >
             {children}
-        </Styles.StyledListInputs>
+        </StyledListInputs>
     )
 )
 
 export const ListItem = forwardRef(
     (
         {
-            accentColor = "primary",
             backgroundColor,
             validation,
             children,
             isActive,
             readOnly,
+            className,
             ...rest
         }: ListInputsItemProps,
         ref?: ForwardedRef<HTMLSpanElement>
     ) => (
-        <Styles.Item
+        <Item
             ref={ref}
-            $accentColor={accentColor}
-            $backgroundColor={backgroundColor}
-            $validation={validation}
-            $isActive={isActive}
-            $readOnly={readOnly}
+            className={classNames(
+                { "read-only": readOnly },
+                { active: isActive },
+                className,
+                "list-inputs-item"
+            )}
+            data-validation={validation}
+            data-background={backgroundColor}
             {...rest}
         >
             {children}
-        </Styles.Item>
+        </Item>
     )
 )
 
-export const Chevron = forwardRef(
-    (
-        { isOpen, color, icon, hasAnimation, ...rest }: ListInputsChevronProps,
-        ref?: ForwardedRef<HTMLOrSVGElement>
-    ) => {
-        const props = {
-            size: 16,
-            color,
-            ref,
-            $isOpen: isOpen,
-        }
-
-        return icon ? (
-            typeof icon === "string" ? (
-                <Styles.StyledIcon
-                    src={icon}
-                    $hasAnimation={hasAnimation}
-                    {...props}
-                />
-            ) : (
-                icon
-            )
+export const Chevron = ({
+    isOpen,
+    icon,
+    withAnimation,
+    className,
+    ...rest
+}: ListInputsChevronProps) => {
+    if (icon) {
+        return typeof icon === "string" ? (
+            // @ts-expect-error
+            <StyledIcon
+                {...rest}
+                src={icon}
+                className={classNames(
+                    { "with-animation": withAnimation },
+                    { open: isOpen },
+                    "chevron-icon",
+                    className
+                )}
+            />
         ) : (
-            <Styles.StyledChevronDown {...props} {...rest} />
+            icon
         )
     }
-)
+
+    return (
+        // @ts-expect-error
+        <StyledChevronDown
+            className={classNames(
+                { "with-animation": withAnimation },
+                { open: isOpen },
+                "chevron-icon",
+                className
+            )}
+            {...rest}
+        />
+    )
+}

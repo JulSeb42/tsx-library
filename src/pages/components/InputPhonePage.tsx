@@ -41,11 +41,10 @@ const InputPhonePage = () => {
                     setSelectedCountry={setSelectedCountry}
                     value={phone}
                     onChange={handlePhone}
-                    accentColor="secondary"
                     // variant="pill"
                     // listDirection="up"
                     // validation={{ status: "not-passed" }}
-                    backgroundColor="light"
+                    // backgroundColor="dark"
                     label="Phone number"
                 />
 
