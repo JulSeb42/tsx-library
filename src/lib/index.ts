@@ -44,8 +44,8 @@ export * from "./components/Truncate" // ✅
 export * from "./components/Card" // ✅
 export * from "./components/Badge" // ✅
 export * from "./components/Tooltip" // ✅
-export * from "./components/Input"
-export * from "./components/InputImage"
+export * from "./components/Input" // ✅
+export * from "./components/InputImage" // ✅
 export * from "./components/InputCheck"
 export * from "./components/InputPhone"
 export * from "./components/InputCounter"

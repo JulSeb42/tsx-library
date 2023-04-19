@@ -2,21 +2,23 @@
 
 import type { InputHTMLAttributes } from "react"
 
-import type { ValidationTypes, RadiusesTypes } from "../../types"
+import type { ValidationTypes } from "../../types"
 import type { InputBaseProps } from "../InputContainer/types"
+
+const inputSizes = { small: "small", large: "large" } as const
+
+export type InputImageSizeTypes = keyof typeof inputSizes
 
 export interface InputImageProps
     extends InputHTMLAttributes<HTMLInputElement>,
         InputBaseProps {
+    id: string
+    img: string
+
     validation?: ValidationTypes
-    width?: number | string
-    height?: number | string
+    inputSize?: InputImageSizeTypes
     iconSize?: number
     value?: never
-    borderRadius?: RadiusesTypes
-    id: string
-
-    img: string
 
     icons?: {
         empty?: string | JSX.Element

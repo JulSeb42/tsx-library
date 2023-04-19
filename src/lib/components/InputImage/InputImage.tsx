@@ -2,30 +2,36 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
 import { Icon } from "../../"
 import { ImageIcon, EditIcon } from "../../icons"
 import { InputContainer } from "../InputContainer"
 
-import * as Styles from "./styles"
+import {
+    StyledInputImage,
+    StyledEmptyContainer,
+    StyledHoverContainer,
+    Label,
+    Img,
+    Input,
+} from "./styles"
 import type { InputImageProps } from "./types"
 
 const InputImage = forwardRef(
     (
         {
-            disabled,
-            validation,
-            width = 64,
-            height = 64,
-            iconSize = 48,
+            id,
             img,
+            inputSize,
+            iconSize = 48,
+            validation,
             icons,
+            disabled,
             label,
             helper,
             helperBottom,
-            accentColor = "primary",
-            borderRadius = "m",
-            id,
+            className,
             ...rest
         }: InputImageProps,
         ref?: ForwardedRef<HTMLInputElement>
@@ -35,76 +41,97 @@ const InputImage = forwardRef(
                 ? "danger"
                 : disabled
                 ? "gray"
-                : accentColor
+                : "primary"
 
         const emptyContainer = () => (
-            <Styles.StyledEmptyContainer $validation={validation}>
+            <StyledEmptyContainer
+                data-validation={validation}
+                className="input-image-empty-container"
+            >
                 {icons?.empty ? (
                     typeof icons?.empty === "string" ? (
                         <Icon
                             src={icons.empty}
                             color={iconColor}
                             size={iconSize}
+                            className="input-image-icon-empty"
                         />
                     ) : (
                         icons?.empty
                     )
                 ) : (
-                    <ImageIcon size={iconSize} color={iconColor} />
+                    <ImageIcon
+                        size={iconSize}
+                        color={iconColor}
+                        className="input-image-icon-empty"
+                    />
                 )}
-            </Styles.StyledEmptyContainer>
+            </StyledEmptyContainer>
         )
 
         const hoverContainer = () => (
-            <Styles.StyledHoverContainer>
+            <StyledHoverContainer>
                 {icons?.hover ? (
                     typeof icons?.hover === "string" ? (
                         <Icon
                             src={icons.hover}
                             size={iconSize - 8}
                             color={iconColor}
+                            className="input-image-icon-hover"
                         />
                     ) : (
                         icons?.hover
                     )
                 ) : (
-                    <EditIcon size={iconSize - 8} color={iconColor} />
+                    <EditIcon
+                        size={iconSize - 8}
+                        color={iconColor}
+                        className="input-image-icon-hover"
+                    />
                 )}
-            </Styles.StyledHoverContainer>
+            </StyledHoverContainer>
         )
 
         const inputFn = () => (
-            <Styles.StyledInputImage>
-                <Styles.Label
+            <StyledInputImage
+                className={classNames(
+                    "input-image-container",
+                    !label && !helper && !helperBottom && className
+                )}
+            >
+                <Label
                     htmlFor={id}
-                    $disabled={disabled}
-                    $width={width}
-                    $height={height}
-                    $radius={borderRadius}
+                    className={classNames(
+                        { disabled: disabled },
+                        "input-image-label"
+                    )}
+                    data-size={inputSize}
                 >
                     {img === "" ? (
                         emptyContainer()
                     ) : (
-                        <Styles.Img
+                        <Img
                             src={img}
                             alt="Image input"
                             width="100%"
                             height="100%"
                             fit="cover"
+                            className="input-image-image"
                         />
                     )}
 
                     {hoverContainer()}
-                </Styles.Label>
+                </Label>
 
-                <Styles.Input
+                <Input
                     type="file"
                     id={id}
                     disabled={disabled}
                     ref={ref}
+                    className="input-image-input"
                     {...rest}
                 />
-            </Styles.StyledInputImage>
+            </StyledInputImage>
         )
 
         return label || helper || helperBottom ? (
@@ -113,7 +140,7 @@ const InputImage = forwardRef(
                 label={label}
                 helper={helper}
                 helperBottom={helperBottom}
-                accentColor={accentColor}
+                className={className}
             >
                 {inputFn()}
             </InputContainer>

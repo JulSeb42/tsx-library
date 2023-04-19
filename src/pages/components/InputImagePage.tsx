@@ -28,8 +28,6 @@ const InputImagePage = () => {
                 label="Input image"
                 onChange={e => handleImage(e)}
                 icons={{ empty: "user" }}
-                accentColor="secondary"
-                borderRadius="circle"
             />
 
             <InputImage
@@ -38,7 +36,7 @@ const InputImagePage = () => {
                 label="Input image validation"
                 onChange={e => handleImage(e)}
                 validation="not-passed"
-                accentColor="warning"
+                inputSize="large"
             />
 
             <InputImage
@@ -46,7 +44,6 @@ const InputImagePage = () => {
                 img={image}
                 label="Input image disabled"
                 disabled
-                accentColor="success"
             />
         </Page>
     )

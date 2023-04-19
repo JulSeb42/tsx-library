@@ -40,7 +40,6 @@ import CardPage from "../pages/components/CardPage"
 import BadgePage from "../pages/components/BadgePage"
 import TooltipPage from "../pages/components/TooltipPage"
 import InputPage from "../pages/components/InputPage"
-import SearchInputPage from "../pages/components/SearchInputPage"
 import InputImagePage from "../pages/components/InputImagePage"
 import InputCheckPage from "../pages/components/InputCheckPage"
 import InputPhonePage from "../pages/components/InputPhonePage"
@@ -136,7 +135,6 @@ export const router: RouteType[] = [
     { path: "/badge", element: <BadgePage /> },
     { path: "/tooltip", element: <TooltipPage /> },
     { path: "/input", element: <InputPage /> },
-    { path: "/search-input", element: <SearchInputPage /> },
     { path: "/input-image", element: <InputImagePage /> },
     { path: "/input-check", element: <InputCheckPage /> },
     { path: "/input-phone", element: <InputPhonePage /> },

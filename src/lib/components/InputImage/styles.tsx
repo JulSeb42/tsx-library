@@ -3,14 +3,13 @@
 import styled from "styled-components"
 
 import {
+    Breakpoints,
     Image,
     Mixins,
-    Transitions,
     Overlays,
-    stringifyPx,
-    Breakpoints,
+    Radiuses,
+    Transitions,
 } from "../../"
-import type { ValidationTypes, RadiusesTypes } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
 
@@ -18,9 +17,7 @@ const StyledInputImage = styled.div`
     position: relative;
 `
 
-const StyledEmptyContainer = styled.span<{
-    $validation?: ValidationTypes
-}>`
+const StyledEmptyContainer = styled.span`
     width: 100%;
     height: 100%;
     ${Mixins.Flexbox({
@@ -30,8 +27,11 @@ const StyledEmptyContainer = styled.span<{
     })};
     position: relative;
     z-index: 0;
-    background-color: ${({ $validation, theme }) =>
-        $validation === "not-passed" ? theme.Danger50 : theme.Gray100};
+    background-color: ${({ theme }) => theme.Gray100};
+
+    &[data-validation="not-passed"] {
+        background-color: ${({ theme }) => theme.Danger50};
+    }
 `
 
 const StyledHoverContainer = styled.span`
@@ -51,26 +51,33 @@ const StyledHoverContainer = styled.span`
     transition: ${Transitions.Short};
 `
 
-const Label = styled.label<{
-    $disabled?: boolean
-    $width?: number | string
-    $height?: number | string
-    $radius?: RadiusesTypes
-}>`
-    width: ${({ $width }) => $width && stringifyPx($width)};
-    height: ${({ $height }) => $height && stringifyPx($height)};
+const INPUT_SIZE = 64
+
+const Label = styled.label`
+    position: relative;
+    border-radius: ${Radiuses.M};
+    overflow: hidden;
+    cursor: pointer;
+    width: ${INPUT_SIZE}px;
+    height: ${INPUT_SIZE}px;
+
     ${Mixins.Flexbox({
         $alignItems: "center",
         $justifyContent: "center",
     })};
-    position: relative;
-    ${({ $radius }) => Mixins.BorderRadius({ $borderRadius: $radius })};
-    overflow: hidden;
-    cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
+
+    &.disabled {
+        cursor: not-allowed;
+    }
+
+    &[data-size="large"] {
+        width: 100%;
+        height: 200px;
+    }
 
     @media ${Breakpoints.Hover} {
-        &:hover ${StyledHoverContainer} {
-            opacity: ${({ $disabled }) => !$disabled && 1};
+        &:not(.disabled):hover ${StyledHoverContainer} {
+            opacity: 1;
         }
     }
 `
