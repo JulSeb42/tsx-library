@@ -2,12 +2,13 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef, ChangeEvent } from "react"
+import classNames from "classnames"
 
 import { ButtonIcon } from "../../"
 import { MinusIcon, PlusIcon } from "../../icons"
 import { InputContainer } from "../InputContainer"
 
-import * as Styles from "./styles"
+import { StyledInputCounter, Input } from "./styles"
 import type { InputCounterProps } from "./types"
 
 const InputCounter = forwardRef(
@@ -21,16 +22,14 @@ const InputCounter = forwardRef(
             min,
             max,
             icons,
-            buttons,
             label,
             helper,
             helperBottom,
-            accentColor = "primary",
             disabled,
             backgroundColorInput,
-            inputVariant = "rounded",
             labelButtons,
             showButtonsLabels,
+            className,
             ...rest
         }: InputCounterProps,
         ref?: ForwardedRef<HTMLInputElement>
@@ -62,28 +61,13 @@ const InputCounter = forwardRef(
 
         const optionsButton = {
             size: 32,
-            color: accentColor,
             showLabel: showButtonsLabels,
-            ...buttons,
-        }
-
-        const propsButtons = {
-            minus: {
-                ...optionsButton,
-                onClick: handleMinus,
-                disabled: !!(min && value <= min) || disabled,
-                label: labelButtons?.minus || "Minus",
-            },
-            plus: {
-                ...optionsButton,
-                onClick: handlePlus,
-                disabled: !!(max && value >= max) || disabled,
-                label: labelButtons?.plus || "Plus",
-            },
         }
 
         const inputFn = () => (
-            <Styles.StyledInputCounter>
+            <StyledInputCounter
+                className={classNames("input-counter-container", className)}
+            >
                 <ButtonIcon
                     icon={
                         icons?.minus || (
@@ -91,34 +75,39 @@ const InputCounter = forwardRef(
                         )
                     }
                     type="button"
-                    {...propsButtons.minus}
+                    color="primary"
+                    onClick={handleMinus}
+                    disabled={!!(min && value <= min) || disabled}
+                    label={labelButtons?.minus || "Minus"}
+                    {...optionsButton}
                 />
 
                 {isInputEditable ? (
-                    <Styles.Input
-                        $isEditable={true}
+                    <Input
                         id={id}
                         value={value}
                         onChange={handleChange}
                         type="number"
                         disabled={disabled}
-                        $accentColor={accentColor}
-                        $disabled={disabled}
-                        $backgroundColor={backgroundColorInput}
-                        $variant={inputVariant}
+                        className={classNames(
+                            "is-editable",
+                            { disabled: disabled },
+                            "input input-counter"
+                        )}
+                        data-background={backgroundColorInput}
                         {...rest}
                     />
                 ) : (
-                    <Styles.Input
+                    <Input
                         as="span"
-                        $isEditable={false}
-                        $accentColor={accentColor}
-                        $disabled={disabled}
                         ref={ref}
+                        className={classNames("input input-counter", {
+                            disabled: disabled,
+                        })}
                         {...rest}
                     >
                         {value}
-                    </Styles.Input>
+                    </Input>
                 )}
 
                 <ButtonIcon
@@ -127,10 +116,14 @@ const InputCounter = forwardRef(
                             <PlusIcon size={optionsButton.size * 0.7} />
                         )
                     }
+                    color="primary"
                     type="button"
-                    {...propsButtons.plus}
+                    onClick={handlePlus}
+                    disabled={!!(max && value >= max) || disabled}
+                    label={labelButtons?.plus || "Plus"}
+                    {...optionsButton}
                 />
-            </Styles.StyledInputCounter>
+            </StyledInputCounter>
         )
 
         return label || helper || helperBottom ? (
@@ -139,7 +132,6 @@ const InputCounter = forwardRef(
                 label={label}
                 helper={helper}
                 helperBottom={helperBottom}
-                accentColor={accentColor}
             >
                 {inputFn()}
             </InputContainer>

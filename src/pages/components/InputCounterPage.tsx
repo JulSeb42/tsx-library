@@ -18,10 +18,6 @@ const InputCounterPage = () => {
                 max={30}
                 step={10}
                 label="Count"
-                accentColor="secondary"
-                // backgroundColorInput="dark"
-                isInputEditable={false}
-                // inputVariant="pill"
             />
         </Page>
     )

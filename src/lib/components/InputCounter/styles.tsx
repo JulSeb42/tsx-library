@@ -1,21 +1,16 @@
 /*=============================================== InputCounter styles ===============================================*/
 
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
 import {
-    Mixins,
     FontFamilies,
     FontSizes,
     FontWeights,
+    Mixins,
+    Radiuses,
     ThemeDark,
     ThemeLight,
-    Radiuses,
 } from "../../"
-import type { ColorsHoverTypes } from "../../types"
-import type {
-    InputBackgroundTypes,
-    InputVariantTypes,
-} from "../InputComponents/types"
 
 import { setDefaultTheme } from "../../utils"
 
@@ -26,14 +21,8 @@ const StyledInputCounter = styled.div`
     })};
 `
 
-const Input = styled.input<{
-    $isEditable: boolean
-    $accentColor?: ColorsHoverTypes
-    $disabled?: boolean
-    $backgroundColor?: InputBackgroundTypes
-    $variant?: InputVariantTypes
-}>`
-    width: ${({ $isEditable }) => ($isEditable ? 48 : 32)}px;
+const Input = styled.input`
+    width: 32px;
     height: 32px;
     line-height: 32px;
     padding: 0;
@@ -42,46 +31,59 @@ const Input = styled.input<{
     font-size: ${FontSizes.Titles.H6};
     text-align: center;
     font-weight: ${FontWeights.Black};
-    color: ${({ $disabled, theme, $backgroundColor, $isEditable }) =>
-        $disabled
-            ? theme.Gray500
-            : $isEditable
-            ? $backgroundColor === "dark"
-                ? ThemeDark.Font
-                : $backgroundColor === "light"
-                ? ThemeLight.Font
-                : theme.Font
-            : theme.Font};
+    color: ${({ theme }) => theme.Font};
 
-    ${({ $isEditable, $accentColor, $backgroundColor, theme, $variant }) =>
-        $isEditable &&
-        css`
-            border: 1px solid ${theme.Gray200};
-            -moz-appearance: textfield;
-            border-radius: ${$variant === "pill" ? Radiuses.Round : Radiuses.S};
-            outline: none;
-            background-color: ${$backgroundColor === "dark"
-                ? ThemeDark.Background
-                : $backgroundColor === "light"
-                ? ThemeLight.Background
-                : theme.Background};
+    &.is-editable {
+        width: 48px;
+        background-color: ${({ theme }) => theme.Background};
+        border: 1px solid ${({ theme }) => theme.Gray200};
+        -moz-appearance: textfield;
+        border-radius: ${Radiuses.S};
+        outline: none;
 
-            &::-webkit-outer-spin-button,
-            &::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
-            }
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
 
-            &:focus {
-                border-color: ${theme.AllColors({ $color: $accentColor })};
-            }
+        &:focus {
+            border-color: ${({ theme }) => theme.Primary500};
+        }
 
-            &:disabled {
-                cursor: not-allowed;
-                background-color: ${theme.Gray50};
-                color: ${theme.Gray500};
-            }
-        `}
+        &:disabled,
+        &.disabled {
+            background-color: ${({ theme }) => theme.Gray100};
+        }
+    }
+
+    &:disabled,
+    &.disabled {
+        cursor: not-allowed;
+        color: ${({ theme }) => theme.Gray500};
+    }
+
+    &[data-background="light"].is-editable {
+        background-color: ${ThemeLight.Background};
+        color: ${ThemeLight.Font};
+
+        &:disabled,
+        &.disabled {
+            background-color: ${ThemeLight.Gray100};
+            color: ${ThemeLight.Gray500};
+        }
+    }
+
+    &[data-background="dark"].is-editable {
+        background-color: ${ThemeDark.Background};
+        color: ${ThemeDark.Font};
+
+        &:disabled,
+        &.disabled {
+            background-color: ${ThemeDark.Gray100};
+            color: ${ThemeDark.Gray500};
+        }
+    }
 `
 
 setDefaultTheme([StyledInputCounter, Input])
