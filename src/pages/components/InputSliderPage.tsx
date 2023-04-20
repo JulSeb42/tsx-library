@@ -20,9 +20,6 @@ const InputSliderPage = () => {
                 max={100}
                 onChange={handleChange}
                 showMinMax
-                showValue
-                accentColor="secondary"
-                // validation="not-passed"
                 label="Range"
             />
             <Text>{value}</Text>

@@ -1,20 +1,8 @@
 /*=============================================== InputSlider styles ===============================================*/
 
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
-import {
-    Breakpoints,
-    Radiuses,
-    Transitions,
-    ThemeDark,
-    Overlays,
-    Text,
-} from "../../"
-import type {
-    AllColorsTypes,
-    ColorsHoverTypes,
-    ValidationTypes,
-} from "../../types"
+import { Breakpoints, Overlays, Radiuses, Text, Transitions } from "../../"
 
 import { setDefaultTheme } from "../../utils"
 
@@ -23,35 +11,24 @@ const SliderContainer = styled.div`
     position: relative;
 `
 
-const circleSize = 16
+const CIRCLE_SIZE = 16
 
-const StyledInputSlider = styled.input.attrs({ type: "range" })<{
-    $accentColor?: ColorsHoverTypes
-    $backgroundColor?: AllColorsTypes
-    $rangeWidth?: number
-    $validation?: ValidationTypes
-}>`
+const StyledInputSlider = styled.input.attrs({ type: "range" })`
     width: 100%;
     -webkit-appearance: none;
-    background: ${({ $backgroundColor, $validation, theme }) =>
-        $validation === "not-passed"
-            ? theme.Danger50
-            : theme.AllColors({ $color: $backgroundColor })};
+    -moz-appearance: initial;
     border-radius: ${Radiuses.Round};
     height: 8px;
     position: relative;
-    -moz-appearance: initial;
     margin: 0;
+    background: ${({ theme }) => theme.Gray100};
 
     &::-webkit-slider-thumb {
         -webkit-appearance: none;
-        width: ${circleSize}px;
-        height: ${circleSize}px;
+        width: ${CIRCLE_SIZE}px;
+        height: ${CIRCLE_SIZE}px;
         border-radius: ${Radiuses.Circle};
-        background-color: ${({ $accentColor, $validation, theme }) =>
-            $validation === "not-passed"
-                ? theme.Danger500
-                : theme.AllColors({ $color: $accentColor })};
+        background-color: ${({ theme }) => theme.Primary500};
         cursor: pointer;
         transition: ${Transitions.Short};
         position: relative;
@@ -59,20 +36,13 @@ const StyledInputSlider = styled.input.attrs({ type: "range" })<{
 
         @media ${Breakpoints.Hover} {
             &:hover {
-                box-shadow: 0 0 8px 0
-                    ${({ $accentColor, $validation, theme }) =>
-                        $validation === "not-passed"
-                            ? theme.Danger500
-                            : theme.AllColors({ $color: $accentColor })};
+                box-shadow: 0 0 8px 0 ${({ theme }) => theme.Primary500};
             }
         }
     }
 
     &::-moz-range-thumb {
-        background-color: ${({ $accentColor, $validation, theme }) =>
-            $validation === "not-passed"
-                ? theme.Danger500
-                : theme.AllColors({ $color: $accentColor })};
+        background-color: ${({ theme }) => theme.Primary500};
         border: none;
         cursor: pointer;
     }
@@ -82,13 +52,31 @@ const StyledInputSlider = styled.input.attrs({ type: "range" })<{
         content: "";
         position: absolute;
         top: 0;
-        background-color: ${({ $accentColor, $validation, theme }) =>
-            $validation === "not-passed"
-                ? theme.Danger500
-                : theme.AllColors({ $color: $accentColor })};
+        background-color: ${({ theme }) => theme.Primary500};
         height: 8px;
-        width: ${({ $rangeWidth }) => $rangeWidth}%;
+        width: var(--range-width);
         border-radius: ${Radiuses.Round} 0 0 ${Radiuses.Round};
+    }
+
+    &[data-validation="not-passed"] {
+        background: ${({ theme }) => theme.Danger50};
+
+        &::-webkit-slider-thumb {
+            background-color: ${({ theme }) => theme.Danger500};
+
+            &:hover {
+                box-shadow: 0 0 8px 0 ${({ theme }) => theme.Danger500};
+            }
+        }
+
+        &::-moz-range-thumb {
+            background-color: ${({ theme }) => theme.Danger500};
+        }
+
+        &:before,
+        &::before {
+            background-color: ${({ theme }) => theme.Danger500};
+        }
     }
 
     &:disabled {
@@ -119,42 +107,27 @@ const StyledInputSlider = styled.input.attrs({ type: "range" })<{
     }
 `
 
-const getLeft = ($position: number) => css`
-    left: calc(${$position}% + (${-8 - $position * 0.15}px));
+const MinMax = styled(Text).attrs({ tag: "small" })`
+    color: ${({ theme }) => theme.Gray500};
 `
 
-const Value = styled(Text).attrs({ tag: "small" })<{
-    $background?: AllColorsTypes | "overlay-black" | "overlay-white"
-    $textColor?: AllColorsTypes
-    $position: number
-    $isVisible?: boolean
-}>`
-    background-color: ${({ $background, theme }) =>
-        $background
-            ? $background === "overlay-black"
-                ? Overlays.Plain.Black80
-                : $background === "overlay-white"
-                ? Overlays.Plain.White80
-                : theme.AllColors({ $color: $background })
-            : theme === ThemeDark
-            ? Overlays.Plain.White80
-            : Overlays.Plain.Black80};
-    color: ${({ $textColor, theme, $background }) =>
-        $background === "overlay-white"
-            ? theme.Black
-            : $background === "overlay-black"
-            ? theme.White
-            : theme.AllColors({ $color: $textColor || "white" })};
+const Value = styled(Text).attrs({ tag: "small" })`
+    background-color: ${Overlays.Plain.Black80};
+    color: ${({ theme }) => theme.White};
     position: absolute;
     width: 32px;
     text-align: center;
     border-radius: ${Radiuses.S};
     top: -28px;
-    ${({ $position }) => getLeft($position)};
-    opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
+    opacity: 0;
     transition: opacity 0.2s ease;
+    left: var(--cursor-position);
+
+    &.visible {
+        opacity: 1;
+    }
 `
 
-setDefaultTheme([SliderContainer, StyledInputSlider, Value])
+setDefaultTheme([SliderContainer, StyledInputSlider, Value, MinMax])
 
-export { SliderContainer, StyledInputSlider, Value }
+export { SliderContainer, StyledInputSlider, Value, MinMax }

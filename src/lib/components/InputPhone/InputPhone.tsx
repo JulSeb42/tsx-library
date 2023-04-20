@@ -43,6 +43,7 @@ const InputPhone = forwardRef(
             textEmpty = "Your search did not return any result.",
             searchIcon,
             className,
+            style,
             ...rest
         }: InputPhoneProps,
         ref?: ForwardedRef<HTMLInputElement>
@@ -101,18 +102,25 @@ const InputPhone = forwardRef(
                     !label && !helper && !helperBottom && className,
                     "input-content"
                 )}
+                style={!label && !helper && !helperBottom ? style : undefined}
             >
                 <Button
                     type="button"
                     data-variant={variant}
                     onClick={() => setIsOpen(!isOpen)}
+                    className="flag-button"
                 >
                     <Flag
                         src={selectedCountry && selectedCountry.flag}
                         alt={`Flag ${selectedCountry && selectedCountry.name}`}
+                        className="flag selected-flag"
                     />
 
-                    <CaretDownIcon size={12} color={iconColor} />
+                    <CaretDownIcon
+                        size={12}
+                        color={iconColor}
+                        className="caret-down"
+                    />
                 </Button>
 
                 <ListInputs
@@ -121,17 +129,19 @@ const InputPhone = forwardRef(
                     backgroundColor={backgroundColor}
                     direction={listDirection}
                 >
-                    <SearchContainer>
+                    <SearchContainer className="search-container">
                         {searchIcon ? (
                             <Icon
                                 src={searchIcon}
                                 size={16}
                                 color={searchIconColor}
+                                className="search-icon"
                             />
                         ) : (
                             <StyledIconSearch
                                 size={16}
                                 color={searchIconColor}
+                                className="search-icon"
                             />
                         )}
 
@@ -141,6 +151,7 @@ const InputPhone = forwardRef(
                             value={search}
                             data-validation={validation}
                             data-background={backgroundColor}
+                            className="search-input"
                         />
                     </SearchContainer>
 
@@ -156,8 +167,10 @@ const InputPhone = forwardRef(
                                 <Flag
                                     src={country.flag}
                                     alt={`Flag ${country.name}`}
+                                    className="flag"
                                 />
-                                <span>
+
+                                <span className="country-code">
                                     ({country.dial_code}) {country.name}
                                 </span>
                             </ListItem>
@@ -167,7 +180,10 @@ const InputPhone = forwardRef(
                     )}
                 </ListInputs>
 
-                <CountryCode data-background={backgroundColor}>
+                <CountryCode
+                    data-background={backgroundColor}
+                    className="selected-country-dial-code"
+                >
                     {selectedCountry && selectedCountry.dial_code}
                 </CountryCode>
 

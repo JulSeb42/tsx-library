@@ -2,18 +2,18 @@
 
 import React, { forwardRef, useState } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
-import { Flexbox, Text, getPercentage } from "../../"
+import { Flexbox, getPercentage } from "../../"
 import { InputContainer } from "../InputContainer"
 
-import * as Styles from "./styles"
+import { SliderContainer, StyledInputSlider, Value, MinMax } from "./styles"
 import type { InputSliderProps } from "./types"
 
 const InputSlider = forwardRef(
     (
         {
             id,
-            backgroundColor = "gray-200",
             validation,
             min = 0,
             max = 100,
@@ -23,38 +23,37 @@ const InputSlider = forwardRef(
             label,
             helper,
             helperBottom,
-            accentColor = "primary",
+            className,
+            style,
             ...rest
         }: InputSliderProps,
         ref?: ForwardedRef<HTMLInputElement>
     ) => {
         const [isVisible, setIsVisible] = useState(
-            typeof showValue === "object" && showValue.onlyHover ? false : true
+            showValue === "always" ? true : false
         )
 
         const getRangeWidth = getPercentage(value, max)
 
         const inputFn = () => (
-            <Styles.StyledInputSlider
+            <StyledInputSlider
                 ref={ref}
                 id={id}
                 min={min}
                 max={max}
                 value={value}
-                $accentColor={accentColor}
-                $backgroundColor={backgroundColor}
-                $rangeWidth={getRangeWidth}
-                $validation={validation}
                 onMouseEnter={
-                    typeof showValue === "object" && showValue.onlyHover
-                        ? () => setIsVisible(true)
-                        : undefined
+                    showValue === "hover" ? () => setIsVisible(true) : undefined
                 }
                 onMouseLeave={
-                    typeof showValue === "object" && showValue.onlyHover
+                    showValue === "hover"
                         ? () => setIsVisible(false)
                         : undefined
                 }
+                data-validation={validation}
+                style={{
+                    ["--range-width" as any]: `${getRangeWidth}%`,
+                }}
                 {...rest}
             />
         )
@@ -62,58 +61,28 @@ const InputSlider = forwardRef(
         const fullInput = () =>
             showMinMax || showValue ? (
                 <Flexbox alignItems="center" gap="xs">
-                    {showMinMax && (
-                        <Text
-                            tag="small"
-                            color={
-                                typeof showMinMax === "string"
-                                    ? showMinMax
-                                    : "gray"
-                            }
-                        >
-                            {min}
-                        </Text>
-                    )}
+                    {showMinMax && <MinMax tag="small">{min}</MinMax>}
 
                     {showValue ? (
-                        <Styles.SliderContainer>
+                        <SliderContainer>
                             {inputFn()}
 
-                            <Styles.Value
-                                $background={
-                                    typeof showValue === "object" &&
-                                    showValue.backgroundColor
-                                        ? showValue.backgroundColor
-                                        : undefined
-                                }
-                                $textColor={
-                                    typeof showValue === "object" &&
-                                    showValue.textColor
-                                        ? showValue.textColor
-                                        : "background"
-                                }
-                                $position={getRangeWidth}
-                                $isVisible={isVisible}
+                            <Value
+                                className={classNames({ visible: isVisible })}
+                                style={{
+                                    ["--cursor-position" as any]: `calc(${getRangeWidth}% + ${
+                                        -8 - getRangeWidth * 0.15
+                                    }px)`,
+                                }}
                             >
                                 {value}
-                            </Styles.Value>
-                        </Styles.SliderContainer>
+                            </Value>
+                        </SliderContainer>
                     ) : (
                         inputFn()
                     )}
 
-                    {showMinMax && (
-                        <Text
-                            tag="small"
-                            color={
-                                typeof showMinMax === "string"
-                                    ? showMinMax
-                                    : "gray"
-                            }
-                        >
-                            {max}
-                        </Text>
-                    )}
+                    {showMinMax && <MinMax>{max}</MinMax>}
                 </Flexbox>
             ) : (
                 inputFn()
@@ -125,7 +94,6 @@ const InputSlider = forwardRef(
                 label={label}
                 helper={helper}
                 helperBottom={helperBottom}
-                accentColor={accentColor}
             >
                 {fullInput()}
             </InputContainer>
