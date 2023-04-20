@@ -43,7 +43,6 @@ const InputBaseMixin = css`
     &[data-validation="not-passed"] {
         background-color: ${({ theme }) => theme.Danger50};
         color: ${({ theme }) => theme.Font};
-        ${"" /* border-color: ${({ theme }) => theme.Danger500}; */}
     }
 
     &::placeholder {
@@ -175,20 +174,8 @@ const IconContainer = styled.span`
         width: calc(${Spacers.XS} + ${CONSTANT_VALUES.InputHeight}px);
     }
 
-    &[data-background="light"] {
-        color: ${ThemeLight.Primary500};
-
-        &:after {
-            background-color: ${ThemeLight.Gray200};
-        }
-    }
-
-    &[data-background="dark"] {
-        color: ${ThemeDark.Primary500};
-
-        &:after {
-            background-color: ${ThemeDark.Gray200};
-        }
+    &[data-validation="not-passed"] {
+        color: ${({ theme }) => theme.Danger500};
     }
 `
 

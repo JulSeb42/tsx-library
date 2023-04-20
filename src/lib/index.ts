@@ -48,7 +48,7 @@ export * from "./components/Input" // ✅
 export * from "./components/InputImage" // ✅
 export * from "./components/InputCheck" // ✅
 export * from "./components/InputPhone" // ✅
-export * from "./components/InputCounter"
+export * from "./components/InputCounter" // ✅
 export * from "./components/InputSlider"
 export * from "./components/Select"
 export * from "./components/Autocomplete"

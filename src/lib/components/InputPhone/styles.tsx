@@ -87,21 +87,11 @@ const InputSearch = styled.input`
     }
 
     &[data-background="light"] {
-        border-bottom-color: ${ThemeLight.Gray200};
         color: ${ThemeLight.Font};
-
-        &[data-validation="not-passed"]:focus {
-            border-bottom-color: ${ThemeLight.Danger500};
-        }
     }
 
     &[data-background="dark"] {
-        border-bottom-color: ${ThemeDark.Gray200};
         color: ${ThemeDark.Font};
-
-        &[data-validation="not-passed"]:focus {
-            border-bottom-color: ${ThemeDark.Danger500};
-        }
     }
 `
 
@@ -134,22 +124,6 @@ const Input = styled.input`
 
     &[data-validation="not-passed"].list-open {
         border-color: ${({ theme }) => theme.Danger500};
-    }
-
-    &[data-background="light"].list-open {
-        border-color: ${ThemeLight.Primary500};
-
-        &[data-validation="not-passed"] {
-            border-color: ${ThemeLight.Danger500};
-        }
-    }
-
-    &[data-background="dark"].list-open {
-        border-color: ${ThemeDark.Primary500};
-
-        &[data-validation="not-passed"] {
-            border-color: ${ThemeDark.Danger500};
-        }
     }
 `
 

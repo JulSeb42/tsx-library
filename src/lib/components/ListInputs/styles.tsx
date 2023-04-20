@@ -65,7 +65,6 @@ const StyledListInputs = styled.div`
 
         &[data-validation="not-passed"] {
             background-color: ${ThemeLight.Danger50};
-            border-color: ${ThemeLight.Danger500};
         }
     }
 
@@ -74,7 +73,6 @@ const StyledListInputs = styled.div`
 
         &[data-validation="not-passed"] {
             background-color: ${ThemeDark.Danger50};
-            border-color: ${ThemeDark.Danger500};
         }
     }
 `
@@ -149,45 +147,13 @@ const Item = styled.span`
         }
 
         &.active {
-            background-color: ${ThemeLight.ColorsHoverDefault({
-                $color: "primary",
-            })};
             color: ${ThemeLight.Background};
-
-            &[data-validation="not-passed"] {
-                background-color: ${ThemeLight.ColorsHoverDefault({
-                    $color: "danger",
-                })};
-            }
         }
 
         &:not(.read-only) {
             @media ${Breakpoints.Hover} {
                 &:hover {
-                    background-color: ${ThemeLight.ColorsHoverHover({
-                        $color: "primary",
-                    })};
                     color: ${ThemeLight.Background};
-                }
-
-                &:active {
-                    background-color: ${ThemeLight.ColorsHoverActive({
-                        $color: "primary",
-                    })};
-                }
-
-                &[data-validation="not-passed"] {
-                    &:hover {
-                        background-color: ${ThemeLight.ColorsHoverHover({
-                            $color: "danger",
-                        })};
-                    }
-
-                    &:active {
-                        background-color: ${ThemeLight.ColorsHoverActive({
-                            $color: "danger",
-                        })};
-                    }
                 }
             }
         }
@@ -201,45 +167,13 @@ const Item = styled.span`
         }
 
         &.active {
-            background-color: ${ThemeDark.ColorsHoverDefault({
-                $color: "primary",
-            })};
             color: ${ThemeDark.Background};
-
-            &[data-validation="not-passed"] {
-                background-color: ${ThemeDark.ColorsHoverDefault({
-                    $color: "danger",
-                })};
-            }
         }
 
         &:not(.read-only) {
             @media ${Breakpoints.Hover} {
                 &:hover {
-                    background-color: ${ThemeDark.ColorsHoverHover({
-                        $color: "primary",
-                    })};
                     color: ${ThemeDark.Background};
-                }
-
-                &:active {
-                    background-color: ${ThemeDark.ColorsHoverActive({
-                        $color: "primary",
-                    })};
-                }
-
-                &[data-validation="not-passed"] {
-                    &:hover {
-                        background-color: ${ThemeDark.ColorsHoverHover({
-                            $color: "danger",
-                        })};
-                    }
-
-                    &:active {
-                        background-color: ${ThemeDark.ColorsHoverActive({
-                            $color: "danger",
-                        })};
-                    }
                 }
             }
         }
