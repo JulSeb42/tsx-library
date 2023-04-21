@@ -13,7 +13,6 @@ const RatingPage = () => {
             <Rating
                 rating={rating}
                 setRating={setRating}
-                accentColor="secondary"
                 id="rating-stars"
                 label="Rating"
             />
@@ -29,9 +28,8 @@ const RatingPage = () => {
 
             <Rating
                 rating={rating}
-                accentColor="success"
                 id="rating-read"
-                label="Rating"
+                label="Rating readOnly"
                 readOnly
             />
         </Page>

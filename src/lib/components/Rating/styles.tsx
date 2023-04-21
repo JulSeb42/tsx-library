@@ -1,46 +1,39 @@
 /*=============================================== Rating styles ===============================================*/
 
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
-import { Mixins, Breakpoints } from "../../"
-import type { ColorsHoverTypes } from "../../types"
+import { Breakpoints, Mixins } from "../../"
 
 import { setDefaultTheme } from "../../utils"
 
-const buttonSize = 32
+const BUTTON_SIZE = 32
 
-const Button = styled.button<{
-    $color?: ColorsHoverTypes
-    $isButton?: boolean
-}>`
-    width: ${buttonSize}px;
-    height: ${buttonSize}px;
+const Button = styled.button`
+    width: ${BUTTON_SIZE}px;
+    height: ${BUTTON_SIZE}px;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    color: ${({ theme }) => theme.ColorsHoverDefault({ $color: "primary" })};
     ${Mixins.Flexbox({
         $inline: true,
         $alignItems: "center",
         $justifyContent: "center",
-    })};
-    padding: 0;
-    border: none;
-    background-color: transparent;
-    color: ${({ theme, $color }) =>
-        theme.ColorsHoverDefault({ $color: $color })};
+    })}
 
-    ${({ $isButton, $color }) =>
-        $isButton &&
-        css`
-            @media ${Breakpoints.Hover} {
-                &:hover {
-                    color: ${({ theme }) =>
-                        theme.ColorsHoverHover({ $color: $color })};
-                }
-
-                &:active {
-                    color: ${({ theme }) =>
-                        theme.ColorsHoverActive({ $color: $color })};
-                }
+    &.is-button {
+        @media ${Breakpoints.Hover} {
+            &:hover {
+                color: ${({ theme }) =>
+                    theme.ColorsHoverHover({ $color: "primary" })};
             }
-        `}
+
+            &:active {
+                color: ${({ theme }) =>
+                    theme.ColorsHoverActive({ $color: "primary" })};
+            }
+        }
+    }
 `
 
 setDefaultTheme([Button])

@@ -2,12 +2,13 @@
 
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
 import { generateNumbers, uuid, Flexbox, Icon } from "../../"
 import { StarIcon, StarFullIcon } from "../../icons"
 import { InputContainer } from "../InputContainer"
 
-import * as Styles from "./styles"
+import { Button } from "./styles"
 import type { RatingProps } from "./types"
 
 const Rating = forwardRef(
@@ -15,46 +16,71 @@ const Rating = forwardRef(
         {
             rating,
             setRating,
-            accentColor = "primary",
             icons,
             label,
             helper,
             helperBottom,
             id,
             readOnly,
+            className,
             ...rest
         }: RatingProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         const ratingFn = () => (
-            <Flexbox alignItems="center" gap="xs" ref={ref} {...rest}>
+            <Flexbox
+                alignItems="center"
+                gap="xs"
+                ref={ref}
+                className={classNames(
+                    "rating-container",
+                    !label && !helper && !helperBottom && className
+                )}
+                {...rest}
+            >
                 {generateNumbers(0, 5).map((_, i) => (
-                    <Styles.Button
+                    <Button
                         as={readOnly ? "span" : "button"}
                         onClick={!readOnly ? () => setRating(i + 1) : undefined}
-                        $color={accentColor}
-                        $isButton={!readOnly}
                         type="button"
+                        className={classNames(
+                            { "is-button": !readOnly },
+                            "button-rating"
+                        )}
                         key={uuid()}
                     >
                         {icons ? (
                             i >= rating ? (
                                 typeof icons?.default === "string" ? (
-                                    <Icon src={icons?.default} size={24} />
+                                    <Icon
+                                        src={icons?.default}
+                                        size={24}
+                                        className="rating-icon rating-icon-default"
+                                    />
                                 ) : (
                                     icons?.default
                                 )
                             ) : typeof icons?.checked === "string" ? (
-                                <Icon src={icons?.checked} size={24} />
+                                <Icon
+                                    src={icons?.checked}
+                                    size={24}
+                                    className="rating-icon rating-icon-checked"
+                                />
                             ) : (
                                 icons?.checked
                             )
                         ) : i >= rating ? (
-                            <StarIcon size={24} />
+                            <StarIcon
+                                size={24}
+                                className="rating-icon rating-icon-default"
+                            />
                         ) : (
-                            <StarFullIcon size={24} />
+                            <StarFullIcon
+                                size={24}
+                                className="rating-icon rating-icon-checked"
+                            />
                         )}
-                    </Styles.Button>
+                    </Button>
                 ))}
             </Flexbox>
         )
@@ -65,7 +91,7 @@ const Rating = forwardRef(
                 label={label}
                 helper={helper}
                 helperBottom={helperBottom}
-                accentColor={accentColor}
+                className={className}
             >
                 {ratingFn()}
             </InputContainer>
