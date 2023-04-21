@@ -1,7 +1,6 @@
 /*=============================================== ListInputs types ===============================================*/
 
 import type { HTMLAttributes } from "react"
-import type { Props as SVGProps } from "react-inlinesvg"
 
 import type { ValidationTypes } from "../../types"
 import type { InputBackgroundTypes } from "../InputComponents/types"
@@ -28,8 +27,9 @@ export interface ListInputsItemProps
     readOnly?: boolean
 }
 
-export type ListInputsChevronProps = (SVGProps & HTMLOrSVGElement) & {
+export type ListInputsChevronProps = {
     isOpen?: boolean
     icon?: string | JSX.Element
     withAnimation?: boolean
+    className?: string
 }

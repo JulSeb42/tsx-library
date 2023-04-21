@@ -1,12 +1,13 @@
 /*=============================================== Select component ===============================================*/
 
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
+import classNames from "classnames"
 
 import { uuid, useClickOutside } from "../../"
 import { ListInputs, ListItem, Chevron } from "../ListInputs"
 import { InputContainer } from "../InputContainer"
 
-import * as Styles from "./styles"
+import { StyledSelect, Selected } from "./styles"
 import type { SelectProps } from "./types"
 
 const Select = ({
@@ -18,19 +19,19 @@ const Select = ({
     label,
     helper,
     helperBottom,
-    icon,
-    accentColor = "primary",
     items,
     backgroundColor,
-    listVariant,
-    listShadow,
     listDirection,
-    inputVariant = "rounded",
+    variant = "rounded",
+    iconChevron,
+    className,
+    tabIndex,
     ...rest
 }: SelectProps) => {
     const [isOpen, setIsOpen] = useState(false)
 
     const el = useRef<HTMLDivElement>(null)
+    const listRef = useRef<HTMLDivElement>(null)
     const onClickOutside = () => setIsOpen(false)
     useClickOutside(el, onClickOutside)
 
@@ -39,74 +40,149 @@ const Select = ({
         setIsOpen(false)
     }
 
-    const itemsFn = () =>
-        items?.map(item => (
-            <ListItem
-                isActive={selected === item && true}
-                onClick={() => selectItem(item)}
-                accentColor={accentColor}
-                backgroundColor={backgroundColor}
-                key={uuid()}
-            >
-                {item}
-            </ListItem>
-        ))
+    // Keyboard navigation
+    const [isFocus, setIsFocus] = useState(false)
 
-    const listProps = {
-        isOpen: isOpen,
-        accentColor: accentColor,
-        backgroundColor: backgroundColor,
-        direction: listDirection,
+    const handleOpen = () => {
+        setIsFocus(true)
+        setIsOpen(true)
     }
 
-    const listFn = () =>
-        listVariant === "shadow" ? (
-            <ListInputs
-                {...listProps}
-                variant={listVariant}
-                shadow={listShadow}
-            >
-                {itemsFn()}
-            </ListInputs>
-        ) : (
-            <ListInputs {...listProps} variant={listVariant}>
-                {itemsFn()}
-            </ListInputs>
-        )
+    const handleClose = () =>
+        setTimeout(() => {
+            setIsFocus(false)
+            setIsOpen(false)
+        }, 100)
+
+    const [cursor, setCursor] = useState<number>(items?.indexOf(selected) || 0)
+
+    // eslint-disable-next-line
+    const handleKeyNavigation = (e: KeyboardEvent) => {
+        if (isOpen) {
+            if (e.key === "ArrowDown") {
+                e.preventDefault()
+
+                if (items?.length) {
+                    const newCursorPosition =
+                        items?.indexOf(selected) === items?.length - 1
+                            ? 0
+                            : cursor + 1
+
+                    setCursor(newCursorPosition)
+
+                    setSelected(items[newCursorPosition])
+
+                    if (cursor === items?.length - 1) {
+                        listRef?.current?.scrollTo({
+                            top: 0,
+                        })
+                    } else {
+                        listRef?.current?.scrollTo({
+                            top: cursor * 40,
+                        })
+                    }
+                }
+            }
+
+            if (e.key === "ArrowUp") {
+                e.preventDefault()
+
+                if (items) {
+                    const newCursorPosition =
+                        items?.indexOf(selected) <= 0
+                            ? items.length - 1
+                            : cursor - 1
+
+                    setCursor(newCursorPosition)
+
+                    setSelected(items[newCursorPosition])
+
+                    if (newCursorPosition <= 1) {
+                        listRef?.current?.scrollTo({
+                            top: 0,
+                        })
+                    } else if (cursor === 0) {
+                        listRef?.current?.scrollTo({
+                            top: listRef?.current?.scrollHeight,
+                        })
+                    } else {
+                        listRef?.current?.scrollTo({
+                            top: cursor * 40,
+                        })
+                    }
+                }
+            }
+
+            if (e.key === "Tab") {
+                e.preventDefault()
+
+                if (items) {
+                    setSelected(items[cursor])
+                    handleClose()
+                }
+            }
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener("keypress", () => handleKeyNavigation)
+
+        if (isFocus && items?.length) {
+            handleOpen()
+        } else {
+            setIsOpen(false)
+        }
+    }, [handleKeyNavigation, isFocus, items])
 
     const content = () => (
-        <Styles.StyledSelect
-            $isOpen={isOpen}
-            $isEmpty={!items}
+        <StyledSelect
             disabled={disabled}
             onClick={!disabled ? () => setIsOpen(!isOpen) : undefined}
             id={id}
             ref={el}
             as={as}
+            className={classNames(
+                { open: isOpen },
+                { empty: !items?.length },
+                { disabled: disabled }
+            )}
             {...rest}
         >
-            <Styles.Selected
-                $isOpen={items && isOpen}
-                $accentColor={accentColor}
-                $disabled={disabled}
-                $backgroundColor={backgroundColor}
-                $variant={inputVariant}
+            <Selected
+                className={classNames({ empty: !items?.length })}
+                disabled={disabled}
+                onFocus={handleOpen}
+                onBlur={handleClose}
+                onClick={handleOpen}
+                tabIndex={tabIndex}
+                type="button"
+                onKeyDown={(e: any) => handleKeyNavigation(e)}
             >
                 {selected}
 
-                {items && (
-                    <Chevron
-                        icon={
-                            icon && typeof icon === "object" ? icon?.name : icon
-                        }
-                        isOpen={isOpen}
-                        color={accentColor}
-                    />
-                )}
-            </Styles.Selected>
+                {items && <Chevron icon={iconChevron} isOpen={isOpen} />}
+            </Selected>
 
-            {listFn()}
-        </Styles.StyledSelect>
+            <ListInputs
+                isOpen={isOpen}
+                backgroundColor={backgroundColor}
+                direction={listDirection}
+                data-variant={variant}
+                data-background={backgroundColor}
+                ref={listRef}
+            >
+                {items?.map(item => (
+                    <ListItem
+                        isActive={selected === item && true}
+                        onClick={() => selectItem(item)}
+                        backgroundColor={backgroundColor}
+                        key={uuid()}
+                    >
+                        {item}
+                    </ListItem>
+                ))}
+            </ListInputs>
+        </StyledSelect>
     )
 
     return label || helper || helperBottom ? (
@@ -115,7 +191,6 @@ const Select = ({
             label={label}
             helper={helper}
             helperBottom={helperBottom}
-            accentColor={accentColor}
         >
             {content()}
         </InputContainer>

@@ -72,13 +72,10 @@ export const Chevron = ({
     icon,
     withAnimation,
     className,
-    ...rest
 }: ListInputsChevronProps) => {
     if (icon) {
         return typeof icon === "string" ? (
-            // @ts-expect-error
             <StyledIcon
-                {...rest}
                 src={icon}
                 className={classNames(
                     { "with-animation": withAnimation },
@@ -93,7 +90,6 @@ export const Chevron = ({
     }
 
     return (
-        // @ts-expect-error
         <StyledChevronDown
             className={classNames(
                 { "with-animation": withAnimation },
@@ -101,7 +97,6 @@ export const Chevron = ({
                 "chevron-icon",
                 className
             )}
-            {...rest}
         />
     )
 }
