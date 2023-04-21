@@ -101,48 +101,59 @@ const Autocomplete = forwardRef(
                 if (e.key === "ArrowDown") {
                     e.preventDefault()
 
-                    setCursor(prevState =>
-                        prevState < fuzzyResults?.length - 1 ? prevState + 1 : 0
-                    )
+                    if (fuzzyResults?.length) {
+                        setCursor(prevState =>
+                            prevState < fuzzyResults?.length - 1
+                                ? prevState + 1
+                                : 0
+                        )
 
-                    if (cursor === fuzzyResults?.length - 1) {
-                        listRef?.current?.scrollTo({
-                            top: 0,
-                        })
-                    } else {
-                        listRef?.current?.scrollTo({
-                            top: cursor * 40,
-                        })
+                        if (cursor === fuzzyResults?.length - 1) {
+                            listRef?.current?.scrollTo({
+                                top: 0,
+                            })
+                        } else {
+                            listRef?.current?.scrollTo({
+                                top: cursor * 40,
+                            })
+                        }
                     }
                 }
 
                 if (e.key === "ArrowUp") {
                     e.preventDefault()
 
-                    const newCursor = (prevState: number) =>
-                        prevState > 0 ? prevState - 1 : fuzzyResults?.length - 1
+                    if (fuzzyResults?.length) {
+                        const newCursor = (prevState: number) =>
+                            prevState > 0
+                                ? prevState - 1
+                                : fuzzyResults?.length - 1
 
-                    setCursor(prevState => newCursor(prevState))
+                        setCursor(prevState => newCursor(prevState))
 
-                    if (newCursor(cursor) <= 1) {
-                        listRef?.current?.scrollTo({
-                            top: 0,
-                        })
-                    } else if (newCursor(cursor) === 0) {
-                        listRef?.current?.scrollTo({
-                            top: listRef?.current?.scrollHeight,
-                        })
-                    } else {
-                        listRef?.current?.scrollTo({
-                            top: newCursor(cursor) * 40,
-                        })
+                        if (newCursor(cursor) <= 1) {
+                            listRef?.current?.scrollTo({
+                                top: 0,
+                            })
+                        } else if (newCursor(cursor) === 0) {
+                            listRef?.current?.scrollTo({
+                                top: listRef?.current?.scrollHeight,
+                            })
+                        } else {
+                            listRef?.current?.scrollTo({
+                                top: newCursor(cursor) * 40,
+                            })
+                        }
                     }
                 }
 
                 if (e.key === "Tab") {
                     e.preventDefault()
-                    setValue(fuzzyResults[cursor].item)
-                    handleClose()
+
+                    if (fuzzyResults?.length) {
+                        setValue(fuzzyResults[cursor].item)
+                        handleClose()
+                    }
                 }
             }
         }
@@ -191,7 +202,7 @@ const Autocomplete = forwardRef(
                     data-validation={getValidationStatus}
                     className={classNames(
                         { "with-icon": !!icon },
-                        "input input-text",
+                        "input input-autocomplete",
                         !icon && !validation && className
                     )}
                     {...rest}
