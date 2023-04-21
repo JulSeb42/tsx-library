@@ -29,8 +29,8 @@ const AutocompletePage = () => {
                     label="Label"
                     helper="Helper"
                     helperBottom="Helper bottom"
-                    // variant="pill"
-                    // fuzzy={false}
+                    focusKeys={["Command", "KeyK"]}
+                    showKeys
                 />
             </Form>
 

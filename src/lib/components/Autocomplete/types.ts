@@ -2,14 +2,13 @@
 
 import type { InputHTMLAttributes } from "react"
 
-import type { ShadowsTypes } from "../../types"
-import type { InputBaseProps } from "../InputContainer/types"
 import type {
+    IconInputProps,
+    InputBackgroundTypes,
     InputVariantTypes,
     ValidationComponentProps,
-    InputBackgroundTypes,
-    IconInputProps,
 } from "../InputComponents/types"
+import type { InputBaseProps } from "../InputContainer/types"
 import type { ListDirectionTypes } from "../ListInputs/types"
 
 interface AutocompletePropsBase
@@ -24,22 +23,18 @@ interface AutocompletePropsBase
     backgroundColor?: InputBackgroundTypes
     listDirection?: ListDirectionTypes
     variant?: InputVariantTypes
-    fuzzy?:
-        | false
-        | {
-              options?: any
-          }
-    highlight?: boolean
+    fuzzyOptions?: any
+    iconClear?: string | JSX.Element
 }
 
-interface AutocompleteList1 extends AutocompletePropsBase {
-    listVariant?: "bordered"
-    listShadow?: never
+interface AutocompletePropsKeys1 extends AutocompletePropsBase {
+    focusKeys?: string[]
+    showKeys?: boolean
 }
 
-interface AutocompleteList2 extends AutocompletePropsBase {
-    listVariant?: "shadow"
-    listShadow?: ShadowsTypes
+interface AutocompletePropsKeys2 extends AutocompletePropsBase {
+    focusKeys?: undefined | null
+    showKeys?: never
 }
 
-export type AutocompleteProps = AutocompleteList1 | AutocompleteList2
+export type AutocompleteProps = AutocompletePropsKeys1 | AutocompletePropsKeys2

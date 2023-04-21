@@ -1,10 +1,11 @@
 /*=============================================== Autocomplete component ===============================================*/
 
-import React, { forwardRef, useState, useEffect } from "react"
+import React, { forwardRef, useState, useEffect, useRef } from "react"
 import type { ForwardedRef, ChangeEvent } from "react"
 import Fuse from "fuse.js"
+import classNames from "classnames"
 
-import { uuid, getHighlightedText } from "../.."
+import { uuid, getHighlightedText, ButtonIcon, Key, useKeyPress } from "../.."
 import { InputContainer } from "../InputContainer"
 import { ListInputs, ListItem } from "../ListInputs"
 import {
@@ -12,8 +13,9 @@ import {
     ValidationComponent,
     RightContainer,
 } from "../InputComponents"
+import { CloseIcon } from "../../icons"
 
-import * as Styles from "./styles"
+import { StyledAutocomplete, AutocompleteContainer } from "./styles"
 import type { AutocompleteProps } from "./types"
 
 const Autocomplete = forwardRef(
@@ -31,17 +33,15 @@ const Autocomplete = forwardRef(
             helper,
             helperBottom,
             validation,
-            accentColor = "primary",
             backgroundColor,
-            listVariant,
-            listShadow,
             listDirection,
             iconSize,
             variant = "rounded",
-            fuzzy = {
-                options: {},
-            },
-            highlight = true,
+            fuzzyOptions,
+            className,
+            iconClear,
+            focusKeys,
+            showKeys,
             ...rest
         }: AutocompleteProps,
         ref?: ForwardedRef<HTMLInputElement>
@@ -52,27 +52,36 @@ const Autocomplete = forwardRef(
 
         const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
             setValue(e.target.value)
+        const clearSearch = () => setValue("")
 
         const handleClick = (text: string) => setValue(text)
 
-        const results = items
-            .filter(item =>
-                item.toLowerCase().includes((value || "").toLowerCase())
-            )
-            ?.sort()
+        const keyArr = focusKeys?.map(key =>
+            key.includes("Key")
+                ? key.replace("Key", "")
+                : key === "Command"
+                ? "⌘"
+                : key === "Enter"
+                ? "↵"
+                : key === "Control"
+                ? "Ctrl"
+                : key
+        )
+
+        const inputRef = useRef<HTMLInputElement>(null)
+        const keys = focusKeys ? focusKeys : [""]
+        const handleFocus = () => inputRef?.current?.focus()
+        useKeyPress(() => handleFocus(), keys)
 
         // Fuse results
         let fuzzyResults: { item: string }[]
-
-        if (fuzzy) {
-            const fuse = new Fuse(items, fuzzy.options)
-
-            fuzzyResults = fuse.search(value)
-        }
+        const fuse = new Fuse(items, fuzzyOptions)
+        fuzzyResults = fuse.search(value)?.slice(0, 20)
 
         // Keyboard navigation
         const [isOpen, setIsOpen] = useState(false)
         const [isFocus, setIsFocus] = useState(false)
+        const listRef = useRef<HTMLDivElement>(null)
 
         const handleOpen = () => {
             setIsFocus(true)
@@ -92,40 +101,47 @@ const Autocomplete = forwardRef(
                 if (e.key === "ArrowDown") {
                     e.preventDefault()
 
-                    if (fuzzyResults) {
-                        setCursor(prevState =>
-                            prevState < fuzzyResults?.length - 1
-                                ? prevState + 1
-                                : prevState
-                        )
+                    setCursor(prevState =>
+                        prevState < fuzzyResults?.length - 1 ? prevState + 1 : 0
+                    )
+
+                    if (cursor === fuzzyResults?.length - 1) {
+                        listRef?.current?.scrollTo({
+                            top: 0,
+                        })
                     } else {
-                        setCursor(prevState =>
-                            prevState < results?.length - 1
-                                ? prevState + 1
-                                : prevState
-                        )
+                        listRef?.current?.scrollTo({
+                            top: cursor * 40,
+                        })
                     }
                 }
 
                 if (e.key === "ArrowUp") {
                     e.preventDefault()
 
-                    if (fuzzyResults) {
-                        setCursor(prevState =>
-                            prevState > 0 ? prevState - 1 : prevState
-                        )
+                    const newCursor = (prevState: number) =>
+                        prevState > 0 ? prevState - 1 : fuzzyResults?.length - 1
+
+                    setCursor(prevState => newCursor(prevState))
+
+                    if (newCursor(cursor) <= 1) {
+                        listRef?.current?.scrollTo({
+                            top: 0,
+                        })
+                    } else if (newCursor(cursor) === 0) {
+                        listRef?.current?.scrollTo({
+                            top: listRef?.current?.scrollHeight,
+                        })
                     } else {
-                        setCursor(prevState =>
-                            prevState > 0 ? prevState - 1 : prevState
-                        )
+                        listRef?.current?.scrollTo({
+                            top: newCursor(cursor) * 40,
+                        })
                     }
                 }
 
                 if (e.key === "Tab") {
                     e.preventDefault()
-                    setValue(
-                        fuzzy ? fuzzyResults[cursor].item : results[cursor]
-                    )
+                    setValue(fuzzyResults[cursor].item)
                     handleClose()
                 }
             }
@@ -141,77 +157,16 @@ const Autocomplete = forwardRef(
             }
         }, [handleKeyNavigation, isFocus, value])
 
-        // Components
-        const listItemsFn = () =>
-            fuzzy && value && fuzzyResults?.length ? (
-                fuzzyResults?.slice(0, 20)?.map((result, i) => {
-                    const getItem = result.item
-
-                    return (
-                        <ListItem
-                            onClick={() => handleClick(getItem)}
-                            onMouseEnter={() => setCursor(i)}
-                            onMouseLeave={() => setCursor(0)}
-                            accentColor={accentColor}
-                            validation={getValidationStatus}
-                            isActive={cursor === i}
-                            key={uuid()}
-                        >
-                            {highlight
-                                ? getHighlightedText(getItem, value)
-                                : getItem}
-                        </ListItem>
-                    )
-                })
-            ) : value?.length && results?.length ? (
-                results?.slice(0, 20)?.map((result, i) => (
-                    <ListItem
-                        onClick={() => handleClick(result)}
-                        onMouseEnter={() => setCursor(i)}
-                        onMouseLeave={() => setCursor(0)}
-                        accentColor={accentColor}
-                        validation={getValidationStatus}
-                        isActive={cursor === i}
-                        key={uuid()}
-                    >
-                        {highlight ? getHighlightedText(result, value) : result}
-                    </ListItem>
-                ))
-            ) : (
-                <ListItem
-                    accentColor={accentColor}
-                    validation={getValidationStatus}
-                    backgroundColor={backgroundColor}
-                    readOnly
-                >
-                    {emptyText}
-                </ListItem>
-            )
-
-        const listProps = {
-            isOpen: (value && isOpen) || false,
-            accentColor,
-            backgroundColor,
-            validation: getValidationStatus,
-            direction: listDirection,
-        }
-
-        const listFn = () =>
-            listVariant === "bordered" ? (
-                <ListInputs {...listProps} variant="bordered">
-                    {listItemsFn()}
-                </ListInputs>
-            ) : (
-                <ListInputs {...listProps} variant="shadow" shadow={listShadow}>
-                    {listItemsFn()}
-                </ListInputs>
-            )
-
         const inputFn = () => (
-            <Styles.InputContainer>
+            <AutocompleteContainer
+                className={classNames(
+                    "input-content",
+                    !label && !helper && !helperBottom && className
+                )}
+                ref={ref}
+            >
                 {icon && (
                     <IconComponent
-                        accentColor={accentColor}
                         disabled={disabled}
                         icon={icon}
                         validation={getValidationStatus}
@@ -220,32 +175,90 @@ const Autocomplete = forwardRef(
                     />
                 )}
 
-                <Styles.StyledAutocomplete
-                    ref={ref}
+                <StyledAutocomplete
                     id={id}
+                    ref={inputRef}
                     onChange={handleChange}
                     onFocus={!disabled ? () => setIsFocus(true) : undefined}
                     onBlur={!disabled ? () => setIsFocus(false) : undefined}
                     onKeyDown={(e: any) => handleKeyNavigation(e)}
-                    type="text"
+                    type="search"
                     value={value}
                     autoFocus={autoFocus}
-                    $hasIcon={!!icon}
-                    $validation={getValidationStatus}
-                    $accentColor={accentColor}
-                    $backgroundColor={backgroundColor}
-                    $variant={variant}
+                    data-variant={variant}
+                    data-background={backgroundColor}
+                    data-type="search"
+                    data-validation={getValidationStatus}
+                    className={classNames(
+                        { "with-icon": !!icon },
+                        "input input-text",
+                        !icon && !validation && className
+                    )}
                     {...rest}
                 />
 
-                {validation && (
-                    <RightContainer disabled={disabled} variant={variant}>
-                        <ValidationComponent validation={validation} />
-                    </RightContainer>
-                )}
+                <RightContainer disabled={disabled} variant={variant}>
+                    {value.length > 0 && (
+                        <ButtonIcon
+                            icon={iconClear || <CloseIcon size={20} />}
+                            variant="transparent"
+                            type="button"
+                            size={24}
+                            onClick={clearSearch}
+                            disabled={disabled}
+                            color="primary"
+                            className="button-clear"
+                        />
+                    )}
 
-                {listFn()}
-            </Styles.InputContainer>
+                    {focusKeys && showKeys && keyArr && (
+                        <Key
+                            keys={keyArr}
+                            accentColor="primary"
+                            className="keys"
+                        />
+                    )}
+
+                    {validation && (
+                        <ValidationComponent validation={validation} />
+                    )}
+                </RightContainer>
+
+                <ListInputs
+                    isOpen={value ? isOpen : false}
+                    backgroundColor={backgroundColor}
+                    validation={getValidationStatus}
+                    direction={listDirection}
+                    ref={listRef}
+                >
+                    {value && fuzzyResults?.length ? (
+                        fuzzyResults?.map((result, i) => {
+                            const getItem = result.item
+
+                            return (
+                                <ListItem
+                                    onClick={() => handleClick(getItem)}
+                                    onMouseEnter={() => setCursor(i)}
+                                    onMouseLeave={() => setCursor(0)}
+                                    validation={getValidationStatus}
+                                    isActive={cursor === i}
+                                    key={uuid()}
+                                >
+                                    {getHighlightedText(getItem, value)}
+                                </ListItem>
+                            )
+                        })
+                    ) : (
+                        <ListItem
+                            validation={getValidationStatus}
+                            backgroundColor={backgroundColor}
+                            readOnly
+                        >
+                            {emptyText}
+                        </ListItem>
+                    )}
+                </ListInputs>
+            </AutocompleteContainer>
         )
 
         return label || helper || helperBottom ? (
@@ -254,7 +267,7 @@ const Autocomplete = forwardRef(
                 label={label}
                 helper={helper}
                 helperBottom={helperBottom}
-                accentColor={accentColor}
+                className={className}
             >
                 {inputFn()}
             </InputContainer>

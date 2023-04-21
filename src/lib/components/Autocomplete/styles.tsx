@@ -2,30 +2,24 @@
 
 import styled from "styled-components"
 
-import type { ColorsHoverTypes, ValidationTypes } from "../../types"
 import { InputBaseMixin } from "../InputComponents/styles"
-import type {
-    InputBackgroundTypes,
-    InputVariantTypes,
-} from "../InputComponents/types"
 
 import { setDefaultTheme } from "../../utils"
 
-const InputContainer = styled.div`
+const AutocompleteContainer = styled.div`
     position: relative;
     z-index: 10;
 `
 
-const StyledAutocomplete = styled.input<{
-    $hasIcon?: boolean
-    $validation?: ValidationTypes
-    $accentColor?: ColorsHoverTypes
-    $backgroundColor?: InputBackgroundTypes
-    $variant?: InputVariantTypes
-}>`
+const StyledAutocomplete = styled.input`
     ${InputBaseMixin};
+
+    &::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+        appearance: none;
+    }
 `
 
-setDefaultTheme([StyledAutocomplete, InputContainer])
+setDefaultTheme([StyledAutocomplete, AutocompleteContainer])
 
-export { StyledAutocomplete, InputContainer }
+export { StyledAutocomplete, AutocompleteContainer }
