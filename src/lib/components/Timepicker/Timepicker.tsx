@@ -3,10 +3,15 @@
 import React, { useState, useRef } from "react"
 import classNames from "classnames"
 
-import { useClickOutside, uuid, Icon } from "../../"
+import { useClickOutside, uuid } from "../../"
 import { InputContainer } from "../InputContainer"
 import { ListItem, ListInputs } from "../ListInputs"
-import { IconComponent, RightContainer } from "../InputComponents"
+import {
+    IconComponent,
+    RightContainer,
+    ValidationComponent,
+    ButtonRightInputs,
+} from "../InputComponents"
 import { typeValues } from "../../utils"
 import { ClockIcon } from "../../icons"
 
@@ -21,7 +26,7 @@ const Timepicker = ({
     step = "1h",
     backgroundColor,
     icon,
-    clockIcon,
+    iconClock,
     validation,
     disabled,
     id,
@@ -36,8 +41,6 @@ const Timepicker = ({
 }: TimepickerProps) => {
     const getValidationStatus =
         typeof validation === "object" ? validation?.status : validation
-
-    const iconColor = getValidationStatus === "not-passed" ? "gray" : "primary"
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -184,25 +187,15 @@ const Timepicker = ({
 
                 {selectedTime}
 
-                <RightContainer>
-                    {clockIcon ? (
-                        typeof clockIcon === "string" ? (
-                            <Icon
-                                src={clockIcon}
-                                size={16}
-                                color={iconColor}
-                                className="timepicker-icon-clock"
-                            />
-                        ) : (
-                            clockIcon
-                        )
-                    ) : (
-                        <ClockIcon
-                            size={16}
-                            color={iconColor}
-                            className="timepicker-icon-clock"
-                        />
-                    )}
+                <RightContainer variant={inputVariant} disabled={disabled}>
+                    <ValidationComponent validation={validation} />
+
+                    <ButtonRightInputs
+                        icon={iconClock || <ClockIcon size={16} />}
+                        onClick={() => setIsOpen(true)}
+                        disabled={disabled}
+                        className="timepicker-icon-clock"
+                    />
                 </RightContainer>
             </Selected>
 

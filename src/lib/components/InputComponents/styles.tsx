@@ -3,6 +3,7 @@
 import styled, { css } from "styled-components"
 
 import {
+    Breakpoints,
     FontFamilies,
     FontSizes,
     Mixins,
@@ -10,6 +11,7 @@ import {
     Spacers,
     ThemeDark,
     ThemeLight,
+    Transitions,
 } from "../../"
 
 import { setDefaultTheme } from "../../utils"
@@ -179,6 +181,47 @@ const IconContainer = styled.span`
     }
 `
 
-setDefaultTheme([InputBaseMixin, StyledRightContainer, IconContainer])
+const RightButton = styled.button`
+    height: 32px;
+    font-size: ${FontSizes.Small};
+    color: ${({ theme }) => theme.ColorsHoverDefault({ $color: "primary" })};
+    ${Mixins.Flexbox({
+        $inline: true,
+        $alignItems: "center",
+    })}
 
-export { InputBaseMixin, StyledRightContainer, IconContainer }
+    &.is-clickable {
+        cursor: pointer;
+        border: none;
+        padding: 0;
+        background-color: transparent;
+        transition: ${Transitions.Short};
+
+        @media ${Breakpoints.Hover} {
+            &:not(:disabled):hover {
+                color: ${({ theme }) =>
+                    theme.ColorsHoverHover({ $color: "primary" })};
+            }
+
+            &:not(:disabled):active {
+                color: ${({ theme }) =>
+                    theme.ColorsHoverHover({ $color: "primary" })};
+            }
+        }
+    }
+
+    &:disabled,
+    &.disabled {
+        color: ${({ theme }) => theme.Gray500};
+        cursor: not-allowed;
+    }
+`
+
+setDefaultTheme([
+    InputBaseMixin,
+    StyledRightContainer,
+    IconContainer,
+    RightButton,
+])
+
+export { InputBaseMixin, StyledRightContainer, IconContainer, RightButton }

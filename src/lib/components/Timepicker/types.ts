@@ -21,7 +21,7 @@ type TimepickerPropsBase = InputHTMLAttributes<HTMLInputElement> &
     InputBaseProps &
     IconInputProps &
     ValidationComponentProps & {
-        clockIcon?: string | JSX.Element
+        iconClock?: string | JSX.Element
         backgroundColor?: InputBackgroundTypes
         listDirection?: ListDirectionTypes
         inputVariant?: InputVariantTypes

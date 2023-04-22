@@ -1,21 +1,22 @@
 /*=============================================== Autocomplete component ===============================================*/
 
-import React, { forwardRef, useState, useEffect, useRef } from "react"
-import type { ForwardedRef, ChangeEvent } from "react"
-import Fuse from "fuse.js"
 import classNames from "classnames"
+import Fuse from "fuse.js"
+import type { ChangeEvent, ForwardedRef } from "react"
+import { forwardRef, useEffect, useRef, useState } from "react"
 
-import { uuid, getHighlightedText, ButtonIcon, Key, useKeyPress } from "../.."
+import { Key, getHighlightedText, useKeyPress, uuid } from "../.."
+import { CloseIcon } from "../../icons"
+import {
+    ButtonRightInputs,
+    IconComponent,
+    RightContainer,
+    ValidationComponent,
+} from "../InputComponents"
 import { InputContainer } from "../InputContainer"
 import { ListInputs, ListItem } from "../ListInputs"
-import {
-    IconComponent,
-    ValidationComponent,
-    RightContainer,
-} from "../InputComponents"
-import { CloseIcon } from "../../icons"
 
-import { StyledAutocomplete, AutocompleteContainer } from "./styles"
+import { AutocompleteContainer, StyledAutocomplete } from "./styles"
 import type { AutocompleteProps } from "./types"
 
 const Autocomplete = forwardRef(
@@ -197,6 +198,7 @@ const Autocomplete = forwardRef(
                     type="search"
                     value={value}
                     autoFocus={autoFocus}
+                    disabled={disabled}
                     data-variant={variant}
                     data-background={backgroundColor}
                     data-type="search"
@@ -210,29 +212,25 @@ const Autocomplete = forwardRef(
                 />
 
                 <RightContainer disabled={disabled} variant={variant}>
+                    {validation && (
+                        <ValidationComponent validation={validation} />
+                    )}
+
                     {value.length > 0 && (
-                        <ButtonIcon
+                        <ButtonRightInputs
                             icon={iconClear || <CloseIcon size={20} />}
-                            variant="transparent"
-                            type="button"
-                            size={24}
                             onClick={clearSearch}
                             disabled={disabled}
-                            color="primary"
                             className="button-clear"
                         />
                     )}
 
-                    {focusKeys && showKeys && keyArr && (
+                    {focusKeys && showKeys && keyArr && !disabled && (
                         <Key
                             keys={keyArr}
                             accentColor="primary"
                             className="keys"
                         />
-                    )}
-
-                    {validation && (
-                        <ValidationComponent validation={validation} />
                     )}
                 </RightContainer>
 

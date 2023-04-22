@@ -3,14 +3,20 @@
 /*==================== Imports ====================*/
 
 import React from "react"
+import classNames from "classnames"
+
 import { StyledIcon } from "./styles"
 import type { IconProps } from "./types"
+import { stringifyPx } from "../"
 
 /*==================== Component ====================*/
 
 export const CodeBlockIcon = ({
     size = 64,
     color = "currentColor",
+    style,
+    onClick,
+    className,
     ...rest
 }: IconProps) => {
     return (

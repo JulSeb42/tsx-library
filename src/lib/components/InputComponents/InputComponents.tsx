@@ -5,12 +5,18 @@ import { Icon } from "../../"
 import { CheckCircleIcon, CloseCircleIcon } from "../../icons"
 import classNames from "classnames"
 
-import { InputBaseMixin, StyledRightContainer, IconContainer } from "./styles"
+import {
+    InputBaseMixin,
+    StyledRightContainer,
+    IconContainer,
+    RightButton,
+} from "./styles"
 
 import type {
     RightContainerProps,
     IconComponentProps,
     ValidationComponentProps,
+    ButtonRightProps,
 } from "./types"
 
 const RightContainer = ({
@@ -30,6 +36,38 @@ const RightContainer = ({
         {children}
     </StyledRightContainer>
 )
+
+const ButtonRightInputs = ({
+    icon,
+    text,
+    onClick,
+    disabled,
+    className,
+}: ButtonRightProps) => {
+    return (
+        <RightButton
+            onClick={onClick}
+            className={classNames(
+                { "is-clickable": !!onClick },
+                "input-icon-right-container",
+                { disabled: disabled },
+                className
+            )}
+            as={onClick ? "button" : "span"}
+            disabled={disabled}
+        >
+            {icon ? (
+                typeof icon === "string" ? (
+                    <Icon src={icon} size={16} />
+                ) : (
+                    icon
+                )
+            ) : (
+                text
+            )}
+        </RightButton>
+    )
+}
 
 const IconComponent = ({
     icon,
@@ -107,4 +145,10 @@ const ValidationComponent = ({ validation }: ValidationComponentProps) => {
     return null
 }
 
-export { RightContainer, InputBaseMixin, IconComponent, ValidationComponent }
+export {
+    RightContainer,
+    InputBaseMixin,
+    IconComponent,
+    ValidationComponent,
+    ButtonRightInputs,
+}

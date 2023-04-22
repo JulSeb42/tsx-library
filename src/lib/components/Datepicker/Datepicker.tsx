@@ -3,12 +3,13 @@
 import { useRef, useState } from "react"
 import classNames from "classnames"
 
-import { Icon, convertDateShort, useClickOutside } from "../../"
+import { convertDateShort, useClickOutside } from "../../"
 import { CalendarIcon } from "../../icons"
 import {
     IconComponent,
     ValidationComponent,
     RightContainer,
+    ButtonRightInputs,
 } from "../InputComponents"
 import { InputContainer } from "../InputContainer"
 import Calendar from "./Calendar"
@@ -45,8 +46,6 @@ const Datepicker = ({
     const onClickOutside = () => setIsOpen(false)
     useClickOutside(el, onClickOutside)
 
-    const iconColor = disabled ? "gray" : "primary"
-
     const inputFn = () => (
         <DatepickerContainer
             ref={el}
@@ -66,9 +65,10 @@ const Datepicker = ({
                 data-validation={getValidationStatus}
                 data-background={backgroundColor}
                 className={classNames(
-                    { disabled: disabled },
-                    { "with-icon": !!icons?.icon }
+                    { "with-icon": !!icons?.icon },
+                    "datepicker-selected"
                 )}
+                disabled={disabled}
             >
                 {icons?.icon && (
                     <IconComponent
@@ -83,24 +83,17 @@ const Datepicker = ({
 
                 {convertDateShort(selectedDate)}
 
-                <RightContainer>
-                    {icons?.calendar ? (
-                        typeof icons?.calendar === "string" ? (
-                            <Icon
-                                src={icons.calendar}
-                                size={16}
-                                color={iconColor}
-                            />
-                        ) : (
-                            icons?.calendar
-                        )
-                    ) : (
-                        <CalendarIcon size={16} color={iconColor} />
-                    )}
-
+                <RightContainer variant={inputVariant} disabled={disabled}>
                     {validation && (
                         <ValidationComponent validation={validation} />
                     )}
+
+                    <ButtonRightInputs
+                        icon={icons?.calendar || <CalendarIcon size={16} />}
+                        onClick={() => setIsOpen(true)}
+                        disabled={disabled}
+                        className="datapicker-calendar-icon"
+                    />
                 </RightContainer>
             </Selected>
 

@@ -19,10 +19,10 @@ const TimepickerPage = () => {
                 helperBottom="Helper"
                 icon="clock"
                 step="1h"
-                minTime="05:00"
-                maxTime="16:00"
-                // inputVariant="pill"
-                // validation={{ status: "not-passed" }}
+                // minTime="05:00"
+                // maxTime="16:00"
+                inputVariant="pill"
+                validation={{ status: "not-passed" }}
                 // backgroundColor="light"
             />
         </Page>

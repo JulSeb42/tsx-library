@@ -4,11 +4,11 @@ import React, { forwardRef, useState } from "react"
 import type { ForwardedRef } from "react"
 import classNames from "classnames"
 
-import { Button, ButtonIcon } from "../../../"
 import {
     RightContainer,
     IconComponent,
     ValidationComponent,
+    ButtonRightInputs,
 } from "../../InputComponents"
 
 import { StyledInput, StyledInputContent } from "../styles"
@@ -33,22 +33,6 @@ const PasswordInput = forwardRef(
 
         const getValidationStatus =
             typeof validation === "object" ? validation?.status : validation
-
-        const baseButtonProps = {
-            disabled,
-            onClick: () => setIsVisible(!isVisible),
-            className: "button-password",
-        }
-
-        const buttonProps = {
-            ...baseButtonProps,
-            noPadding: true,
-        }
-
-        const buttonIconProps = {
-            ...baseButtonProps,
-            size: 32,
-        }
 
         return (
             <StyledInputContent
@@ -81,46 +65,40 @@ const PasswordInput = forwardRef(
                 />
 
                 <RightContainer disabled={disabled} variant={variant}>
-                    {isVisible ? (
-                        button?.iconHide ? (
-                            <ButtonIcon
-                                icon={button.iconHide}
-                                type="button"
-                                color="primary"
-                                variant="transparent"
-                                {...buttonIconProps}
-                            />
-                        ) : (
-                            <Button
-                                type="button"
-                                color="primary"
-                                variant="transparent"
-                                {...buttonProps}
-                            >
-                                {button?.textHide || "Hide"}
-                            </Button>
-                        )
-                    ) : button?.iconShow ? (
-                        <ButtonIcon
-                            icon={button.iconShow}
-                            type="button"
-                            color="primary"
-                            variant="transparent"
-                            {...buttonIconProps}
-                        />
-                    ) : (
-                        <Button
-                            type="button"
-                            color="primary"
-                            variant="transparent"
-                            {...buttonProps}
-                        >
-                            {button?.textShow || "Show"}
-                        </Button>
-                    )}
-
                     {validation && (
                         <ValidationComponent validation={validation} />
+                    )}
+
+                    {isVisible ? (
+                        button?.iconHide ? (
+                            <ButtonRightInputs
+                                icon={button?.iconHide}
+                                onClick={() => setIsVisible(!isVisible)}
+                                disabled={disabled}
+                                className="button-password"
+                            />
+                        ) : (
+                            <ButtonRightInputs
+                                text={button?.textHide || "Hide"}
+                                onClick={() => setIsVisible(!isVisible)}
+                                disabled={disabled}
+                                className="button-password"
+                            />
+                        )
+                    ) : button?.iconShow ? (
+                        <ButtonRightInputs
+                            icon={button?.iconShow}
+                            onClick={() => setIsVisible(!isVisible)}
+                            disabled={disabled}
+                            className="button-password"
+                        />
+                    ) : (
+                        <ButtonRightInputs
+                            text={button?.textShow || "Show"}
+                            onClick={() => setIsVisible(!isVisible)}
+                            disabled={disabled}
+                            className="button-password"
+                        />
                     )}
                 </RightContainer>
             </StyledInputContent>

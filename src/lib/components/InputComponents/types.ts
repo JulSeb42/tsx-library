@@ -40,3 +40,21 @@ export interface IconInputProps {
     icon?: string
     iconSize?: number
 }
+
+interface ButtonRightPropsBase {
+    onClick?: () => void
+    disabled?: boolean
+    className?: string
+}
+
+interface ButtonRightContent1 extends ButtonRightPropsBase {
+    icon: string | JSX.Element
+    text?: never
+}
+
+interface ButtonRightContent2 extends ButtonRightPropsBase {
+    icon?: never
+    text: string
+}
+
+export type ButtonRightProps = ButtonRightContent1 | ButtonRightContent2

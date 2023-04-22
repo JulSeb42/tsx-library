@@ -4,9 +4,13 @@ import React, { forwardRef, useRef } from "react"
 import type { ForwardedRef } from "react"
 import classNames from "classnames"
 
-import { ButtonIcon, Key, useKeyPress } from "../../../"
+import { Key, useKeyPress } from "../../../"
 import { CloseIcon } from "../../../icons"
-import { RightContainer, IconComponent } from "../../InputComponents"
+import {
+    RightContainer,
+    IconComponent,
+    ButtonRightInputs,
+} from "../../InputComponents"
 
 import { StyledInputContent, StyledInput } from "../styles"
 import type { SearchInputProps } from "../types"
@@ -80,15 +84,11 @@ const SearchInput = forwardRef(
 
                 <RightContainer disabled={disabled} variant={variant}>
                     {typeof value === "string" && value.length > 0 && (
-                        <ButtonIcon
+                        <ButtonRightInputs
                             icon={iconClear || <CloseIcon size={20} />}
-                            variant="transparent"
-                            type="button"
-                            size={24}
                             onClick={clearSearch}
                             disabled={disabled}
-                            color="primary"
-                            className="button-clear"
+                            className="clear-button"
                         />
                     )}
 

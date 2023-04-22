@@ -60,6 +60,7 @@ export interface DateInputProps
         ValidationComponentProps,
         InputHTMLAttributes<HTMLInputElement> {
     type?: "date" | "datetime-local" | "month" | "week"
+    iconCalendar?: string | JSX.Element
 }
 
 export interface FileInputProps
@@ -141,6 +142,7 @@ export interface TimeInputProps
         IconInputProps,
         InputHTMLAttributes<HTMLInputElement> {
     type?: "time"
+    iconClock?: string | JSX.Element
 }
 
 export type InputProps =

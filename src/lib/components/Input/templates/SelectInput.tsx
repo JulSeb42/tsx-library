@@ -4,9 +4,8 @@ import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 import classNames from "classnames"
 
-import { Icon } from "../../../"
-import { ChevronDownIcon } from "../../../icons"
-import { RightContainer } from "../../InputComponents"
+import { CaretDownIcon } from "../../../icons"
+import { RightContainer, ButtonRightInputs } from "../../InputComponents"
 
 import { StyledInput, StyledInputContent } from "../styles"
 import type { SelectInputProps } from "../types"
@@ -23,17 +22,15 @@ const SelectInput = forwardRef(
             className,
             ...rest
         }: SelectInputProps,
-        ref?: ForwardedRef<HTMLInputElement>
+        ref?: ForwardedRef<HTMLDivElement>
     ) => {
-        const iconColor = disabled ? "gray" : "primary"
-
         return (
             <StyledInputContent
                 className={classNames("input-content", className)}
+                ref={ref}
             >
                 <StyledInput
                     as="select"
-                    ref={ref}
                     disabled={disabled}
                     data-variant={variant}
                     data-background={backgroundColor}
@@ -47,24 +44,11 @@ const SelectInput = forwardRef(
                 </StyledInput>
 
                 <RightContainer disabled={disabled} variant={variant}>
-                    {iconSelect ? (
-                        typeof iconSelect === "string" ? (
-                            <Icon
-                                src={iconSelect}
-                                size={16}
-                                color={iconColor}
-                                className="icon-select"
-                            />
-                        ) : (
-                            iconSelect
-                        )
-                    ) : (
-                        <ChevronDownIcon
-                            size={16}
-                            color={iconColor}
-                            className="icon-select"
-                        />
-                    )}
+                    <ButtonRightInputs
+                        icon={iconSelect || <CaretDownIcon size={16} />}
+                        disabled={disabled}
+                        className="icon-select"
+                    />
                 </RightContainer>
             </StyledInputContent>
         )
