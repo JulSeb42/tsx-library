@@ -1,127 +1,99 @@
 /*=============================================== Datepicker styles ===============================================*/
 
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
 import {
-    Spacers,
-    Radiuses,
     Breakpoints,
+    FontSizes,
+    FontWeights,
+    Mixins,
+    Radiuses,
+    Spacers,
     ThemeDark,
     ThemeLight,
-    FontSizes,
-    Mixins,
 } from "../../"
 import { InputBaseMixin } from "../InputComponents"
-import type {
-    ColorsHoverTypes,
-    ShadowsTypes,
-    ValidationTypes,
-} from "../../types"
-import type {
-    InputBackgroundTypes,
-    InputVariantTypes,
-} from "../InputComponents/types"
-import type { ListDirectionTypes } from "../ListInputs/types"
 
 import { setDefaultTheme } from "../../utils"
 
 const BUTTON_SIZE = 32
 const BUTTON_MOBILE = 24
 
-const DatepickerContainer = styled.div<{
-    disabled?: boolean
-    $isOpen: boolean
-}>`
+const DatepickerContainer = styled.div`
     position: relative;
     width: 100%;
     height: ${BUTTON_SIZE}px;
-    cursor: ${({ disabled }) => (disabled ? "not-allowed" : "default")};
-    z-index: ${({ $isOpen }) => ($isOpen ? 30 : 0)};
+    cursor: default;
+    z-index: 0;
+
+    &.open {
+        z-index: 30;
+    }
+
+    &.disabled {
+        cursor: not-allowed;
+    }
 `
 
-const Selected = styled.span<{
-    $isOpen?: boolean
-    $accentColor?: ColorsHoverTypes
-    $disabled?: boolean
-    $backgroundColor?: InputBackgroundTypes
-    $validation?: ValidationTypes
-    $hasIcon?: boolean
-    $variant?: InputVariantTypes
-}>`
-    ${InputBaseMixin};
+const Selected = styled.button`
+    font-weight: ${FontWeights.Regular};
+    cursor: pointer;
     ${Mixins.Flexbox({
         $alignItems: "center",
         $justifyContent: "space-between",
     })};
-    cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
+    ${InputBaseMixin};
+
+    &.disabled {
+        cursor: not-allowed;
+    }
 `
 
-const StyledDatepicker = styled.div<{
-    $accentColor?: ColorsHoverTypes
-    $isOpen?: boolean
-    $calendarDirection?: ListDirectionTypes
-    $variant?: "bordered" | "shadow"
-    $shadow?: ShadowsTypes
-    $backgroundColor?: InputBackgroundTypes
-    $validation?: ValidationTypes
-}>`
+const StyledDatepicker = styled.div`
     border-radius: ${Radiuses.M};
     width: 100%;
     max-width: 400px;
     overflow: hidden;
-    display: ${({ $isOpen }) => ($isOpen ? "block" : "none")};
+    display: none;
     position: absolute;
     left: 0;
     overflow-x: scroll;
-    ${Mixins.HideScrollbar};
+    border: 1px solid ${({ theme }) => theme.Primary500};
+    ${Mixins.HideScrollbar}
 
-    ${({ $calendarDirection }) =>
-        $calendarDirection === "up"
-            ? css`
-                  bottom: ${BUTTON_SIZE}px;
-              `
-            : css`
-                  top: ${BUTTON_SIZE}px;
-              `}
+    &.open {
+        display: block;
+    }
 
-    ${({ $variant, $accentColor, $validation, $shadow, $isOpen }) =>
-        $variant === "bordered"
-            ? css`
-                  border: 1px solid
-                      ${({ theme }) =>
-                          $validation === "not-passed"
-                              ? theme.Danger500
-                              : theme.AllColors({ $color: $accentColor })};
-              `
-            : $variant === "shadow" &&
-              css`
-                  ${$isOpen ? Mixins.Shadow({ $shadow: $shadow }) : ""}
-              `}
+    &[data-direction="up"] {
+        bottom: ${BUTTON_SIZE}px;
+    }
+
+    &[data-direction="bottom"] {
+        top: ${BUTTON_SIZE}px;
+    }
+
+    &[data-validation="not-passed"] {
+        border-color: ${({ theme }) => theme.Danger500};
+    }
 `
 
-const Header = styled.div<{
-    $accentColor?: ColorsHoverTypes
-    $validation?: ValidationTypes
-    $backgroundColor?: InputBackgroundTypes
-}>`
+const Header = styled.div`
     padding: ${Spacers.XS};
     ${Mixins.Flexbox({
         $alignItems: "center",
         $justifyContent: "space-between",
     })};
     text-align: center;
-    background-color: ${({ theme, $accentColor, $validation }) =>
-        $validation === "not-passed"
-            ? theme.Danger500
-            : theme.AllColors({ $color: $accentColor })};
-    color: ${({ theme, $accentColor }) =>
-        $accentColor === "white" ? theme.Primary500 : theme.Background};
+    background-color: ${({ theme }) => theme.Primary500};
+    color: ${({ theme }) => theme.Background};
+
+    &[data-validation="not-passed"] {
+        background-color: ${({ theme }) => theme.Danger500};
+    }
 `
 
-const NavButton = styled.button<{
-    $accentColor?: ColorsHoverTypes
-    $validation?: ValidationTypes
-}>`
+const NavButton = styled.button`
     width: ${BUTTON_SIZE}px;
     height: ${BUTTON_SIZE}px;
     ${Mixins.Flexbox({
@@ -137,17 +109,25 @@ const NavButton = styled.button<{
 
     @media ${Breakpoints.Hover} {
         &:not(:disabled):hover {
-            background-color: ${({ theme, $accentColor, $validation }) =>
-                $validation === "not-passed"
-                    ? theme.Danger300
-                    : theme.ColorsHoverHover({ $color: $accentColor })};
+            background-color: ${({ theme }) =>
+                theme.ColorsHoverHover({ $color: "primary" })};
         }
 
         &:not(:disabled):active {
-            background-color: ${({ theme, $accentColor, $validation }) =>
-                $validation === "not-passed"
-                    ? theme.Danger600
-                    : theme.ColorsHoverActive({ $color: $accentColor })};
+            background-color: ${({ theme }) =>
+                theme.ColorsHoverActive({ $color: "primary" })};
+        }
+    }
+
+    &[data-validation="not-passed"] {
+        &:not(:disabled):hover {
+            background-color: ${({ theme }) =>
+                theme.ColorsHoverHover({ $color: "danger" })};
+        }
+
+        &:not(:disabled):active {
+            background-color: ${({ theme }) =>
+                theme.ColorsHoverActive({ $color: "danger" })};
         }
     }
 
@@ -161,84 +141,102 @@ const Empty = styled.span`
     height: ${BUTTON_SIZE}px;
 `
 
-const DaysContainer = styled.div<{ $backgroundColor?: InputBackgroundTypes }>`
+const DaysContainer = styled.div`
     ${Mixins.Grid({
         $col: 7,
         $gap: "xs",
         $padding: "xs",
         $justifyItems: "center",
     })};
-    background-color: ${({ $backgroundColor, theme }) =>
-        $backgroundColor === "dark"
-            ? ThemeDark.Background
-            : $backgroundColor === "light"
-            ? ThemeLight.Background
-            : theme.Background};
-    color: ${({ $backgroundColor, theme }) =>
-        $backgroundColor === "dark"
-            ? ThemeDark.Font
-            : $backgroundColor === "light"
-            ? ThemeLight.Font
-            : theme.Font};
+    background-color: ${({ theme }) => theme.Background};
+    color: ${({ theme }) => theme.Font};
+
+    &[data-background="light"] {
+        background-color: ${ThemeLight.Background};
+        color: ${ThemeLight.Font};
+    }
+
+    &[data-background="dark"] {
+        background-color: ${ThemeDark.Background};
+        color: ${ThemeDark.Font};
+    }
 `
 
-const Day = styled.button<{
-    $isToday?: boolean
-    $isActive?: boolean
-    $accentColor?: ColorsHoverTypes
-    $validation?: ValidationTypes
-    $backgroundColor?: InputBackgroundTypes
-}>`
+const Day = styled.button`
     width: ${BUTTON_SIZE}px;
     height: ${BUTTON_SIZE}px;
     padding: 0;
-    border: 1px solid
-        ${({ $isToday, $accentColor, theme, $validation }) =>
-            $isToday
-                ? $validation === "not-passed"
-                    ? theme.Danger500
-                    : theme.ColorsHoverDefault({ $color: $accentColor })
-                : "transparent"};
+    border: 1px solid transparent;
     border-radius: ${Radiuses.Circle};
-    background-color: ${({ $isActive, $accentColor, theme, $validation }) =>
-        $isActive
-            ? $validation === "not-passed"
-                ? theme.Danger500
-                : theme.ColorsHoverDefault({ $color: $accentColor })
-            : "transparent"};
-    color: ${({ $isActive, theme, $backgroundColor }) =>
-        $isActive
-            ? $backgroundColor === "dark"
-                ? ThemeDark.Background
-                : $backgroundColor === "light"
-                ? ThemeLight.Background
-                : theme.Background
-            : $backgroundColor === "dark"
-            ? ThemeDark.Font
-            : $backgroundColor === "light"
-            ? ThemeLight.Font
-            : theme.Font};
+    background-color: transparent;
+    color: ${({ theme }) => theme.Font};
     font-size: ${FontSizes.Small};
+
+    &.today {
+        border-color: ${({ theme }) =>
+            theme.ColorsHoverDefault({ $color: "primary" })};
+    }
+
+    &.active {
+        background-color: ${({ theme }) =>
+            theme.ColorsHoverDefault({ $color: "primary" })};
+        color: ${({ theme }) => theme.Background};
+    }
 
     @media ${Breakpoints.Hover} {
         &:not(:disabled):hover {
-            background-color: ${({ theme, $accentColor, $validation }) =>
-                $validation === "not-passed"
-                    ? theme.Danger300
-                    : theme.ColorsHoverHover({ $color: $accentColor })};
-            color: ${({ theme, $backgroundColor }) =>
-                $backgroundColor === "dark"
-                    ? ThemeDark.Background
-                    : $backgroundColor === "light"
-                    ? ThemeLight.Background
-                    : theme.Background};
+            background-color: ${({ theme }) =>
+                theme.ColorsHoverHover({ $color: "primary" })};
+            color: ${({ theme }) => theme.Background};
         }
 
         &:not(:disabled):active {
-            background-color: ${({ theme, $accentColor, $validation }) =>
-                $validation === "not-passed"
-                    ? theme.Danger600
-                    : theme.ColorsHoverActive({ $color: $accentColor })};
+            background-color: ${({ theme }) =>
+                theme.ColorsHoverActive({ $color: "primary" })};
+        }
+    }
+
+    &[data-validation="not-passed"] {
+        &.today {
+            border-color: ${({ theme }) =>
+                theme.ColorsHoverDefault({ $color: "danger" })};
+        }
+
+        &.active {
+            background-color: ${({ theme }) =>
+                theme.ColorsHoverDefault({ $color: "danger" })};
+        }
+
+        @media ${Breakpoints.Hover} {
+            &:not(:disabled):hover {
+                background-color: ${({ theme }) =>
+                    theme.ColorsHoverHover({ $color: "danger" })};
+            }
+
+            &:not(:disabled):active {
+                background-color: ${({ theme }) =>
+                    theme.ColorsHoverActive({ $color: "danger" })};
+            }
+        }
+    }
+
+    &[data-background="light"] {
+        color: ${ThemeLight.Font};
+
+        &[data-validation="not-passed"].active {
+            color: ${ThemeLight.Background};
+        }
+    }
+
+    &[data-background="dark"] {
+        color: ${ThemeDark.Font};
+
+        &[data-validation="not-passed"].active {
+            color: ${ThemeDark.Background};
+        }
+
+        &.active {
+            color: ${ThemeDark.Background};
         }
     }
 

@@ -2,16 +2,15 @@
 
 import type { InputHTMLAttributes } from "react"
 
-import type { ShadowsTypes } from "../../types"
 import type {
     InputBackgroundTypes,
-    ValidationComponentProps,
     InputVariantTypes,
+    ValidationComponentProps,
 } from "../InputComponents/types"
 import type { InputBaseProps } from "../InputContainer/types"
 import type { ListDirectionTypes } from "../ListInputs/types"
 
-interface DatepickerPropsBase
+export interface DatepickerProps
     extends InputHTMLAttributes<HTMLInputElement>,
         InputBaseProps,
         ValidationComponentProps {
@@ -56,19 +55,7 @@ interface DatepickerPropsBase
     inputVariant?: InputVariantTypes
 }
 
-interface DatepickerList1 extends DatepickerPropsBase {
-    calendarVariant?: "bordered"
-    calendarShadow?: never
-}
-
-interface DatepickerList2 extends DatepickerPropsBase {
-    calendarVariant?: "shadow"
-    calendarShadow?: ShadowsTypes
-}
-
-export type DatepickerProps = DatepickerList1 | DatepickerList2
-
 export type CalendarProps = DatepickerProps & {
-    isOpen?: boolean
+    isOpen: boolean
     setIsOpen: (isOpen: boolean) => void
 }

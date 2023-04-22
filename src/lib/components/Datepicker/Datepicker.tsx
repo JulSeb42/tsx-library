@@ -1,21 +1,25 @@
 /*=============================================== Datepicker component ===============================================*/
 
-import React, { useState, useRef } from "react"
+import { useRef, useState } from "react"
+import classNames from "classnames"
 
-import { convertDateShort, useClickOutside, Icon, Flexbox } from "../../"
+import { Icon, convertDateShort, useClickOutside } from "../../"
 import { CalendarIcon } from "../../icons"
-import Calendar from "./Calendar"
-import { ValidationComponent, IconComponent } from "../InputComponents"
+import {
+    IconComponent,
+    ValidationComponent,
+    RightContainer,
+} from "../InputComponents"
 import { InputContainer } from "../InputContainer"
+import Calendar from "./Calendar"
 
-import * as Styles from "./styles"
+import { DatepickerContainer, Selected } from "./styles"
 import type { DatepickerProps } from "./types"
 
 const Datepicker = ({
     minDate,
     maxDate,
     texts,
-    accentColor = "primary",
     selectedDate,
     setSelectedDate,
     icons,
@@ -24,13 +28,13 @@ const Datepicker = ({
     backgroundColor,
     disabled,
     calendarDirection = "down",
-    calendarShadow = "s",
-    calendarVariant = "bordered",
     label,
     helper,
     helperBottom,
     iconSize,
     inputVariant,
+    className,
+    tabIndex,
     ...rest
 }: DatepickerProps) => {
     const getValidationStatus =
@@ -41,58 +45,34 @@ const Datepicker = ({
     const onClickOutside = () => setIsOpen(false)
     useClickOutside(el, onClickOutside)
 
-    const propsCalendar = {
-        id: id,
-        selectedDate: selectedDate,
-        setSelectedDate: setSelectedDate,
-        minDate: minDate,
-        maxDate: maxDate,
-        texts: texts,
-        accentColor: accentColor,
-        icons: icons,
-        isOpen: isOpen,
-        calendarDirection: calendarDirection,
-        setIsOpen: setIsOpen,
-        validation: validation,
-    }
-
-    const calendarFn = () =>
-        calendarVariant === "bordered" ? (
-            <Calendar
-                backgroundColor={backgroundColor}
-                calendarVariant={calendarVariant}
-                {...propsCalendar}
-            />
-        ) : (
-            <Calendar
-                backgroundColor={backgroundColor}
-                calendarVariant={calendarVariant}
-                calendarShadow={calendarShadow}
-                {...propsCalendar}
-            />
-        )
+    const iconColor = disabled ? "gray" : "primary"
 
     const inputFn = () => (
-        <Styles.DatepickerContainer
-            $isOpen={isOpen}
+        <DatepickerContainer
             ref={el}
             disabled={disabled}
+            className={classNames(
+                { open: isOpen },
+                "datepicker-container",
+                !label && !helper && !helperBottom && className
+            )}
             {...rest}
         >
-            <Styles.Selected
-                onClick={() => (!disabled ? setIsOpen(!isOpen) : undefined)}
-                $disabled={disabled}
-                $accentColor={accentColor}
-                $backgroundColor={backgroundColor}
-                $isOpen={isOpen}
-                $validation={getValidationStatus}
-                $hasIcon={!!icons?.icon}
-                $variant={inputVariant}
+            <Selected
+                onClick={() => (!disabled ? setIsOpen(true) : undefined)}
+                onFocus={() => setIsOpen(true)}
+                tabIndex={tabIndex}
+                data-variant={inputVariant}
+                data-validation={getValidationStatus}
+                data-background={backgroundColor}
+                className={classNames(
+                    { disabled: disabled },
+                    { "with-icon": !!icons?.icon }
+                )}
             >
                 {icons?.icon && (
                     <IconComponent
                         icon={icons.icon}
-                        accentColor={accentColor}
                         disabled={disabled}
                         validation={getValidationStatus}
                         size={iconSize}
@@ -101,32 +81,42 @@ const Datepicker = ({
 
                 {convertDateShort(selectedDate)}
 
-                <Flexbox as="span" gap="xs" alignItems="center">
+                <RightContainer>
                     {icons?.calendar ? (
                         typeof icons?.calendar === "string" ? (
                             <Icon
                                 src={icons.calendar}
                                 size={16}
-                                color={disabled ? "gray" : accentColor}
+                                color={iconColor}
                             />
                         ) : (
                             icons?.calendar
                         )
                     ) : (
-                        <CalendarIcon
-                            size={16}
-                            color={disabled ? "gray" : accentColor}
-                        />
+                        <CalendarIcon size={16} color={iconColor} />
                     )}
 
                     {validation && (
                         <ValidationComponent validation={validation} />
                     )}
-                </Flexbox>
-            </Styles.Selected>
+                </RightContainer>
+            </Selected>
 
-            {calendarFn()}
-        </Styles.DatepickerContainer>
+            <Calendar
+                id={id}
+                selectedDate={selectedDate}
+                setSelectedDate={setSelectedDate}
+                minDate={minDate}
+                maxDate={maxDate}
+                texts={texts}
+                icons={icons}
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                calendarDirection={calendarDirection}
+                validation={validation}
+                backgroundColor={backgroundColor}
+            />
+        </DatepickerContainer>
     )
 
     return label || helper || helperBottom ? (
@@ -135,7 +125,7 @@ const Datepicker = ({
             label={label}
             helper={helper}
             helperBottom={helperBottom}
-            accentColor={accentColor}
+            className={className}
         >
             {inputFn()}
         </InputContainer>

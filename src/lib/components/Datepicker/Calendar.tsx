@@ -1,28 +1,33 @@
 /*=============================================== Calendar component ===============================================*/
 
-import React, { useState } from "react"
 import type { MouseEvent } from "react"
+import { useState } from "react"
+import classNames from "classnames"
 
 import { Icon, Text, uuid } from "../../"
 import { ChevronLeftIcon, ChevronRightIcon } from "../../icons"
 import { monthsEn, weekDaysEn } from "./data"
 
-import * as Styles from "./styles"
+import {
+    Day,
+    DaysContainer,
+    Empty,
+    Header,
+    NavButton,
+    StyledDatepicker,
+} from "./styles"
 import type { CalendarProps } from "./types"
 
 const Calendar = ({
     minDate,
     maxDate,
     texts,
-    accentColor = "primary",
     selectedDate,
     setSelectedDate,
     icons,
     isOpen,
     calendarDirection,
     setIsOpen,
-    calendarVariant,
-    calendarShadow,
     validation,
     backgroundColor,
 }: CalendarProps) => {
@@ -124,66 +129,81 @@ const Calendar = ({
     }
 
     return (
-        <Styles.StyledDatepicker
-            $accentColor={accentColor}
-            $isOpen={isOpen}
-            $calendarDirection={calendarDirection}
-            $variant={calendarVariant}
-            $shadow={calendarShadow}
-            $validation={getValidationStatus}
-            $backgroundColor={backgroundColor}
+        <StyledDatepicker
+            className={classNames(
+                { open: isOpen },
+                "datepicker-calendar-container"
+            )}
+            data-direction={calendarDirection}
+            data-validation={getValidationStatus}
         >
-            <Styles.Header
-                $accentColor={accentColor}
-                $validation={getValidationStatus}
-                $backgroundColor={backgroundColor}
+            <Header
+                data-validation={getValidationStatus}
+                className="datepicker-header"
             >
-                <Styles.NavButton
+                <NavButton
                     onClick={handlePrevMonth}
                     disabled={
                         minDate && minDate?.getTime() > getTimeFromState(1, 0)
                     }
-                    $accentColor={accentColor}
-                    $validation={getValidationStatus}
                     type="button"
+                    data-validation={getValidationStatus}
+                    className="datepicker-nav-button datepicker-nav-button-prev"
                 >
                     {icons?.prev ? (
                         typeof icons?.prev === "string" ? (
-                            <Icon src={icons.prev} size={24} />
+                            <Icon
+                                src={icons.prev}
+                                size={24}
+                                className="datepicker-nav-icon datepicker-nav-icon-prev"
+                            />
                         ) : (
                             icons?.prev
                         )
                     ) : (
-                        <ChevronLeftIcon size={24} />
+                        <ChevronLeftIcon
+                            size={24}
+                            className="datepicker-nav-icon datepicker-nav-icon-prev"
+                        />
                     )}
-                </Styles.NavButton>
+                </NavButton>
 
-                <Text tag="h6">
+                <Text tag="h6" className="datepicker-nav-current-month-year">
                     {monthArr[currentMonth]} {currentYear}
                 </Text>
 
-                <Styles.NavButton
+                <NavButton
                     onClick={handleNextMonth}
                     disabled={
                         maxDate && maxDate?.getTime() < getTimeFromState(0, 1)
                     }
-                    $accentColor={accentColor}
-                    $validation={getValidationStatus}
                     type="button"
+                    data-validation={getValidationStatus}
+                    className="datepicker-nav-button datepicker-nav-button-next"
                 >
                     {icons?.next ? (
                         typeof icons?.next === "string" ? (
-                            <Icon src={icons.next} size={24} />
+                            <Icon
+                                src={icons.next}
+                                size={24}
+                                className="datepicker-nav-icon datepicker-nav-icon-next"
+                            />
                         ) : (
                             icons?.next
                         )
                     ) : (
-                        <ChevronRightIcon size={24} />
+                        <ChevronRightIcon
+                            size={24}
+                            className="datepicker-nav-icon datepicker-nav-icon-next"
+                        />
                     )}
-                </Styles.NavButton>
-            </Styles.Header>
+                </NavButton>
+            </Header>
 
-            <Styles.DaysContainer $backgroundColor={backgroundColor}>
+            <DaysContainer
+                data-background={backgroundColor}
+                className="datepicker-days-container"
+            >
                 {weekDaysArr.map(day => (
                     <Text tag="strong" key={uuid()}>
                         {day.slice(0, 3)}
@@ -191,17 +211,42 @@ const Calendar = ({
                 ))}
 
                 {getFirstDayOfTheMonth() === "Tuesday" ? (
-                    <Styles.Empty />
+                    <Empty className="datepicker-day datepicker-day-empty" />
                 ) : getFirstDayOfTheMonth() === "Wednesday" ? (
-                    [...Array(2)].map(_ => <Styles.Empty key={uuid()} />)
+                    [...Array(2)].map(_ => (
+                        <Empty
+                            className="datepicker-day datepicker-day-empty"
+                            key={uuid()}
+                        />
+                    ))
                 ) : getFirstDayOfTheMonth() === "Thursday" ? (
-                    [...Array(3)].map(_ => <Styles.Empty key={uuid()} />)
+                    [...Array(3)].map(_ => (
+                        <Empty
+                            className="datepicker-day datepicker-day-empty"
+                            key={uuid()}
+                        />
+                    ))
                 ) : getFirstDayOfTheMonth() === "Friday" ? (
-                    [...Array(4)].map(_ => <Styles.Empty key={uuid()} />)
+                    [...Array(4)].map(_ => (
+                        <Empty
+                            className="datepicker-day datepicker-day-empty"
+                            key={uuid()}
+                        />
+                    ))
                 ) : getFirstDayOfTheMonth() === "Saturday" ? (
-                    [...Array(5)].map(_ => <Styles.Empty key={uuid()} />)
+                    [...Array(5)].map(_ => (
+                        <Empty
+                            className="datepicker-day datepicker-day-empty"
+                            key={uuid()}
+                        />
+                    ))
                 ) : getFirstDayOfTheMonth() === "Sunday" ? (
-                    [...Array(6)].map(_ => <Styles.Empty key={uuid()} />)
+                    [...Array(6)].map(_ => (
+                        <Empty
+                            className="datepicker-day datepicker-day-empty"
+                            key={uuid()}
+                        />
+                    ))
                 ) : (
                     ""
                 )}
@@ -221,13 +266,9 @@ const Calendar = ({
                         : null
 
                     return (
-                        <Styles.Day
+                        <Day
                             id={`day-${day}`}
                             onClick={handleSelect}
-                            $isActive={formatedDate === formatedSelected}
-                            $isToday={formatedDate === today}
-                            $accentColor={accentColor}
-                            $validation={getValidationStatus}
                             disabled={
                                 (minDate &&
                                     minDate?.getTime() >
@@ -236,16 +277,22 @@ const Calendar = ({
                                     maxDate?.getTime() <
                                         getTimeFromState(day, 0))
                             }
-                            $backgroundColor={backgroundColor}
                             type="button"
+                            className={classNames(
+                                { today: formatedDate === today },
+                                { active: formatedDate === formatedSelected },
+                                "datepicker-day"
+                            )}
+                            data-background={backgroundColor}
+                            data-validation={getValidationStatus}
                             key={uuid()}
                         >
                             {day}
-                        </Styles.Day>
+                        </Day>
                     )
                 })}
-            </Styles.DaysContainer>
-        </Styles.StyledDatepicker>
+            </DaysContainer>
+        </StyledDatepicker>
     )
 }
 
