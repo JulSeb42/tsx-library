@@ -153,11 +153,18 @@ const Timepicker = ({
         <StyledTimepicker
             onClick={() => !disabled && setIsOpen(!isOpen)}
             ref={el}
+            className={classNames(
+                "timepicker-container",
+                !label && !helper && !helperBottom && className
+            )}
             {...rest}
         >
             <Selected
                 id={id}
-                className={classNames({ "with-icon": !!icon })}
+                className={classNames(
+                    { "with-icon": !!icon },
+                    "input input-timepicker"
+                )}
                 data-variant={inputVariant}
                 data-background={backgroundColor}
                 data-validation={getValidationStatus}
@@ -180,12 +187,21 @@ const Timepicker = ({
                 <RightContainer>
                     {clockIcon ? (
                         typeof clockIcon === "string" ? (
-                            <Icon src={clockIcon} size={16} color={iconColor} />
+                            <Icon
+                                src={clockIcon}
+                                size={16}
+                                color={iconColor}
+                                className="timepicker-icon-clock"
+                            />
                         ) : (
                             clockIcon
                         )
                     ) : (
-                        <ClockIcon size={16} color={iconColor} />
+                        <ClockIcon
+                            size={16}
+                            color={iconColor}
+                            className="timepicker-icon-clock"
+                        />
                     )}
                 </RightContainer>
             </Selected>
