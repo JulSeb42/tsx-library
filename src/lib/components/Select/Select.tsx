@@ -4,11 +4,13 @@ import React, { useRef, useState, useEffect } from "react"
 import classNames from "classnames"
 
 import { uuid, useClickOutside } from "../../"
-import { ListInputs, ListItem, Chevron } from "../ListInputs"
+import { ListInputs, ListItem } from "../ListInputs"
 import { InputContainer } from "../InputContainer"
+import { ButtonRightInputs, RightContainer } from "../InputComponents"
 
 import { StyledSelect, Selected } from "./styles"
 import type { SelectProps } from "./types"
+import { CaretDownIcon } from "../../icons"
 
 const Select = ({
     as,
@@ -23,7 +25,7 @@ const Select = ({
     backgroundColor,
     listDirection,
     variant = "rounded",
-    iconChevron,
+    iconCaret,
     className,
     tabIndex,
     ...rest
@@ -160,7 +162,20 @@ const Select = ({
             >
                 {selected}
 
-                {items && <Chevron icon={iconChevron} isOpen={isOpen} />}
+                {items && (
+                    <RightContainer
+                        variant={variant}
+                        disabled={disabled}
+                        className="select-icon-container"
+                    >
+                        <ButtonRightInputs
+                            icon={iconCaret || <CaretDownIcon size={16} />}
+                            onClick={handleOpen}
+                            disabled={disabled}
+                            className="select-icon"
+                        />
+                    </RightContainer>
+                )}
             </Selected>
 
             <ListInputs

@@ -21,6 +21,6 @@ export interface SelectProps
     backgroundColor?: InputBackgroundTypes
     listDirection?: ListDirectionTypes
     variant?: InputVariantTypes
-    iconChevron?: string | JSX.Element
+    iconCaret?: string | JSX.Element
     tabIndex?: number
 }

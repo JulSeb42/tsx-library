@@ -4,12 +4,8 @@ import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 import classNames from "classnames"
 
-import { StyledListInputs, Item, StyledChevronDown, StyledIcon } from "./styles"
-import type {
-    ListInputsProps,
-    ListInputsItemProps,
-    ListInputsChevronProps,
-} from "./types"
+import { StyledListInputs, Item } from "./styles"
+import type { ListInputsProps, ListInputsItemProps } from "./types"
 
 export const ListInputs = forwardRef(
     (
@@ -66,37 +62,3 @@ export const ListItem = forwardRef(
         </Item>
     )
 )
-
-export const Chevron = ({
-    isOpen,
-    icon,
-    withAnimation,
-    className,
-}: ListInputsChevronProps) => {
-    if (icon) {
-        return typeof icon === "string" ? (
-            <StyledIcon
-                src={icon}
-                className={classNames(
-                    { "with-animation": withAnimation },
-                    { open: isOpen },
-                    "chevron-icon",
-                    className
-                )}
-            />
-        ) : (
-            icon
-        )
-    }
-
-    return (
-        <StyledChevronDown
-            className={classNames(
-                { "with-animation": withAnimation },
-                { open: isOpen },
-                "chevron-icon",
-                className
-            )}
-        />
-    )
-}
