@@ -42,6 +42,7 @@ const TimeInput = forwardRef(
                         validation={getValidationStatus}
                         size={iconSize}
                         variant={variant}
+                        backgroundColor={backgroundColor}
                     />
                 )}
 

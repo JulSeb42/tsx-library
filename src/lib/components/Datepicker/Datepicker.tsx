@@ -76,6 +76,8 @@ const Datepicker = ({
                         disabled={disabled}
                         validation={getValidationStatus}
                         size={iconSize}
+                        variant={inputVariant}
+                        backgroundColor={backgroundColor}
                     />
                 )}
 

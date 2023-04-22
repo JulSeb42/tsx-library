@@ -59,6 +59,7 @@ const SearchInput = forwardRef(
                         disabled={disabled}
                         size={iconSize}
                         variant={variant}
+                        backgroundColor={backgroundColor}
                     />
                 )}
 

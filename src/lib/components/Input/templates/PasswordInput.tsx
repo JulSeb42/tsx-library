@@ -61,6 +61,7 @@ const PasswordInput = forwardRef(
                         validation={getValidationStatus}
                         size={iconSize}
                         variant={variant}
+                        backgroundColor={backgroundColor}
                     />
                 )}
 

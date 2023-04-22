@@ -20,6 +20,8 @@ const DatepickerPage = () => {
                 icons={{
                     icon: "calendar",
                 }}
+                inputVariant="pill"
+                backgroundColor="dark"
             />
 
             {convertDateShort(selectedDate)}
