@@ -1,144 +1,228 @@
 /*=============================================== Timepicker component ===============================================*/
 
 import React, { useState, useRef } from "react"
+import classNames from "classnames"
 
-import { generateNumbers, useClickOutside, formatHour, uuid } from "../../"
+import { useClickOutside, uuid, Icon } from "../../"
 import { InputContainer } from "../InputContainer"
-import { ListItem, ListInputs, Chevron } from "../ListInputs"
-import { IconComponent } from "../InputComponents"
+import { ListItem, ListInputs } from "../ListInputs"
+import { IconComponent, RightContainer } from "../InputComponents"
+import { typeValues } from "../../utils"
+import { ClockIcon } from "../../icons"
 
-import * as Styles from "./styles"
+import { StyledTimepicker, Selected } from "./styles"
 import type { TimepickerProps } from "./types"
 
-const TimepickerFunction = ({
+const Timepicker = ({
     selectedTime,
     setSelectedTime,
-    minTime = 0,
-    maxTime = 24,
-    step = 1,
+    minTime,
+    maxTime,
+    step = "1h",
     backgroundColor,
     icon,
-    chevronIcon,
-    accentColor = "primary",
+    clockIcon,
     validation,
     disabled,
-    listVariant = "bordered",
-    listShadow,
     id,
     listDirection,
     iconSize,
     inputVariant,
+    label,
+    helper,
+    helperBottom,
+    className,
     ...rest
 }: TimepickerProps) => {
     const getValidationStatus =
         typeof validation === "object" ? validation?.status : validation
 
+    const iconColor = getValidationStatus === "not-passed" ? "gray" : "primary"
+
     const [isOpen, setIsOpen] = useState(false)
 
-    const hours = generateNumbers(minTime, maxTime, step)
+    let hours: any[] =
+        step === "30min"
+            ? Object.keys(typeValues.halfTimes)
+            : step === "15min"
+            ? Object.keys(typeValues.quarterTimes)
+            : step === "1min"
+            ? Object.keys(typeValues.allTimes)
+            : Object.keys(typeValues.times)
 
-    const handleTime = (hour: number) => setSelectedTime(hour)
+    if (minTime) {
+        hours = hours.splice(
+            hours.indexOf(hours?.find(found => found === minTime)),
+            hours.length - 1
+        )
+    }
 
-    const el = useRef<HTMLButtonElement>(null)
+    if (maxTime) {
+        hours = hours.splice(0, hours.indexOf(maxTime) + 1)
+    }
+
+    const handleTime = (hour: any) => {
+        setSelectedTime(hour)
+        setIsOpen(false)
+    }
+
+    const el = useRef<HTMLDivElement>(null)
+    const listRef = useRef<HTMLDivElement>(null)
     const onClickOutside = () => setIsOpen(false)
     useClickOutside(el, onClickOutside)
 
-    const hoursMapped = () =>
-        hours.map(hour => (
-            <ListItem
-                isActive={selectedTime === hour && true}
-                onClick={() => handleTime(hour)}
-                backgroundColor={backgroundColor}
-                validation={getValidationStatus}
-                accentColor={accentColor}
-                key={uuid()}
-            >
-                {formatHour(hour)}
-            </ListItem>
-        ))
+    const [cursor, setCursor] = useState<number>(
+        hours?.indexOf(selectedTime) || 0
+    )
 
-    const propsList = {
-        isOpen: isOpen,
-        accentColor: accentColor,
-        backgroundColor: backgroundColor,
-        validation: getValidationStatus,
-        direction: listDirection,
+    const handleKeyNavigation = (e: KeyboardEvent) => {
+        if (isOpen) {
+            if (e.key === "ArrowDown") {
+                if (isOpen) {
+                    e.preventDefault()
+
+                    if (hours?.length) {
+                        const newCursorPosition =
+                            hours?.indexOf(selectedTime) === hours?.length - 1
+                                ? 0
+                                : cursor + 1
+
+                        setCursor(newCursorPosition)
+
+                        setSelectedTime(hours[newCursorPosition])
+
+                        if (cursor === hours?.length - 1) {
+                            listRef?.current?.scrollTo({
+                                top: 0,
+                            })
+                        } else {
+                            listRef?.current?.scrollTo({
+                                top: cursor * 40,
+                            })
+                        }
+                    }
+                }
+            }
+
+            if (e.key === "ArrowUp") {
+                if (isOpen) {
+                    e.preventDefault()
+
+                    const newCursorPosition =
+                        hours?.indexOf(selectedTime) <= 0
+                            ? hours.length - 1
+                            : cursor - 1
+
+                    setCursor(newCursorPosition)
+
+                    setSelectedTime(hours[newCursorPosition])
+
+                    if (newCursorPosition <= 1) {
+                        listRef?.current?.scrollTo({
+                            top: 0,
+                        })
+                    } else if (cursor === 0) {
+                        listRef?.current?.scrollTo({
+                            top: listRef?.current?.scrollHeight,
+                        })
+                    } else {
+                        listRef?.current?.scrollTo({
+                            top: (cursor - 1) * 40,
+                        })
+                    }
+                }
+            }
+
+            if (e.key === "Tab") {
+                if (isOpen) {
+                    e.preventDefault()
+                    setSelectedTime(hours[cursor])
+                    setIsOpen(false)
+                }
+            }
+
+            if (e.key === "Enter") {
+                if (isOpen) {
+                    e.preventDefault()
+                }
+            }
+        }
     }
 
-    const listInput = () =>
-        listVariant === "shadow" ? (
-            <ListInputs {...propsList} variant="shadow" shadow={listShadow}>
-                {hoursMapped()}
-            </ListInputs>
-        ) : (
-            <ListInputs {...propsList} variant="bordered">
-                {hoursMapped()}
-            </ListInputs>
-        )
-
-    return (
-        <Styles.StyledTimepicker
-            $isOpen={isOpen}
+    const timepickerFn = () => (
+        <StyledTimepicker
             onClick={() => !disabled && setIsOpen(!isOpen)}
             ref={el}
-            $disabled={disabled}
             {...rest}
         >
-            <Styles.Selected
-                $backgroundColor={backgroundColor}
-                $validation={getValidationStatus}
-                $isOpen={isOpen}
-                $accentColor={accentColor}
-                $disabled={disabled}
+            <Selected
                 id={id}
-                $hasIcon={!!icon}
-                $variant={inputVariant}
+                className={classNames({ "with-icon": !!icon })}
+                data-variant={inputVariant}
+                data-background={backgroundColor}
+                data-validation={getValidationStatus}
+                onKeyDown={(e: any) => handleKeyNavigation(e)}
+                onFocus={() => setIsOpen(true)}
             >
                 {icon && (
                     <IconComponent
                         icon={icon}
                         disabled={disabled}
-                        accentColor={accentColor}
                         validation={getValidationStatus}
                         size={iconSize}
                         variant={inputVariant}
+                        backgroundColor={backgroundColor}
                     />
                 )}
 
-                {formatHour(selectedTime)}
+                {selectedTime}
 
-                <Chevron
-                    icon={chevronIcon}
-                    color={accentColor}
-                    isOpen={isOpen}
-                />
-            </Styles.Selected>
+                <RightContainer>
+                    {clockIcon ? (
+                        typeof clockIcon === "string" ? (
+                            <Icon src={clockIcon} size={16} color={iconColor} />
+                        ) : (
+                            clockIcon
+                        )
+                    ) : (
+                        <ClockIcon size={16} color={iconColor} />
+                    )}
+                </RightContainer>
+            </Selected>
 
-            {listInput()}
-        </Styles.StyledTimepicker>
+            <ListInputs
+                isOpen={isOpen}
+                backgroundColor={backgroundColor}
+                validation={getValidationStatus}
+                direction={listDirection}
+                ref={listRef}
+            >
+                {hours.map((hour: any) => (
+                    <ListItem
+                        isActive={selectedTime === hour && true}
+                        onClick={() => handleTime(hour)}
+                        backgroundColor={backgroundColor}
+                        validation={getValidationStatus}
+                        key={uuid()}
+                    >
+                        {hour}
+                    </ListItem>
+                ))}
+            </ListInputs>
+        </StyledTimepicker>
     )
-}
 
-const Timepicker = ({
-    id,
-    label,
-    helper,
-    helperBottom,
-    accentColor,
-    ...rest
-}: TimepickerProps) => {
     return label || helper || helperBottom ? (
         <InputContainer
             id={id}
             label={label}
             helper={helper}
             helperBottom={helperBottom}
-            accentColor={accentColor}
         >
-            <TimepickerFunction id={id} accentColor={accentColor} {...rest} />
+            {timepickerFn()}
         </InputContainer>
     ) : (
-        <TimepickerFunction id={id} {...rest} />
+        timepickerFn()
     )
 }
 

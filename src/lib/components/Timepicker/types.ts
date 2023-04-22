@@ -2,12 +2,17 @@
 
 import type { InputHTMLAttributes } from "react"
 
-import type { ShadowsTypes } from "../../types"
 import type {
+    TimepickerHoursTypes,
+    TimepickerHalfHoursTypes,
+    TimepickerQuarterHoursTypes,
+    TimepickerAllTimesTypes,
+} from "../../types"
+import type {
+    IconInputProps,
     InputBackgroundTypes,
     InputVariantTypes,
     ValidationComponentProps,
-    IconInputProps,
 } from "../InputComponents/types"
 import type { InputBaseProps } from "../InputContainer/types"
 import type { ListDirectionTypes } from "../ListInputs/types"
@@ -16,25 +21,46 @@ type TimepickerPropsBase = InputHTMLAttributes<HTMLInputElement> &
     InputBaseProps &
     IconInputProps &
     ValidationComponentProps & {
-        step?: 1 | 0.5
-        chevronIcon?: string
+        clockIcon?: string | JSX.Element
         backgroundColor?: InputBackgroundTypes
         listDirection?: ListDirectionTypes
         inputVariant?: InputVariantTypes
-        minTime?: number
-        maxTime?: number
-        selectedTime: number
-        setSelectedTime: (selectedTime: number) => void
     }
 
-type TimepickerList1 = TimepickerPropsBase & {
-    listVariant?: "bordered"
-    listShadow?: never
+type TimepickerPropsHours = TimepickerPropsBase & {
+    step?: "1h"
+    minTime?: TimepickerHoursTypes
+    maxTime?: TimepickerHoursTypes
+    selectedTime: TimepickerHoursTypes
+    setSelectedTime: (selectedTime: TimepickerHoursTypes) => void
 }
 
-type TimepickerList2 = TimepickerPropsBase & {
-    listVariant?: "shadow"
-    listShadow?: ShadowsTypes
+type TimepickerPropsHalfHours = TimepickerPropsBase & {
+    step?: "30min"
+    minTime?: TimepickerHalfHoursTypes
+    maxTime?: TimepickerHalfHoursTypes
+    selectedTime: TimepickerHalfHoursTypes
+    setSelectedTime: (selectedTime: TimepickerHalfHoursTypes) => void
 }
 
-export type TimepickerProps = TimepickerList1 | TimepickerList2
+type TimepickerPropsQuarterHours = TimepickerPropsBase & {
+    step?: "15min"
+    minTime?: TimepickerQuarterHoursTypes
+    maxTime?: TimepickerQuarterHoursTypes
+    selectedTime: TimepickerQuarterHoursTypes
+    setSelectedTime: (selectedTime: TimepickerQuarterHoursTypes) => void
+}
+
+type TimepickerPropsAllHours = TimepickerPropsBase & {
+    step?: "1min"
+    minTime?: TimepickerAllTimesTypes
+    maxTime?: TimepickerAllTimesTypes
+    selectedTime: TimepickerAllTimesTypes
+    setSelectedTime: (selectedTime: TimepickerAllTimesTypes) => void
+}
+
+export type TimepickerProps =
+    | TimepickerPropsHours
+    | TimepickerPropsHalfHours
+    | TimepickerPropsQuarterHours
+    | TimepickerPropsAllHours

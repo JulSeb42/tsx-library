@@ -15,6 +15,7 @@ import type {
     LinkTypes,
     LinkTypesBlank,
 } from "./"
+import type { typeValues } from "../utils"
 
 /*==================== Accordion item ====================*/
 
@@ -173,3 +174,13 @@ export type InputPhoneCountryType = {
     code: string
     flag: string
 }
+
+/*==================== Timepicker ====================*/
+
+export type TimepickerHoursTypes = keyof typeof typeValues.times
+
+export type TimepickerHalfHoursTypes = keyof typeof typeValues.halfTimes
+
+export type TimepickerQuarterHoursTypes = keyof typeof typeValues.quarterTimes
+
+export type TimepickerAllTimesTypes = keyof typeof typeValues.allTimes

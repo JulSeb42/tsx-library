@@ -17,11 +17,6 @@ const DatepickerPage = () => {
                 minDate={new Date()}
                 maxDate={new Date("2024-04-12")}
                 label="Calendar"
-                icons={{
-                    icon: "calendar",
-                }}
-                inputVariant="pill"
-                backgroundColor="dark"
             />
 
             {convertDateShort(selectedDate)}
