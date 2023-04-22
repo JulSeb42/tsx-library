@@ -1,10 +1,9 @@
 /*=============================================== Footer types ===============================================*/
 
-import type { HTMLAttributes, ElementType } from "react"
+import type { ElementType, HTMLAttributes } from "react"
 
 import type {
     AllColorsTypes,
-    ColorsHoverTypes,
     FooterItemProps,
     RequireAtLeastOne,
 } from "../../types"
@@ -19,7 +18,6 @@ type FooterLogo1 = {
     width?: number
     height?: number
     text?: never
-    color?: never
 }
 
 type FooterLogo2 = {
@@ -28,7 +26,6 @@ type FooterLogo2 = {
     width?: never
     height?: never
     text: string
-    color?: AllColorsTypes
 }
 
 type FooterLogo = FooterLogo1 | FooterLogo2
@@ -36,7 +33,6 @@ type FooterLogo = FooterLogo1 | FooterLogo2
 interface FooterPropsBase extends HTMLAttributes<HTMLDivElement> {
     as?: ElementType
     separator?: boolean | AllColorsTypes
-    accentColor?: ColorsHoverTypes
 }
 
 interface FooterContent1 extends FooterPropsBase {
@@ -53,26 +49,4 @@ interface FooterContent2 extends FooterPropsBase {
 
 type FooterContentRequire = RequireAtLeastOne<FooterContent2, "items" | "logo">
 
-type FooterContent = FooterContent1 | FooterContentRequire
-
-type FooterSeparator1 = FooterContent & {
-    linksSeparator?:
-        | "empty"
-        | {
-              icon: string
-              symbol?: never
-              color?: AllColorsTypes
-          }
-}
-
-type FooterSeparator2 = FooterContent & {
-    linksSeparator?:
-        | "empty"
-        | {
-              icon?: never
-              symbol: string
-              color?: AllColorsTypes
-          }
-}
-
-export type FooterProps = FooterSeparator1 | FooterSeparator2
+export type FooterProps = FooterContent1 | FooterContentRequire

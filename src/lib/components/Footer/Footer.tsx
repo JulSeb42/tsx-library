@@ -3,10 +3,17 @@
 import React, { forwardRef, Fragment } from "react"
 import type { ForwardedRef } from "react"
 import { Link } from "react-router-dom"
+import classNames from "classnames"
 
-import { Icon, Text, uuid } from "../../"
+import { uuid } from "../../"
 
-import * as Styles from "./styles"
+import {
+    StyledFooter,
+    LogoImg,
+    FooterLinks,
+    SeparatorContainer,
+    TextLogo,
+} from "./styles"
 import type { FooterProps } from "./types"
 
 const Footer = forwardRef(
@@ -14,59 +21,40 @@ const Footer = forwardRef(
         {
             as,
             separator,
-            accentColor = "primary",
             logo,
-            linksSeparator,
             items,
             direction = "horizontal",
+            className,
             ...rest
         }: FooterProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         return (
-            <Styles.StyledFooter
+            <StyledFooter
                 ref={ref}
                 as={as}
-                $separator={typeof separator === "string" ? true : separator}
-                $separatorColor={
-                    typeof separator === "string" ? separator : "gray-200"
-                }
-                $accentColor={accentColor}
-                $direction={direction}
+                className={classNames(
+                    { "with-separator": separator },
+                    className
+                )}
+                data-direction={direction}
                 {...rest}
             >
                 {logo &&
                     (logo.img ? (
-                        <Styles.LogoImg
+                        <LogoImg
                             src={logo.img}
                             alt={logo.alt || "Logo"}
                             width={logo?.width || 100}
                             height={logo?.height || 30}
+                            className="footer-logo"
                         />
                     ) : (
-                        <Text tag="strong" color={logo.color || accentColor}>
-                            {logo.text}
-                        </Text>
+                        <TextLogo className="footer-logo">{logo.text}</TextLogo>
                     ))}
 
                 {items && (
-                    <Styles.FooterLinks
-                        $colorSeparator={
-                            linksSeparator && typeof linksSeparator === "object"
-                                ? linksSeparator?.color
-                                : "currentColor"
-                        }
-                        $iconSeparator={
-                            linksSeparator && typeof linksSeparator === "object"
-                                ? linksSeparator?.icon
-                                : undefined
-                        }
-                        $symbolSeparator={
-                            linksSeparator && typeof linksSeparator === "object"
-                                ? linksSeparator?.symbol
-                                : undefined
-                        }
-                    >
+                    <FooterLinks className="footer-links">
                         {items.map(
                             ({ content, onClick, blank, href, to }, i) => (
                                 <Fragment key={uuid()}>
@@ -81,6 +69,7 @@ const Footer = forwardRef(
                                                     ? "noreferrer noopener"
                                                     : undefined
                                             }
+                                            className="footer-link"
                                         >
                                             {content}
                                         </a>
@@ -95,41 +84,30 @@ const Footer = forwardRef(
                                                     ? "noreferrer noopener"
                                                     : undefined
                                             }
+                                            className="footer-link"
                                         >
                                             {content}
                                         </Link>
                                     ) : (
-                                        <button onClick={onClick}>
+                                        <button
+                                            onClick={onClick}
+                                            className="footer-link"
+                                        >
                                             {content}
                                         </button>
                                     )}
 
-                                    {linksSeparator &&
-                                        linksSeparator !== "empty" &&
-                                        i !== items.length - 1 && (
-                                            <Styles.SeparatorContainer
-                                                $color={linksSeparator?.color}
-                                            >
-                                                {linksSeparator?.icon ? (
-                                                    <Icon
-                                                        src={
-                                                            linksSeparator.icon
-                                                        }
-                                                        size={12}
-                                                    />
-                                                ) : linksSeparator?.symbol ? (
-                                                    linksSeparator?.symbol
-                                                ) : (
-                                                    "•"
-                                                )}
-                                            </Styles.SeparatorContainer>
-                                        )}
+                                    {i !== items.length - 1 && (
+                                        <SeparatorContainer className="footer-links-separator">
+                                            •
+                                        </SeparatorContainer>
+                                    )}
                                 </Fragment>
                             )
                         )}
-                    </Styles.FooterLinks>
+                    </FooterLinks>
                 )}
-            </Styles.StyledFooter>
+            </StyledFooter>
         )
     }
 )

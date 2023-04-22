@@ -1,37 +1,27 @@
 /*=============================================== Footer styles ===============================================*/
 
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
-import { Breakpoints, Spacers, Mixins, Image } from "../../"
-import type { AllColorsTypes, ColorsHoverTypes } from "../../types"
-import type { FooterDirectionsTypes } from "./types"
+import { Breakpoints, Image, Mixins, Spacers, Text } from "../../"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledFooter = styled.footer<{
-    $separator?: boolean
-    $separatorColor?: AllColorsTypes
-    $accentColor?: ColorsHoverTypes
-    $direction?: FooterDirectionsTypes
-}>`
+const StyledFooter = styled.footer`
     width: 100%;
     position: relative;
     z-index: 10;
     background-color: ${({ theme }) => theme.Background};
-    ${({ $direction }) =>
-        Mixins.Flexbox({
-            $alignItems: "center",
-            $justifyContent:
-                $direction === "vertical" ? "center" : "space-between",
-            $gap: $direction === "vertical" ? "xs" : "l",
-            $flexDirection: $direction === "vertical" ? "column" : "row",
-        })};
     padding: ${Spacers.L} 5%;
+    ${Mixins.Flexbox({
+        $alignItems: "center",
+        $justifyContent: "space-between",
+        $gap: "l",
+    })}
 
     a,
     button {
-        color: ${({ $accentColor, theme }) =>
-            theme.ColorsHoverDefault({ $color: $accentColor })};
+        color: ${({ theme }) =>
+            theme.ColorsHoverDefault({ $color: "primary" })};
         text-decoration: none;
         border: none;
         padding: 0;
@@ -39,13 +29,13 @@ const StyledFooter = styled.footer<{
 
         @media ${Breakpoints.Hover} {
             &:hover {
-                color: ${({ $accentColor, theme }) =>
-                    theme.ColorsHoverHover({ $color: $accentColor })};
+                color: ${({ theme }) =>
+                    theme.ColorsHoverHover({ $color: "primary" })};
             }
 
             &:active {
-                color: ${({ $accentColor, theme }) =>
-                    theme.ColorsHoverActive({ $color: $accentColor })};
+                color: ${({ theme }) =>
+                    theme.ColorsHoverActive({ $color: "primary" })};
             }
         }
     }
@@ -55,34 +45,36 @@ const StyledFooter = styled.footer<{
         gap: ${Spacers.XS};
     }
 
-    ${({ $separator, $separatorColor, theme }) =>
-        $separator &&
-        css`
-            padding-top: ${Spacers.XXL};
+    &.with-separator {
+        padding-top: ${Spacers.XXL};
 
-            &:before {
-                content: "";
-                width: calc(100% - 10%);
-                height: 1px;
-                position: absolute;
-                top: ${Spacers.L};
-                left: 5%;
-                background-color: ${theme.AllColors({
-                    $color: $separatorColor,
-                })};
-            }
-        `}
+        &:before {
+            content: "";
+            width: calc(100% - 10%);
+            height: 1px;
+            position: absolute;
+            top: ${Spacers.L};
+            left: 5%;
+            background-color: ${({ theme }) => theme.Gray200};
+        }
+    }
+
+    &[data-direction="vertical"] {
+        flex-direction: column;
+        justify-content: center;
+        gap: ${Spacers.XS};
+    }
 `
 
 const LogoImg = styled(Image).attrs({ fit: "contain" })`
     object-position: left center;
 `
 
-const FooterLinks = styled.div<{
-    $symbolSeparator?: string
-    $iconSeparator?: string
-    $colorSeparator?: AllColorsTypes
-}>`
+const TextLogo = styled(Text).attrs({ tag: "strong" })`
+    color: ${({ theme }) => theme.Primary500};
+`
+
+const FooterLinks = styled.div`
     ${Mixins.Flexbox({
         $alignItems: "center",
         $justifyContent: "flex-start",
@@ -96,7 +88,7 @@ const FooterLinks = styled.div<{
     }
 `
 
-const SeparatorContainer = styled.span<{ $color?: AllColorsTypes }>`
+const SeparatorContainer = styled.span`
     height: 24px;
     font-size: 12;
     line-height: 24px;
@@ -104,9 +96,15 @@ const SeparatorContainer = styled.span<{ $color?: AllColorsTypes }>`
         $inline: true,
         $alignItems: "center",
     })};
-    color: ${({ theme }) => theme.AllColors};
+    color: ${({ theme }) => theme.Gray500};
 `
 
-setDefaultTheme([StyledFooter, LogoImg, FooterLinks, SeparatorContainer])
+setDefaultTheme([
+    StyledFooter,
+    LogoImg,
+    FooterLinks,
+    SeparatorContainer,
+    TextLogo,
+])
 
-export { StyledFooter, LogoImg, FooterLinks, SeparatorContainer }
+export { StyledFooter, LogoImg, FooterLinks, SeparatorContainer, TextLogo }
