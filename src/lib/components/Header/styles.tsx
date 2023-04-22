@@ -1,27 +1,19 @@
 /*=============================================== Header styles ===============================================*/
 
-import styled, { css } from "styled-components"
 import { Link } from "react-router-dom"
+import styled from "styled-components"
 
 import {
-    stringifyPx,
+    Breakpoints,
+    Burger,
     FontSizes,
     FontWeights,
-    Breakpoints,
+    Image,
+    Mixins,
+    Overlays,
     Spacers,
     Transitions,
-    Overlays,
-    Mixins,
-    Image,
-    Burger,
 } from "../../"
-import type {
-    ColorsHoverTypes,
-    AllColorsTypes,
-    ShadowsTypes,
-    PositionsTypes,
-} from "../../types"
-import type { NavMenuVariantsTypes, NavMobileVariantsTypes } from "./types"
 
 import { setDefaultTheme } from "../../utils"
 
@@ -45,49 +37,10 @@ const Logo = styled(Link)`
     z-index: 999;
 `
 
-const LinkStyles = ({ $linkColor }: { $linkColor?: ColorsHoverTypes }) => css`
-    font-size: ${FontSizes.Body};
-    padding: 0;
-    border: none;
-    background-color: transparent;
-    text-decoration: none;
-    color: ${({ theme }) => theme.ColorsHoverDefault({ $color: $linkColor })};
-    font-weight: ${FontWeights.Regular};
-
-    &.active,
-    &${Logo} {
-        font-weight: ${FontWeights.Black};
-    }
-
-    @media ${Breakpoints.Hover} {
-        &:hover {
-            color: ${({ theme }) =>
-                theme.ColorsHoverHover({ $color: $linkColor })};
-        }
-
-        &:active {
-            color: ${({ theme }) =>
-                theme.ColorsHoverActive({ $color: $linkColor })};
-        }
-    }
-`
-
-const StyledHeader = styled.header<{
-    $isOpen: boolean
-    $position?: PositionsTypes
-    $backgroundColor?: AllColorsTypes
-    $linkColor?: ColorsHoverTypes
-    $navColor?: AllColorsTypes
-    $burgerPosition?: NavMenuVariantsTypes
-    $navVariant?: NavMobileVariantsTypes
-    $shadow?: ShadowsTypes
-    $isHidden?: boolean
-    $headerHeight: number
-}>`
-    position: ${({ $position }) => $position};
+const StyledHeader = styled.header`
+    position: relative;
     left: 0;
-    top: ${({ $isHidden, $headerHeight }) =>
-        $isHidden ? `-${$headerHeight + 16}px` : 0};
+    top: 0;
     z-index: 999;
     width: 100vw;
     ${Mixins.Flexbox({
@@ -96,118 +49,199 @@ const StyledHeader = styled.header<{
         $gap: "l",
     })};
     padding: ${Spacers.M} 5vw;
-    background-color: ${({ $backgroundColor, theme }) =>
-        theme.AllColors({
-            $color: $backgroundColor,
-        })};
-    ${Mixins.Shadow};
+    background-color: ${({ theme }) => theme.Primary500};
     transition: ${Transitions.Short};
 
-    @media ${Breakpoints.Mobile} {
-        background-color: ${({
-            $navVariant,
-            $backgroundColor,
-            $navColor,
-            $isOpen,
-            theme,
-        }) =>
-            $navVariant === "top" &&
-            ($backgroundColor === "transparent" && $isOpen
-                ? theme.AllColors({ $color: $navColor })
-                : theme.AllColors({ $color: $backgroundColor }))};
-    }
-
     & > a,
-    & > button {
-        ${LinkStyles};
+    & > button:not(${HeaderBurger}),
+    & > nav > a,
+    & > nav > button {
+        font-size: ${FontSizes.Body};
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        text-decoration: none;
+        color: ${({ theme }) => theme.ColorsHoverDefault({ $color: "white" })};
+        font-weight: ${FontWeights.Regular};
+
+        &.active,
+        &${Logo} {
+            font-weight: ${FontWeights.Black};
+        }
+
+        @media ${Breakpoints.Hover} {
+            &:hover {
+                color: ${({ theme }) =>
+                    theme.ColorsHoverHover({ $color: "white" })};
+            }
+
+            &:active {
+                color: ${({ theme }) =>
+                    theme.ColorsHoverActive({ $color: "white" })};
+            }
+        }
     }
 
-    ${({ $burgerPosition }) =>
-        $burgerPosition === "left" &&
-        css`
-            @media ${Breakpoints.Mobile} {
-                justify-content: flex-start;
-                gap: ${Spacers.XS};
+    &[data-burger-position="left"] {
+        @media ${Breakpoints.Mobile} {
+            justify-content: flex-start;
+            gap: ${Spacers.XS};
+        }
+    }
+
+    &[data-position="absolute"] {
+        position: absolute;
+    }
+
+    &[data-position="fixed"] {
+        position: fixed;
+
+        &.is-hidden {
+            top: calc(var(--header-height) - 16px);
+        }
+    }
+
+    &[data-variant="white"],
+    &[data-variant="transparent"] {
+        & > a,
+        & > button:not(${HeaderBurger}),
+        & > nav > a,
+        & > nav > button {
+            color: ${({ theme }) =>
+                theme.ColorsHoverDefault({ $color: "primary" })};
+
+            @media ${Breakpoints.Hover} {
+                &:hover {
+                    color: ${({ theme }) =>
+                        theme.ColorsHoverHover({ $color: "primary" })};
+                }
+
+                &:active {
+                    color: ${({ theme }) =>
+                        theme.ColorsHoverActive({ $color: "primary" })};
+                }
             }
-        `}
+        }
+
+        & > ${Logo} {
+            color: ${({ theme }) =>
+                theme.ColorsHoverDefault({ $color: "primary" })};
+        }
+    }
+
+    &[data-variant="white"] {
+        background-color: ${({ theme }) => theme.White};
+    }
+
+    &[data-variant="transparent"] {
+        background-color: transparent;
+
+        @media ${Breakpoints.Mobile} {
+            &.open {
+                background-color: ${({ theme }) => theme.Primary500};
+
+                & > a,
+                & > button:not(${HeaderBurger}),
+                & > nav > a,
+                & > nav > button {
+                    color: ${({ theme }) =>
+                        theme.ColorsHoverDefault({ $color: "white" })};
+
+                    @media ${Breakpoints.Hover} {
+                        &:hover {
+                            color: ${({ theme }) =>
+                                theme.ColorsHoverHover({ $color: "white" })};
+                        }
+
+                        &:active {
+                            color: ${({ theme }) =>
+                                theme.ColorsHoverActive({ $color: "white" })};
+                        }
+                    }
+                }
+
+                & > ${Logo} {
+                    color: ${({ theme }) =>
+                        theme.ColorsHoverDefault({ $color: "white" })};
+                }
+            }
+        }
+    }
 `
 
-const Nav = styled.nav<{
-    $isOpen: boolean
-    $headerHeight: number
-    $backgroundColor?: AllColorsTypes
-    $navColor?: AllColorsTypes
-    $linkColor?: ColorsHoverTypes
-    $variant?: NavMobileVariantsTypes
-    $desktopVariant?: NavMenuVariantsTypes
-    $shadow?: ShadowsTypes
-}>`
+const Nav = styled.nav`
     ${Mixins.Flexbox({
         $alignItems: "center",
         $gap: "s",
     })};
 
-    flex-grow: ${({ $desktopVariant }) => $desktopVariant === "left" && 1};
-
-    & > a,
-    & > button {
-        ${LinkStyles};
+    &[data-desktop-variant="left"] {
+        flex-grow: 1;
     }
 
     @media ${Breakpoints.Mobile} {
         position: absolute;
-        background-color: ${({ $backgroundColor, $navColor, theme }) =>
-            $backgroundColor === "transparent"
-                ? theme.AllColors({ $color: $navColor })
-                : theme.AllColors({
-                      $color: $backgroundColor,
-                  })};
+        background-color: ${({ theme }) => theme.Primary500};
         transition: ${Transitions.Short};
         z-index: 998;
-        ${({ $shadow }) => $shadow && Mixins.Shadow({ $shadow: $shadow })};
 
-        ${({ $variant, $headerHeight, $isOpen }) =>
-            $variant === "full"
-                ? css`
-                      width: 100vw;
-                      height: 100vh;
-                      top: 0;
-                      left: ${$isOpen ? 0 : "-600px"};
-                      flex-direction: column;
-                      justify-content: center;
-                      padding: ${Spacers.L};
+        &[data-nav-mobile-variant="full"] {
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: -600px;
+            flex-direction: column;
+            justify-content: center;
+            padding: ${Spacers.L};
 
-                      & > a,
-                      & > button {
-                          font-size: ${FontSizes.Titles.H5};
-                      }
-                  `
-                : $variant === "drawer"
-                ? css`
-                      width: 70%;
-                      height: 100vh;
-                      top: 0;
-                      left: ${$isOpen ? 0 : "-600px"};
-                      flex-direction: column;
-                      justify-content: flex-start;
-                      align-items: flex-start;
-                      padding: calc(${$headerHeight}px + ${Spacers.L}) 5vw
-                          ${Spacers.S};
-                  `
-                : $variant === "top" &&
-                  css`
-                      top: ${$isOpen ? $headerHeight : -300}px;
-                      left: 0;
-                      padding: ${Spacers.M} 5vw;
-                      width: 100%;
-                      flex-direction: column;
-                      align-items: flex-start;
-                      z-index: 997;
-                  `}
+            & > a,
+            & > button {
+                font-size: ${FontSizes.Titles.H5};
+            }
+
+            &.open {
+                left: 0;
+            }
+        }
+
+        &[data-nav-mobile-variant="drawer"] {
+            width: 70%;
+            height: 100vh;
+            top: 0;
+            left: -600px;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding: calc(var(--header-height) + ${Spacers.L}) 5vw ${Spacers.S};
+
+            &.open {
+                left: 0;
+            }
+        }
+
+        &[data-nav-mobile-variant="top"] {
+            top: -300px;
+            left: 0;
+            padding: ${Spacers.M} 5vw;
+            width: 100%;
+            flex-direction: column;
+            align-items: flex-start;
+            z-index: 997;
+
+            &.open {
+                top: var(--header-height);
+            }
+        }
+    }
+
+    &[data-variant="white"] {
+        @media ${Breakpoints.Mobile} {
+            background-color: ${({ theme }) => theme.White};
+        }
     }
 `
 
-const Overlay = styled.span<{ $isOpen?: boolean }>`
+const Overlay = styled.span`
     position: absolute;
     top: 0;
     left: 0;
@@ -215,14 +249,19 @@ const Overlay = styled.span<{ $isOpen?: boolean }>`
     height: 100vh;
     background-color: ${Overlays.Plain.Black80};
     z-index: 995;
-    visibility: ${({ $isOpen }) => ($isOpen ? "visible" : "hidden")};
-    opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
+    visibility: hidden;
+    opacity: 0;
     transition: ${Transitions.Short};
+
+    &.open {
+        visibility: visible;
+        opacity: 1;
+    }
 `
 
-const SearchForm = styled.form<{ $maxWidth?: string | number }>`
+const SearchForm = styled.form`
     width: 100%;
-    max-width: ${({ $maxWidth }) => stringifyPx($maxWidth)};
+    max-width: var(--search-max-width, 400px);
 
     @media ${Breakpoints.Mobile} {
         max-width: 100%;

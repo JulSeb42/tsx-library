@@ -5,7 +5,13 @@ import Fuse from "fuse.js"
 import type { ChangeEvent, ForwardedRef } from "react"
 import { forwardRef, useEffect, useRef, useState } from "react"
 
-import { Key, getHighlightedText, useKeyPress, uuid } from "../.."
+import {
+    Key,
+    getHighlightedText,
+    useKeyPress,
+    uuid,
+    useTouchScreen,
+} from "../.."
 import { CloseIcon } from "../../icons"
 import {
     ButtonRightInputs,
@@ -47,6 +53,8 @@ const Autocomplete = forwardRef(
         }: AutocompleteProps,
         ref?: ForwardedRef<HTMLInputElement>
     ) => {
+        const isTouchScreen = useTouchScreen()
+
         // Value + results
         const getValidationStatus =
             typeof validation === "object" ? validation?.status : validation
@@ -225,13 +233,17 @@ const Autocomplete = forwardRef(
                         />
                     )}
 
-                    {focusKeys && showKeys && keyArr && !disabled && (
-                        <Key
-                            keys={keyArr}
-                            accentColor="primary"
-                            className="keys"
-                        />
-                    )}
+                    {focusKeys &&
+                        showKeys &&
+                        keyArr &&
+                        !disabled &&
+                        !isTouchScreen && (
+                            <Key
+                                keys={keyArr}
+                                accentColor="primary"
+                                className="keys"
+                            />
+                        )}
                 </RightContainer>
 
                 <ListInputs

@@ -1,12 +1,8 @@
 /*=============================================== Header types ===============================================*/
 
-import type { HTMLAttributes, ElementType } from "react"
+import type { ElementType, HTMLAttributes } from "react"
 
-import type {
-    ColorsHoverTypes,
-    ShadowsTypes,
-    AllColorsTypes,
-} from "../../types"
+import type { LinkTypes } from "../../types"
 import type {
     InputBackgroundTypes,
     InputVariantTypes,
@@ -24,7 +20,7 @@ const navMobileVariants = {
 
 export type NavMobileVariantsTypes = keyof typeof navMobileVariants
 
-type LogoContent1 = {
+type LogoContent1 = LinkTypes & {
     text: string
     img?: never
     alt?: never
@@ -32,7 +28,7 @@ type LogoContent1 = {
     height?: never
 }
 
-type LogoContent2 = {
+type LogoContent2 = LinkTypes & {
     text?: never
     img: string
     alt?: string
@@ -40,45 +36,28 @@ type LogoContent2 = {
     height?: number
 }
 
-type LogoContent = LogoContent1 | LogoContent2
-
-type LogoLink1 = LogoContent & {
-    to?: string
-    href?: never
-}
-
-type LogoLink2 = LogoContent & {
-    to?: never
-    href?: string
-}
-
-type LogoLink = LogoLink1 | LogoLink2
+type LogoLink = LogoContent1 | LogoContent2
 
 interface HeaderPropsBase extends HTMLAttributes<HTMLDivElement> {
     as?: ElementType
-    backgroundColor?: AllColorsTypes
-    linkColor?: ColorsHoverTypes
-    burgerColor?: ColorsHoverTypes
+    logo: LogoLink
+    variant?: "primary" | "white" | "transparent"
     burgerPosition?: NavMenuVariantsTypes
-    navColor?: AllColorsTypes
     navDesktopVariant?: NavMenuVariantsTypes
     navMobileVariant?: NavMobileVariantsTypes
     search?: {
         pathname: string
         search?: any
         icon?: string
-        iconClear?: string
+        iconClear?: string | JSX.Element
         placeholder?: string
         keyboardShortcut?: string[]
         showKeys?: boolean
         backgroundColor?: InputBackgroundTypes
         maxWidth?: string | number
-        accentColor?: ColorsHoverTypes
         iconSize?: number
         variant?: InputVariantTypes
     }
-    shadow?: ShadowsTypes
-    logo: LogoLink
 }
 
 type HeaderPosition1 = HeaderPropsBase & {

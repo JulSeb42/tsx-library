@@ -4,7 +4,7 @@ import React, { forwardRef, useRef } from "react"
 import type { ForwardedRef } from "react"
 import classNames from "classnames"
 
-import { Key, useKeyPress } from "../../../"
+import { Key, useKeyPress, useTouchScreen } from "../../../"
 import { CloseIcon } from "../../../icons"
 import {
     RightContainer,
@@ -35,6 +35,7 @@ const SearchInput = forwardRef(
         ref?: ForwardedRef<HTMLInputElement>
     ) => {
         const focusRef = useRef<HTMLInputElement>(null)
+        const isTouchScreen = useTouchScreen()
 
         const handleFocus = () => focusRef?.current?.focus()
 
@@ -92,7 +93,7 @@ const SearchInput = forwardRef(
                         />
                     )}
 
-                    {focusKeys && showKeys && keyArr && (
+                    {focusKeys && showKeys && keyArr && !isTouchScreen && (
                         <Key
                             keys={keyArr}
                             accentColor="primary"

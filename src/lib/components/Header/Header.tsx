@@ -3,10 +3,19 @@
 import React, { forwardRef, useState, useRef, useEffect } from "react"
 import type { ForwardedRef, ChangeEvent, FormEvent } from "react"
 import { useNavigate, createSearchParams, Link } from "react-router-dom"
+import classNames from "classnames"
 
-import { Input, useClickOutside, useMaxWidth } from "../../"
+import { Input, useClickOutside, useMaxWidth, stringifyPx } from "../../"
 
-import * as Styles from "./styles"
+import {
+    LogoImg,
+    HeaderBurger,
+    Logo,
+    StyledHeader,
+    Nav,
+    Overlay,
+    SearchForm,
+} from "./styles"
 import type { HeaderProps } from "./types"
 
 const Header = forwardRef(
@@ -15,17 +24,15 @@ const Header = forwardRef(
             as,
             logo,
             position = "relative",
-            backgroundColor = "primary",
-            linkColor = "background",
             children,
-            burgerColor = "background",
-            navColor = "primary",
             navMobileVariant = "top",
             navDesktopVariant = "right",
             burgerPosition = "right",
             search,
-            shadow,
             hideOnScroll,
+            className,
+            style,
+            variant = "primary",
             ...rest
         }: HeaderProps,
         ref?: ForwardedRef<HTMLDivElement>
@@ -35,16 +42,6 @@ const Header = forwardRef(
         const el = useRef<HTMLButtonElement>(null)
         const onClickOutside = () => setIsOpen(false)
         useClickOutside(el, onClickOutside)
-
-        const burgerFunction = () => (
-            <Styles.HeaderBurger
-                isOpen={isOpen}
-                color={burgerColor}
-                onClick={() => setIsOpen(!isOpen)}
-                width={30}
-                height={20}
-            />
-        )
 
         const logoHeight = logo.height || 30
         const burgerHeight = 30
@@ -80,48 +77,6 @@ const Header = forwardRef(
 
         const clearSearch = () => setSearchValue("")
 
-        const searchInputFunc = () =>
-            search && (
-                <Styles.SearchForm
-                    onSubmit={handleSubmit}
-                    role="search"
-                    $maxWidth={search?.maxWidth || 300}
-                >
-                    <Input
-                        type="search"
-                        clearSearch={clearSearch}
-                        iconClear={search.iconClear}
-                        onChange={handleSearchValue}
-                        value={searchValue}
-                        placeholder={search.placeholder}
-                        icon={search.icon}
-                        backgroundColor={search.backgroundColor}
-                        accentColor={search.accentColor}
-                        iconSize={search.iconSize}
-                        variant={search.variant}
-                        focusKeys={search.keyboardShortcut}
-                        showKeys={search.showKeys}
-                    />
-                </Styles.SearchForm>
-            )
-
-        const navFunc = () => (
-            <Styles.Nav
-                $isOpen={isOpen}
-                $headerHeight={headerHeight}
-                $backgroundColor={backgroundColor}
-                $navColor={navColor}
-                $linkColor={linkColor}
-                $variant={navMobileVariant}
-                $desktopVariant={navDesktopVariant}
-                $shadow={shadow}
-            >
-                {isMobile && searchInputFunc()}
-
-                {children && children}
-            </Styles.Nav>
-        )
-
         // Hide header on scroll
         const [isHidden, setIsHidden] = useState(false)
         const hidePosition =
@@ -145,37 +100,109 @@ const Header = forwardRef(
             }
         }, [hidePosition])
 
+        const burgerFunction = () => (
+            <HeaderBurger
+                isOpen={isOpen}
+                onClick={() => setIsOpen(!isOpen)}
+                width={30}
+                height={20}
+                color={
+                    (navMobileVariant === "drawer" && isOpen) ||
+                    variant === "primary" ||
+                    ((navMobileVariant === "full" ||
+                        navMobileVariant === "top") &&
+                        isOpen &&
+                        variant === "transparent")
+                        ? "white"
+                        : "primary"
+                }
+                className="burger"
+            />
+        )
+
+        const searchInputFunc = () =>
+            search && (
+                <SearchForm
+                    onSubmit={handleSubmit}
+                    style={{
+                        ["--search-max-width" as any]:
+                            search?.maxWidth && stringifyPx(search?.maxWidth),
+                    }}
+                    role="search"
+                    className="header-search"
+                >
+                    <Input
+                        type="search"
+                        clearSearch={clearSearch}
+                        iconClear={search.iconClear}
+                        onChange={handleSearchValue}
+                        value={searchValue}
+                        placeholder={search.placeholder}
+                        icon={search.icon}
+                        backgroundColor={search.backgroundColor}
+                        iconSize={search.iconSize}
+                        variant={search.variant}
+                        focusKeys={search?.keyboardShortcut}
+                        showKeys={search?.showKeys}
+                        className="header-search-input"
+                    />
+                </SearchForm>
+            )
+
+        const navFunc = () => (
+            <Nav
+                data-desktop-variant={navDesktopVariant}
+                data-nav-mobile-variant={navMobileVariant}
+                data-variant={variant}
+                className={classNames({ open: isOpen }, "header-nav")}
+                style={{
+                    ["--header-height" as any]: stringifyPx(headerHeight),
+                }}
+            >
+                {isMobile && searchInputFunc()}
+
+                {children && children}
+            </Nav>
+        )
+
         return (
-            <Styles.StyledHeader
+            <StyledHeader
                 ref={navMobileVariant === "top" && isMobile ? el : ref}
                 as={as}
-                $backgroundColor={backgroundColor}
-                $isOpen={isOpen}
-                $position={position}
-                $linkColor={linkColor}
-                $navColor={navColor}
-                $burgerPosition={burgerPosition}
-                $navVariant={navMobileVariant}
-                $shadow={shadow}
-                $isHidden={isHidden}
-                $headerHeight={headerHeight}
+                data-burger-position={burgerPosition}
+                data-position={position}
+                data-variant={variant}
+                className={classNames(
+                    { "is-hidden": isHidden },
+                    { open: isOpen },
+                    className
+                )}
+                style={{
+                    ["--header-height" as any]: stringifyPx(headerHeight * -1),
+                    ...style,
+                }}
                 {...rest}
             >
                 {burgerPosition === "left" && burgerFunction()}
 
-                <Styles.Logo as={logo.to ? Link : "a"} to={logo.to || "/"}>
+                <Logo
+                    as={logo.to ? Link : "a"}
+                    to={logo.to || "/"}
+                    className="logo"
+                >
                     {logo.img ? (
-                        <Styles.LogoImg
+                        <LogoImg
                             src={logo.img}
                             alt={logo.alt || "Logo"}
                             width={logo.width || 100}
                             height={logo.height || 30}
                             fit="contain"
+                            className="logo-img"
                         />
                     ) : (
                         logo.text
                     )}
-                </Styles.Logo>
+                </Logo>
 
                 {navDesktopVariant === "left" && navFunc()}
 
@@ -188,14 +215,14 @@ const Header = forwardRef(
                 {navDesktopVariant === "right" && navFunc()}
 
                 {isMobile && navMobileVariant === "drawer" && (
-                    <Styles.Overlay
-                        $isOpen={isOpen}
+                    <Overlay
                         onClick={() => setIsOpen(false)}
+                        className={classNames({ open: isOpen }, "overlay")}
                     />
                 )}
 
                 {!isMobile && navDesktopVariant === "left" && searchInputFunc()}
-            </Styles.StyledHeader>
+            </StyledHeader>
         )
     }
 )

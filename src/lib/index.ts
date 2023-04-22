@@ -80,7 +80,7 @@ export * from "./components/MarkdownContainer" // ✅
 export * from "./components/CodeContainer" // ✅
 export * from "./components/Fade" // ✅
 export * from "./components/BackToTop" // ✅
-export * from "./components/Header"
+export * from "./components/Header" // ✅
 export * from "./components/IconMenu"
 export * from "./components/Footer"
 export * from "./components/Helmet"

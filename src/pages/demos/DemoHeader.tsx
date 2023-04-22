@@ -33,8 +33,8 @@ const DemoHeader = () => {
                     text: "Logo",
                 }}
                 position="fixed"
-                hideOnScroll={400}
-                navMobileVariant="top"
+                hideOnScroll
+                navMobileVariant="drawer"
                 search={{
                     pathname: "",
                     icon: "search",
@@ -42,11 +42,11 @@ const DemoHeader = () => {
                     keyboardShortcut: ["Command", "KeyK"],
                     maxWidth: 300,
                     backgroundColor: "light",
-                    accentColor: "secondary",
                     showKeys: true,
                 }}
-                navDesktopVariant="left"
-                shadow="m"
+                // burgerPosition="right"
+                // navDesktopVariant="left"
+                // variant="white"
             >
                 {links.map(({ text, to, onClick }) =>
                     to ? (
