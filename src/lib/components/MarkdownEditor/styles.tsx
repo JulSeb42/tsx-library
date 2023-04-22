@@ -1,58 +1,49 @@
 /*=============================================== MarkdownEditor styles ===============================================*/
 
-import styled from "styled-components"
 import Markdown from "markdown-to-jsx"
+import styled from "styled-components"
 
 import {
+    Breakpoints,
+    ButtonIcon,
+    Flexbox,
     FontFamilies,
     FontSizes,
-    Flexbox,
+    LineHeights,
     Mixins,
     Radiuses,
     Spacers,
     ThemeDark,
     ThemeLight,
-    LineHeights,
     Transitions,
-    Breakpoints,
-    ButtonIcon,
 } from "../../"
-import type { ColorsHoverTypes } from "../../types"
-import type { InputBackgroundTypes } from "../InputComponents/types"
-
-import { getFontSizeButton } from "./buttons"
-import type { PossibleTitlesTypes } from "./types"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledMarkdownEditor = styled.div<{
-    $isFocused: boolean
-    $accentColor?: ColorsHoverTypes
-    $backgroundColor?: InputBackgroundTypes
-}>`
+const StyledMarkdownEditor = styled.div`
+    border-radius: ${Radiuses.M};
+    height: fit-content;
+    border: 1px solid ${({ theme }) => theme.Gray200};
+    background-color: ${({ theme }) => theme.Background};
+    color: ${({ theme }) => theme.Font};
     ${Mixins.Flexbox({
         $flexDirection: "column",
         $alignItems: "stretch",
-    })};
-    border: 1px solid
-        ${({ theme, $isFocused, $accentColor }) =>
-            $isFocused
-                ? theme.AllColors({ $color: $accentColor })
-                : theme.Gray200};
-    border-radius: ${Radiuses.M};
-    height: fit-content;
-    background-color: ${({ theme, $backgroundColor }) =>
-        $backgroundColor === "dark"
-            ? ThemeDark.Background
-            : $backgroundColor === "light"
-            ? ThemeLight.Background
-            : theme.Background};
-    color: ${({ theme, $backgroundColor }) =>
-        $backgroundColor === "dark"
-            ? ThemeDark.Font
-            : $backgroundColor === "light"
-            ? ThemeLight.Font
-            : theme.Font};
+    })}
+
+    &.is-focused {
+        border-color: ${({ theme }) => theme.Primary500};
+    }
+
+    &[data-background="light"] {
+        background-color: ${ThemeLight.Background};
+        color: ${ThemeLight.Font};
+    }
+
+    &[data-background="dark"] {
+        background-color: ${ThemeDark.Background};
+        color: ${ThemeDark.Font};
+    }
 `
 
 const ButtonsContainer = styled(Flexbox)`
@@ -64,64 +55,72 @@ const TitlesDropdownContainer = styled.div`
     position: relative;
 `
 
-const TitlesDropdown = styled.div<{
-    $isOpen: boolean
-    $backgroundColor?: InputBackgroundTypes
-}>`
+const TitlesDropdown = styled.div`
     position: absolute;
     width: fit-content;
-    ${Mixins.Flexbox({
-        $flexDirection: "column",
-        $alignItems: "stretch",
-    })};
     background-color: ${({ theme }) => theme.Gray50};
     border-radius: 0 0 ${Radiuses.M} ${Radiuses.M};
     overflow: hidden;
     top: calc(24px + ${Spacers.XS});
-    max-height: ${({ $isOpen }) => ($isOpen ? "180px" : 0)};
+    max-height: 0;
     transition: ${Transitions.Bezier};
+    ${Mixins.Flexbox({
+        $flexDirection: "column",
+        $alignItems: "stretch",
+    })}
+
+    &.open {
+        max-height: 180px;
+    }
 `
 
-const TitleButton = styled.button<{
-    $tag: PossibleTitlesTypes
-    $accentColor?: ColorsHoverTypes
-}>`
+const TitleButton = styled.button`
     padding: 0;
     border: none;
     text-align: left;
     min-width: 100px;
-    font-size: ${({ $tag }) => getFontSizeButton($tag)}px;
     line-height: ${LineHeights.Regular};
     background-color: transparent;
-    color: ${({ theme, $accentColor }) =>
-        theme.ColorsHoverDefault({ $color: $accentColor })};
     padding: ${Spacers.XXS};
     transition: ${Transitions.Short};
+    color: ${({ theme }) => theme.ColorsHoverDefault({ $color: "primary" })};
+    font-size: var(--title-size);
 
     @media ${Breakpoints.Hover} {
         &:hover {
-            background-color: ${({ theme, $accentColor }) =>
-                theme.ColorsHoverHover({ $color: $accentColor })};
+            background-color: ${({ theme }) =>
+                theme.ColorsHoverHover({ $color: "primary" })};
             color: ${({ theme }) => theme.Background};
         }
 
         &:active {
-            background-color: ${({ theme, $accentColor }) =>
-                theme.ColorsHoverActive({ $color: $accentColor })};
+            background-color: ${({ theme }) =>
+                theme.ColorsHoverActive({ $color: "primary" })};
         }
     }
 `
 
-const IconButton = styled(ButtonIcon)<{ $isVisible?: boolean }>`
-    display: ${({ $isVisible }) => ($isVisible ? "flex" : "none")};
+const IconButton = styled(ButtonIcon)`
+    display: none;
+    border-radius: ${Radiuses.S};
+
+    &.visible {
+        display: flex;
+    }
 `
 
-const ContainerGrid = styled.div<{ $col?: 1 | 3 }>`
+const ContainerGrid = styled.div`
     display: grid;
-    grid-template-columns: ${({ $col }) =>
-        $col === 3 ? "1fr 2px 1fr" : "1fr"};
     gap: ${Spacers.XS};
     flex-grow: 1;
+
+    &[data-col="1"] {
+        grid-template-columns: 1fr;
+    }
+
+    &[data-col="3"] {
+        grid-template-columns: 1fr 2px 1fr;
+    }
 `
 
 const Separator = styled.span`
@@ -130,7 +129,7 @@ const Separator = styled.span`
     background-color: ${({ theme }) => theme.Gray200};
 `
 
-const Input = styled.textarea<{ $isVisible?: boolean; $height: number }>`
+const Input = styled.textarea`
     font-family: ${FontFamilies.Body};
     font-size: ${FontSizes.Body};
     width: 100%;
@@ -140,27 +139,35 @@ const Input = styled.textarea<{ $isVisible?: boolean; $height: number }>`
     background-color: transparent;
     outline: none;
     height: 100%;
-    display: ${({ $isVisible }) => ($isVisible ? "block" : "none")};
+    display: none;
     padding: ${Spacers.XS};
-    height: ${({ $height }) => $height}px;
+    height: var(--input-height);
     min-height: 250px;
     color: currentColor;
+
+    &.visible {
+        display: block;
+    }
 `
 
 const MarkdownContainer = styled(Markdown)<{
     $isVisible?: boolean
     $height: number
 }>`
-    height: ${({ $height }) => $height}px;
+    height: var(--input-height);
     min-height: 250px;
     border-radius: 0 0 ${Radiuses.M} 0;
-    display: ${({ $isVisible }) => ($isVisible ? "flex" : "none")};
+    display: none;
     flex-direction: column;
     gap: ${Spacers.S};
     align-items: stretch;
     padding: ${Spacers.XS};
     overflow-y: scroll;
     color: currentColor;
+
+    &.visible {
+        display: flex;
+    }
 `
 
 setDefaultTheme([

@@ -14,9 +14,6 @@ const MarkdownEditorPage = () => {
                 value={body}
                 setValue={setBody}
                 label="Label"
-                helper="Helper"
-                // helperBottom="Bottom"
-                accentColor="secondary"
                 autoFocus
                 counter
                 maxLength={1200}

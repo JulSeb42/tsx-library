@@ -20,7 +20,7 @@ import {
 } from "../../icons"
 import type { ShowTypes, PossibleTitlesTypes } from "./types"
 
-const iconSize = 24 * 0.6
+const ICON_SIZE = 16 * 0.8
 
 export const buttonNames = [
     "bold",
@@ -41,62 +41,62 @@ export const buttons = {
     bold: {
         name: "bold",
         code: "** **",
-        defaultIcon: <BoldIcon size={iconSize} />,
+        defaultIcon: <BoldIcon size={ICON_SIZE} />,
     },
     italic: {
         name: "italic",
         code: "* *",
-        defaultIcon: <ItalicIcon size={iconSize} />,
+        defaultIcon: <ItalicIcon size={ICON_SIZE} />,
     },
     strikethrough: {
         name: "strikethrough",
         code: "~~ ~~",
-        defaultIcon: <StrikethroughIcon size={iconSize} />,
+        defaultIcon: <StrikethroughIcon size={ICON_SIZE} />,
     },
     ul: {
         name: "unordered list",
         code: "- ",
-        defaultIcon: <UnorderedListIcon size={iconSize} />,
+        defaultIcon: <UnorderedListIcon size={ICON_SIZE} />,
     },
     ol: {
         name: "ordered list",
         code: "1. ",
-        defaultIcon: <OrderedListIcon size={iconSize} />,
+        defaultIcon: <OrderedListIcon size={ICON_SIZE} />,
     },
     link: {
         name: "link",
         code: "[](URL here)",
-        defaultIcon: <LinkIcon size={iconSize} />,
+        defaultIcon: <LinkIcon size={ICON_SIZE} />,
     },
     quote: {
         name: "blockquote",
         code: "> ",
-        defaultIcon: <QuoteIcon size={iconSize} />,
+        defaultIcon: <QuoteIcon size={ICON_SIZE} />,
     },
     hr: {
         name: "hr",
         code: "\n\n---\n\n",
-        defaultIcon: <SeparatorIcon size={iconSize} />,
+        defaultIcon: <SeparatorIcon size={ICON_SIZE} />,
     },
     code: {
         name: "code",
         code: "``",
-        defaultIcon: <CodeIcon size={iconSize} />,
+        defaultIcon: <CodeIcon size={ICON_SIZE} />,
     },
     codeBlock: {
         name: "code block",
         code: "```\n\n```",
-        defaultIcon: <CodeBlockIcon size={iconSize} />,
+        defaultIcon: <CodeBlockIcon size={ICON_SIZE} />,
     },
     comment: {
         name: "comment",
         code: "<!--  -->",
-        defaultIcon: <CommentIcon size={iconSize} />,
+        defaultIcon: <CommentIcon size={ICON_SIZE} />,
     },
     image: {
         name: "image",
         code: "![](https://example.com/your-image.png)",
-        defaultIcon: <ImageIcon size={iconSize} />,
+        defaultIcon: <ImageIcon size={ICON_SIZE} />,
     },
 }
 
@@ -109,15 +109,15 @@ export const editorButtonNames: ShowTypes[] = [
 export const editorButtons = {
     editorCode: {
         name: "editorCode",
-        defaultIcon: <EditorCodeIcon size={iconSize} />,
+        defaultIcon: <EditorCodeIcon size={ICON_SIZE} />,
     },
     editorLive: {
         name: "editorLive",
-        defaultIcon: <EditorLiveIcon size={iconSize} />,
+        defaultIcon: <EditorLiveIcon size={ICON_SIZE} />,
     },
     editorPreview: {
         name: "editorPreview",
-        defaultIcon: <EditorPreviewIcon size={iconSize} />,
+        defaultIcon: <EditorPreviewIcon size={ICON_SIZE} />,
     },
 }
 

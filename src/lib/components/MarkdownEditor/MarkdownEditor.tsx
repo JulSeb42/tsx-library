@@ -2,6 +2,7 @@
 
 import React, { forwardRef, useState, useRef } from "react"
 import type { ChangeEvent, ForwardedRef } from "react"
+import classNames from "classnames"
 
 import { InputContainer } from "../InputContainer"
 
@@ -12,9 +13,21 @@ import {
     capitalize,
     Button,
     useClickOutside,
+    stringifyPx,
 } from "../../"
 
-import * as Styles from "./styles"
+import {
+    TitlesDropdown,
+    StyledMarkdownEditor,
+    ButtonsContainer,
+    TitlesDropdownContainer,
+    TitleButton,
+    ContainerGrid,
+    Separator,
+    Input,
+    MarkdownContainer,
+    IconButton,
+} from "./styles"
 import type {
     MarkdownEditorProps,
     ShowTypes,
@@ -31,6 +44,7 @@ import {
     editorButtons,
     titleNames,
     titles,
+    getFontSizeButton,
 } from "./buttons"
 
 const InputMarkdown = forwardRef(
@@ -40,7 +54,6 @@ const InputMarkdown = forwardRef(
             value,
             setValue,
             id,
-            accentColor = "primary",
             backgroundColor,
             showButtons = {
                 titles: true,
@@ -78,6 +91,7 @@ const InputMarkdown = forwardRef(
                 editorLive: editorButtons.editorLive.defaultIcon,
                 editorPreview: editorButtons.editorPreview.defaultIcon,
             },
+            className,
             ...rest
         }: MarkdownEditorProps,
         ref?: ForwardedRef<HTMLTextAreaElement>
@@ -105,36 +119,47 @@ const InputMarkdown = forwardRef(
         }
 
         return (
-            <Styles.StyledMarkdownEditor
+            <StyledMarkdownEditor
                 ref={ref}
                 as={as}
-                $isFocused={isFocused}
-                $accentColor={accentColor}
-                $backgroundColor={backgroundColor}
+                className={classNames(
+                    { "is-focused": isFocused },
+                    "markdown-editor",
+                    className
+                )}
+                data-background={backgroundColor}
             >
-                <Styles.ButtonsContainer
+                <ButtonsContainer
                     gap="xs"
                     alignItems="center"
                     justifyContent="space-between"
                     padding="xs"
+                    className="markdown-editor-buttons-container"
                 >
-                    <Flexbox gap="xxs" alignItems="center">
+                    <Flexbox
+                        gap="xs"
+                        alignItems="center"
+                        className="markdown-editor-commands"
+                    >
                         {showButtons.titles !== false && (
-                            <Styles.TitlesDropdownContainer>
+                            <TitlesDropdownContainer className="markdown-editor-title-dropdown-container">
                                 <Button
-                                    color={accentColor}
-                                    variant="text"
+                                    color="primary"
+                                    variant="transparent"
                                     size="small"
                                     noPadding
                                     onClick={() => setIsTextOpen(!isTextOpen)}
+                                    className="markdown-editor-titles-dropdown-button"
                                 >
                                     Titles
                                 </Button>
 
-                                <Styles.TitlesDropdown
-                                    $isOpen={isTextOpen}
-                                    $backgroundColor={backgroundColor}
+                                <TitlesDropdown
                                     ref={titlesDropdownRef}
+                                    className={classNames(
+                                        { open: isTextOpen },
+                                        "markdown-editor-titles-dropdown"
+                                    )}
                                 >
                                     {titleNames.map(
                                         // @ts-expect-error
@@ -144,22 +169,26 @@ const InputMarkdown = forwardRef(
                                                 titles[title]
 
                                             return (
-                                                <Styles.TitleButton
+                                                <TitleButton
                                                     onClick={() => {
                                                         addCode(button.code)
                                                         setIsTextOpen(false)
                                                     }}
-                                                    $tag={title}
-                                                    $accentColor={accentColor}
+                                                    style={{
+                                                        ["--title-size" as any]: `${getFontSizeButton(
+                                                            title
+                                                        )}px`,
+                                                    }}
+                                                    className="markdown-editor-button-title"
                                                     key={uuid()}
                                                 >
                                                     {button.text}
-                                                </Styles.TitleButton>
+                                                </TitleButton>
                                             )
                                         }
                                     )}
-                                </Styles.TitlesDropdown>
-                            </Styles.TitlesDropdownContainer>
+                                </TitlesDropdown>
+                            </TitlesDropdownContainer>
                         )}
 
                         {buttonNames.map((item: string) => {
@@ -167,43 +196,48 @@ const InputMarkdown = forwardRef(
                             const button: ButtonType = buttons[item]
 
                             return (
-                                <Styles.IconButton
+                                <IconButton
                                     icon={
                                         // @ts-expect-error
                                         icons[item] || button.defaultIcon
                                     }
-                                    size={24}
-                                    borderRadius="s"
+                                    size={16}
                                     variant="transparent"
-                                    hoverBackground
                                     onClick={() => addCode(button.code)}
-                                    color={accentColor}
+                                    color="primary"
                                     label={capitalize(button.name)}
                                     showLabel
-                                    // @ts-expect-error
-                                    $isVisible={showButtons[item] !== false}
+                                    className={classNames(
+                                        {
+                                            visible:
+                                                // @ts-expect-error
+                                                showButtons[item] !== false,
+                                        },
+                                        "markdown-editor-button-command"
+                                    )}
                                     key={uuid()}
                                 />
                             )
                         })}
                     </Flexbox>
 
-                    <Flexbox gap="xxs">
+                    <Flexbox
+                        gap="xxs"
+                        className="markdown-editor-editor-buttons"
+                    >
                         {editorButtonNames.map((button: string) => {
                             const editorButton: EditorButtonType =
                                 // @ts-expect-error
                                 editorButtons[button]
 
                             return (
-                                // @ts-expect-error
-                                <Styles.IconButton
+                                <IconButton
                                     icon={
                                         // @ts-expect-error
                                         icons[button] ||
                                         editorButton.defaultIcon
                                     }
-                                    size={24}
-                                    borderRadius="s"
+                                    size={16}
                                     variant={
                                         show === button
                                             ? "plain"
@@ -212,44 +246,69 @@ const InputMarkdown = forwardRef(
                                     label={capitalize(
                                         editorButton.name.replace("editor", "")
                                     )}
-                                    color={accentColor}
+                                    color="primary"
                                     showLabel
                                     // @ts-expect-error
                                     onClick={() => setShow(button)}
-                                    // @ts-expect-error
-                                    $isVisible={showButtons[button] !== false}
+                                    className={classNames(
+                                        {
+                                            visible:
+                                                // @ts-expect-error
+                                                showButtons[button] !== false,
+                                        },
+                                        "markdown-editor-editor-button"
+                                    )}
                                     key={uuid()}
                                 />
                             )
                         })}
                     </Flexbox>
-                </Styles.ButtonsContainer>
+                </ButtonsContainer>
 
-                <Styles.ContainerGrid $col={show === "editorLive" ? 3 : 1}>
-                    <Styles.Input
+                <ContainerGrid
+                    data-col={show === "editorLive" ? "3" : "1"}
+                    className="markdown-editor-container"
+                >
+                    <Input
                         value={value}
                         onChange={handleValue}
                         ref={inputRef}
                         onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
-                        $isVisible={
-                            show === "editorCode" || show === "editorLive"
-                        }
-                        $height={height}
+                        style={{
+                            ["--input-height" as any]: stringifyPx(height),
+                        }}
+                        className={classNames(
+                            {
+                                visible:
+                                    show === "editorCode" ||
+                                    show === "editorLive",
+                            },
+                            "markdown-editor-input"
+                        )}
                         {...rest}
                     />
 
-                    {show === "editorLive" && <Styles.Separator />}
+                    {show === "editorLive" && (
+                        <Separator className="markdown-editor-separator" />
+                    )}
 
-                    <Styles.MarkdownContainer
+                    <MarkdownContainer
                         options={OptionsMarkdown}
-                        $isVisible={show === "editorCode" ? false : true}
-                        $height={height}
+                        style={{
+                            ["--input-height" as any]: stringifyPx(height),
+                        }}
+                        className={classNames(
+                            {
+                                visible: show === "editorCode" ? false : true,
+                            },
+                            "markdown-editor-markdown-container"
+                        )}
                     >
                         {value}
-                    </Styles.MarkdownContainer>
-                </Styles.ContainerGrid>
-            </Styles.StyledMarkdownEditor>
+                    </MarkdownContainer>
+                </ContainerGrid>
+            </StyledMarkdownEditor>
         )
     }
 )
@@ -261,12 +320,12 @@ const MarkdownEditor = forwardRef(
             value,
             setValue,
             id,
-            accentColor = "primary",
             label,
             helper,
             helperBottom,
             counter,
             maxLength,
+            className,
             ...rest
         }: MarkdownEditorProps,
         ref?: ForwardedRef<HTMLTextAreaElement>
@@ -277,9 +336,11 @@ const MarkdownEditor = forwardRef(
                 value={value}
                 setValue={setValue}
                 id={id}
-                accentColor={accentColor}
                 ref={ref}
                 maxLength={maxLength}
+                className={classNames(
+                    !label && !helper && !helperBottom && className
+                )}
                 {...rest}
             />
         )
@@ -290,10 +351,10 @@ const MarkdownEditor = forwardRef(
                 label={label}
                 helper={helper}
                 helperBottom={helperBottom}
-                accentColor={accentColor}
                 counter={counter}
                 maxLength={maxLength}
                 value={value}
+                className={className}
             >
                 {inputFn()}
             </InputContainer>
