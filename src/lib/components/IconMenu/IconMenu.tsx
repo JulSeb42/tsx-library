@@ -2,25 +2,27 @@
 
 import React, { useRef, useState } from "react"
 import { Link } from "react-router-dom"
+import classNames from "classnames"
 
-import { useClickOutside, Icon, Burger, variableSpacer } from "../../"
+import { useClickOutside, Icon, Burger, stringifyPx } from "../../"
 
-import * as Styles from "./styles"
+import {
+    StyledIconMenu,
+    StyledOpenButton,
+    StyledButton,
+    StyledIconPlus,
+    ICON_MENU_BUTTON_SIZE,
+} from "./styles"
 import type { IconMenuProps } from "./types"
 
 const IconMenu = ({
     as,
     items,
     direction = "up",
-    shadow,
-    position = {
-        position: "relative",
-    },
     color = "primary",
-    buttonsSize = 48,
     icon = "burger",
-    openIconSize = buttonsSize * 0.7,
-    gap = "xs",
+    openIconSize = ICON_MENU_BUTTON_SIZE * 0.7,
+    className,
     ...rest
 }: IconMenuProps) => {
     const el = useRef<HTMLDivElement>(null)
@@ -29,29 +31,14 @@ const IconMenu = ({
 
     const [isOpen, setIsOpen] = useState(false)
 
-    const defaultIconSize = buttonsSize * 0.7
+    const defaultIconSize = ICON_MENU_BUTTON_SIZE * 0.7
 
     return (
-        <Styles.StyledIconMenu
-            ref={el}
-            as={as}
-            $position={position}
-            $buttonSize={buttonsSize}
-            {...rest}
-        >
-            <Styles.StyledOpenButton
+        <StyledIconMenu ref={el} as={as} className={className} {...rest}>
+            <StyledOpenButton
                 onClick={() => setIsOpen(!isOpen)}
+                className="icon-menu-button-open"
                 $color={color}
-                $shadowDefault={
-                    typeof shadow === "object" ? shadow.default : shadow
-                }
-                $shadowHover={
-                    typeof shadow === "object" ? shadow.hover : shadow
-                }
-                $shadowActive={
-                    typeof shadow === "object" ? shadow.active : shadow
-                }
-                $buttonSize={buttonsSize}
             >
                 {icon && typeof icon === "object" ? (
                     <Icon
@@ -64,16 +51,20 @@ const IconMenu = ({
                                 : defaultIconSize
                         }
                         color={color === "white" ? "primary" : "white"}
+                        className="icon-menu-button-open-icon"
                     />
                 ) : icon === "plus" ? (
-                    <Styles.StyledIconPlus
+                    <StyledIconPlus
                         size={
                             typeof openIconSize === "number"
                                 ? openIconSize
                                 : defaultIconSize
                         }
                         color={color === "white" ? "primary" : "white"}
-                        $isOpen={isOpen}
+                        className={classNames(
+                            { open: isOpen },
+                            "icon-menu-button-open-icon"
+                        )}
                     />
                 ) : (
                     <Burger
@@ -84,16 +75,17 @@ const IconMenu = ({
                         width={
                             typeof openIconSize === "object"
                                 ? openIconSize?.width
-                                : buttonsSize * 0.5
+                                : ICON_MENU_BUTTON_SIZE * 0.5
                         }
                         height={
                             typeof openIconSize === "object"
                                 ? openIconSize?.height
-                                : buttonsSize * 0.4
+                                : ICON_MENU_BUTTON_SIZE * 0.4
                         }
+                        className="icon-menu-button-open-icon"
                     />
                 )}
-            </Styles.StyledOpenButton>
+            </StyledOpenButton>
 
             {items.map(
                 (
@@ -108,7 +100,7 @@ const IconMenu = ({
                     },
                     i
                 ) => (
-                    <Styles.StyledButton
+                    <StyledButton
                         as={to ? Link : href ? "a" : "button"}
                         onClick={onClick}
                         href={href}
@@ -120,23 +112,24 @@ const IconMenu = ({
                                 : undefined
                         }
                         aria-label={label}
-                        $color={color}
-                        $index={i}
-                        $isOpen={isOpen}
-                        $direction={direction}
-                        $buttonSize={buttonsSize}
-                        $gap={gap}
                         style={{
-                            ["--icon-menu-position-open" as any]:
-                                variableSpacer(gap),
+                            ["--button-position-open" as any]: stringifyPx(
+                                (i + 1) * (ICON_MENU_BUTTON_SIZE + 8)
+                            ),
                         }}
+                        data-direction={direction}
+                        className={classNames(
+                            { open: isOpen },
+                            "icon-menu-button"
+                        )}
+                        $color={color}
                         key={`button-${icon}-${label}`}
                     >
                         <Icon src={icon} size={iconSize} />
-                    </Styles.StyledButton>
+                    </StyledButton>
                 )
             )}
-        </Styles.StyledIconMenu>
+        </StyledIconMenu>
     )
 }
 

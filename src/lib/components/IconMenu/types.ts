@@ -1,14 +1,8 @@
 /*=============================================== IconMenu types ===============================================*/
 
-import type { HTMLAttributes, ElementType } from "react"
+import type { ElementType, HTMLAttributes } from "react"
 
-import type {
-    ShadowsTypes,
-    ColorsHoverTypes,
-    ObjectPositionTypes,
-    IconMenuItemProps,
-    SpacersTypes,
-} from "../../types"
+import type { ColorsHoverTypes, IconMenuItemProps } from "../../types"
 
 const directions = {
     left: "left",
@@ -23,17 +17,7 @@ interface IconMenuPropsBase extends HTMLAttributes<HTMLDivElement> {
     as?: ElementType
     items: IconMenuItemProps[]
     direction?: IconMenuDirectionTypes
-    shadow?:
-        | ShadowsTypes
-        | {
-              default: ShadowsTypes
-              hover: ShadowsTypes
-              active: ShadowsTypes
-          }
-    position?: ObjectPositionTypes
     color?: ColorsHoverTypes
-    buttonsSize?: number
-    gap?: SpacersTypes
 }
 
 interface IconMenuIconSize1 extends IconMenuPropsBase {

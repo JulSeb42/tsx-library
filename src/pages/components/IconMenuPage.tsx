@@ -28,21 +28,9 @@ const IconMenuPage = () => {
         <Page title="IconMenu">
             <IconMenu
                 items={items}
-                direction="right"
+                direction="down"
                 icon="plus"
-                color="secondary"
-                shadow={{
-                    default: "s",
-                    hover: "l",
-                    active: "m",
-                }}
-                position={{
-                    position: "fixed",
-                    bottom: 48,
-                    right: 48,
-                }}
-                buttonsSize={120}
-                gap="xxl"
+                color="success"
             />
         </Page>
     )

@@ -1,168 +1,107 @@
 /*=============================================== IconMenu styles ===============================================*/
 
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
-import { Breakpoints, Mixins, Radiuses, Transitions } from "../../"
+import { Breakpoints, Mixins, Radiuses, Spacers, Transitions } from "../../"
 import { PlusIcon } from "../../icons"
-import type {
-    ColorsHoverTypes,
-    ObjectPositionTypes,
-    ShadowsTypes,
-    SpacersTypes,
-} from "../../types"
-import type { IconMenuDirectionTypes } from "./types"
+import type { ColorsHoverTypes } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
 
-const StyledIconMenu = styled.div<{
-    $position?: ObjectPositionTypes
-    $buttonSize: number
-}>`
-    ${({ $position }) =>
-        Mixins.Position({
-            $position: $position?.position || "relative",
-            $left: $position?.left,
-            $top: $position?.top,
-            $right: $position?.right,
-            $bottom: $position?.bottom,
-            $zIndex: $position?.zIndex,
-        })};
+export const ICON_MENU_BUTTON_SIZE = 48
 
-    width: ${({ $buttonSize }) => $buttonSize}px;
-    height: ${({ $buttonSize }) => $buttonSize}px;
+const StyledIconMenu = styled.nav`
+    position: relative;
+    width: ${ICON_MENU_BUTTON_SIZE}px;
+    height: ${ICON_MENU_BUTTON_SIZE}px;
 `
 
-const StyledOpenButton = styled.button<{
-    $color?: ColorsHoverTypes
-    $shadowDefault?: ShadowsTypes
-    $shadowHover?: ShadowsTypes
-    $shadowActive?: ShadowsTypes
-    $buttonSize: number
-}>`
-    width: ${({ $buttonSize }) => $buttonSize}px;
-    height: ${({ $buttonSize }) => $buttonSize}px;
+const BaseOpenButton = styled.button`
+    width: ${ICON_MENU_BUTTON_SIZE}px;
+    height: ${ICON_MENU_BUTTON_SIZE}px;
     border: none;
     border-radius: ${Radiuses.Circle};
+    position: relative;
+    z-index: 1;
     ${Mixins.Flexbox({
         $alignItems: "center",
         $justifyContent: "center",
-    })};
+    })}
+`
+
+const StyledOpenButton = styled(BaseOpenButton)<{ $color?: ColorsHoverTypes }>`
     background-color: ${({ $color, theme }) =>
         theme.ColorsHoverDefault({ $color: $color })};
-    position: relative;
-    z-index: 1;
-    ${({ $shadowDefault }) =>
-        $shadowDefault && Mixins.Shadow({ $shadow: $shadowDefault })};
 
     @media ${Breakpoints.Hover} {
         &:hover {
             background-color: ${({ $color, theme }) =>
                 theme.ColorsHoverHover({ $color: $color })};
-            ${({ $shadowHover }) =>
-                $shadowHover && Mixins.Shadow({ $shadow: $shadowHover })};
         }
 
         &:active {
             background-color: ${({ $color, theme }) =>
                 theme.ColorsHoverActive({ $color: $color })};
-            ${({ $shadowActive }) =>
-                $shadowActive && Mixins.Shadow({ $shadow: $shadowActive })};
         }
     }
 `
 
-const ButtonPosition = ({
-    $isOpen,
-    $index,
-    $buttonSize,
-    $gap,
-}: {
-    $isOpen: boolean
-    $index: number
-    $buttonSize: number
-    $gap: SpacersTypes
-}) =>
-    css`
-        ${$isOpen
-            ? `calc(${
-                  ($index + 1) * $buttonSize
-              }px + var(--icon-menu-position-open) * ${$index + 1})`
-            : 0}
-    `
-
-const StyledButton = styled.button<{
-    $color?: ColorsHoverTypes
-    $direction?: IconMenuDirectionTypes
-    $isOpen: boolean
-    $index: number
-    $buttonSize: number
-    $gap: SpacersTypes
-}>`
-    width: ${({ $buttonSize }) => $buttonSize}px;
-    height: ${({ $buttonSize }) => $buttonSize}px;
+const BaseButton = styled.button`
+    width: ${ICON_MENU_BUTTON_SIZE}px;
+    height: ${ICON_MENU_BUTTON_SIZE}px;
     border: none;
     border-radius: ${Radiuses.Circle};
+    position: absolute;
+    text-decoration: none;
     ${Mixins.Flexbox({
         $alignItems: "center",
         $justifyContent: "center",
-    })};
-    position: absolute;
+    })}
+
+    &[data-direction="left"] {
+        top: 0;
+        left: 0;
+
+        &.open {
+            left: calc(var(--button-position-open) + ${Spacers.XS});
+        }
+    }
+
+    &[data-direction="up"] {
+        bottom: 0;
+        left: 0;
+
+        &.open {
+            bottom: calc(var(--button-position-open) + ${Spacers.XS});
+        }
+    }
+
+    &[data-direction="right"] {
+        top: 0;
+        right: 0;
+
+        &.open {
+            right: calc(var(--button-position-open) + ${Spacers.XS});
+        }
+    }
+
+    &[data-direction="down"] {
+        left: 0;
+        top: 0;
+
+        &.open {
+            top: calc(var(--button-position-open) + ${Spacers.XS});
+        }
+    }
+`
+
+const StyledButton = styled(BaseButton)<{ $color?: ColorsHoverTypes }>`
     background-color: ${({ theme }) => theme.Background};
     color: ${({ $color, theme }) =>
         $color === "white"
             ? theme.Primary500
             : theme.ColorsHoverDefault({ $color: $color })};
-    transition: ${({ $direction }) =>
-                $direction === "up"
-                    ? "bottom"
-                    : $direction === "down"
-                    ? "top"
-                    : $direction}
-            calc(${({ $index }) => $index + 1} * 0.2s) ease,
-        background-color 0.2s ease, color 0.2s ease;
-    text-decoration: none;
-
-    ${({ $direction, $isOpen, $index, $buttonSize, $gap }) =>
-        $direction === "left"
-            ? css`
-                  top: 0;
-                  left: ${ButtonPosition({
-                      $buttonSize,
-                      $gap,
-                      $index,
-                      $isOpen,
-                  })};
-              `
-            : $direction === "up"
-            ? css`
-                  bottom: ${ButtonPosition({
-                      $buttonSize,
-                      $gap,
-                      $index,
-                      $isOpen,
-                  })};
-                  left: 0;
-              `
-            : $direction === "right"
-            ? css`
-                  top: 0;
-                  right: ${ButtonPosition({
-                      $buttonSize,
-                      $gap,
-                      $index,
-                      $isOpen,
-                  })};
-              `
-            : $direction === "down" &&
-              css`
-                  left: 0;
-                  top: ${ButtonPosition({
-                      $buttonSize,
-                      $gap,
-                      $index,
-                      $isOpen,
-                  })};
-              `}
+    transition: ${Transitions.Short};
 
     @media ${Breakpoints.Hover} {
         &:hover {
@@ -178,9 +117,12 @@ const StyledButton = styled.button<{
     }
 `
 
-const StyledIconPlus = styled(PlusIcon)<{ $isOpen?: boolean }>`
-    transform: ${({ $isOpen }) => $isOpen && "rotate(45deg)"};
+const StyledIconPlus = styled(PlusIcon)`
     transition: ${Transitions.Short};
+
+    &.open {
+        transform: rotate(45deg);
+    }
 `
 
 setDefaultTheme([
