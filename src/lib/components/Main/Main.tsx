@@ -38,12 +38,8 @@ const Main = forwardRef(
                         getMainContentSize(contentSize),
                     ...style,
                 }}
-                className={classNames(
-                    { "position-one": position === 1 },
-                    { "position-two": position === 2 },
-                    { full: size === "full" },
-                    className
-                )}
+                className={classNames({ full: size === "full" }, className)}
+                data-position={position}
                 {...rest}
             >
                 {children}
