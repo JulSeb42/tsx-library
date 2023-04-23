@@ -158,6 +158,7 @@ const Header = forwardRef(
                 style={{
                     ["--header-height" as any]: stringifyPx(headerHeight),
                 }}
+                ref={el}
             >
                 {isMobile && searchInputFunc()}
 
@@ -167,7 +168,7 @@ const Header = forwardRef(
 
         return (
             <StyledHeader
-                ref={navMobileVariant === "top" && isMobile ? el : ref}
+                ref={ref}
                 as={as}
                 data-burger-position={burgerPosition}
                 data-position={position}

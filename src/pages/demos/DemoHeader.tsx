@@ -34,7 +34,7 @@ const DemoHeader = () => {
                 }}
                 position="fixed"
                 hideOnScroll
-                navMobileVariant="drawer"
+                navMobileVariant="top"
                 search={{
                     pathname: "",
                     icon: "search",

@@ -1,6 +1,6 @@
 /*=============================================== AutocompletePage ===============================================*/
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import type { FormEvent } from "react"
 
 import { Page } from "../../components"
@@ -16,8 +16,12 @@ const AutocompletePage = () => {
         setResults(location)
     }
 
+    const el = useRef<HTMLInputElement>(null)
+
     return (
         <Page title="Autocomplete">
+            <button onClick={() => el?.current?.focus()}>Focus</button>
+
             <Form buttonPrimary="Submit" onSubmit={handleSubmit}>
                 <Autocomplete
                     id="autocomplete"
@@ -31,6 +35,7 @@ const AutocompletePage = () => {
                     helperBottom="Helper bottom"
                     focusKeys={["Command", "KeyK"]}
                     showKeys
+                    ref={el}
                 />
             </Form>
 

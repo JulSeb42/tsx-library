@@ -12,9 +12,7 @@ import {
     uuid,
     useTouchScreen,
 } from "../.."
-import { CloseIcon } from "../../icons"
 import {
-    ButtonRightInputs,
     IconComponent,
     RightContainer,
     ValidationComponent,
@@ -61,7 +59,6 @@ const Autocomplete = forwardRef(
 
         const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
             setValue(e.target.value)
-        const clearSearch = () => setValue("")
 
         const handleClick = (text: string) => setValue(text)
 
@@ -77,7 +74,7 @@ const Autocomplete = forwardRef(
                 : key
         )
 
-        const inputRef = useRef<HTMLInputElement>(null)
+        const inputRef = useRef<HTMLDivElement>(null)
         const keys = focusKeys ? focusKeys : [""]
         const handleFocus = () => inputRef?.current?.focus()
         useKeyPress(() => handleFocus(), keys)
@@ -183,7 +180,7 @@ const Autocomplete = forwardRef(
                     "input-content",
                     !label && !helper && !helperBottom && className
                 )}
-                ref={ref}
+                ref={inputRef}
             >
                 {icon && (
                     <IconComponent
@@ -198,12 +195,12 @@ const Autocomplete = forwardRef(
 
                 <StyledAutocomplete
                     id={id}
-                    ref={inputRef}
+                    ref={ref}
                     onChange={handleChange}
                     onFocus={!disabled ? () => setIsFocus(true) : undefined}
                     onBlur={!disabled ? () => setIsFocus(false) : undefined}
                     onKeyDown={(e: any) => handleKeyNavigation(e)}
-                    type="search"
+                    type="text"
                     value={value}
                     autoFocus={autoFocus}
                     disabled={disabled}
@@ -222,15 +219,6 @@ const Autocomplete = forwardRef(
                 <RightContainer disabled={disabled} variant={variant}>
                     {validation && (
                         <ValidationComponent validation={validation} />
-                    )}
-
-                    {value.length > 0 && (
-                        <ButtonRightInputs
-                            icon={iconClear || <CloseIcon size={20} />}
-                            onClick={clearSearch}
-                            disabled={disabled}
-                            className="button-clear"
-                        />
                     )}
 
                     {focusKeys &&
