@@ -5,7 +5,12 @@ import type { ForwardedRef } from "react"
 
 import { uuid } from "../../"
 
-import * as Styles from "./styles"
+import {
+    StyledButton,
+    StyledButtonGroup,
+    Separator,
+    StyledButtonIcon,
+} from "./styles"
 import type { ButtonGroupProps } from "./types"
 
 const ButtonGroup = forwardRef(
@@ -20,7 +25,7 @@ const ButtonGroup = forwardRef(
         }: ButtonGroupProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => (
-        <Styles.StyledButtonGroup
+        <StyledButtonGroup
             ref={ref}
             as={as}
             $hasBorders={!!(variant === "transparent")}
@@ -45,7 +50,7 @@ const ButtonGroup = forwardRef(
                     <Fragment key={uuid()}>
                         {iconOnly ? (
                             href ? (
-                                <Styles.StyledButtonIcon
+                                <StyledButtonIcon
                                     icon={iconOnly}
                                     variant={variant}
                                     color={color}
@@ -56,7 +61,7 @@ const ButtonGroup = forwardRef(
                                     className="button"
                                 />
                             ) : to ? (
-                                <Styles.StyledButtonIcon
+                                <StyledButtonIcon
                                     icon={iconOnly}
                                     variant={variant}
                                     color={color}
@@ -67,7 +72,7 @@ const ButtonGroup = forwardRef(
                                     className="button"
                                 />
                             ) : (
-                                <Styles.StyledButtonIcon
+                                <StyledButtonIcon
                                     onClick={onClick}
                                     icon={iconOnly}
                                     variant={variant}
@@ -78,7 +83,7 @@ const ButtonGroup = forwardRef(
                                 />
                             )
                         ) : href ? (
-                            <Styles.StyledButton
+                            <StyledButton
                                 variant={variant}
                                 color={color}
                                 aria-label={ariaLabel}
@@ -92,9 +97,9 @@ const ButtonGroup = forwardRef(
                                 className="button"
                             >
                                 {text}
-                            </Styles.StyledButton>
+                            </StyledButton>
                         ) : to ? (
-                            <Styles.StyledButton
+                            <StyledButton
                                 variant={variant}
                                 color={color}
                                 aria-label={ariaLabel}
@@ -108,9 +113,9 @@ const ButtonGroup = forwardRef(
                                 className="button"
                             >
                                 {text}
-                            </Styles.StyledButton>
+                            </StyledButton>
                         ) : (
-                            <Styles.StyledButton
+                            <StyledButton
                                 onClick={onClick}
                                 variant={variant}
                                 color={color}
@@ -123,12 +128,12 @@ const ButtonGroup = forwardRef(
                                 className="button"
                             >
                                 {text}
-                            </Styles.StyledButton>
+                            </StyledButton>
                         )}
 
                         {variant === "transparent" &&
                             i !== buttons.length - 1 && (
-                                <Styles.Separator
+                                <Separator
                                     className="separator"
                                     $color={color}
                                 />
@@ -136,7 +141,7 @@ const ButtonGroup = forwardRef(
                     </Fragment>
                 )
             )}
-        </Styles.StyledButtonGroup>
+        </StyledButtonGroup>
     )
 )
 

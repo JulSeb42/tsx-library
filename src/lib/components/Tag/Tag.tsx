@@ -6,7 +6,7 @@ import classNames from "classnames"
 
 import { Icon } from "../../"
 
-import * as Styles from "./styles"
+import { StyledTag } from "./styles"
 import type { TagProps } from "./types"
 
 const Tag = forwardRef(
@@ -27,7 +27,7 @@ const Tag = forwardRef(
         }
 
         return (
-            <Styles.StyledTag
+            <StyledTag
                 ref={ref}
                 as={as}
                 className={classNames({ "with-icon": !!icons }, className)}
@@ -56,7 +56,7 @@ const Tag = forwardRef(
                 ) : (
                     icons?.right
                 )}
-            </Styles.StyledTag>
+            </StyledTag>
         )
     }
 )

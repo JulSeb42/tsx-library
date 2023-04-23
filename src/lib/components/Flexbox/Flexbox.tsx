@@ -5,7 +5,7 @@ import type { ForwardedRef } from "react"
 
 import { variableAllPaddings, variableSpacer } from "../../"
 
-import * as Styles from "./styles"
+import { StyledFlexbox } from "./styles"
 import type { FlexboxProps } from "./types"
 
 const Flexbox = forwardRef(
@@ -30,7 +30,7 @@ const Flexbox = forwardRef(
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         return (
-            <Styles.StyledFlexbox
+            <StyledFlexbox
                 ref={ref}
                 as={as}
                 style={{
@@ -53,7 +53,7 @@ const Flexbox = forwardRef(
                 {...rest}
             >
                 {children}
-            </Styles.StyledFlexbox>
+            </StyledFlexbox>
         )
     }
 )

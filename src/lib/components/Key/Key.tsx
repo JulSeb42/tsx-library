@@ -6,7 +6,7 @@ import classNames from "classnames"
 
 import { Flexbox, uuid } from "../../"
 
-import * as Styles from "./styles"
+import { StyledKey } from "./styles"
 import type { KeyProps } from "./types"
 
 const Key = forwardRef(
@@ -38,9 +38,9 @@ const Key = forwardRef(
                 >
                     {keys.map((key, i) => (
                         <Fragment key={uuid()}>
-                            <Styles.StyledKey className="key" {...props}>
+                            <StyledKey className="key" {...props}>
                                 {key}
-                            </Styles.StyledKey>
+                            </StyledKey>
 
                             {i !== keys?.length - 1 && (
                                 <span className="separator">+</span>
@@ -51,12 +51,9 @@ const Key = forwardRef(
             )
 
         return (
-            <Styles.StyledKey
-                className={classNames("key", className)}
-                {...props}
-            >
+            <StyledKey className={classNames("key", className)} {...props}>
                 {keys.join("")}
-            </Styles.StyledKey>
+            </StyledKey>
         )
     }
 )

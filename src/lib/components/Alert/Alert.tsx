@@ -5,7 +5,7 @@ import type { ForwardedRef } from "react"
 
 import { Text, stringifyPx } from "../../"
 
-import * as Styles from "./styles"
+import { StyledAlert } from "./styles"
 import type { AlertProps } from "./types"
 
 const Alert = forwardRef(
@@ -21,7 +21,7 @@ const Alert = forwardRef(
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         return (
-            <Styles.StyledAlert
+            <StyledAlert
                 ref={ref}
                 as={as ? as : typeof children === "string" ? Text : "div"}
                 style={{
@@ -33,7 +33,7 @@ const Alert = forwardRef(
                 {...rest}
             >
                 {children}
-            </Styles.StyledAlert>
+            </StyledAlert>
         )
     }
 )

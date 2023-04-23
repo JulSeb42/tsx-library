@@ -5,7 +5,7 @@ import type { ForwardedRef } from "react"
 
 import { Flexbox, Button } from "../.."
 
-import * as Styles from "./styles"
+import { StyledForm } from "./styles"
 import type { FormProps } from "./types"
 
 const Form = forwardRef(
@@ -22,7 +22,7 @@ const Form = forwardRef(
         ref?: ForwardedRef<HTMLFormElement>
     ) => {
         return (
-            <Styles.StyledForm ref={ref} {...rest}>
+            <StyledForm ref={ref} {...rest}>
                 {children}
 
                 {(buttonPrimary || buttonSecondary) && (
@@ -84,7 +84,7 @@ const Form = forwardRef(
                             ))}
                     </Flexbox>
                 )}
-            </Styles.StyledForm>
+            </StyledForm>
         )
     }
 )

@@ -5,7 +5,7 @@ import type { ForwardedRef } from "react"
 
 import { variablesAllLoaders } from "../variables-loader"
 
-import * as Styles from "../styles"
+import { StyledLoaderThree } from "../styles"
 import type { LoaderProps } from "../types"
 
 const LoaderThree = forwardRef(
@@ -21,7 +21,7 @@ const LoaderThree = forwardRef(
         ref?: ForwardedRef<HTMLSpanElement>
     ) => {
         return (
-            <Styles.StyledLoaderThree
+            <StyledLoaderThree
                 ref={ref}
                 as={as}
                 style={{
@@ -35,7 +35,7 @@ const LoaderThree = forwardRef(
                 <span />
                 <span />
                 <span />
-            </Styles.StyledLoaderThree>
+            </StyledLoaderThree>
         )
     }
 )

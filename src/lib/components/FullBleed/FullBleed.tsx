@@ -5,7 +5,7 @@ import type { ForwardedRef } from "react"
 
 import { stringifyPx, variableAllPaddings } from "../../"
 
-import * as Styles from "./styles"
+import { StyledFullBleed } from "./styles"
 import type { FullBleedProps } from "./types"
 
 const FullBleed = forwardRef(
@@ -22,7 +22,7 @@ const FullBleed = forwardRef(
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         return (
-            <Styles.StyledFullBleed
+            <StyledFullBleed
                 ref={ref}
                 as={as}
                 style={{
@@ -35,7 +35,7 @@ const FullBleed = forwardRef(
                 {...rest}
             >
                 {children}
-            </Styles.StyledFullBleed>
+            </StyledFullBleed>
         )
     }
 )

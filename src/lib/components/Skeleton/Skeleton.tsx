@@ -6,12 +6,12 @@ import classNames from "classnames"
 
 import { variableBorderRadius, stringifyPx } from "../../"
 
-import * as Styles from "./styles"
+import { StyledSkeleton, Shine, Card } from "./styles"
 import type { SkeletonProps, ShineProps, SkeletonCardProps } from "./types"
 
 export const SkeletonShine = forwardRef(
     ({ as, ...rest }: ShineProps, ref?: ForwardedRef<HTMLSpanElement>) => (
-        <Styles.Shine ref={ref} as={as} {...rest} />
+        <Shine ref={ref} as={as} {...rest} />
     )
 )
 
@@ -33,7 +33,7 @@ export const Skeleton = forwardRef(
         ref?: ForwardedRef<HTMLSpanElement>
     ) => {
         return (
-            <Styles.StyledSkeleton
+            <StyledSkeleton
                 ref={ref}
                 as={as}
                 style={{
@@ -52,7 +52,7 @@ export const Skeleton = forwardRef(
                 {...rest}
             >
                 {animation === "shine" && <SkeletonShine className="shine" />}
-            </Styles.StyledSkeleton>
+            </StyledSkeleton>
         )
     }
 )
@@ -75,7 +75,7 @@ export const SkeletonCard = forwardRef(
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         return (
-            <Styles.Card
+            <Card
                 ref={ref}
                 as={as}
                 padding={padding}
@@ -94,7 +94,7 @@ export const SkeletonCard = forwardRef(
                 {children}
 
                 {isShiny && <SkeletonShine className="shine" />}
-            </Styles.Card>
+            </Card>
         )
     }
 )

@@ -21,19 +21,19 @@ import type { ForwardedRef } from "react"
 import {} from "../../"
 import type {} from "../../types"
 
-import * as Styles from "./styles"
+import { Styled$(name) } from "./styles"
 import type { $(name)Props } from "./types"
 
 const $(name) = forwardRef(
 	({ as, ...rest }: $(name)Props, ref?: ForwardedRef<HTMLElement>) => {
 		return (
-			<Styles.Styled$(name)
+			<Styled$(name)
 				ref={ref}
 				as={as}
 				{...rest}
 			>
 
-			</Styles.Styled$(name)>
+			</Styled$(name)>
 		)
 	}
 )

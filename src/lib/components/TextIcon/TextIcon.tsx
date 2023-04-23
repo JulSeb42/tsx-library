@@ -5,7 +5,7 @@ import type { ForwardedRef } from "react"
 
 import { Icon, Text, stringifyPx } from "../../"
 
-import * as Styles from "./styles"
+import { StyledTextIcon, IconContainer } from "./styles"
 import type { TextIconProps, PossibleTextIconTags } from "./types"
 
 const TextIcon = forwardRef(
@@ -26,13 +26,13 @@ const TextIcon = forwardRef(
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         return (
-            <Styles.StyledTextIcon
+            <StyledTextIcon
                 ref={ref}
                 as={as}
                 className={className}
                 style={style}
             >
-                <Styles.IconContainer
+                <IconContainer
                     style={{
                         ["--text-icon-container-size" as any]: stringifyPx(
                             getIconSize(tag, display) * 1.5
@@ -46,7 +46,7 @@ const TextIcon = forwardRef(
                         color={iconColor}
                         className="icon"
                     />
-                </Styles.IconContainer>
+                </IconContainer>
 
                 {tag === "h1" ||
                 tag === "h2" ||
@@ -67,7 +67,7 @@ const TextIcon = forwardRef(
                         {children}
                     </Text>
                 )}
-            </Styles.StyledTextIcon>
+            </StyledTextIcon>
         )
     }
 )

@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react"
 
 import { uuid, variableSpacer } from "../../"
 
-import * as Styles from "./styles"
+import { StyledMasonry, Col } from "./styles"
 import type { MasonryProps } from "./types"
 
 const useEventListener = (
@@ -55,7 +55,7 @@ const Masonry = ({
     }
 
     return (
-        <Styles.StyledMasonry
+        <StyledMasonry
             ref={ref}
             as={as}
             style={{
@@ -65,11 +65,11 @@ const Masonry = ({
             {...rest}
         >
             {[...Array(numCols)].map((_, index) => (
-                <Styles.Col style={{ ...gapVar }} className="col" key={uuid()}>
+                <Col style={{ ...gapVar }} className="col" key={uuid()}>
                     {cols[index]}
-                </Styles.Col>
+                </Col>
             ))}
-        </Styles.StyledMasonry>
+        </StyledMasonry>
     )
 }
 

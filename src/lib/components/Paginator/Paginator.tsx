@@ -8,7 +8,7 @@ import { Text, ButtonIcon } from "../../"
 import { ChevronLeftIcon, ChevronRightIcon } from "../../icons"
 import { usePaginationNav } from "../../utils"
 
-import * as Styles from "./styles"
+import { StyledInput, StyledPaginator } from "./styles"
 import type { PaginatorProps } from "./types"
 
 const Paginator = forwardRef(
@@ -94,12 +94,12 @@ const Paginator = forwardRef(
         )
 
         return (
-            <Styles.StyledPaginator ref={ref} as={as} {...rest}>
+            <StyledPaginator ref={ref} as={as} {...rest}>
                 {isInputEditable ? (
                     <>
                         <span className="paginator-text">{texts.page}</span>
 
-                        <Styles.StyledInput
+                        <StyledInput
                             value={page || currentPage}
                             onChange={handleInput || handlePage}
                             type="number"
@@ -130,7 +130,7 @@ const Paginator = forwardRef(
                     className="paginator-button paginator-button-next"
                     {...buttonNext}
                 />
-            </Styles.StyledPaginator>
+            </StyledPaginator>
         )
     }
 )

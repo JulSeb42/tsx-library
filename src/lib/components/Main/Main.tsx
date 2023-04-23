@@ -8,7 +8,7 @@ import { stringifyPx } from "../../"
 import { getMainSize } from "./get-main-size"
 import { getMainContentSize } from "./get-main-content-size"
 
-import * as Styles from "./styles"
+import { StyledMain } from "./styles"
 import type { MainProps } from "./types"
 
 const Main = forwardRef(
@@ -27,7 +27,7 @@ const Main = forwardRef(
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         return (
-            <Styles.StyledMain
+            <StyledMain
                 ref={ref}
                 as={as}
                 style={{
@@ -47,7 +47,7 @@ const Main = forwardRef(
                 {...rest}
             >
                 {children}
-            </Styles.StyledMain>
+            </StyledMain>
         )
     }
 )

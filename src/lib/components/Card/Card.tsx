@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 
 import { variableBorderRadius, variableAllPaddings, stringifyPx } from "../../"
 
-import * as Styles from "./styles"
+import { StyledCard } from "./styles"
 import type { CardProps } from "./types"
 
 const Card = forwardRef(
@@ -30,7 +30,7 @@ const Card = forwardRef(
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         return (
-            <Styles.StyledCard
+            <StyledCard
                 ref={ref}
                 as={
                     as
@@ -60,7 +60,7 @@ const Card = forwardRef(
                 {...rest}
             >
                 {children}
-            </Styles.StyledCard>
+            </StyledCard>
         )
     }
 )

@@ -3,7 +3,7 @@
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
-import * as Styles from "./styles"
+import { StyledSrOnly } from "./styles"
 import type { SrOnlyProps } from "./types"
 
 const SrOnly = forwardRef(
@@ -11,9 +11,9 @@ const SrOnly = forwardRef(
         { as, children, ...rest }: SrOnlyProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => (
-        <Styles.StyledSrOnly ref={ref} as={as} {...rest}>
+        <StyledSrOnly ref={ref} as={as} {...rest}>
             {children}
-        </Styles.StyledSrOnly>
+        </StyledSrOnly>
     )
 )
 

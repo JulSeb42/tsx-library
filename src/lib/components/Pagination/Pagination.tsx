@@ -9,7 +9,7 @@ import { Icon } from "../../"
 import { ChevronLeftIcon, ChevronRightIcon } from "../../icons"
 import { usePaginationNav } from "../../utils"
 
-import * as Styles from "./styles"
+import { StyledPagination, Button } from "./styles"
 import type {
     PaginationContainerProps,
     PaginationProps,
@@ -31,7 +31,7 @@ export const PaginationButton = forwardRef(
         ref?: ForwardedRef<HTMLButtonElement>
     ) => {
         return (
-            <Styles.Button
+            <Button
                 as={as}
                 ref={ref}
                 disabled={disabled}
@@ -67,7 +67,7 @@ export const PaginationButton = forwardRef(
                 ) : (
                     buttonContent
                 )}
-            </Styles.Button>
+            </Button>
         )
     }
 )
@@ -78,9 +78,9 @@ export const PaginationContainer = forwardRef(
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         return (
-            <Styles.StyledPagination ref={ref} as={as} {...rest}>
+            <StyledPagination ref={ref} as={as} {...rest}>
                 {children}
-            </Styles.StyledPagination>
+            </StyledPagination>
         )
     }
 )

@@ -7,7 +7,14 @@ import classNames from "classnames"
 import { Text, Icon, stringifyPx } from "../../"
 import { CloseIcon } from "../../icons"
 
-import * as Styles from "./styles"
+import {
+    StyledToast,
+    Title,
+    TitleContainer,
+    IconContainer,
+    Content,
+    CloseButton,
+} from "./styles"
 import type { ToastProps } from "./types"
 
 const Toast = forwardRef(
@@ -28,10 +35,10 @@ const Toast = forwardRef(
     ) => {
         const [isClosed, setIsClosed] = useState(false)
 
-        const titleFn = () => <Styles.Title>{title}</Styles.Title>
+        const titleFn = () => <Title>{title}</Title>
 
         return (
-            <Styles.StyledToast
+            <StyledToast
                 ref={ref}
                 as={as}
                 style={{
@@ -43,9 +50,9 @@ const Toast = forwardRef(
                 {...rest}
             >
                 {icon || close ? (
-                    <Styles.TitleContainer>
+                    <TitleContainer>
                         {icon && (
-                            <Styles.IconContainer>
+                            <IconContainer>
                                 <Icon
                                     src={
                                         typeof icon === "object"
@@ -63,13 +70,13 @@ const Toast = forwardRef(
                                             : "primary"
                                     }
                                 />
-                            </Styles.IconContainer>
+                            </IconContainer>
                         )}
 
                         {titleFn()}
 
                         {close && (
-                            <Styles.CloseButton
+                            <CloseButton
                                 icon={
                                     typeof close === "string" ? (
                                         close
@@ -81,19 +88,17 @@ const Toast = forwardRef(
                                 onClick={() => setIsClosed(true)}
                             />
                         )}
-                    </Styles.TitleContainer>
+                    </TitleContainer>
                 ) : (
                     titleFn()
                 )}
 
                 {children && (
-                    <Styles.Content
-                        as={typeof children === "string" ? Text : "div"}
-                    >
+                    <Content as={typeof children === "string" ? Text : "div"}>
                         {children}
-                    </Styles.Content>
+                    </Content>
                 )}
-            </Styles.StyledToast>
+            </StyledToast>
         )
     }
 )

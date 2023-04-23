@@ -5,7 +5,7 @@ import type { ForwardedRef } from "react"
 
 import { Text, uuid } from "../../"
 
-import * as Styles from "./styles"
+import { StyledLinkify } from "./styles"
 import type { LinkifyProps } from "./types"
 
 const URL_REGEX =
@@ -32,7 +32,7 @@ const Linkify = forwardRef(
                 {words?.map((word: string) =>
                     word.match(URL_REGEX) ? (
                         <Fragment key={uuid()}>
-                            <Styles.StyledLinkify
+                            <StyledLinkify
                                 as={linkAs}
                                 href={word}
                                 target={blank ? "_blank" : undefined}
@@ -40,7 +40,7 @@ const Linkify = forwardRef(
                                 className="linkify"
                             >
                                 {word}
-                            </Styles.StyledLinkify>{" "}
+                            </StyledLinkify>{" "}
                         </Fragment>
                     ) : (
                         word + " "

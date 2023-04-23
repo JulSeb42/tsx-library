@@ -8,7 +8,7 @@ import classNames from "classnames"
 import { Icon, uuid, Text } from "../../"
 import { CheckIcon } from "../../icons"
 
-import * as Styles from "./styles"
+import { StyledStepper, Item, Number } from "./styles"
 import type { StepperProps, StepProps } from "./types"
 
 export const Step = forwardRef(
@@ -30,13 +30,13 @@ export const Step = forwardRef(
         ref?: ForwardedRef<HTMLSpanElement>
     ) => {
         return (
-            <Styles.Item
+            <Item
                 as={as}
                 ref={ref}
                 className={classNames("step", className)}
                 {...rest}
             >
-                <Styles.Number
+                <Number
                     className={classNames({ active: isActive }, "step-number")}
                 >
                     {isActive ? (
@@ -56,7 +56,7 @@ export const Step = forwardRef(
                     ) : (
                         number
                     )}
-                </Styles.Number>
+                </Number>
 
                 <Text tag="small" className="step-text">
                     {to ? (
@@ -81,7 +81,7 @@ export const Step = forwardRef(
                         children
                     )}
                 </Text>
-            </Styles.Item>
+            </Item>
         )
     }
 )
@@ -108,7 +108,7 @@ export const Stepper = forwardRef(
         }
 
         return (
-            <Styles.StyledStepper
+            <StyledStepper
                 ref={ref}
                 as={as}
                 className={className}
@@ -151,7 +151,7 @@ export const Stepper = forwardRef(
                           )
                       )
                     : children}
-            </Styles.StyledStepper>
+            </StyledStepper>
         )
     }
 )

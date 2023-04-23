@@ -6,7 +6,7 @@ import classNames from "classnames"
 
 import { SrOnly, getPercentage } from "../../"
 
-import * as Styles from "./styles"
+import { StyledProgressBar } from "./styles"
 import type { ProgressBarProps } from "./types"
 
 const ProgressBar = forwardRef(
@@ -25,7 +25,7 @@ const ProgressBar = forwardRef(
         ref?: ForwardedRef<HTMLMeterElement>
     ) => {
         return (
-            <Styles.StyledProgressBar
+            <StyledProgressBar
                 ref={ref}
                 as={as}
                 value={value}
@@ -44,7 +44,7 @@ const ProgressBar = forwardRef(
                 {...rest}
             >
                 <SrOnly>{`${value} / ${max}`}</SrOnly>
-            </Styles.StyledProgressBar>
+            </StyledProgressBar>
         )
     }
 )

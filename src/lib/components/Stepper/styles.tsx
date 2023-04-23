@@ -2,16 +2,7 @@
 
 import styled from "styled-components"
 
-import {
-    Breakpoints,
-    FontSizes,
-    FontWeights,
-    Mixins,
-    Radiuses,
-    Spacers,
-    Text,
-    Transitions,
-} from "../../"
+import { FontWeights, Mixins, Radiuses, Spacers } from "../../"
 
 import { setDefaultTheme } from "../../utils"
 
@@ -97,36 +88,6 @@ const Number = styled.span`
     }
 `
 
-const StyledText = styled(Text).attrs({
-    tag: "small",
-})`
-    font-size: ${FontSizes.Small};
-    text-decoration: none;
-    color: ${({ theme }) => theme.Font};
+setDefaultTheme([StyledStepper, Item, Number])
 
-    &.is-link {
-        transition: ${Transitions.Short};
-        color: ${({ theme }) =>
-            theme.ColorsHoverDefault({ $color: "primary" })};
-
-        @media ${Breakpoints.Hover} {
-            &:hover {
-                color: ${({ theme }) =>
-                    theme.ColorsHoverHover({
-                        $color: "primary",
-                    })};
-            }
-
-            &:active {
-                color: ${({ theme }) =>
-                    theme.ColorsHoverActive({
-                        $color: "primary",
-                    })};
-            }
-        }
-    }
-`
-
-setDefaultTheme([StyledStepper, Item, Number, StyledText])
-
-export { StyledStepper, Item, Number, StyledText }
+export { StyledStepper, Item, Number }

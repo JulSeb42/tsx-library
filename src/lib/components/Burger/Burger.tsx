@@ -6,7 +6,7 @@ import classNames from "classnames"
 
 import { stringifyPx } from "../../"
 
-import * as Styles from "./styles"
+import { StyledBurger } from "./styles"
 import type { BurgerProps } from "./types"
 
 const Burger = forwardRef(
@@ -27,7 +27,7 @@ const Burger = forwardRef(
         ref?: ForwardedRef<HTMLButtonElement>
     ) => {
         return (
-            <Styles.StyledBurger
+            <StyledBurger
                 ref={ref}
                 as={as}
                 aria-label={ariaLabel}
@@ -49,7 +49,7 @@ const Burger = forwardRef(
                 <span />
                 <span />
                 <span />
-            </Styles.StyledBurger>
+            </StyledBurger>
         )
     }
 )

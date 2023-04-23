@@ -21,7 +21,7 @@ const BaseCircle = styled.circle`
     }
 `
 
-const Circle = styled(BaseCircle)<{ $color?: AllColorsTypes }>`
+const StyledCircle = styled(BaseCircle)<{ $color?: AllColorsTypes }>`
     stroke: ${({ $color, theme }) => theme.AllColors({ $color })};
 `
 
@@ -44,9 +44,15 @@ const Value = styled(Text).attrs({ tag: "small" })`
 setDefaultTheme([
     ProgressCircleContainer,
     StyledProgressCircle,
-    Circle,
+    StyledCircle,
     Content,
     Value,
 ])
 
-export { ProgressCircleContainer, StyledProgressCircle, Circle, Content, Value }
+export {
+    ProgressCircleContainer,
+    StyledProgressCircle,
+    StyledCircle,
+    Content,
+    Value,
+}

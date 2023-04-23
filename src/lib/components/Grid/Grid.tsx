@@ -5,7 +5,7 @@ import type { ForwardedRef } from "react"
 
 import { variableAllPaddings, variableSpacer } from "../../"
 
-import * as Styles from "./styles"
+import { StyledGrid } from "./styles"
 import type { GridProps } from "./types"
 
 const Grid = forwardRef(
@@ -29,7 +29,7 @@ const Grid = forwardRef(
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         return (
-            <Styles.StyledGrid
+            <StyledGrid
                 ref={ref}
                 as={as}
                 style={{
@@ -53,7 +53,7 @@ const Grid = forwardRef(
                 {...rest}
             >
                 {children}
-            </Styles.StyledGrid>
+            </StyledGrid>
         )
     }
 )

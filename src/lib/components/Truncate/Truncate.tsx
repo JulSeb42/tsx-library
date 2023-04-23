@@ -2,7 +2,7 @@
 
 import React, { useLayoutEffect, useRef, useState } from "react"
 
-import * as Styles from "./styles"
+import { StyledTruncate, Number } from "./styles"
 import type { TruncateProps } from "./types"
 
 const Truncate = ({ as, children, ...rest }: TruncateProps) => {
@@ -76,13 +76,13 @@ const Truncate = ({ as, children, ...rest }: TruncateProps) => {
     }, [children])
 
     return (
-        <Styles.StyledTruncate ref={containerRef} as={as} {...rest}>
+        <StyledTruncate ref={containerRef} as={as} {...rest}>
             {children}
 
             {invisibleNumber > 0 && (
-                <Styles.Number className="invisible-number">{`+ ${invisibleNumber}`}</Styles.Number>
+                <Number className="invisible-number">{`+ ${invisibleNumber}`}</Number>
             )}
-        </Styles.StyledTruncate>
+        </StyledTruncate>
     )
 }
 

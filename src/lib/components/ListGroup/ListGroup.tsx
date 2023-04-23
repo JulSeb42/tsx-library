@@ -7,7 +7,13 @@ import classNames from "classnames"
 
 import { Text, convertDateShort, Flexbox, uuid, Badge } from "../../"
 
-import * as Styles from "./styles"
+import {
+    StyledListGroup,
+    NumberContainer,
+    Title,
+    BadgeContainer,
+    Item,
+} from "./styles"
 import type { ListGroupProps, ListGroupItemProps } from "./types"
 
 export const ListItem = ({
@@ -35,7 +41,7 @@ export const ListItem = ({
     )
 
     return (
-        <Styles.Item
+        <Item
             as={as ? as : onClick ? "button" : to ? Link : href ? "a" : "span"}
             ref={ref}
             href={href}
@@ -53,15 +59,15 @@ export const ListItem = ({
                 className="item-title-container"
             >
                 {number && (
-                    <Styles.NumberContainer className="item-number-container">
+                    <NumberContainer className="item-number-container">
                         {number}.
-                    </Styles.NumberContainer>
+                    </NumberContainer>
                 )}
 
-                <Styles.Title className="item-title">{text}</Styles.Title>
+                <Title className="item-title">{text}</Title>
 
                 {(badge || date) && (
-                    <Styles.BadgeContainer className="item-badge-container">
+                    <BadgeContainer className="item-badge-container">
                         {badge &&
                             (typeof badge === "object" ? (
                                 badge.icon ? (
@@ -88,7 +94,7 @@ export const ListItem = ({
                                 {convertDateShort(new Date(date))}
                             </Text>
                         )}
-                    </Styles.BadgeContainer>
+                    </BadgeContainer>
                 )}
             </Flexbox>
 
@@ -97,7 +103,7 @@ export const ListItem = ({
                     {subtext}
                 </Text>
             )}
-        </Styles.Item>
+        </Item>
     )
 }
 
@@ -107,7 +113,7 @@ export const ListGroup = forwardRef(
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         return (
-            <Styles.StyledListGroup ref={ref} as={as} {...rest}>
+            <StyledListGroup ref={ref} as={as} {...rest}>
                 {items.map((item, i) => (
                     <ListItem
                         item={item}
@@ -115,7 +121,7 @@ export const ListGroup = forwardRef(
                         key={uuid()}
                     />
                 ))}
-            </Styles.StyledListGroup>
+            </StyledListGroup>
         )
     }
 )

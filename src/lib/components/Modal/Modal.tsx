@@ -7,7 +7,7 @@ import classNames from "classnames"
 import { useKeyPress } from "../../"
 import { CloseIcon } from "../../icons"
 
-import * as Styles from "./styles"
+import { StyledModal, CloseButton, Content } from "./styles"
 import type { ModalProps } from "./types"
 
 const Modal = forwardRef(
@@ -35,7 +35,7 @@ const Modal = forwardRef(
         }, ["Escape"])
 
         return (
-            <Styles.StyledModal
+            <StyledModal
                 ref={ref}
                 as={as}
                 $isOpen={isOpen}
@@ -43,7 +43,7 @@ const Modal = forwardRef(
                 {...rest}
             >
                 {showCloseButton && (
-                    <Styles.CloseButton
+                    <CloseButton
                         icon={iconClose || <CloseIcon size={48 * 0.7} />}
                         variant="transparent"
                         color="white"
@@ -54,10 +54,8 @@ const Modal = forwardRef(
                     />
                 )}
 
-                <Styles.Content className="modal-content">
-                    {children}
-                </Styles.Content>
-            </Styles.StyledModal>
+                <Content className="modal-content">{children}</Content>
+            </StyledModal>
         )
     }
 )

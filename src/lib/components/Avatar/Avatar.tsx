@@ -5,7 +5,7 @@ import type { ForwardedRef } from "react"
 
 import { Image, Icon, stringifyPx } from "../../"
 
-import * as Styles from "./styles"
+import { StyledAvatar } from "./styles"
 import type { AvatarProps } from "./types"
 
 const Avatar = forwardRef(
@@ -26,7 +26,7 @@ const Avatar = forwardRef(
         ref?: ForwardedRef<HTMLSpanElement>
     ) => {
         return (
-            <Styles.StyledAvatar
+            <StyledAvatar
                 ref={ref}
                 as={as}
                 style={{
@@ -55,7 +55,7 @@ const Avatar = forwardRef(
                 ) : (
                     letter
                 )}
-            </Styles.StyledAvatar>
+            </StyledAvatar>
         )
     }
 )

@@ -5,7 +5,7 @@ import type { ForwardedRef } from "react"
 
 import { variableSpacer } from "../../"
 
-import * as Styles from "./styles"
+import { StyledSection } from "./styles"
 import type { SectionProps } from "./types"
 
 const Section = forwardRef(
@@ -13,7 +13,7 @@ const Section = forwardRef(
         { as, gap = "m", children, style, ...rest }: SectionProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => (
-        <Styles.StyledSection
+        <StyledSection
             ref={ref}
             as={as}
             style={{
@@ -23,7 +23,7 @@ const Section = forwardRef(
             {...rest}
         >
             {children}
-        </Styles.StyledSection>
+        </StyledSection>
     )
 )
 

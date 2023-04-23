@@ -6,7 +6,14 @@ import classNames from "classnames"
 
 import { Icon, SrOnly } from "../../"
 
-import * as Styles from "./styles"
+import {
+    StyledProgressCircle,
+    Content,
+    StyledCircle,
+    PROGRESS_CIRCLE_SIZE,
+    Value,
+    ProgressCircleContainer,
+} from "./styles"
 import type { ProgressCircleProps } from "./types"
 
 const cleanPercentage = (value: number) => {
@@ -21,7 +28,7 @@ const Circle = ({ value, color, animated, className }: ProgressCircleProps) => {
     const strokePct = ((100 - value) * circ) / 100
 
     return (
-        <Styles.Circle
+        <StyledCircle
             r={r}
             cx={100}
             cy={100}
@@ -57,9 +64,9 @@ const ProgressCircle = forwardRef(
         }, [pct])
 
         const progressFn = () => (
-            <Styles.StyledProgressCircle
-                width={Styles.PROGRESS_CIRCLE_SIZE}
-                height={Styles.PROGRESS_CIRCLE_SIZE}
+            <StyledProgressCircle
+                width={PROGRESS_CIRCLE_SIZE}
+                height={PROGRESS_CIRCLE_SIZE}
                 viewBox="0 0 200 200"
                 ref={ref}
                 {...rest}
@@ -73,30 +80,30 @@ const ProgressCircle = forwardRef(
                         color={color}
                     />
                 </g>
-            </Styles.StyledProgressCircle>
+            </StyledProgressCircle>
         )
 
         return showValue || icon ? (
-            <Styles.ProgressCircleContainer className={className}>
+            <ProgressCircleContainer className={className}>
                 {progressFn()}
 
-                <Styles.Content className="value-container">
+                <Content className="value-container">
                     {icon && (
                         <Icon
                             src={icon}
-                            size={Styles.PROGRESS_CIRCLE_SIZE * 0.4}
+                            size={PROGRESS_CIRCLE_SIZE * 0.4}
                             color="gray"
                             className="icon"
                         />
                     )}
 
                     {showValue ? (
-                        <Styles.Value className="value">{value}%</Styles.Value>
+                        <Value className="value">{value}%</Value>
                     ) : (
                         <SrOnly>{value}%</SrOnly>
                     )}
-                </Styles.Content>
-            </Styles.ProgressCircleContainer>
+                </Content>
+            </ProgressCircleContainer>
         ) : (
             progressFn()
         )

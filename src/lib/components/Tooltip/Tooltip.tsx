@@ -6,7 +6,7 @@ import classNames from "classnames"
 
 import { stringifyPx } from "../../"
 
-import * as Styles from "./styles"
+import { StyledTooltip, Tip } from "./styles"
 import type { TooltipProps } from "./types"
 
 const Tooltip = forwardRef(
@@ -22,14 +22,14 @@ const Tooltip = forwardRef(
         useLayoutEffect(() => setWidth(tooltipRef?.current?.offsetWidth), [])
 
         return (
-            <Styles.StyledTooltip
+            <StyledTooltip
                 ref={ref}
                 as={as}
                 onMouseEnter={() => setIsVisible(true)}
                 onMouseLeave={() => setIsVisible(false)}
                 {...rest}
             >
-                <Styles.Tip
+                <Tip
                     ref={tooltipRef}
                     className={classNames(
                         { visible: isVisible },
@@ -40,10 +40,10 @@ const Tooltip = forwardRef(
                     }}
                 >
                     {tooltip}
-                </Styles.Tip>
+                </Tip>
 
                 {children}
-            </Styles.StyledTooltip>
+            </StyledTooltip>
         )
     }
 )

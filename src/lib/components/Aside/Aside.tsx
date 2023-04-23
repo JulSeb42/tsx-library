@@ -6,7 +6,7 @@ import type { ForwardedRef } from "react"
 import { stringifyPx } from "../../"
 import { getAsideSize } from "./get-aside-size"
 
-import * as Styles from "./styles"
+import { StyledAside } from "./styles"
 import type { AsideProps } from "./types"
 
 const Aside = forwardRef(
@@ -23,7 +23,7 @@ const Aside = forwardRef(
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         return (
-            <Styles.StyledAside
+            <StyledAside
                 ref={ref}
                 as={as}
                 data-position={position}
@@ -36,7 +36,7 @@ const Aside = forwardRef(
                 {...rest}
             >
                 {children}
-            </Styles.StyledAside>
+            </StyledAside>
         )
     }
 )

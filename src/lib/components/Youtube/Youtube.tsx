@@ -5,7 +5,7 @@ import type { ForwardedRef } from "react"
 
 import { convertYoutube, stringifyPx } from "../../"
 
-import * as Styles from "./styles"
+import { StyledYoutube } from "./styles"
 import type { YoutubeProps } from "./types"
 
 const Youtube = forwardRef(
@@ -21,7 +21,7 @@ const Youtube = forwardRef(
         ref?: ForwardedRef<HTMLIFrameElement>
     ) => {
         return (
-            <Styles.StyledYoutube
+            <StyledYoutube
                 ref={ref}
                 as={as}
                 src={convertYoutube(src)}

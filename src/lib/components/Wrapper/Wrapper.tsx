@@ -3,7 +3,7 @@
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
-import * as Styles from "./styles"
+import { StyledWrapper } from "./styles"
 import type { WrapperProps } from "./types"
 
 const Wrapper = forwardRef(
@@ -11,14 +11,9 @@ const Wrapper = forwardRef(
         { as, template = "1col", children, style, ...rest }: WrapperProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => (
-        <Styles.StyledWrapper
-            ref={ref}
-            as={as}
-            data-template={template}
-            {...rest}
-        >
+        <StyledWrapper ref={ref} as={as} data-template={template} {...rest}>
             {children}
-        </Styles.StyledWrapper>
+        </StyledWrapper>
     )
 )
 
