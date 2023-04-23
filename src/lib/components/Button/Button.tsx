@@ -7,7 +7,7 @@ import classNames from "classnames"
 
 import { Loader, Icon } from "../../"
 
-import * as Styles from "./styles"
+import { StyledButton } from "./styles"
 import type { ButtonProps } from "./types"
 
 const Button = forwardRef(
@@ -32,7 +32,7 @@ const Button = forwardRef(
         }: ButtonProps,
         ref?: ForwardedRef<HTMLButtonElement>
     ) => (
-        <Styles.StyledButton
+        <StyledButton
             ref={ref}
             as={as ? as : to ? Link : href ? "a" : "button"}
             to={to === "prev" ? -1 : to}
@@ -41,12 +41,9 @@ const Button = forwardRef(
             rel={(href || to) && blank && "noreferrer noopener"}
             type={href || to ? undefined : type}
             disabled={!!isLoading || disabled}
-            className={classNames(
-                variant,
-                { small: size === "small" },
-                { "no-padding": noPadding },
-                className
-            )}
+            className={classNames({ "no-padding": noPadding }, className)}
+            data-variant={variant}
+            data-size={size}
             $color={color}
             {...rest}
         >
@@ -92,7 +89,7 @@ const Button = forwardRef(
                 ) : (
                     icons.right
                 ))}
-        </Styles.StyledButton>
+        </StyledButton>
     )
 )
 

@@ -2,16 +2,17 @@
 
 import React, { forwardRef, useState } from "react"
 import type { ForwardedRef } from "react"
-import {
-    createSearchParams,
-    useNavigate,
-    useSearchParams,
-} from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import classNames from "classnames"
 
 import { Text, uuid } from "../../"
 
-import * as Styles from "./styles"
+import {
+    StyledTabs,
+    StyledTabsButtonsContainer,
+    StyledTabButton,
+    StyledTabItem,
+} from "./styles"
 import type {
     TabsProps,
     TabsContainerProps,
@@ -26,9 +27,9 @@ export const TabsContainer = forwardRef(
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         return (
-            <Styles.StyledTabs ref={ref} as={as} {...rest}>
+            <StyledTabs ref={ref} as={as} {...rest}>
                 {children}
-            </Styles.StyledTabs>
+            </StyledTabs>
         )
     }
 )
@@ -40,18 +41,17 @@ export const TabsButtonsContainer = forwardRef(
             variant = "basic",
             justify = "start",
             children = [],
-            className,
             style,
             ...rest
         }: TabsButtonsContainerProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         return (
-            <Styles.ButtonsContainer
+            <StyledTabsButtonsContainer
                 as={as}
                 ref={ref}
-                className={classNames(variant, className)}
                 data-justify={justify}
+                data-variant={variant}
                 style={{
                     ["--col-number" as any]: children?.length,
                     ...style,
@@ -59,7 +59,7 @@ export const TabsButtonsContainer = forwardRef(
                 {...rest}
             >
                 {children}
-            </Styles.ButtonsContainer>
+            </StyledTabsButtonsContainer>
         )
     }
 )
@@ -79,34 +79,35 @@ export const TabButton = forwardRef(
         ref?: ForwardedRef<HTMLButtonElement>
     ) => {
         return (
-            <Styles.Button
+            <StyledTabButton
                 as={as}
                 ref={ref}
                 onClick={onClick}
-                className={classNames(variant, { active: isActive }, className)}
+                className={classNames({ active: isActive }, className)}
+                data-variant={variant}
                 data-justify={justify}
                 {...rest}
             >
                 {children}
-            </Styles.Button>
+            </StyledTabButton>
         )
     }
 )
 
 export const TabItem = forwardRef(
     (
-        { as, children, isActive, className, ...rest }: TabItemProps,
+        { as, children, isActive, ...rest }: TabItemProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         return (
-            <Styles.TabItem
+            <StyledTabItem
                 as={as ? as : typeof children === "string" ? Text : "div"}
                 ref={ref}
-                className={classNames({ active: isActive }, className)}
+                hidden={!isActive}
                 {...rest}
             >
                 {isActive && children}
-            </Styles.TabItem>
+            </StyledTabItem>
         )
     }
 )
@@ -125,33 +126,25 @@ export const Tabs = forwardRef(
         }: TabsProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
-        const [q] = useSearchParams()
-        const tab = q.get("tab") || active
+        const [searchParams, setSearchParams] = useSearchParams()
+        const tab = searchParams.get("tab") || active
 
         const [isActive, setIsActive] = useState<number>(
             typeof tab === "string" ? parseInt(tab) : tab
         )
 
-        const navigate = useNavigate()
-
         const handleButton = (activeTab: number) => {
             setIsActive(activeTab)
 
             if (showInUrl) {
-                queries
-                    ? navigate({
-                          pathname: "",
-                          search: createSearchParams({
-                              tab: activeTab.toString(),
+                setSearchParams(
+                    queries
+                        ? {
+                              tab: activeTab?.toString(),
                               ...Object.fromEntries(queries),
-                          }).toString(),
-                      })
-                    : navigate({
-                          pathname: "",
-                          search: createSearchParams({
-                              tab: activeTab.toString(),
-                          }).toString(),
-                      })
+                          }
+                        : { tab: activeTab?.toString() }
+                )
             }
         }
 

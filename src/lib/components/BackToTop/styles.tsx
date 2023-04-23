@@ -28,9 +28,7 @@ const StyledBackToTop = styled.div`
     }
 `
 
-const ButtonText = styled(Text).attrs({ tag: "small" })<{
-    $isVisible?: boolean
-}>`
+const ButtonText = styled(Text).attrs({ tag: "small" })`
     opacity: 0;
     visibility: hidden;
     transition: ${Transitions.Short};

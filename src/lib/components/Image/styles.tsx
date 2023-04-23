@@ -13,8 +13,8 @@ const Img = styled.img`
     position: relative;
     z-index: 0;
     ${Mixins.ImgSizeVar("image")}
-    ${Mixins.BorderRadiusVar("image")};
-    ${Mixins.DataFit()};
+    ${Mixins.BorderRadiusVar("image")}
+    ${Mixins.DataFit()}
 `
 
 export default Img
@@ -29,24 +29,23 @@ const ImgContainer = styled.figure`
     ${Mixins.BorderRadiusVar("image")};
 `
 
-const CaptionBase = styled(Text).attrs({ as: "figcaption" })`
+const Caption = styled(Text).attrs({ as: "figcaption" })`
     position: absolute;
     z-index: 1;
     bottom: 0;
     left: 0;
     width: 100%;
     padding: ${Spacers.M};
-`
 
-const Caption = styled(CaptionBase)<{
-    $background?: "black" | "white"
-}>`
-    background-color: ${({ $background }) =>
-        $background === "white"
-            ? Overlays.Plain.White80
-            : Overlays.Plain.Black80};
-    color: ${({ $background, theme }) =>
-        $background === "white" ? theme.Black : theme.White};
+    &[data-background="black"] {
+        background-color: ${Overlays.Plain.Black80};
+        color: ${({ theme }) => theme.White};
+    }
+
+    &[data-background="white"] {
+        background-color: ${Overlays.Plain.White80};
+        color: ${({ theme }) => theme.Black};
+    }
 `
 
 setDefaultTheme([ImgContainer, Caption])

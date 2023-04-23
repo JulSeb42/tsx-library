@@ -6,7 +6,14 @@ import classNames from "classnames"
 
 import { Text, uuid } from "../../"
 
-import * as Styles from "./styles"
+import {
+    StyledAccordion,
+    StyledIconPlus,
+    Item,
+    Content,
+    IconContainer,
+    Button,
+} from "./styles"
 import type {
     AccordionProps,
     ItemProps,
@@ -19,14 +26,15 @@ export const AccordionContainer = forwardRef(
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         return (
-            <Styles.StyledAccordion
+            <StyledAccordion
                 ref={ref}
                 as={as}
-                className={classNames(variant, className, "accordion")}
+                className={classNames(className, "accordion")}
+                data-variant={variant}
                 {...rest}
             >
                 {children}
-            </Styles.StyledAccordion>
+            </StyledAccordion>
         )
     }
 )
@@ -47,42 +55,36 @@ export const AccordionItem = forwardRef(
         const [open, setOpen] = useState(isOpen)
 
         return (
-            <Styles.Item as={as} ref={ref} className="accordion-item" {...rest}>
-                <Styles.Button
+            <Item as={as} ref={ref} className="accordion-item" {...rest}>
+                <Button
                     onClick={() => setOpen(!open)}
                     className={classNames(
-                        variant,
                         { open: open },
                         { noBorder: noBorder },
                         "accordion-button"
                     )}
+                    data-variant={variant}
                 >
                     {title}
 
-                    <Styles.IconContainer
+                    <IconContainer
                         className={classNames(
                             { open: open },
                             "accordion-icon-container"
                         )}
                     >
-                        <Styles.StyledIconPlus
-                            size={20}
-                            className="accordion-icon"
-                        />
-                    </Styles.IconContainer>
-                </Styles.Button>
+                        <StyledIconPlus size={20} className="accordion-icon" />
+                    </IconContainer>
+                </Button>
 
-                <Styles.Content
+                <Content
                     as={typeof children === "string" ? Text : "div"}
-                    className={classNames(
-                        { open: open },
-                        variant,
-                        "accordion-content"
-                    )}
+                    className={classNames({ open: open }, "accordion-content")}
+                    data-variant={variant}
                 >
                     {children}
-                </Styles.Content>
-            </Styles.Item>
+                </Content>
+            </Item>
         )
     }
 )

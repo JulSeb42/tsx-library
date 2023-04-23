@@ -42,29 +42,34 @@ export const Message = forwardRef(
             ...rest
         }: MessageProps,
         ref?: ForwardedRef<HTMLDivElement>
-    ) => (
-        <Flexbox
-            as={as}
-            ref={ref}
-            alignItems={type === "sent" ? "flex-end" : "flex-start"}
-            flexDirection="column"
-            gap="xxs"
-            className={classNames("message-container", className)}
-            {...rest}
-        >
-            <StyledMessage data-message-type={type} className="message-text">
-                {text}
-            </StyledMessage>
+    ) => {
+        return (
+            <Flexbox
+                as={as}
+                ref={ref}
+                alignItems={type === "sent" ? "flex-end" : "flex-start"}
+                flexDirection="column"
+                gap="xxs"
+                className={classNames("message-container", className)}
+                {...rest}
+            >
+                <StyledMessage
+                    data-message-type={type}
+                    className="message-text"
+                >
+                    {text}
+                </StyledMessage>
 
-            {(date || time) && (
-                <DateTime className="date-time">
-                    {date && date}
-                    {date && time && ` ${textDateTime} `}
-                    {time && time}
-                </DateTime>
-            )}
-        </Flexbox>
-    )
+                {(date || time) && (
+                    <DateTime className="date-time">
+                        {date && date}
+                        {date && time && ` ${textDateTime} `}
+                        {time && time}
+                    </DateTime>
+                )}
+            </Flexbox>
+        )
+    }
 )
 
 export const Messaging = forwardRef(

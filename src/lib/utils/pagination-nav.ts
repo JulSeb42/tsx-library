@@ -1,32 +1,26 @@
 /*=============================================== Pagination navigation ===============================================*/
 
-import { useNavigate, createSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 
 export const usePaginationNav = (
     currentPage: number,
     setCurrentPage: (currentPage: number) => void,
     queries?: string[][]
 ) => {
-    const navigate = useNavigate()
+    // eslint-disable-next-line
+    const [_, setSearchParams] = useSearchParams()
 
     const handlePrev = () => {
         setCurrentPage(currentPage - 1)
 
-        queries
-            ? navigate({
-                  pathname: "",
-
-                  search: createSearchParams({
+        setSearchParams(
+            queries
+                ? {
                       page: (currentPage - 1).toString(),
                       ...Object.fromEntries(queries),
-                  }).toString(),
-              })
-            : navigate({
-                  pathname: "",
-                  search: createSearchParams({
-                      page: (currentPage - 1).toString(),
-                  }).toString(),
-              })
+                  }
+                : { page: (currentPage - 1).toString() }
+        )
 
         window.scrollTo(0, 0)
     }
@@ -34,20 +28,14 @@ export const usePaginationNav = (
     const handleNext = () => {
         setCurrentPage(currentPage + 1)
 
-        queries
-            ? navigate({
-                  pathname: "",
-                  search: createSearchParams({
+        setSearchParams(
+            queries
+                ? {
                       page: (currentPage + 1).toString(),
                       ...Object.fromEntries(queries),
-                  }).toString(),
-              })
-            : navigate({
-                  pathname: "",
-                  search: createSearchParams({
-                      page: (currentPage + 1).toString(),
-                  }).toString(),
-              })
+                  }
+                : { page: (currentPage + 1).toString() }
+        )
 
         window.scrollTo(0, 0)
     }

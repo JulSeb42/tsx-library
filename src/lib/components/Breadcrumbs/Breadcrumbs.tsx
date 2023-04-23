@@ -7,7 +7,7 @@ import { Link } from "react-router-dom"
 import { Icon, uuid } from "../../"
 import { ChevronRightIcon } from "../../icons"
 
-import * as Styles from "./styles"
+import { StyledBreadcrumbs, Separator, Item } from "./styles"
 import type { BreadcrumbsProps } from "./types"
 
 const Breadcrumbs = forwardRef(
@@ -23,7 +23,7 @@ const Breadcrumbs = forwardRef(
         }: BreadcrumbsProps,
         ref?: ForwardedRef<HTMLParagraphElement>
     ) => (
-        <Styles.StyledBreadcrumbs
+        <StyledBreadcrumbs
             ref={ref}
             as={as}
             $separator={separator}
@@ -33,17 +33,17 @@ const Breadcrumbs = forwardRef(
             {items
                 ? items.map(({ text, href, to }) => (
                       <Fragment key={uuid()}>
-                          <Styles.Item
+                          <Item
                               as={to ? Link : href ? "a" : "span"}
                               href={href ? href : undefined}
                               to={to ? to : undefined}
                               className="breadcrumbs-item"
                           >
                               {text}
-                          </Styles.Item>
+                          </Item>
 
                           {(href || to) && (
-                              <Styles.Separator
+                              <Separator
                                   $separator={separator || "slash"}
                                   $customIcon={!!customIcon}
                                   className="breadcrumbs-separator"
@@ -66,12 +66,12 @@ const Breadcrumbs = forwardRef(
                                   ) : (
                                       "/"
                                   )}
-                              </Styles.Separator>
+                              </Separator>
                           )}
                       </Fragment>
                   ))
                 : children}
-        </Styles.StyledBreadcrumbs>
+        </StyledBreadcrumbs>
     )
 )
 

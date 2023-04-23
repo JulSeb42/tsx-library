@@ -2,12 +2,11 @@
 
 import type { ElementType, HTMLAttributes } from "react"
 
-import type { AllColorsTypes, RadiusesTypes } from "../../types"
+import type { AllColorsTypes } from "../../types"
 
 interface AvatarPropsBase extends HTMLAttributes<HTMLSpanElement> {
     as?: ElementType
     size?: number
-    borderRadius?: RadiusesTypes
 }
 
 interface AvatarPropsContent1 extends AvatarPropsBase {

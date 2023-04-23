@@ -23,7 +23,7 @@ const ButtonBase = styled.button`
     })};
     border-radius: ${Radiuses.M};
 
-    &.small {
+    &[data-size="small"] {
         font-size: ${FontSizes.Small};
         padding: ${Spacers.XXS} ${Spacers.XS};
     }
@@ -32,7 +32,7 @@ const ButtonBase = styled.button`
 const StyledButton = styled(ButtonBase)<{
     $color?: ColorsHoverTypes
 }>`
-    &.plain {
+    &[data-variant="plain"] {
         background-color: ${({ theme, $color }) =>
             theme.ColorsHoverDefault({ $color })};
         color: ${({ $color, theme }) =>
@@ -60,7 +60,7 @@ const StyledButton = styled(ButtonBase)<{
         }
     }
 
-    &.transparent {
+    &[data-variant="transparent"] {
         background-color: transparent;
         color: ${({ $color, theme }) => theme.ColorsHoverDefault({ $color })};
 
@@ -85,7 +85,7 @@ const StyledButton = styled(ButtonBase)<{
         }
     }
 
-    &.ghost {
+    &[data-variant="ghost"] {
         background-color: ${({ theme, $color }) =>
             theme.ColorsGhostDefault({ $color })};
         color: ${({ $color, theme }) =>
@@ -113,7 +113,7 @@ const StyledButton = styled(ButtonBase)<{
         }
     }
 
-    &.outline {
+    &[data-variant="outline"] {
         background-color: transparent;
         border-color: ${({ $color, theme }) =>
             theme.ColorsHoverDefault({ $color })};

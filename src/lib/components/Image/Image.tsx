@@ -7,7 +7,7 @@ import classNames from "classnames"
 import { Fallback } from "../Fallback"
 import { variableBorderRadius, stringifyPx } from "../../"
 
-import * as Styles from "./styles"
+import { ImgContainer, Caption } from "./styles"
 import type { ImageProps } from "./types"
 
 const Img = lazy(() => import("./styles"))
@@ -56,7 +56,7 @@ const Image = forwardRef(
         return (
             <Suspense fallback={<Fallback style={sizeStyles} />}>
                 {caption ? (
-                    <Styles.ImgContainer
+                    <ImgContainer
                         as={
                             typeof caption === "object" && caption.asContainer
                                 ? caption.asContainer
@@ -69,8 +69,8 @@ const Image = forwardRef(
                     >
                         {img()}
 
-                        <Styles.Caption
-                            $background={
+                        <Caption
+                            data-background={
                                 typeof caption === "object"
                                     ? caption.background
                                     : "black"
@@ -80,8 +80,8 @@ const Image = forwardRef(
                             {typeof caption === "object"
                                 ? caption.text
                                 : caption}
-                        </Styles.Caption>
-                    </Styles.ImgContainer>
+                        </Caption>
+                    </ImgContainer>
                 ) : (
                     img()
                 )}

@@ -14,7 +14,7 @@ const ButtonIconPage = () => {
                 color="secondary"
                 label="email"
                 showLabel
-                size={120}
+                // size={120}
             />
 
             <Flexbox gap="xs">

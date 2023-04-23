@@ -62,7 +62,6 @@ const Masonry = ({
                 ...gapVar,
                 ...style,
             }}
-            $gap={gap}
             {...rest}
         >
             {[...Array(numCols)].map((_, index) => (

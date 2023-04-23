@@ -1,9 +1,9 @@
 /*=============================================== Autocomplete component ===============================================*/
 
-import classNames from "classnames"
-import Fuse from "fuse.js"
+import React, { forwardRef, useEffect, useRef, useState } from "react"
 import type { ChangeEvent, ForwardedRef } from "react"
-import { forwardRef, useEffect, useRef, useState } from "react"
+import Fuse from "fuse.js"
+import classNames from "classnames"
 
 import {
     Key,

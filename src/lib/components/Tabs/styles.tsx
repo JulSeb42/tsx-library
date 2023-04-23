@@ -13,10 +13,10 @@ const StyledTabs = styled.div`
     })};
 `
 
-const ButtonsContainer = styled.div`
+const StyledTabsButtonsContainer = styled.div`
     position: relative;
 
-    &.basic {
+    &[data-variant="basic"] {
         &:after {
             content: "";
             position: absolute;
@@ -29,7 +29,7 @@ const ButtonsContainer = styled.div`
         }
     }
 
-    &.rounded {
+    &[data-variant="rounded"] {
         background-color: ${({ theme }) => theme.Gray50};
         border-radius: ${Radiuses.M};
         padding: ${Spacers.XS};
@@ -47,11 +47,11 @@ const ButtonsContainer = styled.div`
             flex-direction: column;
         }
 
-        &.basic {
+        &[data-variant="basic"] {
             width: 100%;
         }
 
-        &.rounded {
+        &[data-variant="rounded"] {
             width: fit-content;
         }
     }
@@ -68,12 +68,12 @@ const ButtonsContainer = styled.div`
     }
 `
 
-const Button = styled.button`
+const StyledTabButton = styled.button`
     border: none;
     padding: 0;
     background-color: transparent;
 
-    &.basic {
+    &[data-variant="basic"] {
         min-width: 100px;
         text-align: left;
         padding-bottom: ${Spacers.XXS};
@@ -90,7 +90,7 @@ const Button = styled.button`
         }
     }
 
-    &.rounded {
+    &[data-variant="rounded"] {
         border-radius: ${Radiuses.S};
         padding: ${Spacers.XXS};
         color: ${({ theme }) => theme.Font};
@@ -121,17 +121,25 @@ const Button = styled.button`
     }
 `
 
-const TabItem = styled.div`
-    display: none;
-
-    &.active {
+const StyledTabItem = styled.div`
+    &:not([hidden]) {
         ${Mixins.Flexbox({
             $flexDirection: "column",
             $alignItems: "stretch",
-        })};
+        })}
     }
 `
 
-setDefaultTheme([StyledTabs, ButtonsContainer, Button, TabItem])
+setDefaultTheme([
+    StyledTabs,
+    StyledTabsButtonsContainer,
+    StyledTabButton,
+    StyledTabItem,
+])
 
-export { StyledTabs, ButtonsContainer, Button, TabItem }
+export {
+    StyledTabs,
+    StyledTabsButtonsContainer,
+    StyledTabButton,
+    StyledTabItem,
+}

@@ -7,7 +7,11 @@ import classNames from "classnames"
 
 import { useClickOutside, Icon, uuid } from "../../"
 
-import * as Styles from "./styles"
+import {
+    StyledDropdownContainer,
+    StyledDropdown,
+    StyledDropdownItem,
+} from "./styles"
 import type {
     DropdownProps,
     DropdownItemProps,
@@ -19,27 +23,20 @@ export const DropdownContainer = forwardRef(
         {
             as,
             children,
-            className,
             justifyContent = "flex-start",
             ...rest
         }: DropdownContainerProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => (
-        <Styles.DropdownContainer
+        <StyledDropdownContainer
             ref={ref}
             as={as}
-            className={classNames(
-                {
-                    "justify-left": justifyContent === "flex-start",
-                },
-                { "justify-right": justifyContent === "flex-end" },
-                className
-            )}
             justifyContent={justifyContent}
+            data-justify={justifyContent === "flex-end" ? "right" : "left"}
             {...rest}
         >
             {children}
-        </Styles.DropdownContainer>
+        </StyledDropdownContainer>
     )
 )
 
@@ -58,7 +55,7 @@ export const DropdownItem = forwardRef(
         ref?: ForwardedRef<HTMLButtonElement & HTMLAnchorElement>
     ) => {
         return (
-            <Styles.DropdownItem
+            <StyledDropdownItem
                 as={as ? as : to ? Link : href ? "a" : "button"}
                 ref={ref}
                 to={to}
@@ -76,7 +73,7 @@ export const DropdownItem = forwardRef(
                     ))}
 
                 {text}
-            </Styles.DropdownItem>
+            </StyledDropdownItem>
         )
     }
 )
@@ -96,7 +93,7 @@ export const Dropdown = ({
     useClickOutside(el, onClickOutside)
 
     return (
-        <Styles.StyledDropdown
+        <StyledDropdown
             ref={el}
             as={as}
             className={classNames({ open: isOpen }, className)}
@@ -137,6 +134,6 @@ export const Dropdown = ({
                       )
                   })
                 : children}
-        </Styles.StyledDropdown>
+        </StyledDropdown>
     )
 }

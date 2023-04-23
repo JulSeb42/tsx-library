@@ -7,6 +7,8 @@ import { Breakpoints, Mixins } from "../../"
 import { setDefaultTheme } from "../../utils"
 
 const StyledMain = styled.main`
+    width: var(--main-size);
+    min-height: var(--main-min-height, 100vh);
     ${Mixins.Grid({
         $alignContent: "start",
         $alignItems: "start",
@@ -16,15 +18,13 @@ const StyledMain = styled.main`
         $padding: {
             topBottom: "xxl",
         },
-    })};
-    width: var(--main-size);
-    min-height: var(--main-min-height, 100vh);
+    })}
 
-    &.position-one {
+    &[data-position="1"] {
         grid-column: 2;
     }
 
-    &.position-two {
+    &[data-position="2"] {
         grid-column: 3;
     }
 

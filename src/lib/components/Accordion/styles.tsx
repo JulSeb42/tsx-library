@@ -16,11 +16,11 @@ const StyledAccordion = styled.div`
         $alignItems: "stretch",
     })};
 
-    &.basic {
+    &[data-variant="basic"] {
         gap: ${Spacers.XXS};
     }
 
-    &.rounded {
+    &[data-variant="rounded"] {
         border-radius: ${Radiuses.M};
         overflow: hidden;
         border: 1px solid ${({ theme }) => theme.Gray200};
@@ -35,18 +35,18 @@ const Content = styled.div`
     transition: ${Transitions.Long};
     color: ${({ theme }) => theme.Font};
 
-    &.rounded {
+    &[data-variant="rounded"] {
         padding: 0 ${Spacers.S};
     }
 
     &.open {
         max-height: 300vh;
 
-        &.basic {
+        &[data-variant="basic"] {
             padding: ${Spacers.S} 0;
         }
 
-        &.rounded {
+        &[data-variant="rounded"] {
             padding: ${Spacers.S};
         }
     }
@@ -69,7 +69,7 @@ const Button = styled.button`
     border: none;
     border-bottom: 1px solid;
 
-    &.basic {
+    &[data-variant="basic"] {
         padding: 0;
         padding-bottom: ${Spacers.XXS};
         border-bottom-color: ${({ theme }) => theme.Gray200};
@@ -78,7 +78,7 @@ const Button = styled.button`
         height: 29px;
     }
 
-    &.rounded {
+    &[data-variant="rounded"] {
         padding: ${Spacers.S};
         border-bottom-color: ${({ theme }) => theme.Background};
         background-color: ${({ theme }) => theme.Primary500};

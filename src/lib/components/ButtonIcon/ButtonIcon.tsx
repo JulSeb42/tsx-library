@@ -7,14 +7,14 @@ import classNames from "classnames"
 
 import { useTouchScreen, Icon, Loader, stringifyPx } from "../../"
 
-import * as Styles from "./styles"
+import { StyledButtonIcon, TooltipContainer, Tip } from "./styles"
 import type { ButtonIconProps, TipsProps } from "./types"
 
 const Tooltip = ({
     label,
     children,
     size,
-    bottom = "125%",
+    bottom,
     tipPosition = "top",
     className,
 }: TipsProps) => {
@@ -28,7 +28,7 @@ const Tooltip = ({
     const [isVisible, setIsVisible] = useState(false)
 
     return (
-        <Styles.TooltipContainer
+        <TooltipContainer
             onMouseEnter={() => setIsVisible(true)}
             onMouseLeave={() => setIsVisible(false)}
             className={classNames(className, "tooltip-container")}
@@ -36,20 +36,20 @@ const Tooltip = ({
                 ["--button-size" as any]: size && stringifyPx(size),
             }}
         >
-            <Styles.Tip
+            <Tip
                 ref={ref}
                 className={classNames("tip", { visible: isVisible })}
                 style={{
                     ["--tip-width" as any]: stringifyPx(width),
+                    ["--tip-position" as any]: stringifyPx(bottom),
                 }}
-                $bottom={bottom}
-                $position={tipPosition}
+                data-position={tipPosition}
             >
                 {label}
-            </Styles.Tip>
+            </Tip>
 
             {children}
-        </Styles.TooltipContainer>
+        </TooltipContainer>
     )
 }
 
@@ -78,7 +78,7 @@ const ButtonIcon = forwardRef(
         ref?: ForwardedRef<HTMLButtonElement>
     ) => {
         const buttonFn = () => (
-            <Styles.StyledButtonIcon
+            <StyledButtonIcon
                 as={as ? as : to ? Link : href ? "a" : "button"}
                 ref={ref}
                 aria-label={label}
@@ -88,13 +88,13 @@ const ButtonIcon = forwardRef(
                 target={(href || to) && blank && "_blank"}
                 rel={(href || to) && blank && "noreferrer noopener"}
                 disabled={!!isLoading || disabled}
-                className={classNames(variant, className)}
+                className={className}
+                data-variant={variant}
                 style={{
                     ["--button-size" as any]: size && stringifyPx(size),
                     ...style,
                 }}
                 $color={color}
-                $variant={variant}
                 {...rest}
             >
                 {isLoading ? (
@@ -113,7 +113,7 @@ const ButtonIcon = forwardRef(
                 ) : (
                     icon
                 )}
-            </Styles.StyledButtonIcon>
+            </StyledButtonIcon>
         )
 
         const isTouchScreen = useTouchScreen()

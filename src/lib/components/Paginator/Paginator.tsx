@@ -2,11 +2,7 @@
 
 import React, { forwardRef, useState } from "react"
 import type { ForwardedRef, ChangeEvent } from "react"
-import {
-    useNavigate,
-    createSearchParams,
-    useSearchParams,
-} from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 
 import { Text, ButtonIcon } from "../../"
 import { ChevronLeftIcon, ChevronRightIcon } from "../../icons"
@@ -39,11 +35,9 @@ const Paginator = forwardRef(
         }: PaginatorProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
-        const navigate = useNavigate()
+        const [searchParams, setSearchParams] = useSearchParams()
 
-        const [q] = useSearchParams()
-
-        const getPage = q.get("page")
+        const getPage = searchParams.get("page")
 
         const [currentPage, setCurrentPage] = useState(
             getPage ? parseInt(getPage) : 1
@@ -66,20 +60,11 @@ const Paginator = forwardRef(
                     : parseInt(e.target.value)
             setCurrentPage(page)
 
-            queries
-                ? navigate({
-                      pathname: "",
-                      search: createSearchParams({
-                          page: page.toString(),
-                          ...Object.fromEntries(queries),
-                      }).toString(),
-                  })
-                : navigate({
-                      pathname: "",
-                      search: createSearchParams({
-                          page: page.toString(),
-                      }).toString(),
-                  })
+            setSearchParams(
+                queries
+                    ? { page: page.toString(), ...Object.fromEntries(queries) }
+                    : { page: page.toString() }
+            )
             window.scrollTo(0, 0)
         }
 

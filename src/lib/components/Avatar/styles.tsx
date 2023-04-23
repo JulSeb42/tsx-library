@@ -2,7 +2,7 @@
 
 import styled from "styled-components"
 
-import { FontWeights, Mixins } from "../../"
+import { FontWeights, Mixins, Radiuses } from "../../"
 import type { AllColorsTypes } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
@@ -12,7 +12,7 @@ const AVATAR_SIZE = "var(--avatar-size, 48px)"
 const BaseAvatar = styled.span`
     width: ${AVATAR_SIZE};
     height: ${AVATAR_SIZE};
-    ${Mixins.BorderRadiusVar("avatar")};
+    border-radius: ${Radiuses.Circle};
     font-weight: ${FontWeights.Black};
     font-size: calc(${AVATAR_SIZE} * 0.7);
     border: none;

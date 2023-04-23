@@ -43,23 +43,23 @@ const StyledDropdown = styled.div`
     }
 `
 
-const DropdownContainer = styled(Flexbox)`
+const StyledDropdownContainer = styled(Flexbox)`
     position: relative;
 
-    &.justify-left {
+    &[data-justify="left"] {
         ${StyledDropdown} {
             left: 0;
         }
     }
 
-    &.justify-right {
+    &[data-justify="right"] {
         ${StyledDropdown} {
             right: 0;
         }
     }
 `
 
-const DropdownItem = styled.button`
+const StyledDropdownItem = styled.button`
     color: ${({ theme }) => theme.ColorsHoverDefault({ $color: "primary" })};
     text-decoration: none;
     text-align: left;
@@ -86,6 +86,6 @@ const DropdownItem = styled.button`
     }
 `
 
-setDefaultTheme([DropdownContainer, StyledDropdown, DropdownItem])
+setDefaultTheme([StyledDropdownContainer, StyledDropdown, StyledDropdownItem])
 
-export { DropdownContainer, StyledDropdown, DropdownItem }
+export { StyledDropdownContainer, StyledDropdown, StyledDropdownItem }

@@ -32,7 +32,7 @@ const BaseLoaderOne = styled.span`
 const StyledLoaderOne = styled(BaseLoaderOne)<{
     $color?: AllColorsTypes
 }>`
-    border-bottom-color: ${({ theme }) => theme.AllColors};
+    border-bottom-color: ${({ theme, $color }) => theme.AllColors({ $color })};
 `
 
 const SpinLoaderTwo = keyframes`
@@ -56,8 +56,8 @@ const BaseLoaderTwo = styled.span`
 const StyledLoaderTwo = styled(BaseLoaderTwo)<{
     $color?: AllColorsTypes
 }>`
-    border-top-color: ${({ theme }) => theme.AllColors};
-    border-bottom-color: ${({ theme }) => theme.AllColors};
+    border-top-color: ${({ theme, $color }) => theme.AllColors({ $color })};
+    border-bottom-color: ${({ theme, $color }) => theme.AllColors({ $color })};
 `
 
 const SpinLoaderThree = keyframes`
@@ -103,7 +103,7 @@ const StyledLoaderThree = styled(BaseLoaderThree)<{
     $color?: AllColorsTypes
 }>`
     span {
-        border-top-color: ${({ theme }) => theme.AllColors};
+        border-top-color: ${({ theme, $color }) => theme.AllColors({ $color })};
     }
 `
 
@@ -156,7 +156,7 @@ const StyledLoaderFour = styled(BaseLoaderFour)<{
     $color?: AllColorsTypes
 }>`
     span {
-        background-color: ${({ theme }) => theme.AllColors};
+        background-color: ${({ theme, $color }) => theme.AllColors({ $color })};
     }
 `
 

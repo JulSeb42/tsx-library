@@ -5,7 +5,7 @@ import type { ForwardedRef } from "react"
 
 import { Icon, stringifyPx } from "../../"
 
-import * as Styles from "./styles"
+import { StyledBadge } from "./styles"
 import type { BadgeProps } from "./types"
 
 const Badge = forwardRef(
@@ -22,7 +22,7 @@ const Badge = forwardRef(
         ref?: ForwardedRef<HTMLSpanElement>
     ) => {
         return (
-            <Styles.StyledBadge
+            <StyledBadge
                 ref={ref}
                 as={as}
                 style={{
@@ -47,7 +47,7 @@ const Badge = forwardRef(
                 ) : (
                     number && number
                 )}
-            </Styles.StyledBadge>
+            </StyledBadge>
         )
     }
 )

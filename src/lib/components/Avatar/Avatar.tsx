@@ -3,7 +3,7 @@
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
-import { Image, Icon, variableBorderRadius, stringifyPx } from "../../"
+import { Image, Icon, stringifyPx } from "../../"
 
 import * as Styles from "./styles"
 import type { AvatarProps } from "./types"
@@ -13,7 +13,6 @@ const Avatar = forwardRef(
         {
             as,
             size = 48,
-            borderRadius = "circle",
             img,
             alt = "Avatar",
             letter,
@@ -31,7 +30,6 @@ const Avatar = forwardRef(
                 ref={ref}
                 as={as}
                 style={{
-                    ...variableBorderRadius(borderRadius, "avatar"),
                     ["--avatar-size" as any]: stringifyPx(size),
                     ...style,
                 }}

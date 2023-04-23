@@ -1,6 +1,6 @@
 /*=============================================== ButtonIcon styles ===============================================*/
 
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
 import {
     Breakpoints,
@@ -12,10 +12,8 @@ import {
     Spacers,
     ThemeDark,
     Transitions,
-    stringifyPx,
 } from "../../"
 import type { ColorsHoverTypes } from "../../types"
-import type { ButtonIconLabelDirectionsTypes } from "./types"
 
 import { setDefaultTheme } from "../../utils"
 
@@ -38,7 +36,7 @@ const BaseButtonIcon = styled.button`
 const StyledButtonIcon = styled(BaseButtonIcon)<{
     $color?: ColorsHoverTypes
 }>`
-    &.plain {
+    &[data-variant="plain"] {
         background-color: ${({ theme, $color }) =>
             theme.ColorsHoverDefault({ $color })};
         color: ${({ $color, theme }) =>
@@ -66,7 +64,7 @@ const StyledButtonIcon = styled(BaseButtonIcon)<{
         }
     }
 
-    &.transparent {
+    &[data-variant="transparent"] {
         background-color: transparent;
         color: ${({ $color, theme }) => theme.ColorsHoverDefault({ $color })};
 
@@ -87,7 +85,7 @@ const StyledButtonIcon = styled(BaseButtonIcon)<{
         }
     }
 
-    &.ghost {
+    &[data-variant="ghost"] {
         background-color: ${({ theme, $color }) =>
             theme.ColorsGhostDefault({ $color })};
         color: ${({ $color, theme }) =>
@@ -122,7 +120,7 @@ const TooltipContainer = styled.span`
     height: var(--button-size, 48px);
 `
 
-const BaseTip = styled.span`
+const Tip = styled.span`
     min-width: 60px;
     text-align: center;
     padding: ${Spacers.XXS};
@@ -167,29 +165,23 @@ const BaseTip = styled.span`
             visibility: visible;
         }
     }
-`
 
-const Tip = styled(BaseTip)<{
-    $bottom?: string | number
-    $position?: ButtonIconLabelDirectionsTypes
-}>`
-    ${({ $position, $bottom }) =>
-        $position === "bottom"
-            ? css`
-                  top: ${$bottom && stringifyPx($bottom)};
+    &[data-position="top"] {
+        bottom: var(--tip-position, 125%);
 
-                  &:after {
-                      top: calc(${Spacers.XS} * -1 - 2px);
-                      transform: rotate(180deg);
-                  }
-              `
-            : css`
-                  bottom: ${$bottom && stringifyPx($bottom)};
+        &:after {
+            bottom: calc(${Spacers.XS} * -1 - 2px);
+        }
+    }
 
-                  &:after {
-                      bottom: calc(${Spacers.XS} * -1 - 2px);
-                  }
-              `}
+    &[data-position="bottom"] {
+        top: var(--tip-position, 125%);
+
+        &:after {
+            top: calc(${Spacers.XS} * -1 - 2px);
+            transform: rotate(180deg);
+        }
+    }
 `
 
 setDefaultTheme([StyledButtonIcon, TooltipContainer, Tip])
