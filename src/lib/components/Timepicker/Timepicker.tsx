@@ -12,8 +12,8 @@ import {
     ValidationComponent,
     ButtonRightInputs,
 } from "../InputComponents"
-import { typeValues } from "../../utils"
 import { ClockIcon } from "../../icons"
+import { typeValues } from "../../types"
 
 import { StyledTimepicker, Selected } from "./styles"
 import type { TimepickerProps } from "./types"

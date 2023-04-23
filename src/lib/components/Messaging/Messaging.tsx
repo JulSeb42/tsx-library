@@ -13,6 +13,7 @@ import {
     Button,
     ButtonIcon,
     stringifyPx,
+    linkifyText,
 } from "../.."
 import { SendIcon, ChevronDownIcon } from "../../icons"
 
@@ -57,7 +58,7 @@ export const Message = forwardRef(
                     data-message-type={type}
                     className="message-text"
                 >
-                    {text}
+                    {linkifyText(text, true)}
                 </StyledMessage>
 
                 {(date || time) && (

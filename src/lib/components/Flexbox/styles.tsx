@@ -4,11 +4,8 @@ import styled from "styled-components"
 
 import { Mixins } from "../../"
 
-import {
-    setDefaultTheme,
-    typeValues,
-    generateDataAttributes,
-} from "../../utils"
+import { setDefaultTheme, generateDataAttributes } from "../../utils"
+import { typeValues } from "../../types"
 
 const StyledFlexbox = styled.div`
     display: flex;

@@ -60,7 +60,7 @@ const Image = forwardRef(
                         as={
                             typeof caption === "object" && caption.asContainer
                                 ? caption.asContainer
-                                : "figcaption"
+                                : "figure"
                         }
                         style={styles}
                         className={

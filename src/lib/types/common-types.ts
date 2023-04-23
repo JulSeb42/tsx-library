@@ -1,7 +1,6 @@
 /*=============================================== Common types ===============================================*/
 
-import type { RequireAtLeastOne } from "./"
-import type { typeValues } from "../utils/types-values"
+import type { RequireAtLeastOne, typeValues } from "./"
 
 /*==================== Colors ====================*/
 

@@ -2,7 +2,8 @@
 
 import styled from "styled-components"
 
-import { Mixins, Overlays, Spacers, Text } from "../../"
+import { Mixins, Overlays, Spacers } from "../../"
+import { FontCommon } from "../Text/styles"
 
 import { setDefaultTheme } from "../../utils"
 
@@ -29,13 +30,18 @@ const ImgContainer = styled.figure`
     ${Mixins.BorderRadiusVar("image")};
 `
 
-const Caption = styled(Text)`
+const Caption = styled.figcaption`
     position: absolute;
     z-index: 1;
     bottom: 0;
     left: 0;
     width: 100%;
     padding: ${Spacers.M};
+
+    ${FontCommon({
+        $fontSize: "body",
+        $fontWeight: "regular",
+    })}
 
     &[data-background="black"] {
         background-color: ${Overlays.Plain.Black80};

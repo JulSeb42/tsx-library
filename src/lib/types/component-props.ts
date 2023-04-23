@@ -14,8 +14,8 @@ import type {
     ColorsShortTypes,
     LinkTypes,
     LinkTypesBlank,
+    typeValues,
 } from "./"
-import type { typeValues } from "../utils/types-values"
 
 /*==================== Accordion item ====================*/
 

@@ -5,11 +5,8 @@ import styled from "styled-components"
 import { Breakpoints, FontSizes, Mixins, Spacers } from "../../"
 import { FontCommon } from "../Text/styles"
 
-import {
-    setDefaultTheme,
-    generateDataAttributes,
-    typeValues,
-} from "../../utils"
+import { setDefaultTheme, generateDataAttributes } from "../../utils"
+import { typeValues } from "../../types"
 
 const StyledTable = styled.table`
     ${FontCommon({

@@ -4,11 +4,8 @@ import styled from "styled-components"
 
 import { Mixins } from "../../"
 
-import {
-    setDefaultTheme,
-    generateDataAttributes,
-    typeValues,
-} from "../../utils"
+import { setDefaultTheme, generateDataAttributes } from "../../utils"
+import { typeValues } from "../../types"
 
 const StyledGrid = styled.div`
     display: grid;

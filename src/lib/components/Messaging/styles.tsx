@@ -8,11 +8,11 @@ import {
     FontFamilies,
     FontSizes,
     LineHeights,
-    Linkify,
     Mixins,
     Radiuses,
     Spacers,
     Text,
+    Transitions,
 } from "../.."
 
 import { setDefaultTheme } from "../../utils"
@@ -86,11 +86,27 @@ const Input = styled.textarea`
     }
 `
 
-const StyledMessage = styled(Linkify)`
+const StyledMessage = styled.p`
     padding: ${Spacers.XS};
     border-radius: ${Radiuses.S};
     width: fit-content;
     max-width: 70%;
+
+    a {
+        color: ${({ theme }) => theme.ColorsHoverDefault("primary")};
+        transition: ${Transitions.Short};
+        text-decoration: none;
+
+        @media ${Breakpoints.Hover} {
+            &:hover {
+                color: ${({ theme }) => theme.ColorsHoverHover("primary")};
+            }
+
+            &:active {
+                color: ${({ theme }) => theme.ColorsHoverActive("primary")};
+            }
+        }
+    }
 
     &[data-message-type="sent"] {
         background-color: ${({ theme }) => theme.Primary500};
