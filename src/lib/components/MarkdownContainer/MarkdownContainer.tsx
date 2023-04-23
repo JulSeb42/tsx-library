@@ -3,7 +3,7 @@
 import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
-import { OptionsMarkdown } from "../../"
+import { OptionsMarkdown } from "../../utils/options-markdown"
 
 import { StyledMarkdownContainer } from "./styles"
 import type { MarkdownContainerProps } from "./types"

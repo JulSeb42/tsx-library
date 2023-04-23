@@ -4,10 +4,7 @@ import React, { forwardRef, useState, useRef } from "react"
 import type { ChangeEvent, ForwardedRef } from "react"
 import classNames from "classnames"
 
-import { InputContainer } from "../InputContainer"
-
 import {
-    OptionsMarkdown,
     Flexbox,
     uuid,
     capitalize,
@@ -15,6 +12,8 @@ import {
     useClickOutside,
     stringifyPx,
 } from "../../"
+import { OptionsMarkdown } from "../../utils/options-markdown"
+import { InputContainer } from "../InputContainer"
 
 import {
     TitlesDropdown,

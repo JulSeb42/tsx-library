@@ -15,7 +15,7 @@ import type {
     LinkTypes,
     LinkTypesBlank,
 } from "./"
-import type { typeValues } from "../utils"
+import type { typeValues } from "../utils/types-values"
 
 /*==================== Accordion item ====================*/
 

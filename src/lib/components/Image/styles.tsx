@@ -29,7 +29,7 @@ const ImgContainer = styled.figure`
     ${Mixins.BorderRadiusVar("image")};
 `
 
-const Caption = styled(Text).attrs({ as: "figcaption" })`
+const Caption = styled(Text)`
     position: absolute;
     z-index: 1;
     bottom: 0;

@@ -26,6 +26,13 @@ export const ItalicIcon = ({
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            style={{
+                ["--icon-size" as any]: stringifyPx(size),
+                ...style,
+            }}
+            className={classNames({ "is-clickable": !!onClick }, className)}
+            onClick={onClick}
+            $color={color}
             {...rest}
         >
             <path

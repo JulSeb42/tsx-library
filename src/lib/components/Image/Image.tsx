@@ -76,6 +76,7 @@ const Image = forwardRef(
                                     : "black"
                             }
                             className="img-caption"
+                            as="figcaption"
                         >
                             {typeof caption === "object"
                                 ? caption.text
