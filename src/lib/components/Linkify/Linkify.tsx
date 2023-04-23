@@ -27,7 +27,6 @@ const Linkify = forwardRef(
         const words: string[] = children ? children.split(" ") : []
 
         return (
-            // @ts-expect-error
             <Text ref={ref} as={as} {...rest}>
                 {words?.map((word: string) =>
                     word.match(URL_REGEX) ? (

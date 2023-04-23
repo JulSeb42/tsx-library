@@ -5,7 +5,11 @@ import styled from "styled-components"
 import { Breakpoints, FontSizes, Mixins, Spacers } from "../../"
 import { FontCommon } from "../Text/styles"
 
-import { setDefaultTheme } from "../../utils"
+import {
+    setDefaultTheme,
+    generateDataAttributes,
+    typeValues,
+} from "../../utils"
 
 const StyledTable = styled.table`
     ${FontCommon({
@@ -17,6 +21,10 @@ const StyledTable = styled.table`
     border-spacing: 0;
     table-layout: fixed;
     width: 100%;
+    ${generateDataAttributes("vertical-align", Object.keys(typeValues.vAlign), [
+        "th",
+        "td",
+    ])}
 
     td,
     th {

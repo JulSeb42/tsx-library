@@ -16,11 +16,18 @@ const Table = forwardRef(
             variant = "bordered",
             headers,
             linkifyHeaders,
+            vAlign,
             ...rest
         }: TableProps,
         ref?: ForwardedRef<HTMLTableElement>
     ) => (
-        <StyledTable ref={ref} as={as} data-table-variant={variant} {...rest}>
+        <StyledTable
+            ref={ref}
+            as={as}
+            data-table-variant={variant}
+            data-vertical-align={vAlign}
+            {...rest}
+        >
             {headers && (
                 <thead>
                     <tr>

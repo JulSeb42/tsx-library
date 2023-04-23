@@ -2,6 +2,8 @@
 
 import type { ElementType, HTMLAttributes } from "react"
 
+import type { VerticalAlignTypes } from "../../types"
+
 const tableVariants = {
     bordered: "bordered",
     stripped: "stripped",
@@ -13,6 +15,7 @@ export type TableVariantsTypes = keyof typeof tableVariants
 interface TablePropsBase extends HTMLAttributes<HTMLTableElement> {
     as?: ElementType
     variant?: TableVariantsTypes
+    vAlign?: VerticalAlignTypes
 }
 
 interface TablePropsHeaders1 extends TablePropsBase {

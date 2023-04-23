@@ -76,6 +76,10 @@ export type RadiusesTypes =
 
 export type TextAlignTypes = keyof typeof typeValues.textAlign
 
+/*==================== Vertical align ====================*/
+
+export type VerticalAlignTypes = keyof typeof typeValues.vAlign
+
 /*==================== Spacers ====================*/
 
 export type SpacersTypes = keyof typeof typeValues.spacers | number | null

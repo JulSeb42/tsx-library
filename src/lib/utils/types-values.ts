@@ -184,6 +184,17 @@ export const typeValues = {
         unset: "unset",
     },
 
+    /*==================== Vertical align ====================*/
+
+    vAlign: {
+        baseline: "baseline",
+        top: "top",
+        middle: "middle",
+        bottom: "bottom",
+        sub: "sub",
+        "text-top": "text-top",
+    },
+
     /*==================== Spacers ====================*/
 
     spacers: {
