@@ -1,6 +1,6 @@
 /*=============================================== Text component ===============================================*/
 
-import React from "react"
+import React, { forwardRef } from "react"
 import type { ForwardedRef } from "react"
 
 import H1 from "./templates/H1"
@@ -126,6 +126,18 @@ const renderComponent = (
     }
 }
 
-const Text = ({ tag = "p", ...props }: TextProps) => renderComponent(props, tag)
+const Text = forwardRef(
+    (
+        { tag = "p", ...props }: TextProps,
+        ref?: ForwardedRef<
+            HTMLElement &
+                HTMLParagraphElement &
+                HTMLHeadingElement &
+                HTMLQuoteElement &
+                HTMLUListElement &
+                HTMLOListElement
+        >
+    ) => renderComponent(props, tag, ref)
+)
 
 export default Text

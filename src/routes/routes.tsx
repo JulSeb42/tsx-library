@@ -23,6 +23,7 @@ import SkeletonPage from "../pages/components/SkeletonPage"
 import IconPage from "../pages/components/IconPage"
 import KeyPage from "../pages/components/KeyPage"
 import TextIconPage from "../pages/components/TextIconPage"
+import HighlightPage from "../pages/components/HighlightPage"
 import LinkifyPage from "../pages/components/LinkifyPage"
 import HrPage from "../pages/components/HrPage"
 import ImagePage from "../pages/components/ImagePage"
@@ -118,6 +119,7 @@ export const router: RouteType[] = [
     { path: "/icon", element: <IconPage /> },
     { path: "/key", element: <KeyPage /> },
     { path: "/text-icon", element: <TextIconPage /> },
+    { path: "/highlight", element: <HighlightPage /> },
     { path: "/linkify", element: <LinkifyPage /> },
     { path: "/hr", element: <HrPage /> },
     { path: "/image", element: <ImagePage /> },

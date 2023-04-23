@@ -85,3 +85,4 @@ export * from "./components/IconMenu" // ✅
 export * from "./components/Footer" // ✅
 export * from "./components/Helmet"
 export * from "./components/SrOnly"
+export * from "./components/Highlight"
