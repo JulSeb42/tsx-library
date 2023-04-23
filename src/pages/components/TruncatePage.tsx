@@ -30,13 +30,7 @@ const TruncatePage = () => {
                 }}
             >
                 {names.map(name => (
-                    <Tag
-                        borderRadius="round"
-                        padding={{ topBottom: "xxs", leftRight: "s" }}
-                        key={uuid()}
-                    >
-                        {name}
-                    </Tag>
+                    <Tag key={uuid()}>{name}</Tag>
                 ))}
             </Truncate>
         </Page>

@@ -25,10 +25,7 @@ const ComponentsPropsPage = () => {
                             <td>{prop.name}</td>
                             <td>{prop.component}</td>
                             <td style={{ padding: 0 }}>
-                                <CodeContainer
-                                    textColor="white"
-                                    copyButton={false}
-                                >
+                                <CodeContainer color="white" copyButton={false}>
                                     {prop.content}
                                 </CodeContainer>
                             </td>

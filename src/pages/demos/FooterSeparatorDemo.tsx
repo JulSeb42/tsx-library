@@ -32,7 +32,6 @@ const FooterSeparatorDemo = () => {
                 logo={{ text: "Logo" }}
                 separator
                 items={footerLinks}
-                accentColor="secondary"
                 direction="vertical"
             />
         </DefaultLayout>
