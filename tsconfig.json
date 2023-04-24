@@ -21,7 +21,7 @@
         "noEmit": true,
         "jsx": "react-jsx",
         "outDir": "dist",
-        "downlevelIteration": true,
+        // "downlevelIteration": true,
     },
     "include": [
         "src"

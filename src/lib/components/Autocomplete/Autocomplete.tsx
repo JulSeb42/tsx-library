@@ -153,7 +153,7 @@ const Autocomplete = forwardRef(
                     }
                 }
 
-                if (e.key === "Tab") {
+                if (e.key === "Tab" || e.key === "Enter") {
                     e.preventDefault()
 
                     if (fuzzyResults?.length) {

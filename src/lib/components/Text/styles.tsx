@@ -64,8 +64,7 @@ const FontCommon = ({
         text-align: unset;
     }
 
-    a,
-    button {
+    a {
         padding: 0;
         border: none;
         background-color: transparent;

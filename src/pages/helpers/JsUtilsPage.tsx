@@ -159,7 +159,11 @@ const JsUtilsPage = () => {
                 </>
             ),
             example: "disableScroll()",
-            result: <Button onClick={disableScroll}>Disable scroll</Button>,
+            result: (
+                <Button onClick={disableScroll} size="small">
+                    Disable scroll
+                </Button>
+            ),
         },
         {
             name: "enableScroll",
@@ -169,7 +173,11 @@ const JsUtilsPage = () => {
                 </>
             ),
             example: "enableScroll()",
-            result: <Button onClick={enableScroll}>Enable scroll</Button>,
+            result: (
+                <Button onClick={enableScroll} size="small">
+                    Enable scroll
+                </Button>
+            ),
         },
         {
             name: "formatHour",
@@ -283,7 +291,11 @@ const JsUtilsPage = () => {
         {
             name: "scrollToTop",
             effect: "Function to scroll to the top of the page on click",
-            result: <Button onClick={scrollToTop}>Scroll to top</Button>,
+            result: (
+                <Button onClick={scrollToTop} size="small">
+                    Scroll to top
+                </Button>
+            ),
         },
         {
             name: "slugify",

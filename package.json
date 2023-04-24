@@ -1,7 +1,7 @@
 {
     "name": "tsx-library-julseb",
     "private": false,
-    "version": "8.0.3",
+    "version": "8.0.4   ",
     "type": "module",
     "scripts": {
         "dev": "vite",
@@ -26,7 +26,7 @@
         "react-router-dom": "^6.10.0",
         "react-syntax-highlighter": "^15.5.0",
         "styled-components": "^5.3.10",
-        "ts-utils-julseb": "^2.2.14"
+        "ts-utils-julseb": "^2.2.15"
     },
     "devDependencies": {
         "@babel/core": "^7.21.4",
