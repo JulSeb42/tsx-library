@@ -60,7 +60,7 @@ export const AccordionItem = forwardRef(
                     onClick={() => setOpen(!open)}
                     className={classNames(
                         { open: open },
-                        { noBorder: noBorder },
+                        { "no-border": noBorder },
                         "accordion-button"
                     )}
                     data-variant={variant}
