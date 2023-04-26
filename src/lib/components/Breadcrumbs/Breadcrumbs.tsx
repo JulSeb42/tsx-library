@@ -26,7 +26,7 @@ const Breadcrumbs = forwardRef(
         <StyledBreadcrumbs
             ref={ref}
             as={as}
-            $separator={separator}
+            data-separator={separator}
             $color={color}
             {...rest}
         >

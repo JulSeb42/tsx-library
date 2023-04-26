@@ -14,9 +14,17 @@ const BaseBreadcrumbs = styled(Text).attrs({ tag: "p" })`
         $justifyContent: "flex-start",
         $flexWrap: "wrap",
     })};
+
+    &[data-separator="icon"] {
+        gap: ${Spacers.XXS};
+    }
+
+    &[data-separator="slash"] {
+        gap: ${Spacers.XS};
+    }
 `
 
-const BreadcrumbsColor = styled(BaseBreadcrumbs)<{
+const StyledBreadcrumbs = styled(BaseBreadcrumbs)<{
     $color?: ColorsHoverTypes
 }>`
     color: ${({ theme, $color }) => theme.ColorsHoverDefault({ $color })};
@@ -33,13 +41,6 @@ const BreadcrumbsColor = styled(BaseBreadcrumbs)<{
                 theme.ColorsHoverActive({ $color })};
         }
     }
-`
-
-const StyledBreadcrumbs = styled(BreadcrumbsColor)<{
-    $separator?: SeparatorTypes
-}>`
-    gap: ${({ $separator }) =>
-        $separator === "slash" ? Spacers.XS : Spacers.XXS};
 `
 
 const BaseSeparator = styled.span`

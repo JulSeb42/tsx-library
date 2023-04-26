@@ -150,10 +150,7 @@ const Input = styled.textarea`
     }
 `
 
-const MarkdownContainer = styled(Markdown)<{
-    $isVisible?: boolean
-    $height: number
-}>`
+const MarkdownContainer = styled(Markdown)`
     height: var(--input-height);
     min-height: 250px;
     border-radius: 0 0 ${Radiuses.M} 0;
