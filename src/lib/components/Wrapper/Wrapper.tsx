@@ -8,10 +8,10 @@ import type { WrapperProps } from "./types"
 
 const Wrapper = forwardRef(
     (
-        { as, template = "1col", children, style, ...rest }: WrapperProps,
+        { as, children, style, ...rest }: WrapperProps,
         ref?: ForwardedRef<HTMLDivElement>
     ) => (
-        <StyledWrapper ref={ref} as={as} data-template={template} {...rest}>
+        <StyledWrapper ref={ref} as={as} {...rest}>
             {children}
         </StyledWrapper>
     )

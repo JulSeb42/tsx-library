@@ -21,6 +21,7 @@ const BaseCodeContainer = styled.div`
     overflow-x: scroll;
     padding: ${Spacers.M};
     background-color: ${ThemeLight.Gray800};
+    /* max-width: 100% !important; */
     ${Mixins.HideScrollbar}
 `
 
@@ -40,11 +41,13 @@ const BaseCode = styled(SyntaxHighlighter)`
     padding: 0 !important;
     white-space: pre;
     line-height: ${LineHeights.Code};
+    /* max-width: 100% !important; */
     ${Mixins.HideScrollbar}
 
     & > code {
         background-color: transparent !important;
         line-height: ${LineHeights.Code};
+        max-width: 100% !important;
     }
 `
 

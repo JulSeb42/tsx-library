@@ -12,7 +12,6 @@ const Form = forwardRef(
     (
         {
             buttonPrimary,
-            accentColor = "primary",
             isLoading,
             disabled,
             buttonSecondary,
@@ -31,7 +30,6 @@ const Form = forwardRef(
                             <Button
                                 type="submit"
                                 variant="plain"
-                                color={accentColor}
                                 icons={{
                                     left:
                                         typeof buttonPrimary === "object"
@@ -56,7 +54,6 @@ const Form = forwardRef(
                             (buttonSecondary.to ? (
                                 <Button
                                     variant="transparent"
-                                    color={accentColor}
                                     icons={{
                                         left: buttonSecondary.iconLeft,
                                         right: buttonSecondary.iconRight,
@@ -70,7 +67,6 @@ const Form = forwardRef(
                                 buttonSecondary.onClick && (
                                     <Button
                                         variant="transparent"
-                                        color={accentColor}
                                         icons={{
                                             left: buttonSecondary.iconLeft,
                                             right: buttonSecondary.iconRight,

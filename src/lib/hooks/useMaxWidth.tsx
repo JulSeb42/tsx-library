@@ -1,11 +1,11 @@
 /*=============================================== useMaxWidth ===============================================*/
 
-import { useState, useLayoutEffect } from "react"
+import { useState, useEffect } from "react"
 
 export const useMaxWidth = (width: number) => {
     const [isMax, setIsMax] = useState<undefined | boolean>(undefined)
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         const detectSize = () => {
             if (window.innerWidth <= width) {
                 setIsMax(true)

@@ -12,7 +12,7 @@ const Avatar = forwardRef(
     (
         {
             as,
-            size = 48,
+            size,
             img,
             alt = "Avatar",
             letter,
@@ -25,6 +25,8 @@ const Avatar = forwardRef(
         }: AvatarProps,
         ref?: ForwardedRef<HTMLSpanElement>
     ) => {
+        const defaultSize = size ? size : 48
+
         return (
             <StyledAvatar
                 ref={ref}
@@ -49,7 +51,7 @@ const Avatar = forwardRef(
                 ) : icon ? (
                     <Icon
                         src={icon}
-                        size={iconSize || size * 0.7}
+                        size={iconSize || defaultSize * 0.7}
                         className="avatar-icon"
                     />
                 ) : (

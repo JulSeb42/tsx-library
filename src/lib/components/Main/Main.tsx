@@ -15,7 +15,6 @@ const Main = forwardRef(
     (
         {
             as,
-            position = 1,
             size = "default",
             contentSize = "default",
             children,
@@ -39,7 +38,6 @@ const Main = forwardRef(
                     ...style,
                 }}
                 className={classNames({ full: size === "full" }, className)}
-                data-position={position}
                 {...rest}
             >
                 {children}

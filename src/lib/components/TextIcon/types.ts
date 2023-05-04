@@ -26,5 +26,4 @@ export type TextIconProps = TextProps & {
     iconColor?: AllColorsTypes
     iconSize?: number
     tag?: PossibleTextIconTags
-    display?: boolean
 }

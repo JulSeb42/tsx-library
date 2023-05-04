@@ -9,10 +9,14 @@ import { setDefaultTheme } from "../../utils"
 const StyledSection = styled.section`
     ${Mixins.Flexbox({
         $justifyItems: "start",
-        $alignItems: "stretch",
+        $alignItems: "flex-start",
         $flexDirection: "column",
     })};
     gap: var(--section-gap);
+
+    & > * {
+        flex-shrink: 0;
+    }
 
     & > div,
     & > h1,
@@ -40,7 +44,7 @@ const StyledSection = styled.section`
     & > select,
     & > textarea,
     & > form {
-        justify-self: stretch;
+        align-self: stretch;
     }
 `
 

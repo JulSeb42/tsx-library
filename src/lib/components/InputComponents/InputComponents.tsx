@@ -43,6 +43,7 @@ const ButtonRightInputs = ({
     onClick,
     disabled,
     className,
+    as,
 }: ButtonRightProps) => {
     return (
         <RightButton
@@ -53,8 +54,9 @@ const ButtonRightInputs = ({
                 { disabled: disabled },
                 className
             )}
-            as={onClick ? "button" : "span"}
+            as={as ? as : onClick ? "button" : "span"}
             disabled={disabled}
+            type="button"
         >
             {icon ? (
                 typeof icon === "string" ? (

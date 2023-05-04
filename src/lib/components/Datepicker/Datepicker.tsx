@@ -99,6 +99,7 @@ const Datepicker = forwardRef(
                             onClick={() => setIsOpen(true)}
                             disabled={disabled}
                             className="datapicker-calendar-icon"
+                            as="span"
                         />
                     </RightContainer>
                 </Selected>

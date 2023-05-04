@@ -84,7 +84,8 @@ export const Messaging = forwardRef(
             input,
             submit,
             textDateTime,
-            iconScroll = <ChevronDownIcon size={32 * 0.6} />,
+            iconScrollSize = 32 * 0.6,
+            iconScroll = <ChevronDownIcon size={iconScrollSize} />,
             className,
             ...rest
         }: MessagingProps,

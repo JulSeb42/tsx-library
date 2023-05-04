@@ -2,7 +2,7 @@
 
 import type { HTMLAttributes } from "react"
 
-import type { ColorsHoverTypes, ButtonLinkTypesRequire } from "../../types"
+import type { ButtonLinkTypesRequire } from "../../types"
 
 export interface FormProps extends HTMLAttributes<HTMLFormElement> {
     buttonPrimary?:
@@ -12,12 +12,12 @@ export interface FormProps extends HTMLAttributes<HTMLFormElement> {
               iconLeft?: string | JSX.Element
               iconRight?: string | JSX.Element
           }
-    accentColor?: ColorsHoverTypes
     isLoading?: boolean
     disabled?: boolean
     buttonSecondary?: ButtonLinkTypesRequire & {
-        text?: "prev" | string | undefined
+        text?: string
         iconLeft?: string
         iconRight?: string
+        to?: string | "prev"
     }
 }

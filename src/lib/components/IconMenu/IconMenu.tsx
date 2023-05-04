@@ -18,10 +18,10 @@ import type { IconMenuProps } from "./types"
 const IconMenu = ({
     as,
     items,
-    direction = "up",
+    direction = "right",
     color = "primary",
     icon = "burger",
-    openIconSize = ICON_MENU_BUTTON_SIZE * 0.7,
+    openIconSize,
     className,
     ...rest
 }: IconMenuProps) => {
@@ -72,16 +72,8 @@ const IconMenu = ({
                         color={color === "white" ? "primary" : "white"}
                         as="span"
                         noHover
-                        width={
-                            typeof openIconSize === "object"
-                                ? openIconSize?.width
-                                : ICON_MENU_BUTTON_SIZE * 0.5
-                        }
-                        height={
-                            typeof openIconSize === "object"
-                                ? openIconSize?.height
-                                : ICON_MENU_BUTTON_SIZE * 0.4
-                        }
+                        width={ICON_MENU_BUTTON_SIZE * 0.5}
+                        height={ICON_MENU_BUTTON_SIZE * 0.4}
                         className="icon-menu-button-open-icon"
                     />
                 )}

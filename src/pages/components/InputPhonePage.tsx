@@ -13,14 +13,13 @@ const InputPhonePage = () => {
     >(undefined)
 
     const [phone, setPhone] = useState("")
+    const [result, setResult] = useState("")
     const handlePhone = (e: ChangeEvent<HTMLInputElement>) =>
         setPhone(e.target.value)
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        console.log(
-            `${selectedCountry ? selectedCountry.dial_code : "+33"}${phone}`
-        )
+        setResult(`${selectedCountry?.dial_code || "+33"}${phone}`)
     }
 
     return (
@@ -50,6 +49,8 @@ const InputPhonePage = () => {
 
                 <button type="submit">Submit</button>
             </form>
+
+            {result && <p>{result}</p>}
         </Page>
     )
 }

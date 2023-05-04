@@ -14,10 +14,7 @@ const InputSliderPage = () => {
     return (
         <Page title="InputSlider">
             <InputSlider
-                id="slider"
                 value={value}
-                min={0}
-                max={100}
                 onChange={handleChange}
                 showMinMax
                 label="Range"

@@ -11,6 +11,7 @@ import {
     Button,
     useClickOutside,
     stringifyPx,
+    useMaxWidth,
 } from "../../"
 import { OptionsMarkdown } from "../../utils/options-markdown"
 import { InputContainer } from "../InputContainer"
@@ -117,6 +118,8 @@ const InputMarkdown = forwardRef(
             inputRef?.current?.focus()
         }
 
+        const isMobile = useMaxWidth(600)
+
         return (
             <StyledMarkdownEditor
                 ref={ref}
@@ -129,11 +132,12 @@ const InputMarkdown = forwardRef(
                 data-background={backgroundColor}
             >
                 <ButtonsContainer
-                    gap="xs"
-                    alignItems="center"
-                    justifyContent="space-between"
+                    gap={isMobile ? "none" : "xs"}
+                    alignItems={isMobile ? "flex-start" : "center"}
+                    justifyContent={isMobile ? "flex-start" : "space-between"}
                     padding="xs"
                     className="markdown-editor-buttons-container"
+                    flexDirection={isMobile ? "column" : "row"}
                 >
                     <Flexbox
                         gap="xs"

@@ -9,7 +9,7 @@ const MarkdownContainerPage = () => {
 
     return (
         <Page title="MarkdownContainer">
-            <MarkdownContainer content={post} />
+            <MarkdownContainer>{post}</MarkdownContainer>
         </Page>
     )
 }

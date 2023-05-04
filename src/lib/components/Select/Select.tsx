@@ -173,6 +173,7 @@ const Select = ({
                             onClick={handleOpen}
                             disabled={disabled}
                             className="select-icon"
+                            as="span"
                         />
                     </RightContainer>
                 )}

@@ -22,17 +22,12 @@ interface IconMenuPropsBase extends HTMLAttributes<HTMLDivElement> {
 
 interface IconMenuIconSize1 extends IconMenuPropsBase {
     icon?: "plus"
-    openIconSize?: number
+    openIconSize?: never
 }
 
 interface IconMenuIconSize2 extends IconMenuPropsBase {
     icon?: "burger"
-    openIconSize?: {
-        width?: number
-        height?: number
-        open?: never
-        close?: never
-    }
+    openIconSize?: never
 }
 
 interface IconMenuIconSize3 extends IconMenuPropsBase {
@@ -41,8 +36,6 @@ interface IconMenuIconSize3 extends IconMenuPropsBase {
         close: string
     }
     openIconSize?: {
-        width?: never
-        height?: never
         open?: number
         close?: number
     }

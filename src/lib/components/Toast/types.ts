@@ -15,6 +15,6 @@ export interface ToastProps extends HTMLAttributes<HTMLDivElement> {
               color?: AllColorsTypes
               size?: number
           }
-    close?: boolean | string
+    withCloseButton?: boolean | string
     labelClose?: string
 }

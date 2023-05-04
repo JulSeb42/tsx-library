@@ -31,6 +31,10 @@ const StyledInput = styled.input`
     &[data-type="file"],
     &[data-type="color"] {
         cursor: pointer;
+
+        &:disabled {
+            cursor: not-allowed;
+        }
     }
 
     &[data-type="color"] {

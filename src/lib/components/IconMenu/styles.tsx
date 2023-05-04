@@ -52,13 +52,21 @@ const BaseButton = styled.button`
     border: none;
     border-radius: ${Radiuses.Circle};
     position: absolute;
-    text-decoration: none;
     ${Mixins.Flexbox({
         $alignItems: "center",
         $justifyContent: "center",
     })}
 
     &[data-direction="left"] {
+        top: 0;
+        right: 0;
+
+        &.open {
+            right: calc(var(--button-position-open) + ${Spacers.XS});
+        }
+    }
+
+    &[data-direction="right"] {
         top: 0;
         left: 0;
 
@@ -76,15 +84,6 @@ const BaseButton = styled.button`
         }
     }
 
-    &[data-direction="right"] {
-        top: 0;
-        right: 0;
-
-        &.open {
-            right: calc(var(--button-position-open) + ${Spacers.XS});
-        }
-    }
-
     &[data-direction="down"] {
         left: 0;
         top: 0;
@@ -92,7 +91,16 @@ const BaseButton = styled.button`
         &.open {
             top: calc(var(--button-position-open) + ${Spacers.XS});
         }
-    }
+    } /* 
+    text-decoration: none;
+    
+    
+
+   
+
+   
+
+    */
 `
 
 const StyledButton = styled(BaseButton)<{ $color?: ColorsHoverTypes }>`

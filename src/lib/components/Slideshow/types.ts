@@ -36,7 +36,7 @@ interface SlideshowPropsBase extends HTMLAttributes<HTMLDivElement> {
     controls?:
         | boolean
         | {
-              type: "small" | "large"
+              type?: "small" | "large"
               color?: ColorsHoverTypes
               hideTouchScreens?: boolean
               iconPrev?: string

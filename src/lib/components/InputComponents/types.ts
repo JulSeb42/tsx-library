@@ -1,6 +1,6 @@
 /*=============================================== Input components types ===============================================*/
 
-import type { HTMLAttributes } from "react"
+import type { HTMLAttributes, ElementType } from "react"
 
 import type { ValidationTypes } from "../../types"
 
@@ -37,7 +37,7 @@ export interface ValidationComponentProps {
 }
 
 export interface IconInputProps {
-    icon?: string
+    icon?: string | JSX.Element
     iconSize?: number
 }
 
@@ -45,6 +45,7 @@ interface ButtonRightPropsBase {
     onClick?: () => void
     disabled?: boolean
     className?: string
+    as?: ElementType
 }
 
 interface ButtonRightContent1 extends ButtonRightPropsBase {

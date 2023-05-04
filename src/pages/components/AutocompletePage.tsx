@@ -33,7 +33,7 @@ const AutocompletePage = () => {
                     label="Label"
                     helper="Helper"
                     helperBottom="Helper bottom"
-                    focusKeys={["Command", "KeyK"]}
+                    focusKeys={["Command", "KeyJ"]}
                     showKeys
                     ref={el}
                 />

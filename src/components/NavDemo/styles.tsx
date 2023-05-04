@@ -22,6 +22,10 @@ export const StyledNavDemo = styled.nav`
         $alignContent: "start",
     })};
     overflow-y: scroll;
+
+    @media ${Breakpoints.Tablet} {
+        display: none;
+    }
 `
 
 export const StyledNavLink = styled(NavLink)`

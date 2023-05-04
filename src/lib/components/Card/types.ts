@@ -19,5 +19,6 @@ export type CardProps = HTMLAttributes<HTMLDivElement> &
         padding?: PaddingTypes
         width?: string | number
         height?: string | number
+        maxWidth?: string | number
         backgroundImg?: string | null
     }

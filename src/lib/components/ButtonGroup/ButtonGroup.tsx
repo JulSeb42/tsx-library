@@ -2,6 +2,7 @@
 
 import React, { forwardRef, Fragment } from "react"
 import type { ForwardedRef } from "react"
+import classNames from "classnames"
 
 import { uuid } from "../../"
 
@@ -21,6 +22,7 @@ const ButtonGroup = forwardRef(
             color = "primary",
             buttons,
             buttonsSize = "default",
+            className,
             ...rest
         }: ButtonGroupProps,
         ref?: ForwardedRef<HTMLDivElement>
@@ -28,6 +30,10 @@ const ButtonGroup = forwardRef(
         <StyledButtonGroup
             ref={ref}
             as={as}
+            className={classNames(
+                { small: buttonsSize === "small" },
+                className
+            )}
             $hasBorders={!!(variant === "transparent")}
             $color={color}
             {...rest}

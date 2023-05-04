@@ -16,96 +16,110 @@ import {
 } from "./styles"
 import type { ListGroupProps, ListGroupItemProps } from "./types"
 
-export const ListItem = ({
-    as,
-    item: {
-        text,
-        subtext,
-        badge,
-        badgeColor = "primary",
-        date,
-        onClick,
-        disabled,
-        ref,
-        href,
-        blank,
-        to,
-    },
-    number,
-    className,
-    ...rest
-}: ListGroupItemProps) => {
-    const classes = classNames(
-        { "is-hoverable": !!(to || href || onClick) },
-        className
-    )
-
-    return (
-        <Item
-            as={as ? as : onClick ? "button" : to ? Link : href ? "a" : "span"}
-            ref={ref}
-            href={href}
-            to={to}
-            onClick={onClick}
-            disabled={disabled}
-            target={(href || to) && blank && "_blank"}
-            rel={(href || to) && blank && "noreferrer noopener"}
-            className={classes}
-            {...rest}
-        >
-            <Flexbox
-                justifyContent="space-between"
-                gap="xxs"
-                className="item-title-container"
+export const ListItem = forwardRef(
+    (
+        {
+            as,
+            item: {
+                text,
+                subtext,
+                badge,
+                date,
+                onClick,
+                disabled,
+                href,
+                blank,
+                to,
+            },
+            number,
+            className,
+            ...rest
+        }: ListGroupItemProps,
+        ref?: ForwardedRef<HTMLLIElement>
+    ) => {
+        return (
+            <Item
+                as={
+                    as
+                        ? as
+                        : onClick
+                        ? "button"
+                        : to
+                        ? Link
+                        : href
+                        ? "a"
+                        : "span"
+                }
+                ref={ref}
+                href={href}
+                to={to}
+                onClick={onClick}
+                disabled={disabled}
+                target={(href || to) && blank && "_blank"}
+                rel={(href || to) && blank && "noreferrer noopener"}
+                className={classNames(
+                    { "is-hoverable": !!(to || href || onClick) },
+                    className
+                )}
+                {...rest}
             >
-                {number && (
-                    <NumberContainer className="item-number-container">
-                        {number}.
-                    </NumberContainer>
-                )}
+                <Flexbox
+                    justifyContent="space-between"
+                    gap="xxs"
+                    className="item-title-container"
+                >
+                    {number && (
+                        <NumberContainer className="item-number-container">
+                            {number}.
+                        </NumberContainer>
+                    )}
 
-                <Title className="item-title">{text}</Title>
+                    <Title className="item-title">{text}</Title>
 
-                {(badge || date) && (
-                    <BadgeContainer className="item-badge-container">
-                        {badge &&
-                            (typeof badge === "object" ? (
-                                badge.icon ? (
-                                    <Badge
-                                        icon={badge.icon}
-                                        color={badgeColor}
-                                        className="item-badge"
-                                    />
+                    {(badge || date) && (
+                        <BadgeContainer className="item-badge-container">
+                            {badge &&
+                                (typeof badge === "object" ? (
+                                    badge.icon ? (
+                                        <Badge
+                                            icon={badge.icon}
+                                            color={badge.color || "primary"}
+                                            className="item-badge"
+                                        />
+                                    ) : badge.number ? (
+                                        <Badge
+                                            number={badge.number}
+                                            color={badge?.color || "primary"}
+                                            className="item-badge"
+                                        />
+                                    ) : (
+                                        <Badge
+                                            color={badge?.color || "primary"}
+                                            className="item-badge"
+                                        />
+                                    )
                                 ) : (
-                                    <Badge
-                                        number={badge.number}
-                                        className="item-badge"
-                                    />
-                                )
-                            ) : (
-                                <Badge
-                                    color={badgeColor}
-                                    className="item-badge"
-                                />
-                            ))}
+                                    <Badge className="item-badge" />
+                                ))}
 
-                        {date && (
-                            <Text tag="small" className="item-date">
-                                {convertDateShort(new Date(date))}
-                            </Text>
-                        )}
-                    </BadgeContainer>
+                            {date && (
+                                <Text tag="small" className="item-date">
+                                    {convertDateShort(new Date(date))}
+                                </Text>
+                            )}
+                        </BadgeContainer>
+                    )}
+                </Flexbox>
+
+                {subtext && (
+                    <Text tag="small" className="item-subtext">
+                        {subtext}
+                    </Text>
                 )}
-            </Flexbox>
-
-            {subtext && (
-                <Text tag="small" className="item-subtext">
-                    {subtext}
-                </Text>
-            )}
-        </Item>
-    )
-}
+            </Item>
+        )
+    }
+)
 
 export const ListGroup = forwardRef(
     (

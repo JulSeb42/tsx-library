@@ -11,14 +11,9 @@ const mainSizes = {
 
 export type MainSizeTypes = keyof typeof mainSizes | number
 
-const mainPositions = { 1: 1, 2: 2 } as const
-
-export type MainPositionTypes = keyof typeof mainPositions
-
 interface BaseMainProps extends HTMLAttributes<HTMLDivElement> {
     as?: ElementType
     minHeight?: string | number
-    position?: MainPositionTypes
 }
 
 interface MainSize1 extends BaseMainProps {

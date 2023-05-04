@@ -2,7 +2,7 @@
 
 import styled from "styled-components"
 
-import { Mixins, Text, Transitions } from "../../"
+import { Mixins, Text, Transitions, Breakpoints, Spacers } from "../../"
 
 import { setDefaultTheme } from "../../utils"
 
@@ -25,6 +25,11 @@ const StyledBackToTop = styled.div`
     &.visible {
         opacity: 1;
         visibility: visible;
+    }
+
+    @media ${Breakpoints.Mobile} {
+        right: ${Spacers.L};
+        bottom: ${Spacers.L};
     }
 `
 

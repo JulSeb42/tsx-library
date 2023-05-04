@@ -28,7 +28,7 @@ const IconMenuPage = () => {
         <Page title="IconMenu">
             <IconMenu
                 items={items}
-                direction="down"
+                direction="right"
                 icon="plus"
                 color="success"
             />

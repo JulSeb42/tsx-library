@@ -2,11 +2,7 @@
 
 import type { ElementType, HTMLAttributes } from "react"
 
-import type {
-    AllColorsTypes,
-    FooterItemProps,
-    RequireAtLeastOne,
-} from "../../types"
+import type { FooterItemProps, RequireAtLeastOne } from "../../types"
 
 const directions = { horizontal: "horizontal", vertical: "vertical" } as const
 
@@ -32,7 +28,7 @@ type FooterLogo = FooterLogo1 | FooterLogo2
 
 interface FooterPropsBase extends HTMLAttributes<HTMLDivElement> {
     as?: ElementType
-    separator?: boolean | AllColorsTypes
+    separator?: boolean
 }
 
 interface FooterContent1 extends FooterPropsBase {

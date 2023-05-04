@@ -17,11 +17,12 @@ export interface InputImageProps
 
     validation?: ValidationTypes
     inputSize?: InputImageSizeTypes
-    iconSize?: number
     value?: never
 
     icons?: {
         empty?: string | JSX.Element
         hover?: string | JSX.Element
+        sizeEmpty?: number
+        sizeHover?: number
     }
 }

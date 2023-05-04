@@ -24,7 +24,7 @@ const Toast = forwardRef(
             title,
             maxWidth,
             icon,
-            close,
+            withCloseButton,
             labelClose = "Close",
             children,
             style,
@@ -49,7 +49,7 @@ const Toast = forwardRef(
                 className={classNames({ closed: isClosed }, className)}
                 {...rest}
             >
-                {icon || close ? (
+                {icon || withCloseButton ? (
                     <TitleContainer>
                         {icon && (
                             <IconContainer>
@@ -75,11 +75,11 @@ const Toast = forwardRef(
 
                         {titleFn()}
 
-                        {close && (
+                        {withCloseButton && (
                             <CloseButton
                                 icon={
-                                    typeof close === "string" ? (
-                                        close
+                                    typeof withCloseButton === "string" ? (
+                                        withCloseButton
                                     ) : (
                                         <CloseIcon size={32 * 0.7} />
                                     )

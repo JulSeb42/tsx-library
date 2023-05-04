@@ -44,12 +44,12 @@ type ButtonBehaviour2 = ButtonBaseProps & {
 type ButtonBehaviour = ButtonBehaviour1 | ButtonBehaviour2
 
 type ButtonLoading1 = ButtonBehaviour & {
-    isLoading?: true
+    isLoading?: boolean
     loaderVariant?: LoaderVariantTypes
 }
 
 type ButtonLoading2 = ButtonBehaviour & {
-    isLoading?: false
+    isLoading?: undefined | null
     loaderVariant?: never
 }
 

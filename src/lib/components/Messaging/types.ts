@@ -26,6 +26,7 @@ interface MessagingPropsBase extends HTMLAttributes<HTMLFormElement> {
         autoFocus?: boolean
     }
     iconScroll?: string | JSX.Element
+    iconScrollSize?: number
 }
 
 interface MessagingPropsButton1 extends MessagingPropsBase {

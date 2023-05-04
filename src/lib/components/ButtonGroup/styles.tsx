@@ -2,7 +2,7 @@
 
 import styled, { css } from "styled-components"
 
-import { Button, ButtonIcon, Mixins, Radiuses } from "../../"
+import { Button, ButtonIcon, Mixins, Radiuses, Breakpoints } from "../../"
 import type { AllColorsTypes, ColorsHoverTypes } from "../../types"
 
 import { setDefaultTheme } from "../../utils"
@@ -11,11 +11,31 @@ const BaseButtonGroup = styled.div`
     border-radius: ${Radiuses.M};
     overflow: hidden;
     width: fit-content;
+    height: 42px;
     ${Mixins.Flexbox({
         $inline: true,
         $gap: 0,
-        $alignItems: "flex-start",
-    })};
+        $alignItems: "stretch",
+    })}
+
+    &.small {
+        height: 31px;
+    }
+
+    @media ${Breakpoints.Mobile} {
+        flex-direction: column;
+        height: fit-content;
+        align-items: stretch;
+
+        &.small {
+            height: fit-content;
+        }
+
+        & > * {
+            width: 100%;
+            height: auto;
+        }
+    }
 `
 
 const StyledButtonGroup = styled(BaseButtonGroup)<{

@@ -74,7 +74,7 @@ const Autocomplete = forwardRef(
                 : key
         )
 
-        const inputRef = useRef<HTMLDivElement>(null)
+        const inputRef = useRef<HTMLInputElement>(null)
         const keys = focusKeys ? focusKeys : [""]
         const handleFocus = () => inputRef?.current?.focus()
         useKeyPress(() => handleFocus(), keys)
@@ -109,12 +109,10 @@ const Autocomplete = forwardRef(
 
                     if (fuzzyResults?.length) {
                         setCursor(prevState =>
-                            prevState < fuzzyResults?.length - 1
-                                ? prevState + 1
-                                : 0
+                            prevState < fuzzyResults?.length ? prevState + 1 : 0
                         )
 
-                        if (cursor === fuzzyResults?.length - 1) {
+                        if (cursor === fuzzyResults?.length) {
                             listRef?.current?.scrollTo({
                                 top: 0,
                             })
@@ -131,9 +129,7 @@ const Autocomplete = forwardRef(
 
                     if (fuzzyResults?.length) {
                         const newCursor = (prevState: number) =>
-                            prevState > 0
-                                ? prevState - 1
-                                : fuzzyResults?.length - 1
+                            prevState > 0 ? prevState - 1 : fuzzyResults?.length
 
                         setCursor(prevState => newCursor(prevState))
 
@@ -157,7 +153,12 @@ const Autocomplete = forwardRef(
                     e.preventDefault()
 
                     if (fuzzyResults?.length) {
-                        setValue(fuzzyResults[cursor].item)
+                        if (cursor === fuzzyResults?.length) {
+                            setValue(value)
+                        } else {
+                            setValue(fuzzyResults[cursor].item)
+                        }
+
                         handleClose()
                     }
                 }
@@ -180,7 +181,7 @@ const Autocomplete = forwardRef(
                     "input-content",
                     !label && !helper && !helperBottom && className
                 )}
-                ref={inputRef}
+                // ref={inputRef}
             >
                 {icon && (
                     <IconComponent
@@ -195,7 +196,7 @@ const Autocomplete = forwardRef(
 
                 <StyledAutocomplete
                     id={id}
-                    ref={ref}
+                    ref={ref || inputRef}
                     onChange={handleChange}
                     onFocus={!disabled ? () => setIsFocus(true) : undefined}
                     onBlur={!disabled ? () => setIsFocus(false) : undefined}
@@ -242,22 +243,36 @@ const Autocomplete = forwardRef(
                     ref={listRef}
                 >
                     {value && fuzzyResults?.length ? (
-                        fuzzyResults?.map((result, i) => {
-                            const getItem = result.item
+                        <>
+                            {fuzzyResults?.map((result, i) => {
+                                const getItem = result.item
 
-                            return (
-                                <ListItem
-                                    onClick={() => handleClick(getItem)}
-                                    onMouseEnter={() => setCursor(i)}
-                                    onMouseLeave={() => setCursor(0)}
-                                    validation={getValidationStatus}
-                                    isActive={cursor === i}
-                                    key={uuid()}
-                                >
-                                    {getHighlightedText(getItem, value)}
-                                </ListItem>
-                            )
-                        })
+                                return (
+                                    <ListItem
+                                        onClick={() => handleClick(getItem)}
+                                        onMouseEnter={() => setCursor(i)}
+                                        onMouseLeave={() => setCursor(0)}
+                                        validation={getValidationStatus}
+                                        isActive={cursor === i}
+                                        key={uuid()}
+                                    >
+                                        {getHighlightedText(getItem, value)}
+                                    </ListItem>
+                                )
+                            })}
+
+                            <ListItem
+                                onClick={() => handleClick(value)}
+                                onMouseEnter={() =>
+                                    setCursor(fuzzyResults?.length)
+                                }
+                                onMouseLeave={() => setCursor(0)}
+                                validation={getValidationStatus}
+                                isActive={cursor === fuzzyResults?.length}
+                            >
+                                {getHighlightedText(value, value)}
+                            </ListItem>
+                        </>
                     ) : (
                         <ListItem
                             validation={getValidationStatus}

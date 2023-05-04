@@ -10,28 +10,17 @@ interface InputSliderPropsBase
         InputBaseProps {
     validation?: ValidationTypes
     type?: never
-}
-
-interface InputSliderPropsMinMax1 extends InputSliderPropsBase {
+    showMinMax?: boolean
     min?: number
     max?: number
-    showMinMax?: boolean
 }
 
-interface InputSliderPropsMinMax2 extends InputSliderPropsBase {
-    min?: undefined
-    max?: undefined
-    showMinMax?: never
-}
-
-type InputSliderPropsMinMax = InputSliderPropsMinMax1 | InputSliderPropsMinMax2
-
-type InputSliderPropsValue1 = InputSliderPropsMinMax & {
+type InputSliderPropsValue1 = InputSliderPropsBase & {
     value?: number
     showValue?: "never" | "always" | "hover"
 }
 
-type InputSliderPropsValue2 = InputSliderPropsMinMax & {
+type InputSliderPropsValue2 = InputSliderPropsBase & {
     value?: undefined
     showValue?: never
 }

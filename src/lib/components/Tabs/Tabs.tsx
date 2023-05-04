@@ -127,10 +127,10 @@ export const Tabs = forwardRef(
         ref?: ForwardedRef<HTMLDivElement>
     ) => {
         const [searchParams, setSearchParams] = useSearchParams()
-        const tab = searchParams.get("tab") || active
+        const tab = searchParams.get("tab") || active.toString()
 
         const [isActive, setIsActive] = useState<number>(
-            typeof tab === "string" ? parseInt(tab) : tab
+            showInUrl ? parseInt(tab) : active
         )
 
         const handleButton = (activeTab: number) => {

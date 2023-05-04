@@ -21,8 +21,8 @@ import type {
 
 export type AccordionItemProps = {
     title: string
-    isOpen?: boolean
     content: string | ReactNode
+    isOpen?: boolean
 }
 
 /*==================== Breadcrumbs item ====================*/
@@ -131,7 +131,9 @@ type ListGroupBadge1 = ListGroupPropsBase & {
         | {
               icon?: string | JSX.Element
               number?: never
+              color?: ColorsShortTypes
           }
+    date?: never
 }
 
 type ListGroupBadge2 = ListGroupPropsBase & {
@@ -140,23 +142,20 @@ type ListGroupBadge2 = ListGroupPropsBase & {
         | {
               icon?: never
               number?: number
+              color?: ColorsShortTypes
           }
-}
-
-type ListGroupBadge = ListGroupBadge1 | ListGroupBadge2
-
-type ListGroupPropsContent1 = ListGroupBadge & {
-    badgeColor?: ColorsShortTypes
     date?: never
 }
 
-type ListGroupPropsContent2 = ListGroupBadge & {
+type ListGroupBadge3 = ListGroupPropsBase & {
     badge?: never
-    badgeColor?: never
     date?: string | Date
 }
 
-export type ListGroupItemProps = ListGroupPropsContent1 | ListGroupPropsContent2
+export type ListGroupItemProps =
+    | ListGroupBadge1
+    | ListGroupBadge2
+    | ListGroupBadge3
 
 /*==================== Icon menu ====================*/
 

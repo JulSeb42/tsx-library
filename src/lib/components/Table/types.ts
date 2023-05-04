@@ -19,7 +19,7 @@ interface TablePropsBase extends HTMLAttributes<HTMLTableElement> {
 }
 
 interface TablePropsHeaders1 extends TablePropsBase {
-    headers?: string[]
+    headers?: (string | JSX.Element)[]
     linkifyHeaders?: boolean
 }
 

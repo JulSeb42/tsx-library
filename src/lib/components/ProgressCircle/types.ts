@@ -15,7 +15,7 @@ type ProgressCircleValue1 = ProgressCirclePropsBase & {
 }
 
 type ProgressCircleValue2 = ProgressCirclePropsBase & {
-    showValue?: false
+    showValue?: false | undefined | null
     icon?: string
 }
 

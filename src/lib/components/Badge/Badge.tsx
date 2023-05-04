@@ -15,12 +15,15 @@ const Badge = forwardRef(
             color = "primary",
             size,
             icon,
+            iconSize,
             number,
             style,
             ...rest
         }: BadgeProps,
         ref?: ForwardedRef<HTMLSpanElement>
     ) => {
+        const defaultSize = size || 16
+
         return (
             <StyledBadge
                 ref={ref}
@@ -38,7 +41,7 @@ const Badge = forwardRef(
                     typeof icon === "string" ? (
                         <Icon
                             src={icon}
-                            size={size ? size * 0.7 : 16 * 0.7}
+                            size={iconSize || defaultSize * 0.7}
                             className="badge-icon"
                         />
                     ) : (

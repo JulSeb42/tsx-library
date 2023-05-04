@@ -13,7 +13,6 @@ const Aside = forwardRef(
     (
         {
             as,
-            position = 1,
             size = "default",
             children,
             minHeight,
@@ -26,7 +25,6 @@ const Aside = forwardRef(
             <StyledAside
                 ref={ref}
                 as={as}
-                data-position={position}
                 style={{
                     ["--aside-size" as any]: getAsideSize(size),
                     ["--aside-min-height" as any]:

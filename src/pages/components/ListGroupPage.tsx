@@ -16,18 +16,15 @@ const ListGroupPage = () => {
         },
         {
             text: "Item",
-            badge: { number: 350 },
-            badgeColor: "danger",
+            badge: { number: 350, color: "danger" },
         },
         {
             text: "Item",
-            badge: { icon: "star" },
-            badgeColor: "success",
+            badge: { icon: "star", color: "success" },
         },
         {
             text: "Item",
-            badge: true,
-            badgeColor: "warning",
+            badge: { color: "warning" },
         },
         {
             text: "Router link",

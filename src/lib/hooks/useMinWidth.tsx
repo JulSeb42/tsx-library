@@ -1,11 +1,11 @@
 /*=============================================== useMinWidth ===============================================*/
 
-import { useState, useLayoutEffect } from "react"
+import { useState, useEffect } from "react"
 
 export const useMinWidth = (width: number) => {
     const [isMin, setIsMin] = useState<undefined | boolean>(undefined)
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         const detectSize = () => {
             if (window.innerWidth >= width) {
                 setIsMin(true)

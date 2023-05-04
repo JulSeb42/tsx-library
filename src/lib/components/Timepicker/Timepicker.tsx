@@ -195,6 +195,7 @@ const Timepicker = ({
                         onClick={() => setIsOpen(true)}
                         disabled={disabled}
                         className="timepicker-icon-clock"
+                        as="span"
                     />
                 </RightContainer>
             </Selected>

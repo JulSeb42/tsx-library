@@ -24,17 +24,24 @@ type ButtonIconBaseProps = HTMLAttributes<
         as?: ElementType
         icon: string | JSX.Element
         iconSize?: number
-
         color?: ColorsHoverTypes
         size?: number
-
-        isLoading?: boolean
-        loaderBorder?: number
-
         variant?: ButtonIconVariantTypes
     }
 
-type ButtonIconLabel1 = ButtonIconBaseProps & {
+type ButtonIconLoading1 = ButtonIconBaseProps & {
+    isLoading?: boolean
+    loaderBorder?: number
+}
+
+type ButtonIconLoading2 = ButtonIconBaseProps & {
+    isLoading?: undefined
+    loaderBorder?: never
+}
+
+type ButtonIconLoading = ButtonIconLoading1 | ButtonIconLoading2
+
+type ButtonIconLabel1 = ButtonIconLoading & {
     label?: string
     showLabel?:
         | boolean
@@ -44,7 +51,7 @@ type ButtonIconLabel1 = ButtonIconBaseProps & {
           }
 }
 
-type ButtonIconLabel2 = ButtonIconBaseProps & {
+type ButtonIconLabel2 = ButtonIconLoading & {
     label?: undefined
     showLabel?: never
 }

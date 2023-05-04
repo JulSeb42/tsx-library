@@ -16,11 +16,11 @@ interface RatingPropsBase
 
 interface RatingPropsBehaviour1 extends RatingPropsBase {
     setRating: (rating: number) => void
-    readOnly?: never
+    readOnly?: undefined | false
 }
 
 interface RatingPropsBehaviour2 extends RatingPropsBase {
-    setRating?: never
+    setRating?: never | undefined | null
     readOnly: true
 }
 

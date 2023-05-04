@@ -47,8 +47,8 @@ interface HeaderPropsBase extends HTMLAttributes<HTMLDivElement> {
     navMobileVariant?: NavMobileVariantsTypes
     search?: {
         pathname: string
-        search?: any
-        icon?: string
+        queries?: string[][]
+        icon?: string | JSX.Element
         iconClear?: string | JSX.Element
         placeholder?: string
         keyboardShortcut?: string[]

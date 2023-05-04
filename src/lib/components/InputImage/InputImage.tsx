@@ -24,7 +24,6 @@ const InputImage = forwardRef(
             id,
             img,
             inputSize,
-            iconSize = 48,
             validation,
             icons,
             disabled,
@@ -53,7 +52,7 @@ const InputImage = forwardRef(
                         <Icon
                             src={icons.empty}
                             color={iconColor}
-                            size={iconSize}
+                            size={icons?.sizeEmpty || 48}
                             className="input-image-icon-empty"
                         />
                     ) : (
@@ -61,7 +60,7 @@ const InputImage = forwardRef(
                     )
                 ) : (
                     <ImageIcon
-                        size={iconSize}
+                        size={icons?.sizeEmpty || 48}
                         color={iconColor}
                         className="input-image-icon-empty"
                     />
@@ -75,7 +74,9 @@ const InputImage = forwardRef(
                     typeof icons?.hover === "string" ? (
                         <Icon
                             src={icons.hover}
-                            size={iconSize - 8}
+                            size={
+                                icons && icons.sizeHover ? icons.sizeHover : 40
+                            }
                             color={iconColor}
                             className="input-image-icon-hover"
                         />
@@ -84,7 +85,7 @@ const InputImage = forwardRef(
                     )
                 ) : (
                     <EditIcon
-                        size={iconSize - 8}
+                        size={icons && icons.sizeHover ? icons.sizeHover : 40}
                         color={iconColor}
                         className="input-image-icon-hover"
                     />

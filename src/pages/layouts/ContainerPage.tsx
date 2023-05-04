@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 
 import { Page } from "../../components"
-import { Wrapper, Main, Aside, Text } from "../../lib"
+import { Wrapper, Main, Aside, Text, CodeContainer, Section } from "../../lib"
 
 const StyledMain = styled(Main)`
     background-color: ${({ theme }) => theme.Danger100};
@@ -70,6 +70,10 @@ const Content = () => (
             pellentesque. Vestibulum massa nisi, dapibus vel feugiat et, laoreet
             vel nisi. Nunc feugiat nunc nisi, tempus rhoncus dui tincidunt vel.
         </Text>
+
+        <Section>
+            <CodeContainer language="typescript">{`const Button = styled.button<{\n    $color: "red" | "blue"\n    $size?: "default" | "small" | "large"\n}>\`\n    border: none;\n    border-radius: 8px;\n    background-color: \${({ $color }) => $color};\n    font-size: \${({ $size }) =>\n        $size === "large" ? 18 : $size === "small" ? 14 : 16}px;\n    padding: \${({ $size }) =>\n        $size === "large"\n            ? \`6px 12px\`\n            : $size === "small"\n            ? \`2px 4px\`\n            : \`4px 8px\`};\n    color: white;\n\`\n\n<Button $color="red" $size="small">\n    Red\n</Button>\n\n<Button $color="blue" $size="large">\n    Blue\n</Button>`}</CodeContainer>
+        </Section>
     </>
 )
 
@@ -87,6 +91,20 @@ const ContainerPage = () => {
             </Text>
 
             <Wrapper>
+                <StyledMain size="default">
+                    <Text tag="h2">Main</Text>
+
+                    <Content />
+                </StyledMain>
+            </Wrapper>
+
+            <Wrapper>
+                <StyledAside>
+                    <Text tag="h2">Aside</Text>
+
+                    <Content />
+                </StyledAside>
+
                 <StyledMain>
                     <Text tag="h2">Main</Text>
 
@@ -94,48 +112,34 @@ const ContainerPage = () => {
                 </StyledMain>
             </Wrapper>
 
-            <Wrapper template="2cols">
-                <StyledAside position={1}>
-                    <Text tag="h2">Aside</Text>
-
-                    <Content />
-                </StyledAside>
-
-                <StyledMain position={2}>
-                    <Text tag="h2">Main</Text>
-
-                    <Content />
-                </StyledMain>
-            </Wrapper>
-
-            <Wrapper template="2cols">
-                <StyledMain position={1}>
+            <Wrapper>
+                <StyledMain>
                     <Text tag="h2">Main</Text>
 
                     <Content />
                 </StyledMain>
 
-                <StyledAside position={2} minHeight={100}>
+                <StyledAside minHeight={100}>
                     <Text tag="h2">Aside</Text>
 
                     <Content />
                 </StyledAside>
             </Wrapper>
 
-            <Wrapper template="3cols">
-                <StyledAside position={1} size="small">
+            <Wrapper>
+                <StyledAside size="small">
                     <Text tag="h2">Aside</Text>
 
                     <Content />
                 </StyledAside>
 
-                <StyledMain position={2}>
+                <StyledMain>
                     <Text tag="h2">Main</Text>
 
                     <Content />
                 </StyledMain>
 
-                <StyledAside position={3} size="small">
+                <StyledAside size="small">
                     <Text tag="h2">Aside</Text>
 
                     <Content />

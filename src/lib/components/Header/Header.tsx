@@ -68,7 +68,7 @@ const Header = forwardRef(
                 pathname: search?.pathname,
                 search: createSearchParams({
                     query: searchValue,
-                    ...search?.search,
+                    ...Object.fromEntries(search?.queries || []),
                 }).toString(),
             })
 

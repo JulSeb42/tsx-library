@@ -7,7 +7,7 @@ import styled from "styled-components"
 import { NavDemo } from "./NavDemo"
 import { DefaultLayout } from "./"
 
-import { Spacers, Mixins, Text } from "../lib"
+import { Spacers, Mixins, Text, Breakpoints } from "../lib"
 
 export const Page: FC<PageProps> = ({ children, title }) => {
     return (
@@ -33,7 +33,20 @@ const Container = styled.main`
     left: 200px;
     position: relative;
     padding: ${Spacers.XXL};
-    ${Mixins.Grid({
+    ${Mixins.Flexbox({
+        $alignItems: "stretch",
+        $flexDirection: "column",
         $gap: "l",
-    })};
+    })}
+    ${
+        "" /* ${Mixins.Grid({
+        $gap: "l",
+    })}; */
+    }
+
+    @media ${Breakpoints.Tablet} {
+        width: 100%;
+        left: 0;
+        padding: ${Spacers.XXL} 0;
+    }
 `

@@ -15,7 +15,7 @@ const Table = forwardRef(
             children,
             variant = "bordered",
             headers,
-            linkifyHeaders,
+            linkifyHeaders = true,
             vAlign,
             ...rest
         }: TableProps,
@@ -33,8 +33,12 @@ const Table = forwardRef(
                     <tr>
                         {headers.map(header => (
                             <th key={uuid()}>
-                                {linkifyHeaders ? (
-                                    <Linkify>{header}</Linkify>
+                                {typeof header === "string" ? (
+                                    linkifyHeaders ? (
+                                        <Linkify>{header}</Linkify>
+                                    ) : (
+                                        header
+                                    )
                                 ) : (
                                     header
                                 )}

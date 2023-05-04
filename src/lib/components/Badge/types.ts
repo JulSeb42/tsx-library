@@ -12,11 +12,13 @@ interface BadgePropsBase extends HTMLAttributes<HTMLSpanElement> {
 
 interface BadgePropsContent1 extends BadgePropsBase {
     icon?: string | JSX.Element
+    iconSize?: number
     number?: never
 }
 
 interface BadgePropsContent2 extends BadgePropsBase {
     icon?: never
+    iconSize?: never
     number?: number
 }
 

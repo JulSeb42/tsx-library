@@ -1,7 +1,7 @@
 {
     "name": "tsx-library-julseb",
     "private": false,
-    "version": "8.0.6",
+    "version": "8.0.33",
     "type": "module",
     "scripts": {
         "dev": "vite",
@@ -46,6 +46,7 @@
         "eslint-plugin-prettier": "^4.2.1",
         "json": "^11.0.0",
         "prettier": "^2.8.8",
+        "prop-types": "^15.8.1",
         "tslib": "^2.5.0",
         "typescript": "^5.0.4",
         "vite": "^4.3.1",
@@ -75,6 +76,12 @@
             "import": "./dist/index.css",
             "require": "./dist/index.css",
             "default": "./dist/index.css"
+        },
+        "./types": {
+            "import": "./dist/types/index.d.ts",
+            "require": "./dist/types/index.d.ts",
+            "types": "./dist/types/index.d.ts",
+            "default": "./dist/types/index.d.ts"
         }
     },
     "typesVersions": {

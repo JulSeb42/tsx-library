@@ -57,7 +57,7 @@ interface TabsPropsBase extends HTMLAttributes<HTMLDivElement> {
 }
 
 type TabsUrl = TabsPropsBase & {
-    showInUrl: true
+    showInUrl?: true
     queries?: string[][]
 }
 
