@@ -22,6 +22,7 @@ const BaseSkeleton = styled.div`
     overflow: hidden;
     width: var(--skeleton-width);
     height: var(--skeleton-height);
+    max-width: var(--skeleton-max-width);
     flex: var(--skeleton-flex);
     flex-grow: var(--skeleton-flex-grow);
     ${Mixins.BorderRadiusVar("skeleton")};
@@ -63,6 +64,7 @@ const Shine = styled.span`
 const BaseCard = styled(Flexbox)`
     width: var(--skeleton-card-width);
     height: var(--skeleton-card-height);
+    max-width: var(--skeleton-card-max-width);
     overflow: hidden;
     position: relative;
     ${Mixins.BorderRadiusVar("skeleton-card")};

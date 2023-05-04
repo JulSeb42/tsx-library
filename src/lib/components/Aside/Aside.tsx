@@ -26,7 +26,7 @@ const Aside = forwardRef(
                 ref={ref}
                 as={as}
                 style={{
-                    ["--aside-size" as any]: getAsideSize(size),
+                    ["--aside-size" as any]: size && getAsideSize(size),
                     ["--aside-min-height" as any]:
                         minHeight && stringifyPx(minHeight),
                     ...style,

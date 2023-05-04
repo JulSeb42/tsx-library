@@ -8,8 +8,8 @@ import type { AllColorsTypes } from "../../types"
 import { setDefaultTheme } from "../../utils"
 
 const BaseIcon = styled(SVG)`
-    width: var(--icon-size);
-    height: var(--icon-size);
+    width: var(--icon-size, 16px);
+    height: var(--icon-size, 16px);
 `
 
 const StyledIcon = styled(BaseIcon)<{

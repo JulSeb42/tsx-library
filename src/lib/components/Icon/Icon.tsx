@@ -10,14 +10,14 @@ import type { IconProps } from "./types"
 
 const Icon = forwardRef(
     (
-        { src, size = 16, color = "currentColor", style, ...rest }: IconProps,
+        { src, size, color = "currentColor", style, ...rest }: IconProps,
         ref?: ForwardedRef<any>
     ) => (
         <StyledIcon
             ref={ref}
             src={`/icons/${src}.svg`}
             style={{
-                ["--icon-size" as any]: stringifyPx(size),
+                ["--icon-size" as any]: size && stringifyPx(size),
                 ...style,
             }}
             $color={color}

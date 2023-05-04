@@ -41,7 +41,7 @@ const Tooltip = ({
                 className={classNames("tip", { visible: isVisible })}
                 style={{
                     ["--tip-width" as any]: stringifyPx(width),
-                    ["--tip-position" as any]: stringifyPx(bottom),
+                    ["--tip-position" as any]: bottom && stringifyPx(bottom),
                 }}
                 data-position={tipPosition}
             >

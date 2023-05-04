@@ -13,6 +13,7 @@ export interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {
     as?: ElementType
     width?: string | number
     height?: string | number
+    maxWidth?: string | number
     backgroundColor?: AllColorsTypes
     borderRadius?: RadiusesTypes
     flex?: string | number
@@ -31,6 +32,7 @@ export interface SkeletonCardProps
     borderRadius?: RadiusesTypes
     width?: string | number
     height?: string | number
+    maxWidth?: string | number
     backgroundColor?: AllColorsTypes
     isShiny?: boolean
 }

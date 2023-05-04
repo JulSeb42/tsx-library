@@ -4,6 +4,8 @@ import { Layouts, stringifyPx } from "../../"
 import type { MainSizeTypes } from "./types"
 
 export const getMainSize = (size?: MainSizeTypes) => {
+    if (typeof size === "number") return stringifyPx(size)
+
     switch (size) {
         case "large":
             return Layouts.Main.Large
@@ -11,9 +13,7 @@ export const getMainSize = (size?: MainSizeTypes) => {
             return Layouts.Main.Form
         case "full":
             return Layouts.Main.Full
-        case "default":
-            return Layouts.Main.Default
         default:
-            return stringifyPx(size)
+            return Layouts.Main.Default
     }
 }

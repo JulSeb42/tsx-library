@@ -21,6 +21,7 @@ export const Skeleton = forwardRef(
             as,
             width = "100%",
             height = 100,
+            maxWidth,
             backgroundColor = "gray-100",
             borderRadius = "s",
             animation,
@@ -38,8 +39,10 @@ export const Skeleton = forwardRef(
                 as={as}
                 style={{
                     ...variableBorderRadius(borderRadius, "skeleton"),
-                    ["--skeleton-width" as any]: stringifyPx(width),
-                    ["--skeleton-height" as any]: stringifyPx(height),
+                    ["--skeleton-width" as any]: width && stringifyPx(width),
+                    ["--skeleton-height" as any]: height && stringifyPx(height),
+                    ["--skeleton-max-width" as any]:
+                        maxWidth && stringifyPx(maxWidth),
                     ["--skeleton-flex" as any]: flex,
                     ["--skeleton-flex-grow" as any]: flexGrow,
                     ...style,
@@ -70,6 +73,7 @@ export const SkeletonCard = forwardRef(
             style,
             width,
             height,
+            maxWidth,
             ...rest
         }: SkeletonCardProps,
         ref?: ForwardedRef<HTMLDivElement>
@@ -85,6 +89,8 @@ export const SkeletonCard = forwardRef(
                         width && stringifyPx(width),
                     ["--skeleton-card-height" as any]:
                         height && stringifyPx(height),
+                    ["--skeleton-card-max-width" as any]:
+                        maxWidth && stringifyPx(maxWidth),
                     ...style,
                 }}
                 $border={border}

@@ -32,7 +32,7 @@ const Avatar = forwardRef(
                 ref={ref}
                 as={as}
                 style={{
-                    ["--avatar-size" as any]: stringifyPx(size),
+                    ["--avatar-size" as any]: size && stringifyPx(size),
                     ...style,
                 }}
                 $color={color}
