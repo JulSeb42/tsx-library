@@ -121,6 +121,7 @@ const Paginator = forwardRef(
                     icon={icons?.prev || <ChevronLeftIcon size={24 * 0.7} />}
                     variant="transparent"
                     className="paginator-button paginator-button-prev"
+                    type="button"
                     {...buttonPrev}
                 />
 
@@ -128,6 +129,7 @@ const Paginator = forwardRef(
                     icon={icons?.next || <ChevronRightIcon size={24 * 0.7} />}
                     variant="transparent"
                     className="paginator-button paginator-button-next"
+                    type="button"
                     {...buttonNext}
                 />
             </StyledPaginator>

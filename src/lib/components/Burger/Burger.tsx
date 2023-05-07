@@ -31,6 +31,7 @@ const Burger = forwardRef(
                 ref={ref}
                 as={as}
                 aria-label={ariaLabel}
+                type="button"
                 className={classNames(
                     { "no-hover": noHover },
                     { open: isOpen },

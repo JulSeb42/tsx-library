@@ -39,6 +39,7 @@ export const PaginationButton = forwardRef(
                     { more: buttonContent === "more" },
                     { active: isActive }
                 )}
+                type="button"
                 {...rest}
             >
                 {buttonContent === "more" ? (

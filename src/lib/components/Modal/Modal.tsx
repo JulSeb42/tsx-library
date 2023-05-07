@@ -51,6 +51,7 @@ const Modal = forwardRef(
                         onClick={closeModal}
                         label={labelClose}
                         className="close-button"
+                        type="button"
                     />
                 )}
 

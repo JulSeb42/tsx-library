@@ -190,6 +190,7 @@ export const Messaging = forwardRef(
                     style={{
                         ["--input-height" as any]: stringifyPx(inputHeight),
                     }}
+                    type="button"
                 />
 
                 <Hr />
@@ -241,6 +242,7 @@ export const Messaging = forwardRef(
                             variant="transparent"
                             size={32}
                             className="message-button"
+                            type="submit"
                         />
                     )}
                 </InputContainer>

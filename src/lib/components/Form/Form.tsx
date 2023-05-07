@@ -73,6 +73,7 @@ const Form = forwardRef(
                                         }}
                                         onClick={buttonSecondary.onClick}
                                         className="form-button-secondary"
+                                        type="reset"
                                     >
                                         {buttonSecondary.text || "Reset"}
                                     </Button>

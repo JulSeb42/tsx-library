@@ -63,6 +63,7 @@ export const DropdownItem = forwardRef(
                 onClick={onClick}
                 target={(href || to) && blank && "_blank"}
                 rel={(href || to) && blank && "noreferrer noopener"}
+                type="button"
                 {...rest}
             >
                 {icon &&

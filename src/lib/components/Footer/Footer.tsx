@@ -92,6 +92,7 @@ const Footer = forwardRef(
                                         <button
                                             onClick={onClick}
                                             className="footer-link"
+                                            type="button"
                                         >
                                             {content}
                                         </button>

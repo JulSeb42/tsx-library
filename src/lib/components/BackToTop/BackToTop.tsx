@@ -72,6 +72,7 @@ const BackToTop = forwardRef(
                     onMouseLeave={() => setIsTextVisible(false)}
                     label={text || "Back to top"}
                     className="button"
+                    type="button"
                 />
 
                 {text && (

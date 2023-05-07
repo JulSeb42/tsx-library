@@ -64,6 +64,7 @@ const Card = forwardRef(
                 target={(href || to) && blank && "_blank"}
                 rel={(href || to) && blank && "noreferrer noopener"}
                 onClick={onClick}
+                type={onClick && "button"}
                 style={{
                     ...variableBorderRadius(borderRadius, "card"),
                     ...variableAllPaddings(padding, "card"),

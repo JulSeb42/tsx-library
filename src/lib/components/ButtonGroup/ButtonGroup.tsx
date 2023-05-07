@@ -65,6 +65,7 @@ const ButtonGroup = forwardRef(
                                     href={href}
                                     blank={blank}
                                     className="button"
+                                    type="button"
                                 />
                             ) : to ? (
                                 <StyledButtonIcon
@@ -76,6 +77,7 @@ const ButtonGroup = forwardRef(
                                     to={to}
                                     blank={blank}
                                     className="button"
+                                    type="button"
                                 />
                             ) : (
                                 <StyledButtonIcon
@@ -86,6 +88,7 @@ const ButtonGroup = forwardRef(
                                     aria-label={ariaLabel}
                                     iconSize={16}
                                     className="button"
+                                    type="button"
                                 />
                             )
                         ) : href ? (
@@ -101,6 +104,7 @@ const ButtonGroup = forwardRef(
                                 blank={blank}
                                 size={buttonsSize}
                                 className="button"
+                                type="button"
                             >
                                 {text}
                             </StyledButton>
@@ -117,6 +121,7 @@ const ButtonGroup = forwardRef(
                                 blank={blank}
                                 size={buttonsSize}
                                 className="button"
+                                type="button"
                             >
                                 {text}
                             </StyledButton>
@@ -132,6 +137,7 @@ const ButtonGroup = forwardRef(
                                 }}
                                 size={buttonsSize}
                                 className="button"
+                                type="button"
                             >
                                 {text}
                             </StyledButton>

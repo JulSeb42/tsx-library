@@ -81,6 +81,7 @@ const CodeContainer = forwardRef(
                                 : "Copy"
                         }
                         className="code-container-button"
+                        type="button"
                     />
                 )}
             </StyledCodeContainer>

@@ -153,6 +153,7 @@ const InputMarkdown = forwardRef(
                                     noPadding
                                     onClick={() => setIsTextOpen(!isTextOpen)}
                                     className="markdown-editor-titles-dropdown-button"
+                                    type="button"
                                 >
                                     Titles
                                 </Button>
@@ -183,6 +184,7 @@ const InputMarkdown = forwardRef(
                                                         )}px`,
                                                     }}
                                                     className="markdown-editor-button-title"
+                                                    type="button"
                                                     key={uuid()}
                                                 >
                                                     {button.text}
@@ -218,6 +220,7 @@ const InputMarkdown = forwardRef(
                                         },
                                         "markdown-editor-button-command"
                                     )}
+                                    type="button"
                                     key={uuid()}
                                 />
                             )
@@ -261,6 +264,7 @@ const InputMarkdown = forwardRef(
                                         },
                                         "markdown-editor-editor-button"
                                     )}
+                                    type="button"
                                     key={uuid()}
                                 />
                             )

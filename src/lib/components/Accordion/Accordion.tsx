@@ -63,6 +63,7 @@ export const AccordionItem = forwardRef(
                         { "no-border": noBorder },
                         "accordion-button"
                     )}
+                    type="button"
                     data-variant={variant}
                 >
                     {title}

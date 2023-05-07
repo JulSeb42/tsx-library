@@ -86,6 +86,7 @@ const Toast = forwardRef(
                                 }
                                 label={labelClose}
                                 onClick={() => setIsClosed(true)}
+                                type="button"
                             />
                         )}
                     </TitleContainer>

@@ -57,6 +57,7 @@ export const ListItem = forwardRef(
                 disabled={disabled}
                 target={(href || to) && blank && "_blank"}
                 rel={(href || to) && blank && "noreferrer noopener"}
+                type="button"
                 className={classNames(
                     { "is-hoverable": !!(to || href || onClick) },
                     className

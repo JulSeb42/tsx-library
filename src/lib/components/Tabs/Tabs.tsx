@@ -86,6 +86,7 @@ export const TabButton = forwardRef(
                 className={classNames({ active: isActive }, className)}
                 data-variant={variant}
                 data-justify={justify}
+                type="button"
                 {...rest}
             >
                 {children}

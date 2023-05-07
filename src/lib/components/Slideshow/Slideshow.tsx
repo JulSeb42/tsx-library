@@ -36,6 +36,7 @@ const SlideshowButton = ({
             onClick={onClick}
             data-size={isLarge ? "large" : "small"}
             data-position={position}
+            type="button"
             className={classNames({ "hide-on-touch": hideTouch }, className)}
             $color={color}
         >

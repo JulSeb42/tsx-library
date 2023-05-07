@@ -73,6 +73,7 @@ const ButtonIcon = forwardRef(
             to,
             style,
             onClick,
+            type = "button",
             ...rest
         }: ButtonIconProps,
         ref?: ForwardedRef<HTMLButtonElement>
@@ -90,6 +91,7 @@ const ButtonIcon = forwardRef(
                 disabled={!!isLoading || disabled}
                 className={className}
                 data-variant={variant}
+                type={type}
                 style={{
                     ["--button-size" as any]: size && stringifyPx(size),
                     ...style,

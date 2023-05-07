@@ -38,6 +38,7 @@ const IconMenu = ({
             <StyledOpenButton
                 onClick={() => setIsOpen(!isOpen)}
                 className="icon-menu-button-open"
+                type="button"
                 $color={color}
             >
                 {icon && typeof icon === "object" ? (
@@ -114,6 +115,7 @@ const IconMenu = ({
                             { open: isOpen },
                             "icon-menu-button"
                         )}
+                        type="button"
                         $color={color}
                         key={`button-${icon}-${label}`}
                     >
