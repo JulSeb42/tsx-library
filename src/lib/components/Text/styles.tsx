@@ -74,6 +74,7 @@ const FontCommon = ({
         font-weight: ${FontWeights.Black};
         color: ${({ theme }) =>
             theme.ColorsHoverDefault({ $color: "primary" })};
+        ${Mixins.FontSize({ $fontSize })};
 
         @media ${Breakpoints.Hover} {
             &:hover {
@@ -95,6 +96,7 @@ const FontCommon = ({
         padding: ${Spacers.XXS};
         background-color: ${({ theme }) => theme.Gray50};
         border-radius: ${Radiuses.S};
+        ${Mixins.FontSize({ $fontSize })};
     }
 `
 
@@ -106,6 +108,12 @@ const StyledH1 = styled.h1`
 
     &.display {
         font-size: ${FontSizes.Display.H1};
+
+        a,
+        button,
+        code {
+            ${Mixins.FontSize({ $fontSize: "display-h1" })};
+        }
     }
 `
 
@@ -117,6 +125,12 @@ const StyledH2 = styled.h2`
 
     &.display {
         font-size: ${FontSizes.Display.H2};
+
+        a,
+        button,
+        code {
+            ${Mixins.FontSize({ $fontSize: "display-h2" })};
+        }
     }
 `
 
@@ -128,6 +142,12 @@ const StyledH3 = styled.h3`
 
     &.display {
         font-size: ${FontSizes.Display.H3};
+
+        a,
+        button,
+        code {
+            ${Mixins.FontSize({ $fontSize: "display-h3" })};
+        }
     }
 `
 
@@ -139,6 +159,12 @@ const StyledH4 = styled.h4`
 
     &.display {
         font-size: ${FontSizes.Display.H4};
+
+        a,
+        button,
+        code {
+            ${Mixins.FontSize({ $fontSize: "display-h4" })};
+        }
     }
 `
 
@@ -150,6 +176,12 @@ const StyledH5 = styled.h5`
 
     &.display {
         font-size: ${FontSizes.Display.H5};
+
+        a,
+        button,
+        code {
+            ${Mixins.FontSize({ $fontSize: "display-h5" })};
+        }
     }
 `
 
