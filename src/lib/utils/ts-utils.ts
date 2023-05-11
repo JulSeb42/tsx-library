@@ -36,4 +36,5 @@ export {
     uuid,
     disableScroll,
     enableScroll,
+    sortByFrequency,
 } from "ts-utils-julseb"

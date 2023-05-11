@@ -40,6 +40,7 @@ import {
     uuid,
     enableScroll,
     disableScroll,
+    sortByFrequency,
 } from "../../lib"
 
 const JsUtilsPage = () => {
@@ -302,6 +303,22 @@ const JsUtilsPage = () => {
             effect: "Replaces accents, spaces, uppercase letters, etc., in a string to convert it to a url friendly string",
             example: 'slugify("Hello world how are you?")',
             result: slugify("Hello world how are you?"),
+        },
+        {
+            name: "sortByFrequency",
+            effect: "Sort array by frequency of its values",
+            example:
+                'sortByFrequency(["Hello", "Hello", "foo", "baz", "baz", "hello", "world", "world"])',
+            result: sortByFrequency([
+                "Hello",
+                "Hello",
+                "foo",
+                "baz",
+                "baz",
+                "hello",
+                "world",
+                "world",
+            ]).join(", "),
         },
         {
             name: "stringifyPx",
