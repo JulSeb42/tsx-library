@@ -646,20 +646,12 @@ const Mixins = {
 
     MaxLines: ({ $maxLines }: MaxLinesProps) =>
         css`
-            ${$maxLines === 1
-                ? css`
-                      white-space: nowrap;
-                      overflow: hidden;
-                      text-overflow: ellipsis;
-                  `
-                : css`
-                      overflow: hidden;
-                      text-overflow: ellipsis;
-                      display: -webkit-box;
-                      -webkit-line-clamp: ${$maxLines};
-                      line-clamp: ${$maxLines};
-                      -webkit-box-orient: vertical;
-                  `}
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: ${$maxLines};
+            line-clamp: ${$maxLines};
+            -webkit-box-orient: vertical;
         `,
 
     ImgSizeVar: (component: string) => css`

@@ -13,6 +13,7 @@ const StyledAside = styled.aside`
     ${Mixins.Flexbox({
         $flexDirection: "column",
         $alignItems: "stretch",
+        $gap: "l",
         $padding: {
             topBottom: "xxl",
         },
