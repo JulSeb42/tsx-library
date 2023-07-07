@@ -1,7 +1,7 @@
 {
     "extends": [
-        "react-app",
-        "plugin:prettier/recommended"
+        "react-app"
+        // "plugin:prettier/recommended"
     ],
     "plugins": [
         "prettier"
@@ -10,7 +10,7 @@
         "no-unused-expressions": "warn",
         "@typescript-eslint/no-unused-expressions": "warn",
         "@typescript-eslint/consistent-type-imports": "warn",
-        "@typescript-eslint/no-duplicate-imports": "warn",
-        "prettier/prettier": "warn"
+        "@typescript-eslint/no-duplicate-imports": "warn"
+        // "prettier/prettier": "warn"
     }
 }

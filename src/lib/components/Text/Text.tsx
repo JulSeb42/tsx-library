@@ -18,117 +18,11 @@ import Ul from "./templates/Ul"
 import Ol from "./templates/Ol"
 import Dl from "./templates/Dl"
 
-import type { TagTypes, TextProps } from "./types"
-
-const renderComponent = (
-    props: TextProps,
-    tag?: TagTypes,
-    ref?: ForwardedRef<
-        HTMLElement &
-            HTMLParagraphElement &
-            HTMLHeadingElement &
-            HTMLQuoteElement &
-            HTMLUListElement &
-            HTMLOListElement
-    >
-) => {
-    switch (tag) {
-        case "h1":
-            return (
-                <H1 ref={ref} {...props}>
-                    {props.children}
-                </H1>
-            )
-        case "h2":
-            return (
-                <H2 ref={ref} {...props}>
-                    {props.children}
-                </H2>
-            )
-        case "h3":
-            return (
-                <H3 ref={ref} {...props}>
-                    {props.children}
-                </H3>
-            )
-        case "h4":
-            return (
-                <H4 ref={ref} {...props}>
-                    {props.children}
-                </H4>
-            )
-        case "h5":
-            return (
-                <H5 ref={ref} {...props}>
-                    {props.children}
-                </H5>
-            )
-        case "h6":
-            return (
-                <H6 ref={ref} {...props}>
-                    {props.children}
-                </H6>
-            )
-        case "p":
-            return (
-                <P ref={ref} {...props}>
-                    {props.children}
-                </P>
-            )
-        case "strong":
-            return (
-                <Strong ref={ref} {...props}>
-                    {props.children}
-                </Strong>
-            )
-        case "em":
-            return (
-                <Em ref={ref} {...props}>
-                    {props.children}
-                </Em>
-            )
-        case "small":
-            return (
-                <Small ref={ref} {...props}>
-                    {props.children}
-                </Small>
-            )
-        case "blockquote":
-            return (
-                <Blockquote ref={ref} {...props}>
-                    {props.children}
-                </Blockquote>
-            )
-        case "ul":
-            return (
-                <Ul ref={ref} {...props}>
-                    {props.children}
-                </Ul>
-            )
-        case "ol":
-            return (
-                <Ol ref={ref} {...props}>
-                    {props.children}
-                </Ol>
-            )
-        case "dl":
-            return (
-                <Dl ref={ref} {...props}>
-                    {props.children}
-                </Dl>
-            )
-        default:
-            return (
-                <P ref={ref} {...props}>
-                    {props.children}
-                </P>
-            )
-    }
-}
+import type { TextProps } from "./types"
 
 const Text = forwardRef(
     (
-        { tag = "p", ...props }: TextProps,
+        { tag, ...rest }: TextProps,
         ref?: ForwardedRef<
             HTMLElement &
                 HTMLParagraphElement &
@@ -137,7 +31,35 @@ const Text = forwardRef(
                 HTMLUListElement &
                 HTMLOListElement
         >
-    ) => renderComponent(props, tag, ref)
+    ) => {
+        if (tag === "h1") return <H1 ref={ref} {...rest} />
+
+        if (tag === "h2") return <H2 ref={ref} {...rest} />
+
+        if (tag === "h3") return <H3 ref={ref} {...rest} />
+
+        if (tag === "h4") return <H4 ref={ref} {...rest} />
+
+        if (tag === "h5") return <H5 ref={ref} {...rest} />
+
+        if (tag === "h6") return <H6 ref={ref} {...rest} />
+
+        if (tag === "strong") return <Strong ref={ref} {...rest} />
+
+        if (tag === "em") return <Em ref={ref} {...rest} />
+
+        if (tag === "small") return <Small ref={ref} {...rest} />
+
+        if (tag === "blockquote") return <Blockquote ref={ref} {...rest} />
+
+        if (tag === "ul") return <Ul ref={ref} {...rest} />
+
+        if (tag === "ol") return <Ol ref={ref} {...rest} />
+
+        if (tag === "dl") return <Dl ref={ref} {...rest} />
+
+        return <P ref={ref} {...rest} />
+    }
 )
 
 export default Text
